@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PawnShop.Framework/PawnShop.Framework.csproj" />
+    <ProjectReference Include="../PawnShop.Core/PawnShop.Core.csproj" />
+    <ProjectReference Include="../PawnShop.Game/PawnShop.Game.csproj" />
+  </ItemGroup>
+</Project>
