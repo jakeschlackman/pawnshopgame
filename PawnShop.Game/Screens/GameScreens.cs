@@ -8,6 +8,7 @@ namespace PawnShop.Game.Screens;
 
 internal sealed class GameScreens(GraphicsDevice device) : IDisposable
 {
+    private readonly TitleScreen title = new(device);
     private RoomScreen? room;
 
     public void SynchronizeRoom(RoomView? view)
@@ -21,15 +22,22 @@ internal sealed class GameScreens(GraphicsDevice device) : IDisposable
 
     public void Draw(PixelRenderer renderer, ApplicationFlow flow)
     {
+        if (flow.Screen == Screen.Title && flow.Menu is { } titleMenu)
+        {
+            title.Draw(titleMenu);
+            return;
+        }
+        renderer.Begin(new Color(26, 36, 38));
         if (flow.Room is { } view && room is not null) room.Draw(renderer, view);
-        else TitleScreen.Draw(renderer);
         if (flow.Menu is { } menu) MenuScreen.Draw(renderer, flow, menu);
         renderer.Text("M01 PROTOTYPE - NO SAVING", 18, 341, new Color(173, 184, 172));
+        renderer.Present();
     }
 
     public void Dispose()
     {
         room?.Dispose();
         room = null;
+        title.Dispose();
     }
 }

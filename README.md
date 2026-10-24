@@ -83,17 +83,31 @@ MonoGame's fixed 60 Hz host is the single tick owner. Menus capture the entire
 transition frame. Simulation time stops in overlays; presentation time continues.
 The room is intentionally static until M02.
 
-## Placeholder content workflow
+## Content and title screen
 
-M01 uses original code-authored shapes, a 5x7 bitmap alphabet, and one generated
-floor texture. Game/Content is reserved with `.gitkeep`. There are no external assets, `.mgcb` files, XNB outputs, downloaded
-fonts, or third-party artwork. Content is compiled as C# with the normal solution
-build; no separate MGCB check applies yet. The MonoGame package supplies its
-runtime dependencies through NuGet.
+The Rummage Hollow title uses four supplied PNG layers in
+`PawnShop.Game/Content/TitleScreen`: town, pawnshop, salvage foreground, and logo.
+The little robot is deliberately omitted. See the [asset record](PawnShop.Game/Content/TitleScreen/README.md)
+for provenance, dimensions, and layout. Normal build/publish copies the PNGs beside
+the executable; runtime loading resolves them from the executable directory, not
+the working directory. No MGCB/XNB workflow or new package is required.
 
-Rendering uses a provisional 640x360 logical render target, a fixed 1280x720
-window, point sampling, and integer output scaling/letterboxing. These are M01
-UI choices, not approved actor/tile/art dimensions. M02 must validate world scale.
+TitleScreen validates native dimensions and premultiplies PNG alpha once at load.
+It owns its textures and render target for the application lifetime and releases
+them on unload/disposal, including partial load failure. Returning to title reuses
+the artwork without creating a session. Menu labels use the existing runtime 5x7
+bitmap font with keyboard focus, disabled badges, and explanations; they are not
+baked into the artwork. The reference preview's serif font is not included.
+
+The detailed title uses the reference's 1920x1080 composition, contained and
+centered with nearest-neighbor scaling (fractional downscaling is allowed).
+Title layout positions and sizes are normalized fractions of that canvas, including
+menu text and help. The window starts at 1280x720 and can be resized; the composition
+scales to fit the current resolution with letterboxing at other aspect ratios.
+The placeholder room and pause overlays retain the
+640x360 logical target, integer output scaling, original code-authored shapes,
+bitmap font, and generated floor texture. These UI choices do not establish
+actor/tile dimensions; M02 must validate world scale.
 
 ## Guidance and evidence
 

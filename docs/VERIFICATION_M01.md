@@ -155,3 +155,26 @@ refactor; the earlier M01 manual acceptance checklist remains pending.
 The restructuring has no build/test/dependency blocker. M00 remains complete,
 M01 remains implemented with desktop acceptance pending, and no later milestone
 has been started or marked complete. Nothing was committed or pushed.
+
+## Rummage Hollow title artwork — 2026-10-24
+
+The working directory and Git root matched the requested repository; the working
+tree was clean before this change. The supplied town, pawnshop, salvage, and logo
+now compose the title screen. The robot is excluded. Existing menu/input/session
+logic is reused; only title labels changed. TitleScreen owns the four textures
+and a 1920x1080 canvas, while room/overlay rendering remains at 640x360.
+
+| Check | Result |
+| --- | --- |
+| Baseline and post-change `dotnet build PawnShopSimulator.sln --no-restore` | Both passed, zero warnings/errors. |
+| Baseline and post-change `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build` | Both passed 10/10, including ten headless start/return cycles and input capture. |
+| Four PNG source/repository/build-output SHA-256 comparisons | All matched; dimensions matched the supplied pack. Background is RGB; three foreground layers are ARGB. No robot copied. |
+| Launch `PawnShop.Game/bin/Debug/net10.0/PawnShop.Game.exe` through Computer Use | Launched successfully. Screenshots inspected actual MonoGame rendering: composition, transparent layers, logo, bitmap menu, gold focus indicator, and both disabled-option explanations. |
+| `git diff --check` | Passed; Git emitted only LF-to-CRLF conversion notices. |
+
+The UI tool detected user input during attempted menu navigation, so further
+automated desktop input was left to the user. Visual inspection does not establish
+complete desktop start/pause/return/restart or graphics-resource acceptance. Those
+checks and other display aspect ratios remain unverified in this change. The
+existing M01 desktop acceptance checklist/status therefore remains pending; the
+next bounded task is to complete that checklist before beginning M02.

@@ -11,14 +11,16 @@ public sealed class PixelRenderer : IDisposable
     private readonly Texture2D pixel;
     private readonly RenderTarget2D canvas;
     private readonly PixelFont font;
+    private readonly bool integerScaling;
     public int Width { get; }
     public int Height { get; }
 
-    public PixelRenderer(GraphicsDevice device, int width, int height)
+    public PixelRenderer(GraphicsDevice device, int width, int height, bool integerScaling = true)
     {
         this.device = device;
         Width = width;
         Height = height;
+        this.integerScaling = integerScaling;
         batch = new SpriteBatch(device);
         pixel = new Texture2D(device, 1, 1);
         pixel.SetData(new[] { Color.White });
@@ -39,9 +41,12 @@ public sealed class PixelRenderer : IDisposable
         device.SetRenderTarget(null);
         device.Clear(Color.Black);
         var bounds = device.PresentationParameters;
-        int scale = Math.Max(1, Math.Min(bounds.BackBufferWidth / Width, bounds.BackBufferHeight / Height));
-        var destination = new Rectangle((bounds.BackBufferWidth - Width * scale) / 2,
-            (bounds.BackBufferHeight - Height * scale) / 2, Width * scale, Height * scale);
+        float scale = Math.Min((float)bounds.BackBufferWidth / Width, (float)bounds.BackBufferHeight / Height);
+        // Detailed title illustrations can shrink to fit; gameplay retains an integer pixel grid.
+        if (integerScaling && scale >= 1) scale = MathF.Floor(scale);
+        int width = (int)(Width * scale), height = (int)(Height * scale);
+        var destination = new Rectangle((bounds.BackBufferWidth - width) / 2,
+            (bounds.BackBufferHeight - height) / 2, width, height);
         batch.Begin(samplerState: SamplerState.PointClamp);
         batch.Draw(canvas, destination, Color.White);
         batch.End();
@@ -55,6 +60,9 @@ public sealed class PixelRenderer : IDisposable
 
     public void DrawTexture(Texture2D texture, int x, int y) =>
         batch.Draw(texture, new Vector2(x, y), Color.White);
+
+    public void DrawTexture(Texture2D texture, Rectangle destination) =>
+        batch.Draw(texture, destination, Color.White);
 
     public void Dispose()
     {

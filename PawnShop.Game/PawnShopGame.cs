@@ -22,8 +22,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
             PreferredBackBufferHeight = Height * 2,
             SynchronizeWithVerticalRetrace = true
         };
-        Window.Title = "Pawn Shop - M01";
-        Window.AllowUserResizing = false;
+        Window.Title = "Rummage Hollow";
+        Window.AllowUserResizing = true;
         IsMouseVisible = true;
         IsFixedTimeStep = true;
         TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60);
@@ -46,9 +46,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
     protected override void Draw(GameTime gameTime)
     {
         if (renderer is null || screens is null) return;
-        renderer.Begin(new Color(26, 36, 38));
         screens.Draw(renderer, flow);
-        renderer.Present();
         base.Draw(gameTime);
     }
 

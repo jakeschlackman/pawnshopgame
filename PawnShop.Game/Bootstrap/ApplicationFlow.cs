@@ -101,10 +101,10 @@ public sealed class ApplicationFlow : IDisposable
         };
     }
 
-    private static Menu<MenuCommand> TitleMenu() => new(new("New game", MenuCommand.NewGame),
-        new("Continue - unavailable", MenuCommand.Continue, "Save and load are not implemented yet."),
-        new("Settings - unavailable", MenuCommand.Settings, "No configurable settings in this prototype."),
-        new("Exit game", MenuCommand.Exit));
+    private static Menu<MenuCommand> TitleMenu() => new(new("New Game", MenuCommand.NewGame),
+        new("Continue", MenuCommand.Continue, "Save and load are not implemented yet."),
+        new("Settings", MenuCommand.Settings, "No configurable settings in this prototype."),
+        new("Exit", MenuCommand.Exit));
 
     private void EndSession()
     {

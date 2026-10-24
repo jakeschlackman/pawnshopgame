@@ -100,7 +100,7 @@ Required folders, relative to each project directory:
 
 The tests retain the dependency-free console runner. They reference Game's graphics-free Bootstrap classes for lifecycle tests without constructing PawnShopGame, a window, or graphics resources. Framework menu/input tests are under Tests/Framework. Run `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build` after building the solution; `dotnet test` does not execute this runner.
 
-`Game/Content` is currently an empty retained folder. M01's original code-authored placeholder shapes/font/floor are compiled by the C# build; no MGCB/XNB workflow has been introduced. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
+`Game/Content/TitleScreen` contains the four supplied Rummage Hollow PNG layers (the robot is omitted), copied to build/publish output and loaded by the application-owned TitleScreen. It uses a contained 1920x1080 presentation canvas with point sampling and the existing runtime bitmap font. The room/overlays retain their 640x360 target and original code-authored placeholder shapes/font/floor. No MGCB/XNB workflow has been introduced. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
 
 ### 2.3 Definition, state, operation, and presentation
 
