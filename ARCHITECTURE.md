@@ -100,9 +100,20 @@ Required folders, relative to each project directory:
 
 The tests retain the dependency-free console runner. They reference Game's graphics-free Bootstrap classes for lifecycle tests without constructing PawnShopGame, a window, or graphics resources. Framework menu/input tests are under Tests/Framework. Run `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build` after building the solution; `dotnet test` does not execute this runner.
 
-`Game/Content/TitleScreen` contains the four supplied Rummage Hollow PNG layers (the robot is omitted), copied to build/publish output and loaded by the application-owned TitleScreen. It uses a contained 1920x1080 presentation canvas with point sampling and the existing runtime bitmap font. The room/overlays retain their 640x360 target and original code-authored placeholder shapes/font/floor. No MGCB/XNB workflow has been introduced. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
+`Game/Content/TitleScreen/title-screen-panorama.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Older Rummage Hollow artwork is preserved but no longer loaded. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport, uniformly scaled with point sampling. The graphics-free PanoramaCamera tracks normalized horizontal travel with 0.8-second SmoothStep easing and calculates source bounds for the actual viewport aspect ratio. ApplicationFlow advances it once using presentation time; gameplay cameras are unaffected. Title and Options UI remain on contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. UI is hidden during title travel, and Escape can reverse an outgoing pan. Pause-menu Options does not pan. The room/overlays retain their 640x360 target and original code-authored placeholder content. Fonts now use the standard MGCB/SpriteFont workflow, with the content builder and local tool pinned to 3.8.4.1; existing PNG loading is unchanged. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
 
 ### 2.3 Definition, state, operation, and presentation
+
+`Game/Content/Fonts/fonts.json` is the application-wide font-role catalog.
+Framework's graphics-free FontCatalog validates names, content IDs and line heights;
+the small string extension `"text".Font("TitleMenu")` selects a role. FontLibrary
+uses MonoGame ContentManager/SpriteFont/DrawString/MeasureString rather than custom
+font processing. Game bootstrap creates one shared font scope and passes it to
+renderers/screens, disposing it after those consumers. Catalog data and assets load
+once, never in Draw. TitleMenu uses bundled Silkscreen Regular (400); other title
+and Options roles use Pixelify Sans Bold (700), each with its OFL license.
+The title logo remains an image. Room/pause placeholder text
+is unchanged. Named font size is a logical pixel line height multiplied by UI scale.
 
 These four concepts must remain distinct:
 
@@ -116,6 +127,36 @@ These four concepts must remain distinct:
 `IReadOnlyList<ItemInstance>` is not an immutable read model if each instance can still be edited. Return immutable value snapshots, immutable nested collections, or deliberately read-only projections that cannot expose a mutation path.
 
 ## 3. Identity, state ownership, and reusable capabilities
+
+Application preferences now live in `Game/Bootstrap/AppSettings`, `SettingsStore`,
+and the graphics-free `OptionsModel`. `ApplicationFlow` owns the options overlay;
+it captures input and pauses the session from both title and pause. The host applies
+display changes, key bindings, and audio previews; Screens renders the options UI.
+Settings persist outside gameplay saves with temporary-write/backup replacement.
+Display edits require a 15-second confirmation and revert on cancellation, timeout,
+focus loss, or application failure. Resolutions reach 3840x2160; manual window
+resizing is disabled and users change resolution through Options. UI/text size previews independently of world scale. Audio
+and dialogue speed have live previews; authored audio and conversations remain
+future work. See README.md for controls and persistence behavior.
+
+MenuPointerInput maps mouse clicks through the same contained UI viewport used for
+drawing (including gameplay integer scaling), then produces the existing semantic
+menu input. Main-menu rows, Options tabs/rows, Back and display Keep/Revert buttons
+share keyboard command paths. Focus-return held clicks and clicks outside the UI
+canvas are ignored; a single frame cannot apply both pointer and keyboard actions.
+
+The title selector uses `Content/TitleScreen/sprout-title.json` and its PNG.
+Framework's immutable SpriteSheetDefinition validates the grid/clips/pivot;
+SpriteAnimator selects frames from presentation time without a graphics device.
+ApplicationFlow advances the selector once and defers title commands until its
+one-shot Interact clip finishes (0.8 seconds at 50 ms/frame; Idle uses 90 ms/frame). Repeated input is captured, Escape
+cancels, and focus loss holds pending activation. Disabled entries may animate but
+cannot execute. TitleScreen only reads the frame and draws through PixelRenderer
+using a source rectangle and stable pivot at the text's vertical center. The
+selector is application UI and does not create a gameplay companion entity.
+PixelRenderer draws Sprout as a point-sampled overlay directly on the backbuffer
+after presenting the UI target, using the same contained viewport transform and
+a snapped pixel position. This avoids scaling the sprite twice at different ratios.
 
 Use strongly distinguished IDs conceptually: `EntityId`, `ItemInstanceId`, `InventoryId`, `LocationId`, `DungeonRunId`, `DefinitionId`, `QuestId`, `DialogueId`, `OperationId`, and `ClaimId`. Their exact implementation follows repository conventions. Display text and collection indexes are never persistent identities.
 

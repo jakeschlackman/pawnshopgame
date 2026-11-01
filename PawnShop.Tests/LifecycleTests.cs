@@ -12,7 +12,15 @@ internal static partial class RegressionTests
     }
     internal static void Step(ApplicationFlow app, InputFrame input = default) => app.Update(input, TimeSpan.FromSeconds(1));
     internal static void Down(ApplicationFlow app) => Step(app, new(Down: true));
-    internal static void Confirm(ApplicationFlow app) => Step(app, new(Confirm: true));
+    internal static void Confirm(ApplicationFlow app)
+    {
+        Step(app, new(Confirm: true));
+        FinishTitleInteraction(app);
+    }
+    internal static void FinishTitleInteraction(ApplicationFlow app)
+    {
+        if (app.TitleInteractionPlaying) app.Update(default, app.TitleSelector.Remaining);
+    }
     internal static void Back(ApplicationFlow app) => Step(app, new(Cancel: true));
     internal static void Begin(ApplicationFlow app) => Confirm(app);
     internal static void ReturnPrompt(ApplicationFlow app) { Back(app); Down(app); Confirm(app); }
@@ -23,7 +31,7 @@ internal static partial class RegressionTests
         using var app = new ApplicationFlow();
         Step(app);
         Check(app.Screen == Screen.Title && app.Room is null && app.LiveSessions == 0 && app.SessionsCreated == 0);
-        foreach (var command in new[] { MenuCommand.Continue, MenuCommand.Settings })
+        foreach (var command in new[] { MenuCommand.Continue })
         {
             Down(app);
             Check(app.Menu!.Selected.Command == command && !app.Menu.Selected.Enabled);
@@ -38,6 +46,8 @@ internal static partial class RegressionTests
     {
         using var app = new ApplicationFlow();
         Step(app, new(Confirm: true, Interact: true));
+        Check(app.Screen == Screen.Title && app.LiveSessions == 0 && app.TitleInteractionPlaying);
+        FinishTitleInteraction(app);
         Check(app.Screen == Screen.Room && app.LiveSessions == 1 && app.SessionsCreated == 1);
         Check(app.Room!.Value.Elapsed == TimeSpan.Zero && app.Room.Value.BellRings == 0);
         Confirm(app);

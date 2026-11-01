@@ -49,11 +49,13 @@ internal sealed class PixelFont(Texture2D pixel)
         [':'] = "00000 00110 00110 00000 00110 00110 00000",
         ['/'] = "00001 00001 00010 00100 01000 10000 10000",
         ['>'] = "10000 01000 00100 00010 00100 01000 10000",
-        ['?'] = "01110 10001 00001 00010 00100 00000 00100"
+        ['?'] = "01110 10001 00001 00010 00100 00000 00100",
+        ['\''] = "00100 00100 00000 00000 00000 00000 00000"
     };
 
-    public void Draw(SpriteBatch batch, string text, int x, int y, Color color, int scale = 1)
+    public void Draw(SpriteBatch batch, string text, int x, int y, Color color, float scale = 1)
     {
+        float cursor = x;
         foreach (char c in text)
         {
             if (c != ' ')
@@ -62,9 +64,12 @@ internal sealed class PixelFont(Texture2D pixel)
                 for (int row = 0; row < 7; row++)
                     for (int col = 0; col < 5; col++)
                         if (glyph[row * 6 + col] == '1')
-                            batch.Draw(pixel, new Rectangle(x + col * scale, y + row * scale, scale, scale), color);
+                            batch.Draw(pixel, new Rectangle((int)MathF.Round(cursor + col * scale),
+                                (int)MathF.Round(y + row * scale),
+                                (int)MathF.Round(cursor + (col + 1) * scale) - (int)MathF.Round(cursor + col * scale),
+                                (int)MathF.Round(y + (row + 1) * scale) - (int)MathF.Round(y + row * scale)), color);
             }
-            x += 6 * scale;
+            cursor += 6 * scale;
         }
     }
 }

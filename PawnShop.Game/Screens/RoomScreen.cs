@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PawnShop.Core.World;
+using PawnShop.Game.Bootstrap;
 using PawnShop.Framework.Rendering;
 using static PawnShop.Game.Screens.ScreenColors;
 
@@ -24,7 +25,7 @@ internal sealed class RoomScreen : IDisposable
         Floor.SetData(pixels);
     }
 
-    public void Draw(PixelRenderer renderer, RoomView view)
+    public void Draw(PixelRenderer renderer, RoomView view, AppSettings settings)
     {
         for (int y = 80; y < 304; y += 32)
             for (int x = 32; x < 608; x += 32)
@@ -40,7 +41,7 @@ internal sealed class RoomScreen : IDisposable
         renderer.Text("YOUR SHOP", 44, 58, Cream, 2);
         renderer.Text($"ROOM TIME: {(int)view.Elapsed.TotalSeconds} SECONDS", 36, 16, Cream);
         renderer.Text($"BELL RINGS: {view.BellRings}", 410, 16, Gold);
-        renderer.Text("SPACE: RING BELL    ESC: PAUSE", 36, 315, Cream);
+        renderer.Text($"{settings.InteractKey}: BELL   {settings.PauseKey}: PAUSE", 36, 315, Cream);
     }
 
     public void Dispose() => Floor.Dispose();

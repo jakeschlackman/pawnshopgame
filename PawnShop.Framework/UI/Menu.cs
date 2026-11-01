@@ -24,6 +24,8 @@ public sealed class Menu<TCommand> where TCommand : struct, Enum
 
     public TCommand? Handle(InputFrame input)
     {
+        if (input.SelectionIndex is { } index && index >= 0 && index < Items.Count)
+            SelectedIndex = index;
         if (input.Up != input.Down)
         {
             SelectedIndex = (SelectedIndex + (input.Down ? 1 : Items.Count - 1)) % Items.Count;

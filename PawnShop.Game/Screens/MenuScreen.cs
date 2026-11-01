@@ -15,7 +15,7 @@ internal static class MenuScreen
         if (!title)
         {
             renderer.Fill(0, 0, renderer.Width, renderer.Height, Color.Black * 0.65f);
-            renderer.Fill(100, 64, 440, 230, new Color(36, 51, 51));
+            renderer.Fill(30, 64, 580, 260, new Color(36, 51, 51));
             string heading = flow.Screen switch
             {
                 Screen.Pause => "PAUSED",
@@ -25,7 +25,7 @@ internal static class MenuScreen
             renderer.Text(heading, 120, 82, Gold, 2);
             renderer.Text(flow.Screen == Screen.Pause ? "THE SHOP CAN WAIT." : "UNSAVED PROGRESS WILL BE LOST.", 120, 111, Cream);
         }
-        int left = title ? 48 : 120;
+        int left = title ? 48 : 50;
         for (int i = 0; i < menu.Items.Count; i++)
         {
             var item = menu.Items[i];
@@ -39,7 +39,6 @@ internal static class MenuScreen
             renderer.Text(item.Label, left + 18, y, item.Enabled ? Cream : new Color(166, 179, 168), 1);
         }
         if (menu.Selected.DisabledReason is { } reason) renderer.Text(reason, left, 287, Gold);
-        renderer.Text("UP/DOWN: SELECT   ENTER/SPACE: CONFIRM   ESC: BACK", title ? 48 : 120,
-            title ? 310 : 270, Cream);
+        renderer.Text("UP/DOWN: SELECT  ENTER: OK  ESC: BACK", left, title ? 310 : 300, Cream);
     }
 }

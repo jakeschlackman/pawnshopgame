@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "fonts": {
+    "PixelifySansBold": { "asset": "Fonts/PixelifySans-Bold", "size": 24 },
+    "Silkscreen": { "asset": "Fonts/Silkscreen-Regular", "size": 24 },
+    "TitleMenu": { "asset": "Fonts/Silkscreen-Regular", "size": 76 },
+    "TitleBadge": { "asset": "Fonts/PixelifySans-Bold", "size": 28 },
+    "TitleHelp": { "asset": "Fonts/PixelifySans-Bold", "size": 28 },
+    "OptionsHeading": { "asset": "Fonts/PixelifySans-Bold", "size": 36 },
+    "OptionsBody": { "asset": "Fonts/PixelifySans-Bold", "size": 24 },
+    "OptionsHelp": { "asset": "Fonts/PixelifySans-Bold", "size": 22 }
+  }
+}

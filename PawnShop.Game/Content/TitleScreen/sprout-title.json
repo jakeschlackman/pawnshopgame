@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "frameWidth": 48,
+  "frameHeight": 48,
+  "columns": 4,
+  "rows": 8,
+  "pivotX": 26,
+  "pivotY": 28,
+  "displayScale": 1.5,
+  "animations": {
+    "Idle": { "firstFrame": 0, "frameCount": 16, "frameDurationMs": 90, "loop": true },
+    "Interact": { "firstFrame": 16, "frameCount": 16, "frameDurationMs": 50, "loop": false }
+  }
+}

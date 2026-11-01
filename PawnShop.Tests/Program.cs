@@ -3,7 +3,7 @@ using PawnShop.Tests;
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
-    ("Title has no session; disabled controls explain and reject activation", RegressionTests.Title),
+    ("Title has no session; Continue explains and rejects activation", RegressionTests.Title),
     ("Menu wraps, owns its items and separates navigation from activation", RegressionTests.Menus),
     ("Input edges reject held/replayed keys", RegressionTests.Edges),
     ("New game consumes confirm and creates exactly one session", RegressionTests.Start),
@@ -12,7 +12,22 @@ var tests = new (string Name, Action Run)[]
     ("Return cancellation preserves state; discard disposes and restarts fresh", RegressionTests.Return),
     ("Ten cycles keep one live session and dispose all previous sessions", RegressionTests.Cycles),
     ("Exit is distinct, cancellable in play, and disposes on confirmation", RegressionTests.Exit),
-    ("Application disposal is idempotent and rejects subsequent updates", RegressionTests.Disposal)
+    ("Application disposal is idempotent and rejects subsequent updates", RegressionTests.Disposal),
+    ("Options capture input and preserve title and paused session lifetimes", RegressionTests.OptionsLifecycle),
+    ("Display preview confirms, times out, cancels and reverts on focus loss", RegressionTests.DisplayPreview),
+    ("Preferences round-trip, retain backups and preserve malformed files", RegressionTests.SettingsPersistence),
+    ("Bindings require key release and reject duplicate actions", RegressionTests.Bindings),
+    ("Audio gain, text speed and configurable focus pause obey settings", RegressionTests.Preferences),
+    ("Failed settings writes retain current preferences and revert display", RegressionTests.SettingsFailure),
+    ("Panorama easing is time based, reaches endpoints and reverses without jumps", RegressionTests.PanoramaTiming),
+    ("Panorama cover crops stay inside the image across aspect ratios and resizing", RegressionTests.PanoramaGeometry),
+    ("Title navigation gates hidden controls, reverses and leaves paused options alone", RegressionTests.PanoramaNavigation),
+    ("Mouse Options and Back preserve keyboard behavior and ignore letterboxes", RegressionTests.PanoramaPointer),
+    ("Font catalog resolves named roles and rejects invalid content with diagnostics", RegressionTests.FontCatalogValidation),
+    ("Bundled font roles, compiled SpriteFont and license reach application output", RegressionTests.FontContent),
+    ("Sprite sheet metadata validates frames and row-major source rectangles", RegressionTests.SproutSheet),
+    ("Sprite animator loops Idle at 90ms and completes Interact at 50ms boundaries", RegressionTests.SproutTiming),
+    ("Title feedback delays actions once, captures input and respects cancellation/focus", RegressionTests.SproutSelection)
 };
 int failures = 0;
 foreach (var test in tests)

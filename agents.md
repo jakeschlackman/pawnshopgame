@@ -1,5 +1,13 @@
 # AGENTS.md — Pawn Shop Game
 
+## Required startup reading
+
+At the beginning of each new session, before analyzing or changing the project, discover and read all repository Markdown files, including subdirectories, except files named README.md (case-insensitive).
+
+Exclude .git, dependency folders, and generated build output. Read AGENTS.md first, then ARCHITECTURE.md, GAME_DESIGN.md, ROADMAP.md, and the remaining Markdown files.
+
+Briefly confirm which files were read. If any cannot be read, report that explicitly.
+
 ## 1. Purpose and scope
 
 Build a cozy, humorous, top-down pixel-art pawn shop and salvage game in C# with MonoGame. Favor reusable, understandable components and small, playable milestones.
@@ -32,7 +40,7 @@ Default to local, single-player gameplay. Multiplayer, online services, runtime 
 
 ## 3. Inspect the repository before changing it
 
-Read applicable repository instructions, README, solution/project files, SDK configuration, package references, build scripts, and nearby tests. Read relevant design/decision documents if present.
+Read applicable repository instructions, solution/project files, SDK configuration, package references, build scripts, and nearby tests. Read README files only when needed for the current task. Read relevant design/decision documents if present.
 
 Use the actual repository as evidence for what exists. Do not assume an earlier discussion's class names, folders, dependencies, or milestones have been implemented.
 
@@ -248,7 +256,7 @@ dotnet test <actual-test-project-or-solution> --no-build
 git diff --check
 ```
 
-These are command forms, not a claim that the repository already builds. Use matching configurations/frameworks for build and test. Run the content build and manual launch checks required by the existing workflow.
+These are command forms, not a claim that the repository already builds. Use matching configurations/frameworks for build and test. Run the content build required by the existing workflow; the user performs manual launch and desktop checks.
 
 The current solution is `PawnShopSimulator.sln`. Its existing dependency-free test runner uses `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build`; `dotnet test` does not execute those checks. Build/run details and the current code-authored content workflow are in README.md.
 
@@ -264,7 +272,9 @@ Add focused regression tests for changed behavior, especially:
 - Mount/dismount, pause, time advancement, and seeded generation obey their contracts.
 - Save round trips, corrupt/unsupported data, migrations, and interrupted writes have defined outcomes.
 
-Use headless tests for rules and explicit manual checks for rendering, audio, animation, and feel. Never claim visual behavior is verified merely because compilation succeeded.
+Use headless tests for rules. The user handles manual testing of rendering, audio, animation, input feel, window behavior, and desktop workflows. Do not launch or control the game, use computer vision, inspect screenshots, or use Computer Use to verify changes unless the user explicitly requests that testing. Such agent-driven testing is never required to finish an implementation task, even when other repository documents call for visual or desktop acceptance checks.
+
+Continue running relevant builds, automated tests, and nonvisual content checks. Briefly identify any manual checks left for the user, without treating their pending testing as a blocker to the implementation handoff. Record visual acceptance separately and only mark it verified after the user reports results or explicitly requested testing provides evidence. Never claim visual behavior is verified merely because compilation succeeded.
 
 ## 15. Milestones and completion
 
