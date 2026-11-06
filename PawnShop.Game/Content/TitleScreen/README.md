@@ -20,8 +20,8 @@ edge, Options shows the right edge, with a 0.8-second SmoothStep pan between the
 For a viewport wider than the panorama's aspect ratio, the full source width is
 already visible and the image is cropped vertically.
 
-The title logo, menu rows and Options controls are separate UI. They are hidden during
-travel and appear at the destination; Back/Escape pans to Main. The title-side
+The title logo, menu rows and Options controls are separate UI. The Options panel is visible during outgoing flight, with input captured until arrival;
+UI is hidden on the return pan. Back/Escape pans to Main. The title-side
 Options panel is translucent over the same panorama. Pause-menu Options keeps its
 existing standalone presentation. Users change resolution only through Options;
 manual resizing and maximizing are disabled. Title/UI layout and pointer mapping
@@ -53,14 +53,30 @@ indexed left-to-right, top-to-bottom. Source and imported SHA-256:
 6D79201AA34A122FD279477EA6C44EE3F10EBFD6AA909AFEC5289CEC0115F72B
 ```
 
-`sprout-title.json` declares Idle (0–15, looping) and Interact (16–31, one-shot),
-at **90 ms/frame for Idle** and **50 ms/frame for Interact**. Numeric alpha-bound inspection confirmed nonempty content
-in all 32 cells. The shared occupied range is x=3–47, y=7–47. The stable pivot
-(26,28) centers that area near the label without recentering individual frames.
-At scale 1.5 the full frame is 72x72 on the 1920x1080 title UI canvas; it remains
-independent of font scaling, while its vertical anchor follows the font metrics.
+The active runtime sheet is now `sprout-title-menu.png` (272x1520), assembled
+without resampling into a 4-column, 19-row grid of 68x80 cells. Idle uses frames
+0-12 from PixelLab's **Floating Point Right Loop**, east direction, at the existing
+90 ms/frame (1.17 seconds per loop). Cells 13-15 are unused. Interact retains the
+original frames 16-31 at 50 ms/frame, padded by (10,16). The new fixed pivot
+(36,44) preserves the old interaction's (26,28) anchor and scale 1.5 exactly.
+No frame is individually recentered. The Idle export canvas is 68x76 even though the
+base PixelLab character is 48x48; downloaded alpha bounds span x=18-50, y=12-63.
 
-Title confirmations play the full 0.8-second reaction before executing an enabled
+Imported 2026-11-05 through the PixelLab MCP download URLs:
+- Character: `106b34ee-a26a-4424-baec-61331b5d1a8a` (SPROUT — Original Brief Revised).
+- Animation group: `d921f70e-9c0a-4f5a-b2c7-1f14db71c859`.
+- East animation: `6f6f3e65-f403-4ccb-8e96-d35784478a8c`.
+- Original downloaded PNGs: `Sources/sprout-floating-point-right/frame_0.png`
+  through `frame_12.png`, preserved byte-for-byte. All 13 are 68x76 RGBA.
+- User-owned PixelLab asset; no additional license grant is asserted.
+
+The original sheet above remains unchanged. The assembled runtime sheet copies
+each downloaded pixel into its numbered cell and each original interaction pixel
+into the same numbered cell plus (10,16), leaving all other pixels transparent.
+Only root title PNGs/JSON are copied to output; source frames are archival inputs.
+The game loads bundled files only; no runtime PixelLab/network connection exists.
+
+Non-Options title confirmations play the full 0.8-second reaction before executing an enabled
 command. Disabled entries react without executing. Selection/repeated activation
 is captured, Escape cancels, and focus loss pauses pending feedback. Ordinary
 window-close requests remain immediate on title. Textures are loaded once with
@@ -73,6 +89,34 @@ the same contained viewport transform, point sampling and a snapped output pixel
 position. This avoids resampling his small sprite into the 1920x1080 canvas and
 then scaling that result again. Source artwork and authored pose offsets remain
 unchanged; Idle and Interact use independently configured frame durations.
+
+## Options flight animation
+
+Additional east-facing PixelLab exports from the same character, imported 2026-11-05:
+
+| Clip | Animation ID | Export canvas | Frames / sheet range | Timing |
+| --- | --- | --- | --- | --- |
+| Point to Fast Flight | `68570332-21d2-4c54-8f3d-a409f951c3b1` | 68x76 | 13 / 32-44 | 50 ms, once |
+| Menu Fast Jet Flight | `88aa7830-b80d-4d48-a4d5-8098802c144e` | 60x68 | 17 / 45-61 | 50 ms, loop while traveling |
+| Fast Flight to Point | `91fd5324-7c47-4baf-aa0d-eb5b934f512e` | 68x80 | 13 / 62-74 | 50 ms, once |
+
+Original downloads are preserved in the matching `Sources/sprout-*/frame_N.png`
+folders. The asset is user-owned PixelLab content; no additional license is asserted.
+`tools/Build-SproutTitleSheet.ps1` rebuilds the runtime PNG from those local files
+and the original selection sheet. It performs exact pixel copies with centered
+transparent padding, never resizing: Idle/takeoff +(0,2), jet +(4,6), landing
++(0,0), original Interact +(10,16). Cells 13-15 and 75 remain transparent.
+Pivot (36,44), scale 1.5, and the 9-title-pixel downward adjustment preserve the
+previous pointing/selection position. The varying canvases are export dimensions,
+not a new character body-size standard.
+
+The flight exports above are preserved but are no longer used by Options.
+Options finishes the current Idle cycle, then floats Sprout upright to the first
+Display field along a SmoothStep path over the 0.8-second panorama pan. The same
+pointing loop continues throughout travel and arrival; there is no rotation,
+takeoff, jet animation or landing transition. Input unlocks after arrival.
+Focus loss freezes travel; Escape cancels and returns to title. Other title
+confirmations keep Interact. No runtime download or MCP connection is involved.
 
 ## Preserved earlier artwork
 

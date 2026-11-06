@@ -62,3 +62,82 @@ updated to the slower duration; manual appearance testing remains with the user.
 Per the latest request, Idle now uses 90 ms/frame (1.44-second loop) and Interact
 uses 50 ms/frame (0.8-second one-shot). Updated timing boundaries, metadata
 validation and delayed-activation checks to cover the two distinct durations.
+
+## PixelLab floating-point loop — 2026-11-05
+
+Downloaded the existing Floating Point Right Loop, east direction, from Sprout's
+PixelLab character via MCP-provided URLs. Preserved all 13 original 68x76 PNGs
+under TitleScreen/Sources. The base character is 48x48, but these animation exports
+use a larger canvas. No resizing or per-frame recentering was applied.
+
+The new local sprout-title-menu.png uses 68x76 cells. Idle is frames 0-12 at
+90 ms/frame (1.17 seconds); Interact remains frames 16-31 at 50 ms/frame. Original
+interaction pixels are padded by (10,14), with the shared pivot shifted by the
+same amount to (36,42), preserving their display size and position. The original
+sprout-title.png remains unchanged. No runtime PixelLab/network dependency exists.
+Asset IDs and assembly layout are recorded in the title artwork README.
+
+Verification:
+
+- Baseline and final `dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false`: passed, zero warnings/errors, including normal content workflow.
+- Baseline and final `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build`: 34/34 passed. Updated sheet bounds and 13-frame loop timing checks; existing selection/cancellation tests still pass.
+- Numerical pixel comparison: all 13 imported frames, 16 retained interaction frames and transparent padding match exactly. Original sheet SHA-256 remains the value recorded above.
+- Runtime sheet SHA-256: `2C5B6CBEF41C22CF324B3C59499347B357985E11CF6F67FF9D527C7B13D2A6C1`.
+- `git diff --check`: passed with line-ending notices only.
+
+No game launch or visual inspection performed. Check the idle loop's appearance,
+alignment and transition to the existing selection reaction manually. Existing
+uncommitted work was preserved; no dependency or session behavior changed.
+
+## Options flight sequence — 2026-11-05
+
+Main-menu Options now finishes the active pointing cycle (retaining its final
+frame), plays PointToFastFlight once, runs MenuFastJetFlight while moving to the
+first Display field, plays FastFlightToPoint once, then resumes Idle. Takeoff and
+landing each use 13 frames at 50 ms. Flight uses the existing 0.8-second SmoothStep
+pan duration. Rotation eases toward the path during takeoff and back to upright
+on landing. Phase boundaries consume excess time and retain endpoint poses until
+the next update. Other title commands still use the original Interact clip.
+
+OptionsSproutFlight is graphics-free presentation state driven once by
+ApplicationFlow. All input is captured through landing, including the completion
+frame; focus loss freezes both flight and camera. Escape cancels from every phase
+and reverses the panorama if necessary. Window close clears pending presentation.
+The Options panel and sprite are visible during outgoing travel. The idle marker
+then follows the selected row; pause-side Options retains its existing behavior.
+
+Downloaded 43 additional original east-facing frames, preserved under Sources.
+The 68x80 atlas cells accommodate the largest export without resampling. The
+existing pointing/selection position, scale, and requested downward adjustment
+are preserved by matching padding and pivot changes. The local assembly script
+is `tools/Build-SproutTitleSheet.ps1`; the game never invokes it or contacts MCP.
+Source IDs, export dimensions and frame ranges are in the title asset README.
+
+Automated verification:
+
+- Baseline build: passed, zero warnings/errors; baseline runner: 34/34 passed.
+- `dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false`: passed, zero warnings/errors, including normal content compilation.
+- `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build`: **36/36 passed**. New groups cover every phase/frame boundary, one-shot completion, synchronized travel, input capture, focus loss, cancellation in every phase, repeat entry, exit cleanup and missing clip validation. Existing pointer, pause-side Options, title commands and session checks pass.
+- Numerical pixel checks: all 56 imported frames and padding match originals, all 16 original selection frames match, and unused cells are transparent. Original selection-sheet SHA-256 remains unchanged.
+- Runtime sheet and built output hashes match: `511E6E74D9DBB4DA230C345D9C32EFA94B43CD8314609E3E77E2040FFA9FBC75`.
+- `git diff --check`: passed, line-ending notices only.
+- Script execution was initially denied in the sandbox; the approved elevated retry assembled the sheet successfully without changing execution policy or installing dependencies.
+
+No game launch, screenshot inspection or desktop automation was performed.
+Manual checks: Options flight direction/tilt, perceived timing, sprite continuity
+between exports, landing alignment at supported UI scales, and keyboard/mouse
+feel. Automated results do not establish visual acceptance. No build/test blocker
+remains, and existing unrelated uncommitted work is preserved.
+
+## Pointing-only float correction — 2026-11-05
+
+At the user's request, Options now uses only Floating Point Right Loop while
+floating upright to the first setting. Removed takeoff/landing phases and rotation
+from this transition; the downloaded flight artwork remains preserved. The current
+pointing cycle still finishes before travel, then Idle continues without restarting
+on arrival. The 0.8-second pan, input capture, cancellation and focus pause remain.
+
+`dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false`
+passed with zero warnings/errors. `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build`
+passed 36/36 with updated sequence/continuity checks. `git diff --check` passed.
+No game launch or visual check was performed; float appearance remains for the user.

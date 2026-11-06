@@ -4,5 +4,8 @@
     <ProjectReference Include="../PawnShop.Framework/PawnShop.Framework.csproj" />
     <ProjectReference Include="../PawnShop.Core/PawnShop.Core.csproj" />
     <ProjectReference Include="../PawnShop.Game/PawnShop.Game.csproj" />
+    <ProjectReference Include="../PawnShop.Narrative/PawnShop.Narrative.csproj" />
+    <Reference Include="ink-engine-runtime"><HintPath>../third_party/ink/ink-engine-runtime.dll</HintPath></Reference>
+    <Reference Include="ink_compiler"><HintPath>../third_party/ink/ink_compiler.dll</HintPath></Reference>
   </ItemGroup>
 </Project>

@@ -54,14 +54,18 @@ public sealed class PixelRenderer : IDisposable
 
     // Call after Present: scale small pixel sprites once, directly from their source
     // sheet to the backbuffer, while preserving the canvas's contained UI coordinates.
-    public void DrawPixelOverlay(Texture2D texture, Rectangle source, Vector2 anchor, Vector2 pivot, float logicalScale)
+    public void DrawPixelOverlay(Texture2D texture, Rectangle source, Vector2 anchor, Vector2 pivot, float logicalScale, float rotation = 0)
     {
         var destination = GetPresentationBounds();
         float outputScale = (float)destination.Width / Width;
-        var position = new Vector2(destination.X, destination.Y) + (anchor - pivot * logicalScale) * outputScale;
+        var position = new Vector2(destination.X, destination.Y) + anchor * outputScale;
+        // Snap the unrotated top-left as before; rotate around the stable pivot.
+        var offset = pivot * logicalScale * outputScale;
+        position -= offset;
         position = new Vector2(MathF.Round(position.X), MathF.Round(position.Y));
+        position += offset;
         batch.Begin(samplerState: SamplerState.PointClamp);
-        batch.Draw(texture, position, source, Color.White, 0, Vector2.Zero,
+        batch.Draw(texture, position, source, Color.White, rotation, pivot,
             logicalScale * outputScale, SpriteEffects.None, 0);
         batch.End();
     }

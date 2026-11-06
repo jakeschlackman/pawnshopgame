@@ -1,5 +1,7 @@
 using PawnShop.Tests;
 
+if (args.Length > 0 && args[0] == "--dialogue") return DialogueAuthoring.Run(args[1..], Console.In, Console.Out);
+
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
@@ -27,7 +29,18 @@ var tests = new (string Name, Action Run)[]
     ("Bundled font roles, compiled SpriteFont and license reach application output", RegressionTests.FontContent),
     ("Sprite sheet metadata validates frames and row-major source rectangles", RegressionTests.SproutSheet),
     ("Sprite animator loops Idle at 90ms and completes Interact at 50ms boundaries", RegressionTests.SproutTiming),
-    ("Title feedback delays actions once, captures input and respects cancellation/focus", RegressionTests.SproutSelection)
+    ("Title feedback delays actions once, captures input and respects cancellation/focus", RegressionTests.SproutSelection),
+    ("Options Sprout floats to the first setting while continuing the pointing loop", RegressionTests.OptionsSproutSequence),
+    ("Options Sprout captures input, freezes on focus loss and cancels cleanly", RegressionTests.OptionsSproutCancellation),
+    ("Ink source matches build output and every visitor branch runs", RegressionTests.DialogueContent),
+    ("Dialogue commands reject stale IDs, revisions and duplicate selections", RegressionTests.DialogueCommands),
+    ("Ink compiler and adapter diagnose invalid graphs, tags, speakers and external calls", RegressionTests.DialogueValidation),
+    ("Dialogue reveal, choice focus and long-text paging obey settings", RegressionTests.DialoguePresentation),
+    ("Dialogue captures input, pauses time and closes with its session", RegressionTests.DialogueLifecycle),
+    ("Data-only NPCs route clicks and keyboard Talk by identity", RegressionTests.NpcConversations),
+    ("NPC bindings reject malformed, missing, duplicate and stale content", RegressionTests.NpcContentValidation),
+    ("NPC assets animate only in simulation and conversation bindings select explicit/default entries", RegressionTests.NpcAssetsAndBindings),
+    ("Authoring commands list, check branches and preview text without graphics", RegressionTests.AuthoringCommands)
 };
 int failures = 0;
 foreach (var test in tests)

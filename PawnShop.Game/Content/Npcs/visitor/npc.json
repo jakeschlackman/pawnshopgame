@@ -1,0 +1,18 @@
+{
+  "$schema": "../npc.schema.json",
+  "version": 1,
+  "id": "visitor",
+  "name": "Shop visitor",
+  "sprite": {
+    "texture": "sprites/body.png",
+    "metadata": "sprites/body.json",
+    "idleAnimation": "Idle"
+  },
+  "interactionBounds": {
+    "x": -18,
+    "y": -40,
+    "width": 36,
+    "height": 58
+  },
+  "conversations": "conversations.json"
+}

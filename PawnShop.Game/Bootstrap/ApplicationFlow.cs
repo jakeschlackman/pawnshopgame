@@ -3,6 +3,7 @@ using PawnShop.Framework.Input;
 using PawnShop.Framework.UI;
 using PawnShop.Framework.Rendering;
 using PawnShop.Game.Screens;
+using PawnShop.Narrative.Dialogue;
 
 namespace PawnShop.Game.Bootstrap;
 
@@ -14,20 +15,30 @@ public sealed class ApplicationFlow : IDisposable
     private bool disposed;
     private Screen optionsOrigin;
     private MenuCommand? pendingTitleCommand;
-    public bool TitleInteractionPlaying { get; private set; }
+    private bool titleInteractionPlaying;
+    public bool TitleInteractionPlaying => titleInteractionPlaying || OptionsFlight.IsBusy;
     public SpriteAnimator TitleSelector { get; }
+    public OptionsSproutFlight OptionsFlight { get; }
     public OptionsModel Options { get; }
+    private readonly NpcContentCatalog conversations;
+    private int selectedNpc;
+    public IReadOnlyList<PlacedNpc> Npcs => session?.Npcs ?? Array.Empty<PlacedNpc>();
+    public string? SelectedNpcId => Npcs.Count == 0 ? null : Npcs[selectedNpc].Id;
+    public IReadOnlyDictionary<string, int> NpcFrames => session?.NpcFrames ?? System.Collections.Frozen.FrozenDictionary<string, int>.Empty;
+    public DialoguePresenter? Dialogue { get; private set; }
     public PanoramaCamera TitleCamera { get; } = new();
     public bool UsesTitleBackground => session is null && Screen is Screen.Title or Screen.Options;
     public bool TitleUiVisible => UsesTitleBackground && !TitleCamera.IsMoving;
-    public ApplicationFlow(AppSettings? settings = null, Action<AppSettings>? saveSettings = null)
+    public ApplicationFlow(AppSettings? settings = null, Action<AppSettings>? saveSettings = null, NpcContentCatalog? conversations = null)
     {
         Options = new(settings ?? new(), saveSettings);
+        this.conversations = conversations ?? NpcContentCatalog.Load(Path.Combine(AppContext.BaseDirectory, "Content", "Npcs"), Path.Combine(AppContext.BaseDirectory, "Content", "World", "shop.npcs.json"));
         var sheet = SpriteSheetDefinition.Load(Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "sprout-title.json"));
         if (!sheet.Animations.TryGetValue("Idle", out var idle) || !idle.Loop
             || !sheet.Animations.TryGetValue("Interact", out var interact) || interact.Loop)
             throw new InvalidDataException("sprout-title.json: requires looping Idle and non-looping Interact animations.");
         TitleSelector = new(sheet, "Idle");
+        OptionsFlight = new(TitleSelector);
     }
     public Screen Screen { get; private set; } = Screen.Title;
     public Menu<MenuCommand>? Menu { get; private set; } = TitleMenu();
@@ -44,6 +55,21 @@ public sealed class ApplicationFlow : IDisposable
         if (delta < TimeSpan.Zero) throw new ArgumentOutOfRangeException(nameof(delta));
         if (ExitRequested) return;
         PresentationTime += delta;
+        if (OptionsFlight.IsBusy)
+        {
+            if (!active) return;
+            if (input.Cancel) { Options.Cancel(); SetScreen(Screen.Title); return; }
+            var before = OptionsFlight.Phase;
+            OptionsFlight.Update(delta);
+            if (before == OptionsSproutPhase.FinishingPoint && OptionsFlight.Phase == OptionsSproutPhase.Flying)
+            {
+                optionsOrigin = Screen.Title;
+                Options.Open();
+                SetScreen(Screen.Options, preserveOptionsFlight: true);
+            }
+            else if (before == OptionsSproutPhase.Flying) TitleCamera.Update(delta);
+            return; // Capture input through arrival, including its completion frame.
+        }
         if (Screen == Screen.Title && !TitleCamera.IsMoving)
         {
             if (active || !TitleInteractionPlaying) TitleSelector.Update(delta);
@@ -71,8 +97,23 @@ public sealed class ApplicationFlow : IDisposable
         }
         if (Screen == Screen.Options)
         {
+            if (UsesTitleBackground && active) TitleSelector.Update(delta);
             if (Options.Update(input, delta, active)) SetScreen(optionsOrigin);
             return;
+        }
+        if (Screen == Screen.Dialogue)
+        {
+            if (!active) return;
+            var presenter = Dialogue ?? throw new InvalidOperationException("Dialogue screen requires a presenter.");
+            presenter.Update(input, delta);
+            if (presenter.View.Ended)
+            {
+                // The runtime has already recorded its end reason; this releases session ownership.
+                session!.CloseDialogue(DialogueEndReason.Completed);
+                Dialogue = null;
+                SetScreen(Screen.Room);
+            }
+            return; // Never apply opening, choice or closing input to the world.
         }
         if (!active)
         {
@@ -86,6 +127,21 @@ public sealed class ApplicationFlow : IDisposable
         if (Screen == Screen.Room)
         {
             if (input.Cancel) { SetScreen(Screen.Pause); return; }
+            if (Npcs.Count > 0 && input.Left != input.Right)
+            {
+                selectedNpc = (selectedNpc + (input.Right ? 1 : Npcs.Count - 1)) % Npcs.Count;
+                return;
+            }
+            if (input.TalkTargetId is { } target)
+            {
+                TryTalkTo(target);
+                return;
+            }
+            if (input.NextTab && SelectedNpcId is not null)
+            {
+                TryTalkTo(SelectedNpcId);
+                return;
+            }
             session!.Tick(delta, input.Interact);
             return;
         }
@@ -103,9 +159,14 @@ public sealed class ApplicationFlow : IDisposable
         var command = Menu?.Handle(input);
         if (Screen == Screen.Title && input.Confirm && input.Up == input.Down)
         {
+            if (command == MenuCommand.Settings)
+            {
+                OptionsFlight.Start();
+                return;
+            }
             // Even unavailable entries react, but only enabled commands are queued.
             pendingTitleCommand = command;
-            TitleInteractionPlaying = true;
+            titleInteractionPlaying = true;
             TitleSelector.Play("Interact", restart: true);
             return;
         }
@@ -119,7 +180,8 @@ public sealed class ApplicationFlow : IDisposable
         {
             case MenuCommand.NewGame:
                 if (session is not null) throw new InvalidOperationException("A session is already active.");
-                session = new GameSession();
+                session = new GameSession(conversations.ShopNpcs);
+                selectedNpc = 0;
                 SessionsCreated++;
                 SetScreen(Screen.Room);
                 break;
@@ -151,9 +213,26 @@ public sealed class ApplicationFlow : IDisposable
         if (session is null) ExitRequested = true;
         else if (Screen != Screen.ConfirmExit)
         {
+            session.CloseDialogue(DialogueEndReason.Cancelled);
+            Dialogue = null;
             Options.Cancel();
             Confirm(Screen.ConfirmExit);
         }
+    }
+
+    // NPC interaction entry point. Input adapters submit identity, never a filename or choice index.
+    public TalkResult TryTalkTo(string npcId, string? conversationId = null)
+    {
+        ObjectDisposedException.ThrowIf(disposed, this);
+        if (session is null) return TalkResult.NoSession;
+        if (Screen != Screen.Room) return TalkResult.Busy;
+        if (!Npcs.Any(n => n.Id == npcId) || !conversations.TryGet(npcId, out var npc)) return TalkResult.UnknownNpc;
+        string? id = conversationId ?? npc.DefaultConversation;
+        if (id is null) return TalkResult.NoConversation;
+        if (!npc.Conversations.TryGetValue(id, out var conversation)) return TalkResult.UnknownConversation;
+        Dialogue = new(session.StartDialogue(conversation.Dialogue), Options.Current);
+        SetScreen(Screen.Dialogue);
+        return TalkResult.Started;
     }
 
     private void Confirm(Screen target)
@@ -162,9 +241,9 @@ public sealed class ApplicationFlow : IDisposable
         SetScreen(target);
     }
 
-    private void SetScreen(Screen screen)
+    private void SetScreen(Screen screen, bool preserveOptionsFlight = false)
     {
-        CancelTitleInteraction();
+        if (!preserveOptionsFlight) CancelTitleInteraction();
         if (session is null)
         {
             if (screen == Screen.Options) TitleCamera.NavigateToOptions();
@@ -186,7 +265,8 @@ public sealed class ApplicationFlow : IDisposable
     private void CancelTitleInteraction()
     {
         pendingTitleCommand = null;
-        TitleInteractionPlaying = false;
+        titleInteractionPlaying = false;
+        OptionsFlight.Reset();
         TitleSelector.Play("Idle", restart: true);
     }
 
@@ -199,6 +279,7 @@ public sealed class ApplicationFlow : IDisposable
     {
         if (session is null) return;
         session.Dispose();
+        Dialogue = null;
         session = null;
         SessionsDisposed++;
     }

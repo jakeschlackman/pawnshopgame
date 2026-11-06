@@ -1,0 +1,24 @@
+<Project>
+  <!-- Compile authored Ink as ordinary content. No installed Inky or test build is required. -->
+  <UsingTask TaskName="CompilePawnShopInk" TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <Task>
+      <Code Type="Class" Language="cs" Source="$(MSBuildThisFileDirectory)CompilePawnShopInk.cs" />
+    </Task>
+  </UsingTask>
+  <Target Name="CompileDialogueContent" BeforeTargets="AssignTargetPaths" Condition="'$(DesignTimeBuild)' != 'true'">
+    <Error Condition="!Exists('Content/World/shop.npcs.json')" Text="Missing Content/World/shop.npcs.json" />
+    <ItemGroup>
+      <_InkSource Include="Content/Npcs/**/*.ink" />
+      <_NpcSource Include="Content/Npcs/**/*.json;Content/Npcs/**/*.png" />
+    </ItemGroup>
+    <CompilePawnShopInk Sources="@(_InkSource)" Npcs="@(_NpcSource)" OutputRoot="$(IntermediateOutputPath)Ink"
+                       InkDirectory="$(MSBuildThisFileDirectory)../third_party/ink">
+      <Output TaskParameter="CompiledFiles" ItemName="_CompiledInk" />
+    </CompilePawnShopInk>
+    <ItemGroup>
+      <None Include="@(_CompiledInk)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+      <FileWrites Include="@(_CompiledInk)" />
+    </ItemGroup>
+  </Target>
+</Project>

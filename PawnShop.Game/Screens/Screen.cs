@@ -1,3 +1,3 @@
 namespace PawnShop.Game.Screens;
 
-public enum Screen { Title, Room, Pause, ConfirmReturn, ConfirmExit, Options }
+public enum Screen { Title, Room, Pause, ConfirmReturn, ConfirmExit, Options, Dialogue }

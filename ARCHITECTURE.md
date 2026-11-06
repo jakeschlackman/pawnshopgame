@@ -100,7 +100,7 @@ Required folders, relative to each project directory:
 
 The tests retain the dependency-free console runner. They reference Game's graphics-free Bootstrap classes for lifecycle tests without constructing PawnShopGame, a window, or graphics resources. Framework menu/input tests are under Tests/Framework. Run `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build` after building the solution; `dotnet test` does not execute this runner.
 
-`Game/Content/TitleScreen/title-screen-panorama.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Older Rummage Hollow artwork is preserved but no longer loaded. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport, uniformly scaled with point sampling. The graphics-free PanoramaCamera tracks normalized horizontal travel with 0.8-second SmoothStep easing and calculates source bounds for the actual viewport aspect ratio. ApplicationFlow advances it once using presentation time; gameplay cameras are unaffected. Title and Options UI remain on contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. UI is hidden during title travel, and Escape can reverse an outgoing pan. Pause-menu Options does not pan. The room/overlays retain their 640x360 target and original code-authored placeholder content. Fonts now use the standard MGCB/SpriteFont workflow, with the content builder and local tool pinned to 3.8.4.1; existing PNG loading is unchanged. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
+`Game/Content/TitleScreen/title-screen-panorama.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Older Rummage Hollow artwork is preserved but no longer loaded. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport, uniformly scaled with point sampling. The graphics-free PanoramaCamera tracks normalized horizontal travel with 0.8-second SmoothStep easing and calculates source bounds for the actual viewport aspect ratio. ApplicationFlow advances it once using presentation time; gameplay cameras are unaffected. Title and Options UI remain on contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. Options is visible but input-captured during Sprout's outgoing float; UI is hidden on the return pan. Escape can cancel the flight and reverse the pan. Pause-menu Options does not pan. The room/overlays retain their 640x360 target and original code-authored placeholder content. Fonts now use the standard MGCB/SpriteFont workflow, with the content builder and local tool pinned to 3.8.4.1; existing PNG loading is unchanged. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
 
 ### 2.3 Definition, state, operation, and presentation
 
@@ -136,8 +136,9 @@ Settings persist outside gameplay saves with temporary-write/backup replacement.
 Display edits require a 15-second confirmation and revert on cancellation, timeout,
 focus loss, or application failure. Resolutions reach 3840x2160; manual window
 resizing is disabled and users change resolution through Options. UI/text size previews independently of world scale. Audio
-and dialogue speed have live previews; authored audio and conversations remain
-future work. See README.md for controls and persistence behavior.
+and dialogue speed have live previews; the Ink conversation draft also uses the
+text-speed setting. Authored audio remains future work. See README.md for controls
+and persistence behavior.
 
 MenuPointerInput maps mouse clicks through the same contained UI viewport used for
 drawing (including gameplay integer scaling), then produces the existing semantic
@@ -145,15 +146,24 @@ menu input. Main-menu rows, Options tabs/rows, Back and display Keep/Revert butt
 share keyboard command paths. Focus-return held clicks and clicks outside the UI
 canvas are ignored; a single frame cannot apply both pointer and keyboard actions.
 
-The title selector uses `Content/TitleScreen/sprout-title.json` and its PNG.
+The title selector uses `Content/TitleScreen/sprout-title.json` and bundled `sprout-title-menu.png`.
+Idle uses the 13-frame PixelLab Floating Point Right Loop (east); the original
+Interact pixels are padded into the shared 68x80 grid without resizing. No runtime
+network connection is used.
 Framework's immutable SpriteSheetDefinition validates the grid/clips/pivot;
 SpriteAnimator selects frames from presentation time without a graphics device.
-ApplicationFlow advances the selector once and defers title commands until its
+ApplicationFlow advances the selector once and defers non-Options title commands until its
 one-shot Interact clip finishes (0.8 seconds at 50 ms/frame; Idle uses 90 ms/frame). Repeated input is captured, Escape
 cancels, and focus loss holds pending activation. Disabled entries may animate but
 cannot execute. TitleScreen only reads the frame and draws through PixelRenderer
 using a source rectangle and stable pivot at the text's vertical center. The
 selector is application UI and does not create a gameplay companion entity.
+OptionsSproutFlight owns the title-to-Options presentation: finish the current
+Idle cycle, then float upright to the first Display field over the 800 ms
+panorama pan while continuing the same pointing loop. There are no takeoff,
+jet-flight or landing clips and no rotation. Arrival does not restart Idle.
+Options input unlocks after arrival; Escape cancels and focus loss freezes the
+sequence and camera. Pause-side Options and other title commands are unchanged.
 PixelRenderer draws Sprout as a point-sampled overlay directly on the backbuffer
 after presenting the UI target, using the same contained viewport transform and
 a snapped pixel position. This avoids scaling the sprite twice at different ratios.
@@ -492,6 +502,10 @@ Register action providers explicitly at composition. An NPC can offer Talk and T
 
 ### 8.2 Condition and action vocabulary
 
+The user-requested Ink first draft is implemented separately from the future
+gameplay condition/action vocabulary below. Ink 1.2.1 owns conversation-local
+branching only. No external functions or gameplay effect handlers are exposed.
+
 Use a small typed vocabulary shared by dialogue, quests, location gates, and interactions. Initial condition types can be `All`, `Any`, `Not`, `HasItem`, `QuestStatusIs`, `StoryFactIs`, `LocationUnlocked`, and an approved relationship threshold. Each reads narrow immutable views and produces a result/failure explanation.
 
 Separate durable gameplay actions from presentation cues:
@@ -503,9 +517,55 @@ Separate durable gameplay actions from presentation cues:
 | Open a shop view or journal | Presentation/navigation output after relevant checks |
 | Play an expression, sound, or speech bubble | Nonpersistent presentation cue; cannot determine whether a trade succeeded |
 
-Handlers are registered explicitly; serialized IDs map only to approved handlers and validated parameters. No reflection-selected method names, arbitrary C#, dynamically evaluated expressions, or executable scripts in content files. Do not turn this vocabulary into a general scripting engine preemptively.
+Handlers are registered explicitly; serialized IDs map only to approved handlers and validated parameters. The explicitly approved Ink integration permits authored narrative control flow in `.ink` files. It does not permit reflection-selected method names, arbitrary C#, or unregistered gameplay callbacks. Do not turn the gameplay vocabulary into a general scripting engine preemptively.
 
 ### 8.3 Dialogue data and runtime API
+
+**Implemented first draft (2026-11-04):** Narrative's DialogueDefinition and
+DialogueSession wrap the pinned Ink runtime with immutable views, session/revision
+checks and authored choice IDs. Game/Bootstrap owns loading, session lifetime and
+DialoguePresenter; Screens draws the modal. Framework supplies shared selection
+and fixed-width wrapping. Tab opens a placeholder visitor conversation in the
+existing room without advancing time. Cancel/finish consumes input; reopening
+resets conversation-local state. Focus loss retains the paused modal. Window-close
+confirmation ends the conversation and returns to Pause if exit is cancelled.
+There is no gameplay saving, reward integration, world-condition binding or
+portrait adapter yet. Current content/workflow:
+[authoring guide](PawnShop.Game/Content/Npcs/README.md),
+[verification](docs/VERIFICATION_DIALOGUE.md).
+
+The interfaces and custom JSON example below remain conceptual reference designs
+for later integration; the executable content format is compiled Ink JSON, not
+the illustrative schema. Narrative depends on Core and the headless Ink assembly;
+the compiler is used only by the build task and existing test/authoring runner.
+
+**NPC content refactor:** `Characters/Npcs/NpcDefinition` owns immutable authored
+identity, sprite references and local interaction bounds. Each `Content/Npcs/<id>/`
+folder contains `npc.json`, `sprites/`, optional `conversations.json`, and `dialogue/`
+Ink sources. Narrative's `ConversationBindings` maps stable conversation IDs to Ink
+paths and names a default. It has no dependency on Characters. Game/Bootstrap's
+`NpcContentCatalog` resolves these into validated assets/conversations and loads
+`Content/World/shop.npcs.json` placements separately. Folder names must match NPC IDs.
+An NPC may omit conversations; unused NPC definitions need not be placed.
+`TryTalkTo(npcId, conversationId?)` requires a present NPC and ordinary room play,
+then selects the explicit/default conversation. Unknown, unavailable and non-speaking
+targets have typed outcomes. Clicks use authored interaction bounds; keyboard selection
+handles an empty room. Movement/proximity, preferences and schedules are not implemented.
+
+GameSession owns NPC animators and their read-only frame projection. Room simulation
+advances them once per tick; dialogue and pause freeze them. RoomScreen owns/disposes
+PNG textures and draws using shared sheet metadata, pivot, scale and frame rectangles.
+Headless validation checks PNG header dimensions, frame/clip ranges and asset references;
+full texture decoding occurs only when the room graphics scope loads.
+
+Normal builds compile Ink using build/Ink.targets and generate a current content index.
+Deleted source assets cannot be revived by stale output files. Source Ink is authoritative;
+compiled JSON lives under obj/ and is copied to build/publish output. VS Code tasks/snippets
+and npc.ps1 scaffold complete NPC folders, list, check and preview conversations.
+dialogue.ps1 remains a compatibility entry point. Inky is optional; dialogue is text only.
+The bounded checker does not prove arbitrary visit-count/random-dependent paths; those
+require authored tests. Future quests, relationships and schedules can reference stable
+NPC IDs without making the dialogue engine own character state.
 
 Dialogue definitions contain stable conversation, node, choice, and speaker IDs; text/portrait/emotion references; conditions; explicit action references; and transitions. Runtime state contains the current participants, node, view revision, and any transient presentation state.
 

@@ -46,7 +46,7 @@ The sequence is a dependency order, not a calendar estimate. M00 maps existing c
 | M03 | Shared inventory and ownership | M02 | Move the same objects between containers | Planned; not repository-verified |
 | M04 | Minimal robust save/load | M03 | Continue a consistent saved session | Planned; not repository-verified |
 | M05 | Local shop/restoration economy loop | M04 | Search, repair, list, sell, save | Planned; not repository-verified |
-| M06 | Dialogue and quests | M05 | Accept and fulfill an authored request | Planned; not repository-verified |
+| M06 | Dialogue and quests | M05 | Accept and fulfill an authored request | Ink dialogue foundation implemented by explicit request; full quest integration remains planned |
 | M07 | Mech and companion | M03–M06 | Ride the mech with a distinct expressive follower | Planned; not repository-verified |
 | M08 | Authored mall and integrated slice | M07 | Expedition, extraction, restoration, sale, quest | Planned; not repository-verified |
 | M09 | Renewal, upgrades, daily cadence, story | M08 | Repeat the loop with meaningful progression | Planned; not repository-verified |
@@ -196,6 +196,20 @@ Use provisional fixtures such as `item.radio` and `recipe.radio_repair`; names a
 **Verification:** failed-operation before/after tests; duplicate completion/sale tests; manual local loop. **Defer:** haggling trees, complex demand simulation, loans/collateral, decorative shop expansion, broad recipe catalogs.
 
 ### M06 — Reusable dialogue, conditions, and quests
+
+**Partial implementation, 2026-11-04:** explicitly requested first Ink draft:
+authored branching visitor dialogue, stable choice IDs/revisions, validated tags,
+modal presentation, adjustable reveal/paging, cancellation and lifecycle tests.
+This foundation was selected independently of M02–M05; it does not implement or
+complete those prerequisites or M06's radio quest/rewards/persistence criteria.
+See [dialogue verification](docs/VERIFICATION_DIALOGUE.md).
+
+Authoring follow-up: VS Code tasks/snippets, data-driven NPC bindings, automatic
+Ink build compilation, a safe scaffold command and terminal branch previews now
+make conversations editable without C# registration or Inky. The NPC-first refactor
+adds per-NPC folders, sprite metadata/assets, optional multi-conversation bindings, and
+separate shop placements. NPC animation follows room simulation pause. This is still text
+dialogue groundwork, not quest/economy implementation or world NPC movement.
 
 **Goal:** prove authored narrative uses the same world rules as ordinary play.
 

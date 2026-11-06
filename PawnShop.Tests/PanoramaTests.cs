@@ -98,6 +98,7 @@ internal static partial class RegressionTests
         OpenOptions(app);
         app.Update(default, PanoramaCamera.TransitionDuration);
         Check(app.TitleUiVisible && app.TitleCamera.Position == 1);
+        FinishOptionsFlight(app);
         Back(app);
         Check(!app.TitleUiVisible);
         app.Update(default, PanoramaCamera.TransitionDuration);
@@ -120,6 +121,7 @@ internal static partial class RegressionTests
         Check(app.Screen == Screen.Options && !app.TitleUiVisible);
         Check(MenuPointerInput.HitTest(app, 100, 170, 1280, 720) == default);
         app.Update(default, PanoramaCamera.TransitionDuration);
+        FinishOptionsFlight(app);
         var back = OptionsMenuLayout.Row(app.Options.FieldCount + 2).Center;
         app.Update(MenuPointerInput.HitTest(app, back.X, back.Y, 1280, 720), TimeSpan.Zero);
         Check(app.Screen == Screen.Title && !app.TitleUiVisible);

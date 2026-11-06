@@ -19,7 +19,19 @@ internal static partial class RegressionTests
     }
     internal static void FinishTitleInteraction(ApplicationFlow app)
     {
+        // Options' departure replaces Interact; leave flight/pan available to callers.
+        if (app.OptionsFlight.IsBusy)
+        {
+            for (int i = 0; i < 8 && app.Screen == Screen.Title; i++) app.Update(default, TimeSpan.FromSeconds(2));
+            Check(app.OptionsFlight.Phase == OptionsSproutPhase.Flying);
+            return;
+        }
         if (app.TitleInteractionPlaying) app.Update(default, app.TitleSelector.Remaining);
+    }
+    internal static void FinishOptionsFlight(ApplicationFlow app)
+    {
+        for (int i = 0; i < 8 && app.OptionsFlight.IsBusy; i++) app.Update(default, TimeSpan.FromSeconds(2));
+        Check(app.OptionsFlight.Phase == OptionsSproutPhase.Arrived);
     }
     internal static void Back(ApplicationFlow app) => Step(app, new(Cancel: true));
     internal static void Begin(ApplicationFlow app) => Confirm(app);

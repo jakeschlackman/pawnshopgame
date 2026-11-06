@@ -22,7 +22,7 @@ internal sealed class TitleScreen : IDisposable
             background = new PanoramicBackground(device,
                 Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-screen-panorama.png"));
             logo = LoadTexture(device, "logo-pickers-hollow.png", 1774, 887);
-            sprout = LoadTexture(device, "sprout-title.png", titleSheet.ImageWidth, titleSheet.ImageHeight);
+            sprout = LoadTexture(device, "sprout-title-menu.png", titleSheet.ImageWidth, titleSheet.ImageHeight);
             DrawBackground = () => background.Draw(camera);
         }
         catch
@@ -35,7 +35,7 @@ internal sealed class TitleScreen : IDisposable
         }
     }
 
-    public void Draw(Menu<MenuCommand> menu, float textScale, SpriteAnimator selector)
+    public void Draw(Menu<MenuCommand> menu, float textScale, SpriteAnimator selector, bool drawSelector = true)
     {
         renderer.TextScale = textScale;
         renderer.Begin(Color.Transparent);
@@ -61,12 +61,22 @@ internal sealed class TitleScreen : IDisposable
         Text("CLICK OR UP/DOWN: SELECT   ENTER: CONFIRM", 0.15625f, 0.962963f,
             new Color(221, 198, 162), "TitleHelp");
         renderer.Present(clearBackBuffer: false, drawBackground: DrawBackground);
+        if (drawSelector) DrawSelector(selector, SelectorAnchor(menu.SelectedIndex, menu.Selected.Label, textScale));
+    }
+
+    public Vector2 SelectorAnchor(int index, string label, float textScale)
+    {
+        renderer.TextScale = textScale;
+        float y = TitleMenuLayout.FirstRow + index * TitleMenuLayout.RowSpacing;
+        return new Vector2(X(0.145833f), Y(y) + renderer.MeasureTextVerticalCenter(label.Font("TitleMenu")) + 9);
+    }
+
+    public void DrawSelector(SpriteAnimator selector, Vector2 anchor, float rotation = 0)
+    {
         var sheet = selector.Definition;
-        float selectedY = TitleMenuLayout.FirstRow + menu.SelectedIndex * TitleMenuLayout.RowSpacing;
-        float centerY = Y(selectedY) + renderer.MeasureTextVerticalCenter(menu.Selected.Label.Font("TitleMenu"));
         // Keep the stable authored pivot, and avoid resampling the sprite through two targets.
         renderer.DrawPixelOverlay(sprout, sheet.GetFrame(selector.FrameIndex),
-            new Vector2(X(0.145833f), centerY), sheet.Pivot, sheet.DisplayScale);
+            anchor, sheet.Pivot, sheet.DisplayScale, rotation);
     }
 
     private int X(float fraction) => (int)MathF.Round(renderer.Width * fraction);

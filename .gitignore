@@ -414,6 +414,12 @@ FodyWeavers.xsd
 # Local History for Visual Studio Code
 .history/
 
+# Downloaded tool archives (pinned redistributable Ink assemblies live in third_party).
+/.cache/
+
+# Ink JSON is built into obj/ and copied to output; authored .ink remains source.
+/PawnShop.Game/Content/Npcs/**/*.ink.json
+
 # Built Visual Studio Code Extensions
 *.vsix
 

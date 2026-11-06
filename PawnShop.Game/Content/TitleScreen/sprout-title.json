@@ -1,14 +1,17 @@
 {
   "version": 1,
-  "frameWidth": 48,
-  "frameHeight": 48,
+  "frameWidth": 68,
+  "frameHeight": 80,
   "columns": 4,
-  "rows": 8,
-  "pivotX": 26,
-  "pivotY": 28,
+  "rows": 19,
+  "pivotX": 36,
+  "pivotY": 44,
   "displayScale": 1.5,
   "animations": {
-    "Idle": { "firstFrame": 0, "frameCount": 16, "frameDurationMs": 90, "loop": true },
-    "Interact": { "firstFrame": 16, "frameCount": 16, "frameDurationMs": 50, "loop": false }
+    "Idle": { "firstFrame": 0, "frameCount": 13, "frameDurationMs": 90, "loop": true },
+    "Interact": { "firstFrame": 16, "frameCount": 16, "frameDurationMs": 50, "loop": false },
+    "PointToFastFlight": { "firstFrame": 32, "frameCount": 13, "frameDurationMs": 50, "loop": false },
+    "MenuFastJetFlight": { "firstFrame": 45, "frameCount": 17, "frameDurationMs": 50, "loop": true },
+    "FastFlightToPoint": { "firstFrame": 62, "frameCount": 13, "frameDurationMs": 50, "loop": false }
   }
 }

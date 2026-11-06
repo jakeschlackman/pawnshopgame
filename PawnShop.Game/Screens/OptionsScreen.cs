@@ -10,6 +10,17 @@ internal sealed class OptionsScreen(GraphicsDevice device, FontLibrary fonts) : 
     private readonly PixelRenderer renderer = new(device, 1280, 720, integerScaling: false, fonts: fonts);
     private static readonly Color Cream = new(255, 240, 210), Gold = new(255, 209, 108);
 
+    // Return title-canvas coordinates so the sprite keeps the same display scale
+    // while crossing from the 1920x1080 title UI to the 1280x720 Options UI.
+    public Vector2 SelectorAnchor(OptionsModel model, bool first = false)
+    {
+        renderer.TextScale = model.Presentation.UiScale / 100f;
+        int selected = first ? 0 : model.Selected;
+        var fields = model.Fields;
+        string label = selected < fields.Count ? fields[selected].Label : "APPLY";
+        return new Vector2(30, 166 + selected * 43 + renderer.MeasureTextVerticalCenter(label.Font("OptionsBody")) + 6) * 1.5f;
+    }
+
     public void Draw(OptionsModel model, Action? drawBackground = null)
     {
         bool overPanorama = drawBackground is not null;

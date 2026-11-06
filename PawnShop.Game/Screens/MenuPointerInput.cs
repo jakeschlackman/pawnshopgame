@@ -65,6 +65,22 @@ public sealed class MenuPointerInput
             for (int i = 0; i < flow.Options.FieldCount + 3; i++)
                 if (OptionsMenuLayout.Row(i).Contains(point)) return new(Confirm: true, SelectionIndex: i);
         }
+        else if (flow.Screen == Screen.Room)
+        {
+            foreach (var npc in flow.Npcs.Reverse())
+            {
+                var bounds = npc.Content.Definition.InteractionBounds;
+                if (new Rectangle(npc.X + bounds.X, npc.Y + bounds.Y, bounds.Width, bounds.Height).Contains(point)) return new(TalkTargetId: npc.Id);
+            }
+        }
+        else if (flow.Screen == Screen.Dialogue && flow.Dialogue is { } dialogue)
+        {
+            if (dialogue.ChoicesVisible)
+                for (int row = 0; row < 3; row++)
+                    if (dialogue.FirstVisibleChoice + row < dialogue.View.Choices.Count && DialogueScreen.ChoiceRow(row).Contains(point))
+                        return new(Confirm: true, SelectionIndex: dialogue.FirstVisibleChoice + row);
+            if (new Rectangle(24, 42, 592, 145).Contains(point)) return new(Confirm: true);
+        }
         else if (flow.Menu is { } menu)
         {
             for (int i = 0; i < menu.Items.Count; i++)

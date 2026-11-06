@@ -2,7 +2,24 @@
 
 C#/MonoGame prototype of a cozy salvage and pawn shop game. M01 implements
 title, New Game, a placeholder room, pause/resume, return, and exit. Inventory,
-movement, economics, saving, narrative, and robots are not implemented.
+movement, economics, saving, quests, and robots are not implemented. A first Ink
+conversation draft supports authored branching and a paused dialogue overlay.
+
+## Defining NPCs in VS Code
+
+**Start here: [Add NPCs, sprites and conversations](PawnShop.Game/Content/Npcs/README.md).**
+Dialogue is text only. Inky and audio tools are not required.
+
+```powershell
+./npc.ps1 new -Id mechanic -Name "Mechanic" -X 180 -Y 235
+```
+
+Edit the generated `Content/Npcs/mechanic/` folder in VS Code, build normally, then click the NPC in
+the room. `npc.json` defines identity and sprites; `conversations.json` selects Ink files;
+`Content/World/shop.npcs.json` places the NPC in the room;
+no C# registration or manual JSON export is needed. Use `./npc.ps1 check`
+to validate branches or `./npc.ps1 play -Id mechanic` for a terminal preview.
+VS Code's **Terminal > Run Task** also lists the four **Dialogue:** authoring tasks.
 
 ## Build and run
 
@@ -38,6 +55,9 @@ the MonoGame host or initializing graphics/audio. The test framework is unchange
   does not exit.
 - Space in the room: ring a silent test bell. Its count demonstrates session
   reset and that a menu-closing confirm cannot also activate the room.
+- Click an NPC in the room, or select one with Left/Right and press Tab to talk. Enter/Space reveals text,
+  then advances/selects on a later press; Up/Down selects, Escape leaves. Mouse
+  clicks on the text panel and response rows use the same command path.
 
 Continue is visibly unavailable; focus it to read the reason.
 Gameplay saves are not implemented. Returning to title or exiting during a session
@@ -61,7 +81,7 @@ unapplied edits. The active session stays paused while Options is open.
   tones and a Mute When Unfocused toggle. There are no authored gameplay audio
   tracks yet. Audio categories multiply their volume by Master.
 - Comfort: Pause When Unfocused and Slow/Normal/Fast/Instant dialogue text speed,
-  with a live text preview. Conversations are not implemented yet.
+  with a live text preview. The visitor conversation uses this preference.
 - Controls: rebind the existing Interact and Pause actions. Release the activation
   key before pressing a new key. Duplicate action keys are rejected; Escape cancels.
   Menu navigation stays fixed so it remains accessible after rebinding. Movement
@@ -90,7 +110,7 @@ regression project. The approved dependency graph and full folder list are in
 | --- | --- |
 | PawnShop.Framework | Reusable input/edges, generic menus, renderer, font catalog and SpriteFont adapter. No PawnShop project references or game-specific commands. |
 | PawnShop.Core | Authoritative room clock/bell fixture and immutable view under World. No graphics/project/package dependencies. |
-| PawnShop.Narrative | Requested class library and empty future folders; no narrative implementation. |
+| PawnShop.Narrative | Headless Ink definition/session adapter, immutable dialogue views, stable choice IDs and content diagnostics. Quest/relationship folders remain empty. |
 | PawnShop.Characters | Requested class library and empty future folders; no actor implementation. |
 | PawnShop.Shop | Requested class library and empty future folders; no shop implementation. |
 | PawnShop.Exploration | Requested class library and empty future folders; no exploration implementation. |
@@ -137,9 +157,9 @@ the standard MonoGame content pipeline in `Content/Content.mgcb`.
 
 The title starts at the panorama's left edge. Click Options (or use keyboard
 confirmation) to pan to the right edge over 0.8 seconds with SmoothStep easing.
-Options appears after arrival. Back/Escape hides Options and pans left; Escape
+Options appears during Sprout's flight and accepts input after arrival. Back/Escape hides Options and pans left; Escape
 can also reverse an outgoing pan. Repeated navigation does not restart the camera.
-Hidden controls cannot activate during travel. Options opened from the pause
+Controls cannot activate during travel. Options opened from the pause
 menu does not use this title animation and keeps the session paused.
 
 The background fills the actual viewport using a uniform cover scale, without
@@ -167,12 +187,12 @@ Menu rows and Options tabs also accept mouse clicks. Clicking a settings row
 performs its existing confirm action; Left/Right still provides fine keyboard
 adjustments. Display confirmation has clickable Keep/Revert buttons.
 
-Sprout replaces the title menu's selection diamond. `sprout-title.png` contains
-32 row-major 48x48 frames (4 columns, 8 rows). Frames 0–15 loop as Idle at 90 ms
-per frame; frames 16–31 play once as Interact at 50 ms per frame on confirmation by
-Enter, Space, or mouse. The selected action runs after the 0.8-second Interact
-clip finishes, so the reaction is visible before starting a game, panning to
-Options, or exiting. Repeated input is captured during the clip; Escape cancels
+Sprout replaces the title menu's selection diamond. The bundled local
+`sprout-title-menu.png` uses 68x80 cells: frames 0-12 loop PixelLab's east-facing
+Floating Point Right Loop at 90 ms/frame; frames 16-31 preserve the original
+selection reaction, padded without resizing, at 50 ms/frame on confirmation by
+Enter, Space, or mouse. For entries other than Options, the selected action runs after the 0.8-second Interact
+clip finishes, so the reaction is visible before starting a game or exiting. Repeated input is captured during the clip; Escape cancels
 it. Focus loss holds pending activation until focus returns. Disabled Continue
 reacts but cannot start a session. Pause/Options controls keep their normal timing.
 
@@ -183,6 +203,12 @@ Framework's SpriteAnimator advances once in Update, with Draw only reading frame
 Sprout renders directly to the final viewport with point sampling and a snapped
 pixel position, avoiding a second scaling pass through the title render target.
 Clip timings are independently editable in the metadata.
+
+Options finishes the current pointing cycle, then Sprout floats upright to the
+first Display setting during the 0.8-second panorama pan. The Floating Point
+Right Loop continues throughout travel and arrival, without rotation or jet clips.
+Input is captured until arrival; Escape cancels and focus loss pauses the float.
+All frames are bundled locally; the game never calls PixelLab.
 
 ## Central font catalog
 
@@ -215,6 +241,24 @@ from the catalog. The existing MonoGame content build compiles it automatically.
 See [MonoGame's font guide](https://docs.monogame.net/articles/getting_started/content_pipeline/adding_ttf_fonts.html)
 and [font provenance/license](PawnShop.Game/Content/Fonts/README.md).
 
+## Ink conversations
+
+The conversation engine uses Ink 1.2.1 through its official C# runtime. Editable
+NPC folders containing `npc.json`, sprites, `conversations.json` and `.ink` sources live in
+[Content/Npcs](PawnShop.Game/Content/Npcs/README.md); that guide covers
+VS Code editing, automatic build compilation, supported tags, and limitations.
+Compiled JSON and the current content index are generated under `obj/` and copied
+to output. Normal builds detect Ink syntax errors; `npc.ps1 check` validates
+NPC bindings and performs bounded branch checks.
+The official runtime/compiler assemblies and MIT license are recorded in
+[third_party/ink](third_party/ink/README.md). Only the runtime ships with the game.
+No Unity integration or installed Inky app is required.
+
+GameSession owns transient conversations; ApplicationFlow routes modal input and
+pauses the world; Screens renders text and responses using the existing pixel
+font. Quests, rewards, gameplay effects, durable Ink variables, and gameplay saves
+are deliberately absent from this draft. See [verification](docs/VERIFICATION_DIALOGUE.md).
+
 ## Guidance and evidence
 
 The existing design documents are at the root, not under `docs/`:
@@ -225,4 +269,5 @@ Their proposals remain proposals beyond the implemented slice.
 See [M00/M01 verification](docs/VERIFICATION_M01.md) for historical baseline
 results, structural-refactor verification, and the remaining desktop acceptance
 checklist. M00 remains complete; M01's full desktop lifecycle/resource acceptance
-remains pending. No new gameplay milestone was started.
+remains pending. The user-requested M06 dialogue foundation is now implemented;
+the full M06 quest/economy/persistence integration remains planned.

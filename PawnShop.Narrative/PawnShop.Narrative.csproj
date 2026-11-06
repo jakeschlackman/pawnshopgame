@@ -1,5 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="../PawnShop.Core/PawnShop.Core.csproj" />
+    <Reference Include="ink-engine-runtime">
+      <HintPath>../third_party/ink/ink-engine-runtime.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

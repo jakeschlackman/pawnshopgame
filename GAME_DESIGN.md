@@ -274,6 +274,17 @@ Procedural assembly is a later gated proposal. If adopted, generation must produ
 
 ### 10.1 Conversation experience
 
+The first implemented conversation draft uses text-only Ink authored in VS Code
+(Inky is optional), with a placeholder shop visitor and conversation-local follow-up
+questions. Each NPC has a folder with identity/sprite JSON, PNG assets, and separate
+conversation bindings/Ink files. Shop placement is separate from character identity;
+preferences, quests and schedules remain future work. Click an
+NPC, or select with Left/Right and press Tab in the existing room; text reveal,
+paging, keyboard/mouse responses, speed
+settings and cancellation are implemented. Names/text are prototype content.
+Quests, item delivery, rewards, durable facts and portraits below remain future
+integration work; this draft does not establish new story canon.
+
 Conversations are authored branches with identifiable speakers, text, optional portraits/emotions, and choices. One interaction can reveal more text; a separate action chooses or advances. Skipping a typewriter effect is not automatically selecting the first answer.
 
 Choice availability can depend on inventory, a quest state, a relationship, a story fact, or location access. If the state changes before selection, the choice is checked again and explains why it is no longer available. Text itself does not contain executable business logic.

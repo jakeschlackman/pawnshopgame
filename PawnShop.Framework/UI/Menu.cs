@@ -13,7 +13,8 @@ public sealed record MenuItem<TCommand>(string Label, TCommand Command, string? 
 public sealed class Menu<TCommand> where TCommand : struct, Enum
 {
     public IReadOnlyList<MenuItem<TCommand>> Items { get; }
-    public int SelectedIndex { get; private set; }
+    private readonly SelectionModel selection = new();
+    public int SelectedIndex => selection.Index;
     public MenuItem<TCommand> Selected => Items[SelectedIndex];
 
     public Menu(params MenuItem<TCommand>[] items)
@@ -24,13 +25,6 @@ public sealed class Menu<TCommand> where TCommand : struct, Enum
 
     public TCommand? Handle(InputFrame input)
     {
-        if (input.SelectionIndex is { } index && index >= 0 && index < Items.Count)
-            SelectedIndex = index;
-        if (input.Up != input.Down)
-        {
-            SelectedIndex = (SelectedIndex + (input.Down ? 1 : Items.Count - 1)) % Items.Count;
-            return null; // Navigation and confirm together never activate an unseen selection.
-        }
-        return input.Confirm && Selected.Enabled ? Selected.Command : null;
+        return selection.Handle(input, Items.Count) && Selected.Enabled ? Selected.Command : null;
     }
 }
