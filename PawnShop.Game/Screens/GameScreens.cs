@@ -6,11 +6,31 @@ using PawnShop.Game.Bootstrap;
 
 namespace PawnShop.Game.Screens;
 
-internal sealed class GameScreens(GraphicsDevice device, PanoramaCamera camera, FontLibrary fonts, SpriteSheetDefinition titleSheet) : IDisposable
+internal sealed class GameScreens : IDisposable
 {
-    private readonly TitleScreen title = new(device, camera, fonts, titleSheet);
-    private readonly OptionsScreen options = new(device, fonts);
+    private readonly GraphicsDevice device;
+    private readonly TitleScreen title;
+    private readonly OptionsScreen options;
+    private readonly PlayerSpriteRenderer players;
     private RoomScreen? room;
+
+    public GameScreens(GraphicsDevice device, PanoramaCamera camera, FontLibrary fonts, SpriteSheetDefinition titleSheet, PlayerSpriteCatalog playerCatalog)
+    {
+        this.device = device;
+        try
+        {
+            title = new(device, camera, fonts, titleSheet);
+            options = new(device, fonts);
+            players = new(device, playerCatalog);
+        }
+        catch
+        {
+            players?.Dispose();
+            options?.Dispose();
+            title?.Dispose();
+            throw;
+        }
+    }
 
     public void SynchronizeRoom(RoomView? view, IReadOnlyList<PlacedNpc> npcs)
     {
@@ -18,7 +38,7 @@ internal sealed class GameScreens(GraphicsDevice device, PanoramaCamera camera, 
         if (room?.SessionId == id) return;
         room?.Dispose();
         room = null;
-        if (id is { } sessionId) room = new RoomScreen(device, sessionId, npcs);
+        if (id is { } sessionId) room = new RoomScreen(device, sessionId, npcs, players);
     }
 
     public void Draw(PixelRenderer renderer, ApplicationFlow flow)
@@ -49,10 +69,15 @@ internal sealed class GameScreens(GraphicsDevice device, PanoramaCamera camera, 
         }
         renderer.TextScale = flow.Options.Current.UiScale / 100f;
         renderer.Begin(new Color(26, 36, 38));
-        if (flow.Room is { } view && room is not null) room.Draw(renderer, view, flow.Options.Current, flow.Npcs, flow.SelectedNpcId, flow.NpcFrames);
-        if (flow.Menu is { } menu) MenuScreen.Draw(renderer, flow, menu);
+        if (flow.Room is { } view && room is not null && flow.Player is { } player)
+            room.Draw(renderer, view, player, flow.Options.Current, flow.SelectedNpcId, flow.NpcFrames);
+        if (flow.Menu is { } menu)
+        {
+            if (flow.Screen == Screen.CharacterSelect) CharacterSelectionScreen.Draw(renderer, menu, players);
+            else MenuScreen.Draw(renderer, flow, menu);
+        }
         if (flow.Dialogue is { } dialogue) DialogueScreen.Draw(renderer, dialogue);
-        renderer.Text("M01 PROTOTYPE - NO SAVING", 18, 341, new Color(173, 184, 172));
+        renderer.Text("PROTOTYPE - NO SAVING", 18, 341, new Color(173, 184, 172));
         renderer.Present();
     }
 
@@ -71,5 +96,6 @@ internal sealed class GameScreens(GraphicsDevice device, PanoramaCamera camera, 
         room = null;
         title.Dispose();
         options.Dispose();
+        players.Dispose();
     }
 }

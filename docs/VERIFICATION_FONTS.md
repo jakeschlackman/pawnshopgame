@@ -55,6 +55,41 @@ the approved elevated retry of the solution build passed with zero warnings/erro
 The source TTF is bundled and does not require installation. Manual visual testing
 remains with the user.
 
+## Options readability follow-up (2026-11-05)
+
+All three Options roles now use Atkinson Hyperlegible: Bold headings, Regular
+body/help. Their existing 36/24/22 logical line heights are retained. These roles
+cover every Options category, value, binding column, button, message, footer and
+display confirmation prompt. The Options renderer opts into linear sampling for
+font downscaling and canvas presentation. Renderer defaults, the title, gameplay
+and direct pixel-sprite overlays retain point sampling. Shared FontLibrary
+measurement also uses the new glyphs, including selection alignment and wrapping.
+
+Bundled unmodified Regular/Bold static TTFs and their original SIL OFL license
+from Google Fonts. Source URLs, byte counts and SHA-256 hashes are recorded in
+Content/Fonts/README.md. Both compile with the existing MonoGame 3.8.4.1 pipeline;
+the license is copied to build/publish output. No new dependency, system font
+installation or runtime download was added.
+
+The sandbox blocked the initial font download; the approved elevated retry
+succeeded. Initial MGCB compilation hit the same sandbox font-lookup exception
+recorded above. The approved build outside the sandbox then compiled both bundled
+TTFs successfully, with zero warnings/errors:
+
+```text
+dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false
+dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build
+git diff --check
+```
+
+The runner passed 47/47 checks. Existing font-content checks now require the new
+Options role mappings, both compiled XNBs and the copied license. Runtime copies
+of the catalog/license were compared with source by SHA-256. Whitespace checks
+passed for authored text; the unmodified upstream license retains its original
+trailing space on line 20. No application launch or screenshot inspection was performed. Readability,
+binding-column fit, message wrapping and display confirmation layout at
+100/125/150 percent UI scale remain manual checks for the user.
+
 ## Selection indicator alignment
 
 The title selection diamond now centers on the selected label's drawn glyph

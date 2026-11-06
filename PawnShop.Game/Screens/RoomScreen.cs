@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using PawnShop.Core.World;
 using PawnShop.Game.Bootstrap;
 using PawnShop.Framework.Rendering;
+using PawnShop.Characters.Player;
 using static PawnShop.Game.Screens.ScreenColors;
 
 namespace PawnShop.Game.Screens;
@@ -14,9 +15,13 @@ internal sealed class RoomScreen : IDisposable
     public Texture2D Floor { get; }
 
     private readonly Dictionary<string, Texture2D> textures = new();
+    private readonly PlayerSpriteRenderer players;
+    private readonly PlacedNpc[] drawOrder;
 
-    public RoomScreen(GraphicsDevice device, Guid sessionId, IReadOnlyList<PlacedNpc> npcs)
+    public RoomScreen(GraphicsDevice device, Guid sessionId, IReadOnlyList<PlacedNpc> npcs, PlayerSpriteRenderer players)
     {
+        this.players = players;
+        drawOrder = npcs.OrderBy(n => n.Y).ThenBy(n => n.Id, StringComparer.Ordinal).ToArray();
         SessionId = sessionId;
         Floor = new Texture2D(device, 32, 32);
         var pixels = new Color[32 * 32];
@@ -38,25 +43,27 @@ internal sealed class RoomScreen : IDisposable
         catch { Dispose(); throw; }
     }
 
-    public void Draw(PixelRenderer renderer, RoomView view, AppSettings settings, IReadOnlyList<PlacedNpc> npcs, string? selectedNpcId, IReadOnlyDictionary<string, int> frames)
+    public void Draw(PixelRenderer renderer, RoomView view, PlayerView player, AppSettings settings, string? selectedNpcId, IReadOnlyDictionary<string, int> frames)
     {
-        for (int y = 80; y < 304; y += 32)
-            for (int x = 32; x < 608; x += 32)
+        var floor = ShopRoomLayout.Floor;
+        for (int y = (int)floor.Top; y < floor.Bottom; y += 32)
+            for (int x = (int)floor.Left; x < floor.Right; x += 32)
                 renderer.DrawTexture(Floor, x, y);
         renderer.Fill(32, 44, 576, 36, new Color(90, 111, 99));
-        renderer.Fill(68, 104, 190, 48, new Color(56, 40, 35));
-        renderer.Fill(68, 104, 190, 9, Gold);
-        renderer.Text("COUNTER - BELL", 85, 124, Cream);
-        renderer.Fill(315, 184, 20, 26, new Color(45, 66, 78));
-        renderer.Fill(317, 176, 16, 14, new Color(230, 183, 139));
-        renderer.Fill(317, 210, 6, 5, Color.Black);
-        renderer.Fill(329, 210, 6, 5, Color.Black);
+        var counter = ShopRoomLayout.Counter;
+        renderer.Fill((int)counter.Left, (int)counter.Top, (int)counter.Width, (int)counter.Height, new Color(56, 40, 35));
+        renderer.Fill((int)counter.Left, (int)counter.Top, (int)counter.Width, 9, Gold);
+        renderer.Text("COUNTER", 85, 124, Cream);
         renderer.Text("YOUR SHOP", 44, 58, Cream, 2);
         renderer.Text($"ROOM TIME: {(int)view.Elapsed.TotalSeconds} SECONDS", 36, 16, Cream);
-        renderer.Text($"BELL RINGS: {view.BellRings}", 410, 16, Gold);
-        renderer.Text($"ARROWS: NPC  TAB: TALK  {settings.InteractKey}: BELL  {settings.PauseKey}: PAUSE", 36, 315, Cream);
-        foreach (var npc in npcs)
+        renderer.Text(player.Gender == PlayerGender.Male ? "MALE" : "FEMALE", 480, 16, Gold);
+        renderer.Text($"MOVE KEYS: MOVE  {settings.InteractKey}: TALK  {settings.PauseKey}: PAUSE / BACK", 36, 315, Cream);
+        if (selectedNpcId is null) renderer.Text("WALK NEAR THE VISITOR TO TALK", 36, 326, Cream);
+        else renderer.Text($"{settings.InteractKey}: TALK TO THE VISITOR", 36, 326, Gold);
+        bool playerDrawn = false;
+        foreach (var npc in drawOrder)
         {
+            if (!playerDrawn && player.Position.Y <= npc.Y) { DrawPlayer(renderer, player); playerDrawn = true; }
             if (npc.Id == selectedNpcId) renderer.Fill(npc.X - 13, npc.Y + 1, 26, 3, Gold);
             var asset = npc.Content.Sprite;
             var sheet = asset.Sheet;
@@ -68,7 +75,11 @@ internal sealed class RoomScreen : IDisposable
             int labelX = Math.Clamp(npc.X - labelWidth / 2, 36, 604 - labelWidth);
             renderer.Text(npc.Name, labelX, npc.Y + 11, npc.Id == selectedNpcId ? Gold : Cream);
         }
+        if (!playerDrawn) DrawPlayer(renderer, player);
     }
+
+    private void DrawPlayer(PixelRenderer renderer, PlayerView player) =>
+        players.Draw(renderer, player.Gender, player.Facing, player.Position.X, player.Position.Y);
 
     public void Dispose()
     {

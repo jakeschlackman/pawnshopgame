@@ -19,7 +19,7 @@ public sealed record PlacedNpc(NpcContent Content, int X, int Y)
     public string Id => Content.Id;
     public string Name => Content.Name;
 }
-public enum TalkResult { Started, NoSession, Busy, UnknownNpc, NoConversation, UnknownConversation }
+public enum TalkResult { Started, NoSession, Busy, UnknownNpc, NoConversation, UnknownConversation, OutOfRange }
 
 // Composition boundary: Characters owns definitions, Narrative owns conversations,
 // Framework owns sprite metadata, and Game resolves their content references.

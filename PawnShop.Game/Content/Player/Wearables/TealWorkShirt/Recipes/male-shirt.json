@@ -1,0 +1,121 @@
+{
+  "job": {
+    "canvas": [
+      48,
+      64
+    ],
+    "frame_count": 1,
+    "views": [
+      {
+        "id": "male",
+        "offset": [
+          0,
+          0
+        ]
+      }
+    ],
+    "source_bookends_exact": false,
+    "body_palette_exact": false,
+    "require_clear_border": true
+  },
+  "scene": {
+    "palette": {},
+    "layers": [
+      {
+        "id": "shirt",
+        "name": "Shirt - body-specific AI garment"
+      }
+    ],
+    "views": {
+      "male": {
+        "nodes": {
+          "shirt": {
+            "layer": "shirt",
+            "draw": [
+              {
+                "op": "grid",
+                "at": [
+                  10,
+                  20
+                ],
+                "rows": [
+                  "............................",
+                  "............................",
+                  "........OOO......OxXA.......",
+                  "......OBCDEO....OHIJKO......",
+                  ".....OLLLLICOOOOMNPLPPO.....",
+                  "....ODLHLLLQRSTPUDLLLLLO....",
+                  "....OPLLLLLLLLLLLLLLLLLO....",
+                  "...OBLLNLLLLLLPPMMBDVLLO....",
+                  "...OPLLWPLLLLLLYTTDLWPLLK...",
+                  "...ULPPOPPPLLLLZLLLPOLPUU...",
+                  "...OCRUOPLLLLLPRLLZIONSLK...",
+                  "........PCLLLPPLZZRN........",
+                  "........HCPLLLLLLPRx........",
+                  "........HCCLLLLLLCPN........",
+                  "........CPCLLLLLLCLN........",
+                  "........RPLCLLLLILLJ........",
+                  "........DDLLCVLLLDLV........",
+                  "........CVJHPLLDLLVE........",
+                  "........OOOOOOOKOOOO........",
+                  "............................",
+                  "............................",
+                  "............................"
+                ],
+                "legend": {
+                  "#": "#0c0a09ff",
+                  "@": "#bc7a5eff",
+                  "%": "#e6a47cff",
+                  "&": "#eaa982ff",
+                  "*": "#e9a57dff",
+                  "+": "#0b0403ff",
+                  "=": "#b37358ff",
+                  "o": "#e8a780ff",
+                  "O": "#030202ff",
+                  "x": "#0c1b1bff",
+                  "X": "#2b1611ff",
+                  "A": "#1b0805ff",
+                  "B": "#213b3cff",
+                  "C": "#5a7c7eff",
+                  "D": "#63868aff",
+                  "E": "#102424ff",
+                  "F": "#a2654cff",
+                  "G": "#945d47ff",
+                  "H": "#608385ff",
+                  "I": "#55777aff",
+                  "J": "#4a6b6dff",
+                  "K": "#040b0bff",
+                  "L": "#668a8dff",
+                  "M": "#1f3434ff",
+                  "N": "#436365ff",
+                  "P": "#698d91ff",
+                  "Q": "#355354ff",
+                  "R": "#6c9194ff",
+                  "S": "#729599ff",
+                  "T": "#7b9ea2ff",
+                  "U": "#3c5b5cff",
+                  "V": "#507274ff",
+                  "W": "#0a1413ff",
+                  "Y": "#2b4444ff",
+                  "Z": "#324c4cff",
+                  "a": "#e49d76ff",
+                  "b": "#413b3bff",
+                  "c": "#ca8566ff",
+                  "d": "#c38266ff",
+                  "e": "#120302ff",
+                  "f": "#3a3434ff",
+                  "g": "#535253ff",
+                  "h": "#504e50ff",
+                  "i": "#342f2eff",
+                  "j": "#4a4545ff",
+                  "k": "#201513ff"
+                },
+                "mode": "stamp"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

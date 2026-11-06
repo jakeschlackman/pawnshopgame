@@ -6,26 +6,37 @@ public sealed class KeyboardInput
 {
     private readonly InputEdges edges = new();
     private bool wasActive;
-    public Keys InteractKey { get; set; } = Keys.Space;
-    public Keys PauseKey { get; set; } = Keys.Escape;
-    public bool InMenus { get; set; } = true;
+    public KeyboardBindings Bindings { get; set; } = new();
     public KeyboardState State { get; private set; }
 
     public InputFrame Read(bool active)
     {
         var keys = Keyboard.GetState();
+        return Read(keys, active);
+    }
+
+    // Device-independent overload lets headless tests exercise the actual action mapping.
+    public InputFrame Read(KeyboardState keys, bool active)
+    {
+        bool ready = active && wasActive;
         State = keys;
         InputButtons held = InputButtons.None;
-        if (keys.IsKeyDown(Keys.Up) || keys.IsKeyDown(Keys.W)) held |= InputButtons.Up;
-        if (keys.IsKeyDown(Keys.Down) || keys.IsKeyDown(Keys.S)) held |= InputButtons.Down;
-        if (keys.IsKeyDown(Keys.Enter) || keys.IsKeyDown(Keys.Space)) held |= InputButtons.Confirm;
-        if (keys.IsKeyDown(InMenus ? Keys.Escape : PauseKey)) held |= InputButtons.Cancel;
-        if (keys.IsKeyDown(InteractKey)) held |= InputButtons.Interact;
-        if (keys.IsKeyDown(Keys.Left) || keys.IsKeyDown(Keys.A)) held |= InputButtons.Left;
-        if (keys.IsKeyDown(Keys.Right) || keys.IsKeyDown(Keys.D)) held |= InputButtons.Right;
+        if (Bindings.MoveUp.IsDown(keys)) held |= InputButtons.Up;
+        if (Bindings.MoveDown.IsDown(keys)) held |= InputButtons.Down;
+        if (Bindings.Interact.IsDown(keys) || keys.IsKeyDown(Keys.Enter) || keys.IsKeyDown(Keys.Space)) held |= InputButtons.Confirm;
+        if (Bindings.PauseBack.IsDown(keys) || keys.IsKeyDown(Keys.Escape)) held |= InputButtons.Cancel;
+        if (Bindings.Interact.IsDown(keys)) held |= InputButtons.Interact;
+        if (Bindings.MoveLeft.IsDown(keys)) held |= InputButtons.Left;
+        if (Bindings.MoveRight.IsDown(keys)) held |= InputButtons.Right;
         if (keys.IsKeyDown(Keys.Tab)) held |= InputButtons.NextTab;
         if (!active || !wasActive) edges.Synchronize(held);
         wasActive = active;
-        return edges.Read(held);
+        var frame = edges.Read(held);
+        if (!ready) return default;
+        return frame with
+        {
+            MoveX = (Bindings.MoveRight.IsDown(keys) ? 1 : 0) - (Bindings.MoveLeft.IsDown(keys) ? 1 : 0),
+            MoveY = (Bindings.MoveDown.IsDown(keys) ? 1 : 0) - (Bindings.MoveUp.IsDown(keys) ? 1 : 0)
+        };
     }
 }

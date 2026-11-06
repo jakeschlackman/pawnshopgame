@@ -220,6 +220,9 @@ Separate source canvas size, visible body bounds, world size, origin, collision 
 - Use data-driven animation metadata and a reusable animator. Gameplay requests animation states, not sprite-sheet row numbers.
 - Define arbitration between locomotion, actions, reactions, and dialogue expressions so systems do not overwrite one another every tick.
 - Preserve source artwork; keep derivative sheets and generated build output distinct. Record third-party asset provenance/licenses.
+- For customizable player clothing, follow [the approved wearable art workflow](docs/WEARABLE_ART_WORKFLOW.md): AI-generate separate body-specific PixelLab object references, fit each to its exact base, and extract garment-only layers over the unchanged body. Do not substitute hand-drawn shapes or force fitting by shifting, stretching or repeating fabric rows.
+- Use the canonical `Content/Player/Bases` and `Content/Player/Wearables` assets and their manifests. The current source-frame contract is 48×64 with 48–52 visible body pixels (currently 50) and pivot (24,58); it does not establish collision/world scale. Keep full transparent canvases and native coordinates.
+- Check shoulder/underwear coverage and enlarged/native-size composition before requesting visual acceptance. Record approval per body, direction and pose; numeric checks alone cannot approve fit. Archive rejected source work before cleanup, and keep approved files independent of the archive.
 - Own and dispose textures, render targets, audio, and content scopes deliberately; do not dispose shared assets while another scene uses them.
 
 ## 13. Persistence and content validation

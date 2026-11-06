@@ -39,6 +39,6 @@ internal static class MenuScreen
             renderer.Text(item.Label, left + 18, y, item.Enabled ? Cream : new Color(166, 179, 168), 1);
         }
         if (menu.Selected.DisabledReason is { } reason) renderer.Text(reason, left, 287, Gold);
-        renderer.Text("UP/DOWN: SELECT  ENTER: OK  ESC: BACK", left, title ? 310 : 300, Cream);
+        renderer.Text("MOVE KEYS: SELECT  ENTER: OK  ESC: BACK", left, title ? 310 : 300, Cream);
     }
 }

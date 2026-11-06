@@ -7,7 +7,8 @@ namespace PawnShop.Game.Screens;
 
 internal sealed class OptionsScreen(GraphicsDevice device, FontLibrary fonts) : IDisposable
 {
-    private readonly PixelRenderer renderer = new(device, 1280, 720, integerScaling: false, fonts: fonts);
+    private readonly PixelRenderer renderer = new(device, 1280, 720, integerScaling: false, fonts: fonts,
+        samplerState: SamplerState.LinearClamp);
     private static readonly Color Cream = new(255, 240, 210), Gold = new(255, 209, 108);
 
     // Return title-canvas coordinates so the sprite keeps the same display scale
@@ -18,7 +19,8 @@ internal sealed class OptionsScreen(GraphicsDevice device, FontLibrary fonts) : 
         int selected = first ? 0 : model.Selected;
         var fields = model.Fields;
         string label = selected < fields.Count ? fields[selected].Label : "APPLY";
-        return new Vector2(30, 166 + selected * 43 + renderer.MeasureTextVerticalCenter(label.Font("OptionsBody")) + 6) * 1.5f;
+        return new Vector2(30, OptionsMenuLayout.Row(selected, model.Tab == 3).Y + 8
+            + renderer.MeasureTextVerticalCenter(label.Font("OptionsBody")) + 6) * 1.5f;
     }
 
     public void Draw(OptionsModel model, Action? drawBackground = null)
@@ -31,16 +33,33 @@ internal sealed class OptionsScreen(GraphicsDevice device, FontLibrary fonts) : 
         for (int i = 0; i < OptionsModel.Tabs.Count; i++)
             Text(OptionsModel.Tabs[i], 50 + i * 300, 110, i == model.Tab ? Gold : Cream);
         var fields = model.Fields;
+        if (model.Tab == 3)
+        {
+            Text("PRIMARY", 640, 154, Gold, "OptionsHelp");
+            Text("ALTERNATE", 945, 154, Gold, "OptionsHelp");
+        }
         for (int i = 0; i < fields.Count + 3; i++)
         {
-            int y = 166 + i * 43;
+            int y = OptionsMenuLayout.Row(i, model.Tab == 3).Y + 8;
             if (i == model.Selected) renderer.Fill(42, y - 8, 1190, 36, new Color(62, 78, 72));
             string label = i < fields.Count ? fields[i].Label : (i - fields.Count) switch
             {
                 0 => "APPLY", 1 => "RESTORE DEFAULTS", _ => "BACK - DISCARD UNAPPLIED EDITS"
             };
             Text(label, 60, y, i == model.Selected ? Gold : Cream);
-            if (i < fields.Count) Text(fields[i].Value, 800, y, Cream);
+            if (i < fields.Count && model.Tab == 3)
+            {
+                var binding = model.Binding(i);
+                for (int slot = 0; slot < 2; slot++)
+                {
+                    var bounds = OptionsMenuLayout.Binding(i, slot);
+                    bool focused = i == model.Selected && slot == model.SelectedBinding;
+                    if (focused) renderer.Fill(bounds.X, bounds.Y, bounds.Width, bounds.Height, new Color(83, 96, 82));
+                    Text(model.CapturingKey && focused ? "PRESS KEY..." : OptionsModel.KeyLabel(slot == 0 ? binding.Primary : binding.Alternate),
+                        bounds.X + 20, y, focused ? Gold : Cream);
+                }
+            }
+            else if (i < fields.Count) Text(fields[i].Value, 800, y, Cream);
             if (model.Tab == 1 && i < 4)
             {
                 int volume = i switch { 0 => model.Draft.Master, 1 => model.Draft.Music,
@@ -64,8 +83,8 @@ internal sealed class OptionsScreen(GraphicsDevice device, FontLibrary fonts) : 
         }
         else
         {
-            Text("ENTER: REBIND. ESC CANCELS CAPTURE. DUPLICATES REJECTED.", 60, 540, Cream, "OptionsHelp");
-            Text("MENU KEYS STAY FIXED. MOVEMENT IS NOT IMPLEMENTED YET.", 60, 578, Cream, "OptionsHelp");
+            Text("LEFT/RIGHT: SLOT   ENTER: REBIND   ESC: CANCEL CAPTURE", 60, 548, Cream, "OptionsHelp");
+            Text("DELETE: CLEAR ALTERNATE. APPLY TO SAVE BOTH KEYS.", 60, 582, Cream, "OptionsHelp");
         }
         string message = model.Message ?? "TAB: CATEGORY   UP/DOWN: SELECT   LEFT/RIGHT: CHANGE";
         if (renderer.MeasureText(message.Font("OptionsHelp")).X > 1160)
@@ -81,7 +100,7 @@ internal sealed class OptionsScreen(GraphicsDevice device, FontLibrary fonts) : 
             else Text(message, 60, 628, Gold, "OptionsHelp");
         }
         else Text(message, 60, 628, Gold, "OptionsHelp");
-        Text("ENTER: ACTIVATE   ESC: BACK / DISCARD", 60, 677, Cream, "OptionsHelp");
+        Text($"{OptionsModel.KeyLabel(model.Current.InteractKey)} / ENTER: ACTIVATE   {OptionsModel.KeyLabel(model.Current.PauseKey)} / ESC: BACK", 60, 677, Cream, "OptionsHelp");
         if (model.Previewing)
         {
             renderer.Fill(30, 160, 1220, 370, new Color(20, 29, 33));

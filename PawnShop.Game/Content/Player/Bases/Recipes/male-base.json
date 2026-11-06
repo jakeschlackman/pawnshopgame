@@ -1,0 +1,1416 @@
+{
+  "job": {
+    "canvas": [
+      48,
+      64
+    ],
+    "frame_count": 1,
+    "durations_ms": [
+      100
+    ],
+    "views": [
+      {
+        "id": "male-south",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "male-south-east",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "male-east",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "male-north-east",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "male-north",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "male-north-west",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "male-west",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "male-south-west",
+        "offset": [
+          0,
+          0
+        ]
+      }
+    ],
+    "source_bookends_exact": false,
+    "body_palette_exact": true,
+    "require_clear_border": true
+  },
+  "scene": {
+    "palette": {},
+    "layers": [
+      {
+        "id": "body",
+        "name": "Body - base"
+      }
+    ],
+    "views": {
+      "male-south": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                33
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                34,
+                47,
+                34
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                35,
+                47,
+                48
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                49,
+                47,
+                49
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                50,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -8,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -8,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -8,
+              -3
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso2": {
+            "layer": "body",
+            "at": [
+              -8,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -8,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -8,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -8,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin2": {
+            "layer": "body",
+            "at": [
+              -8,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin3": {
+            "layer": "body",
+            "at": [
+              -8,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -8,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "male-south-east": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                33
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                34,
+                47,
+                34
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                35,
+                47,
+                48
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                49,
+                47,
+                49
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                50,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -10,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -10,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -10,
+              -3
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso2": {
+            "layer": "body",
+            "at": [
+              -10,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -10,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -10,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -10,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin2": {
+            "layer": "body",
+            "at": [
+              -10,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -10,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "male-east": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                30
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                31,
+                47,
+                31
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                32,
+                47,
+                45
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                46,
+                47,
+                46
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                47,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -1,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -1,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -1,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso2": {
+            "layer": "body",
+            "at": [
+              -1,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -1,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -1,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -1,
+              2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin2": {
+            "layer": "body",
+            "at": [
+              -1,
+              3
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -1,
+              3
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "male-north-east": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                29
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                30,
+                47,
+                30
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                31,
+                47,
+                44
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                45,
+                47,
+                45
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                46,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -12,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -12,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -12,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -12,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -12,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -12,
+              2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -12,
+              2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "male-north": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                31
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                32,
+                47,
+                32
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                33,
+                47,
+                46
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                47,
+                47,
+                47
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                48,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -8,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -8,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -8,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -8,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -8,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -8,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin2": {
+            "layer": "body",
+            "at": [
+              -8,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -8,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "male-north-west": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                29
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                30,
+                47,
+                30
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                31,
+                47,
+                44
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                45,
+                47,
+                45
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                46,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -8,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -8,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -8,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -8,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -8,
+              1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -8,
+              2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -8,
+              2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "male-west": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                33
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                34,
+                47,
+                34
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                35,
+                47,
+                48
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                49,
+                47,
+                49
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                50,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -11,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -11,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -11,
+              -3
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso2": {
+            "layer": "body",
+            "at": [
+              -11,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -11,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -11,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -11,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin2": {
+            "layer": "body",
+            "at": [
+              -11,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -11,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "male-south-west": {
+        "selections": {
+          "top": {
+            "regions": [
+              [
+                0,
+                0,
+                47,
+                33
+              ]
+            ]
+          },
+          "torso": {
+            "regions": [
+              [
+                0,
+                34,
+                47,
+                34
+              ]
+            ]
+          },
+          "middle": {
+            "regions": [
+              [
+                0,
+                35,
+                47,
+                48
+              ]
+            ]
+          },
+          "shin": {
+            "regions": [
+              [
+                0,
+                49,
+                47,
+                49
+              ]
+            ]
+          },
+          "bottom": {
+            "regions": [
+              [
+                0,
+                50,
+                47,
+                63
+              ]
+            ]
+          }
+        },
+        "nodes": {
+          "top": {
+            "layer": "body",
+            "at": [
+              -9,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "top"
+              }
+            ]
+          },
+          "torso0": {
+            "layer": "body",
+            "at": [
+              -9,
+              -4
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso1": {
+            "layer": "body",
+            "at": [
+              -9,
+              -3
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "torso2": {
+            "layer": "body",
+            "at": [
+              -9,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "torso"
+              }
+            ]
+          },
+          "middle": {
+            "layer": "body",
+            "at": [
+              -9,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "middle"
+              }
+            ]
+          },
+          "shin0": {
+            "layer": "body",
+            "at": [
+              -9,
+              -2
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin1": {
+            "layer": "body",
+            "at": [
+              -9,
+              -1
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "shin2": {
+            "layer": "body",
+            "at": [
+              -9,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "shin"
+              }
+            ]
+          },
+          "bottom": {
+            "layer": "body",
+            "at": [
+              -9,
+              0
+            ],
+            "draw": [
+              {
+                "op": "copy",
+                "part": "bottom"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

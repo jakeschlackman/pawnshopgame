@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "frameWidth": 48,
+  "frameHeight": 64,
+  "columns": 8,
+  "rows": 1,
+  "pivotX": 24,
+  "pivotY": 58,
+  "displayScale": 1,
+  "animations": {
+    "IdleSouth": { "firstFrame": 0, "frameCount": 1, "frameDurationMs": 500, "loop": true },
+    "IdleSouthEast": { "firstFrame": 1, "frameCount": 1, "frameDurationMs": 500, "loop": true },
+    "IdleEast": { "firstFrame": 2, "frameCount": 1, "frameDurationMs": 500, "loop": true },
+    "IdleNorthEast": { "firstFrame": 3, "frameCount": 1, "frameDurationMs": 500, "loop": true },
+    "IdleNorth": { "firstFrame": 4, "frameCount": 1, "frameDurationMs": 500, "loop": true },
+    "IdleNorthWest": { "firstFrame": 5, "frameCount": 1, "frameDurationMs": 500, "loop": true },
+    "IdleWest": { "firstFrame": 6, "frameCount": 1, "frameDurationMs": 500, "loop": true },
+    "IdleSouthWest": { "firstFrame": 7, "frameCount": 1, "frameDurationMs": 500, "loop": true }
+  }
+}

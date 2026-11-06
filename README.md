@@ -1,9 +1,10 @@
 # Pawn Shop Game
 
 C#/MonoGame prototype of a cozy salvage and pawn shop game. M01 implements
-title, New Game, a placeholder room, pause/resume, return, and exit. Inventory,
-movement, economics, saving, quests, and robots are not implemented. A first Ink
-conversation draft supports authored branching and a paused dialogue overlay.
+title, character selection, a movable player in a small room, nearby NPC dialogue,
+pause/resume, return, and exit. Inventory, economics, saving, quests, and robots
+are not implemented. The player uses the existing eight-direction base poses;
+walking animation and equipment customization remain future work.
 
 ## Defining NPCs in VS Code
 
@@ -15,7 +16,7 @@ Dialogue is text only. Inky and audio tools are not required.
 ```
 
 Edit the generated `Content/Npcs/mechanic/` folder in VS Code, build normally, then click the NPC in
-the room. `npc.json` defines identity and sprites; `conversations.json` selects Ink files;
+the room after walking nearby. `npc.json` defines identity and sprites; `conversations.json` selects Ink files;
 `Content/World/shop.npcs.json` places the NPC in the room;
 no C# registration or manual JSON export is needed. Use `./npc.ps1 check`
 to validate branches or `./npc.ps1 play -Id mechanic` for a terminal preview.
@@ -49,15 +50,25 @@ the MonoGame host or initializing graphics/audio. The test framework is unchange
 
 ## Controls and current behavior
 
-- Up/Down or W/S: move menu focus, wrapping at either end.
-- Enter or Space: activate the focused enabled item.
-- Escape: pause/resume; cancel a discard prompt back to pause. Escape on title
-  does not exit.
-- Space in the room: ring a silent test bell. Its count demonstrates session
-  reset and that a menu-closing confirm cannot also activate the room.
-- Click an NPC in the room, or select one with Left/Right and press Tab to talk. Enter/Space reveals text,
-  then advances/selects on a later press; Up/Down selects, Escape leaves. Mouse
-  clicks on the text panel and response rows use the same command path.
+- New Game opens Male/Female selection. No gameplay session exists until you
+  choose a character. WASD/arrows select; Z confirms; X returns to title.
+  Clicking a character card also starts a new session with that gender.
+- WASD or arrow keys in the room: held movement, with equal cardinal/diagonal speed. The player
+  faces the direction of travel, stays on the floor and collides with the counter
+  and NPC footprints. Current sprites are standing poses, not a walking cycle.
+- Z near the shop visitor: talk. The prompt appears within 48 logical pixels;
+  clicking the NPC also requires proximity. Z reveals text, then advances or
+  selects on a later press. W/S or Up/Down selects responses; X leaves dialogue.
+- X in the room: pause. X resumes or backs out of the current menu. Movement is
+  captured during selection, dialogue, pause, Options and confirmation screens.
+- Z activates ordinary menus. Enter/Space remain menu-confirm aliases, Escape
+  remains a back/pause alias, and nearby Tab Talk remains a legacy shortcut.
+  The old Space-to-ring-bell room shortcut has been removed.
+
+These are the default controls. Both primary and alternate bindings are editable
+in Options. Direction bindings also navigate menus; Interact confirms and
+Pause / Back cancels throughout the UI. Enter/Space confirm and Escape back remain
+available after rebinding.
 
 Continue is visibly unavailable; focus it to read the reason.
 Gameplay saves are not implemented. Returning to title or exiting during a session
@@ -68,9 +79,10 @@ Losing application focus pauses the room by default; focus return requires expli
 ## Options
 
 Options is available from the title and pause menus. Tab cycles Display, Audio,
-Comfort, and Controls; Up/Down selects a row; Left/Right adjusts it; Enter activates
-buttons or begins key capture. Escape cancels capture or leaves Options, discarding
-unapplied edits. The active session stays paused while Options is open.
+Comfort, and Controls; Up/Down selects a row; Left/Right adjusts it; Interact or
+Enter activates buttons. Pause / Back or Escape leaves Options, discarding
+unapplied edits. During key capture, Escape cancels. The active session stays paused
+while Options is open.
 
 - Display: Windowed, Borderless, or Fullscreen; presets from 960x540 through
   3840x2160 (4K), including 16:10 and ultrawide choices; UI/text size at 100, 125,
@@ -82,13 +94,25 @@ unapplied edits. The active session stays paused while Options is open.
   tracks yet. Audio categories multiply their volume by Master.
 - Comfort: Pause When Unfocused and Slow/Normal/Fast/Instant dialogue text speed,
   with a live text preview. The visitor conversation uses this preference.
-- Controls: rebind the existing Interact and Pause actions. Release the activation
-  key before pressing a new key. Duplicate action keys are rejected; Escape cancels.
-  Menu navigation stays fixed so it remains accessible after rebinding. Movement
-  bindings will arrive with movement; Restore Defaults restores Escape for Pause.
+- Controls: Interact, **Pause / Back**, Move Up, Move Left, Move Down and Move Right
+  each have **Primary** and **Alternate** columns. Select a row and use Left/Right
+  to choose a slot, or click a slot, then activate it. Release the activation key
+  before pressing the replacement. Escape cancels capture; Delete/Backspace clears
+  an alternate. A primary is required. Duplicate keys across either column are
+  rejected with the conflicting action and slot. Holding both bindings performs
+  one action and does not double movement speed.
+- Restore Defaults chooses Z for Interact, X for Pause / Back, and W/A/S/D with
+  Up/Left/Down/Right arrows as movement alternates. Interact and Pause / Back start
+  with no alternate. Enter/Space are reserved for confirmation, Escape for Back,
+  Tab for categories, and Delete/Backspace for clearing alternates.
+- Older settings gain the movement defaults in memory. Legacy Space/Escape
+  defaults adopt Z/X. Custom action keys are retained; if they occupy a new movement
+  default, movement uses its remaining default or an unused I/J/K/L key and shows
+  a review message. The original file is preserved until Apply. Newly saved
+  bindings, including deliberate Space/Escape choices, round-trip unchanged.
 
 Apply saves preferences. Display changes first require confirmation within 15
-seconds; Escape, timeout, or losing focus reverts them. Restore Defaults edits all
+seconds; X/Escape, timeout, or losing focus reverts them. Restore Defaults edits all
 categories and still requires Apply. UI size, audio, and text speed preview while
 editing; leaving without Apply restores the saved values.
 
@@ -111,13 +135,15 @@ regression project. The approved dependency graph and full folder list are in
 | PawnShop.Framework | Reusable input/edges, generic menus, renderer, font catalog and SpriteFont adapter. No PawnShop project references or game-specific commands. |
 | PawnShop.Core | Authoritative room clock/bell fixture and immutable view under World. No graphics/project/package dependencies. |
 | PawnShop.Narrative | Headless Ink definition/session adapter, immutable dialogue views, stable choice IDs and content diagnostics. Quest/relationship folders remain empty. |
-| PawnShop.Characters | Requested class library and empty future folders; no actor implementation. |
+| PawnShop.Characters | NPC definitions plus headless player identity, gender, facing, held movement and swept ground-footprint collision. Other actor features remain future work. |
 | PawnShop.Shop | Requested class library and empty future folders; no shop implementation. |
 | PawnShop.Exploration | Requested class library and empty future folders; no exploration implementation. |
 | PawnShop.Game | Executable; Bootstrap owns ApplicationFlow/GameSession; Screens owns title, menus and the room texture scope. |
 | PawnShop.Tests | Existing lifecycle checks plus input/menu checks under Framework, using the same console runner. |
 
-One room texture follows the active session ID and is disposed on return.
+The floor and NPC textures follow the active session ID and are disposed on return.
+Two application-owned player base textures are shared by character selection and
+room rendering; returning to title does not dispose textures still used by selection.
 Framework's PixelRenderer owns the application-wide font pixel, render target,
 and SpriteBatch, disposed by the host on unload/application disposal. Drawing
 never changes session state. There are no session event subscriptions in M01.
@@ -140,7 +166,8 @@ coordinates complete snapshots. No saving was implemented by this refactor.
 
 MonoGame's fixed 60 Hz host is the single tick owner. Menus capture the entire
 transition frame. Simulation time stops in overlays; presentation time continues.
-The room is intentionally static until M02.
+The room now supports the requested character-selection/movement/Talk slice.
+The NPC and furniture remain static, and M02's scale lab is still pending.
 
 ## Content and title screen
 
@@ -148,8 +175,8 @@ The Picker's Hollow title uses `Content/TitleScreen/title-screen-panorama.png`,
 an unmodified 2106x747 copy of the supplied single-pass illustration. The older
 Rummage Hollow artwork remains preserved but is no longer loaded. The supplied
 `logo-pickers-hollow.png` replaces the title text as an independent transparent
-overlay; the main menu uses Silkscreen and other title/Options text uses Pixelify
-Sans Bold through the font catalog. See the
+overlay; the main menu uses Silkscreen, title badge/help uses Pixelify Sans Bold,
+and Options uses Atkinson Hyperlegible through the font catalog. See the
 [asset record](PawnShop.Game/Content/TitleScreen/README.md) for provenance and hash.
 Normal build/publish copies PNGs beside the executable; runtime resolves them
 relative to the executable. PNG loading is unchanged; fonts compile to XNB using
@@ -183,6 +210,16 @@ The placeholder room and pause overlays retain the
 bitmap font, and generated floor texture. These UI choices do not establish
 actor/tile dimensions; M02 must validate world scale.
 
+Player artwork now has canonical reference bases under `Content/Player/Bases`
+and the user-approved south-facing male/female teal shirt under
+`Content/Player/Wearables/TealWorkShirt`. Follow the
+[wearable art workflow](docs/WEARABLE_ART_WORKFLOW.md) for new equipment artwork.
+Run `./tools/Validate-PlayerBases.ps1` and `./tools/Validate-Wearable.ps1` for the
+current nonvisual art checks. The game now loads the two canonical base PNGs and
+`Content/Player/player-sprite.json` for selection and eight-direction room poses.
+Shirt/source/recipe artifacts are not copied into runtime content; wearable
+equipment, other shirt directions, animation and full customization remain pending.
+
 Menu rows and Options tabs also accept mouse clicks. Clicking a settings row
 performs its existing confirm action; Left/Right still provides fine keyboard
 adjustments. Display confirmation has clickable Keep/Revert buttons.
@@ -215,8 +252,10 @@ All frames are bundled locally; the game never calls PixelLab.
 `PawnShop.Game/Content/Fonts/fonts.json` maps names to compiled font assets and
 logical pixel line heights. It loads once at application startup. Current roles
 are `TitleMenu`, `TitleBadge`, `TitleHelp`, `OptionsHeading`, `OptionsBody`, and
-`OptionsHelp`. `TitleMenu` uses bundled Silkscreen Regular; the remaining roles
-use Pixelify Sans Bold. `Silkscreen` and `PixelifySansBold` are also available as
+`OptionsHelp`. `TitleMenu` uses bundled Silkscreen Regular; title badge/help uses
+Pixelify Sans Bold. All Options text uses Atkinson Hyperlegible: Bold headings,
+Regular body/help, with linear filtering for smoother scaling. Other renderers
+retain point sampling. `Silkscreen` and `PixelifySansBold` are also available as
 general named entries. The title logo remains an image.
 
 ```csharp

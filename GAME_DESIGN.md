@@ -278,8 +278,8 @@ The first implemented conversation draft uses text-only Ink authored in VS Code
 (Inky is optional), with a placeholder shop visitor and conversation-local follow-up
 questions. Each NPC has a folder with identity/sprite JSON, PNG assets, and separate
 conversation bindings/Ink files. Shop placement is separate from character identity;
-preferences, quests and schedules remain future work. Click an
-NPC, or select with Left/Right and press Tab in the existing room; text reveal,
+preferences, quests and schedules remain future work. Walk near an
+NPC with WASD, then press Z or click it; X backs out. Text reveal,
 paging, keyboard/mouse responses, speed
 settings and cancellation are implemented. Names/text are prototype content.
 Quests, item delivery, rewards, durable facts and portraits below remain future
@@ -371,7 +371,7 @@ Paused timers do not prohibit the open UI's authorized domain actions. Transfers
 
 ### 12.2 Title and session flow
 
-The first playable screen is the title screen. New Game creates a fresh session. Continue remains unavailable with a clear reason until loading and a valid compatible save exist. Settings either change real behavior or are explicitly unavailable. Returning to title ends the session cleanly; opening another session does not retain the old inventory, quests, or subscriptions.
+The first playable screen is the title screen. New Game opens male/female character selection; confirming creates a fresh session, while X returns to title without one. Continue remains unavailable with a clear reason until loading and a valid compatible save exist. Settings either change real behavior or are explicitly unavailable. Returning to title ends the session cleanly; opening another session does not retain the old inventory, quests, or subscriptions.
 
 ### 12.3 Save policy
 
@@ -391,6 +391,18 @@ Earlier tile sizes, body canvases, sprite-sheet counts, and display-resolution s
 
 Keep original source art, production sprite sheets, and generated build content separate. Validate transparent padding, frame rectangles, duration, foot/origin positions, facing, attachment points, and rider occlusion. Generated images are concept inputs until those checks pass.
 
+**Approved player customization art direction:** use bald underwear bases with
+separate clothing, armor, hair and facial-hair artwork. The current player source
+frames are 48×64 with 48–52 visible body pixels (50 in the reference bases),
+independent of world size. Clothing that fits differently uses separate male and
+female cuts of the same design. Their PixelLab object references and fitted
+wearable layers are distinct assets; body-specific art need not create separate
+economy items. The teal work shirt is visually approved for both south-facing
+standing poses. See [the standard process](docs/WEARABLE_ART_WORKFLOW.md).
+Male/female selection and WASD movement now use the eight standing base facings.
+Other shirt directions, walking animation, hair, armor and wearable customization
+remain pending; in-game visual acceptance is recorded separately from art approval.
+
 ### 13.2 Animation priorities
 
 Movement, interactions, reactions, and dialogue expressions need deliberate priority. A panic reaction should not be overwritten every frame by a walking state; a cosmetic bonk must not permanently block following. Separately layered riders need facing/frame-specific placement and a cockpit rim/mask where appropriate.
@@ -406,6 +418,9 @@ Use placeholders for the first lifecycle and mechanics slices. Build only the st
 - Separate audio-volume controls once audio is present.
 - Limited camera shake and reduced-motion options when such effects are introduced.
 - Keyboard navigation from the first title/menu slice; additional device support follows an explicit input decision.
+- Primary and alternate keyboard bindings for Interact, Pause / Back and all four
+  movement directions. Default movement is WASD plus arrows; either binding has
+  the same effect, and both held together do not multiply movement speed.
 
 Use short mechanical sounds and reactions to distinguish successful, blocked, and completed actions. Audio is feedback, not the only indicator of a required event. Recorded dialogue, complex adaptive music, and large cinematic sequences are outside the baseline.
 

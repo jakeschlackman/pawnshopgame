@@ -98,10 +98,12 @@ internal static partial class RegressionTests
         for (int i = 0; i < 3; i++) model.Update(new(NextTab: true), TimeSpan.Zero, true);
         model.Update(new(Confirm: true), TimeSpan.Zero, true);
         model.Capture(new[] { Keys.Enter });
-        Check(model.CapturingKey && model.Draft.InteractKey == Keys.Space);
+        Check(model.CapturingKey && model.Draft.InteractKey == Keys.Z);
         model.Capture(Array.Empty<Keys>());
+        model.Capture(new[] { Keys.W });
+        Check(model.CapturingKey && model.Draft.InteractKey == Keys.Z && model.Message!.Contains("Already used"));
         model.Capture(new[] { Keys.Escape });
-        Check(!model.CapturingKey && model.Draft.InteractKey == Keys.Space);
+        Check(!model.CapturingKey && model.Draft.InteractKey == Keys.Z);
         model.Update(new(Confirm: true), TimeSpan.Zero, true);
         model.Capture(Array.Empty<Keys>());
         model.Capture(new[] { Keys.E });
@@ -110,7 +112,7 @@ internal static partial class RegressionTests
         model.Update(new(Confirm: true), TimeSpan.Zero, true);
         model.Capture(Array.Empty<Keys>());
         model.Capture(new[] { Keys.E });
-        Check(model.CapturingKey && model.Draft.PauseKey == Keys.Escape);
+        Check(model.CapturingKey && model.Draft.PauseKey == Keys.X);
         model.Capture(new[] { Keys.P });
         Check(!model.CapturingKey && model.Draft.PauseKey == Keys.P);
         Select(model, model.FieldCount);

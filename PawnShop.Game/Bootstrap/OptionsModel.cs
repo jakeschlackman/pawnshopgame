@@ -10,6 +10,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
     public AppSettings Draft { get; private set; } = initial;
     public int Tab { get; private set; }
     public int Selected { get; private set; }
+    public int SelectedBinding { get; private set; }
     public string? Message { get; private set; }
     public bool CapturingKey { get; private set; }
     private bool captureReleased;
@@ -21,12 +22,22 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
     public TimeSpan TextElapsed { get; private set; }
     public AudioChannel? RequestedTone { get; private set; }
     public static IReadOnlyList<string> Tabs { get; } = Array.AsReadOnly(new[] { "DISPLAY", "AUDIO", "COMFORT", "CONTROLS" });
-    public int FieldCount => Tab switch { 0 => 3, 1 => 5, 2 => 3, _ => 2 };
+    public static IReadOnlyList<ControlAction> ControlActions { get; } = Array.AsReadOnly(Enum.GetValues<ControlAction>());
+    public int FieldCount => Tab switch { 0 => 3, 1 => 5, 2 => 3, _ => ControlActions.Count };
+    public KeyBinding Binding(int row) => Draft.Bindings.Get(ControlActions[row]);
+    public static string ActionLabel(ControlAction action) => action switch
+    {
+        ControlAction.Interact => "INTERACT", ControlAction.PauseBack => "PAUSE / BACK",
+        ControlAction.MoveUp => "MOVE UP", ControlAction.MoveLeft => "MOVE LEFT",
+        ControlAction.MoveDown => "MOVE DOWN", ControlAction.MoveRight => "MOVE RIGHT",
+        _ => throw new ArgumentOutOfRangeException(nameof(action))
+    };
+    public static string KeyLabel(Keys key) => key == Keys.None ? "UNBOUND" : key.ToString().ToUpperInvariant();
 
     public void Open()
     {
         Draft = Current;
-        Tab = Selected = 0;
+        Tab = Selected = SelectedBinding = 0;
         CapturingKey = false;
         PreviewRemaining = TimeSpan.Zero;
         TextElapsed = TimeSpan.Zero;
@@ -65,16 +76,17 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         if (input.TabIndex is { } tab && tab >= 0 && tab < Tabs.Count)
         {
             Tab = tab;
-            Selected = 0;
+            Selected = SelectedBinding = 0;
             Message = null;
             return false;
         }
         if (input.SelectionIndex is { } selection && selection >= 0 && selection < FieldCount + 3)
             Selected = selection;
+        if (Tab == 3 && input.BindingIndex is 0 or 1) SelectedBinding = input.BindingIndex.Value;
         if (input.NextTab)
         {
             Tab = (Tab + 1) % Tabs.Count;
-            Selected = 0;
+            Selected = SelectedBinding = 0;
             Message = null;
             return false;
         }
@@ -85,11 +97,16 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         }
         if (Selected < FieldCount)
         {
+            if (Tab == 3 && input.Left != input.Right)
+            {
+                SelectedBinding = input.Right ? 1 : 0;
+                return false;
+            }
             if (Tab == 3 && input.Confirm)
             {
                 CapturingKey = true;
                 captureReleased = false;
-                Message = "Release keys, then press a new key. ESC cancels.";
+                Message = "Release keys, then press a new key. ESC cancels; Delete clears an alternate.";
             }
             else if (input.Left != input.Right || input.Confirm)
                 Adjust(input.Left ? -1 : 1);
@@ -117,12 +134,31 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         if (keys.Contains(Keys.Escape)) { CapturingKey = false; Message = "Binding unchanged."; return; }
         if (keys.Count != 1 || !AppSettings.ValidKey(keys[0])) { Message = "Choose one supported key."; return; }
         Keys key = keys[0];
-        if (key == (Selected == 0 ? Draft.PauseKey : Draft.InteractKey))
+        var action = ControlActions[Selected];
+        if (key is Keys.Back or Keys.Delete)
         {
-            Message = "That key is already used by the other action.";
+            if (SelectedBinding == 0) { Message = "A primary key is required. Select an alternate to clear it."; return; }
+            key = Keys.None;
+        }
+        if (!AppSettings.AllowedFor(action, key))
+        {
+            Message = "That key is reserved for menu confirmation, back or category navigation.";
             return;
         }
-        Draft = Selected == 0 ? Draft with { InteractKey = key } : Draft with { PauseKey = key };
+        foreach (var other in ControlActions)
+        {
+            var binding = Draft.Bindings.Get(other);
+            for (int slot = 0; slot < 2; slot++)
+            {
+                if (other == action && slot == SelectedBinding) continue;
+                if (key != Keys.None && key == (slot == 0 ? binding.Primary : binding.Alternate))
+                {
+                    Message = $"Already used by {ActionLabel(other)} ({(slot == 0 ? "PRIMARY" : "ALTERNATE")}).";
+                    return;
+                }
+            }
+        }
+        Draft = Draft.WithBinding(action, SelectedBinding, key);
         CapturingKey = false;
         Message = "Binding changed. Apply to save.";
     }
@@ -206,6 +242,6 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             ("AMBIENT", $"{Draft.Ambient}"), ("SOUND EFFECTS", $"{Draft.Effects}"), ("MUTE WHEN UNFOCUSED", Draft.MuteUnfocused ? "ON" : "OFF") },
         2 => new[] { ("PAUSE WHEN UNFOCUSED", Draft.PauseUnfocused ? "ON" : "OFF"),
             ("DIALOGUE TEXT SPEED", Draft.Dialogue.ToString()), ("REPLAY TEXT PREVIEW", "ENTER") },
-        _ => new[] { ("INTERACT", Draft.InteractKey.ToString()), ("PAUSE", Draft.PauseKey.ToString()) }
+        _ => ControlActions.Select(action => (ActionLabel(action), KeyLabel(Draft.Bindings.Get(action).Primary))).ToArray()
     };
 }

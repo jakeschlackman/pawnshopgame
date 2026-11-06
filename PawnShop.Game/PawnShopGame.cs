@@ -15,6 +15,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
     private readonly ApplicationFlow flow;
     private readonly GraphicsDeviceManager graphics;
     private readonly KeyboardInput input = new();
+    private AppSettings? appliedInputSettings;
     private readonly MenuPointerInput pointer = new();
     private readonly PreviewAudio audio = new();
     private DisplaySettings appliedDisplay = new(1280, 720);
@@ -52,14 +53,16 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         var catalog = FontCatalog.Load(Path.Combine(contentRoot, "Fonts", "fonts.json"));
         fonts = new FontLibrary(Services, contentRoot, catalog);
         renderer = new PixelRenderer(GraphicsDevice, Width, Height, fonts: fonts);
-        screens = new GameScreens(GraphicsDevice, flow.TitleCamera, fonts, flow.TitleSelector.Definition);
+        screens = new GameScreens(GraphicsDevice, flow.TitleCamera, fonts, flow.TitleSelector.Definition, flow.PlayerSprites);
     }
 
     protected override void Update(GameTime gameTime)
     {
-        input.InteractKey = flow.Options.Current.InteractKey;
-        input.PauseKey = flow.Options.Current.PauseKey;
-        input.InMenus = flow.Screen != Screen.Room;
+        if (!ReferenceEquals(appliedInputSettings, flow.Options.Current))
+        {
+            appliedInputSettings = flow.Options.Current;
+            input.Bindings = appliedInputSettings.Bindings;
+        }
         bool capturing = flow.Screen == Screen.Options && flow.Options.CapturingKey;
         var frame = input.Read(IsActive);
         var bounds = GraphicsDevice.PresentationParameters;

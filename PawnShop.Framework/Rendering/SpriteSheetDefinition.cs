@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Buffers.Binary;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
@@ -40,6 +41,21 @@ public sealed class SpriteSheetDefinition
     }
 
     public static SpriteSheetDefinition Load(string path) => Parse(File.ReadAllText(path), path);
+
+    // Header-only validation shared by NPC and player content; no graphics device is needed.
+    public void ValidatePng(string path, string metadataPath)
+    {
+        Span<byte> header = stackalloc byte[24];
+        try { using var stream = File.OpenRead(path); stream.ReadExactly(header); }
+        catch (IOException e) { throw new InvalidDataException($"{path}: Cannot read PNG dimensions.", e); }
+        ReadOnlySpan<byte> signature = [137, 80, 78, 71, 13, 10, 26, 10];
+        if (!header[..8].SequenceEqual(signature) || !header.Slice(12, 4).SequenceEqual("IHDR"u8))
+            throw new InvalidDataException($"{path}: Expected a PNG image.");
+        int width = BinaryPrimitives.ReadInt32BigEndian(header.Slice(16, 4));
+        int height = BinaryPrimitives.ReadInt32BigEndian(header.Slice(20, 4));
+        if (width != ImageWidth || height != ImageHeight)
+            throw new InvalidDataException($"{path}: PNG is {width}x{height}; {metadataPath} requires {ImageWidth}x{ImageHeight}.");
+    }
 
     public static SpriteSheetDefinition Parse(string json, string source = "sprite-sheet.json")
     {

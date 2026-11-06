@@ -80,7 +80,9 @@ internal static partial class RegressionTests
         app.Update(new(Confirm: true, Interact: true), TimeSpan.FromMilliseconds(749));
         Check(app.TitleInteractionPlaying && app.TitleSelector.FrameIndex == 31 && app.LiveSessions == 0);
         app.Update(new(Confirm: true, Interact: true), TimeSpan.FromMilliseconds(1));
-        Check(app.Screen == Screen.Room && app.LiveSessions == 1 && app.SessionsCreated == 1);
+        Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0 && app.SessionsCreated == 0);
+        Confirm(app);
+        Check(app.Screen == Screen.Room && app.LiveSessions == 1);
         Check(app.Room!.Value.BellRings == 0 && app.Room.Value.Elapsed == TimeSpan.Zero);
 
         using var cancelled = new ApplicationFlow();

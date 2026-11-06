@@ -58,7 +58,7 @@ internal sealed class TitleScreen : IDisposable
         renderer.Fill(helpBounds.X, helpBounds.Y, helpBounds.Width, helpBounds.Height, Color.Black * 0.6f);
         Text(menu.Selected.DisabledReason ?? "Every treasure deserves a second chance.",
             0.15625f, 0.922222f, new Color(255, 240, 193), "TitleHelp");
-        Text("CLICK OR UP/DOWN: SELECT   ENTER: CONFIRM", 0.15625f, 0.962963f,
+        Text("CLICK / MOVE KEYS: SELECT   ENTER: CONFIRM   ESC: BACK", 0.15625f, 0.962963f,
             new Color(221, 198, 162), "TitleHelp");
         renderer.Present(clearBackBuffer: false, drawBackground: DrawBackground);
         if (drawSelector) DrawSelector(selector, SelectorAnchor(menu.SelectedIndex, menu.Selected.Label, textScale));

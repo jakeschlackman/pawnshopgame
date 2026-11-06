@@ -2,6 +2,10 @@
 
 Date: 2026-10-31.
 
+Follow-up: [2026-11-05 dual bindings](VERIFICATION_DUAL_BINDINGS.md) adds movement
+rebinding, primary/alternate columns and the Pause / Back label/behavior. The
+original evidence below describes the earlier two-action menu.
+
 Implemented application preferences, a four-category options menu on title/pause,
 display modes and resolution presets through 3840x2160, display confirmation and
 rollback, UI/text scaling, audio preview sliders, focus pause/mute, dialogue speed

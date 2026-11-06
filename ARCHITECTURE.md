@@ -110,8 +110,11 @@ the small string extension `"text".Font("TitleMenu")` selects a role. FontLibrar
 uses MonoGame ContentManager/SpriteFont/DrawString/MeasureString rather than custom
 font processing. Game bootstrap creates one shared font scope and passes it to
 renderers/screens, disposing it after those consumers. Catalog data and assets load
-once, never in Draw. TitleMenu uses bundled Silkscreen Regular (400); other title
-and Options roles use Pixelify Sans Bold (700), each with its OFL license.
+once, never in Draw. TitleMenu uses bundled Silkscreen Regular (400); title badge/help
+use Pixelify Sans Bold (700). All Options roles use Atkinson Hyperlegible, with
+Bold for headings and Regular for body/help; every family includes its OFL license.
+Options opts into linear sampling for smooth glyph scaling and canvas presentation.
+The renderer default and pixel-sprite overlays retain point sampling.
 The title logo remains an image. Room/pause placeholder text
 is unchanged. Named font size is a logical pixel line height multiplied by UI scale.
 
@@ -139,6 +142,24 @@ resizing is disabled and users change resolution through Options. UI/text size p
 and dialogue speed have live previews; the Ink conversation draft also uses the
 text-speed setting. Authored audio remains future work. See README.md for controls
 and persistence behavior.
+
+`Framework/Input/KeyboardBindings` is an immutable mapping of six actions to
+primary/alternate `KeyBinding` pairs. `KeyboardInput` merges each pair before edge
+detection and held-axis calculation, so alternate keys cannot duplicate actions
+or speed. Movement mappings also navigate UI, Interact confirms and Pause / Back
+cancels in every screen. Enter/Space and Escape remain recovery shortcuts.
+`AppSettings` keeps its existing action fields and adds alternate/movement fields
+without changing gameplay saves. Missing movement fields receive defaults; legacy
+custom action conflicts adjust new movement defaults with an explicit message.
+Loading never rewrites preferences. The host updates the input map only when the
+immutable current settings change.
+
+The Controls tab has six rows and two focusable columns. `OptionsModel` owns slot
+focus, release-before-capture, duplicate/reserved-key checks, alternate clearing,
+and draft/apply/discard behavior. `OptionsMenuLayout` shares row/cell geometry
+between drawing, the title selector and mouse input. Escape cancels capture;
+Delete/Backspace clears only an alternate, preserving a required primary.
+See [dual-binding verification](docs/VERIFICATION_DUAL_BINDINGS.md).
 
 MenuPointerInput maps mouse clicks through the same contained UI viewport used for
 drawing (including gameplay integer scaling), then produces the existing semantic
@@ -525,8 +546,8 @@ Handlers are registered explicitly; serialized IDs map only to approved handlers
 DialogueSession wrap the pinned Ink runtime with immutable views, session/revision
 checks and authored choice IDs. Game/Bootstrap owns loading, session lifetime and
 DialoguePresenter; Screens draws the modal. Framework supplies shared selection
-and fixed-width wrapping. Tab opens a placeholder visitor conversation in the
-existing room without advancing time. Cancel/finish consumes input; reopening
+and fixed-width wrapping. Z or a click opens a nearby placeholder visitor conversation
+without advancing time. X cancels. Cancel/finish consumes input; reopening
 resets conversation-local state. Focus loss retains the paused modal. Window-close
 confirmation ends the conversation and returns to Pause if exit is cancelled.
 There is no gameplay saving, reward integration, world-condition binding or
@@ -549,8 +570,10 @@ paths and names a default. It has no dependency on Characters. Game/Bootstrap's
 An NPC may omit conversations; unused NPC definitions need not be placed.
 `TryTalkTo(npcId, conversationId?)` requires a present NPC and ordinary room play,
 then selects the explicit/default conversation. Unknown, unavailable and non-speaking
-targets have typed outcomes. Clicks use authored interaction bounds; keyboard selection
-handles an empty room. Movement/proximity, preferences and schedules are not implemented.
+targets have typed outcomes. Clicks use authored interaction bounds; keyboard Talk
+chooses the nearest NPC within 48 logical pixels. Both paths revalidate proximity
+and return `OutOfRange` for a distant target. NPC movement, preferences and schedules
+are not implemented.
 
 GameSession owns NPC animators and their read-only frame projection. Room simulation
 advances them once per tick; dialogue and pause freeze them. RoomScreen owns/disposes
@@ -874,6 +897,48 @@ Validate actual file dimensions, transparency, frame rectangles, padding, origin
 Before finalizing the art specification, put the player, little robot, mounted mech, one door, one shelf, one pile, and a sample monster in the same test room. Inspect silhouette, foot placement, occlusion, UI legibility, collision, and visible relative scale at the intended output sizes. Reuse validated animator/metadata tools for all actors.
 
 Track third-party licenses/provenance. No new art pipeline service or image-generation runtime is needed inside the shipped game.
+
+#### Player wearable authoring contract
+
+The user-approved workflow is [documented here](docs/WEARABLE_ART_WORKFLOW.md).
+Canonical player references live in `Game/Content/Player/Bases` (48×64 cells,
+50-pixel bodies, pivot (24,58)); body-specific wearable assets live under
+`Content/Player/Wearables`. `TealWorkShirt` contains the approved male/female
+south-facing static fit, AI sources, exact layer recipes and approval manifest.
+The game copies and loads the two base PNG atlases and `Content/Player/player-sprite.json`.
+Wearables, recipes, manifests and source artwork remain authoring artifacts;
+they are not runtime equipment/save schemas or executable content.
+
+The future renderer selects one action/facing/frame for the actor and resolves
+all its body/equipment layers from that same pose and ground anchor. Item ownership
+continues through Core's authoritative inventory/transactions; different body-fit
+art must not duplicate an equipment item. Source pictures and worn layers remain
+separate. Other facings, animation, helmet/hair hiding and in-game scale still need
+their own implementation and acceptance; this artwork does not complete M02/M07.
+
+#### Implemented player selection and movement
+
+New Game opens a sessionless male/female selection screen. Confirmation creates
+one fresh session; X returns to title. `Characters/Player/PlayerState` owns the
+player's ID, gender, ground position and facing, exposing an immutable `PlayerView`.
+`GameSession` advances movement and NPC animation once per room tick. Held movement
+is separate from pressed-once Z/X actions; focused menus and dialogue consume
+input before room simulation. Dialogue, pause and character confirmation cannot
+also move or interact with the world.
+
+Movement is 90 logical pixels per second, normalized diagonally. A 12-by-6 foot
+rectangle is swept separately along X and Y against the room bounds, counter and
+NPC footprints, allowing sliding without tunneling. This is independent of the
+48-by-64 artwork. `ShopRoomLayout` shares floor/counter geometry with rendering.
+`PlayerSpriteCatalog` validates metadata and both PNG headers without a device.
+The application-owned `PlayerSpriteRenderer` shares the two textures between
+selection and room rendering, anchors both at (24,58), and uses the eight standing
+facings from the common sheet metadata. There is no walking cycle or runtime
+wearable layer yet. NPC textures remain location-owned. Headless checks and manual
+acceptance status are recorded in [player verification](docs/VERIFICATION_PLAYER_CONTROLS.md).
+
+Movement defaults to WASD with arrow alternates. All six actions now support
+rebinding in both slots; Z/X above describe the default Interact/Pause / Back keys.
 
 ### 12.4 Reusable UI and feedback
 

@@ -43,7 +43,13 @@ internal static partial class RegressionTests
             "OptionsHeading", "OptionsBody", "OptionsHelp" })
         {
             var font = catalog.Get(role);
-            string expectedAsset = role is "TitleMenu" or "Silkscreen" ? "Fonts/Silkscreen-Regular" : "Fonts/PixelifySans-Bold";
+            string expectedAsset = role switch
+            {
+                "TitleMenu" or "Silkscreen" => "Fonts/Silkscreen-Regular",
+                "OptionsHeading" => "Fonts/AtkinsonHyperlegible-Bold",
+                "OptionsBody" or "OptionsHelp" => "Fonts/AtkinsonHyperlegible-Regular",
+                _ => "Fonts/PixelifySans-Bold"
+            };
             Check(font.Asset == expectedAsset && font.Size > 0);
             string asset = Path.Combine(AppContext.BaseDirectory, "Content", font.Asset + ".xnb");
             byte[] bytes = File.ReadAllBytes(asset);
@@ -51,5 +57,6 @@ internal static partial class RegressionTests
         }
         Check(File.ReadAllText(Path.Combine(directory, "OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
         Check(File.ReadAllText(Path.Combine(directory, "Silkscreen-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
+        Check(File.ReadAllText(Path.Combine(directory, "AtkinsonHyperlegible-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
     }
 }

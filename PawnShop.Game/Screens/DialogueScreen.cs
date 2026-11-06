@@ -32,7 +32,7 @@ internal static class DialogueScreen
                     60, bounds.Y + 3, Cream);
             }
         }
-        renderer.Text(dialogue.ChoicesVisible ? "UP/DOWN: CHOOSE  ENTER: OK  ESC: LEAVE" : "ENTER: REVEAL / NEXT  ESC: LEAVE", 42, 310, Cream);
+        renderer.Text(dialogue.ChoicesVisible ? "MOVE KEYS: CHOOSE  ENTER: OK  ESC: BACK" : "ENTER: REVEAL / NEXT  ESC: BACK", 42, 310, Cream);
         if (dialogue.PageCount > 1) renderer.Text($"{dialogue.Page + 1}/{dialogue.PageCount}", 540, 174, Gold);
     }
 

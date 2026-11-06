@@ -6,7 +6,7 @@ Create an NPC from the repository terminal (PowerShell 7), or run **NPC: Add NPC
 ./npc.ps1 new -Id mechanic -Name "Mechanic" -X 180 -Y 235
 ```
 
-This creates the folder below and adds a shop placement. No C# registration, Inky installation, voice files, or manual Ink export is needed. Rebuild and restart the game after editing content; hot reload is not implemented. Click the NPC, or select it with Left/Right and press Tab to talk.
+This creates the folder below and adds a shop placement. No C# registration, Inky installation, voice files, or manual Ink export is needed. Rebuild and restart the game after editing content; hot reload is not implemented. Walk within 48 logical pixels of the NPC, then press Z or click it to talk.
 
 ```text
 Content/Npcs/mechanic/
@@ -30,7 +30,7 @@ Content/Npcs/mechanic/
 
 The included visitor is a complete example. JSON schema references provide VS Code completion and diagnostics for NPC definitions, conversation bindings and placements. The loader checks supported fields and cross-file references as well. Use forward-slash paths inside each NPC folder; references cannot escape it. Keep the folder name equal to the stable NPC ID. Changing a display name does not change identity.
 
-An NPC can exist without conversation content: omit `conversations` or set it to `null` in `npc.json`. Talking then returns `NoConversation`. Omit its shop placement to keep a definition available without spawning it. The prototype allows one placement per NPC ID, at x=80..560 and y=170..270; it does not yet simulate movement or proximity.
+An NPC can exist without conversation content: omit `conversations` or set it to `null` in `npc.json`. Talking then returns `NoConversation`. Omit its shop placement to keep a definition available without spawning it. The prototype allows one stationary placement per NPC ID, at x=80..560 and y=170..270. Player movement and Talk proximity are implemented; NPC movement is not. Keep placements clear of the player spawn and furniture. Both Z and clicking revalidate the 48-pixel Talk range.
 
 ## Add another conversation to an existing NPC
 
@@ -61,7 +61,7 @@ Hello! What needs fixing? # line: mechanic.greeting # speaker: mechanic
 
 Every displayed line requires stable `line` and `speaker` tags. A speaker must match an NPC definition ID. Choices require a stable `id` **inside the square brackets**; response labels must be one paragraph of at most 80 characters. Optional `emotion` values are `neutral`, `pleased`, `worried`, and `confident`. Unknown/duplicate tags are errors. VS Code snippets `inkline`, `inkchoice` and `inkbranch` are available through Insert Snippet (see the workspace snippet file for current prefixes).
 
-Use Ink knots, conditions and variables for branching. Each interaction starts fresh; conversation variables are not saved. There are no gameplay rewards, external functions, quest actions, or inventory mutations in this draft. Dialogue pauses room simulation, including NPC animation; Escape cancels and closing input cannot also activate the room.
+Use Ink knots, conditions and variables for branching. Each interaction starts fresh; conversation variables are not saved. There are no gameplay rewards, external functions, quest actions, or inventory mutations in this draft. Dialogue pauses room simulation, including player movement and NPC animation; X or Escape cancels and closing input cannot also activate the room.
 
 ## Replace or animate the sprite
 

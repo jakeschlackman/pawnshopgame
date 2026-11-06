@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework.Input;
+using PawnShop.Framework.Input;
 
 namespace PawnShop.Game.Bootstrap;
 
@@ -22,14 +23,69 @@ public sealed record AppSettings
     public bool PauseUnfocused { get; init; } = true;
     public bool MuteUnfocused { get; init; } = true;
     public DialogueSpeed Dialogue { get; init; } = DialogueSpeed.Normal;
-    public Keys InteractKey { get; init; } = Keys.Space;
-    public Keys PauseKey { get; init; } = Keys.Escape;
+    public Keys InteractKey { get; init; } = Keys.Z;
+    public Keys PauseKey { get; init; } = Keys.X;
+    public Keys InteractAlternateKey { get; init; } = Keys.None;
+    public Keys PauseAlternateKey { get; init; } = Keys.None;
+    public KeyBinding MoveUp { get; init; } = new(Keys.W, Keys.Up);
+    public KeyBinding MoveLeft { get; init; } = new(Keys.A, Keys.Left);
+    public KeyBinding MoveDown { get; init; } = new(Keys.S, Keys.Down);
+    public KeyBinding MoveRight { get; init; } = new(Keys.D, Keys.Right);
+
+    [JsonIgnore]
+    public KeyboardBindings Bindings => new()
+    {
+        Interact = new(InteractKey, InteractAlternateKey), PauseBack = new(PauseKey, PauseAlternateKey),
+        MoveUp = MoveUp, MoveLeft = MoveLeft, MoveDown = MoveDown, MoveRight = MoveRight
+    };
+
+    public AppSettings WithBinding(ControlAction action, int slot, Keys key)
+    {
+        if (slot is not (0 or 1)) throw new ArgumentOutOfRangeException(nameof(slot));
+        KeyBinding binding = Bindings.Get(action);
+        binding = slot == 0 ? binding with { Primary = key } : binding with { Alternate = key };
+        return action switch
+        {
+            ControlAction.Interact => this with { InteractKey = binding.Primary, InteractAlternateKey = binding.Alternate },
+            ControlAction.PauseBack => this with { PauseKey = binding.Primary, PauseAlternateKey = binding.Alternate },
+            ControlAction.MoveUp => this with { MoveUp = binding }, ControlAction.MoveLeft => this with { MoveLeft = binding },
+            ControlAction.MoveDown => this with { MoveDown = binding }, ControlAction.MoveRight => this with { MoveRight = binding },
+            _ => throw new ArgumentOutOfRangeException(nameof(action))
+        };
+    }
 
     [JsonIgnore]
     public bool IsValid => Version == 1 && Enum.IsDefined(Display.Mode)
         && Resolutions.Contains((Display.Width, Display.Height)) && UiScale is 100 or 125 or 150
         && new[] { Master, Music, Ambient, Effects }.All(v => v is >= 0 and <= 100)
-        && Enum.IsDefined(Dialogue) && ValidKey(InteractKey) && ValidKey(PauseKey) && InteractKey != PauseKey;
+        && Enum.IsDefined(Dialogue) && ValidBindings;
+
+    [JsonIgnore]
+    private bool ValidBindings
+    {
+        get
+        {
+            var bindings = Bindings;
+            var used = new HashSet<Keys>();
+            foreach (var action in Enum.GetValues<ControlAction>())
+            {
+                var binding = bindings.Get(action);
+                if (!ValidKey(binding.Primary) || !used.Add(binding.Primary)) return false;
+                if (binding.Alternate != Keys.None && (!ValidKey(binding.Alternate) || !used.Add(binding.Alternate))) return false;
+                if (!AllowedFor(action, binding.Primary) || !AllowedFor(action, binding.Alternate)) return false;
+            }
+            return true;
+        }
+    }
+
+    public static bool AllowedFor(ControlAction action, Keys key) => key switch
+    {
+        Keys.Tab => false,
+        Keys.Escape => action == ControlAction.PauseBack,
+        Keys.Enter or Keys.Space => action == ControlAction.Interact,
+        Keys.Back or Keys.Delete => false,
+        _ => true
+    };
 
     public static bool ValidKey(Keys key) => Enum.IsDefined(key) && key != Keys.None
         && key is not (Keys.LeftWindows or Keys.RightWindows or Keys.F4);
@@ -66,8 +122,34 @@ public sealed class SettingsStore(string path)
         if (!File.Exists(path)) return new();
         try
         {
-            var result = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(path), JsonOptions);
-            if (result is null || !result.IsValid) throw new InvalidDataException("Invalid or unsupported preferences.");
+            string json = File.ReadAllText(path);
+            var result = JsonSerializer.Deserialize<AppSettings>(json, JsonOptions);
+            if (result is null) throw new InvalidDataException("Invalid preferences.");
+            using var document = JsonDocument.Parse(json);
+            bool legacy = !new[] { "MoveUp", "MoveLeft", "MoveDown", "MoveRight", "InteractAlternateKey", "PauseAlternateKey" }
+                .Any(name => document.RootElement.TryGetProperty(name, out _));
+            if (legacy)
+            {
+                // Add movement defaults without overwriting old custom actions or the original file.
+                if (result.InteractKey == Keys.Space && result.PauseKey == Keys.Escape)
+                    result = result with { InteractKey = Keys.Z, PauseKey = Keys.X };
+                var used = new HashSet<Keys> { result.InteractKey, result.PauseKey };
+                foreach (var action in new[] { ControlAction.MoveUp, ControlAction.MoveLeft, ControlAction.MoveDown, ControlAction.MoveRight })
+                {
+                    var binding = result.Bindings.Get(action);
+                    Keys primary = binding.Primary, alternate = binding.Alternate;
+                    if (used.Contains(primary))
+                        primary = !used.Contains(alternate) ? alternate
+                            : new[] { Keys.I, Keys.J, Keys.K, Keys.L }.First(k => !used.Contains(k));
+                    if (used.Contains(alternate) || alternate == primary) alternate = Keys.None;
+                    if (new KeyBinding(primary, alternate) != binding)
+                        warning = "Existing action keys kept. Conflicting movement defaults adjusted; review Controls.";
+                    result = result.WithBinding(action, 0, primary).WithBinding(action, 1, alternate);
+                    used.Add(primary);
+                    if (alternate != Keys.None) used.Add(alternate);
+                }
+            }
+            if (!result.IsValid) throw new InvalidDataException("Invalid or unsupported preferences.");
             return result;
         }
         catch (Exception e) when (e is IOException or InvalidDataException or UnauthorizedAccessException or JsonException)

@@ -12,18 +12,21 @@ public sealed class PixelRenderer : IDisposable
     private readonly RenderTarget2D canvas;
     private readonly PixelFont font;
     private readonly bool integerScaling;
+    private readonly SamplerState samplerState;
     private readonly FontLibrary? fonts;
     public int Width { get; }
     public int Height { get; }
     public float TextScale { get; set; } = 1;
 
-    public PixelRenderer(GraphicsDevice device, int width, int height, bool integerScaling = true, FontLibrary? fonts = null)
+    public PixelRenderer(GraphicsDevice device, int width, int height, bool integerScaling = true, FontLibrary? fonts = null,
+        SamplerState? samplerState = null)
     {
         this.fonts = fonts;
         this.device = device;
         Width = width;
         Height = height;
         this.integerScaling = integerScaling;
+        this.samplerState = samplerState ?? SamplerState.PointClamp;
         batch = new SpriteBatch(device);
         pixel = new Texture2D(device, 1, 1);
         pixel.SetData(new[] { Color.White });
@@ -35,7 +38,7 @@ public sealed class PixelRenderer : IDisposable
     {
         device.SetRenderTarget(canvas);
         device.Clear(background);
-        batch.Begin(samplerState: SamplerState.PointClamp);
+        batch.Begin(samplerState: samplerState);
     }
 
     public void Present(bool clearBackBuffer = true, Action? drawBackground = null)
@@ -47,7 +50,7 @@ public sealed class PixelRenderer : IDisposable
         // preservation across render-target switches (DiscardContents is the default).
         drawBackground?.Invoke();
         var destination = GetPresentationBounds();
-        batch.Begin(samplerState: SamplerState.PointClamp);
+        batch.Begin(samplerState: samplerState);
         batch.Draw(canvas, destination, Color.White);
         batch.End();
     }

@@ -40,7 +40,18 @@ var tests = new (string Name, Action Run)[]
     ("Data-only NPCs route clicks and keyboard Talk by identity", RegressionTests.NpcConversations),
     ("NPC bindings reject malformed, missing, duplicate and stale content", RegressionTests.NpcContentValidation),
     ("NPC assets animate only in simulation and conversation bindings select explicit/default entries", RegressionTests.NpcAssetsAndBindings),
-    ("Authoring commands list, check branches and preview text without graphics", RegressionTests.AuthoringCommands)
+    ("Authoring commands list, check branches and preview text without graphics", RegressionTests.AuthoringCommands),
+    ("Character selection creates no session until confirmed and supports keyboard, pointer and back", RegressionTests.CharacterSelection),
+    ("Z/X actions are edges while WASD movement stays held and focus-safe", RegressionTests.PlayerInputMapping),
+    ("Player movement preserves speed across directions, ticks and both genders", RegressionTests.PlayerMovement),
+    ("Player footprint sweeps prevent tunneling through furniture and room boundaries", RegressionTests.PlayerCollision),
+    ("Nearby Z interaction revalidates range and captures dialogue/pause movement", RegressionTests.NearbyInteraction),
+    ("Player atlas poses reach output and malformed content fails headlessly", RegressionTests.PlayerContent),
+    ("Legacy default controls adopt Z/X without rewriting custom preferences", RegressionTests.DefaultControlsMigration),
+    ("Primary and alternate keys share movement speed, edges and focus safety", RegressionTests.DualBindingInput),
+    ("Both binding columns edit, reject conflicts, clear alternates, apply and restore", RegressionTests.DualBindingEditing),
+    ("Binding cells map pointer input and remapped Pause / Back works across screens", RegressionTests.DualBindingPointerAndFlow),
+    ("Dual bindings round-trip, upgrade old settings and reject invalid mappings", RegressionTests.DualBindingPersistence)
 };
 int failures = 0;
 foreach (var test in tests)

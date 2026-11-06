@@ -1,0 +1,233 @@
+{
+  "job": {
+    "canvas": [
+      48,
+      64
+    ],
+    "frame_count": 1,
+    "views": [
+      {
+        "id": "male",
+        "offset": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "female",
+        "offset": [
+          0,
+          0
+        ]
+      }
+    ],
+    "source_bookends_exact": true,
+    "body_palette_exact": true,
+    "require_clear_border": true
+  },
+  "scene": {
+    "palette": {},
+    "layers": [
+      {
+        "id": "body",
+        "name": "Body - unchanged base"
+      },
+      {
+        "id": "shirt",
+        "name": "Shirt - AI garment pixels"
+      }
+    ],
+    "views": {
+      "male": {
+        "selections": {
+          "rest": {}
+        },
+        "nodes": {
+          "body": {
+            "layer": "body",
+            "draw": [
+              {
+                "op": "copy",
+                "part": "rest"
+              }
+            ]
+          },
+          "shirt": {
+            "layer": "shirt",
+            "draw": [
+              {
+                "op": "grid",
+                "at": [
+                  10,
+                  20
+                ],
+                "rows": [
+                  "............................",
+                  "............................",
+                  "........OOO......OxXA.......",
+                  "......OBCDEO....OHIJKO......",
+                  ".....OLLLLICOOOOMNPLPPO.....",
+                  "....ODLHLLLQRSTPUDLLLLLO....",
+                  "....OPLLLLLLLLLLLLLLLLLO....",
+                  "...OBLLNLLLLLLPPMMBDVLLO....",
+                  "...OPLLWPLLLLLLYTTDLWPLLK...",
+                  "...ULPPOPPPLLLLZLLLPOLPUU...",
+                  "...OCRUOPLLLLLPRLLZIONSLK...",
+                  "........PCLLLPPLZZRN........",
+                  "........HCPLLLLLLPRx........",
+                  "........HCCLLLLLLCPN........",
+                  "........CPCLLLLLLCLN........",
+                  "........RPLCLLLLILLJ........",
+                  "........DDLLCVLLLDLV........",
+                  "........CVJHPLLDLLVE........",
+                  "........OOOOOOOKOOOO........",
+                  "............................",
+                  "............................",
+                  "............................"
+                ],
+                "legend": {
+                  "#": "#0c0a09ff",
+                  "@": "#bc7a5eff",
+                  "%": "#e6a47cff",
+                  "&": "#eaa982ff",
+                  "*": "#e9a57dff",
+                  "+": "#0b0403ff",
+                  "=": "#b37358ff",
+                  "o": "#e8a780ff",
+                  "O": "#030202ff",
+                  "x": "#0c1b1bff",
+                  "X": "#2b1611ff",
+                  "A": "#1b0805ff",
+                  "B": "#213b3cff",
+                  "C": "#5a7c7eff",
+                  "D": "#63868aff",
+                  "E": "#102424ff",
+                  "F": "#a2654cff",
+                  "G": "#945d47ff",
+                  "H": "#608385ff",
+                  "I": "#55777aff",
+                  "J": "#4a6b6dff",
+                  "K": "#040b0bff",
+                  "L": "#668a8dff",
+                  "M": "#1f3434ff",
+                  "N": "#436365ff",
+                  "P": "#698d91ff",
+                  "Q": "#355354ff",
+                  "R": "#6c9194ff",
+                  "S": "#729599ff",
+                  "T": "#7b9ea2ff",
+                  "U": "#3c5b5cff",
+                  "V": "#507274ff",
+                  "W": "#0a1413ff",
+                  "Y": "#2b4444ff",
+                  "Z": "#324c4cff",
+                  "a": "#e49d76ff",
+                  "b": "#413b3bff",
+                  "c": "#ca8566ff",
+                  "d": "#c38266ff",
+                  "e": "#120302ff",
+                  "f": "#3a3434ff",
+                  "g": "#535253ff",
+                  "h": "#504e50ff",
+                  "i": "#342f2eff",
+                  "j": "#4a4545ff",
+                  "k": "#201513ff"
+                },
+                "mode": "stamp"
+              }
+            ]
+          }
+        }
+      },
+      "female": {
+        "selections": {
+          "rest": {}
+        },
+        "nodes": {
+          "body": {
+            "layer": "body",
+            "draw": [
+              {
+                "op": "copy",
+                "part": "rest"
+              }
+            ]
+          },
+          "shirt": {
+            "layer": "shirt",
+            "draw": [
+              {
+                "op": "grid",
+                "at": [
+                  10,
+                  20
+                ],
+                "rows": [
+                  "............................",
+                  "............................",
+                  "............................",
+                  "........xxxB.....Exxx.......",
+                  ".......xEFGH.....IGFJx......",
+                  "......#KGGGGLE.EMFGGGE#.....",
+                  "......xGFGGGGGJGFGGFGGx.....",
+                  "......KGGIFGGGGGEEEKGFN.....",
+                  ".....xELGKGGGGGGFNPBQHPx....",
+                  ".....x..EBFGGGMGGGLBBE.x....",
+                  ".........xQMGLGLLLQx........",
+                  "..........xLGGGGGQx.........",
+                  "..........IGGGGGGFB.........",
+                  "..........IQGGGGGMx.........",
+                  ".........PLGLGGGGGM.A.......",
+                  ".........HQGGMMLGGGI........",
+                  ".........JGLMGGGGGLM........",
+                  "..........EKxxxPxK..........",
+                  "............................",
+                  "............................",
+                  "............................",
+                  "............................"
+                ],
+                "legend": {
+                  "#": "#0a0a0aff",
+                  "@": "#c48365ff",
+                  "%": "#e6a883ff",
+                  "&": "#965a44ff",
+                  "*": "#bd7b5eff",
+                  "+": "#8c533dff",
+                  "=": "#e3a37cff",
+                  "o": "#df9b75ff",
+                  "O": "#b17155ff",
+                  "x": "#030302ff",
+                  "X": "#a4664cff",
+                  "A": "#0a0706ff",
+                  "B": "#050b0bff",
+                  "C": "#6c3c2bff",
+                  "D": "#5c3323ff",
+                  "E": "#0c1c1bff",
+                  "F": "#6c9193ff",
+                  "G": "#678a8cff",
+                  "H": "#3b5a59ff",
+                  "I": "#436464ff",
+                  "J": "#213c3bff",
+                  "K": "#162a29ff",
+                  "L": "#5a7d7eff",
+                  "M": "#527475ff",
+                  "N": "#314f4eff",
+                  "P": "#0a1413ff",
+                  "Q": "#4b6c6cff",
+                  "R": "#7a4532ff",
+                  "S": "#3a3434ff",
+                  "T": "#514f51ff",
+                  "U": "#4d2109ff",
+                  "V": "#2a231fff",
+                  "W": "#201b18ff",
+                  "Y": "#53413cff"
+                },
+                "mode": "stamp"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

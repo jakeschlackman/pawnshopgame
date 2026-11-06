@@ -56,6 +56,7 @@ internal static partial class RegressionTests
         using var app = new ApplicationFlow(conversations: catalog);
         Check(app.TryTalkTo("first") == TalkResult.NoSession);
         Begin(app);
+        Approach(app, "second");
         var before = app.Room;
         Check(app.TryTalkTo("missing") == TalkResult.UnknownNpc && app.Room == before && app.Screen == Screen.Room);
         var click = MenuPointerInput.HitTest(app, 450, 210, 640, 360);
@@ -64,12 +65,11 @@ internal static partial class RegressionTests
         Check(app.Dialogue!.View.Speaker.Id == "second" && app.Dialogue.View.Text.Contains("Second NPC") && app.Room == before);
         Check(app.TryTalkTo("first") == TalkResult.Busy);
         Back(app);
-        app.Update(new(Right: true, NextTab: true), TimeSpan.Zero);
         Check(app.Screen == Screen.Room && app.SelectedNpcId == "second");
         app.Update(new(NextTab: true), TimeSpan.Zero);
         Check(app.Dialogue!.View.Speaker.Id == "second");
         Back(app);
-        app.Update(new(Left: true), TimeSpan.Zero);
+        Approach(app, "first");
         app.Update(new(NextTab: true), TimeSpan.Zero);
         Check(app.Dialogue!.View.Speaker.Id == "first");
 
@@ -80,6 +80,7 @@ internal static partial class RegressionTests
         Begin(quiet);
         Check(quiet.TryTalkTo("second") == TalkResult.NoConversation && quiet.Screen == Screen.Room);
         Check(quiet.TryTalkTo("first", "missing") == TalkResult.UnknownConversation);
+        Approach(quiet, "first");
         Check(quiet.TryTalkTo("first", "greeting") == TalkResult.Started);
 
         fixture.Write("shop.npcs.json", "{\"version\":1,\"spawns\":[]}");
@@ -138,6 +139,7 @@ internal static partial class RegressionTests
         fixture.Write("visitor/sprites/body.json", "{\"version\":1,\"frameWidth\":24,\"frameHeight\":20,\"columns\":1,\"rows\":2,\"pivotX\":12,\"pivotY\":20,\"displayScale\":1,\"animations\":{\"Idle\":{\"firstFrame\":0,\"frameCount\":2,\"frameDurationMs\":100,\"loop\":true}}}");
         using var app = new ApplicationFlow(conversations: fixture.Load());
         Begin(app);
+        Approach(app, "visitor");
         app.Update(default, TimeSpan.FromMilliseconds(100));
         Check(app.NpcFrames["visitor"] == 1);
         Check(app.TryTalkTo("visitor") == TalkResult.Started && app.Dialogue!.View.Text == "A different greeting.");

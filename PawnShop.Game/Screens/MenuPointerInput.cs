@@ -13,7 +13,8 @@ public static class TitleMenuLayout
 
 public static class OptionsMenuLayout
 {
-    public static Rectangle Row(int index) => new(42, 158 + index * 43, 1190, 36);
+    public static Rectangle Row(int index, bool controls = false) => new(42, (controls ? 186 : 158) + index * (controls ? 38 : 43), 1190, 36);
+    public static Rectangle Binding(int row, int slot) => new(slot == 0 ? 620 : 925, Row(row, controls: true).Y, 285, 36);
     public static Rectangle Tab(int index) => new(50 + index * 300, 102, 280, 36);
     public static Rectangle Keep => new(90, 470, 450, 40);
     public static Rectangle Revert => new(650, 470, 450, 40);
@@ -63,7 +64,12 @@ public sealed class MenuPointerInput
             for (int i = 0; i < OptionsModel.Tabs.Count; i++)
                 if (OptionsMenuLayout.Tab(i).Contains(point)) return new(TabIndex: i);
             for (int i = 0; i < flow.Options.FieldCount + 3; i++)
-                if (OptionsMenuLayout.Row(i).Contains(point)) return new(Confirm: true, SelectionIndex: i);
+                if (OptionsMenuLayout.Row(i, flow.Options.Tab == 3).Contains(point))
+                {
+                    int? slot = flow.Options.Tab == 3 && i < flow.Options.FieldCount
+                        ? OptionsMenuLayout.Binding(i, 1).Contains(point) ? 1 : 0 : null;
+                    return new(Confirm: true, SelectionIndex: i, BindingIndex: slot);
+                }
         }
         else if (flow.Screen == Screen.Room)
         {
@@ -80,6 +86,12 @@ public sealed class MenuPointerInput
                     if (dialogue.FirstVisibleChoice + row < dialogue.View.Choices.Count && DialogueScreen.ChoiceRow(row).Contains(point))
                         return new(Confirm: true, SelectionIndex: dialogue.FirstVisibleChoice + row);
             if (new Rectangle(24, 42, 592, 145).Contains(point)) return new(Confirm: true);
+        }
+        else if (flow.Screen == Screen.CharacterSelect)
+        {
+            for (int i = 0; i < 2; i++)
+                if (CharacterSelectionLayout.Card(i).Contains(point)) return new(Confirm: true, SelectionIndex: i);
+            if (CharacterSelectionLayout.Back.Contains(point)) return new(Cancel: true);
         }
         else if (flow.Menu is { } menu)
         {

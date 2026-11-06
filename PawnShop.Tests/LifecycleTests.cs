@@ -34,7 +34,21 @@ internal static partial class RegressionTests
         Check(app.OptionsFlight.Phase == OptionsSproutPhase.Arrived);
     }
     internal static void Back(ApplicationFlow app) => Step(app, new(Cancel: true));
-    internal static void Begin(ApplicationFlow app) => Confirm(app);
+    internal static void Begin(ApplicationFlow app)
+    {
+        Confirm(app);
+        Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0);
+        Confirm(app);
+    }
+    internal static void Approach(ApplicationFlow app, string npcId)
+    {
+        var npc = app.Npcs.Single(n => n.Id == npcId);
+        float current = app.Player!.Value.Position.X;
+        float target = npc.X + (npc.X >= current ? -32 : 32);
+        float difference = target - current;
+        app.Update(new(MoveX: Math.Sign(difference)), TimeSpan.FromSeconds(Math.Abs(difference) / PawnShop.Characters.Player.PlayerState.Speed));
+        Check(app.SelectedNpcId == npcId, "Test player did not reach NPC interaction range.");
+    }
     internal static void ReturnPrompt(ApplicationFlow app) { Back(app); Down(app); Confirm(app); }
     internal static void Discard(ApplicationFlow app) { Down(app); Confirm(app); }
 
@@ -60,12 +74,15 @@ internal static partial class RegressionTests
         Step(app, new(Confirm: true, Interact: true));
         Check(app.Screen == Screen.Title && app.LiveSessions == 0 && app.TitleInteractionPlaying);
         FinishTitleInteraction(app);
+        Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0 && app.Room is null);
+        Step(app, new(Confirm: true, Interact: true, MoveX: 1));
         Check(app.Screen == Screen.Room && app.LiveSessions == 1 && app.SessionsCreated == 1);
+        Check(app.Player!.Value.Position == ShopRoomLayout.PlayerSpawn);
         Check(app.Room!.Value.Elapsed == TimeSpan.Zero && app.Room.Value.BellRings == 0);
         Confirm(app);
         Check(app.SessionsCreated == 1);
         Step(app, new(Interact: true));
-        Check(app.Room.Value.BellRings == 1);
+        Check(app.Room.Value.BellRings == 0 && app.Dialogue is null); // Too far from the NPC; no bell shortcut remains.
     }
     internal static void Pause()
     {

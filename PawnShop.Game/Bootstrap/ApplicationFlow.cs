@@ -4,6 +4,7 @@ using PawnShop.Framework.UI;
 using PawnShop.Framework.Rendering;
 using PawnShop.Game.Screens;
 using PawnShop.Narrative.Dialogue;
+using PawnShop.Characters.Player;
 
 namespace PawnShop.Game.Bootstrap;
 
@@ -21,9 +22,10 @@ public sealed class ApplicationFlow : IDisposable
     public OptionsSproutFlight OptionsFlight { get; }
     public OptionsModel Options { get; }
     private readonly NpcContentCatalog conversations;
-    private int selectedNpc;
     public IReadOnlyList<PlacedNpc> Npcs => session?.Npcs ?? Array.Empty<PlacedNpc>();
-    public string? SelectedNpcId => Npcs.Count == 0 ? null : Npcs[selectedNpc].Id;
+    public string? SelectedNpcId => session?.NearbyNpcId;
+    public PlayerView? Player => session?.Player;
+    public PlayerSpriteCatalog PlayerSprites { get; }
     public IReadOnlyDictionary<string, int> NpcFrames => session?.NpcFrames ?? System.Collections.Frozen.FrozenDictionary<string, int>.Empty;
     public DialoguePresenter? Dialogue { get; private set; }
     public PanoramaCamera TitleCamera { get; } = new();
@@ -32,6 +34,7 @@ public sealed class ApplicationFlow : IDisposable
     public ApplicationFlow(AppSettings? settings = null, Action<AppSettings>? saveSettings = null, NpcContentCatalog? conversations = null)
     {
         Options = new(settings ?? new(), saveSettings);
+        PlayerSprites = new(Path.Combine(AppContext.BaseDirectory, "Content", "Player"));
         this.conversations = conversations ?? NpcContentCatalog.Load(Path.Combine(AppContext.BaseDirectory, "Content", "Npcs"), Path.Combine(AppContext.BaseDirectory, "Content", "World", "shop.npcs.json"));
         var sheet = SpriteSheetDefinition.Load(Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "sprout-title.json"));
         if (!sheet.Animations.TryGetValue("Idle", out var idle) || !idle.Loop
@@ -120,29 +123,22 @@ public sealed class ApplicationFlow : IDisposable
             if (Screen == Screen.Room)
             {
                 if (Options.Current.PauseUnfocused) SetScreen(Screen.Pause);
-                else session!.Tick(delta, false);
+                else session!.Tick(delta, false); // No movement or interaction from an unfocused application.
             }
             return;
         }
         if (Screen == Screen.Room)
         {
             if (input.Cancel) { SetScreen(Screen.Pause); return; }
-            if (Npcs.Count > 0 && input.Left != input.Right)
-            {
-                selectedNpc = (selectedNpc + (input.Right ? 1 : Npcs.Count - 1)) % Npcs.Count;
-                return;
-            }
             if (input.TalkTargetId is { } target)
             {
-                TryTalkTo(target);
-                return;
+                if (TryTalkTo(target) == TalkResult.Started) return;
             }
-            if (input.NextTab && SelectedNpcId is not null)
+            if ((input.Interact || input.NextTab) && SelectedNpcId is { } nearby)
             {
-                TryTalkTo(SelectedNpcId);
-                return;
+                if (TryTalkTo(nearby) == TalkResult.Started) return;
             }
-            session!.Tick(delta, input.Interact);
+            session!.Tick(delta, false, new(input.MoveX, input.MoveY));
             return;
         }
         if (input.Cancel)
@@ -152,10 +148,13 @@ public sealed class ApplicationFlow : IDisposable
                 case Screen.Pause: SetScreen(Screen.Room); break;
                 case Screen.ConfirmExit:
                 case Screen.ConfirmReturn: SetScreen(confirmationOrigin); break;
+                case Screen.CharacterSelect: SetScreen(Screen.Title); break;
                 // Escape on title is deliberately harmless; Exit is a separate menu action.
             }
             return;
         }
+        if (Screen == Screen.CharacterSelect && input.Left != input.Right)
+            input = input with { Up = input.Left, Down = input.Right };
         var command = Menu?.Handle(input);
         if (Screen == Screen.Title && input.Confirm && input.Up == input.Down)
         {
@@ -180,11 +179,16 @@ public sealed class ApplicationFlow : IDisposable
         {
             case MenuCommand.NewGame:
                 if (session is not null) throw new InvalidOperationException("A session is already active.");
-                session = new GameSession(conversations.ShopNpcs);
-                selectedNpc = 0;
+                SetScreen(Screen.CharacterSelect);
+                break;
+            case MenuCommand.SelectMale:
+            case MenuCommand.SelectFemale:
+                if (session is not null || Screen != Screen.CharacterSelect) throw new InvalidOperationException("Choose a character before starting a session.");
+                session = new GameSession(conversations.ShopNpcs, command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female);
                 SessionsCreated++;
                 SetScreen(Screen.Room);
                 break;
+            case MenuCommand.BackToTitle: SetScreen(Screen.Title); break;
             case MenuCommand.Resume: SetScreen(Screen.Room); break;
             case MenuCommand.Settings:
                 optionsOrigin = Screen;
@@ -230,6 +234,8 @@ public sealed class ApplicationFlow : IDisposable
         string? id = conversationId ?? npc.DefaultConversation;
         if (id is null) return TalkResult.NoConversation;
         if (!npc.Conversations.TryGetValue(id, out var conversation)) return TalkResult.UnknownConversation;
+        var placed = Npcs.First(n => n.Id == npcId);
+        if (!session.CanTalkTo(placed)) return TalkResult.OutOfRange;
         Dialogue = new(session.StartDialogue(conversation.Dialogue), Options.Current);
         SetScreen(Screen.Dialogue);
         return TalkResult.Started;
@@ -253,6 +259,7 @@ public sealed class ApplicationFlow : IDisposable
         Menu = screen switch
         {
             Screen.Title => TitleMenu(),
+            Screen.CharacterSelect => new(new("Male", MenuCommand.SelectMale), new("Female", MenuCommand.SelectFemale), new("Back", MenuCommand.BackToTitle)),
             Screen.Pause => new(new("Resume", MenuCommand.Resume),
                 new("Return to title", MenuCommand.ReturnToTitle), new("Exit game", MenuCommand.Exit),
                 new("Options", MenuCommand.Settings)),

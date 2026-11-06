@@ -1,0 +1,367 @@
+{
+  "version": 1,
+  "status": "approved_static_south",
+  "scope": "User-approved male/female south-facing work-shirt layers. Other directions, animation and gameplay integration remain pending.",
+  "canvas": {
+    "width": 48,
+    "height": 64
+  },
+  "groundPivot": {
+    "x": 24,
+    "y": 58
+  },
+  "bases": {
+    "male": {
+      "id": "79b48db4-483d-4fe3-94bd-74bcec89eab9",
+      "source": "https://api.pixellab.ai/mcp/pixel-tools/ebb831d5-e49d-499a-9afb-fe62449124a8/assets/male-south/full.png",
+      "atlas": "../../Bases/male/base.png"
+    },
+    "female": {
+      "id": "5cd54c3f-d34a-4f02-83ca-0e9a21966fe5",
+      "source": "https://api.pixellab.ai/mcp/pixel-tools/44e00f73-cf32-42af-9c32-38bc20394905/assets/female-south/full.png",
+      "atlas": "../../Bases/female/base.png"
+    }
+  },
+  "objects": {
+    "male": {
+      "name": "Picker's Hollow - Male Teal Work Shirt",
+      "description": "A standalone empty teal cotton work shirt for a cozy top-down pixel-art pawn shop RPG, matching the reference shirt's muted teal palette, dark ribbed round crew neck, short sleeves with small cuffs, straight waist-length hem, and one small stitched pocket on wearer's left (screen-right in front view). No buttons, logos, writing, hanger, mannequin, body, skin, pants, accessories, ground or shadow. Crisp native pixels and restrained shading. Full empty garment front on a transparent 48x64 canvas. This is an equipment object and will have a separate wearable layer fitted to its matching body type. Keep the same design language and proportions of the garment details as the reference. MALE CUT: broader shoulder seams, straight roomy torso, comparatively square waist and chest, relaxed short sleeves angled down to match a standing male adult with arms resting at sides. The shirt must fully cover both shoulder tops. No oversized sleeves or dropped shoulders.",
+      "seed": 51071,
+      "background_job_id": "89296878-3d44-4257-aad9-a8da09cad0a4",
+      "object_id": "ba1ff781-dd78-415b-ae9c-87099d4bb0ec",
+      "status": "completed",
+      "first_direction_generated": true,
+      "estimated_generations": 5,
+      "job_id": "89296878-3d44-4257-aad9-a8da09cad0a4",
+      "n_directions": 1,
+      "poll_tool": "get_object",
+      "status_path": "/v2/background-jobs/89296878-3d44-4257-aad9-a8da09cad0a4",
+      "download_path": "/mcp/objects/ba1ff781-dd78-415b-ae9c-87099d4bb0ec/download"
+    },
+    "female": {
+      "name": "Picker's Hollow - Female Teal Work Shirt",
+      "description": "A standalone empty teal cotton work shirt for a cozy top-down pixel-art pawn shop RPG, matching the reference shirt's muted teal palette, dark ribbed round crew neck, short sleeves with small cuffs, straight waist-length hem, and one small stitched pocket on wearer's left (screen-right in front view). No buttons, logos, writing, hanger, mannequin, body, skin, pants, accessories, ground or shadow. Crisp native pixels and restrained shading. Full empty garment front on a transparent 48x64 canvas. This is an equipment object and will have a separate wearable layer fitted to its matching body type. Keep the same design language and proportions of the garment details as the reference. FEMALE CUT: narrower shoulder seams, modest shaping over the chest, a gently tapered waist and slightly flared hem over the hips, natural fitted cotton rather than a skin-tight top. Short sleeves angled down to match a standing female adult with arms resting at sides. Full shoulder coverage and modest crew neck. This is the same practical work shirt in a female fitted cut, not a cropped shirt, dress, generic male box cut, or exaggerated hourglass.",
+      "seed": 51072,
+      "background_job_id": "6bb2f57f-50d0-4d32-9b74-3376dde084c3",
+      "object_id": "0d78d136-ec65-4d74-97e0-565f4c70c368",
+      "status": "completed",
+      "first_direction_generated": true,
+      "estimated_generations": 5,
+      "job_id": "6bb2f57f-50d0-4d32-9b74-3376dde084c3",
+      "n_directions": 1,
+      "poll_tool": "get_object",
+      "status_path": "/v2/background-jobs/6bb2f57f-50d0-4d32-9b74-3376dde084c3",
+      "download_path": "/mcp/objects/0d78d136-ec65-4d74-97e0-565f4c70c368/download"
+    }
+  },
+  "fittedSources": {
+    "male": {
+      "prompt": "Put the separate male-cut shirt from the reference object onto this exact male base. Preserve the player's native 48x64 canvas, original pixel coordinates, face/head/neck, anatomy, idle pose, bare forearms/hands, underwear below hem and legs/feet. No recentering, scaling, taller body or shorter body. Only add the correctly fitted shirt. MALE fit: broad shoulders start at row 22, with skin at x18-19 and x28-29 on that row; cover those shoulder tops with fabric. Let the round collar opening reveal only the central neck at x21-26. Shoulder seams slope out from the collar, sleeves follow the relaxed arms and end around y30, and hem meets the waistband at y38. Straight torso cut. Keep the reference's teal cotton, ribbed crew neck, plain short sleeves, dark outline, one small wearer's-left chest pocket and subtle fabric folds. Match the BASE SPRITE'S crisp restrained pixel art and outline weight. Preserve clothing material and proportions but fit this exact individual's anatomy; do not copy the reference object's canvas-centered position. Return a full dressed sprite on transparency for review. The shirt must cover all shoulder skin outside the central neck, conceal all sports bra, meet the original waist naturally and have clean sleeve openings. No hair, accessories, backgrounds, shadows, additional garments or facial changes.",
+      "background_job_id": "14fd02fa-5fd1-43f7-b41d-b098e0019c11",
+      "image_id": "9ad1b23b-e12a-565a-ae39-0d4a27b35b24",
+      "status": "completed",
+      "source_image_id": "9ad1b23b-e12a-565a-ae39-0d4a27b35b24",
+      "job_id": "14fd02fa-5fd1-43f7-b41d-b098e0019c11",
+      "description": "Put the separate male-cut shirt from the reference object onto this exact male base. Preserve the player's native 48x64 canvas, original pixel coordinates, face/head/neck, anatomy, idle pose, bare forearms/hands, underwear below hem and legs/feet. No recentering, scaling, taller body or shorter body. Only add the correctly fitted shirt. MALE fit: broad shoulders start at row 22, with skin at x18-19 and x28-29 on that row; cover those shoulder tops with fabric. Let the round collar opening reveal only the central neck at x21-26. Shoulder seams slope out from the collar, sleeves follow the relaxed arms and end around y30, and hem meets the waistband at y38. Straight torso cut. Keep the reference's teal cotton, ribbed crew neck, plain short sleeves, dark outline, one small wearer's-left chest pocket and subtle fabric folds. Match the BASE SPRITE'S crisp restrained pixel art and outline weight. Preserve clothing material and proportions but fit this exact individual's anatomy; do not copy the reference object's canvas-centered position. Return a full dressed sprite on transparency for review. The shirt must cover all shoulder skin outside the central neck, conceal all sports bra, meet the original waist naturally and have clean sleeve openings. No hair, accessories, backgrounds, shadows, additional garments or facial changes.",
+      "seed": 51073,
+      "image_size": {
+        "width": 48,
+        "height": 64
+      },
+      "output_count": 1,
+      "estimated_generations": 5,
+      "pricing_provisional": true,
+      "poll_tool": "get_image",
+      "download_path": "/mcp/images/14fd02fa-5fd1-43f7-b41d-b098e0019c11/download"
+    },
+    "female": {
+      "prompt": "Put the separate female-cut shirt from the reference object onto this exact female base. Preserve the player's native 48x64 canvas, original pixel coordinates, face/head/neck, anatomy, idle pose, bare forearms/hands, underwear below hem and legs/feet. No recentering, scaling, taller body or shorter body. Only add the correctly fitted shirt. FEMALE fit: shoulders start at row 23; cover both shoulder tops and sports-bra straps completely. Short sleeves must wrap the actual smaller upper arms ending around y29-30. Gently shape the torso over the chest and taper to the existing waist around x20-28, ending at the waistband at y37-38. Do not make a square oversized male shirt, long tunic, dress, cropped shirt or skin-tight/exaggerated silhouette. Keep the reference's teal cotton, ribbed crew neck, plain short sleeves, dark outline, one small wearer's-left chest pocket and subtle fabric folds. Match the BASE SPRITE'S crisp restrained pixel art and outline weight. Preserve clothing material and proportions but fit this exact individual's anatomy; do not copy the reference object's canvas-centered position. Return a full dressed sprite on transparency for review. The shirt must cover all shoulder skin outside the central neck, conceal all sports bra, meet the original waist naturally and have clean sleeve openings. No hair, accessories, backgrounds, shadows, additional garments or facial changes.",
+      "background_job_id": "41723d9e-745b-4d46-a8e5-4f1caf0be51e",
+      "image_id": "550374bc-5578-5f87-9ccd-a117f521cf2b",
+      "status": "completed",
+      "source_image_id": "550374bc-5578-5f87-9ccd-a117f521cf2b",
+      "job_id": "41723d9e-745b-4d46-a8e5-4f1caf0be51e",
+      "description": "Put the separate female-cut shirt from the reference object onto this exact female base. Preserve the player's native 48x64 canvas, original pixel coordinates, face/head/neck, anatomy, idle pose, bare forearms/hands, underwear below hem and legs/feet. No recentering, scaling, taller body or shorter body. Only add the correctly fitted shirt. FEMALE fit: shoulders start at row 23; cover both shoulder tops and sports-bra straps completely. Short sleeves must wrap the actual smaller upper arms ending around y29-30. Gently shape the torso over the chest and taper to the existing waist around x20-28, ending at the waistband at y37-38. Do not make a square oversized male shirt, long tunic, dress, cropped shirt or skin-tight/exaggerated silhouette. Keep the reference's teal cotton, ribbed crew neck, plain short sleeves, dark outline, one small wearer's-left chest pocket and subtle fabric folds. Match the BASE SPRITE'S crisp restrained pixel art and outline weight. Preserve clothing material and proportions but fit this exact individual's anatomy; do not copy the reference object's canvas-centered position. Return a full dressed sprite on transparency for review. The shirt must cover all shoulder skin outside the central neck, conceal all sports bra, meet the original waist naturally and have clean sleeve openings. No hair, accessories, backgrounds, shadows, additional garments or facial changes.",
+      "seed": 51074,
+      "image_size": {
+        "width": 48,
+        "height": 64
+      },
+      "output_count": 1,
+      "estimated_generations": 5,
+      "pricing_provisional": true,
+      "poll_tool": "get_image",
+      "download_path": "/mcp/images/41723d9e-745b-4d46-a8e5-4f1caf0be51e/download"
+    }
+  },
+  "extraction": {
+    "method": "Copy native AI garment pixels inside inspected body-specific row regions, excluding warm skin-colored pixels (R>G+20, R>B+20, R>60). Do not shift, scale, stretch, or insert cloth rows. Compose over unchanged base.",
+    "regions": {
+      "male": [
+        [
+          18,
+          22,
+          20,
+          22
+        ],
+        [
+          27,
+          22,
+          30,
+          22
+        ],
+        [
+          16,
+          23,
+          21,
+          23
+        ],
+        [
+          26,
+          23,
+          31,
+          23
+        ],
+        [
+          15,
+          24,
+          32,
+          24
+        ],
+        [
+          14,
+          25,
+          33,
+          26
+        ],
+        [
+          13,
+          27,
+          34,
+          30
+        ],
+        [
+          18,
+          31,
+          29,
+          38
+        ]
+      ],
+      "female": [
+        [
+          18,
+          23,
+          21,
+          23
+        ],
+        [
+          27,
+          23,
+          30,
+          23
+        ],
+        [
+          17,
+          24,
+          31,
+          24
+        ],
+        [
+          16,
+          25,
+          32,
+          27
+        ],
+        [
+          15,
+          28,
+          33,
+          29
+        ],
+        [
+          19,
+          30,
+          29,
+          30
+        ],
+        [
+          20,
+          31,
+          29,
+          33
+        ],
+        [
+          19,
+          34,
+          30,
+          36
+        ],
+        [
+          20,
+          37,
+          27,
+          37
+        ]
+      ]
+    },
+    "compositeDrawing": "d1d2d95a-bd07-486e-9c3a-367cd9b1726d",
+    "shirtDrawings": {
+      "male": "b2026ae2-d94d-4c3e-911f-4e761871e4a3",
+      "female": "f09a7072-e9f5-4232-aa0e-e43ea4ac2392"
+    }
+  },
+  "gallery": {
+    "male": "gallery:f7ca260c-bc2a-41fe-a699-ba3b9fee6c33",
+    "female": "gallery:a440590c-9b51-4409-96db-452fa5a6a2dc"
+  },
+  "garmentBounds": {
+    "male": {
+      "top": 22,
+      "bottom": 38
+    },
+    "female": {
+      "top": 23,
+      "bottom": 37
+    }
+  },
+  "shoulderCoverage": {
+    "male": [
+      [
+        18,
+        22
+      ],
+      [
+        19,
+        22
+      ],
+      [
+        28,
+        22
+      ],
+      [
+        29,
+        22
+      ],
+      [
+        17,
+        23
+      ],
+      [
+        18,
+        23
+      ],
+      [
+        29,
+        23
+      ],
+      [
+        30,
+        23
+      ]
+    ],
+    "female": [
+      [
+        18,
+        24
+      ],
+      [
+        19,
+        24
+      ],
+      [
+        29,
+        24
+      ],
+      [
+        30,
+        24
+      ],
+      [
+        17,
+        25
+      ],
+      [
+        18,
+        25
+      ],
+      [
+        30,
+        25
+      ],
+      [
+        31,
+        25
+      ]
+    ]
+  },
+  "coverageRegions": {
+    "female": [
+      [
+        20,
+        26,
+        28,
+        30
+      ]
+    ]
+  },
+  "downloads": [
+    {
+      "path": "male/shirt-object.png",
+      "url": "https://api.pixellab.ai/mcp/objects/ba1ff781-dd78-415b-ae9c-87099d4bb0ec/download"
+    },
+    {
+      "path": "Sources/male-ai-dressed.png",
+      "url": "https://api.pixellab.ai/mcp/images/14fd02fa-5fd1-43f7-b41d-b098e0019c11/download"
+    },
+    {
+      "path": "male/shirt.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/b2026ae2-d94d-4c3e-911f-4e761871e4a3/assets/male/full.png"
+    },
+    {
+      "path": "male/preview.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/d1d2d95a-bd07-486e-9c3a-367cd9b1726d/assets/male/full.png"
+    },
+    {
+      "path": "female/shirt-object.png",
+      "url": "https://api.pixellab.ai/mcp/objects/0d78d136-ec65-4d74-97e0-565f4c70c368/download"
+    },
+    {
+      "path": "Sources/female-ai-dressed.png",
+      "url": "https://api.pixellab.ai/mcp/images/41723d9e-745b-4d46-a8e5-4f1caf0be51e/download"
+    },
+    {
+      "path": "female/shirt.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/f09a7072-e9f5-4232-aa0e-e43ea4ac2392/assets/female/full.png"
+    },
+    {
+      "path": "female/preview.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/d1d2d95a-bd07-486e-9c3a-367cd9b1726d/assets/female/full.png"
+    },
+    {
+      "path": "review-native.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/2b360e05-080d-4ce9-98bb-086cc195ec38/image.png"
+    },
+    {
+      "path": "review-4x.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/a30ca1ad-7d51-4f49-a373-4172ecfc0172/image.png"
+    },
+    {
+      "path": "Sources/design-reference.png",
+      "provenance": "Original generic design retained as source artwork for both body-specific object generations. PixelLab object f29be2e3-dcda-4b7a-8f8b-293091a0d907 was retired during cleanup."
+    }
+  ],
+  "id": "wearable.teal_work_shirt",
+  "approval": {
+    "kind": "user_visual",
+    "date": "2026-11-05",
+    "statement": "this is perfect",
+    "bodyTypes": [
+      "male",
+      "female"
+    ],
+    "directions": [
+      "south"
+    ]
+  },
+  "baseManifest": "../../Bases/base-manifest.json"
+}

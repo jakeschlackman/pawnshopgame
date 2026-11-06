@@ -18,3 +18,17 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Color
 /build:Fonts/Silkscreen-Regular.spritefont
+
+#begin Fonts/AtkinsonHyperlegible-Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/AtkinsonHyperlegible-Regular.spritefont
+
+#begin Fonts/AtkinsonHyperlegible-Bold.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/AtkinsonHyperlegible-Bold.spritefont

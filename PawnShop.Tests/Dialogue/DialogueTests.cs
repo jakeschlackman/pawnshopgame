@@ -155,6 +155,7 @@ internal static partial class RegressionTests
     {
         using var app = new ApplicationFlow(new() { Dialogue = DialogueSpeed.Instant });
         Begin(app);
+        Approach(app, "visitor");
         var room = app.Room;
         app.Update(new(NextTab: true, Interact: true, Confirm: true), TimeSpan.FromSeconds(1));
         Check(app.Screen == Screen.Dialogue && app.Room == room && app.Dialogue!.View.LineId == "visitor.greeting");
@@ -182,6 +183,7 @@ internal static partial class RegressionTests
         for (int i = 0; i < 10; i++)
         {
             Begin(repeated);
+            Approach(repeated, "visitor");
             repeated.Update(new(NextTab: true), TimeSpan.Zero);
             Check(repeated.Dialogue!.View.LineId == "visitor.greeting");
             Back(repeated);
