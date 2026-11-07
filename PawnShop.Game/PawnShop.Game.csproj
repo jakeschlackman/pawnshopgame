@@ -4,6 +4,8 @@
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="../PawnShop.Characters/Npcs/Common/Assets/**/*.png;../PawnShop.Characters/Npcs/Common/Assets/catalog.json"
+          Link="Content/CommonNpcs/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <ProjectReference Include="../PawnShop.Framework/PawnShop.Framework.csproj" />
     <ProjectReference Include="../PawnShop.Core/PawnShop.Core.csproj" />
     <ProjectReference Include="../PawnShop.Narrative/PawnShop.Narrative.csproj" />

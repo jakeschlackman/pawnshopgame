@@ -51,6 +51,14 @@ the MonoGame host or initializing graphics/audio. The test framework is unchange
 
 ## Human asset authoring
 
+Approved modular human art now belongs to common NPC shoppers under
+`PawnShop.Characters/Npcs/Common`. Its seeded appearance generator and catalog
+support adding outfits, hair and hats through content data. See the
+[common NPC authoring guide](PawnShop.Characters/Npcs/Common/AUTHORING.md).
+The bundled room now replaces its existing visitor sprite with one generated
+common shopper per New Game. It walks in from the right, settles at the original
+visitor position and retains the same dialogue. The player stays unchanged.
+
 Build the solution normally, then use the existing C# authoring executable:
 
 ```text

@@ -5,6 +5,7 @@ using PawnShop.Framework.Rendering;
 using PawnShop.Game.Screens;
 using PawnShop.Narrative.Dialogue;
 using PawnShop.Characters.Player;
+using PawnShop.Characters.Npcs.Common;
 
 namespace PawnShop.Game.Bootstrap;
 
@@ -22,6 +23,8 @@ public sealed class ApplicationFlow : IDisposable
     public OptionsSproutFlight OptionsFlight { get; }
     public OptionsModel Options { get; }
     private readonly NpcContentCatalog conversations;
+    private readonly CommonNpcCatalog? commonNpcs;
+    public CommonNpcRoomVisitor? CommonVisitor => session?.CommonVisitor;
     public IReadOnlyList<PlacedNpc> Npcs => session?.Npcs ?? Array.Empty<PlacedNpc>();
     public string? SelectedNpcId => session?.NearbyNpcId;
     public PlayerView? Player => session?.Player;
@@ -32,11 +35,16 @@ public sealed class ApplicationFlow : IDisposable
     public PanoramaCamera TitleCamera { get; } = new();
     public bool UsesTitleBackground => session is null && Screen is Screen.Title or Screen.Options;
     public bool TitleUiVisible => UsesTitleBackground && !TitleCamera.IsMoving;
-    public ApplicationFlow(AppSettings? settings = null, Action<AppSettings>? saveSettings = null, NpcContentCatalog? conversations = null)
+    public ApplicationFlow(AppSettings? settings = null, Action<AppSettings>? saveSettings = null, NpcContentCatalog? conversations = null,
+        CommonNpcCatalog? commonNpcs = null)
     {
         Options = new(settings ?? new(), saveSettings);
         PlayerSprites = new(Path.Combine(AppContext.BaseDirectory, "Content", "Player"));
         this.conversations = conversations ?? NpcContentCatalog.Load(Path.Combine(AppContext.BaseDirectory, "Content", "Npcs"), Path.Combine(AppContext.BaseDirectory, "Content", "World", "shop.npcs.json"));
+        // Only the bundled room gets the example by default. Injected authored NPC
+        // catalogs retain their own sprites unless explicitly paired with common art.
+        this.commonNpcs = commonNpcs ?? (conversations is null
+            ? CommonNpcCatalog.Load(Path.Combine(AppContext.BaseDirectory, "Content", "CommonNpcs")) : null);
         var sheet = SpriteSheetDefinition.Load(Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "sprout-title.json"));
         if (!sheet.Animations.TryGetValue("Idle", out var idle) || !idle.Loop
             || !sheet.Animations.TryGetValue("Interact", out var interact) || interact.Loop)
@@ -185,7 +193,8 @@ public sealed class ApplicationFlow : IDisposable
             case MenuCommand.SelectMale:
             case MenuCommand.SelectFemale:
                 if (session is not null || Screen != Screen.CharacterSelect) throw new InvalidOperationException("Choose a character before starting a session.");
-                session = new GameSession(PlayerSprites.PlaceholderSheet, conversations.ShopNpcs, command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female);
+                session = new GameSession(PlayerSprites.PlaceholderSheet, conversations.ShopNpcs,
+                    command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female, commonNpcs);
                 SessionsCreated++;
                 SetScreen(Screen.Room);
                 break;

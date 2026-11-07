@@ -102,6 +102,46 @@ The tests retain the dependency-free console runner. They reference Game's graph
 
 `Game/Content/TitleScreen/title-screen-panorama.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Older Rummage Hollow artwork is preserved but no longer loaded. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport, uniformly scaled with point sampling. The graphics-free PanoramaCamera tracks normalized horizontal travel with 0.8-second SmoothStep easing and calculates source bounds for the actual viewport aspect ratio. ApplicationFlow advances it once using presentation time; gameplay cameras are unaffected. Title and Options UI remain on contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. Options is visible but input-captured during Sprout's outgoing float; UI is hidden on the return pan. Escape can cancel the flight and reverse the pan. Pause-menu Options does not pan. The room/overlays retain their 640x360 target and original code-authored placeholder content. Fonts now use the standard MGCB/SpriteFont workflow, with the content builder and local tool pinned to 3.8.4.1; existing PNG loading is unchanged. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
 
+### Common NPC ownership — approved destination
+
+`PawnShop.Characters/Npcs/Common` is the user-approved home for ordinary,
+procedurally generated townies and shop visitors. Their character logic uses
+the namespace `PawnShop.Characters.Npcs.Common`. This includes seeded
+generation of compatible body, hair and clothing combinations from the approved
+modular art library. Main-player and notable NPC designs are separate.
+
+The approved layout is implemented:
+`Common/Assets/Bases`, `Common/Assets/Hair` and `Common/Assets/Clothing` for approved
+runtime images and animation/compatibility metadata, with generation code under
+`Common/Generation`. Fifty-two approved PNGs were promoted as byte-identical
+copies with source hashes in `Assets/migration.json`. Original PixelLab sources,
+rejected revisions, recipes and review
+composites remain authoring evidence, outside the runtime asset library.
+
+Game packages the selected Characters-owned PNGs and `catalog.json` into
+`Content/CommonNpcs` at build/publish time. Texture loading/rendering remains a
+Game responsibility. The bundled room renders one generated common visitor,
+entering from x=672 at 80 logical pixels/second to its existing placement. This
+does not require Characters to reference Game or hold graphics objects in NPC
+state. Existing `Content/Player` base images are still loaded by character
+selection; promotion preserves that working dependency until replacement.
+Existing authored NPC content and the general `Npcs/NpcDefinition` stay separate
+from generated instances. `CommonNpcGenerator` produces realized appearances with
+seeded choices, body-specific compatibility, caller-supplied stable instance IDs
+and content/generator versions. Catalog items and hair/headgear compatibility are
+data-driven; adding approved outfits, hairstyles or hats requires no generator
+code changes. `CommonNpcCatalog.Resolve` returns ordered native frame rectangles,
+body occlusion and a shared West-mirror flag without advancing a clock. The
+session-owned `CommonNpcEntrance` drives a bounded West-facing entrance, eight
+100 ms walk frames and the accepted walk-1/settling/standing stop. Room-owned
+textures load once and are disposed with the room. Live NPC placement drives
+collision, click bounds, proximity and drawing; pause/dialogue freeze the entrance.
+New Game realizes one appearance; the existing visitor speaker/dialogue remains.
+General navigation, browsing, trading and persistence integration are later work. See
+[common NPC authoring](PawnShop.Characters/Npcs/Common/AUTHORING.md).
+Shop customer transactions remain in Shop/Core, composed with characters by Game.
+See the [folder walkthrough](docs/VERIFICATION_EQUIPMENT_PILOT.md#common-npc-folder-walkthrough).
+
 ### 2.3 Definition, state, operation, and presentation
 
 `Game/Content/Fonts/fonts.json` is the application-wide font-role catalog.

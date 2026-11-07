@@ -133,6 +133,7 @@ internal static partial class RegressionTests
     {
         using var app = new ApplicationFlow();
         Begin(app);
+        app.Update(default, TimeSpan.FromSeconds(3)); // The demo visitor now enters before waiting at the talk position.
         Check(app.Npcs.Count == 1 && app.SelectedNpcId is null);
         Check(app.TryTalkTo("visitor") == TalkResult.OutOfRange && app.Dialogue is null);
         var npc = app.Npcs.Single();

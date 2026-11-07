@@ -174,18 +174,28 @@ and corrected South-walking fits are accepted. North standing/walking fits are
 accepted; corrected East/West standing, walking and side settling jeans are also
 accepted (user: "fixed in, next phase"). Separate male/female brown leather work
 boots are accepted South standing (user: "it looks good, next phase"). Both
-South-walking boot fits are accepted (user: "perfect"). Work stopped at the user's
-request for a later chat. Next unstarted checkpoint: North standing/walking boots
-for both bodies, then East/mirrored West including side settling. Resume details
-are at the top of [equipment verification](docs/VERIFICATION_EQUIPMENT_PILOT.md).
-The user added separate
-**pants → shoes/boots → backpacks**
-checkpoints after the wrench, each for both bodies and all supported poses.
-Before production integration, complete the user's folder walkthrough: character
-behavior belongs in `PawnShop.Characters`, shared item data in `PawnShop.Core/Items`,
-with final asset/render placement still to be agreed. Write item-type Markdown
-authoring guides alongside the actual production implementation, using working
-examples and its real paths/contracts. See
+South-walking boot fits are accepted (user: "perfect"). North standing/walking
+boots are accepted ("good, next"), as are East/mirrored-West standing, walking and
+settling ("looks good"), for both bodies. Backpacks were explicitly skipped.
+This modular art is now intended for ordinary, procedurally varied NPC shoppers,
+not the main player or notable characters. The user selected
+`PawnShop.Characters/Npcs/Common` as its home. The approved layout now contains
+52 byte-identical promoted PNGs, pose/compatibility metadata and a seeded
+appearance generator. Items, hair and headgear are data-driven, with headless
+checks for adding choices without C# registration. Game packages the assets and
+renders one generated shopper replacing the bundled visitor. It enters from the
+right using the approved walk/settle poses, then waits at the original placement.
+Pause, dialogue, collision and restart are covered headlessly; appearance still
+has the user's in-game approval ("ok we're good, youre good to clean up").
+The authorized disposable-cache cleanup is complete. General browsing and
+trading remain later slices.
+Existing player/review sources remain intact.
+Resume details and the walkthrough are in
+[equipment verification](docs/VERIFICATION_EQUIPMENT_PILOT.md).
+Shared item data remains in `PawnShop.Core/Items`; Game retains rendering and
+content packaging; Characters owns the approved common-NPC library.
+The [authoring guide](PawnShop.Characters/Npcs/Common/AUTHORING.md) documents
+working outfit, hair and hat examples, compatibility and validation commands. See
 [equipment verification](docs/VERIFICATION_EQUIPMENT_PILOT.md) and
 [the wearable workflow](docs/WEARABLE_ART_WORKFLOW.md).
 

@@ -5,6 +5,8 @@ using PawnShop.Narrative.Dialogue;
 using PawnShop.Characters.Player;
 using PawnShop.Characters.Movement;
 using System.Numerics;
+using System.Buffers.Binary;
+using PawnShop.Characters.Npcs.Common;
 
 namespace PawnShop.Game.Bootstrap;
 
@@ -23,20 +25,44 @@ public sealed class GameSession : IDisposable
     public int PlayerFrame => playerAnimator.FrameIndex;
 
     public IReadOnlyList<PlacedNpc> Npcs { get; }
+    public CommonNpcRoomVisitor? CommonVisitor { get; }
+    private readonly PlacedNpc[] placements;
+    private readonly int commonVisitorIndex = -1;
+    private readonly MovementBounds[] visitorObstacles;
     private readonly Dictionary<string, SpriteAnimator> animators = new();
     private readonly Dictionary<string, int> frames = new();
     public IReadOnlyDictionary<string, int> NpcFrames { get; }
 
-    public GameSession(SpriteSheetDefinition playerSheet, IReadOnlyList<PlacedNpc>? npcs = null, PlayerGender gender = PlayerGender.Male)
+    public GameSession(SpriteSheetDefinition playerSheet, IReadOnlyList<PlacedNpc>? npcs = null, PlayerGender gender = PlayerGender.Male,
+        CommonNpcCatalog? commonNpcs = null, ulong? commonVisitorSeed = null)
     {
         playerAnimator = new(playerSheet, "Idle");
-        Npcs = Array.AsReadOnly((npcs ?? Array.Empty<PlacedNpc>()).ToArray());
+        placements = (npcs ?? Array.Empty<PlacedNpc>()).ToArray();
+        Npcs = Array.AsReadOnly(placements);
         player = new(gender, ShopRoomLayout.PlayerSpawn);
         obstacles = new[] { ShopRoomLayout.Counter }.Concat(Npcs.Select(ShopRoomLayout.NpcFootprint)).ToArray();
         if (!ShopRoomLayout.Floor.Contains(player.Footprint) || obstacles.Any(o => o.Intersects(player.Footprint)))
             throw new InvalidDataException("Shop player spawn overlaps an obstacle or is outside the walk area.");
+        if (commonNpcs is not null && Npcs.Any(n => n.Id == CommonNpcRoomVisitor.NpcId))
+        {
+            Guid id = Guid.NewGuid();
+            // New Game samples once. The realized appearance and seed stay fixed for
+            // this session, including pause/dialogue. Tests can supply an exact seed.
+            ulong seed = commonVisitorSeed ?? BinaryPrimitives.ReadUInt64LittleEndian(id.ToByteArray());
+            commonVisitorIndex = Array.FindIndex(placements, n => n.Id == CommonNpcRoomVisitor.NpcId);
+            var destination = placements[commonVisitorIndex];
+            CommonVisitor = CommonNpcRoomVisitor.Create(commonNpcs, id, seed, destination.X, destination.Y);
+            UpdateVisitorPlacement();
+        }
+        visitorObstacles = new[] { player.Footprint, ShopRoomLayout.Counter }
+            .Concat(Npcs.Where(n => n.Id != CommonNpcRoomVisitor.NpcId).Select(ShopRoomLayout.NpcFootprint)).ToArray();
         foreach (var npc in Npcs)
         {
+            if (CommonVisitor is not null && npc.Id == CommonNpcRoomVisitor.NpcId)
+            {
+                frames.Add(npc.Id, CommonVisitor.SpriteFrame);
+                continue;
+            }
             var asset = npc.Content.Sprite;
             var animator = new SpriteAnimator(asset.Sheet, asset.IdleAnimation);
             animators.Add(npc.Id, animator);
@@ -81,11 +107,25 @@ public sealed class GameSession : IDisposable
     internal void Tick(TimeSpan delta, bool ringBell, Vector2 movement = default)
     {
         ObjectDisposedException.ThrowIf(IsDisposed, this);
+        if (CommonVisitor is not null)
+        {
+            visitorObstacles[0] = player.Footprint;
+            CommonVisitor.Update(delta, visitorObstacles);
+            UpdateVisitorPlacement();
+            frames[CommonNpcRoomVisitor.NpcId] = CommonVisitor.SpriteFrame;
+        }
         player.Move(movement, delta, ShopRoomLayout.Floor, obstacles);
         playerAnimator.Play(player.View.Moving ? "Walk" : "Idle");
         playerAnimator.Update(delta);
         room.Tick(delta, ringBell);
         foreach (var (id, animator) in animators) { animator.Update(delta); frames[id] = animator.FrameIndex; }
+    }
+
+    private void UpdateVisitorPlacement()
+    {
+        if (CommonVisitor is null) return;
+        placements[commonVisitorIndex] = placements[commonVisitorIndex] with { X = CommonVisitor.X, Y = CommonVisitor.Y };
+        obstacles[commonVisitorIndex + 1] = ShopRoomLayout.NpcFootprint(placements[commonVisitorIndex]);
     }
 
     public void Dispose()

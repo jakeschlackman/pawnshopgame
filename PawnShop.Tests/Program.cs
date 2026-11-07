@@ -6,6 +6,12 @@ if (args.Length > 0 && args[0] == "--assets") return PlayerAssets.Run(args[1..],
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
+    ("Common shopper enters with synchronized walk/settle frames and cannot cross the player", CommonNpcRoomTests.Entrance),
+    ("Room visitor replacement preserves dialogue, player state and session lifecycle", CommonNpcRoomTests.RoomLifecycle),
+    ("Common shoppers reproduce seeded appearances and preserve independent identity", CommonNpcTests.Generation),
+    ("Common NPC migration preserves bytes, pose alignment, occlusion and West mirroring", CommonNpcTests.FramesAndMigration),
+    ("New common NPC outfits, hair and hats work through data without code changes", CommonNpcTests.ExtensibleContent),
+    ("Common NPC content rejects invalid assets, fits, compatibility and metadata", CommonNpcTests.InvalidContent),
     ("Offline player assets preserve pixels and reject invalid sources, attire and metadata", PlayerAssetTests.Run),
     ("Title has no session; Continue explains and rejects activation", RegressionTests.Title),
     ("Menu wraps, owns its items and separates navigation from activation", RegressionTests.Menus),

@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Phase 4 — Equipment fit review</title>
+<title>Shop customer equipment fit review</title>
 <style>
 body{font:16px system-ui;background:#20282b;color:#eef4ec;margin:24px;max-width:1200px}
 h1{font-size:26px}a{color:#9ddbd0}fieldset{border:0;padding:0;margin:16px 0}
@@ -11,32 +11,45 @@ figure{margin:0;padding:12px;background:#303b3d;border-radius:8px}figcaption{mar
 canvas{display:block;image-rendering:pixelated;background:repeating-conic-gradient(#394448 0 25%,#455257 0 50%) 0/12px 12px}
 small{display:block;color:#bac7c9}section{margin:24px 0}.contact{overflow-x:auto}button{font:inherit}output{margin-left:12px}
 </style>
-<h1>Phase 4 · Brown leather work boots</h1>
-<p><strong>Boots · South walking accepted</strong>: separate male/female layers fitted
-to all eight accepted walking poses. Check toe lift, sole contact and jeans hems
-through the loop, with or without the other equipment. Standing boots are accepted;
-North and East/West boot fits follow this checkpoint.</p>
+<h1>Shop customers · Brown leather work boots</h1>
+<p>These modular bodies, hair and clothes are intended for procedurally varied
+NPCs who visit the shop to buy and sell. The main player and notable characters
+will use a separate design strategy. This page reviews artwork; customer generation
+and runtime integration are not implemented here.</p>
+<p><strong>Boots · East/West standing, walking and settling · accepted</strong>:
+separate male/female layers follow the exact accepted side poses. Check toe and
+heel shape, raised feet, jeans hems and Standing ↔ walking transitions. West
+mirrors the complete East composition. South and North boots remain accepted.</p>
 <p>The accepted mask/hair motion panels below still support all four directions
 and side transitions. West mirrors the complete East composition.</p>
 <p>The jacket is accepted in all four directions and side transitions. Its review
 panels remain below. All compositions preserve the original body; object images
 are design references, not pasted or scaled equipment.</p>
 <fieldset id="controls" disabled>
-<label>Review direction <select id="direction"><option value="north">North · handle-only wrench correction</option><option value="south" selected>South · accepted equipment</option><option value="east">East · accepted equipment</option><option value="west">West · mirrored equipment</option></select></label>
+<label>Review direction <select id="direction"><option value="north">North · accepted boots</option><option value="south">South · accepted equipment</option><option value="east" selected>East · boots accepted</option><option value="west">West · mirrored boots accepted</option></select></label>
 <label>Selected direction motion <select id="motion"><option value="walk">Walking loop</option><option value="transition">Standing ↔ walking</option></select></label>
 <label>Full-body scale <select id="scale"><option value="1">1×</option><option value="2">2×</option><option value="4" selected>4×</option></select></label>
 <label><input id="equipped" type="checkbox" checked>Jacket on in composition views</label>
 <label><input id="helmet" type="checkbox" checked>Mask on in equipment panels</label>
 <label><input id="hair" type="checkbox" checked>Short brown hair in equipment panels</label>
-<label><input id="wrench" type="checkbox" checked>Wrench on in wrench, jeans and boot panels</label>
+<label><input id="wrench" type="checkbox">Optional legacy wrench reference in equipment panels</label>
 <label><input id="jeans" type="checkbox" checked>Jeans on in jeans and boot panels</label>
-<label><input id="boots" type="checkbox" checked>Boots on in South boot panels</label>
+<label><input id="boots" type="checkbox" checked>Boots on in boot panels</label>
 <p><button id="play" type="button">Pause</button>
 <button id="next" type="button">Next frame</button>
 <label>Review frame <input id="frame" type="range" min="0" max="7" value="0"></label>
 <output id="frameLabel">1 / 8 · 100 ms per frame</output></p>
 </fieldset>
 <p id="status" role="status">Loading local review PNGs…</p>
+<section id="bootsEastSection">
+<h2>Brown leather work boots · East/West standing, walking and settling · accepted</h2>
+<div id="bootsEastBodies"></div>
+</section>
+<section id="bootsNorthSection">
+<h2>Brown leather work boots · North standing and walking · accepted</h2>
+<p>The North wrench handle-only correction retains its separate pending review.</p>
+<div id="bootsNorthBodies"></div>
+</section>
 <section id="bootsWalkSection">
 <h2>Brown leather work boots · South walking · accepted</h2>
 <div id="bootsWalkBodies"></div>
@@ -74,9 +87,11 @@ are design references, not pasted or scaled equipment.</p>
 South/North standing and walking mask/hair combinations are accepted.
 East/West standing, walking and settling combinations are accepted for both bodies.
 Wrench fits in all four directions and side settling are accepted. Jeans currently
-cover accepted standing/walking in all four directions and side settling. North wrench visibility is corrected to handle only. South-standing and South-walking boots are accepted. North boots are the next checkpoint, followed by side boots and backpacks.
+cover accepted standing/walking in all four directions and side settling. North wrench visibility is corrected to handle only and awaits separate approval. South and North boots are accepted. East/West boots and side settling are accepted; backpacks were skipped. Approved assets now also live in PawnShop.Characters/Npcs/Common/Assets; the seeded appearance generator is implemented and a common shopper now enters the game room from the right. The in-game entrance example is approved.
 The raw fitted sources are retained for provenance; their generated body pixels are not used.</p>
-<p><a href="../docs/ReviewAssets/BootsWalkSouth/review.json">South-walking boot sources and checks</a> ·
+<p><a href="../docs/ReviewAssets/BootsEast/review.json">Side boot sources, settling and fit checks</a> ·
+<a href="../docs/ReviewAssets/BootsNorth/review.json">North boot sources and fit checks</a> ·
+<a href="../docs/ReviewAssets/BootsWalkSouth/review.json">South-walking boot sources and checks</a> ·
 <a href="../docs/ReviewAssets/BootsPilot/review.json">Boot designs, fitted sources and checks</a> ·
 <a href="../docs/ReviewAssets/JeansEast/review.json">East/West jeans sources and fit checks</a> ·
 <a href="../docs/ReviewAssets/JeansNorth/review.json">North jeans sources and fit checks</a> ·
@@ -107,7 +122,7 @@ const helmetWalkLayers={south:{},north:{},east:{}},helmetWalkHeadings={},helmetW
 const hairLayers={south:{},north:{},east:{}};
 const wrenchLayers={},wrenchWalkLayers={south:{},north:{},east:{}},wrenchWalkHeadings={};let wrenchObject;
 const jeansImages={},jeansWalkLayers={},jeansNorthLayers={},jeansEastLayers={};
-const bootsImages={},bootsWalkLayers={};
+const bootsImages={},bootsWalkLayers={},bootsNorthLayers={},bootsEastLayers={};
 const transitionColumns=[0,0,0,0,0,0,0,0,9,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,9,0];
 let frame=0,playing=true,lastTime=null,elapsed=0;
 function sideView(){return ['east','west'].includes(document.getElementById('direction').value);}
@@ -169,6 +184,8 @@ function redraw(){
   const direction=document.getElementById('direction').value;
   document.getElementById('jeansWalkSection').hidden=direction!=='south';
   document.getElementById('bootsWalkSection').hidden=direction!=='south';
+  document.getElementById('bootsNorthSection').hidden=direction!=='north';
+  document.getElementById('bootsEastSection').hidden=!sideView();
   document.getElementById('jeansNorthSection').hidden=direction!=='north';
   document.getElementById('jeansEastSection').hidden=!sideView();
   for(const body of ['male','female'])wrenchWalkHeadings[body].textContent=(body==='male'?'Male':'Female')+' · '+direction+' wrench · '+(direction==='north'?'handle-only correction · review pending':'accepted');
@@ -184,7 +201,41 @@ function redraw(){
     const scale=fixedScale??Number(document.getElementById('scale').value),context=canvas.getContext('2d');
     canvas.style.width=canvas.width*scale+'px';canvas.style.height=canvas.height*scale+'px';
     context.clearRect(0,0,canvas.width,canvas.height);context.imageSmoothingEnabled=false;
-    if(kind.startsWith('bootsWalk')){
+    if(kind.startsWith('bootsEast')){
+      const columns=region[2]===384?[1,2,3,4,5,6,7,8]:[pose==='standing'?0:steps[frame]];
+      const crop=region[2]===384?[0,0,48,64]:region;
+      for(const [index,column] of columns.entries()){
+        const offset=region[2]===384?index*48:0;
+        const boots=document.getElementById('boots').checked?bootsEastLayers[body]:null;
+        const pants=document.getElementById('jeans').checked?jeansEastLayers[body]:null;
+        if(kind==='bootsEastLayer')drawPose(context,bootsEastLayers[body],column,crop,mirror,offset);
+        else if(kind==='bootsEastBody'||kind==='bootsEastJeans'){
+          drawPose(context,walkImages.east[body].base,column,crop,mirror,offset);
+          if(boots)drawPose(context,boots,column,crop,mirror,offset);
+          if(kind==='bootsEastJeans'&&pants)drawPose(context,pants,column,crop,mirror,offset);
+        }else{
+          drawWalkingMask(context,body,column,crop,offset,'helmetWalkComposite','east',column===0,mirror,pants,column,boots,column);
+          if(document.getElementById('wrench').checked)drawPose(context,wrenchWalkLayers.east[body].layer,column,crop,mirror,offset);
+        }
+      }
+    }else if(kind.startsWith('bootsNorth')){
+      const columns=region[2]===384?[1,2,3,4,5,6,7,8]:[pose==='standing'?0:frame%8+1];
+      const crop=region[2]===384?[0,0,48,64]:region;
+      for(const [index,column] of columns.entries()){
+        const offset=region[2]===384?index*48:0;
+        const boots=document.getElementById('boots').checked?bootsNorthLayers[body]:null;
+        const pants=document.getElementById('jeans').checked?jeansNorthLayers[body]:null;
+        if(kind==='bootsNorthLayer')drawPose(context,bootsNorthLayers[body],column,crop,false,offset);
+        else if(kind==='bootsNorthBody'||kind==='bootsNorthJeans'){
+          drawPose(context,walkImages.north[body].base,column,crop,false,offset);
+          if(boots)drawPose(context,boots,column,crop,false,offset);
+          if(kind==='bootsNorthJeans'&&pants)drawPose(context,pants,column,crop,false,offset);
+        }else{
+          drawWalkingMask(context,body,column,crop,offset,'helmetWalkComposite','north',column===0,false,pants,column,boots,column);
+          if(document.getElementById('wrench').checked)drawPose(context,wrenchWalkLayers.north[body].layer,column,crop,false,offset);
+        }
+      }
+    }else if(kind.startsWith('bootsWalk')){
       const columns=region[2]===384?[0,1,2,3,4,5,6,7]:[frame%8];
       const crop=region[2]===384?[0,0,48,64]:region;
       for(const [index,column] of columns.entries()){
@@ -500,8 +551,40 @@ async function start(){
     const bootWalkContact=document.createElement('div');bootWalkContact.className='contact';bootWalkSection.append(bootWalkContact);
     add(bootWalkContact,body,'bootsWalkComposite','All eight poses · left to right',[0,0,384,64],2);
     document.getElementById('bootsWalkBodies').append(bootWalkSection);
+    bootsNorthLayers[body]=await load('../docs/ReviewAssets/BootsNorth/'+body+'-layer.png',432,64);
+    const bootNorthSection=document.createElement('section'),bootNorthHeading=document.createElement('h2'),bootNorthGrid=document.createElement('div');
+    bootNorthHeading.textContent=(body==='male'?'Male':'Female')+' · North boots · accepted';
+    bootNorthGrid.className='grid';bootNorthSection.append(bootNorthHeading,bootNorthGrid);
+    add(bootNorthGrid,body,'bootsNorthComposite','Standing comparison',[0,0,48,64],null,false,'standing');
+    add(bootNorthGrid,body,'bootsNorthLayer','Standing boots only',[0,0,48,64],null,false,'standing');
+    add(bootNorthGrid,body,'bootsNorthComposite','Standing heels and jeans hems · 12×',[13,43,23,18],12,false,'standing');
+    add(bootNorthGrid,body,'bootsNorthComposite','Boots + selected equipment, shared frame clock');
+    add(bootNorthGrid,body,'bootsNorthBody','Boots over unchanged walking body');
+    add(bootNorthGrid,body,'bootsNorthJeans','Jeans hems over walking boots');
+    add(bootNorthGrid,body,'bootsNorthLayer','Matching rear boot pose');
+    add(bootNorthGrid,body,'bootsNorthComposite','Native size',[0,0,48,64],1);
+    add(bootNorthGrid,body,'bootsNorthComposite','Heel lift, soles and jeans hems · 12×',[13,43,23,18],12);
+    const bootNorthContact=document.createElement('div');bootNorthContact.className='contact';bootNorthSection.append(bootNorthContact);
+    add(bootNorthContact,body,'bootsNorthComposite','All eight walking poses · left to right',[0,0,384,64],2);
+    document.getElementById('bootsNorthBodies').append(bootNorthSection);
+    bootsEastLayers[body]=await load('../docs/ReviewAssets/BootsEast/'+body+'-layer.png',480,64);
+    const bootEastSection=document.createElement('section'),bootEastHeading=document.createElement('h2'),bootEastGrid=document.createElement('div');
+    bootEastHeading.textContent=(body==='male'?'Male':'Female')+' · East / mirrored West boots · accepted';
+    bootEastGrid.className='grid';bootEastSection.append(bootEastHeading,bootEastGrid);
+    add(bootEastGrid,body,'bootsEastComposite','Standing comparison',[0,0,48,64],null,false,'standing');
+    add(bootEastGrid,body,'bootsEastLayer','Standing boots only',[0,0,48,64],null,false,'standing');
+    add(bootEastGrid,body,'bootsEastComposite','Standing toes, soles and hems · 12×',[12,43,24,18],12,false,'standing');
+    add(bootEastGrid,body,'bootsEastComposite','Selected direction · walking / standing ↔ walking');
+    add(bootEastGrid,body,'bootsEastBody','Boots over unchanged side body');
+    add(bootEastGrid,body,'bootsEastJeans','Jeans hems over side boots');
+    add(bootEastGrid,body,'bootsEastLayer','Matching boot pose, mirrored with the body');
+    add(bootEastGrid,body,'bootsEastComposite','Native size',[0,0,48,64],1);
+    add(bootEastGrid,body,'bootsEastComposite','Foot lift, soles and jeans hems · 12×',[12,43,24,18],12);
+    const bootEastContact=document.createElement('div');bootEastContact.className='contact';bootEastSection.append(bootEastContact);
+    add(bootEastContact,body,'bootsEastComposite','All eight walking poses · chronological order',[0,0,384,64],2);
+    document.getElementById('bootsEastBodies').append(bootEastSection);
   }
-  document.getElementById('controls').disabled=false;document.getElementById('motion').disabled=!sideView();document.getElementById('status').textContent='Brown work boots · both bodies · South standing and walking accepted · next: North boots';redraw();requestAnimationFrame(tick);
+  document.getElementById('controls').disabled=false;document.getElementById('motion').disabled=!sideView();document.getElementById('status').textContent='Brown work boots · both bodies · East/West and settling accepted · South/North accepted';redraw();requestAnimationFrame(tick);
 }
 function tick(time){
   if(lastTime!==null&&playing){

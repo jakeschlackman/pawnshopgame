@@ -61,6 +61,7 @@ internal static partial class RegressionTests
         ReturnPrompt(app); Discard(app);
         Begin(app);
         Check(app.PlayerFrame == 0);
+        app.Update(default, TimeSpan.FromSeconds(3)); // Wait for the visitor's entrance before testing the fixed approach.
         app.Update(new(MoveX: 1), TimeSpan.FromMilliseconds(1300));
         Check(app.SelectedNpcId == "visitor" && app.PlayerFrame == 1);
         app.Update(new(Interact: true), TimeSpan.FromSeconds(1));

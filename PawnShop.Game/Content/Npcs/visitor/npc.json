@@ -9,10 +9,10 @@
     "idleAnimation": "Idle"
   },
   "interactionBounds": {
-    "x": -18,
-    "y": -40,
-    "width": 36,
-    "height": 58
+    "x": -24,
+    "y": -58,
+    "width": 48,
+    "height": 76
   },
   "conversations": "conversations.json"
 }

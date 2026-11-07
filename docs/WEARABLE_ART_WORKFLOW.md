@@ -1,5 +1,20 @@
 # Wearable art workflow
 
+**Current ownership decision:** this modular body/hair/clothing library is for
+common NPC townies and shoppers, with its approved destination at
+`PawnShop.Characters/Npcs/Common`. Main-player and notable-character art is
+separate. Existing player-prefixed paths below are still the actual source paths;
+they have not been moved or deleted. Approved runtime layers now have byte-identical
+copies under `Common/Assets`, with a source mapping in `Assets/migration.json`.
+The body-specific fitting and approval rules continue
+to apply. Backpacks are skipped; held-item art is optional preserved evidence.
+See the [folder walkthrough](VERIFICATION_EQUIPMENT_PILOT.md#common-npc-folder-walkthrough)
+for the approved layout and preservation constraints. The seeded appearance
+generator and data-driven catalog now exist. Use the
+[common NPC authoring guide](../PawnShop.Characters/Npcs/Common/AUTHORING.md)
+when adding outfits, hair or hats; existing source recipes below remain historical
+authoring evidence, not the destination for new common-NPC runtime content.
+
 Approved from the male/female teal work-shirt south-facing fit on 2026-11-05.
 This is an authoring and acceptance process. The game loads the chosen standalone
 player base for selection; the accepted Phase 2 room uses diagnostic layered

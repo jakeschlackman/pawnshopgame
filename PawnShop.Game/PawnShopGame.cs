@@ -85,7 +85,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         }
         var audioSettings = flow.Screen == Screen.Options ? flow.Options.Presentation : flow.Options.Current;
         audio.SetVolume(audioSettings.Gain(previewChannel, IsActive));
-        screens?.SynchronizeRoom(flow.Room, flow.Npcs);
+        screens?.SynchronizeRoom(flow.Room, flow.Npcs, flow.CommonVisitor);
         if (flow.ExitRequested) Exit();
         base.Update(gameTime);
     }

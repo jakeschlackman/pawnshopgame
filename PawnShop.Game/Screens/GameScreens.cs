@@ -32,13 +32,13 @@ internal sealed class GameScreens : IDisposable
         }
     }
 
-    public void SynchronizeRoom(RoomView? view, IReadOnlyList<PlacedNpc> npcs)
+    public void SynchronizeRoom(RoomView? view, IReadOnlyList<PlacedNpc> npcs, CommonNpcRoomVisitor? visitor)
     {
         Guid? id = view?.SessionId;
         if (room?.SessionId == id) return;
         room?.Dispose();
         room = null;
-        if (id is { } sessionId) room = new RoomScreen(device, sessionId, npcs, players);
+        if (id is { } sessionId) room = new RoomScreen(device, sessionId, npcs, players, visitor);
     }
 
     public void Draw(PixelRenderer renderer, ApplicationFlow flow)

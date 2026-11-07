@@ -391,7 +391,16 @@ Earlier tile sizes, body canvases, sprite-sheet counts, and display-resolution s
 
 Keep original source art, production sprite sheets, and generated build content separate. Validate transparent padding, frame rectangles, duration, foot/origin positions, facing, attachment points, and rider occlusion. Generated images are concept inputs until those checks pass.
 
-**Approved player customization art direction:** use bald underwear bases with
+**Current destination of modular human art:** the approved body, hair and clothing
+work is for ordinary, procedurally varied townies and shop visitors who buy and
+sell. Their home is `PawnShop.Characters/Npcs/Common`; the main player and notable
+NPCs will use a separate, more distinct art strategy. Held items are optional and
+backpacks were skipped. Seeded, data-driven appearance generation is implemented
+for this library; shopper spawning, browsing and trade behavior remain future
+work. The player demo
+described below still uses its existing assets pending a later migration.
+
+**Historical player customization art direction:** use bald underwear bases with
 separate clothing, armor, hair and facial-hair artwork. The current player source
 frames are 48×64 with 48–52 visible body pixels (50 in the reference bases),
 independent of world size. Clothing that fits differently uses separate male and

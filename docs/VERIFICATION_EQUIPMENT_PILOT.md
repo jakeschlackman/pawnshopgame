@@ -2,52 +2,232 @@
 
 ## Resume checkpoint — 2026-11-07
 
-The user accepted **both South-walking brown leather work boot fits** with
-"perfect" and asked to resume in a later chat. No further generation is running.
-**Next unstarted step: North standing and eight walking boot poses, separately
-for male and female.** Do only that checkpoint, present the updated preview,
-and await visual approval. Then fit East/mirrored West with side settling;
-backpacks follow footwear. Do not restart the audit or regenerate accepted art.
+**Current checkpoint: the generated common shopper now replaces the bundled
+room visitor and walks onto the screen from the right.** Its appearance is
+generated once per New Game. At 80 logical pixels/second it walks from x=672 to
+the existing placement (479,210), then uses walk-1, settling and standing. The
+player is unchanged. All layers share the West mirror and 100 ms walk clock.
+The approved Common layout, asset promotion and seeded generator remain in place. The user approved the folder layout
+("I like this") and authorized implementation ("go ahead"). A subsequent request
+requires adding many outfits, hairstyles and hats without generator code changes;
+the catalog and regression tests now support that workflow.
 
+- Home: `PawnShop.Characters/Npcs/Common`. Fifty-two approved PNGs are promoted as
+  byte-identical copies into `Assets/Bases`, `Assets/Hair` and `Assets/Clothing`.
+  `Assets/migration.json` records each original path, destination, SHA256 and
+  approval record. Original sources, all review art/HTML, player references and
+  Sprout remain preserved; no source cleanup or destructive move was performed.
+- `Assets/catalog.json` declares native texture layouts, per-body parts, item
+  slots, hair/headgear compatibility and body occlusion. New approved parts/items
+  are data-only additions. Seeded selection uses actual compatible fits and
+  optional hair/headgear; clothing slots stay filled. All four facings resolve
+  from the accepted S/N/E poses, with a single West mirror and side settling.
+- `Generation/CommonNpcGenerator` returns caller-supplied stable IDs, seed,
+  generator/content versions and realized appearances. It is graphics-free and
+  has no PixelLab/network dependency. This is an appearance generator, not
+  shopper spawning, browsing, trading, dialogue or save-system integration.
+- Game packages the catalog and PNGs into `Content/CommonNpcs`. The bundled
+  visitor now uses room-owned layered textures; originals are unchanged. The
+  existing visitor identity, dialogue and destination are retained. Its live
+  placement drives rendering, click bounds, collision and talking range. It waits
+  if the player blocks its entrance and resumes when clear. Pause/dialogue freeze
+  both position and animation. Returning to title releases the room graphics;
+  another New Game creates one new shopper and restarts the entrance. Injected
+  authored NPC catalogs keep their own sprites unless common art is supplied.
+- Read [the common NPC authoring guide](../PawnShop.Characters/Npcs/Common/AUTHORING.md)
+  for actual outfit/hair/hat examples and the existing-runner validation command:
+  `dotnet run --project PawnShop.Tests --no-build -- --assets common PawnShop.Characters/Npcs/Common/Assets`.
+  The current five item definitions yield eight appearances; no extra outfit
+  artwork was generated. Backpacks remain skipped and held items remain optional.
+- Art is for ordinary townies and shop visitors. Main-player and notable-NPC art
+  remain a separate strategy. The user approved both bodies' South/North boots
+  and East/mirrored-West standing, walking and settling; North's optional wrench
+  correction still has its independent pending review.
+- Verification: baseline build and 51 tests passed; the implementation build has
+  zero warnings/errors and 55 tests pass. Tests cover deterministic identities
+  and appearances, data-only outfit/hair/hat additions, compatibility filtering,
+  malformed content, source/output hashes, native poses, occlusion and mirroring.
+  The asset checker passes. Debug publish output was checked separately.
+  The later room entrance slice passes 57 tests and is approved by the user
+  ("ok we're good, youre good to clean up"). No agent game/browser launch or
+  visual inspection was performed.
+- All 725 existing non-generated files were hashed before this implementation.
+  All 482 existing PNGs and Sprout remain byte-identical; earlier uncommitted work is
+  preserved. Nothing was committed or pushed.
+
+**Room example approved:** the user accepted the entrance example with
+"ok we're good, youre good to clean up" and authorized the cleanup below.
+Build passes with zero warnings/errors; all 57 headless tests pass, including
+entrance timing, obstacle sweep, moving-dialogue pause, click coverage, single
+placement and session restart. User approval is separate from those checks; no
+agent game/browser launch or screenshot inspection was performed.
+
+**Next:** await the next feature or art instruction. No buying/selling AI or
+general population/arrival scheduling is implemented. The optional North wrench
+correction retains its separate review status.
+
+Authorized cleanup completed: removed seven ignored cache directories,
+252 files and 45,536,860 bytes (about 43.4 MiB):
+
+- `.cache/BootsEastInputVerification` and `.cache/BootsNorthInputVerification`
+- `.cache/common-npc-publish`
+- `.cache/phase1-packed` and `.cache/phase1-review`
+- `.cache/walk-validator-7a50941b04c34dd0b41ced2a1aae57a7`
+- `.cache/walk-validator-eadcbee66bff4de38cd4d2486c5dae73`
+
+Each resolved path was checked to remain inside the repository cache, be ignored
+and untracked, and contain no links before deletion. No source/review artwork,
+provenance, archives, code or uncommitted work was removed. The tools folder keeps
+the walk-review template used by the C# authoring runner, NPC/dialogue templates,
+the frozen Sprout helper and useful body/equipment review pages. Retained cache
+archives may contain unique historical/rejected evidence. The deleted publish
+output can be regenerated using the command below.
+
+Commands run successfully for this implementation:
+
+```text
+dotnet restore PawnShopSimulator.sln
+dotnet build PawnShopSimulator.sln --no-restore
+dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build
+dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build -- --assets common PawnShop.Characters/Npcs/Common/Assets
+dotnet publish PawnShop.Game/PawnShop.Game.csproj --no-build --no-restore -c Debug -o .cache/common-npc-publish
+git diff --check
+```
+
+Publish verification compared all 52 PNG hashes and the catalog against the
+Characters-owned sources. The private migration record is excluded from runtime
+packaging. No new packages, projects, scripts or generation services were added.
+
+### Accepted boot review evidence (before Common migration)
+
+The following records the preceding review-only slice and its approval history.
+Its old integration restrictions are superseded by the authorized implementation
+above; source artwork and provenance remain preserved.
+
+- New assets: ReviewAssets/BootsEast/review.json plus ten PNGs: two raw fitted
+  sources, two boot layers and six body/jeans/equipment comparison sheets.
+  Each sheet is 480x64: standing column 0, walk columns 1–8, settling column 9.
+  Walking uses 100 ms frames; the existing 28-step transition includes settling.
+  West mirrors the whole East composition; there is no independently drawn West.
+- PixelLab outfit transfer used each body's own accepted South boot reference
+  and exact ten East poses. Two jobs charged 20 generations total, with no paid
+  retries or independent animation generation. Requests, job IDs, source/export
+  URLs, hashes, masks, palette maps and 29 native boundary/color corrections
+  (17 male, 12 female) are recorded in the manifest. Original bodies and motion
+  stay unchanged. Saved equipped comparisons omit the optional wrench.
+- The existing HTML opens on East, with separate standing comparisons, walking
+  and transition playback, boot-only views, native/enlarged views, foot crops
+  and eight-pose contacts. Select West to review the mirrored result. All six
+  equipment toggles remain independent; wrench starts off. All boot panels are
+  now marked accepted. Numerical checks do not approve appearance or animation; no browser
+  or game was launched, and no agent visual inspection was performed.
 - Approved: human cardinal walks and side settling; teal jacket, charcoal welding
   mask, separate short hair and wrench fits; richer dark-blue jeans in all four
-  facings/settling; brown boots South standing and South walking on both bodies.
+  facings/settling; brown boots standing/walking in all four facings and side
+  settling on both bodies. North approval is recorded in BootsNorth/review.json;
+  side approval is recorded in BootsEast/review.json. All boot PNGs are unchanged.
 - The North wrench handle-only occlusion correction still has its own pending
-  visual record. Keep that correction: only North hides the wrench head;
-  South/East/West retain it. Do not infer a separate approval from the boot review.
-- Work remains in `docs/ReviewAssets` and `tools/player-equipment-review.html`.
+  visual record. Preserve it: only North hides the wrench head; South/East/West
+  retain it. Boot approval does not approve that optional held-item correction.
+- Work remains in docs/ReviewAssets and tools/player-equipment-review.html.
   No production C# or folder moves before the user's folder walkthrough.
-  Future character logic belongs in `PawnShop.Characters`; shared item data in
-  `PawnShop.Core/Items`. Write item-type Markdown guides during production
+  Future character logic belongs in PawnShop.Characters; shared item data in
+  PawnShop.Core/Items. Write item-type Markdown guides during production
   implementation, using actual agreed paths and working examples.
-- Use PixelLab and each body's own approved reference. Fit to exact existing
-  poses using outfit transfer, then extract equipment only over unchanged bodies.
+- Use PixelLab and each body's own approved reference. Fit exact existing poses
+  using outfit transfer, then extract equipment only over unchanged bodies.
   Do not independently animate footwear or modify the gait. Sprout is frozen.
   Keep 48x64 frames, pivot (24,58), eight walk frames at 100 ms, and each foot's
-  actual per-frame contact/lift. West mirrors the whole East composition.
-- Boots draw under jeans, then jacket/hair/mask/wrench. Keep hair separate and
-  visible through transparent headgear pixels. No new PowerShell scripts,
-  projects, orchestration or runtime generation infrastructure.
-- Standing boot references, source URLs, job IDs, palette and hashes:
-  `ReviewAssets/BootsPilot/review.json`. Accepted South-walk sources, requests,
-  masks and exact corrections: `ReviewAssets/BootsWalkSouth/review.json`.
-  Reuse North body/equipment layouts from `WorkJacketNorth`, `JeansNorth`,
-  `WeldingHelmetNorth` and `WrenchNorth` manifests; verify actual filenames.
-  Prior corrections are documented below and in the associated manifests.
-- Last checks: 221 PNG hash records matched; all 211 earlier assets unchanged.
-  Sixteen boot poses passed coverage/composition checks over 49,152 native
-  pixels. Preview: 73 images, 180 views, 64 loadouts; shared frames, layer order,
-  crops, contact strips, West mirroring and settling passed. Visual acceptance
-  came from the user; the agent did not launch/control the game or browser.
-- The repository has extensive pre-existing uncommitted/untracked work. Preserve
-  it. Nothing was committed or pushed. Inspect the working tree on resumption.
-  Session-only tool stores and inline test commands are not durable; reconstruct
-  inputs from checked-in/on-disk PNGs, JSON and HTML, not conversation memory.
+  actual per-frame contact/lift. Boots draw under jeans, then jacket/hair/mask
+  and optional wrench. Keep hair separate and visible through headgear pixels.
+  No new PowerShell scripts, projects or runtime generation infrastructure.
+- Reference manifests: BootsPilot and BootsWalkSouth for approved South boots;
+  BootsNorth for accepted North; WorkJacketEast, JeansEast, HairMaskEast,
+  WeldingHelmetEast and WrenchEast for exact side layouts. Side body frame URLs
+  and standing-reference URLs are recorded in BootsEast/review.json. Reconstruct
+  inputs from on-disk PNGs, JSON and HTML, not session-only tool stores.
+- Latest nonvisual checks: all 20 remote body poses match local originals.
+  Source/mask checks cover 61,440 native pixels; all 771 recorded near/far foot
+  pixels are covered. Eight binary-alpha derivative sheets match the exact
+  expected compositions (245,760 pixels). All 210 PNG records in the earlier
+  review.json manifests match; ten new PNG hashes are recorded. All earlier
+  artwork also matches the full repository snapshot taken before this slice.
+- Headless preview checks: 77 images, 220 views, 6,656 direction/motion/loadout
+  cases across all 64 combinations, 133,120 side-view checks and 1,331,200 prior
+  view comparisons pass. Shared frame columns, layer order, contacts, crops,
+  complete-character West mirroring, 100 ms clock, controls, integer scales and
+  side settling pass. C# build/tests were not run for this review-assets-only
+  change. The subsequent user response "looks good" supplies side-boot visual
+  acceptance; approval metadata and preview labels were updated without art edits.
+- The current slice began with the North work uncommitted. All 713 existing
+  non-generated files were hashed before editing. Only this checkpoint, the
+  existing HTML and North approval metadata were edited; East review assets
+  were added. Sprout, production code and all earlier artwork are byte-identical.
+  Nothing was committed, pushed or moved. Preserve all uncommitted work.
+
+### Common NPC folder walkthrough
+
+**Approved root:** `PawnShop.Characters/Npcs/Common`, namespace
+`PawnShop.Characters.Npcs.Common`. Common means ordinary generated townies and
+shop visitors, separate from authored notable NPCs. This records the user's
+destination decision and the subsequent layout approval ("I like this").
+The user then authorized implementation; the listed folders now contain the
+assets and generator described at the top of this checkpoint.
+
+Approved contents for the migration/implementation slices:
+
+| Destination under Common | Purpose | Current evidence/source |
+| --- | --- | --- |
+| `Assets/Bases` | Approved body poses and animation metadata, separate male/female art | Historical `PawnShop.Game/Content/Player/Bases`; corrected accepted review poses/layouts, including `WorkJacketNorth` and `WorkJacketEast` manifests |
+| `Assets/Hair` | Separate body/direction-specific hair layers and mask compatibility | `docs/ReviewAssets/HairMaskPilot` and `HairMaskEast` |
+| `Assets/Clothing` | Approved jackets, jeans, boots and optional headgear; body-specific fit metadata | Corresponding `WorkJacket*`, `Jeans*`, `Boots*` and `WeldingHelmet*` review manifests |
+| `Generation` | Seeded compatible appearance selection with caller-owned instance IDs | Implemented `CommonNpcGenerator`; regression-tested data-only outfit, hair and hat additions |
+
+These child folders are implemented. Clothing subfolders use item names rather
+than review-phase names.
+Do not blanket-copy every historical image into the runtime library: accepted
+layers, current corrected poses and manifests identify the actual candidates.
+The older standalone teal shirt has South-standing-only approval. Generated
+shoppers requiring walking cannot choose it as an all-direction outfit.
+
+Original PixelLab sources, prompt/job provenance, rejected revisions, review
+composites and the working HTML remain preserved in their existing authoring
+locations during migration. Held-item art is optional and remains preserved;
+backpacks are excluded. Sprout remains frozen. No notable-NPC folder rename or
+main-player redesign is part of this walkthrough.
+
+Current runtime constraints found in the repository:
+
+- `PlayerSpriteCatalog` and the Game project still load/copy the two canonical
+  base PNGs from `Content/Player/Bases`. Moving them without updating their
+  consumers would break selection. Keep those references working until an
+  explicit replacement/migration is implemented.
+- `Npcs/NpcDefinition` describes authored NPC identity and a single sprite.
+  `Game/Bootstrap/NpcContentCatalog` resolves authored NPC folders and unique
+  placements; it is not a procedural population generator. Keep the shared
+  definition at `Npcs`, and add common-specific logic under `Common` as needed.
+- The approved asset source belongs to Characters. Game packages selected
+  files into build/publish content and continues to own
+  texture loading and rendering. Do not introduce a Characters-to-Game reference.
+- Appearance generation selects approved compatible parts using seeded randomness
+  and gives each realized shopper a stable instance identity and appearance.
+  It does not invoke PixelLab at runtime. Buying/selling uses Shop/Core domain
+  operations; Game composes those with the generated characters.
+
+Completed implementation: promoted the approved runtime library with explicit
+source-to-destination records, preserved existing consumers and review references,
+and added a bounded, headless-testable common-NPC appearance generator. Arrival
+schedules, browsing AI, transactions and a full
+town simulation are separate work; none is claimed complete by this walkthrough.
+
+Walkthrough verification originally inspected projects, asset locations, player
+loading and authored NPC definitions/catalog. Implementation verification and
+remaining scene integration are recorded in the current checkpoint above.
 
 Start by following AGENTS.md startup reading, then this checkpoint and the linked
-manifests. This section supersedes older pending-review statements below for the
-accepted South boot fits. Pause here until the user resumes; this record does
-not authorize continuing generation while they are away.
+manifests. This section supersedes older main-player intentions and next-step or
+pending-review statements below. The requested migration and appearance-generator
+slice is complete; subsequent scene behavior and new art are separate slices.
 
 Status: Phase 4 started, not complete. User accepted the corrected male and
 existing female South-standing jacket fits with "great, next phase". A separate

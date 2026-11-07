@@ -3,6 +3,7 @@ using System.Drawing.Imaging;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text.Json.Nodes;
+using PawnShop.Characters.Npcs.Common;
 using PawnShop.Framework.Rendering;
 
 namespace PawnShop.Tests;
@@ -22,6 +23,12 @@ internal static partial class PlayerAssets
         {
             switch (args)
             {
+                case ["common", var root]:
+                    var catalog = CommonNpcCatalog.Load(root);
+                    foreach (string body in catalog.BodyIds)
+                        output.WriteLine($"{body}: " + string.Join("; ", new[] { "torso", "legs", "feet", "hair", "headgear" }
+                            .Select(slot => slot + "=" + string.Join(",", catalog.Choices(body, slot)))));
+                    break;
                 case ["bases", var root]: ValidateBases(root); break;
                 case ["wearable", var root]: ValidateStaticWearable(root); break;
                 case ["walk", var root]: ValidateWalk(root); break;
@@ -30,7 +37,7 @@ internal static partial class PlayerAssets
                 case ["review", var root, var destination]: Review(root, destination); break;
                 case ["import", var manifest, var sources, var destination]: Import(manifest, sources, destination); break;
                 default:
-                    output.WriteLine("Usage: --assets bases <root> | wearable <root> | walk <root> [attire.json]\n" +
+                    output.WriteLine("Usage: --assets common <assets-root> | bases <root> | wearable <root> | walk <root> [attire.json]\n" +
                         "       --assets pack <walk-root> <new-directory> | review <walk-root> <new-directory>\n" +
                         "       --assets import <walk-manifest.json> <download-directory> <new-directory>\n" +
                         "Validation is read-only. Outputs require a new directory. Import uses local exports and existing hashes; no network or promotion.");

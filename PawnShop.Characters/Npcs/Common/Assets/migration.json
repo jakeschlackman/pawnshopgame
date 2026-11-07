@@ -1,0 +1,325 @@
+{
+  "version": 1,
+  "method": "Byte-identical promotion copies; source/review and current player consumers preserved. No raster edits or repacking.",
+  "destination": "PawnShop.Characters/Npcs/Common/Assets",
+  "excluded": [
+    "Backpacks skipped by user",
+    "Held items optional and not needed by generator",
+    "Standalone teal shirt has South-standing-only approval",
+    "Raw fitted sources, rejected revisions and review composites remain in authoring locations"
+  ],
+  "files": [
+    {
+      "source": "PawnShop.Game/Content/Player/Bases/male/base.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/male/south-standing.png",
+      "sha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67",
+      "approvalRecord": "PawnShop.Game/Content/Player/Bases/base-manifest.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketWalkSouth/male-body.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/male/south-walking.png",
+      "sha256": "965C927E67AD24C8274CFA61FDFE36ADA469D930FC18645F489C39854A2B317D",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketNorth/male-body.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/male/north.png",
+      "sha256": "122A2C1DA12D05F5D96CE35F38E226161CA35D2C7CFEE770D23C17137D7EE005",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketEast/male-body.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/male/east.png",
+      "sha256": "B14A4D16B2343B67500C9F9843C6905C2E42357AF6B55597B723CD9BD946356B",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsPilot/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/male/south-standing.png",
+      "sha256": "25EF006ABCA6D26A3CF683D77412BE844A2CEEBABEAF22A0E6FE48D3EDBC3BEB",
+      "approvalRecord": "docs/ReviewAssets/BootsPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsWalkSouth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/male/south-walking.png",
+      "sha256": "7AB601DDCC4E78046C504D694C48EC307932AAC3754DE32CCFA48789420C50CC",
+      "approvalRecord": "docs/ReviewAssets/BootsWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsNorth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/male/north.png",
+      "sha256": "86659AC02B205DE01FA6B180EB937883F599022A4C0250FC4A38170BCA1BF31D",
+      "approvalRecord": "docs/ReviewAssets/BootsNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsEast/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/male/east.png",
+      "sha256": "7E11C9DF25B340F239A778A6D7B2B7C63C68C09D8616511FA20505D45B44F6FD",
+      "approvalRecord": "docs/ReviewAssets/BootsEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansPilot/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/male/south-standing.png",
+      "sha256": "B0D4FD198D151D5EC5D5115801F7E07D855F7097F6E43CD2037E7372C0E5E1AD",
+      "approvalRecord": "docs/ReviewAssets/JeansPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansWalkSouth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/male/south-walking.png",
+      "sha256": "B49A4168DC78D78338977876C6B1D02757A11341E1A498F55CCD2C299D840177",
+      "approvalRecord": "docs/ReviewAssets/JeansWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansNorth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/male/north.png",
+      "sha256": "AAFD8BED99085648FDC5E5A73D6F1D372952714DB982E57F3879C56035CD4FCC",
+      "approvalRecord": "docs/ReviewAssets/JeansNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansEast/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/male/east.png",
+      "sha256": "CD8DA0DAF5D5568B8A25CB2737C2100A9A3E4DC3A539AA85956D8418D1883A7C",
+      "approvalRecord": "docs/ReviewAssets/JeansEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketPilot/male-layer-teal-pockets.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/male/south-standing.png",
+      "sha256": "E9AAF23B04EA6B7F88F86C4FFE403CA8AB6EC743FCAEB7F24CEB75276B950773",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketWalkSouth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/male/south-walking.png",
+      "sha256": "0FD9FF611B847CEA1A461083C574DA2A0168A524B0AFE68C4047BED0AD6E59BA",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketNorth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/male/north.png",
+      "sha256": "0BDD9FD9F563BA3016FAE29EB8AFC303EC7924062379A653C2397C0DCBDA222B",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketEast/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/male/east.png",
+      "sha256": "E6DEA6C8F900FE056AEBBA7A9B762389905E5C560309C1713E301CE435C34765",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/male-south-hair.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/male/south.png",
+      "sha256": "1DFFF834346D4E8A9678A12D7F02330FCA3AEEB9893ADBA80CAE87655491E3DF",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/male-north-hair.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/male/north.png",
+      "sha256": "C1D0357916524C77BBBD75586E84ABD62EE00709B1CECA4A2DE9028F90CE3E0C",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskEast/male-hair.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/male/east.png",
+      "sha256": "6135FC5E4AAF5A165C497CB4BBBA0A24669179B2E13B3981694F1AB4019EA6C3",
+      "approvalRecord": "docs/ReviewAssets/HairMaskEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/male-south-hair-equipped.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/male/masked-south.png",
+      "sha256": "7DB6D3E44FB723249D6C6DA3BA83814C9A4E43597B95E1730A937F2CD931ECB7",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/male-north-hair-equipped.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/male/masked-north.png",
+      "sha256": "C1D0357916524C77BBBD75586E84ABD62EE00709B1CECA4A2DE9028F90CE3E0C",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskEast/male-hair-equipped.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/male/masked-east.png",
+      "sha256": "F144478C6C78154FA532D435255E02B7F22D76A5A16EEC0C3EDE788BA907B5A6",
+      "approvalRecord": "docs/ReviewAssets/HairMaskEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetCharcoal/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/male/south-standing.png",
+      "sha256": "E1ADC91431DEDD127210D492C6E54B8F3C43EF83A90EBB35DA85923C455DEABE",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetCharcoal/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetWalkSouth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/male/south-walking.png",
+      "sha256": "E9C5A6F0F907F8FE578DF9225BF53A542B71C33BCA417AD0BE2C4098008CF043",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetNorth/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/male/north.png",
+      "sha256": "0EF778F4A7AD7B214DE21AA7AF79E9236ECA1B5EADBD86BA048759A4D72C287A",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetEast/male-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/male/east.png",
+      "sha256": "09CD5510ACA399DB38A374170BE3C97BCA38D97194DC0FA8C955ADDE8BDA9F1A",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetEast/review.json"
+    },
+    {
+      "source": "PawnShop.Game/Content/Player/Bases/female/base.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/female/south-standing.png",
+      "sha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52",
+      "approvalRecord": "PawnShop.Game/Content/Player/Bases/base-manifest.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketWalkSouth/female-body.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/female/south-walking.png",
+      "sha256": "8B10C38091CEE248728C1839558A90018A7AF3D458374869A134E2982C601A9D",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketNorth/female-body.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/female/north.png",
+      "sha256": "4C1641C700F06A87048D2FF63890470D9BCEE596E1F9549C30228B06CFE0D0F8",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketEast/female-body.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Bases/female/east.png",
+      "sha256": "3A4EBEEB8DB8F09F0DE05F180B664C388352376AB128CE134631F34076BC96B0",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsPilot/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/female/south-standing.png",
+      "sha256": "35F53DE055D024F242F83E2952C7ABB51559CBD98329A44CB56D4DDB5BB88912",
+      "approvalRecord": "docs/ReviewAssets/BootsPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsWalkSouth/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/female/south-walking.png",
+      "sha256": "3CBCE1AF092C34EEEE5F5E18E5E5032338EFD581CED5E24C87A55F513DD8B20F",
+      "approvalRecord": "docs/ReviewAssets/BootsWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsNorth/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/female/north.png",
+      "sha256": "960E07A0B6D8661BFCE50F16834372FC41DFA3CB1DA8A83D20AA915FBB9A29A6",
+      "approvalRecord": "docs/ReviewAssets/BootsNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/BootsEast/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Boots/female/east.png",
+      "sha256": "B9982216F428B85DAB2E619BD6BE353E7CAC614C278AF3F0534B24F5358EF217",
+      "approvalRecord": "docs/ReviewAssets/BootsEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansPilot/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/female/south-standing.png",
+      "sha256": "B861CD621C534B80D8ED4812224904D32662AFDE6A89F5F098A2819689A70B65",
+      "approvalRecord": "docs/ReviewAssets/JeansPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansWalkSouth/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/female/south-walking.png",
+      "sha256": "88E5E17B8A75ECAE84DE66EA3508DE65E6F1A96A25B0A12FFE8444EE1AF148D2",
+      "approvalRecord": "docs/ReviewAssets/JeansWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansNorth/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/female/north.png",
+      "sha256": "159F7783F4A7ECD6E192F450550FBDF948D1FBBF59B503B04AD089A9D6B0899F",
+      "approvalRecord": "docs/ReviewAssets/JeansNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/JeansEast/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/Jeans/female/east.png",
+      "sha256": "2A61A9E9626D5FADB76A1091A2D2DD8EA3998EEB04B192106CB963E19E42EAA1",
+      "approvalRecord": "docs/ReviewAssets/JeansEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketPilot/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/female/south-standing.png",
+      "sha256": "4E917B0934A656FC075AD0E9A180C3A518617E67B89A448766AFE870EEFDB391",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketWalkSouth/female-layer-shading-fixed.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/female/south-walking.png",
+      "sha256": "430BA6D5E7AB7AC1C60082D702523AAB1550D72AEB55C104D03E9F41832E359B",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketWalkSouth/female-shading-correction.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketNorth/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/female/north.png",
+      "sha256": "2B389C1BA1946A3E5F8A58A85F02DB0C602AA261D58C3BD47AB9515A6CD98993",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WorkJacketEast/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WorkJacket/female/east.png",
+      "sha256": "500EB589AB194F39FA30C3F8F189EB58ACFA3A548BE8BB2F4D3DDA823FCD2364",
+      "approvalRecord": "docs/ReviewAssets/WorkJacketEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/female-south-hair.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/female/south.png",
+      "sha256": "BA0179960B4A32AD913B42ABDBE8C453C4967D72F6EAB9C8386B89C95C1C19A5",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/female-north-hair.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/female/north.png",
+      "sha256": "B4C197604BE51969962231D5AD31747BFB83847397A70244B1176C1E5E2EE72A",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskEast/female-hair.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/female/east.png",
+      "sha256": "121A56058C858377C968A1B0E43E29F02C171C36FB46648E29B71FADB7918396",
+      "approvalRecord": "docs/ReviewAssets/HairMaskEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/female-south-hair-equipped.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/female/masked-south.png",
+      "sha256": "A2069905AAD3ED4E9EFFFF9F60281A0F8155D5CE73725B961F5A42AE7B84A76A",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskPilot/female-north-hair-equipped.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/female/masked-north.png",
+      "sha256": "B4C197604BE51969962231D5AD31747BFB83847397A70244B1176C1E5E2EE72A",
+      "approvalRecord": "docs/ReviewAssets/HairMaskPilot/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/HairMaskEast/female-hair-equipped.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Hair/ShortChestnut/female/masked-east.png",
+      "sha256": "6C3D29B903D4191C8A5F6C3E3B13AA154DCFD3FA828523632D5F7A589284E31C",
+      "approvalRecord": "docs/ReviewAssets/HairMaskEast/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetCharcoal/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/female/south-standing.png",
+      "sha256": "E1ADC91431DEDD127210D492C6E54B8F3C43EF83A90EBB35DA85923C455DEABE",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetCharcoal/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetWalkSouth/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/female/south-walking.png",
+      "sha256": "E9C5A6F0F907F8FE578DF9225BF53A542B71C33BCA417AD0BE2C4098008CF043",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetWalkSouth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetNorth/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/female/north.png",
+      "sha256": "CA2D17886BE6F711FDD70EF01EDB93C5FBA82E9E2E7F65741E8F27E6181A0412",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetNorth/review.json"
+    },
+    {
+      "source": "docs/ReviewAssets/WeldingHelmetEast/female-layer.png",
+      "destination": "PawnShop.Characters/Npcs/Common/Assets/Clothing/WeldingMask/female/east.png",
+      "sha256": "3F90699E87CD1B77C6EF6016A8F15EFF60F45640C9131A035A2F4D23F82B4570",
+      "approvalRecord": "docs/ReviewAssets/WeldingHelmetEast/review.json"
+    }
+  ]
+}
