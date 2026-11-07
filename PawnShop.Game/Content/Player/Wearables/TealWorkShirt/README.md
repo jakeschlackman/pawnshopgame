@@ -19,7 +19,7 @@ do not require separate gameplay/economy items.
 
 Open review-4x.png: object, original base, garment-only layer and composition,
 with male above female. review-native.png is the same sheet at native size.
-Run `./tools/Validate-Wearable.ps1` from the repository root for base preservation,
+Run `dotnet run --project PawnShop.Tests --no-build -- --assets wearable PawnShop.Game/Content/Player/Wearables/TealWorkShirt` from the repository root for base preservation,
 dimensions, binary alpha, layer composition and shoulder/underwear coverage.
 The approved PNGs and sources are bundled locally; no runtime PixelLab access is
 needed. All artwork was created through PixelLab; service terms apply.

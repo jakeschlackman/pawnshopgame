@@ -1,0 +1,130 @@
+{
+  "mode": "skeleton-v3",
+  "action_description": "relaxed small-step walk",
+  "frame_count": 8,
+  "move": {
+    "name": "walk",
+    "energy": 0.6
+  },
+  "poses": [
+    {
+      "frame": 1,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 2,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 3,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 4,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 5,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 6,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 7,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 8,
+      "hips": 0,
+      "chest": 0,
+      "lean": [
+        1,
+        0
+      ],
+      "head": [
+        0,
+        0
+      ]
+    }
+  ],
+  "directions": [
+    "west",
+    "north",
+    "south"
+  ],
+  "animation_group_ids": [
+    {
+      "bodyType": "male",
+      "id": "a6783f36-96da-47ca-98cf-9111a465f555"
+    },
+    {
+      "bodyType": "female",
+      "id": "427b11f0-b2f3-40fb-aee5-74fb541f4783"
+    }
+  ]
+}

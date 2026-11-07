@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase 4 — Equipment fit review</title>
+<style>
+body{font:16px system-ui;background:#20282b;color:#eef4ec;margin:24px;max-width:1200px}
+h1{font-size:26px}a{color:#9ddbd0}fieldset{border:0;padding:0;margin:16px 0}
+label{margin-right:20px}select{font:inherit}.grid{display:flex;flex-wrap:wrap;gap:12px}
+figure{margin:0;padding:12px;background:#303b3d;border-radius:8px}figcaption{margin-bottom:8px}
+canvas{display:block;image-rendering:pixelated;background:repeating-conic-gradient(#394448 0 25%,#455257 0 50%) 0/12px 12px}
+small{display:block;color:#bac7c9}section{margin:24px 0}.contact{overflow-x:auto}button{font:inherit}output{margin-left:12px}
+</style>
+<h1>Phase 4 · Brown leather work boots</h1>
+<p><strong>Boots · South walking accepted</strong>: separate male/female layers fitted
+to all eight accepted walking poses. Check toe lift, sole contact and jeans hems
+through the loop, with or without the other equipment. Standing boots are accepted;
+North and East/West boot fits follow this checkpoint.</p>
+<p>The accepted mask/hair motion panels below still support all four directions
+and side transitions. West mirrors the complete East composition.</p>
+<p>The jacket is accepted in all four directions and side transitions. Its review
+panels remain below. All compositions preserve the original body; object images
+are design references, not pasted or scaled equipment.</p>
+<fieldset id="controls" disabled>
+<label>Review direction <select id="direction"><option value="north">North · handle-only wrench correction</option><option value="south" selected>South · accepted equipment</option><option value="east">East · accepted equipment</option><option value="west">West · mirrored equipment</option></select></label>
+<label>Selected direction motion <select id="motion"><option value="walk">Walking loop</option><option value="transition">Standing ↔ walking</option></select></label>
+<label>Full-body scale <select id="scale"><option value="1">1×</option><option value="2">2×</option><option value="4" selected>4×</option></select></label>
+<label><input id="equipped" type="checkbox" checked>Jacket on in composition views</label>
+<label><input id="helmet" type="checkbox" checked>Mask on in equipment panels</label>
+<label><input id="hair" type="checkbox" checked>Short brown hair in equipment panels</label>
+<label><input id="wrench" type="checkbox" checked>Wrench on in wrench, jeans and boot panels</label>
+<label><input id="jeans" type="checkbox" checked>Jeans on in jeans and boot panels</label>
+<label><input id="boots" type="checkbox" checked>Boots on in South boot panels</label>
+<p><button id="play" type="button">Pause</button>
+<button id="next" type="button">Next frame</button>
+<label>Review frame <input id="frame" type="range" min="0" max="7" value="0"></label>
+<output id="frameLabel">1 / 8 · 100 ms per frame</output></p>
+</fieldset>
+<p id="status" role="status">Loading local review PNGs…</p>
+<section id="bootsWalkSection">
+<h2>Brown leather work boots · South walking · accepted</h2>
+<div id="bootsWalkBodies"></div>
+</section>
+<h2>Brown leather work boots · South standing · accepted</h2>
+<div id="bootsBodies"></div>
+<section id="jeansEastSection">
+<h2>Dark blue jeans · East/West standing, walking and settling · accepted</h2>
+<div id="jeansEastBodies"></div>
+</section>
+<section id="jeansNorthSection">
+<h2>Dark blue jeans · North standing and walking · accepted</h2>
+<div id="jeansNorthBodies"></div>
+</section>
+<section id="jeansWalkSection">
+<h2>Dark blue jeans · South walking · accepted</h2>
+<div id="jeansWalkBodies"></div>
+</section>
+<h2>Dark blue jeans · South standing · accepted</h2>
+<div id="jeansBodies"></div>
+<section id="wrenchWalkSection">
+<h2>Wrench · selected direction · standing, walking and side transitions</h2>
+<div id="wrenchWalkBodies"></div>
+</section>
+<h2>Upright wrench · South standing</h2>
+<div id="wrenchBodies"></div>
+<h2>Accepted mask and hair motion</h2>
+<div id="helmetWalkBodies"></div>
+<h2>South standing · accepted mask and hair combination</h2>
+<div id="helmetComparison" class="grid"></div>
+<div id="helmetBodies"></div>
+<h2>Accepted jacket motion</h2>
+<main id="bodies"></main>
+<p>Jacket fits, side transitions and South-standing masks are accepted.
+South/North standing and walking mask/hair combinations are accepted.
+East/West standing, walking and settling combinations are accepted for both bodies.
+Wrench fits in all four directions and side settling are accepted. Jeans currently
+cover accepted standing/walking in all four directions and side settling. North wrench visibility is corrected to handle only. South-standing and South-walking boots are accepted. North boots are the next checkpoint, followed by side boots and backpacks.
+The raw fitted sources are retained for provenance; their generated body pixels are not used.</p>
+<p><a href="../docs/ReviewAssets/BootsWalkSouth/review.json">South-walking boot sources and checks</a> ·
+<a href="../docs/ReviewAssets/BootsPilot/review.json">Boot designs, fitted sources and checks</a> ·
+<a href="../docs/ReviewAssets/JeansEast/review.json">East/West jeans sources and fit checks</a> ·
+<a href="../docs/ReviewAssets/JeansNorth/review.json">North jeans sources and fit checks</a> ·
+<a href="../docs/ReviewAssets/JeansWalkSouth/review.json">South-walk jeans sources and fit checks</a> ·
+<a href="../docs/ReviewAssets/JeansPilot/review.json">Jeans design, masks and coverage checks</a> ·
+<a href="../docs/ReviewAssets/WorkJacketPilot/review.json">Sources, masks and checks</a> ·
+<a href="../docs/ReviewAssets/WrenchPilot/review.json">Wrench sources, grips and checks</a> ·
+<a href="../docs/ReviewAssets/WrenchWalkSouth/review.json">Walking wrench grips and finger masks</a> ·
+<a href="../docs/ReviewAssets/WrenchNorth/review.json">North wrench grips and finger masks</a> ·
+<a href="../docs/ReviewAssets/WrenchEast/review.json">East/West wrench grips and settling fits</a> ·
+<a href="../docs/ReviewAssets/WeldingHelmetCharcoal/review.json">Charcoal mask sources and checks</a> ·
+<a href="../docs/ReviewAssets/WeldingHelmetWalkSouth/review.json">Walking mask anchors and checks</a> ·
+<a href="../docs/ReviewAssets/WeldingHelmetNorth/review.json">North mask sources and anchors</a> ·
+<a href="../docs/ReviewAssets/HairMaskPilot/review.json">Hair layers, clipping and checks</a> ·
+<a href="../docs/ReviewAssets/WeldingHelmetEast/review.json">East mask anchors and checks</a> ·
+<a href="../docs/ReviewAssets/HairMaskEast/review.json">East/West hair and settling fits</a> ·
+<a href="../docs/ReviewAssets/WorkJacketWalkSouth/review.json">Walking sources and masks</a> ·
+<a href="../docs/ReviewAssets/WorkJacketNorth/review.json">North sources and masks</a> ·
+<a href="../docs/ReviewAssets/WorkJacketEast/review.json">East/West sources and masks</a> ·
+<a href="../docs/VERIFICATION_EQUIPMENT_PILOT.md">Phase status</a> ·
+<a href="player-base-review.html">Accepted motion checkpoint</a></p>
+<script>
+const views=[],images={},walkImages={north:{},south:{},east:{}},walkHeadings={};
+// South-standing fit: original male ear/head outline hidden by this rigid mask.
+// Native character coordinates; canonical body and mask PNGs remain unchanged.
+const helmetHiddenBodyPixels={male:[[17,13],[17,14],[16,17],[16,18],[17,19]],female:[]};
+const helmetWalkLayers={south:{},north:{},east:{}},helmetWalkHeadings={},helmetWalkOffsetY=[0,0,-1,-1,0,0,-1,-1];
+const hairLayers={south:{},north:{},east:{}};
+const wrenchLayers={},wrenchWalkLayers={south:{},north:{},east:{}},wrenchWalkHeadings={};let wrenchObject;
+const jeansImages={},jeansWalkLayers={},jeansNorthLayers={},jeansEastLayers={};
+const bootsImages={},bootsWalkLayers={};
+const transitionColumns=[0,0,0,0,0,0,0,0,9,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,9,0];
+let frame=0,playing=true,lastTime=null,elapsed=0;
+function sideView(){return ['east','west'].includes(document.getElementById('direction').value);}
+function sequence(){return sideView()&&document.getElementById('motion').value==='transition'?transitionColumns:[1,2,3,4,5,6,7,8];}
+function load(path,w,h){return new Promise((resolve,reject)=>{
+  const image=new Image();image.onload=()=>image.naturalWidth===w&&image.naturalHeight===h
+    ?resolve(image):reject(new Error('Unexpected dimensions: '+path));
+  image.onerror=()=>reject(new Error('Cannot load '+path+'. Keep this page in the repository tools folder.'));
+  image.src=path;
+});}
+function add(parent,body,kind,label,region=[0,0,48,64],fixedScale=null,walking=false,pose='walk'){
+  const figure=document.createElement('figure'),caption=document.createElement('figcaption'),canvas=document.createElement('canvas');
+  caption.textContent=label;canvas.width=region[2];canvas.height=region[3];canvas.setAttribute('aria-label',body+' '+label);
+  figure.append(caption,canvas);parent.append(figure);views.push({canvas,body,kind,region,fixedScale,walking,pose});
+}
+function drawPose(context,image,column,region,mirror,offset=0){
+  // Mirror in the full 48px character space, including cropped review windows.
+  const sourceX=column*48+(mirror?48-region[0]-region[2]:region[0]);
+  context.save();context.translate(offset+(mirror?region[2]:0),0);
+  if(mirror)context.scale(-1,1);
+  context.drawImage(image,sourceX,region[1],region[2],region[3],0,0,region[2],region[3]);context.restore();
+}
+function drawWalkingMask(context,body,column,region,offset,kind,direction,standing,mirror,pants=null,pantsColumn=0,boots=null,bootsColumn=0){
+  const southStanding=standing&&direction==='south';
+  const sheet=southStanding?images[body]:walkImages[direction][body],maskOn=document.getElementById('helmet').checked;
+  const mask=southStanding?images[body].helmetLayer:helmetWalkLayers[direction][body];
+  const hair=hairLayers[direction][body],hairColumn=direction==='south'&&!standing?column+1:column;
+  if(kind==='helmetWalkHair'||kind==='helmetWalkHairFitted'){
+    drawPose(context,hair[kind==='helmetWalkHair'?'normal':'fitted'],hairColumn,region,mirror,offset);return;
+  }
+  const layerOnly=kind==='helmetWalkLayer';
+  if(!layerOnly){
+    drawPose(context,sheet.base,column,region,mirror,offset);
+    if(maskOn&&direction==='south'){
+      for(const [x,y] of helmetHiddenBodyPixels[body])
+        context.clearRect(offset+x-region[0],y+(standing?0:helmetWalkOffsetY[column])-region[1],1,1);
+    }
+    if(boots)drawPose(context,boots,bootsColumn,region,mirror,offset);
+    if(pants)drawPose(context,pants,pantsColumn,region,mirror,offset);
+    if(document.getElementById('equipped').checked)drawPose(context,sheet.layer,column,region,mirror,offset);
+    if(document.getElementById('hair').checked)drawPose(context,hair[maskOn?'fitted':'normal'],hairColumn,region,mirror,offset);
+  }
+  if(layerOnly||maskOn)drawPose(context,mask,column,region,mirror,offset);
+}
+function drawWalkingWrench(context,body,column,region,offset,kind,direction,standing=false,mirror=false){
+  if(standing&&direction==='south'){
+    drawWalkingMask(context,body,0,region,offset,'helmetWalkComposite','south',true,false);
+    if(document.getElementById('wrench').checked)drawPose(context,wrenchLayers[body],0,region,false,offset);return;
+  }
+  const sheets=wrenchWalkLayers[direction][body];
+  if(kind==='wrenchWalkTool'||kind==='wrenchWalkLayer'){
+    drawPose(context,sheets[kind==='wrenchWalkTool'?'tool':'layer'],column,region,mirror,offset);return;
+  }
+  drawWalkingMask(context,body,column,region,offset,'helmetWalkComposite',direction,standing,mirror);
+  // The fitted layer excludes original fingers; the upright jaw draws above the sleeve.
+  if(document.getElementById('wrench').checked)drawPose(context,sheets.layer,column,region,mirror,offset);
+}
+function redraw(){
+  const direction=document.getElementById('direction').value;
+  document.getElementById('jeansWalkSection').hidden=direction!=='south';
+  document.getElementById('bootsWalkSection').hidden=direction!=='south';
+  document.getElementById('jeansNorthSection').hidden=direction!=='north';
+  document.getElementById('jeansEastSection').hidden=!sideView();
+  for(const body of ['male','female'])wrenchWalkHeadings[body].textContent=(body==='male'?'Male':'Female')+' · '+direction+' wrench · '+(direction==='north'?'handle-only correction · review pending':'accepted');
+  for(const body of ['male','female'])helmetWalkHeadings[body].textContent=(body==='male'?'Male':'Female')+' · '+direction+' mask and hair · accepted';
+  const visualDirection=direction==='west'?'east':direction,mirror=direction==='west',steps=sequence();
+  for(const body of ['male','female'])walkHeadings[body].textContent=(body==='male'?'Male':'Female')+' · '+direction+' jacket · accepted';
+  document.getElementById('frame').max=steps.length-1;
+  document.getElementById('frame').value=frame;
+  const poseName=steps[frame]===0?'standing':steps[frame]===9?'settling':'walk '+steps[frame];
+  document.getElementById('frameLabel').textContent=(frame+1)+' / '+steps.length+' · '+poseName+' · 100 ms per step';
+  for(const {canvas,body,kind,region,fixedScale,walking,pose} of views){
+    const selected=kind==='composite'&&!document.getElementById('equipped').checked?'base':kind;
+    const scale=fixedScale??Number(document.getElementById('scale').value),context=canvas.getContext('2d');
+    canvas.style.width=canvas.width*scale+'px';canvas.style.height=canvas.height*scale+'px';
+    context.clearRect(0,0,canvas.width,canvas.height);context.imageSmoothingEnabled=false;
+    if(kind.startsWith('bootsWalk')){
+      const columns=region[2]===384?[0,1,2,3,4,5,6,7]:[frame%8];
+      const crop=region[2]===384?[0,0,48,64]:region;
+      for(const [index,column] of columns.entries()){
+        const offset=region[2]===384?index*48:0;
+        const boots=document.getElementById('boots').checked?bootsWalkLayers[body]:null;
+        const pants=document.getElementById('jeans').checked?jeansWalkLayers[body]:null;
+        if(kind==='bootsWalkLayer')drawPose(context,bootsWalkLayers[body],column,crop,false,offset);
+        else if(kind==='bootsWalkBody'||kind==='bootsWalkJeans'){
+          drawPose(context,walkImages.south[body].base,column,crop,false,offset);
+          if(boots)drawPose(context,boots,column,crop,false,offset);
+          if(kind==='bootsWalkJeans'&&pants)drawPose(context,pants,column,crop,false,offset);
+        }else{
+          drawWalkingMask(context,body,column,crop,offset,'helmetWalkComposite','south',false,false,pants,column,boots,column);
+          if(document.getElementById('wrench').checked)drawPose(context,wrenchWalkLayers.south[body].layer,column,crop,false,offset);
+        }
+      }
+    }else if(kind.startsWith('boots')){
+      const boots=document.getElementById('boots').checked?bootsImages[body].layer:null;
+      const pants=document.getElementById('jeans').checked?jeansImages[body].layer:null;
+      if(kind==='bootsComposite'){
+        drawWalkingMask(context,body,0,region,0,'helmetWalkComposite','south',true,false,pants,0,boots);
+        if(document.getElementById('wrench').checked)drawPose(context,wrenchLayers[body],0,region,false);
+      }else if(kind==='bootsBody'||kind==='bootsJeans'){
+        drawPose(context,images[body].base,0,region,false);
+        if(boots)drawPose(context,boots,0,region,false);
+        if(kind==='bootsJeans'&&pants)drawPose(context,pants,0,region,false);
+      }else drawPose(context,kind==='bootsBase'?images[body].base:bootsImages[body][kind==='bootsObject'?'object':'layer'],0,region,false);
+    }else if(kind.startsWith('jeansEast')){
+      const columns=region[2]===384?[1,2,3,4,5,6,7,8]:[pose==='standing'?0:steps[frame]];
+      const crop=region[2]===384?[0,0,48,64]:region;
+      for(const [index,column] of columns.entries()){
+        const offset=region[2]===384?index*48:0;
+        const pants=document.getElementById('jeans').checked?jeansEastLayers[body]:null;
+        if(kind==='jeansEastLayer')drawPose(context,jeansEastLayers[body],column,crop,mirror,offset);
+        else if(kind==='jeansEastBody'){
+          drawPose(context,walkImages.east[body].base,column,crop,mirror,offset);
+          if(pants)drawPose(context,pants,column,crop,mirror,offset);
+        }else{
+          drawWalkingMask(context,body,column,crop,offset,'helmetWalkComposite','east',column===0,mirror,pants,column);
+          if(document.getElementById('wrench').checked)drawPose(context,wrenchWalkLayers.east[body].layer,column,crop,mirror,offset);
+        }
+      }
+    }else if(kind.startsWith('jeansNorth')){
+      const columns=region[2]===384?[1,2,3,4,5,6,7,8]:[pose==='standing'?0:frame%8+1];
+      const crop=region[2]===384?[0,0,48,64]:region;
+      for(const [index,column] of columns.entries()){
+        const offset=region[2]===384?index*48:0;
+        const pants=document.getElementById('jeans').checked?jeansNorthLayers[body]:null;
+        if(kind==='jeansNorthLayer')drawPose(context,jeansNorthLayers[body],column,crop,false,offset);
+        else if(kind==='jeansNorthBody'){
+          drawPose(context,walkImages.north[body].base,column,crop,false,offset);
+          if(pants)drawPose(context,pants,column,crop,false,offset);
+        }else{
+          drawWalkingMask(context,body,column,crop,offset,'helmetWalkComposite','north',pose==='standing',false,pants,column);
+          if(document.getElementById('wrench').checked)drawPose(context,wrenchWalkLayers.north[body].layer,column,crop,false,offset);
+        }
+      }
+    }else if(kind.startsWith('jeansWalk')){
+      // This checkpoint fits South only. Hidden panels never borrow side poses.
+      const columns=region[2]===384?[0,1,2,3,4,5,6,7]:[frame%8];
+      const crop=region[2]===384?[0,0,48,64]:region;
+      for(const [index,column] of columns.entries()){
+        const offset=region[2]===384?index*48:0;
+        const pants=document.getElementById('jeans').checked?jeansWalkLayers[body]:null;
+        if(kind==='jeansWalkLayer')drawPose(context,jeansWalkLayers[body],column,crop,false,offset);
+        else if(kind==='jeansWalkBody'){
+          drawPose(context,walkImages.south[body].base,column,crop,false,offset);
+          if(pants)drawPose(context,pants,column,crop,false,offset);
+        }else{
+          drawWalkingMask(context,body,column,crop,offset,'helmetWalkComposite','south',false,false,pants,column);
+          if(document.getElementById('wrench').checked)drawPose(context,wrenchWalkLayers.south[body].layer,column,crop,false,offset);
+        }
+      }
+    }else if(kind.startsWith('jeans')){
+      const pants=document.getElementById('jeans').checked?jeansImages[body].layer:null;
+      if(kind==='jeansComposite'){
+        drawWalkingMask(context,body,0,region,0,'helmetWalkComposite','south',true,false,pants);
+        if(document.getElementById('wrench').checked)drawPose(context,wrenchLayers[body],0,region,false);
+      }else if(kind==='jeansBodyComposite'){
+        drawPose(context,images[body].base,0,region,false);
+        if(pants)drawPose(context,pants,0,region,false);
+      }else drawPose(context,kind==='jeansBase'?images[body].base:jeansImages[body][kind==='jeansObject'?'object':'layer'],0,region,false);
+    }else if(kind.startsWith('wrenchWalk')){
+      const firstWalk=walkImages[visualDirection][body].firstWalkFrame;
+      if(region[2]===384){
+        for(let i=0;i<8;i++)drawWalkingWrench(context,body,i+firstWalk,[0,0,48,64],i*48,kind,visualDirection,false,mirror);
+      }else{
+        const standing=pose==='standing';
+        const crop=region[2]===24?(visualDirection==='east'?[mirror?10:14,28,24,22]:direction==='north'?[16,28,24,22]:region):region;
+        const column=standing?0:steps[frame]-1+firstWalk;
+        drawWalkingWrench(context,body,column,crop,0,kind,visualDirection,standing,mirror);
+      }
+    }else if(kind.startsWith('wrench')){
+      if(kind==='wrenchComposite'){
+        drawWalkingMask(context,body,0,region,0,'helmetWalkComposite','south',true,false);
+        if(document.getElementById('wrench').checked)drawPose(context,wrenchLayers[body],0,region,false);
+      }else drawPose(context,kind==='wrenchObject'?wrenchObject:kind==='wrenchBase'?images[body].base:wrenchLayers[body],0,region,false);
+    }else if(kind.startsWith('helmetWalk')){
+      if(region[2]===384){
+        for(let i=0;i<8;i++)drawWalkingMask(context,body,i+walkImages[visualDirection][body].firstWalkFrame,[0,0,48,64],i*48,kind,visualDirection,false,mirror);
+      }else{
+        const standing=pose==='standing';
+        const column=standing?0:steps[frame]-1+walkImages[visualDirection][body].firstWalkFrame;
+        drawWalkingMask(context,body,column,region,0,kind,visualDirection,standing,mirror);
+      }
+    }else if(kind.startsWith('helmet')){
+      const layers=kind==='helmetComposite'?[images[body].base,
+        ...(document.getElementById('equipped').checked?[images[body].layer]:[]),
+        ...(document.getElementById('hair').checked?[hairLayers.south[body][document.getElementById('helmet').checked?'fitted':'normal']]:[]),
+        ...(document.getElementById('helmet').checked?[images[body].helmetLayer]:[])]:
+        [kind==='helmetBase'?images[body].base:images[body][kind]];
+      for(const image of layers){
+        context.drawImage(image,...region,0,0,canvas.width,canvas.height);
+        if(kind==='helmetComposite'&&image===images[body].base&&document.getElementById('helmet').checked){
+          for(const [x,y] of helmetHiddenBodyPixels[body])context.clearRect(x-region[0],y-region[1],1,1);
+        }
+      }
+    }else if(walking){
+      const sheet=pose==='standing'&&direction==='south'?images[body]:walkImages[visualDirection][body];
+      const column=pose==='standing'?0:sheet.firstWalkFrame+(region[2]===384?0:steps[frame]-1);
+      const layers=selected==='composite'?[sheet.base,sheet.layer]:[sheet[selected]];
+      for(const image of layers){
+        if(region[2]===384){
+          // Flip each pose in place; preserve left-to-right chronological order.
+          for(let i=0;i<8;i++)drawPose(context,image,column+i,[0,0,48,64],mirror,i*48);
+        }else drawPose(context,image,column,region,mirror);
+      }
+    }else context.drawImage(images[body][selected],...region,0,0,canvas.width,canvas.height);
+  }
+}
+async function start(){
+  wrenchObject=await load('../docs/ReviewAssets/WrenchPilot/object-source.png',48,64);
+  for(const body of ['male','female']){
+    const root='../docs/ReviewAssets/WorkJacketWalkSouth/';
+    const revision=body==='female'?'-shading-fixed':'';
+    const [base,layer]=await Promise.all([load(root+body+'-body.png',384,64),load(root+body+'-layer'+revision+'.png',384,64)]);
+    walkImages.south[body]={base,layer,firstWalkFrame:0};
+    const wrenchRoot='../docs/ReviewAssets/WrenchWalkSouth/';
+    const [wrenchTool,wrenchLayer]=await Promise.all([load(wrenchRoot+body+'-tool.png',384,64),load(wrenchRoot+body+'-layer.png',384,64)]);
+    wrenchWalkLayers.south[body]={tool:wrenchTool,layer:wrenchLayer};
+    const wrenchNorthRoot='../docs/ReviewAssets/WrenchNorth/';
+    const [northWrenchTool,northWrenchLayer]=await Promise.all([load(wrenchNorthRoot+body+'-tool.png',432,64),load(wrenchNorthRoot+body+'-layer.png',432,64)]);
+    wrenchWalkLayers.north[body]={tool:northWrenchTool,layer:northWrenchLayer};
+    const wrenchEastRoot='../docs/ReviewAssets/WrenchEast/';
+    const [eastWrenchTool,eastWrenchLayer]=await Promise.all([load(wrenchEastRoot+body+'-tool.png',480,64),load(wrenchEastRoot+body+'-layer.png',480,64)]);
+    wrenchWalkLayers.east[body]={tool:eastWrenchTool,layer:eastWrenchLayer};
+    const wrenchWalkSection=document.createElement('section'),wrenchWalkHeading=document.createElement('h2'),wrenchWalkGrid=document.createElement('div');
+    wrenchWalkHeadings[body]=wrenchWalkHeading;
+    wrenchWalkGrid.className='grid';wrenchWalkSection.append(wrenchWalkHeading,wrenchWalkGrid);
+    add(wrenchWalkGrid,body,'wrenchWalkComposite','Standing comparison',[0,0,48,64],null,false,'standing');
+    add(wrenchWalkGrid,body,'wrenchWalkComposite','Selected equipment + wrench, shared frame clock');
+    add(wrenchWalkGrid,body,'wrenchWalkTool','Unoccluded tool · fitting reference only');
+    add(wrenchWalkGrid,body,'wrenchWalkLayer','Visible tool after finger and facing occlusion');
+    add(wrenchWalkGrid,body,'wrenchWalkComposite','Native size',[0,0,48,64],1);
+    add(wrenchWalkGrid,body,'wrenchWalkComposite','Grip, sleeve and jaw · 12×',[8,28,24,22],12);
+    const wrenchWalkContact=document.createElement('div');wrenchWalkContact.className='contact';wrenchWalkSection.append(wrenchWalkContact);
+    add(wrenchWalkContact,body,'wrenchWalkComposite','All eight poses · left to right',[0,0,384,64],2);
+    document.getElementById('wrenchWalkBodies').append(wrenchWalkSection);
+    helmetWalkLayers.south[body]=await load('../docs/ReviewAssets/WeldingHelmetWalkSouth/'+body+'-layer.png',384,64);
+    helmetWalkLayers.north[body]=await load('../docs/ReviewAssets/WeldingHelmetNorth/'+body+'-layer.png',432,64);
+    helmetWalkLayers.east[body]=await load('../docs/ReviewAssets/WeldingHelmetEast/'+body+'-layer.png',480,64);
+    for(const direction of ['south','north']){
+      const hairRoot='../docs/ReviewAssets/HairMaskPilot/'+body+'-'+direction;
+      const [normal,fitted]=await Promise.all([load(hairRoot+'-hair.png',432,64),load(hairRoot+'-hair-equipped.png',432,64)]);
+      hairLayers[direction][body]={normal,fitted};
+    }
+    const hairEastRoot='../docs/ReviewAssets/HairMaskEast/'+body;
+    const [eastHair,eastHairFitted]=await Promise.all([load(hairEastRoot+'-hair.png',480,64),load(hairEastRoot+'-hair-equipped.png',480,64)]);
+    hairLayers.east[body]={normal:eastHair,fitted:eastHairFitted};
+    const maskSection=document.createElement('section'),maskHeading=document.createElement('h2'),maskGrid=document.createElement('div');
+    helmetWalkHeadings[body]=maskHeading;
+    maskGrid.className='grid';maskSection.append(maskHeading,maskGrid);
+    add(maskGrid,body,'helmetWalkComposite','Standing comparison',[0,0,48,64],null,false,'standing');
+    add(maskGrid,body,'helmetWalkComposite','Body + jacket + mask, one frame clock');
+    add(maskGrid,body,'helmetWalkLayer','Rigid mask follows the head');
+    add(maskGrid,body,'helmetWalkHair','Normal hair layer');
+    add(maskGrid,body,'helmetWalkHairFitted','Hair clipped for this mask');
+    add(maskGrid,body,'helmetWalkComposite','Native size',[0,0,48,64],1);
+    add(maskGrid,body,'helmetWalkComposite','Head and collar · 12×',[13,3,22,25],12);
+    const maskContact=document.createElement('div');maskContact.className='contact';maskSection.append(maskContact);
+    add(maskContact,body,'helmetWalkComposite','All eight poses · left to right',[0,0,384,64],2);
+    document.getElementById('helmetWalkBodies').append(maskSection);
+    const northRoot='../docs/ReviewAssets/WorkJacketNorth/';
+    const [northBase,northLayer]=await Promise.all([load(northRoot+body+'-body.png',432,64),load(northRoot+body+'-layer.png',432,64)]);
+    walkImages.north[body]={base:northBase,layer:northLayer,firstWalkFrame:1};
+    const eastRoot='../docs/ReviewAssets/WorkJacketEast/';
+    const [eastBase,eastLayer]=await Promise.all([load(eastRoot+body+'-body.png',480,64),load(eastRoot+body+'-layer.png',480,64)]);
+    walkImages.east[body]={base:eastBase,layer:eastLayer,firstWalkFrame:1};
+    const section=document.createElement('section'),heading=document.createElement('h2'),grid=document.createElement('div');
+    walkHeadings[body]=heading;grid.className='grid';section.append(heading,grid);
+    add(grid,body,'composite','Standing comparison',[0,0,48,64],null,true,'standing');
+    for(const [kind,label] of [['base','Accepted body pose'],['layer','Matching jacket pose'],['composite','Body + jacket, one frame clock']])add(grid,body,kind,label,[0,0,48,64],null,true);
+    const details=document.createElement('div');details.className='grid';section.append(document.createElement('p'),details);
+    add(details,body,'composite','Native size',[0,0,48,64],1,true);
+    add(details,body,'composite','Collar and shoulders · 12×',[12,20,25,11],12,true);
+    add(details,body,'composite','Cuffs and hem · 12×',[11,32,26,13],12,true);
+    const contact=document.createElement('div');contact.className='contact';section.append(document.createElement('p'),contact);
+    add(contact,body,'composite','All eight poses · left to right',[0,0,384,64],2,true);
+    document.getElementById('bodies').append(section);
+  }
+  for(const body of ['male','female']){
+    const root='../docs/ReviewAssets/WorkJacketPilot/';
+    const revision=body==='male'?'-teal-pockets':'';
+    const [object,base,layer,composite]=await Promise.all([
+      load(root+body+'-object.png',48,64),
+      load('../PawnShop.Game/Content/Player/Bases/'+body+'/base.png',384,64),
+      load(root+body+'-layer'+revision+'.png',48,64),load(root+body+'-composite'+revision+'.png',48,64)]);
+    const helmetRoot='../docs/ReviewAssets/WeldingHelmetCharcoal/';
+    const [helmetObject,helmetLayer]=await Promise.all([load(helmetRoot+'master-object.png',48,64),load(helmetRoot+body+'-layer.png',48,64)]);
+    images[body]={object,base,layer,composite,helmetObject,helmetLayer};
+    wrenchLayers[body]=await load('../docs/ReviewAssets/WrenchPilot/'+body+'-layer.png',48,64);
+    const wrenchSection=document.createElement('section'),wrenchHeading=document.createElement('h2'),wrenchGrid=document.createElement('div');
+    wrenchHeading.textContent=(body==='male'?'Male':'Female')+' · South-standing wrench · accepted';
+    wrenchGrid.className='grid';wrenchSection.append(wrenchHeading,wrenchGrid);
+    for(const [kind,label] of [['wrenchObject','Wrench design reference'],['wrenchBase','Original body'],['wrenchLayer','Tool-only layer'],['wrenchComposite','Selected equipment + wrench']])add(wrenchGrid,body,kind,label);
+    add(wrenchGrid,body,'wrenchComposite','Native size',[0,0,48,64],1);
+    add(wrenchGrid,body,'wrenchComposite','Grip, cuff and upright jaw · 12×',[8,26,14,21],12);
+    document.getElementById('wrenchBodies').append(wrenchSection);
+    const helmetSection=document.createElement('section'),helmetHeading=document.createElement('h2'),helmetGrid=document.createElement('div');
+    helmetHeading.textContent=(body==='male'?'Male':'Female')+' · South-standing mask · accepted';helmetGrid.className='grid';helmetSection.append(helmetHeading,helmetGrid);
+    for(const [kind,label] of [['helmetObject','Shared mask design reference'],['helmetBase','Original body'],['helmetLayer','Fitted mask-only layer'],['helmetComposite','Body + jacket + mask']])add(helmetGrid,body,kind,label);
+    const helmetDetails=document.createElement('div');helmetDetails.className='grid';helmetSection.append(document.createElement('p'),helmetDetails);
+    add(helmetDetails,body,'helmetComposite','Native size',[0,0,48,64],1);
+    add(helmetDetails,body,'helmetComposite','Head and collar · 12×',[13,3,22,24],12);
+    document.getElementById('helmetBodies').append(helmetSection);
+    const section=document.createElement('section'),heading=document.createElement('h2'),grid=document.createElement('div');
+    heading.textContent=(body==='male'?'Male':'Female')+' · South standing · accepted';grid.className='grid';section.append(heading,grid);
+    for(const [kind,label] of [['object','Body-specific design reference'],['base','Approved body'],['layer','Jacket only'],['composite','Equipped composition']])add(grid,body,kind,label);
+    const details=document.createElement('div');details.className='grid';section.append(document.createElement('p'),details);
+    add(details,body,'composite','Native size',[0,0,48,64],1);
+    add(details,body,'composite','Collar and shoulders · 12×',[12,21,25,11],12);
+    add(details,body,'composite','Cuffs and hem · 12×',[11,33,26,11],12);
+    const link=document.createElement('a');link.href=root+body+'-fitted-source.png';link.textContent='Raw AI source (body excluded from final composition)';
+    section.append(document.createElement('p'),link);document.getElementById('bodies').append(section);
+  }
+  for(const body of ['male','female']){
+    add(document.getElementById('helmetComparison'),body,'helmetComposite',(body==='male'?'Male':'Female')+' · charcoal mask + jacket',[0,0,48,64],4);
+    add(document.getElementById('helmetComparison'),body,'helmetLayer',(body==='male'?'Male':'Female')+' · mask silhouette',[12,4,24,23],8);
+  }
+  for(const body of ['male','female']){
+    const root='../docs/ReviewAssets/JeansPilot/';
+    const [object,layer]=await Promise.all([load(root+body+'-object.png',48,64),load(root+body+'-layer.png',48,64)]);
+    jeansImages[body]={object,layer};
+    const section=document.createElement('section'),heading=document.createElement('h2'),grid=document.createElement('div');
+    heading.textContent=(body==='male'?'Male':'Female')+' · South-standing jeans · accepted';
+    grid.className='grid';section.append(heading,grid);
+    for(const [kind,label] of [['jeansObject','Body-specific jeans design'],['jeansBase','Original body'],['jeansLayer','Jeans only'],['jeansBodyComposite','Jeans over unchanged body'],['jeansComposite','Jeans + selected equipment']])add(grid,body,kind,label);
+    add(grid,body,'jeansComposite','Native size',[0,0,48,64],1);
+    add(grid,body,'jeansComposite','Waist and jacket hem · 12×',[14,33,21,13],12);
+    add(grid,body,'jeansComposite','Ankle hems and original feet · 12×',[14,49,21,11],12);
+    document.getElementById('jeansBodies').append(section);
+    jeansWalkLayers[body]=await load('../docs/ReviewAssets/JeansWalkSouth/'+body+'-layer.png',384,64);
+    const walkSection=document.createElement('section'),walkHeading=document.createElement('h2'),walkGrid=document.createElement('div');
+    walkHeading.textContent=(body==='male'?'Male':'Female')+' · South-walking jeans · accepted';
+    walkGrid.className='grid';walkSection.append(walkHeading,walkGrid);
+    add(walkGrid,body,'jeansWalkComposite','Jeans + selected equipment, shared frame clock');
+    add(walkGrid,body,'jeansWalkBody','Jeans over unchanged walking body');
+    add(walkGrid,body,'jeansWalkLayer','Matching jeans pose');
+    add(walkGrid,body,'jeansWalkComposite','Native size',[0,0,48,64],1);
+    add(walkGrid,body,'jeansWalkComposite','Waist and jacket hem · 12×',[14,33,21,13],12);
+    add(walkGrid,body,'jeansWalkComposite','Ankle hems and original feet · 12×',[14,47,21,14],12);
+    const walkContact=document.createElement('div');walkContact.className='contact';walkSection.append(walkContact);
+    add(walkContact,body,'jeansWalkComposite','All eight poses · left to right',[0,0,384,64],2);
+    document.getElementById('jeansWalkBodies').append(walkSection);
+    jeansNorthLayers[body]=await load('../docs/ReviewAssets/JeansNorth/'+body+'-layer.png',432,64);
+    const northSection=document.createElement('section'),northHeading=document.createElement('h2'),northGrid=document.createElement('div');
+    northHeading.textContent=(body==='male'?'Male':'Female')+' · North jeans · accepted; wrench visibility corrected';
+    northGrid.className='grid';northSection.append(northHeading,northGrid);
+    add(northGrid,body,'jeansNorthComposite','Standing comparison',[0,0,48,64],null,false,'standing');
+    add(northGrid,body,'jeansNorthComposite','Jeans + selected equipment, shared frame clock');
+    add(northGrid,body,'jeansNorthBody','Jeans over unchanged walking body');
+    add(northGrid,body,'jeansNorthLayer','Matching rear jeans pose');
+    add(northGrid,body,'jeansNorthComposite','Native size',[0,0,48,64],1);
+    add(northGrid,body,'jeansNorthComposite','Rear pockets and jacket hem · 12×',[14,33,21,13],12);
+    add(northGrid,body,'jeansNorthComposite','Ankle hems and original feet · 12×',[14,47,21,14],12);
+    const northContact=document.createElement('div');northContact.className='contact';northSection.append(northContact);
+    add(northContact,body,'jeansNorthComposite','All eight walking poses · left to right',[0,0,384,64],2);
+    document.getElementById('jeansNorthBodies').append(northSection);
+    jeansEastLayers[body]=await load('../docs/ReviewAssets/JeansEast/'+body+'-layer.png',480,64);
+    const eastSection=document.createElement('section'),eastHeading=document.createElement('h2'),eastGrid=document.createElement('div');
+    eastHeading.textContent=(body==='male'?'Male':'Female')+' · side jeans · accepted';
+    eastGrid.className='grid';eastSection.append(eastHeading,eastGrid);
+    add(eastGrid,body,'jeansEastComposite','Standing comparison',[0,0,48,64],null,false,'standing');
+    add(eastGrid,body,'jeansEastComposite','Selected direction · walking / standing ↔ walking');
+    add(eastGrid,body,'jeansEastBody','Jeans over unchanged side body');
+    add(eastGrid,body,'jeansEastLayer','Matching jeans pose, mirrored with the body');
+    add(eastGrid,body,'jeansEastComposite','Native size',[0,0,48,64],1);
+    add(eastGrid,body,'jeansEastComposite','Hip seam, hand and jacket hem · 12×',[14,33,21,14],12);
+    add(eastGrid,body,'jeansEastComposite','Ankle hems and original feet · 12×',[14,47,21,14],12);
+    const eastContact=document.createElement('div');eastContact.className='contact';eastSection.append(eastContact);
+    add(eastContact,body,'jeansEastComposite','All eight walking poses · chronological order',[0,0,384,64],2);
+    document.getElementById('jeansEastBodies').append(eastSection);
+    const bootRoot='../docs/ReviewAssets/BootsPilot/';
+    const [bootObject,bootLayer]=await Promise.all([load(bootRoot+body+'-object.png',48,64),load(bootRoot+body+'-layer.png',48,64)]);
+    bootsImages[body]={object:bootObject,layer:bootLayer};
+    const bootSection=document.createElement('section'),bootHeading=document.createElement('h2'),bootGrid=document.createElement('div');
+    bootHeading.textContent=(body==='male'?'Male':'Female')+' · South-standing boots · accepted';
+    bootGrid.className='grid';bootSection.append(bootHeading,bootGrid);
+    for(const [kind,label] of [['bootsObject','Body-specific boot design'],['bootsBase','Original body'],['bootsLayer','Boots only'],['bootsBody','Boots over unchanged body'],['bootsJeans','Jeans hems over boot tops'],['bootsComposite','Boots + selected equipment']])add(bootGrid,body,kind,label);
+    add(bootGrid,body,'bootsComposite','Native size',[0,0,48,64],1);
+    add(bootGrid,body,'bootsComposite','Ankles, soles and jeans hems · 12×',[13,47,23,13],12);
+    document.getElementById('bootsBodies').append(bootSection);
+    bootsWalkLayers[body]=await load('../docs/ReviewAssets/BootsWalkSouth/'+body+'-layer.png',384,64);
+    const bootWalkSection=document.createElement('section'),bootWalkHeading=document.createElement('h2'),bootWalkGrid=document.createElement('div');
+    bootWalkHeading.textContent=(body==='male'?'Male':'Female')+' · South-walking boots · accepted';
+    bootWalkGrid.className='grid';bootWalkSection.append(bootWalkHeading,bootWalkGrid);
+    add(bootWalkGrid,body,'bootsWalkComposite','Boots + selected equipment, shared frame clock');
+    add(bootWalkGrid,body,'bootsWalkBody','Boots over unchanged walking body');
+    add(bootWalkGrid,body,'bootsWalkJeans','Jeans hems over walking boots');
+    add(bootWalkGrid,body,'bootsWalkLayer','Matching boot pose');
+    add(bootWalkGrid,body,'bootsWalkComposite','Native size',[0,0,48,64],1);
+    add(bootWalkGrid,body,'bootsWalkComposite','Foot lift, soles and jeans hems · 12×',[13,43,23,18],12);
+    const bootWalkContact=document.createElement('div');bootWalkContact.className='contact';bootWalkSection.append(bootWalkContact);
+    add(bootWalkContact,body,'bootsWalkComposite','All eight poses · left to right',[0,0,384,64],2);
+    document.getElementById('bootsWalkBodies').append(bootWalkSection);
+  }
+  document.getElementById('controls').disabled=false;document.getElementById('motion').disabled=!sideView();document.getElementById('status').textContent='Brown work boots · both bodies · South standing and walking accepted · next: North boots';redraw();requestAnimationFrame(tick);
+}
+function tick(time){
+  if(lastTime!==null&&playing){
+    elapsed+=Math.min(time-lastTime,250);
+    if(elapsed>=100){frame=(frame+Math.floor(elapsed/100))%sequence().length;elapsed%=100;redraw();}
+  }
+  lastTime=time;requestAnimationFrame(tick);
+}
+function pause(){playing=false;elapsed=0;document.getElementById('play').textContent='Play';}
+document.getElementById('play').onclick=()=>{playing=!playing;elapsed=0;lastTime=null;document.getElementById('play').textContent=playing?'Pause':'Play';};
+document.getElementById('next').onclick=()=>{pause();frame=(frame+1)%sequence().length;redraw();};
+document.getElementById('frame').oninput=event=>{pause();frame=Number(event.target.value);redraw();};
+for(const id of ['scale','equipped','helmet','hair','wrench','jeans','boots'])document.getElementById(id).onchange=redraw;
+function resetPlayback(){frame=0;elapsed=0;lastTime=null;redraw();}
+document.getElementById('direction').onchange=()=>{const mode=document.getElementById('motion');mode.disabled=!sideView();if(mode.disabled)mode.value='walk';resetPlayback();};
+document.getElementById('motion').onchange=resetPlayback;
+start().catch(error=>{document.getElementById('status').textContent=error.message;});
+</script>
+</html>

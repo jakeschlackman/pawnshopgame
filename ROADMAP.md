@@ -136,6 +136,59 @@ actions, with arrow movement alternates and shared Pause / Back behavior. It is
 headless-tested; Controls layout/readability remains manual acceptance. See
 [binding verification](docs/VERIFICATION_DUAL_BINDINGS.md).
 
+**Walking authoring (2026-11-06):** produce male and female cardinal walk candidates
+using PixelLab Skeleton v3. The historical candidates generated W/N/S and copied E
+from W. The current policy authors S/N/E and renders mirrored W at runtime.
+Preserve raw exports and provenance; standing atlases stay
+independent. Every future wearable item requires both body fits, matching NESW
+frames/timing, coverage/protected-pixel checks, locked body hashes and separate
+visual acceptance. See [the wearable workflow](docs/WEARABLE_ART_WORKFLOW.md).
+Runtime walk playback and layered equipment remain separate implementation work.
+
+**Phase 1 cleanup (2026-11-06):** C# `--assets` commands replace five human art
+PowerShell scripts; validation uses the runtime sprite parser, outputs cannot
+overwrite sources, and local import verifies existing hashes. Existing PNGs and
+Sprout remain unchanged. Runtime cardinal/mirroring changes are Phase 2.
+See [cleanup verification](docs/VERIFICATION_ASSET_CLEANUP.md).
+
+**Phase 2 rendering foundation (2026-11-06):** four cardinal facings use S/N/E
+sources and runtime-mirrored West. The room demonstrates male/female placeholder
+bodies with jacket, helmet, backpack and anchored wrench, sharing one Idle/Walk
+clock and full-canvas transform. Movement, collision and session lifetimes remain
+intact. Selection keeps the original art; all existing PNGs and Sprout are unchanged.
+Approved character animation and production equipment remain Phases 3/4. The user
+subsequently accepted the placeholder demo; see [rendering verification](docs/VERIFICATION_CARDINAL_RENDERING.md).
+
+**Phase 3 motion accepted:** user accepted the current standing/cardinal walks and
+side settling after face/proportion, forward-gait and head-bob corrections.
+Animated idle and runtime promotion remain unfinished. At the user's instruction,
+Phase 4 begins with a male/female South-standing jacket design-and-fit checkpoint;
+walking equipment fitting follows approval of that design. See
+[human pilot review](docs/VERIFICATION_HUMAN_PILOT.md).
+
+**Phase 4 equipment previews:** jacket, charcoal welding mask/hair combinations,
+and wrench grip/angle fits in all four directions and side settling are accepted.
+The North-only wrench head-occlusion correction now awaits review. The user
+selected dark blue jeans for the pants checkpoint; both richer South-standing fits
+and corrected South-walking fits are accepted. North standing/walking fits are
+accepted; corrected East/West standing, walking and side settling jeans are also
+accepted (user: "fixed in, next phase"). Separate male/female brown leather work
+boots are accepted South standing (user: "it looks good, next phase"). Both
+South-walking boot fits are accepted (user: "perfect"). Work stopped at the user's
+request for a later chat. Next unstarted checkpoint: North standing/walking boots
+for both bodies, then East/mirrored West including side settling. Resume details
+are at the top of [equipment verification](docs/VERIFICATION_EQUIPMENT_PILOT.md).
+The user added separate
+**pants → shoes/boots → backpacks**
+checkpoints after the wrench, each for both bodies and all supported poses.
+Before production integration, complete the user's folder walkthrough: character
+behavior belongs in `PawnShop.Characters`, shared item data in `PawnShop.Core/Items`,
+with final asset/render placement still to be agreed. Write item-type Markdown
+authoring guides alongside the actual production implementation, using working
+examples and its real paths/contracts. See
+[equipment verification](docs/VERIFICATION_EQUIPMENT_PILOT.md) and
+[the wearable workflow](docs/WEARABLE_ART_WORKFLOW.md).
+
 **Goal:** make the room a reliable test bed for the reusable foundation.
 
 **Small slices:** action-based input; movement/collision/camera; clocks and pause policy; contextual Inspect/Search interactions; placeholder scale and animation comparison.

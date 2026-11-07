@@ -1,0 +1,423 @@
+{
+  "version": 1,
+  "id": "brown_leather_work_boots",
+  "slot": "feet",
+  "direction": "south",
+  "pose": "standing",
+  "status": "both_bodies_south_standing_approved",
+  "approvalBasis": "User: it looks good, next phase. Approval covers both South-standing boot fits, alone and with jeans/equipment; walking remains a separate checkpoint.",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "groundLastOpaqueRow": 57,
+  "preview": "tools/player-equipment-review.html",
+  "scope": "Separate male/female brown leather work boots, South standing only. No walking, North/East/mirrored West or settling fit is implied. Review assets only; no production promotion.",
+  "palette": [
+    "#15191bff",
+    "#353234ff",
+    "#352820ff",
+    "#594030ff",
+    "#80583bff",
+    "#aa7c50ff",
+    "#c4a071ff"
+  ],
+  "layerOrder": [
+    "unchanged body",
+    "boots",
+    "jeans",
+    "jacket",
+    "hair",
+    "helmet",
+    "wrench"
+  ],
+  "extraction": "Copy opaque fitted-source pixels at x15..33, male y49..57 / female y48..57 into unchanged full canvas. Map source colors to the shared leather/sole palette by nearest RGB distance. Discard generated sole extension below original row57; no shifting, stretching or body replacement. Jeans overlap boot tops. All other source anatomy is discarded.",
+  "generation": {
+    "objectModel": "Pro Flash",
+    "fitModel": "Pro Flash reference edit",
+    "objectJobs": 2,
+    "fitJobs": 2,
+    "estimatedTotalGenerations": 20,
+    "animationJobs": 0
+  },
+  "bodies": [
+    {
+      "body": "male",
+      "approval": "approved_by_user",
+      "base": "PawnShop.Game/Content/Player/Bases/male/base.png",
+      "baseSha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67",
+      "baseCrop": [
+        0,
+        0,
+        48,
+        64
+      ],
+      "object": "male-object.png",
+      "objectId": "3a4c12f6-1ff1-4873-b65e-fdc0fcc2d8b7",
+      "objectJob": "3ad97744-e1ce-414e-ab88-2c1c69638ea9",
+      "objectRequest": {
+        "name": "Picker's Hollow - brown leather work boots - male",
+        "description": "One standalone matching PAIR of brown leather work boots, South/front view, low top-down cozy pixel-art RPG. Practical ankle-height lace-up boots with stout rounded reinforced toes, dark charcoal rubber soles, small muted tan lace marks and restrained leather scuff clusters. Warm medium-dark brown, NOT orange or gold. Same everyday workshop/salvage safety boot design for both body variants; broad practical male foot shape. Sized visually for a50-pixel-tall human; each boot around7-8 pixels wide and9-10 pixels tall at native game scale. Place the pair side by side with a gap, within transparent48x64 canvas; no rescaling the pixel grid. Clear recognizable soles and toe shading using few coherent pixels. No body, legs, skin, jeans, mannequin, hanger, scenery, floor or cast shadow. Design reference only; final art will be fitted separately to exact body feet.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match the exact native pixel density, dark outline and restrained readable shading of this48x64 canonical human; produce boots only."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#15191b",
+          "#352820",
+          "#594030",
+          "#80583b",
+          "#aa7c50",
+          "#c4a071"
+        ],
+        "max_colors": 6,
+        "seed": 63701
+      },
+      "fittedSource": "male-fitted-source.png",
+      "fitJob": "c33855f3-a9b5-4410-ae6a-70dfca526c0a",
+      "fitRequest": {
+        "method": "reference",
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/3a4c12f6-1ff1-4873-b65e-fdc0fcc2d8b7/download",
+          "usage_description": "Use this matching brown leather work-boot design, rounded reinforced toes, dark rubber sole and muted tan laces. Fit to target feet at native coordinates; reference placement/size is not a wearable overlay."
+        },
+        "description": "Put ONLY the reference brown leather work boots on this EXACT male South-standing human. Preserve original face, bald head, torso, underwear, arms, hands, legs, pose, native48x64 canvas and foot pivot24,58. No body resize or reposition. Both soles end exactly at row57: no new height, pixels below57 or floating feet. Ankle shafts begin around row49/50 and enclose original ankles, with practical broad rounded toe boxes covering EVERY original bare foot at rows55..57. Foot regions approximately x16..23 and x25..32; follow actual feet, keep central transparent gap. Original toe pixels must not poke out. Same brown work boot design as male/female counterpart, no heel, no fashion taper, no pointed toes. Warm dark brown leather, charcoal sole, restrained tan lace marks and clear subtle toe shading. No orange/gold trim, shin guards or excessive highlights. No jeans yet: full shafts must be authored independently; accepted jeans will draw OVER the boot tops later. No new clothing elsewhere, no ground shadow or background. Transparent full canvas; boot pixels only will be extracted over unchanged body.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63711
+      },
+      "layer": "male-layer.png",
+      "bodyComposite": "male-body-composite.png",
+      "jeansComposite": "male-jeans-composite.png",
+      "equippedComposite": "male-equipped-composite.png",
+      "extractionBounds": [
+        15,
+        49,
+        33,
+        57
+      ],
+      "bootPixels": 112,
+      "colorMap": {
+        "#0b0403ff": "#15191bff",
+        "#543422ff": "#594030ff",
+        "#784e34ff": "#80583bff",
+        "#361f14ff": "#352820ff",
+        "#462b1dff": "#352820ff",
+        "#0c0a09ff": "#15191bff",
+        "#84563aff": "#80583bff",
+        "#040202ff": "#15191bff",
+        "#2b1a15ff": "#352820ff",
+        "#6a432cff": "#594030ff",
+        "#5d3b26ff": "#594030ff",
+        "#43251aff": "#352820ff",
+        "#bc8a62ff": "#c4a071ff",
+        "#e1a27bff": "#c4a071ff",
+        "#cf9868ff": "#c4a071ff",
+        "#d29470ff": "#c4a071ff",
+        "#231612ff": "#15191bff",
+        "#1b0b07ff": "#15191bff",
+        "#ab744cff": "#aa7c50ff",
+        "#2c2b2cff": "#353234ff",
+        "#3d3a3bff": "#353234ff",
+        "#242323ff": "#352820ff",
+        "#4e4c4dff": "#594030ff",
+        "#4b4545ff": "#594030ff",
+        "#353030ff": "#353234ff",
+        "#535051ff": "#594030ff",
+        "#141312ff": "#15191bff"
+      },
+      "nativeOutlineRepairs": [],
+      "discardedBelowGround": [
+        [
+          16,
+          58,
+          "#0c0a09ff"
+        ],
+        [
+          17,
+          58,
+          "#353030ff"
+        ],
+        [
+          18,
+          58,
+          "#2c2b2cff"
+        ],
+        [
+          19,
+          58,
+          "#2c2b2cff"
+        ],
+        [
+          20,
+          58,
+          "#141312ff"
+        ],
+        [
+          27,
+          58,
+          "#1c1b1bff"
+        ],
+        [
+          28,
+          58,
+          "#1c1b1bff"
+        ],
+        [
+          29,
+          58,
+          "#141312ff"
+        ],
+        [
+          30,
+          58,
+          "#2c2b2cff"
+        ],
+        [
+          31,
+          58,
+          "#141312ff"
+        ]
+      ]
+    },
+    {
+      "body": "female",
+      "approval": "approved_by_user",
+      "base": "PawnShop.Game/Content/Player/Bases/female/base.png",
+      "baseSha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52",
+      "baseCrop": [
+        0,
+        0,
+        48,
+        64
+      ],
+      "object": "female-object.png",
+      "objectId": "f1dae91d-784d-4e74-beb1-077bef9f7464",
+      "objectJob": "61d19622-d8af-4457-8106-873bb94dd8d9",
+      "objectRequest": {
+        "name": "Picker's Hollow - brown leather work boots - female",
+        "description": "One standalone matching PAIR of brown leather work boots, South/front view, low top-down cozy pixel-art RPG. Practical ankle-height lace-up boots with stout rounded reinforced toes, dark charcoal rubber soles, small muted tan lace marks and restrained leather scuff clusters. Warm medium-dark brown, NOT orange or gold. Same everyday workshop/salvage safety boot design for both body variants; slightly narrower female foot shape, same flat practical sole and toe style, no heels or fashion silhouette. Sized visually for a50-pixel-tall human; each boot around7-8 pixels wide and9-10 pixels tall at native game scale. Place the pair side by side with a gap, within transparent48x64 canvas; no rescaling the pixel grid. Clear recognizable soles and toe shading using few coherent pixels. No body, legs, skin, jeans, mannequin, hanger, scenery, floor or cast shadow. Design reference only; final art will be fitted separately to exact body feet.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match the exact native pixel density, dark outline and restrained readable shading of this48x64 canonical human; produce boots only."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#15191b",
+          "#352820",
+          "#594030",
+          "#80583b",
+          "#aa7c50",
+          "#c4a071"
+        ],
+        "max_colors": 6,
+        "seed": 63702
+      },
+      "fittedSource": "female-fitted-source.png",
+      "fitJob": "035ffddf-7a54-4d26-83f2-3a10ad05bb53",
+      "fitRequest": {
+        "method": "reference",
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/d13b9b04-3d54-4997-b90d-eabc5a17612b/image.png",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/f1dae91d-784d-4e74-beb1-077bef9f7464/download",
+          "usage_description": "Use this matching brown leather work-boot design, rounded reinforced toes, dark rubber sole and muted tan laces. Fit to target feet at native coordinates; reference placement/size is not a wearable overlay."
+        },
+        "description": "Put ONLY the reference brown leather work boots on this EXACT female South-standing human. Preserve original face, bald head, torso, underwear, arms, hands, legs, pose, native48x64 canvas and foot pivot24,58. No body resize or reposition. Both soles end exactly at row57: no new height, pixels below57 or floating feet. Ankle shafts begin around row49/50 and enclose original ankles, with practical broad rounded toe boxes covering EVERY original bare foot at rows55..57. Foot regions approximately x17..24 and x25..33; follow actual feet, keep central transparent gap. Original toe pixels must not poke out. Same brown work boot design as male/female counterpart, no heel, no fashion taper, no pointed toes. Warm dark brown leather, charcoal sole, restrained tan lace marks and clear subtle toe shading. No orange/gold trim, shin guards or excessive highlights. No jeans yet: full shafts must be authored independently; accepted jeans will draw OVER the boot tops later. No new clothing elsewhere, no ground shadow or background. Transparent full canvas; boot pixels only will be extracted over unchanged body.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63712
+      },
+      "layer": "female-layer.png",
+      "bodyComposite": "female-body-composite.png",
+      "jeansComposite": "female-jeans-composite.png",
+      "equippedComposite": "female-equipped-composite.png",
+      "extractionBounds": [
+        15,
+        48,
+        33,
+        57
+      ],
+      "bootPixels": 127,
+      "colorMap": {
+        "#030202ff": "#15191bff",
+        "#2c1c15ff": "#352820ff",
+        "#63402cff": "#594030ff",
+        "#533524ff": "#594030ff",
+        "#090605ff": "#15191bff",
+        "#4c3123ff": "#594030ff",
+        "#0b0a0aff": "#15191bff",
+        "#432b1eff": "#352820ff",
+        "#5c3b28ff": "#594030ff",
+        "#734c34ff": "#80583bff",
+        "#d09b64ff": "#c4a071ff",
+        "#130d0bff": "#15191bff",
+        "#35231aff": "#352820ff",
+        "#3b251aff": "#352820ff",
+        "#1d110dff": "#15191bff",
+        "#131313ff": "#15191bff",
+        "#bd8b5cff": "#aa7c50ff",
+        "#241913ff": "#15191bff",
+        "#b38254ff": "#aa7c50ff",
+        "#845439ff": "#80583bff",
+        "#7b4d34ff": "#80583bff",
+        "#aa734dff": "#aa7c50ff",
+        "#8b553fff": "#80583bff",
+        "#8b593bff": "#80583bff",
+        "#231d1cff": "#15191bff",
+        "#343132ff": "#353234ff",
+        "#695c54ff": "#80583bff",
+        "#534b44ff": "#594030ff",
+        "#3d3a3aff": "#353234ff",
+        "#514f50ff": "#594030ff",
+        "#252121ff": "#352820ff"
+      },
+      "nativeOutlineRepairs": [],
+      "discardedBelowGround": [
+        [
+          16,
+          58,
+          "#030202ff"
+        ],
+        [
+          17,
+          58,
+          "#0b0a0aff"
+        ],
+        [
+          18,
+          58,
+          "#0b0a0aff"
+        ],
+        [
+          19,
+          58,
+          "#0b0a0aff"
+        ],
+        [
+          20,
+          58,
+          "#030202ff"
+        ],
+        [
+          27,
+          58,
+          "#030202ff"
+        ],
+        [
+          28,
+          58,
+          "#030202ff"
+        ],
+        [
+          29,
+          58,
+          "#0b0a0aff"
+        ],
+        [
+          30,
+          58,
+          "#030202ff"
+        ],
+        [
+          31,
+          58,
+          "#030202ff"
+        ]
+      ]
+    }
+  ],
+  "workbenchExports": {
+    "male": {
+      "layer": "https://api.pixellab.ai/mcp/pixel-tools/b6ce95cf-15f6-4e7d-87b8-9e6ba6d425f5/assets/south/full.png",
+      "body-composite": "https://api.pixellab.ai/mcp/pixel-tools/e0afaf49-1eeb-4b3e-9524-e2fafe2b0dc2/assets/south/full.png",
+      "jeans-composite": "https://api.pixellab.ai/mcp/pixel-tools/2f567146-aec0-43ed-bc56-a4a8714ff0a7/assets/south/full.png",
+      "equipped-composite": "https://api.pixellab.ai/mcp/pixel-tools/fad130e3-4367-478d-9406-aa936cc2e761/assets/south/full.png"
+    },
+    "female": {
+      "layer": "https://api.pixellab.ai/mcp/pixel-tools/99c47581-0d39-4c42-96ff-9bd12d1a984d/assets/south/full.png",
+      "body-composite": "https://api.pixellab.ai/mcp/pixel-tools/0ea5c120-2385-45b6-a5e1-dcdfe38b0a39/assets/south/full.png",
+      "jeans-composite": "https://api.pixellab.ai/mcp/pixel-tools/25fb0097-0abe-407d-b79f-aea53fba6216/assets/south/full.png",
+      "equipped-composite": "https://api.pixellab.ai/mcp/pixel-tools/19d8fc37-5234-4531-b551-8aa7bbc08b59/assets/south/full.png"
+    }
+  },
+  "files": [
+    {
+      "path": "female-layer.png",
+      "sha256": "35F53DE055D024F242F83E2952C7ABB51559CBD98329A44CB56D4DDB5BB88912"
+    },
+    {
+      "path": "female-object.png",
+      "sha256": "0B045E7F5DEF0FE9C35F57FA6BAEAAA05373A6E2E7563C53225B53FC3730F10C"
+    },
+    {
+      "path": "female-body-composite.png",
+      "sha256": "FE9591C05123D4B8740EFBF8B3BBD122350432456D6EF012030547F0A454AF02"
+    },
+    {
+      "path": "female-equipped-composite.png",
+      "sha256": "FE4C550A967DEDD575241029489CEA883348DF2EE50FC5C47E659BF904249704"
+    },
+    {
+      "path": "female-fitted-source.png",
+      "sha256": "7ECC274D673BB9DBC3180E5DAC5A3DD373BE1699939D05CF79F6B8DEB3A4EE11"
+    },
+    {
+      "path": "female-jeans-composite.png",
+      "sha256": "F9FF0F058F113552EFA23B5E82041904B72CCC3C88B2B14451A4CE15BE82CED5"
+    },
+    {
+      "path": "male-layer.png",
+      "sha256": "25EF006ABCA6D26A3CF683D77412BE844A2CEEBABEAF22A0E6FE48D3EDBC3BEB"
+    },
+    {
+      "path": "male-object.png",
+      "sha256": "82CDFFB45863EC06626B418BE92705CFDAF925CEA2F2120D1857C05AEBF22D18"
+    },
+    {
+      "path": "male-body-composite.png",
+      "sha256": "5953E1F0352FFD77F229B798DB6AFE6F17B199F752AEE45E68E21EEA7CA99BB5"
+    },
+    {
+      "path": "male-equipped-composite.png",
+      "sha256": "6606A695820448183A0E025DD5FCA0E2CEC45CC5A73688116A00FD3AA24043B9"
+    },
+    {
+      "path": "male-fitted-source.png",
+      "sha256": "4E439AE6AA5FFD781411BDE81E54377B91695355695DC47883F4E70AC69BF1E1"
+    },
+    {
+      "path": "male-jeans-composite.png",
+      "sha256": "B5AD82767DAA8479C90CB9F4E26AE1B5A2D2632F06D0C943E706F1140078B2CD"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: 12 PNGs 48x64; eight derivatives binary alpha; exact source/palette extraction and three composites per body across 6144 native pixels. Original feet fully covered, central gap clear, final opaque ground row57. Male112/female127 boot pixels; ten generated below-ground pixels trimmed per body, zero native outline repairs. All211 PNG hash records match; all199 earlier assets and both canonical bases unchanged.",
+    "preview": "PASS:71 loaded PNGs,166 views; boots5632 cases/90112 views across all64 loadouts. Boots before jeans, exact standing body and crops independent of selected direction/motion. Existing jeans, wrench, West mirroring, shared pose/settling, controls, links and scale checks pass.",
+    "visual": "Both South-standing fits approved by user: it looks good, next phase. No agent browser/game launch claimed."
+  },
+  "next": "After design approval, fit South walking on both bodies; then North and East/mirrored West including settling. Backpacks follow footwear before the production folder walkthrough."
+}

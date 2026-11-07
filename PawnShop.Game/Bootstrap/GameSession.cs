@@ -8,7 +8,7 @@ using System.Numerics;
 
 namespace PawnShop.Game.Bootstrap;
 
-// Owns player movement, NPC animation, the room clock/bell fixture and the transient conversation.
+// Owns player movement, player/NPC animation, the room clock/bell fixture and the transient conversation.
 // No inventory, save state, event bus, or graphics resources are created here.
 public sealed class GameSession : IDisposable
 {
@@ -19,14 +19,17 @@ public sealed class GameSession : IDisposable
     private readonly PlayerState player;
     private readonly MovementBounds[] obstacles;
     public PlayerView Player => player.View;
+    private readonly SpriteAnimator playerAnimator;
+    public int PlayerFrame => playerAnimator.FrameIndex;
 
     public IReadOnlyList<PlacedNpc> Npcs { get; }
     private readonly Dictionary<string, SpriteAnimator> animators = new();
     private readonly Dictionary<string, int> frames = new();
     public IReadOnlyDictionary<string, int> NpcFrames { get; }
 
-    public GameSession(IReadOnlyList<PlacedNpc>? npcs = null, PlayerGender gender = PlayerGender.Male)
+    public GameSession(SpriteSheetDefinition playerSheet, IReadOnlyList<PlacedNpc>? npcs = null, PlayerGender gender = PlayerGender.Male)
     {
+        playerAnimator = new(playerSheet, "Idle");
         Npcs = Array.AsReadOnly((npcs ?? Array.Empty<PlacedNpc>()).ToArray());
         player = new(gender, ShopRoomLayout.PlayerSpawn);
         obstacles = new[] { ShopRoomLayout.Counter }.Concat(Npcs.Select(ShopRoomLayout.NpcFootprint)).ToArray();
@@ -79,6 +82,8 @@ public sealed class GameSession : IDisposable
     {
         ObjectDisposedException.ThrowIf(IsDisposed, this);
         player.Move(movement, delta, ShopRoomLayout.Floor, obstacles);
+        playerAnimator.Play(player.View.Moving ? "Walk" : "Idle");
+        playerAnimator.Update(delta);
         room.Tick(delta, ringBell);
         foreach (var (id, animator) in animators) { animator.Update(delta); frames[id] = animator.FrameIndex; }
     }

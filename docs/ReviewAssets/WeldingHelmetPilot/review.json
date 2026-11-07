@@ -1,0 +1,331 @@
+{
+  "version": 1,
+  "id": "helmet_rusty_welder",
+  "slot": "head",
+  "status": "rejected_by_user",
+  "direction": "south",
+  "pose": "standing",
+  "canvas": [48,64],
+  "pivot": [24,58],
+  "preview": "tools/player-equipment-review.html",
+  "scope": "Separate male/female South-standing pilot only. No helmet walk, settle, North/East/West or production runtime support yet. No hair or face-accessory compatibility claim.",
+  "drawOrder": [
+    "original_body",
+    "approved_work_jacket_if_equipped",
+    "helmet_if_equipped"
+  ],
+  "extraction": {
+    "method": "Copy only native source pixels selected by explicit maskRows, with the recorded shared-palette map. No scaling, shifting, stretching, copied fabric rows or generated anatomy.",
+    "maskRowsFormat": "[y,xStartInclusive,xEndInclusive]",
+    "occlusion": "Opaque shield covers face/eyes/scalp. Original ears, outline and neck outside the helmet remain unchanged; no body-hide mask. The male retains visible ear pixels beside the lower shield. Inspect this fit during approval.",
+    "palette": [
+      "#080202ff",
+      "#cf8050ff",
+      "#a35332ff",
+      "#713a2cff",
+      "#e5a16fff",
+      "#26333bff",
+      "#46535cff",
+      "#78858bff",
+      "#13292dff",
+      "#60958bff"
+    ]
+  },
+  "generation": {
+    "tools": [
+      "create_object_pro_flash",
+      "edit_image_pro_flash (reference)",
+      "pixelart_workbench draw (exact extraction/composition)"
+    ],
+    "paidOperations": 4,
+    "estimatedGenerationUnits": 20,
+    "retries": 0
+  },
+  "bodies": [
+    {
+      "body": "male",
+      "approval": "rejected_by_user",
+      "base": {
+        "path": "PawnShop.Game/Content/Player/Bases/male/base.png",
+        "crop": [0,0,48,64],
+        "sha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67"
+      },
+      "jacket": {
+        "path": "docs/ReviewAssets/WorkJacketPilot/male-layer-teal-pockets.png",
+        "sha256": "E9AAF23B04EA6B7F88F86C4FFE403CA8AB6EC743FCAEB7F24CEB75276B950773"
+      },
+      "objectId": "4e6e1296-897a-4daa-9271-87e5f38f11f4",
+      "objectRequest": {
+        "name": "Picker's Hollow - Salvage Welding Helmet - male",
+        "description": "One standalone EMPTY welding helmet, South/front view in a cozy low-top-down pixel-art salvage RPG. Retro industrial rounded rectangular rust-orange steel shell, lowered full-face shield, small dark horizontal rectangular green-black glass viewing slit, charcoal rim and side hinges, simple warm highlights and very restrained wear. Enclosed head shell with curved crown, no exposed face. Recognizably a practical welding helmet, not a space helmet, knight helmet, gas mask or robot head. Shared design across body variants; male head fit: slightly broader straight cheek walls. Crisp single-pixel dark outlines and broad quiet color clusters, no noisy scratches, text, logos, glowing eyes, ornaments or extra gear. Helmet alone, no person, mannequin, neck, body, jacket, ground or shadow. Transparent 48x64 canvas. This is an object design reference, actual native head fitting follows separately.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match the game's pixel grid, outline thickness and restrained shading. Helmet only; do not draw the person."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#080202",
+          "#26333b",
+          "#46535c",
+          "#78858b",
+          "#713a2c",
+          "#a35332",
+          "#cf8050",
+          "#13292d",
+          "#28565b",
+          "#60958b"
+        ],
+        "max_colors": 10,
+        "seed": 63201
+      },
+      "fitJob": "b07bf012-eb1e-4eb9-8589-6a640232a8e3",
+      "fitRequest": {
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/4e6e1296-897a-4daa-9271-87e5f38f11f4/download",
+          "usage_description": "Fit this body's welding helmet to the existing head, preserving the exact body. Reference is a design only, not an image to paste or recenter."
+        },
+        "description": "Add ONLY the reference's rust-orange industrial welding helmet to this exact male South-facing standing body. Helmet encloses the existing bald head without moving/resizing/redrawing anatomy: around x16..32, crown near y5..6, chin shield near y23..24. Original head remains its current size/position under the helmet. Keep the helmet small and proportional, about 18 pixels wide and 19 pixels high, no giant head. Front faces the camera symmetrically: curved crown, rounded rectangular rust-orange shell, dark charcoal rim, small dark horizontal green-black rectangular glass slit, subtle side hinge hardware. Visor fully DOWN and opaque: conceal eyes, eyebrows, face and scalp with the shell/glass, no human eyes showing through. Lower edge above the shoulders, neck/collar visible below; no shoulder pads or bib. Match reference design, restrained solid pixel clusters and crisp one-pixel outline, no texture noise or glow. ALL body pixels below y25, shoulders, torso, underwear, arms/hands, legs/feet remain exact and uncovered. Do not add clothing, hair, tools, background, shadow, expressions or new pose. Keep exact transparent 48x64 canvas and ground pivot (24,58). Output a full fitted source for helmet-only extraction onto the unchanged original body.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63203
+      },
+      "maskRows": [
+        [7,22,25],
+        [8,20,27],
+        [9,19,28],
+        [10,19,29],
+        [11,18,29],
+        [12,18,29],
+        [13,17,30],
+        [14,17,30],
+        [15,17,30],
+        [16,17,30],
+        [17,18,29],
+        [18,18,29],
+        [19,18,29],
+        [20,18,29],
+        [21,18,29],
+        [22,19,28],
+        [23,20,27],
+        [24,22,25]
+      ],
+      "colorMap": {
+        "#0b0a09ff": "#080202ff",
+        "#030202ff": "#080202ff",
+        "#0a0403ff": "#080202ff",
+        "#d67a4dff": "#cf8050ff",
+        "#bf673fff": "#cf8050ff",
+        "#ad5d3bff": "#a35332ff",
+        "#9c5235ff": "#a35332ff",
+        "#84442cff": "#713a2cff",
+        "#6c3522ff": "#713a2cff",
+        "#291d19ff": "#713a2cff",
+        "#463027ff": "#713a2cff",
+        "#ec9564ff": "#e5a16fff",
+        "#121515ff": "#26333bff",
+        "#232323ff": "#26333bff",
+        "#3f3b3aff": "#26333bff",
+        "#1a1c1dff": "#26333bff",
+        "#393534ff": "#26333bff",
+        "#242b2cff": "#26333bff",
+        "#444a4dff": "#46535cff",
+        "#525253ff": "#46535cff",
+        "#4d4b4cff": "#46535cff",
+        "#7a7b7dff": "#78858bff",
+        "#273936ff": "#13292dff",
+        "#648d86ff": "#60958bff"
+      },
+      "helmetPixels": 195,
+      "drawIds": {
+        "layer": "a8ffed85-9d6b-4b90-8fbf-989d0498449d",
+        "composite": "409a1ae9-eeff-4a90-9121-d8779dced9e4",
+        "jacket-composite": "32b5e766-e084-4694-97d1-c2773c36fcea"
+      },
+      "files": {
+        "object": "male-object.png",
+        "source": "male-fitted-source.png",
+        "layer": "male-layer.png",
+        "composite": "male-composite.png",
+        "jacketComposite": "male-jacket-composite.png"
+      }
+    },
+    {
+      "body": "female",
+      "approval": "rejected_by_user",
+      "base": {
+        "path": "PawnShop.Game/Content/Player/Bases/female/base.png",
+        "crop": [0,0,48,64],
+        "sha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52"
+      },
+      "jacket": {
+        "path": "docs/ReviewAssets/WorkJacketPilot/female-layer.png",
+        "sha256": "4E917B0934A656FC075AD0E9A180C3A518617E67B89A448766AFE870EEFDB391"
+      },
+      "objectId": "c63806f2-f9f2-4568-9a35-ee182b2736eb",
+      "objectRequest": {
+        "name": "Picker's Hollow - Salvage Welding Helmet - female",
+        "description": "One standalone EMPTY welding helmet, South/front view in a cozy low-top-down pixel-art salvage RPG. Retro industrial rounded rectangular rust-orange steel shell, lowered full-face shield, small dark horizontal rectangular green-black glass viewing slit, charcoal rim and side hinges, simple warm highlights and very restrained wear. Enclosed head shell with curved crown, no exposed face. Recognizably a practical welding helmet, not a space helmet, knight helmet, gas mask or robot head. Shared design across body variants; female head fit: softly tapered lower cheek walls, same practical protective design. Crisp single-pixel dark outlines and broad quiet color clusters, no noisy scratches, text, logos, glowing eyes, ornaments or extra gear. Helmet alone, no person, mannequin, neck, body, jacket, ground or shadow. Transparent 48x64 canvas. This is an object design reference, actual native head fitting follows separately.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match the game's pixel grid, outline thickness and restrained shading. Helmet only; do not draw the person."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#080202",
+          "#26333b",
+          "#46535c",
+          "#78858b",
+          "#713a2c",
+          "#a35332",
+          "#cf8050",
+          "#13292d",
+          "#28565b",
+          "#60958b"
+        ],
+        "max_colors": 10,
+        "seed": 63202
+      },
+      "fitJob": "a7818e9b-9900-4264-9ac8-b4e85507bf41",
+      "fitRequest": {
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/d13b9b04-3d54-4997-b90d-eabc5a17612b/image.png",
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/c63806f2-f9f2-4568-9a35-ee182b2736eb/download",
+          "usage_description": "Fit this body's welding helmet to the existing head, preserving the exact body. Reference is a design only, not an image to paste or recenter."
+        },
+        "description": "Add ONLY the reference's rust-orange industrial welding helmet to this exact female South-facing standing body. Helmet encloses the existing bald head without moving/resizing/redrawing anatomy: around x16..32, crown near y5..6, chin shield near y23..24. Original head remains its current size/position under the helmet. Keep the helmet small and proportional, about 18 pixels wide and 19 pixels high, no giant head. Front faces the camera symmetrically: curved crown, rounded rectangular rust-orange shell, dark charcoal rim, small dark horizontal green-black rectangular glass slit, subtle side hinge hardware. Visor fully DOWN and opaque: conceal eyes, eyebrows, face and scalp with the shell/glass, no human eyes showing through. Lower edge above the shoulders, neck/collar visible below; no shoulder pads or bib. Match reference design, restrained solid pixel clusters and crisp one-pixel outline, no texture noise or glow. ALL body pixels below y25, shoulders, torso, underwear, arms/hands, legs/feet remain exact and uncovered. Do not add clothing, hair, tools, background, shadow, expressions or new pose. Keep exact transparent 48x64 canvas and ground pivot (24,58). Output a full fitted source for helmet-only extraction onto the unchanged original body.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63204
+      },
+      "maskRows": [
+        [8,22,26],
+        [9,20,28],
+        [10,19,29],
+        [11,19,29],
+        [12,18,30],
+        [13,18,30],
+        [14,18,30],
+        [15,17,31],
+        [16,17,31],
+        [17,18,30],
+        [18,18,30],
+        [19,18,30],
+        [20,19,29],
+        [21,19,29],
+        [22,20,28],
+        [23,22,26]
+      ],
+      "colorMap": {
+        "#131313ff": "#080202ff",
+        "#0b0a0aff": "#080202ff",
+        "#030302ff": "#080202ff",
+        "#bb633cff": "#cf8050ff",
+        "#cb764dff": "#cf8050ff",
+        "#a45434ff": "#a35332ff",
+        "#8a452cff": "#a35332ff",
+        "#bd7a5bff": "#a35332ff",
+        "#9b5e45ff": "#a35332ff",
+        "#562c1fff": "#713a2cff",
+        "#773b27ff": "#713a2cff",
+        "#673221ff": "#713a2cff",
+        "#3f1e13ff": "#713a2cff",
+        "#de9165ff": "#e5a16fff",
+        "#e09e75ff": "#e5a16fff",
+        "#242323ff": "#26333bff",
+        "#1c1c1cff": "#26333bff",
+        "#2c2c2bff": "#26333bff",
+        "#343333ff": "#26333bff",
+        "#535354ff": "#46535cff",
+        "#3c3d3dff": "#46535cff",
+        "#666669ff": "#78858bff",
+        "#1a2d24ff": "#13292dff"
+      },
+      "helmetPixels": 180,
+      "drawIds": {
+        "layer": "485446aa-9706-4db7-984c-2aa414600a96",
+        "composite": "eeae1224-4a7e-469d-9e04-b5f5d4e061b7",
+        "jacket-composite": "d430821b-48cc-4b86-a0ef-77a3dad9192d"
+      },
+      "files": {
+        "object": "female-object.png",
+        "source": "female-fitted-source.png",
+        "layer": "female-layer.png",
+        "composite": "female-composite.png",
+        "jacketComposite": "female-jacket-composite.png"
+      }
+    }
+  ],
+  "files": [
+    {
+      "sha256": "33204EBAF04E36013D88795818B336161C1C64F8B812210F05D957D9BFD99376",
+      "path": "female-composite.png"
+    },
+    {
+      "sha256": "D14672D1CB4E13CCB16B7AC346A87FFC9A613655B84E333413CA453DC1BF8D78",
+      "path": "female-fitted-source.png"
+    },
+    {
+      "sha256": "CD83DE697E932BD6BA7250C1B5B61C73511D306A3A80EAB759BC6F25A6B5DF04",
+      "path": "female-jacket-composite.png"
+    },
+    {
+      "sha256": "F17E5A1D8164D422FF5CDCCC0A9284D2AEB48859A5A28812B7F4165901AD7089",
+      "path": "female-layer.png"
+    },
+    {
+      "sha256": "AA8E98A5C573A74A497B60A114C3B01084278CEA3176E0752458D2CC6400C510",
+      "path": "female-object.png"
+    },
+    {
+      "sha256": "805998EEEF87913039F43F8C213C439B5329015A059AE6003EBF5A6B43468CDC",
+      "path": "male-composite.png"
+    },
+    {
+      "sha256": "4A7E8A03023BF34CFAD0CF4C3E180BBE5BDA3EAAC1395754C089A0CC10798075",
+      "path": "male-fitted-source.png"
+    },
+    {
+      "sha256": "134F2CC3C970921D914523E638E613F571DAC9862EC9AE2894DE2743E37398AD",
+      "path": "male-jacket-composite.png"
+    },
+    {
+      "sha256": "F14538BEFDB07887DC93DA836A1AF8607061A74564138B577F50041B798F30EF",
+      "path": "male-layer.png"
+    },
+    {
+      "sha256": "66403ADDF21797FBAB5886D3DF20F0B162FBE8284012FAE228609AC34CCE9925",
+      "path": "male-object.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: 10 native 48x64 PNGs with binary alpha; all 10 new and 57 prior frozen/accepted file hashes; 195 male and 180 female helmet pixels match their exact source masks and recorded palette maps; central face coverage; no helmet below y24; both bare-body and jacket composites equal unchanged original pixels plus the helmet layer.",
+    "previewChecks": "PASS: Node DOM/canvas stubs loaded 24 real PNGs and checked 42 views, four jacket/helmet toggle combinations in every jacket direction, static South helmet crops and scale, retained jacket cardinal facings, full transition sequence, contact chronology, matching layer transforms, playback/pause/step/wrap; 5216 draw calls. No browser rendering claim.",
+    "visual": "User rejected both South-standing masks. Prior numeric checks do not approve their appearance."
+  },
+  "rejection": {
+    "reason": "User rejected the orange color and mismatched rounded female / elongated male shapes.",
+    "replacement": "docs/ReviewAssets/WeldingHelmetCharcoal/review.json",
+    "archive": "All original PNGs and generation records retained here; not production assets."
+  }
+}

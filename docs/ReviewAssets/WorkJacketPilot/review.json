@@ -1,0 +1,414 @@
+{
+  "version": 1,
+  "id": "work_jacket",
+  "slot": "torso",
+  "status": "approved_south_standing_fit",
+  "approvalBasis": "User accepted the removal of male gold pocket accents with 'great, next phase'. Acceptance covers corrected male and existing female South-standing jacket fits only, not walking poses or other directions.",
+  "scope": "Phase 4 first pilot: separate male/female South-standing jacket design references, fitted AI sources, extracted layers and unchanged-body composites. No walking fit, helmet, wrench or runtime promotion yet.",
+  "canvas": [
+    48,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "palette": [
+    "#080202",
+    "#17363b",
+    "#28565b",
+    "#3f7778",
+    "#60958b",
+    "#66533b",
+    "#a4824d",
+    "#cfb77a"
+  ],
+  "preview": "tools/player-equipment-review.html",
+  "motionApproval": "docs/PHASE3_HUMAN_REVIEW.json",
+  "estimatedGenerationUsage": 20,
+  "bodies": [
+    {
+      "body": "male",
+      "approval": "approved_south_standing_corrected_teal_pockets",
+      "base": "PawnShop.Game/Content/Player/Bases/male/base.png",
+      "baseSha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67",
+      "baseRegion": [
+        0,
+        0,
+        47,
+        63
+      ],
+      "objectId": "da6b443e-527f-4fc3-a314-ce86173d1eb0",
+      "objectFile": "male-object.png",
+      "objectRequest": {
+        "name": "Picker's Hollow - Teal Salvage Jacket - male",
+        "description": "One standalone empty muted teal canvas salvage work jacket, front view in a cozy low-top-down pixel-art RPG. Closed central brass fastening, small fold-down collar, two symmetrical practical chest patch pockets, long sleeves with dark cuffs and modest reinforced dark-teal elbow patches, straight hip-length hem. Crisp one-pixel dark outline, simple clusters and restrained shading, no tiny decorative noise. Same design for both body types. Male cut: broad shoulders, straight roomy torso, square waist; relaxed long sleeves hang naturally beside the torso. Garment only, no body, skin, head, hands, pants, mannequin, hanger, text, logo, scenery or ground shadow. Transparent native 48x64 canvas.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match this game's native pixel grid, dark outline weight and restrained shading. Generate only the empty jacket, not the person."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#080202",
+          "#17363b",
+          "#28565b",
+          "#3f7778",
+          "#60958b",
+          "#66533b",
+          "#a4824d",
+          "#cfb77a"
+        ],
+        "max_colors": 8,
+        "seed": 63101
+      },
+      "fitJob": "c55aa6a3-7d48-468a-9860-1b0812347b9d",
+      "fitRequest": {
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/da6b443e-527f-4fc3-a314-ce86173d1eb0/download",
+          "usage_description": "Use this male-cut jacket design and fit it to the exact base body. Do not copy the object's position or size."
+        },
+        "description": "Dress this exact male base ONLY in the reference's muted teal canvas work jacket: closed front, tiny brass fastenings, fold-down collar, two chest patch pockets, long sleeves with dark cuffs and reinforced dark teal elbows. Broad shoulders begin at y22; cover x18-19 and x28-29 at shoulder tops. Neck opening only in the central neck x21-26. Sleeves follow the original arms down to wrists; leave the original hands visible. Straight torso and hip-length hem around y39. Keep the exact 48x64 canvas, every original head/face, neck, hands, legs, feet, identity, proportions and pose. Keep feet at y57 and origin (24,58). No shifting, resizing, stretching, recentering, new anatomy, hair, accessories, pants or shoes. Add jacket material over the original torso and arms only, fully cover shoulder tops and torso underwear, with collar around original neck. Retain dark one-pixel outlines and simple pixel clusters at this native resolution. Return full dressed sprite on transparency; garment-only layer will be extracted separately over the unchanged base.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63103
+      },
+      "fittedSource": "male-fitted-source.png",
+      "layer": "male-layer-teal-pockets.png",
+      "composite": "male-composite-teal-pockets.png",
+      "postExtractionCorrection": {
+        "reason": "User reported gold chest accents resemble nipples. Replace both with adjacent teal pocket shading.",
+        "pixels": [[20,30,"#a4824dff","#28565bff"],[27,30,"#a4824dff","#28565bff"]],
+        "originalLayer": "male-layer.png",
+        "originalComposite": "male-composite.png",
+        "verification": "Exactly two RGBA pixel changes per file; all other pixels, alpha and dimensions unchanged."
+      },
+      "extraction": {
+        "rectanglesInclusive": [
+          [
+            17,
+            22,
+            20,
+            22
+          ],
+          [
+            27,
+            22,
+            30,
+            22
+          ],
+          [
+            16,
+            23,
+            21,
+            23
+          ],
+          [
+            26,
+            23,
+            31,
+            23
+          ],
+          [
+            15,
+            24,
+            32,
+            24
+          ],
+          [
+            14,
+            25,
+            22,
+            25
+          ],
+          [
+            25,
+            25,
+            33,
+            25
+          ],
+          [
+            14,
+            26,
+            33,
+            27
+          ],
+          [
+            13,
+            28,
+            34,
+            32
+          ],
+          [
+            12,
+            33,
+            35,
+            39
+          ],
+          [
+            17,
+            40,
+            30,
+            42
+          ]
+        ],
+        "colorMap": {
+          "#040b0bff": "#080202ff",
+          "#41767aff": "#3f7778ff",
+          "#346669ff": "#28565bff",
+          "#a29354ff": "#a4824dff",
+          "#1c4245ff": "#17363bff",
+          "#21494cff": "#28565bff",
+          "#133234ff": "#17363bff",
+          "#393433ff": "#17363bff",
+          "#1a3e41ff": "#17363bff",
+          "#427a7dff": "#3f7778ff",
+          "#3a6e72ff": "#3f7778ff",
+          "#265154ff": "#28565bff",
+          "#0d2325ff": "#17363bff",
+          "#122b2dff": "#17363bff",
+          "#030302ff": "#080202ff",
+          "#336265ff": "#28565bff",
+          "#091c1cff": "#080202ff",
+          "#3e757aff": "#3f7778ff",
+          "#17363aff": "#17363bff",
+          "#2e5c60ff": "#28565bff",
+          "#36696dff": "#3f7778ff",
+          "#6d8266ff": "#60958bff",
+          "#183a3dff": "#17363bff",
+          "#447d81ff": "#3f7778ff",
+          "#3c7275ff": "#3f7778ff",
+          "#0b0a0aff": "#080202ff",
+          "#8c855aff": "#a4824dff",
+          "#242323ff": "#17363bff",
+          "#0d2a2bff": "#17363bff",
+          "#051314ff": "#080202ff"
+        },
+        "method": "Select only opaque generated garment pixels inside inspected regions; map each selected color to the nearest shared palette color in RGB distance. Preserve source coordinates; do not move, scale or stretch pixels. Composite those pixels over unchanged South base."
+      },
+      "pixelLabLayer": "df4a2bf2-35ae-48bd-8e72-0c0832cc37ba",
+      "pixelLabComposite": "4a408b8f-5048-4169-95d0-7943e3e22297"
+    },
+    {
+      "body": "female",
+      "approval": "approved_south_standing",
+      "base": "PawnShop.Game/Content/Player/Bases/female/base.png",
+      "baseSha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52",
+      "baseRegion": [
+        0,
+        0,
+        47,
+        63
+      ],
+      "objectId": "13514d91-1807-4d7b-8b87-d255e6fec525",
+      "objectFile": "female-object.png",
+      "objectRequest": {
+        "name": "Picker's Hollow - Teal Salvage Jacket - female",
+        "description": "One standalone empty muted teal canvas salvage work jacket, front view in a cozy low-top-down pixel-art RPG. Closed central brass fastening, small fold-down collar, two symmetrical practical chest patch pockets, long sleeves with dark cuffs and modest reinforced dark-teal elbow patches, straight hip-length hem. Crisp one-pixel dark outline, simple clusters and restrained shading, no tiny decorative noise. Same design for both body types. Female cut: narrower shoulders, gently shaped chest and waist, modest ease at the hips; practical fit, no cropped hem or exaggerated hourglass. Garment only, no body, skin, head, hands, pants, mannequin, hanger, text, logo, scenery or ground shadow. Transparent native 48x64 canvas.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match this game's native pixel grid, dark outline weight and restrained shading. Generate only the empty jacket, not the person."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#080202",
+          "#17363b",
+          "#28565b",
+          "#3f7778",
+          "#60958b",
+          "#66533b",
+          "#a4824d",
+          "#cfb77a"
+        ],
+        "max_colors": 8,
+        "seed": 63102
+      },
+      "fitJob": "77ff495c-0758-457a-9f5a-cf24b45068ff",
+      "fitRequest": {
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/d13b9b04-3d54-4997-b90d-eabc5a17612b/image.png",
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/13514d91-1807-4d7b-8b87-d255e6fec525/download",
+          "usage_description": "Use this female-cut jacket design and fit it to the exact base body. Do not copy the object's position or size."
+        },
+        "description": "Dress this exact female base ONLY in the reference's muted teal canvas work jacket: closed front, tiny brass fastenings, fold-down collar, two chest patch pockets, long sleeves with dark cuffs and reinforced dark teal elbows. Narrower shoulders begin at y23. Cover shoulder tops and every sports-bra strap and chest pixel. Fit natural chest and tapered waist, hip-length hem around y39. Long sleeves follow the exact original arms to wrists while leaving the original hands visible. Not a boxy male jacket, dress or cropped top. Keep the exact 48x64 canvas, every original head/face, neck, hands, legs, feet, identity, proportions and pose. Keep feet at y57 and origin (24,58). No shifting, resizing, stretching, recentering, new anatomy, hair, accessories, pants or shoes. Add jacket material over the original torso and arms only, fully cover shoulder tops and torso underwear, with collar around original neck. Retain dark one-pixel outlines and simple pixel clusters at this native resolution. Return full dressed sprite on transparency; garment-only layer will be extracted separately over the unchanged base.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63104
+      },
+      "fittedSource": "female-fitted-source.png",
+      "layer": "female-layer.png",
+      "composite": "female-composite.png",
+      "extraction": {
+        "rectanglesInclusive": [
+          [
+            18,
+            23,
+            30,
+            23
+          ],
+          [
+            17,
+            24,
+            22,
+            24
+          ],
+          [
+            26,
+            24,
+            31,
+            24
+          ],
+          [
+            16,
+            25,
+            23,
+            25
+          ],
+          [
+            25,
+            25,
+            32,
+            25
+          ],
+          [
+            16,
+            26,
+            32,
+            27
+          ],
+          [
+            15,
+            28,
+            32,
+            30
+          ],
+          [
+            14,
+            31,
+            33,
+            34
+          ],
+          [
+            13,
+            35,
+            35,
+            39
+          ],
+          [
+            17,
+            40,
+            31,
+            40
+          ],
+          [
+            19,
+            41,
+            28,
+            41
+          ]
+        ],
+        "colorMap": {
+          "#1e3b3aff": "#17363bff",
+          "#0f2423ff": "#17363bff",
+          "#030302ff": "#080202ff",
+          "#344a36ff": "#17363bff",
+          "#457a7cff": "#3f7778ff",
+          "#325c5dff": "#28565bff",
+          "#0a0a09ff": "#080202ff",
+          "#427375ff": "#3f7778ff",
+          "#123d40ff": "#17363bff",
+          "#050a0aff": "#080202ff",
+          "#4d8485ff": "#3f7778ff",
+          "#376365ff": "#28565bff",
+          "#518a8bff": "#60958bff",
+          "#144448ff": "#17363bff",
+          "#0b1c1cff": "#080202ff",
+          "#0f2b2cff": "#17363bff",
+          "#2c5354ff": "#28565bff",
+          "#051516ff": "#080202ff",
+          "#264b4cff": "#28565bff",
+          "#3c6b6cff": "#3f7778ff",
+          "#224344ff": "#17363bff",
+          "#4b7c7dff": "#3f7778ff"
+        },
+        "method": "Select only opaque generated garment pixels inside inspected regions; map each selected color to the nearest shared palette color in RGB distance. Preserve source coordinates; do not move, scale or stretch pixels. Composite those pixels over unchanged South base."
+      },
+      "pixelLabLayer": "b206e7fc-dab5-4bb3-971d-c63727d006d5",
+      "pixelLabComposite": "9437124b-adfe-4dc9-81ec-b2e927da4460"
+    }
+  ],
+  "validation": [
+    {
+      "body": "male",
+      "garmentPixels": 416,
+      "garmentColors": 5,
+      "compositeExact": true,
+      "protectedHeadHandsLegsExact": true,
+      "shoulderAndTorsoCoverage": true
+    },
+    {
+      "body": "female",
+      "garmentPixels": 349,
+      "garmentColors": 5,
+      "compositeExact": true,
+      "protectedHeadHandsLegsExact": true,
+      "shoulderAndTorsoCoverage": true
+    }
+  ],
+  "files": [
+    { "path": "male-layer-teal-pockets.png", "sha256": "E9AAF23B04EA6B7F88F86C4FFE403CA8AB6EC743FCAEB7F24CEB75276B950773" },
+    { "path": "male-composite-teal-pockets.png", "sha256": "7AD5060895368C8E200F3B6F8213295CB864C937F554FF1B51B735087D2271D0" },
+    {
+      "path": "male-object.png",
+      "sha256": "051AD047C9823DEEA99D72D12644E0404E12AA742E101942D99F92D0EDD35227"
+    },
+    {
+      "path": "female-object.png",
+      "sha256": "052A9B05D0F2AB675981E7351D528646FC2C1C9AF96DC5C3109D1E2CFBEA46C3"
+    },
+    {
+      "path": "male-fitted-source.png",
+      "sha256": "0314043D316260CEB54C55E01FF0F2B2E44B6E43AF992FE267080EE39BEAC1D0"
+    },
+    {
+      "path": "female-fitted-source.png",
+      "sha256": "AFFACF2C57AA19C88B40D128B2D13E51843AB4EBE3B4F05E21364614D43DDF32"
+    },
+    {
+      "path": "male-layer.png",
+      "sha256": "12F9EA6AB92AA3C986C0B2E38B045BF756BC1AB20CCDB44DD7F4A82836FAA753"
+    },
+    {
+      "path": "female-layer.png",
+      "sha256": "4E917B0934A656FC075AD0E9A180C3A518617E67B89A448766AFE870EEFDB391"
+    },
+    {
+      "path": "male-composite.png",
+      "sha256": "C62820442629BF69D8C0E36E8D172BE4E7ECA28A04E9344F363A97DC802F615C"
+    },
+    {
+      "path": "female-composite.png",
+      "sha256": "B4E69FA117350A977BDC17345A27DDAF61C829B0D7FD96FD2FE391F00AD7713E"
+    }
+  ]
+}

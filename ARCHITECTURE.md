@@ -916,12 +916,32 @@ art must not duplicate an equipment item. Source pictures and worn layers remain
 separate. Other facings, animation, helmet/hair hiding and in-game scale still need
 their own implementation and acceptance; this artwork does not complete M02/M07.
 
+Every wearable design must have fitted **male and female** art and separate
+acceptance for both bodies. For player walks, use PixelLab **Skeleton v3** for
+S/N/E, with W rendered from E using `SpriteEffects.FlipHorizontally`. Keep one frame
+clock and one character-space mirror for body, clothing, masks, anchors and offsets.
+Mirroring changes asymmetric details; record reviewed exceptions for anatomical-side
+pockets or handed equipment without changing the mirrored body. Walking authoring
+assets and attire checks live in `Content/Player/Bases/Walking` and
+the C# `--assets walk` command; see the workflow for body hashes, per-frame coverage
+and protected-pixel masks. Static-shirt approval is not walking approval. These
+authoring assets are not loaded by the runtime renderer.
+
+Phase 1 consolidates human PNG checks, packing, review and local import under
+`PawnShop.Tests/Assets`, exposed through `--assets`. It reuses the runtime metadata
+parser and pins System.Drawing.Common 10.0.0 only in the test/authoring project.
+No production dependencies or rendering behavior changed. Existing NESW walking
+sources retain their historical W-to-E provenance and pending approval. New S/N/E
+runtime data and mirrored West drawing are implemented in the Phase 2 placeholder
+demo below; the legacy validator is not a production promotion gate.
+See docs/VERIFICATION_ASSET_CLEANUP.md.
+
 #### Implemented player selection and movement
 
 New Game opens a sessionless male/female selection screen. Confirmation creates
 one fresh session; X returns to title. `Characters/Player/PlayerState` owns the
 player's ID, gender, ground position and facing, exposing an immutable `PlayerView`.
-`GameSession` advances movement and NPC animation once per room tick. Held movement
+`GameSession` advances movement and player/NPC animation once per room tick. Held movement
 is separate from pressed-once Z/X actions; focused menus and dialogue consume
 input before room simulation. Dialogue, pause and character confirmation cannot
 also move or interact with the world.
@@ -931,11 +951,31 @@ rectangle is swept separately along X and Y against the room bounds, counter and
 NPC footprints, allowing sliding without tunneling. This is independent of the
 48-by-64 artwork. `ShopRoomLayout` shares floor/counter geometry with rendering.
 `PlayerSpriteCatalog` validates metadata and both PNG headers without a device.
-The application-owned `PlayerSpriteRenderer` shares the two textures between
-selection and room rendering, anchors both at (24,58), and uses the eight standing
-facings from the common sheet metadata. There is no walking cycle or runtime
-wearable layer yet. NPC textures remain location-owned. Headless checks and manual
-acceptance status are recorded in [player verification](docs/VERIFICATION_PLAYER_CONTROLS.md).
+The application-owned `PlayerSpriteRenderer` retains both original base textures
+for selection. The room demonstrates four cardinal facings with temporary,
+code-authored body, jacket, helmet, backpack and wrench layers for both appearances.
+`PlayerPlaceholderSprites` creates those diagnostic textures once at load; it is
+not an asset generator or a production clothing-fit method. Existing PNGs remain
+unchanged, including their unused legacy directions. NPC textures remain location-owned.
+
+`PlayerState` chooses the dominant cardinal axis; a newly pressed/reversed axis wins
+equal diagonal input, otherwise the last axis persists (initially vertical).
+Translation stays normalized diagonally. One session-owned `SpriteAnimator` reads
+`Content/Player/placeholder-sprite.json`: static Idle and four-phase Walk at 100ms.
+Direction changes preserve phase; stopping or fully blocked movement selects Idle.
+Pause/dialogue freeze the clock. Draw never advances it.
+
+Every placeholder layer has the same 48x64 frame and pivot (24,58), with S/N/E rows
+and four columns. West selects East's source rectangle and applies
+`SpriteEffects.FlipHorizontally` to every full-canvas layer using identical destination
+bounds. Hand anchors and wrench offsets are authored in that canvas before reflection;
+the pivot also reflects for an off-center rig. Backpacks draw behind the body from
+South/East/West and in front from North; North's wrench draws behind the body.
+Shared layer identities have separate male/female shapes, with no independent layer clocks.
+Production item definitions/equipping, fitted overlays and approved human walks remain
+later phases; these placeholders do not claim art acceptance. See
+[Phase 2 verification](docs/VERIFICATION_CARDINAL_RENDERING.md) and the earlier
+[player verification](docs/VERIFICATION_PLAYER_CONTROLS.md).
 
 Movement defaults to WASD with arrow alternates. All six actions now support
 rebinding in both slots; Z/X above describe the default Interact/Pause / Back keys.

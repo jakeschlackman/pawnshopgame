@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player walking and attire review</title>
+<style>
+body{font:16px system-ui;background:#20282b;color:#eef4ec;margin:24px;max-width:1100px}
+h1{font-size:26px}button,input,select{font:inherit;margin:5px;padding:5px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:12px}
+figure{margin:0;padding:10px;background:#303b3d;border-radius:8px}
+canvas{image-rendering:pixelated;display:block;margin:auto;background:repeating-conic-gradient(#394448 0 25%,#455257 0 50%) 0/16px 16px}
+label{display:inline-block;margin:4px 12px 12px 0}small{display:block;color:#bac7c9}
+@media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<h1>Player walks · male and female</h1>
+<p>Historical Skeleton v3 candidates. Rows follow N, E, S, W. These sources copied East from West.
+New production art will author S/N/E and mirror West at runtime; this viewer checks the preserved legacy sheets.
+No walking garment is approved yet. Check each frame and the loop seam.</p>
+<button id="play">Pause</button>
+<label>Frame <input id="frame" type="range" min="0" max="5" value="0"><output id="number">0</output></label>
+<label>Frame time <select id="duration"><option value="100">100 ms</option><option value="150">150 ms</option><option value="200">200 ms</option></select></label>
+<label>Scale <select id="scale"><option value="1">1× native</option><option value="2">2×</option><option value="4" selected>4×</option></select></label>
+<p>Load matching garment-only PNG sheets to review fit. Each must use the same cells and frame order as its body.</p>
+<label>Male garment <input id="male-layer" type="file" accept="image/png"></label>
+<label>Female garment <input id="female-layer" type="file" accept="image/png"></label>
+<label><input id="show-layer" type="checkbox" checked>Show garment</label>
+<label><input id="show-base" type="checkbox" checked>Show body</label>
+<button id="clear">Clear garments</button><p id="message" role="status"></p>
+<h2>Male</h2><div class="grid" id="male"></div>
+<h2>Female</h2><div class="grid" id="female"></div>
+<p>Check shoulders, collar, sleeves, foreground hands, waist/underwear coverage and foot anchoring.
+Compare every frame, then watch the last-to-first transition. Mirrored pockets and handed gear need explicit review.
+Use the validator with authored coverage/protected masks before recording visual approval.</p>
+<script>
+const width=__WIDTH__,height=__HEIGHT__,count=__COUNT__,images={},layers={},canvases=[];
+const frame=document.querySelector('#frame'),number=document.querySelector('#number');
+frame.max=count-1;document.querySelector('#duration').value='__DURATION__';
+let playing=true,last=0;
+function redraw(){
+  number.value=frame.value;
+  for(const {canvas,body,row} of canvases){
+    canvas.style.width=width*Number(document.querySelector('#scale').value)+'px';
+    canvas.style.height=height*Number(document.querySelector('#scale').value)+'px';
+    const context=canvas.getContext('2d');context.clearRect(0,0,width,height);
+    const args=[Number(frame.value)*width,row*height,width,height,0,0,width,height];
+    if(document.querySelector('#show-base').checked&&images[body].complete)context.drawImage(images[body],...args);
+    if(document.querySelector('#show-layer').checked&&layers[body])context.drawImage(layers[body],...args);
+  }
+}
+for(const [body,data] of Object.entries({male:'__MALE__',female:'__FEMALE__'})){
+  const image=new Image();images[body]=image;image.onload=redraw;image.src='data:image/png;base64,'+data;
+  ['North','East · mirrored W','South','West · source'].forEach((direction,row)=>{
+    const figure=document.createElement('figure'),caption=document.createElement('figcaption');
+    caption.textContent=direction;const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+    figure.append(caption,canvas);document.getElementById(body).append(figure);canvases.push({canvas,body,row});
+  });
+  document.getElementById(body+'-layer').addEventListener('change',event=>{
+    const file=event.target.files[0];if(!file)return;
+    const url=URL.createObjectURL(file),layer=new Image();
+    layer.onload=()=>{URL.revokeObjectURL(url);
+      if(layer.width!==width*count||layer.height!==height*4){document.querySelector('#message').textContent=body+': wrong sheet size';return;}
+      layers[body]=layer;document.querySelector('#message').textContent=body+': garment loaded; fit remains unapproved';redraw();};
+    layer.onerror=()=>{URL.revokeObjectURL(url);document.querySelector('#message').textContent=body+': unable to decode PNG';};
+    layer.src=url;
+  });
+}
+document.querySelector('#play').onclick=()=>{playing=!playing;document.querySelector('#play').textContent=playing?'Pause':'Play';last=0;};
+frame.oninput=()=>{playing=false;document.querySelector('#play').textContent='Play';redraw();};
+for(const id of ['scale','show-base','show-layer'])document.getElementById(id).onchange=redraw;
+document.querySelector('#clear').onclick=()=>{delete layers.male;delete layers.female;for(const body of ['male','female'])document.getElementById(body+'-layer').value='';redraw();};
+function tick(time){if(playing&&time-last>=Number(document.querySelector('#duration').value)){frame.value=(Number(frame.value)+1)%count;last=time;redraw();}requestAnimationFrame(tick);}
+requestAnimationFrame(tick);redraw();
+</script>
+</html>

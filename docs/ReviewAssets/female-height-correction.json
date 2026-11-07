@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "status": "candidate_pending_visual_approval",
+  "request": "Female grows when transitioning from standing to side walk.",
+  "standingHeight": 50,
+  "beforeWalkingHeight": [
+    51,
+    52
+  ],
+  "afterWalkingHeight": [
+    49,
+    50
+  ],
+  "method": "Shorten the midriff by two native pixel rows. Copy rows 0..42 down two in each frame independently, replacing elongated rows 43..44; rows 45..79, including lower legs and feet, stay pixel-identical. No scale/resampling, no per-frame recentering. Corrected face pixels move intact with the head.",
+  "original": "docs/ReviewAssets/female-east-walk-eyes-fixed.png",
+  "originalSha256": "40232C4814EFA00805D8CCBA37569A717F56321D1EB25A41C8AB47BF4A3793A3",
+  "candidate": "docs/ReviewAssets/female-east-walk-height-fixed.png",
+  "sha256": "89457079A0B47DE7C9560F63F1D411BC578AD825DE13024ED765EC7250C12571",
+  "tool": "PixelLab pixelart_workbench edit",
+  "inputAnimation": "3eb0b00e-4595-471f-a8cf-9f433b137df1",
+  "editedAnimation": "acd1e4f3-7fd6-41ca-aea9-a37612d7a13d",
+  "sheetResult": "1d25fbf2-0582-426c-b308-3722fb057ed4",
+  "resultUrl": "https://api.pixellab.ai/mcp/pixel-tools/1d25fbf2-0582-426c-b308-3722fb057ed4/image.png",
+  "frameCanvas": [
+    80,
+    80
+  ],
+  "frameCount": 8,
+  "frameDurationMs": 100,
+  "crop": [
+    16,
+    11,
+    48,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "changes": [
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        1
+      ],
+      "source_layer": "image",
+      "source_frame": 1,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    },
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        2
+      ],
+      "source_layer": "image",
+      "source_frame": 2,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    },
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        3
+      ],
+      "source_layer": "image",
+      "source_frame": 3,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    },
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        4
+      ],
+      "source_layer": "image",
+      "source_frame": 4,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    },
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        5
+      ],
+      "source_layer": "image",
+      "source_frame": 5,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    },
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        6
+      ],
+      "source_layer": "image",
+      "source_frame": 6,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    },
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        7
+      ],
+      "source_layer": "image",
+      "source_frame": 7,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    },
+    {
+      "operation": "copy_region",
+      "layer": "image",
+      "frames": [
+        8
+      ],
+      "source_layer": "image",
+      "source_frame": 8,
+      "region": [
+        0,
+        0,
+        79,
+        42
+      ],
+      "at": [
+        0,
+        2
+      ],
+      "reason": "Shorten elongated midriff by two native rows; retain this frame's repaired face/head pose and fixed lower legs/feet. No image resampling."
+    }
+  ],
+  "verifiedFrames": [
+    {
+      "frame": 1,
+      "top": 8,
+      "bottom": 57,
+      "height": 50,
+      "changedPixels": 215
+    },
+    {
+      "frame": 2,
+      "top": 8,
+      "bottom": 57,
+      "height": 50,
+      "changedPixels": 214
+    },
+    {
+      "frame": 3,
+      "top": 8,
+      "bottom": 57,
+      "height": 50,
+      "changedPixels": 191
+    },
+    {
+      "frame": 4,
+      "top": 7,
+      "bottom": 56,
+      "height": 50,
+      "changedPixels": 204
+    },
+    {
+      "frame": 5,
+      "top": 8,
+      "bottom": 56,
+      "height": 49,
+      "changedPixels": 198
+    },
+    {
+      "frame": 6,
+      "top": 8,
+      "bottom": 56,
+      "height": 49,
+      "changedPixels": 197
+    },
+    {
+      "frame": 7,
+      "top": 7,
+      "bottom": 56,
+      "height": 50,
+      "changedPixels": 197
+    },
+    {
+      "frame": 8,
+      "top": 7,
+      "bottom": 56,
+      "height": 50,
+      "changedPixels": 210
+    }
+  ]
+}

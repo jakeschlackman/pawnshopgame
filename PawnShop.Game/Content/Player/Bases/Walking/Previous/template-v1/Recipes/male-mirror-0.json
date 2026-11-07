@@ -1,0 +1,124 @@
+{
+  "recipe": {
+    "job": {
+      "canvas": [
+        48,
+        64
+      ],
+      "frame_count": 1,
+      "durations_ms": [
+        100
+      ],
+      "views": [
+        {
+          "id": "west0",
+          "offset": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "east0",
+          "mirror_of": "west0"
+        },
+        {
+          "id": "west1",
+          "offset": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "east1",
+          "mirror_of": "west1"
+        },
+        {
+          "id": "west2",
+          "offset": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "east2",
+          "mirror_of": "west2"
+        }
+      ]
+    },
+    "scene": {
+      "layers": [
+        {
+          "id": "body",
+          "name": "Body - exact source"
+        }
+      ],
+      "views": {
+        "west0": {
+          "selections": {
+            "all": {}
+          },
+          "nodes": {
+            "body": {
+              "layer": "body",
+              "at": [
+                0,
+                0
+              ],
+              "draw": [
+                {
+                  "op": "copy",
+                  "part": "all"
+                }
+              ]
+            }
+          }
+        },
+        "west1": {
+          "selections": {
+            "all": {}
+          },
+          "nodes": {
+            "body": {
+              "layer": "body",
+              "at": [
+                0,
+                0
+              ],
+              "draw": [
+                {
+                  "op": "copy",
+                  "part": "all"
+                }
+              ]
+            }
+          }
+        },
+        "west2": {
+          "selections": {
+            "all": {}
+          },
+          "nodes": {
+            "body": {
+              "layer": "body",
+              "at": [
+                0,
+                0
+              ],
+              "draw": [
+                {
+                  "op": "copy",
+                  "part": "all"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sources": {
+    "west0": "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/0.png?t=1794004021395",
+    "west1": "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/1.png?t=1794004021395",
+    "west2": "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/2.png?t=1794004021395"
+  }
+}

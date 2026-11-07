@@ -3,8 +3,9 @@
 C#/MonoGame prototype of a cozy salvage and pawn shop game. M01 implements
 title, character selection, a movable player in a small room, nearby NPC dialogue,
 pause/resume, return, and exit. Inventory, economics, saving, quests, and robots
-are not implemented. The player uses the existing eight-direction base poses;
-walking animation and equipment customization remain future work.
+are not implemented. Character selection retains the existing base art. The room
+uses a clearly labeled four-direction placeholder body and synchronized gear demo;
+approved walking art and equipment customization remain future work.
 
 ## Defining NPCs in VS Code
 
@@ -48,14 +49,32 @@ checks. Failed assertions exit nonzero. It references Framework, Core, and Game
 and exercises graphics-free input/menu/state/Bootstrap code without constructing
 the MonoGame host or initializing graphics/audio. The test framework is unchanged.
 
+## Human asset authoring
+
+Build the solution normally, then use the existing C# authoring executable:
+
+```text
+dotnet run --project PawnShop.Tests --no-build -- --assets help
+```
+
+The Windows-only PNG commands validate bases, static shirts and legacy walking
+candidates, pack local source frames, and produce review sheets/HTML. They never
+approve art or overwrite an output directory. System.Drawing.Common 10.0.0 is
+pinned only in Tests; it is not a game dependency. No game window is opened.
+See [the workflow](docs/WEARABLE_ART_WORKFLOW.md) for exact commands and limitations.
+New human art follows S/N/E plus runtime-mirrored West. The Phase 2 room demo uses
+that convention; historical eight-facing bases and NESW candidates remain intact.
+
 ## Controls and current behavior
 
 - New Game opens Male/Female selection. No gameplay session exists until you
   choose a character. WASD/arrows select; Z confirms; X returns to title.
   Clicking a character card also starts a new session with that gender.
 - WASD or arrow keys in the room: held movement, with equal cardinal/diagonal speed. The player
-  faces the direction of travel, stays on the floor and collides with the counter
-  and NPC footprints. Current sprites are standing poses, not a walking cycle.
+  uses four cardinal facings, stays on the floor and collides with the counter
+  and NPC footprints. A newly pressed axis wins diagonal ties; otherwise the last
+  axis persists. West mirrors East. The room shows a four-phase placeholder walk
+  with jacket, helmet, backpack and wrench, sharing one frame clock and feet pivot.
 - Z near the shop visitor: talk. The prompt appears within 48 logical pixels;
   clicking the NPC also requires proximity. Z reveals text, then advances or
   selects on a later press. W/S or Up/Down selects responses; X leaves dialogue.
@@ -214,11 +233,22 @@ Player artwork now has canonical reference bases under `Content/Player/Bases`
 and the user-approved south-facing male/female teal shirt under
 `Content/Player/Wearables/TealWorkShirt`. Follow the
 [wearable art workflow](docs/WEARABLE_ART_WORKFLOW.md) for new equipment artwork.
-Run `./tools/Validate-PlayerBases.ps1` and `./tools/Validate-Wearable.ps1` for the
-current nonvisual art checks. The game now loads the two canonical base PNGs and
-`Content/Player/player-sprite.json` for selection and eight-direction room poses.
-Shirt/source/recipe artifacts are not copied into runtime content; wearable
-equipment, other shirt directions, animation and full customization remain pending.
+Use the C# `--assets bases` / `--assets wearable` commands above for nonvisual checks.
+The game loads the two canonical base PNGs and `Content/Player/player-sprite.json`
+for selection; the catalog resolves South/North/East and mirrors East for West.
+Room diagnostic layers are created by `Screens/PlayerPlaceholderSprites.cs`;
+`Content/Player/placeholder-sprite.json` defines their Idle/Walk timing. Every layer
+uses the same frame, 48x64 canvas and (24,58) pivot. Male/female fits are distinct.
+These shapes prove animation and layering only; they are not approved wearable art.
+Shirt/source/recipe artifacts are not copied into runtime content. Production
+equipment/equipping, approved human walking and full customization remain pending.
+See [verification and manual checks](docs/VERIFICATION_CARDINAL_RENDERING.md).
+
+Phase 3 begins with [the local human reference/walk preview](tools/player-base-review.html).
+Open it in a browser from this checkout to review both bodies' approved standing
+views/South walks, existing North candidates and newly generated East walks with
+mirrored West. Foot guides and standing/walking comparisons help review alignment.
+The room remains on the accepted Phase 2 placeholders until art is approved.
 
 Menu rows and Options tabs also accept mouse clicks. Clicking a settings row
 performs its existing confirm action; Left/Right still provides fine keyboard

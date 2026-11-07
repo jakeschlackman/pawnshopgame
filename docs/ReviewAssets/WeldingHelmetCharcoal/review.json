@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "id": "helmet_welder",
+  "slot": "head",
+  "status": "both_south_standing_approved",
+  "direction": "south",
+  "pose": "standing",
+  "canvas": [48,64],
+  "pivot": [24,58],
+  "brief": "One charcoal-gray squared welding shield with a broad flat lower panel and one framed rectangular viewing window. Identical manufactured design on both player appearances.",
+  "preview": "tools/player-equipment-review.html",
+  "supersedes": "docs/ReviewAssets/WeldingHelmetPilot/review.json",
+  "scope": "South-standing candidate only. Helmet animation, other facings, hair/face-accessory compatibility and runtime promotion remain pending.",
+  "drawOrder": [
+    "original_body_with_equipped_head_occlusion",
+    "optional_approved_jacket",
+    "optional_charcoal_mask"
+  ],
+  "generation": {
+    "tool": "PixelLab create_object_pro_flash; edit_image_pro_flash reference; exact pixelart_workbench extraction/composition",
+    "masterObjectId": "511c3f93-16ae-4890-913a-622ee27bc7e8",
+    "masterJob": "e28daa38-658c-4e26-a20c-d18ce5d8bafb",
+    "masterRequest": {
+      "name": "Picker's Hollow - Charcoal Welding Mask - master",
+      "description": "A single EMPTY classic industrial WELDING FACE SHIELD, front South view, low top-down pixel-art RPG equipment reference. SAME unisex manufactured model for both player bodies. Broad squared rectangular faceplate, nearly square proportions, flat top edge with small chamfered corners, straight parallel sides, broad flat lower chin edge with tiny clipped corners. Matte dark charcoal gray shell, quiet medium-gray edge highlights. ONE clean wide RECTANGULAR dark desaturated green glass viewing window in the upper half, visibly framed by a straight black rectangular rim on all four sides. Front surface below window is one broad uninterrupted flat gray panel. Small dark side hinge studs. Recognizable ordinary flip-down welding mask; not a rounded head, not a robot face, not a bucket/space/knight helmet. No orange, rust, gold, eye holes, mouth, nostrils, expressive eyebrows, pointed chin, round oval silhouette, flared cheeks, gender styling, texture noise or glow. Small native equipment sprite: faceplate about 18px wide and 18px high near x15..33 y6..24, centered over where a human head would be, with generous untouched transparent space below. Crisp 1px black outline and 3-tone grayscale shading with small dark green glass area. No person, body, mannequin, neck, ground or shadow. Transparent 48x64 canvas.",
+      "width": 48,
+      "height": 64,
+      "n_directions": 1,
+      "view": "low top-down",
+      "style_image": {
+        "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+        "usage_description": "Only the crisp native pixel grid, outline weight and simple shading; do not copy human anatomy, skin color or round head silhouette."
+      },
+      "style_options": {
+        "outline": true,
+        "shading": true,
+        "detail": false,
+        "color_palette": false
+      },
+      "palette": [
+        "#080808",
+        "#202428",
+        "#383e43",
+        "#596269",
+        "#899297",
+        "#101e1a",
+        "#29473b"
+      ],
+      "max_colors": 7,
+      "seed": 63221
+    },
+    "masterSource": "master-generated-source.png",
+    "masterReference": "master-object.png",
+    "masterPaletteCorrection": {
+      "imageId": "4cbbb8f1-4797-4eca-8e87-b3cd464c96d1",
+      "from": "#29473bff",
+      "to": "#383e43ff",
+      "pixels": 170,
+      "reason": "Source incorrectly used dark green glass color across shell panels. Neutralize this swatch to charcoal without geometry changes."
+    },
+    "paidOperations": 3,
+    "estimatedGenerationUnits": 15,
+    "fitChargedGenerationUnits": 10,
+    "paidRetries": 0
+  },
+  "extraction": {
+    "source": "female-fitted-source.png",
+    "reason": "Independent male fit distorted the rectangular window and was rejected. Reuse the female source mask at native coordinates on both bodies, with the listed equipment-only male ear/head occlusion. This is not a pasted object icon or geometry-adjusted fit.",
+    "maskRows": [
+      [8,20,27],
+      [9,19,28],
+      [10,19,29],
+      [11,18,30],
+      [12,18,30],
+      [13,18,30],
+      [14,18,30],
+      [15,17,31],
+      [16,17,31],
+      [17,17,31],
+      [18,17,31],
+      [19,18,30],
+      [20,18,30],
+      [21,18,30],
+      [22,18,29],
+      [23,18,30],
+      [24,19,28]
+    ],
+    "maskRowsFormat": "[y,xStartInclusive,xEndInclusive]",
+    "colorMap": {
+      "#2c2b2bff": "#202428ff",
+      "#232325ff": "#202428ff",
+      "#1e2124ff": "#202428ff",
+      "#545a5fff": "#596269ff",
+      "#5a6166ff": "#596269ff",
+      "#52565aff": "#596269ff",
+      "#646b71ff": "#596269ff",
+      "#4b4e52ff": "#596269ff",
+      "#6f777fff": "#899297ff",
+      "#0c0a09ff": "#080808ff",
+      "#0a0605ff": "#080808ff",
+      "#0b0807ff": "#080808ff",
+      "#151413ff": "#080808ff",
+      "#1c1b1bff": "#080808ff",
+      "#040202ff": "#080808ff",
+      "#110906ff": "#080808ff",
+      "#424649ff": "#383e43ff",
+      "#3e4246ff": "#383e43ff",
+      "#3b3b3bff": "#383e43ff"
+    },
+    "palette": [
+      "#202428ff",
+      "#596269ff",
+      "#899297ff",
+      "#080808ff",
+      "#383e43ff"
+    ],
+    "maskPixels": 215,
+    "bounds": [17,8,15,17],
+    "geometry": "Native source coordinates; no scaling, shifting, stretching or new hand-drawn shapes. Male/female layer PNGs are identical; body and jacket composites differ appropriately.",
+    "occlusion": "While this South-standing mask is equipped, hide the five listed male body-outline pixels before drawing the jacket and mask. No hidden pixels for female. Unequipping restores the untouched original body. Face/scalp and ear silhouette now match through y21; neck/collar remain body-specific."
+  },
+  "bodies": [
+    {
+      "body": "male",
+      "approval": "approved_south_standing_by_user",
+      "base": {
+        "path": "PawnShop.Game/Content/Player/Bases/male/base.png",
+        "crop": [0,0,48,64],
+        "sha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67"
+      },
+      "jacket": {
+        "path": "docs/ReviewAssets/WorkJacketPilot/male-layer-teal-pockets.png",
+        "sha256": "E9AAF23B04EA6B7F88F86C4FFE403CA8AB6EC743FCAEB7F24CEB75276B950773"
+      },
+      "fitJob": "39dccfc8-06ab-4740-add3-3028fd1f68dc",
+      "fitRequest": {
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/4cbbb8f1-4797-4eca-8e87-b3cd464c96d1/image.png",
+          "usage_description": "The SAME rigid manufactured welding mask for either wearer. Preserve its squared flat shield silhouette, charcoal shell, straight rectangular black window frame and window proportions. Only fit the mask to the head; body shape is NOT a reason to redesign its shell."
+        },
+        "description": "Fit ONLY this reference's lowered charcoal welding face shield over the existing South-facing head. This is the same unisex rigid equipment item for either player. Match the reference design precisely: broad flat squared rectangle, mostly flat top, tiny clipped corners, parallel straight sides, flat broad lower edge, one straight horizontal RECTANGULAR black glass window with clear rim in upper half; neutral CHARCOAL GRAY front panel underneath. No round face/head shape, oval dome, taper, long pointed chin, cheek shaping, anatomical/gender styling, nose, mouth, eyes, orange, brown, gold or colored shell. Restrained 3-tone gray pixel clusters. Fit at native head size: outer shield x15..32, y6..24, about 18px wide x19px tall INCLUDING outline; single-pixel hinge at each side allowed. Both body variants must keep these same mask dimensions, central alignment and window x19..28 y11..16. Mask fully occludes scalp/eyes/face; chin ends above jacket collar. Original canvas 48x64, head location and body/shoulders/neck/arms/hands/underwear/legs/feet remain EXACT; add no clothes or pose change. No background or shadow. Keep rigid rectangular shell; do not mold the item to the face. Output fitted full-character source for mask-only extraction; no resizing canvas.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63223
+      },
+      "generatedFitDisposition": "Rejected: warped rectangular window. Retained as evidence; no pixels used.",
+      "selectedMaskSource": "female-fitted-source.png",
+      "drawIds": {
+        "layer": "08928f43-0e5e-4195-a6dc-759e091c71ec",
+        "composite": "187e115a-25d1-49c4-b8a0-ca9a75cfa44e",
+        "jacket-composite": "9593428b-4c52-41aa-a718-00f07868ab7f"
+      },
+      "files": {
+        "source": "male-fitted-source.png",
+        "layer": "male-layer.png",
+        "composite": "male-composite-ear-fixed.png",
+        "jacketComposite": "male-jacket-composite-ear-fixed.png"
+      },
+      "correctedCompositeIds": {
+        "composite": "fdf3cf05-2cd4-4145-abcb-08bd9f79861d",
+        "jacketComposite": "67e4eea1-a20f-453d-b13e-ef71eaa534ef"
+      }
+    },
+    {
+      "body": "female",
+      "approval": "approved_south_standing_by_user",
+      "base": {
+        "path": "PawnShop.Game/Content/Player/Bases/female/base.png",
+        "crop": [0,0,48,64],
+        "sha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52"
+      },
+      "jacket": {
+        "path": "docs/ReviewAssets/WorkJacketPilot/female-layer.png",
+        "sha256": "4E917B0934A656FC075AD0E9A180C3A518617E67B89A448766AFE870EEFDB391"
+      },
+      "fitJob": "41c97b55-d5fb-47e3-bece-acae1ad7008a",
+      "fitRequest": {
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/d13b9b04-3d54-4997-b90d-eabc5a17612b/image.png",
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/4cbbb8f1-4797-4eca-8e87-b3cd464c96d1/image.png",
+          "usage_description": "The SAME rigid manufactured welding mask for either wearer. Preserve its squared flat shield silhouette, charcoal shell, straight rectangular black window frame and window proportions. Only fit the mask to the head; body shape is NOT a reason to redesign its shell."
+        },
+        "description": "Fit ONLY this reference's lowered charcoal welding face shield over the existing South-facing head. This is the same unisex rigid equipment item for either player. Match the reference design precisely: broad flat squared rectangle, mostly flat top, tiny clipped corners, parallel straight sides, flat broad lower edge, one straight horizontal RECTANGULAR black glass window with clear rim in upper half; neutral CHARCOAL GRAY front panel underneath. No round face/head shape, oval dome, taper, long pointed chin, cheek shaping, anatomical/gender styling, nose, mouth, eyes, orange, brown, gold or colored shell. Restrained 3-tone gray pixel clusters. Fit at native head size: outer shield x15..32, y6..24, about 18px wide x19px tall INCLUDING outline; single-pixel hinge at each side allowed. Both body variants must keep these same mask dimensions, central alignment and window x19..28 y11..16. Mask fully occludes scalp/eyes/face; chin ends above jacket collar. Original canvas 48x64, head location and body/shoulders/neck/arms/hands/underwear/legs/feet remain EXACT; add no clothes or pose change. No background or shadow. Keep rigid rectangular shell; do not mold the item to the face. Output fitted full-character source for mask-only extraction; no resizing canvas.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63224
+      },
+      "generatedFitDisposition": "Selected helmet pixels only; generated body discarded.",
+      "selectedMaskSource": "female-fitted-source.png",
+      "drawIds": {
+        "layer": "08928f43-0e5e-4195-a6dc-759e091c71ec",
+        "composite": "725effe8-3088-4799-a3f6-9c38dcb78bf4",
+        "jacket-composite": "5ad92d70-0869-4aef-8422-ce782dd5631d"
+      },
+      "files": {
+        "source": "female-fitted-source.png",
+        "layer": "female-layer.png",
+        "composite": "female-composite.png",
+        "jacketComposite": "female-jacket-composite.png"
+      }
+    }
+  ],
+  "files": [
+    {
+      "sha256": "88459664C739FE6C23FA77039CE83DD85AFD9ADBE3EA51C06E7B82739B20642F",
+      "path": "female-composite.png"
+    },
+    {
+      "sha256": "EDAFBE54B60D3019FE45B212500B16A3428B4B264251BAF01822EE45A34C1E74",
+      "path": "female-fitted-source.png"
+    },
+    {
+      "sha256": "607AB56C56DF5453C467E8F16CE26A67BD2016BBB0FCB4022FAB1C8BDA0B95BF",
+      "path": "female-jacket-composite.png"
+    },
+    {
+      "sha256": "E1ADC91431DEDD127210D492C6E54B8F3C43EF83A90EBB35DA85923C455DEABE",
+      "path": "female-layer.png"
+    },
+    {
+      "sha256": "9188893A8F4CD69B6D90E429AFA22FE2BE31DC4794CCCEF55842EF6DA2C98FB0",
+      "path": "male-composite.png"
+    },
+    {
+      "sha256": "F6E4A05AB0CAA788BD2F74A2937E068DCBA4E8CD342CA8D814A475E6A69504C5",
+      "path": "male-fitted-source.png"
+    },
+    {
+      "sha256": "F116B764FBFFEB528CF9060B7DDA6F1BC800CC1033D5594F3EEA3ECAC6D305DE",
+      "path": "male-jacket-composite.png"
+    },
+    {
+      "sha256": "E1ADC91431DEDD127210D492C6E54B8F3C43EF83A90EBB35DA85923C455DEABE",
+      "path": "male-layer.png"
+    },
+    {
+      "sha256": "7CC2F064597A7496418FBEAE46DF92949A209BEC0E0A3D3D02BFAC1E8060EE9F",
+      "path": "master-generated-source.png"
+    },
+    {
+      "sha256": "A2545FF3C0A53155F64AA0C40EF8724374C6EF9B0B815E6DA6B5FF52F1BE04FF",
+      "path": "master-object.png"
+    },
+    {
+      "path": "male-composite-ear-fixed.png",
+      "sha256": "38F0ECB27CD1938437BE99226B7C93B84C49D4C82C20AF3A271ED5353BD97DD8"
+    },
+    {
+      "path": "male-jacket-composite-ear-fixed.png",
+      "sha256": "7343A0B636E322D197AEDF2FB10EE57181F97E3D539B0ACD786162C98BF95E3F"
+    }
+  ],
+  "verification": {
+    "automated": "Before ear correction: PASS: 10 PNGs at 48x64 with binary alpha; all 10 new and 67 prior file hashes; identical male/female mask PNGs; each 215-pixel layer exactly matches the selected source mask and neutral palette map; no visible face/scalp skin above y22; no helmet below y24; exact unchanged-body and jacket compositions. Five original dark male outline pixels remain outside the mask; zero female head pixels remain exposed above y22.",
+    "preview": "PASS: Node DOM/canvas stubs loaded 24 actual PNGs and checked 46 views, common reference, side-by-side comparisons, four equipment-toggle combinations in all jacket directions, static South mask crops, retained jacket transition/mirror/frame-clock/contact ordering, pause/step/wrap, scale and links; 5312 draw calls. No browser rendering claim.",
+    "visual": "User approved both South-standing mask fits after the ear correction. Other poses/directions require separate review.",
+    "earCorrection": "PASS: each corrected export differs from its retained previous version at exactly the five guarded opaque outline pixels, now transparent. Every other pixel unchanged. Equipped male/female head region y0..21 is pixel-identical, with and without jacket. All 79 recorded hashes match (77 preserved, 2 new); native 48x64 and binary alpha. Node DOM/canvas checks pass for 24 actual PNG loads, 46 views, exact manifest/preview occlusion coordinates, full-frame/crop offsets, equipment toggles and base -> occlusion -> jacket -> helmet ordering across 128 cases. Female, unequipped, layer-only and jacket-motion views receive no body clearing. No browser/game launched."
+  },
+  "bodyOcclusion": {
+    "condition": "South standing, mask equipped only",
+    "coordinateSpace": "Native 48x64 character canvas; clear after drawing body and before jacket/mask, using the same crop and transform.",
+    "male": [
+      [17,13],
+      [17,14],
+      [16,17],
+      [16,18],
+      [17,19]
+    ],
+    "female": []
+  },
+  "corrections": [
+    {
+      "reason": "User reported extra pixels around the male left ear. Five original body outline pixels protruded beyond the shared rigid mask.",
+      "method": "PixelLab guarded patch_pixels on review composites; preview applies the same equipment-only body occlusion.",
+      "paidGenerations": 0,
+      "expected": "#080202ff",
+      "replacement": "#00000000",
+      "sourceComposites": [
+        "male-composite.png",
+        "male-jacket-composite.png"
+      ],
+      "resultIds": [
+        "fdf3cf05-2cd4-4145-abcb-08bd9f79861d",
+        "67e4eea1-a20f-453d-b13e-ef71eaa534ef"
+      ],
+      "scope": "South standing only; mask art, female art and all canonical body PNGs unchanged."
+    }
+  ],
+  "approvalBasis": "User: you fixed it! ok, good for the next phase. Accepts the charcoal South-standing mask on both bodies including male ear occlusion."
+}

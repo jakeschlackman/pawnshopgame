@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "frameWidth": 48,
+  "frameHeight": 64,
+  "columns": 4,
+  "rows": 3,
+  "pivotX": 24,
+  "pivotY": 58,
+  "displayScale": 1,
+  "animations": {
+    "Idle": { "firstFrame": 0, "frameCount": 1, "frameDurationMs": 100, "loop": true },
+    "Walk": { "firstFrame": 0, "frameCount": 4, "frameDurationMs": 100, "loop": true }
+  }
+}

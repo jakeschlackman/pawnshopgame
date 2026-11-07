@@ -1,0 +1,302 @@
+{
+  "version": 1,
+  "id": "helmet_welder",
+  "slot": "head",
+  "status": "both_south_walks_approved",
+  "direction": "south",
+  "action": "walk",
+  "frameCanvas": [48,64],
+  "sheetCanvas": [384,64],
+  "pivot": [24,58],
+  "frameCount": 8,
+  "frameDurationsMs": [100,100,100,100,100,100,100,100],
+  "preview": "tools/player-equipment-review.html",
+  "scope": "Phase 4 South-walking mask pilot only. Standing approved separately. North/East/mirrored West, side settling, wrench and production runtime promotion remain pending.",
+  "method": "Rigid attachment of the approved PixelLab-generated mask to measured head motion. Preserve every mask pixel and palette entry. No fresh body/outfit/object animation, no per-frame AI redraw, scaling, warping or fitting by eye. Exact PixelLab workbench exports materialize native 48x64 pose layers and composites.",
+  "paidGenerations": 0,
+  "standingApproval": "docs/ReviewAssets/WeldingHelmetCharcoal/review.json",
+  "headAttachment": {
+    "standingAnchor": [24,14],
+    "frameAnchors": [
+      [24,14],
+      [24,14],
+      [24,13],
+      [24,13],
+      [24,14],
+      [24,14],
+      [24,13],
+      [24,13]
+    ],
+    "offsetY": [0,0,-1,-1,0,0,-1,-1],
+    "offsetX": [0,0,0,0,0,0,0,0],
+    "measurement": {
+      "regionInclusive": [14,5,34,21],
+      "searchOffsetsInclusive": [-2,-2,2,2],
+      "metric": "Minimum RGBA mismatch versus the canonical standing head, ignoring RGB under zero alpha. Best measured offset (0,0) or (0,-1). Small pre-existing color/jaw differences occur entirely beneath the mask; no new anatomy is used.",
+      "bodyMotionUnchanged": true
+    },
+    "geometry": "Only whole rigid-mask translation by the measured head anchor; 215 identical opaque pixels in every frame. This attachment movement is not a resize/refit of a garment. Native frame order and 100ms durations remain unchanged."
+  },
+  "drawOrder": [
+    "original_body",
+    "hide_equipped_head_outline_pixels",
+    "optional_approved_jacket",
+    "mask"
+  ],
+  "bodies": [
+    {
+      "body": "male",
+      "approval": "approved_south_walking_by_user",
+      "bodySheet": {
+        "path": "docs/ReviewAssets/WorkJacketWalkSouth/male-body.png",
+        "sha256": "965C927E67AD24C8274CFA61FDFE36ADA469D930FC18645F489C39854A2B317D"
+      },
+      "jacketSheet": {
+        "path": "docs/ReviewAssets/WorkJacketWalkSouth/male-layer.png",
+        "sha256": "0FD9FF611B847CEA1A461083C574DA2A0168A524B0AFE68C4047BED0AD6E59BA"
+      },
+      "standingMask": {
+        "path": "docs/ReviewAssets/WeldingHelmetCharcoal/male-layer.png",
+        "sha256": "E1ADC91431DEDD127210D492C6E54B8F3C43EF83A90EBB35DA85923C455DEABE"
+      },
+      "headMatch": [
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 1,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 1,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 1,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 1,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 0,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 0,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphadiff": 0
+        }
+      ],
+      "hiddenBodyPixels": [
+        [
+          [17,13],
+          [17,14],
+          [16,17],
+          [16,18],
+          [17,19]
+        ],
+        [
+          [17,13],
+          [17,14],
+          [16,17],
+          [16,18],
+          [17,19]
+        ],
+        [
+          [17,12],
+          [17,13],
+          [16,16],
+          [16,17],
+          [17,18]
+        ],
+        [
+          [17,12],
+          [17,13],
+          [16,16],
+          [16,17],
+          [17,18]
+        ],
+        [
+          [17,13],
+          [17,14],
+          [16,17],
+          [16,18],
+          [17,19]
+        ],
+        [
+          [17,13],
+          [17,14],
+          [16,17],
+          [16,18],
+          [17,19]
+        ],
+        [
+          [17,12],
+          [17,13],
+          [16,16],
+          [16,17],
+          [17,18]
+        ],
+        [
+          [17,12],
+          [17,13],
+          [16,16],
+          [16,17],
+          [17,18]
+        ]
+      ],
+      "hiddenPixelExpected": "#080202ff",
+      "files": {
+        "layer": "male-layer.png",
+        "composite": "male-composite.png",
+        "jacketComposite": "male-jacket-composite.png"
+      },
+      "drawIds": {
+        "layer": "0f5b1155-9a1e-4c55-a3b6-6ac8c0783fd0",
+        "composite": "b9d923c2-e36a-4881-a564-2af83d46d9e4",
+        "jacket-composite": "1c2ac89b-8b82-411a-becd-d5933069ae47"
+      }
+    },
+    {
+      "body": "female",
+      "approval": "approved_south_walking_by_user",
+      "bodySheet": {
+        "path": "docs/ReviewAssets/WorkJacketWalkSouth/female-body.png",
+        "sha256": "8B10C38091CEE248728C1839558A90018A7AF3D458374869A134E2982C601A9D"
+      },
+      "jacketSheet": {
+        "path": "docs/ReviewAssets/WorkJacketWalkSouth/female-layer-shading-fixed.png",
+        "sha256": "430BA6D5E7AB7AC1C60082D702523AAB1550D72AEB55C104D03E9F41832E359B"
+      },
+      "standingMask": {
+        "path": "docs/ReviewAssets/WeldingHelmetCharcoal/female-layer.png",
+        "sha256": "E1ADC91431DEDD127210D492C6E54B8F3C43EF83A90EBB35DA85923C455DEABE"
+      },
+      "headMatch": [
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 8,
+          "alphadiff": 4
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 2,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 3,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 3,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 2,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 2,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphadiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphadiff": 0
+        }
+      ],
+      "hiddenBodyPixels": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "hiddenPixelExpected": "#080202ff",
+      "files": {
+        "layer": "female-layer.png",
+        "composite": "female-composite.png",
+        "jacketComposite": "female-jacket-composite.png"
+      },
+      "drawIds": {
+        "composite": "47ff33ed-1b6d-4b11-b724-512b855b4e90",
+        "jacket-composite": "a882b87e-d1c8-4639-b61c-a57b298fd12d",
+        "layer": "0f5b1155-9a1e-4c55-a3b6-6ac8c0783fd0"
+      }
+    }
+  ],
+  "files": [
+    {
+      "sha256": "77EC45FC4015702CD812BCAD250B1B3B0EB76E9B02AEC0F03993D2795DE3910E",
+      "path": "female-composite.png"
+    },
+    {
+      "sha256": "16478B07C27DCD9C899BC7D2F714AD83A555EA1FE91D90475FE1C7A47C1DE0D4",
+      "path": "female-jacket-composite.png"
+    },
+    {
+      "sha256": "E9C5A6F0F907F8FE578DF9225BF53A542B71C33BCA417AD0BE2C4098008CF043",
+      "path": "female-layer.png"
+    },
+    {
+      "sha256": "05BFBC813CD96A8ECC7372ADB948F4EF772432AE2574F6B1A421E73644BCBB32",
+      "path": "male-composite.png"
+    },
+    {
+      "sha256": "034ADD67688E2D43F54644D0623FEB9DAE8E8F3624BB4F3A1901F2C1BCAE0F48",
+      "path": "male-jacket-composite.png"
+    },
+    {
+      "sha256": "E9C5A6F0F907F8FE578DF9225BF53A542B71C33BCA417AD0BE2C4098008CF043",
+      "path": "male-layer.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: all 16 poses preserve the exact 215-pixel approved mask at measured offsets; correct male ear occlusion, unchanged-body and jacket composition, binary alpha and accepted standing head appearance after accounting for the bob. Six 384x64 PNG sheets. All 85 recorded artwork hashes match (79 preserved, 6 new).",
+    "preview": "PASS: Node DOM/canvas stubs loaded 26 actual PNGs and checked 56 views and 320 South-walking cases: eight poses, four loadouts, shared body/jacket/mask clock, exact occlusion/crop/contact coordinates and chronology, toggle restoration, pause/step/slider/wrap, scale and links. Other jacket facings hide the South mask motion; side transitions retain 28 steps. No browser rendering claim.",
+    "visual": "Static contact sheets inspected during authoring; user subsequently accepted both walking previews: flawless, next phase."
+  },
+  "approvalBasis": "User: flawless, next phase. Approves both South-walking rigid masks and combined jacket previews."
+}

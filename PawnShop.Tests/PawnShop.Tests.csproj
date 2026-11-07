@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
   <ItemGroup>
+    <!-- Offline PNG authoring only; no production project references this package. -->
+    <PackageReference Include="System.Drawing.Common" Version="10.0.0" PrivateAssets="all" />
+    <None Include="../tools/player-walk-review.html" Link="Assets/player-walk-review.html" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="../PawnShop.Framework/PawnShop.Framework.csproj" />
     <ProjectReference Include="../PawnShop.Core/PawnShop.Core.csproj" />
     <ProjectReference Include="../PawnShop.Game/PawnShop.Game.csproj" />

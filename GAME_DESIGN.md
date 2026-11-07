@@ -399,9 +399,21 @@ female cuts of the same design. Their PixelLab object references and fitted
 wearable layers are distinct assets; body-specific art need not create separate
 economy items. The teal work shirt is visually approved for both south-facing
 standing poses. See [the standard process](docs/WEARABLE_ART_WORKFLOW.md).
-Male/female selection and WASD movement now use the eight standing base facings.
-Other shirt directions, walking animation, hair, armor and wearable customization
-remain pending; in-game visual acceptance is recorded separately from art approval.
+Male/female selection retains the original standing base art. Room movement now
+demonstrates four cardinal facings, West mirrored from East, and a synchronized
+placeholder body/jacket/helmet/backpack/wrench walking loop. These are diagnostic
+shapes, not approved human art or fitted clothing. Other shirt directions, approved
+walking animation, hair, armor and wearable customization remain pending; in-game
+visual acceptance is recorded separately from art approval.
+
+Generate **every worn item for both male and female models**, with fitted variants
+and acceptance for each; neither body is an optional later addition. Player walking
+uses PixelLab Skeleton v3 for S/N/E; West will mirror East at runtime. Matching
+clothes, anchors and held gear share the frame clock and character-space mirror.
+Historical W-to-E walking candidates remain preserved, unapproved source evidence.
+Review asymmetric item details explicitly. Walking candidates and a synchronized
+attire preview live under `Content/Player/Bases/Walking`; generated walks do not
+grant clothing approval or imply runtime walking/equipment integration.
 
 ### 13.2 Animation priorities
 

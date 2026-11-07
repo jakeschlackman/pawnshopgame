@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "status": "approved_by_user_current_motion_checkpoint",
+  "request": "Side-view standing/walking still snaps; male lacks head bob East/North and appears to walk backward.",
+  "scope": "Review assets and local HTML only. Side-view transition confirmed by user. No runtime, Sprout or approved source edits.",
+  "maleEast": {
+    "input": "docs/ReviewAssets/male-east-walk-compact.png",
+    "output": "docs/ReviewAssets/male-east-walk-forward-bob.png",
+    "sourceFrameOrderOneBased": [
+      1,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2
+    ],
+    "bobOperations": [
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          3
+        ],
+        "source_layer": "image",
+        "source_frame": 3,
+        "region": [
+          0,
+          0,
+          79,
+          35
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      },
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          4
+        ],
+        "source_layer": "image",
+        "source_frame": 4,
+        "region": [
+          0,
+          0,
+          79,
+          35
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      },
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          7
+        ],
+        "source_layer": "image",
+        "source_frame": 7,
+        "region": [
+          0,
+          0,
+          79,
+          35
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      },
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          8
+        ],
+        "source_layer": "image",
+        "source_frame": 8,
+        "region": [
+          0,
+          0,
+          79,
+          35
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      }
+    ],
+    "headTopInCrop": [
+      7,
+      7,
+      8,
+      8,
+      7,
+      7,
+      8,
+      8
+    ],
+    "animationId": "ac959c3d-2b45-4c8e-acb7-0c2ef8b75d3d",
+    "sheetId": "6fe39e5b-d33a-4122-849a-f7f780639382",
+    "crop": [
+      16,
+      10,
+      48,
+      64
+    ]
+  },
+  "maleNorth": {
+    "input": "PawnShop.Game/Content/Player/Bases/Walking/male/walk.png (North row)",
+    "output": "docs/ReviewAssets/male-north-walk-bob.png",
+    "bobOperations": [
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          1
+        ],
+        "source_layer": "image",
+        "source_frame": 1,
+        "region": [
+          0,
+          0,
+          79,
+          34
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      },
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          2
+        ],
+        "source_layer": "image",
+        "source_frame": 2,
+        "region": [
+          0,
+          0,
+          79,
+          34
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      },
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          5
+        ],
+        "source_layer": "image",
+        "source_frame": 5,
+        "region": [
+          0,
+          0,
+          79,
+          34
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      },
+      {
+        "operation": "copy_region",
+        "layer": "image",
+        "frames": [
+          6
+        ],
+        "source_layer": "image",
+        "source_frame": 6,
+        "region": [
+          0,
+          0,
+          79,
+          34
+        ],
+        "at": [
+          0,
+          1
+        ],
+        "reason": "One-pixel head/neck bob on each footfall; keep head shape intact and feet fixed. No resampling."
+      }
+    ],
+    "headTopInCrop": [
+      8,
+      8,
+      7,
+      7,
+      8,
+      8,
+      7,
+      7
+    ],
+    "animationId": "f9962ea7-089d-4903-9e57-ace1161d19c0",
+    "sheetId": "605eb57d-84c8-4504-be09-2607031f0ca4",
+    "crop": [
+      16,
+      9,
+      48,
+      64
+    ]
+  },
+  "settle": {
+    "mode": "animate_image endpoint interpolation for a stop only; existing walks remain Skeleton v3",
+    "chargedGenerations": 2,
+    "bodies": [
+      {
+        "body": "male",
+        "args": {
+          "first_frame_url": "https://api.pixellab.ai/mcp/pixel-tools/4e4f21c1-95ed-44a2-8da8-a9bde776c9ae/image.png",
+          "last_frame_url": "https://api.pixellab.ai/mcp/pixel-tools/34583acf-d2be-4eeb-aa1a-56e34314a894/image.png",
+          "action": "Finish the step and settle gently into standing. Lower lifted foot, bring feet together, relax arms. Keep exact head, face, body proportions, pixel grid and fixed ground position. No turn, no jump, no camera motion.",
+          "frame_count": 4,
+          "no_background": true,
+          "seed": 7421
+        },
+        "jobId": "d75a430a-59d2-46b1-9af1-67c16e4ff8d2",
+        "raw": "docs/ReviewAssets/male-east-stop-source.png",
+        "output": "docs/ReviewAssets/male-east-settle.png",
+        "sheetId": "c8e0fedd-1a1f-41b1-acb6-2a293d358ce7"
+      },
+      {
+        "body": "female",
+        "args": {
+          "first_frame_url": "https://api.pixellab.ai/mcp/pixel-tools/0bc7c16a-d5a1-48e2-aa14-427b51b6aa1d/image.png",
+          "last_frame_url": "https://api.pixellab.ai/mcp/pixel-tools/127c593d-3e36-41fc-91ef-1a533deb9f54/image.png",
+          "action": "Finish the step and settle gently into standing. Lower lifted foot, bring feet together, relax arms. Keep exact head, face, body proportions, pixel grid and fixed ground position. No turn, no jump, no camera motion.",
+          "frame_count": 4,
+          "no_background": true,
+          "seed": 7421
+        },
+        "jobId": "ecd51f5b-df9c-4067-a129-f208729951dd",
+        "raw": "docs/ReviewAssets/female-east-stop-source.png",
+        "output": "docs/ReviewAssets/female-east-settle.png",
+        "sheetId": "903e3a84-ac08-4493-a86a-fcb2880c1712"
+      }
+    ],
+    "selection": "Discard generated frames 2/3 (extra step and proportion drift). Final three-pose strip: exact current walk frame 1; generated frame 4 with canonical head and palette restoration; exact canonical standing East. Raw input preserved.",
+    "headRestore": "For middle pose, all pixels through y=23 male / y=22 female come from canonical standing East. Remaining noncanonical opaque colors map to nearest canonical RGB color; transparency becomes RGBA zero. No scaling.",
+    "canvas": [
+      48,
+      64
+    ],
+    "frameCount": 3,
+    "frameDurationMs": 100,
+    "pivot": [
+      24,
+      58
+    ],
+    "qa": [
+      {
+        "body": "male",
+        "top": [
+          7,
+          8,
+          8
+        ],
+        "pixelDeltas": {
+          "oldDirectCut": 344,
+          "walkToMiddle": 331,
+          "middleToStand": 154
+        },
+        "bottom": [
+          57,
+          57,
+          57
+        ]
+      },
+      {
+        "body": "female",
+        "top": [
+          8,
+          8,
+          8
+        ],
+        "pixelDeltas": {
+          "oldDirectCut": 298,
+          "walkToMiddle": 296,
+          "middleToStand": 229
+        },
+        "bottom": [
+          57,
+          57,
+          57
+        ]
+      }
+    ]
+  },
+  "previewTimeline": {
+    "standingMs": 800,
+    "startMs": 200,
+    "startFrames": [
+      2,
+      1
+    ],
+    "walkingMs": 1600,
+    "walkFrames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      1
+    ],
+    "stopMs": 200,
+    "stopFrames": [
+      2,
+      3
+    ],
+    "note": "Frame numbers one-based. Same strip reversed for starting. East/West use common mirroring. Comparisons apply only to continuous walks/contact strips; transition always uses current candidate."
+  },
+  "verification": "Exact East frame permutation/bob and North bob verified pixelwise; feet/lower body unchanged within each original frame. Settle first frame equals current walk frame 1; last equals approved standing East, both full RGBA. All settle frames binary alpha and canonical palette, ground bottom y57. Visual acceptance pending."
+}

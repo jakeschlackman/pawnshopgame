@@ -11,6 +11,7 @@ internal sealed class PlayerSpriteRenderer : IDisposable
 {
     private readonly PlayerSpriteCatalog catalog;
     private readonly Dictionary<PlayerGender, Texture2D> textures = new();
+    private readonly Dictionary<(PlayerGender, PlayerPlaceholderLayer), Texture2D> placeholders = new();
 
     public PlayerSpriteRenderer(GraphicsDevice device, PlayerSpriteCatalog catalog)
     {
@@ -21,6 +22,12 @@ internal sealed class PlayerSpriteRenderer : IDisposable
             {
                 using var stream = File.OpenRead(path);
                 textures.Add(gender, Texture2D.FromStream(device, stream));
+                foreach (var layer in Enum.GetValues<PlayerPlaceholderLayer>())
+                {
+                    var texture = new Texture2D(device, catalog.PlaceholderSheet.ImageWidth, catalog.PlaceholderSheet.ImageHeight);
+                    placeholders.Add((gender, layer), texture);
+                    texture.SetData(PlayerPlaceholderSprites.CreatePixels(gender, layer, catalog.PlaceholderSheet));
+                }
             }
         }
         catch { Dispose(); throw; }
@@ -28,16 +35,24 @@ internal sealed class PlayerSpriteRenderer : IDisposable
 
     public void Draw(PixelRenderer renderer, PlayerGender gender, Facing facing, float x, float y, float scale = 1)
     {
-        var sheet = catalog.Sheet;
-        var destination = new Rectangle((int)MathF.Round(x - sheet.Pivot.X * scale),
-            (int)MathF.Round(y - sheet.Pivot.Y * scale),
-            (int)MathF.Round(sheet.FrameWidth * scale), (int)MathF.Round(sheet.FrameHeight * scale));
-        renderer.DrawTexture(textures[gender], destination, catalog.Frame(facing));
+        var destination = PlayerSpriteCatalog.Bounds(catalog.Sheet, facing, x, y, scale);
+        renderer.DrawTexture(textures[gender], destination, catalog.Frame(facing), PlayerSpriteCatalog.Effects(facing));
+    }
+
+    public void DrawPlaceholder(PixelRenderer renderer, PlayerView player, int phase)
+    {
+        var destination = PlayerSpriteCatalog.Bounds(catalog.PlaceholderSheet, player.Facing, player.Position.X, player.Position.Y);
+        var source = PlayerPlaceholderSprites.Frame(catalog.PlaceholderSheet, player.Facing, phase);
+        var effects = PlayerSpriteCatalog.Effects(player.Facing);
+        foreach (var layer in PlayerPlaceholderSprites.DrawOrder(player.Facing))
+            renderer.DrawTexture(placeholders[(player.Gender, layer)], destination, source, effects);
     }
 
     public void Dispose()
     {
         foreach (var texture in textures.Values) texture.Dispose();
         textures.Clear();
+        foreach (var texture in placeholders.Values) texture.Dispose();
+        placeholders.Clear();
     }
 }

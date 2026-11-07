@@ -78,18 +78,18 @@ internal static partial class RegressionTests
             diagonal.Move(new(1, -1), TimeSpan.FromSeconds(1), area, []);
             Check(Math.Abs(Vector2.Distance(cardinal.View.Position, origin) - PlayerState.Speed) < .001);
             Check(Math.Abs(Vector2.Distance(diagonal.View.Position, origin) - PlayerState.Speed) < .001);
-            Check(diagonal.View.Facing == Facing.NorthEast && diagonal.View.Moving);
+            Check(diagonal.View.Facing == Facing.North && diagonal.View.Moving);
             var split = new PlayerState(gender, origin);
             for (int i = 0; i < 120; i++) split.Move(new(1, -1), TimeSpan.FromSeconds(1.0 / 120), area, []);
             Check(Vector2.Distance(split.View.Position, diagonal.View.Position) < .02);
             diagonal.Move(default, TimeSpan.FromSeconds(1), area, []);
-            Check(!diagonal.View.Moving && diagonal.View.Facing == Facing.NorthEast);
+            Check(!diagonal.View.Moving && diagonal.View.Facing == Facing.North);
         }
         var directions = new (Vector2 Intent, Facing Facing)[]
         {
-            (new(0, 1), Facing.South), (new(1, 1), Facing.SouthEast), (new(1, 0), Facing.East),
-            (new(1, -1), Facing.NorthEast), (new(0, -1), Facing.North), (new(-1, -1), Facing.NorthWest),
-            (new(-1, 0), Facing.West), (new(-1, 1), Facing.SouthWest)
+            (new(0, 1), Facing.South), (new(1, 1), Facing.South), (new(1, 0), Facing.East),
+            (new(1, -1), Facing.North), (new(0, -1), Facing.North), (new(-1, -1), Facing.North),
+            (new(-1, 0), Facing.West), (new(-1, 1), Facing.South)
         };
         foreach (var (intent, facing) in directions)
         {
@@ -161,7 +161,7 @@ internal static partial class RegressionTests
         string source = Path.Combine(AppContext.BaseDirectory, "Content", "Player");
         var catalog = new PlayerSpriteCatalog(source);
         Check(catalog.Sheet.FrameWidth == 48 && catalog.Sheet.FrameHeight == 64 && catalog.Sheet.Pivot.X == 24 && catalog.Sheet.Pivot.Y == 58);
-        Check(catalog.Textures.Count == 2 && Enum.GetValues<Facing>().Select(f => catalog.Frame(f).X).Distinct().Count() == 8);
+        Check(catalog.Textures.Count == 2 && Enum.GetValues<Facing>().Select(f => catalog.Frame(f).X).Distinct().Count() == 3);
         foreach (var facing in Enum.GetValues<Facing>()) Check(catalog.Frame(facing).Width == 48 && catalog.Frame(facing).Y == 0);
         string temp = Path.Combine(Path.GetTempPath(), "PawnShopPlayer-" + Guid.NewGuid());
         Directory.CreateDirectory(temp);
@@ -173,10 +173,20 @@ internal static partial class RegressionTests
                 File.Copy(Path.Combine(source, "Bases", sex, "base.png"), Path.Combine(temp, "Bases", sex, "base.png"));
             }
             string metadata = File.ReadAllText(Path.Combine(source, "player-sprite.json"));
-            File.WriteAllText(Path.Combine(temp, "player-sprite.json"), metadata.Replace("IdleNorthWest", "Unused"));
+            File.Copy(Path.Combine(source, "placeholder-sprite.json"), Path.Combine(temp, "placeholder-sprite.json"));
+            File.WriteAllText(Path.Combine(temp, "player-sprite.json"), metadata.Replace("\"IdleNorth\"", "\"Unused\""));
             try { _ = new PlayerSpriteCatalog(temp); throw new Exception("Expected missing facing diagnostic."); }
-            catch (InvalidDataException e) { Check(e.Message.Contains("IdleNorthWest")); }
+            catch (InvalidDataException e) { Check(e.Message.Contains("IdleNorth")); }
             File.WriteAllText(Path.Combine(temp, "player-sprite.json"), metadata);
+            string preview = File.ReadAllText(Path.Combine(source, "placeholder-sprite.json"));
+            foreach (string invalid in new[] { preview.Replace("\"pivotX\": 24", "\"pivotX\": 20"),
+                preview.Replace("\"Walk\"", "\"Unused\""), preview.Replace("\"frameCount\": 4", "\"frameCount\": 3") })
+            {
+                File.WriteAllText(Path.Combine(temp, "placeholder-sprite.json"), invalid);
+                try { _ = new PlayerSpriteCatalog(temp); throw new Exception("Expected incompatible placeholder contract diagnostic."); }
+                catch (InvalidDataException e) { Check(e.Message.Contains("placeholder-sprite.json")); }
+            }
+            File.WriteAllText(Path.Combine(temp, "placeholder-sprite.json"), preview);
             File.WriteAllBytes(Path.Combine(temp, "Bases", "female", "base.png"), new byte[24]);
             try { _ = new PlayerSpriteCatalog(temp); throw new Exception("Expected invalid PNG diagnostic."); }
             catch (InvalidDataException e) { Check(e.Message.Contains("female") && e.Message.Contains("PNG")); }

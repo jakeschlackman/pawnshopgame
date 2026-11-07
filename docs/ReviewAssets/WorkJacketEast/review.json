@@ -1,0 +1,833 @@
+{
+  "version": 1,
+  "id": "work_jacket",
+  "slot": "torso",
+  "direction": "east",
+  "status": "both_east_west_and_settling_approved",
+  "frameCanvas": [48,64],
+  "sheetCanvas": [480,64],
+  "pivot": [24,58],
+  "standingColumn": 0,
+  "walkingColumns": [1,2,3,4,5,6,7,8],
+  "settlingColumns": [1,9,0],
+  "startingColumns": [0,9,1],
+  "walkingDurationsMs": [100,100,100,100,100,100,100,100],
+  "previewTransitionColumns": [0,0,0,0,0,0,0,0,9,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,9,0],
+  "previewStepMs": 100,
+  "layout": "Standing; eight walk poses; middle settling pose. Walking loops only columns 1..8. Start/stop reuse standing and walk-1 clothing endpoints.",
+  "west": "No authored West sheet. Mirror East body and garment together about x=24 in the 48px canvas (pixel x becomes 47-x). Preserve pose order, offsets and timing. Review crops reflect the full character space, and contact-sheet poses flip individually without reversing chronology. Runtime promotion will use SpriteEffects.FlipHorizontally; this checkpoint changes review assets only.",
+  "preview": "tools/player-equipment-review.html",
+  "palette": [
+    "#080202ff",
+    "#17363bff",
+    "#28565bff",
+    "#3f7778ff"
+  ],
+  "extraction": {
+    "method": "Copy native fitted-source teal and nearby outlines within inspected per-pose bounds. Exclude face and explicit near/far hand rectangles. Explicit maskRows define each extracted garment.",
+    "maskRowsFormat": "[y, xStartInclusive, xEndInclusive, ...], local 48x64 frame coordinates.",
+    "outlineSelection": "Source black/dark gray within Chebyshev distance 2 of teal, within bounds and outside protection rectangles; dark gray maps to shared outline.",
+    "protection": "Rows before min/after max; x outside 16..31; face x>=24 and y<=faceBottom; all handRects inclusive. No generated skin copied.",
+    "geometry": "No garment resampling, shifting, stretching or repeated fabric rows.",
+    "composition": "Exact original body unless garment alpha is 255, then use garment."
+  },
+  "bodies": [
+    {
+      "body": "male",
+      "approvals": {
+        "eastStanding": "approved_by_user",
+        "eastWalking": "approved_by_user",
+        "eastSettling": "approved_by_user",
+        "mirroredWest": "approved_by_user"
+      },
+      "standingSource": {
+        "path": "PawnShop.Game/Content/Player/Bases/male/base.png",
+        "sha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67",
+        "crop": [96,0,48,64]
+      },
+      "walkSource": {
+        "path": "docs/ReviewAssets/male-east-walk-forward-bob.png",
+        "frameCanvas": [80,80],
+        "crop": [16,10,48,64],
+        "sha256": "F326D20FFB3FA968547753A3A19A5BE01C433B099F18FBFB7498C21FD7FB5ECC"
+      },
+      "settleSource": {
+        "path": "docs/ReviewAssets/male-east-settle.png",
+        "sha256": "09299EA7E64854AD951F48C9BD411C16823BFBB222B4EF7DD2F33A4A63014C61",
+        "crop": [48,0,48,64],
+        "endpoints": "Source column 0 must equal walk frame 1; source column 2 must equal standing. Reuse those fitted poses; generate only middle."
+      },
+      "fitJob": "96bf2277-62df-4fd2-b1c6-4bda68a87aae",
+      "fitRequest": {
+        "reference_image_url": "https://api.pixellab.ai/mcp/pixel-tools/4a408b8f-5048-4169-95d0-7943e3e22297/image.png",
+        "width": 48,
+        "height": 64,
+        "no_background": true,
+        "seed": 63131,
+        "palette": [
+          "#080202",
+          "#17363b",
+          "#28565b",
+          "#3f7778",
+          "#e4a67e",
+          "#be7e60",
+          "#955b43",
+          "#211917",
+          "#363031",
+          "#4c494e",
+          "#5a2609",
+          "#f9ede3"
+        ],
+        "max_colors": 12,
+        "additional_instructions": "EAST-facing side view ONLY of the same male character, looking RIGHT. Input order is standing, 8 exact accepted walk poses, then the exact middle settling pose. Fit the reference's same muted teal canvas work jacket to every supplied pose. Reference is a front design guide, do not turn or change these side-facing bodies. Broad straight practical male cut. Same collar, hip-length hem, long sleeves with dark cuffs; side seam and subtle elbow reinforcement; any visible front pocket is plain teal, NEVER gold. Main fabric #3f7778, shadow #28565b, deep shadow #17363b, outline #080202. Restrained stable clusters, no glowing highlights, no shading flash in passing or settling poses. Preserve EXACT head, face, brows, neck, shoulder/arm/hand coordinates, proportions, leg/foot pose, body scale, frame order, native 48x64 canvas and pivot (24,58). Sleeves track actual arm swing, leave original hands exposed at wrist. Garment covers shoulder, torso and underwear/bra straps appropriately. No backpack/helmet/tool/trousers/shoes. No new motion, limb repositioning, stretching, resizing, duplicated standing pose, background or shadow. Full fitted sprite output; only jacket pixels will be extracted onto unchanged body.",
+        "input": "Native East standing atlas col2; accepted East walk crops 1..8; accepted middle settling pose."
+      },
+      "chargedGenerations": 10,
+      "standingReference": "../WorkJacketPilot/male-composite-teal-pockets.png",
+      "bodySheet": "male-body.png",
+      "fittedSource": "male-fitted-source.png",
+      "layer": "male-layer.png",
+      "composite": "male-composite.png",
+      "colorMap": {
+        "#211917ff": "#080202ff",
+        "#363031ff": "#080202ff",
+        "#4c494eff": "#080202ff"
+      },
+      "maskConfig": {
+        "min": [21,21,21,22,22,21,21,22,22,21],
+        "max": [42,42,42,43,43,42,42,42,42,41],
+        "handRects": [
+          [
+            [19,41,26,45]
+          ],
+          [
+            [20,42,27,45]
+          ],
+          [
+            [19,42,26,45]
+          ],
+          [
+            [18,42,25,45],
+            [29,33,31,34]
+          ],
+          [
+            [19,42,26,45]
+          ],
+          [
+            [20,42,27,45]
+          ],
+          [
+            [21,42,28,45]
+          ],
+          [
+            [22,43,29,46]
+          ],
+          [
+            [21,42,28,45]
+          ],
+          [
+            [18,41,25,44]
+          ]
+        ],
+        "faceBottom": [22,22,22,23,23,22,22,23,23,22]
+      },
+      "frames": [
+        {
+          "column": 0,
+          "pose": "standing",
+          "garmentPixels": 216,
+          "maskRows": [
+            [21,19,23],
+            [22,19,23],
+            [23,18,27],
+            [24,18,26],
+            [25,17,26],
+            [26,17,27],
+            [27,17,27],
+            [28,17,27],
+            [29,17,27],
+            [30,17,27],
+            [31,17,27],
+            [32,17,27],
+            [33,17,27],
+            [34,17,27],
+            [35,17,28],
+            [36,17,28],
+            [37,17,28],
+            [38,17,28],
+            [39,17,28],
+            [40,17,22,25,28],
+            [41,17,18,27,28],
+            [42,17,18,27,28]
+          ]
+        },
+        {
+          "column": 1,
+          "pose": "walk_1",
+          "garmentPixels": 224,
+          "maskRows": [
+            [21,20,23],
+            [22,19,23],
+            [23,19,27],
+            [24,18,27],
+            [25,18,28],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,28],
+            [30,18,28],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,28],
+            [35,18,29],
+            [36,18,29],
+            [37,18,29],
+            [38,18,29],
+            [39,18,29],
+            [40,18,29],
+            [41,18,23,26,29],
+            [42,18,19,28,29]
+          ]
+        },
+        {
+          "column": 2,
+          "pose": "walk_2",
+          "garmentPixels": 230,
+          "maskRows": [
+            [21,20,23],
+            [22,19,23],
+            [23,19,27],
+            [24,18,27],
+            [25,18,28],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,28],
+            [30,18,28],
+            [31,18,28],
+            [32,17,28],
+            [33,17,28],
+            [34,17,29],
+            [35,17,29],
+            [36,17,29],
+            [37,18,29],
+            [38,18,29],
+            [39,18,29],
+            [40,18,29],
+            [41,18,22,25,29],
+            [42,18,18,27,29]
+          ]
+        },
+        {
+          "column": 3,
+          "pose": "walk_3",
+          "garmentPixels": 232,
+          "maskRows": [
+            [22,19,23],
+            [23,19,23],
+            [24,19,27],
+            [25,18,27],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,29],
+            [30,17,29],
+            [31,17,29],
+            [32,17,29],
+            [33,17,28],
+            [34,17,28],
+            [35,17,29],
+            [36,17,29],
+            [37,17,29],
+            [38,17,29],
+            [39,17,29],
+            [40,18,29],
+            [41,18,21,24,29],
+            [42,26,29],
+            [43,26,29]
+          ]
+        },
+        {
+          "column": 4,
+          "pose": "walk_4",
+          "garmentPixels": 216,
+          "maskRows": [
+            [22,19,23],
+            [23,19,23],
+            [24,19,27],
+            [25,18,27],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,28],
+            [30,18,28],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,28],
+            [35,18,29],
+            [36,18,29],
+            [37,18,29],
+            [38,18,29],
+            [39,18,29],
+            [40,18,29],
+            [41,18,22,25,29],
+            [42,18,18,27,29],
+            [43,27,28]
+          ]
+        },
+        {
+          "column": 5,
+          "pose": "walk_5",
+          "garmentPixels": 226,
+          "maskRows": [
+            [21,19,23],
+            [22,19,23],
+            [23,19,27],
+            [24,18,27],
+            [25,18,28],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,28],
+            [30,18,28],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,29],
+            [35,18,29],
+            [36,18,29],
+            [37,18,29],
+            [38,18,29],
+            [39,18,29],
+            [40,18,29],
+            [41,18,23,26,29],
+            [42,18,19,28,29]
+          ]
+        },
+        {
+          "column": 6,
+          "pose": "walk_6",
+          "garmentPixels": 226,
+          "maskRows": [
+            [21,19,23],
+            [22,19,23],
+            [23,19,27],
+            [24,18,27],
+            [25,18,28],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,28],
+            [30,18,28],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,29],
+            [35,18,29],
+            [36,18,29],
+            [37,18,29],
+            [38,18,29],
+            [39,18,29],
+            [40,18,29],
+            [41,18,24,27,29],
+            [42,18,20,29,29]
+          ]
+        },
+        {
+          "column": 7,
+          "pose": "walk_7",
+          "garmentPixels": 218,
+          "maskRows": [
+            [22,19,23],
+            [23,19,23],
+            [24,19,27],
+            [25,18,27],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,28],
+            [30,18,28],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,28],
+            [35,18,29],
+            [36,18,29],
+            [37,18,29],
+            [38,18,29],
+            [39,18,29],
+            [40,18,29],
+            [41,18,25,28,29],
+            [42,18,24,29,29]
+          ]
+        },
+        {
+          "column": 8,
+          "pose": "walk_8",
+          "garmentPixels": 214,
+          "maskRows": [
+            [22,19,23],
+            [23,19,23],
+            [24,19,27],
+            [25,18,27],
+            [26,18,28],
+            [27,18,28],
+            [28,18,28],
+            [29,18,28],
+            [30,18,28],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,28],
+            [35,18,29],
+            [36,18,29],
+            [37,18,29],
+            [38,18,29],
+            [39,18,29],
+            [40,18,29],
+            [41,18,24,27,29],
+            [42,18,20,29,29]
+          ]
+        },
+        {
+          "column": 9,
+          "pose": "settle_middle",
+          "garmentPixels": 219,
+          "maskRows": [
+            [21,18,23],
+            [22,18,23],
+            [23,18,28],
+            [24,17,26],
+            [25,17,27],
+            [26,17,27],
+            [27,17,27],
+            [28,17,27],
+            [29,17,27],
+            [30,17,27],
+            [31,17,27],
+            [32,17,27],
+            [33,17,27],
+            [34,17,28],
+            [35,17,28],
+            [36,17,28],
+            [37,17,28],
+            [38,17,28],
+            [39,17,28],
+            [40,17,22,24,28],
+            [41,17,17,26,28]
+          ]
+        }
+      ]
+    },
+    {
+      "body": "female",
+      "approvals": {
+        "eastStanding": "approved_by_user",
+        "eastWalking": "approved_by_user",
+        "eastSettling": "approved_by_user",
+        "mirroredWest": "approved_by_user"
+      },
+      "standingSource": {
+        "path": "PawnShop.Game/Content/Player/Bases/female/base.png",
+        "sha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52",
+        "crop": [96,0,48,64]
+      },
+      "walkSource": {
+        "path": "docs/ReviewAssets/female-east-walk-head-fixed.png",
+        "frameCanvas": [80,80],
+        "crop": [16,11,48,64],
+        "sha256": "897E733D62A3777B87E3B1E311C58E1AAA54AD9689AB48942ACDD0F7A04BA467"
+      },
+      "settleSource": {
+        "path": "docs/ReviewAssets/female-east-settle.png",
+        "sha256": "47C193E882376FA84B6A3CCCACBB6E01FE270C83445C6528823408627D280639",
+        "crop": [48,0,48,64],
+        "endpoints": "Source column 0 must equal walk frame 1; source column 2 must equal standing. Reuse those fitted poses; generate only middle."
+      },
+      "fitJob": "c63203cf-e7e7-4234-b05c-7be83ccaeac3",
+      "fitRequest": {
+        "reference_image_url": "https://api.pixellab.ai/mcp/pixel-tools/9437124b-adfe-4dc9-81ec-b2e927da4460/assets/south/full.png",
+        "width": 48,
+        "height": 64,
+        "no_background": true,
+        "seed": 63132,
+        "palette": [
+          "#080202",
+          "#17363b",
+          "#28565b",
+          "#3f7778",
+          "#e4a67e",
+          "#be7e60",
+          "#955b43",
+          "#211917",
+          "#363031",
+          "#4c494e",
+          "#5a2609",
+          "#f9ede3"
+        ],
+        "max_colors": 12,
+        "additional_instructions": "EAST-facing side view ONLY of the same female character, looking RIGHT. Input order is standing, 8 exact accepted walk poses, then the exact middle settling pose. Fit the reference's same muted teal canvas work jacket to every supplied pose. Reference is a front design guide, do not turn or change these side-facing bodies. Narrower practical female cut, natural waist, modest hips. Same collar, hip-length hem, long sleeves with dark cuffs; side seam and subtle elbow reinforcement; any visible front pocket is plain teal, NEVER gold. Main fabric #3f7778, shadow #28565b, deep shadow #17363b, outline #080202. Restrained stable clusters, no glowing highlights, no shading flash in passing or settling poses. Preserve EXACT head, face, brows, neck, shoulder/arm/hand coordinates, proportions, leg/foot pose, body scale, frame order, native 48x64 canvas and pivot (24,58). Sleeves track actual arm swing, leave original hands exposed at wrist. Garment covers shoulder, torso and underwear/bra straps appropriately. No backpack/helmet/tool/trousers/shoes. No new motion, limb repositioning, stretching, resizing, duplicated standing pose, background or shadow. Full fitted sprite output; only jacket pixels will be extracted onto unchanged body.",
+        "input": "Native East standing atlas col2; accepted East walk crops 1..8; accepted middle settling pose."
+      },
+      "chargedGenerations": 10,
+      "standingReference": "../WorkJacketPilot/female-composite.png",
+      "bodySheet": "female-body.png",
+      "fittedSource": "female-fitted-source.png",
+      "layer": "female-layer.png",
+      "composite": "female-composite.png",
+      "colorMap": {
+        "#211917ff": "#080202ff",
+        "#363031ff": "#080202ff",
+        "#4c494eff": "#080202ff"
+      },
+      "maskConfig": {
+        "min": [23,23,23,23,22,23,23,22,22,23],
+        "max": [41,41,41,41,41,41,41,40,41,42],
+        "handRects": [
+          [
+            [20,40,25,44]
+          ],
+          [
+            [19,40,23,44],
+            [29,31,31,33]
+          ],
+          [
+            [20,40,24,44],
+            [29,31,31,33]
+          ],
+          [
+            [22,39,27,43]
+          ],
+          [
+            [23,39,29,43]
+          ],
+          [
+            [24,39,31,43]
+          ],
+          [
+            [23,39,29,43]
+          ],
+          [
+            [22,39,27,43]
+          ],
+          [
+            [20,39,25,43]
+          ],
+          [
+            [17,39,23,43],
+            [29,36,31,38]
+          ]
+        ],
+        "faceBottom": [23,23,23,23,23,23,23,23,23,23]
+      },
+      "frames": [
+        {
+          "column": 0,
+          "pose": "standing",
+          "garmentPixels": 180,
+          "maskRows": [
+            [23,20,23],
+            [24,20,26],
+            [25,19,27],
+            [26,19,28],
+            [27,19,28],
+            [28,19,29],
+            [29,19,29],
+            [30,19,29],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,28],
+            [35,18,28],
+            [36,18,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,28],
+            [40,18,19,26,28],
+            [41,26,28]
+          ]
+        },
+        {
+          "column": 1,
+          "pose": "walk_1",
+          "garmentPixels": 180,
+          "maskRows": [
+            [23,20,23],
+            [24,20,26],
+            [25,19,27],
+            [26,19,28],
+            [27,19,28],
+            [28,19,29],
+            [29,19,29],
+            [30,19,29],
+            [31,18,28],
+            [32,18,28],
+            [33,18,28],
+            [34,18,28],
+            [35,18,28],
+            [36,18,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,28],
+            [40,24,28],
+            [41,24,26]
+          ]
+        },
+        {
+          "column": 2,
+          "pose": "walk_2",
+          "garmentPixels": 175,
+          "maskRows": [
+            [23,20,23],
+            [24,20,26],
+            [25,19,27],
+            [26,19,28],
+            [27,19,28],
+            [28,19,29],
+            [29,19,29],
+            [30,19,29],
+            [31,19,28],
+            [32,19,28],
+            [33,18,28],
+            [34,18,28],
+            [35,18,28],
+            [36,18,28],
+            [37,18,28],
+            [38,19,28],
+            [39,19,28],
+            [40,25,28],
+            [41,25,27]
+          ]
+        },
+        {
+          "column": 3,
+          "pose": "walk_3",
+          "garmentPixels": 167,
+          "maskRows": [
+            [23,20,23],
+            [24,20,26],
+            [25,20,27],
+            [26,19,28],
+            [27,19,29],
+            [28,19,29],
+            [29,19,29],
+            [30,20,29],
+            [31,20,28],
+            [32,19,28],
+            [33,19,28],
+            [34,19,28],
+            [35,19,28],
+            [36,19,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,21,28,28],
+            [40,18,21,28,28],
+            [41,19,21,28,28]
+          ]
+        },
+        {
+          "column": 4,
+          "pose": "walk_4",
+          "garmentPixels": 169,
+          "maskRows": [
+            [22,20,23],
+            [23,20,23],
+            [24,20,26],
+            [25,19,27],
+            [26,19,28],
+            [27,19,29],
+            [28,19,29],
+            [29,19,29],
+            [30,20,28],
+            [31,20,28],
+            [32,20,28],
+            [33,20,28],
+            [34,19,28],
+            [35,19,28],
+            [36,19,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,22],
+            [40,18,22],
+            [41,19,22]
+          ]
+        },
+        {
+          "column": 5,
+          "pose": "walk_5",
+          "garmentPixels": 169,
+          "maskRows": [
+            [23,20,23],
+            [24,20,26],
+            [25,19,27],
+            [26,19,28],
+            [27,19,29],
+            [28,19,29],
+            [29,19,29],
+            [30,19,28],
+            [31,20,28],
+            [32,20,28],
+            [33,20,28],
+            [34,19,28],
+            [35,19,28],
+            [36,19,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,23],
+            [40,18,23],
+            [41,19,23]
+          ]
+        },
+        {
+          "column": 6,
+          "pose": "walk_6",
+          "garmentPixels": 166,
+          "maskRows": [
+            [23,20,23],
+            [24,20,26],
+            [25,19,27],
+            [26,19,28],
+            [27,19,29],
+            [28,19,29],
+            [29,19,29],
+            [30,20,28],
+            [31,20,28],
+            [32,20,28],
+            [33,20,28],
+            [34,19,28],
+            [35,19,28],
+            [36,18,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,22],
+            [40,18,22],
+            [41,19,22]
+          ]
+        },
+        {
+          "column": 7,
+          "pose": "walk_7",
+          "garmentPixels": 169,
+          "maskRows": [
+            [22,20,23],
+            [23,20,23],
+            [24,20,27],
+            [25,19,28],
+            [26,19,29],
+            [27,19,29],
+            [28,20,29],
+            [29,20,29],
+            [30,20,28],
+            [31,20,28],
+            [32,19,28],
+            [33,19,28],
+            [34,19,28],
+            [35,19,28],
+            [36,18,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,21,28,28],
+            [40,18,21,28,28]
+          ]
+        },
+        {
+          "column": 8,
+          "pose": "walk_8",
+          "garmentPixels": 172,
+          "maskRows": [
+            [22,20,23],
+            [23,20,23],
+            [24,20,27],
+            [25,19,28],
+            [26,19,29],
+            [27,19,29],
+            [28,20,29],
+            [29,20,29],
+            [30,20,28],
+            [31,19,28],
+            [32,19,28],
+            [33,19,28],
+            [34,19,28],
+            [35,19,28],
+            [36,18,28],
+            [37,18,28],
+            [38,18,28],
+            [39,18,19,26,28],
+            [40,18,19,26,28],
+            [41,26,26,28,28]
+          ]
+        },
+        {
+          "column": 9,
+          "pose": "settle_middle",
+          "garmentPixels": 196,
+          "maskRows": [
+            [23,20,23],
+            [24,19,26],
+            [25,18,27],
+            [26,18,28],
+            [27,18,29],
+            [28,18,29],
+            [29,18,29],
+            [30,17,28],
+            [31,17,28],
+            [32,17,28],
+            [33,17,28],
+            [34,17,28],
+            [35,17,29],
+            [36,17,28],
+            [37,17,28],
+            [38,18,28],
+            [39,24,28],
+            [40,24,28],
+            [41,24,28],
+            [42,24,26,28,28]
+          ]
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "female-body.png",
+      "sha256": "3A4EBEEB8DB8F09F0DE05F180B664C388352376AB128CE134631F34076BC96B0"
+    },
+    {
+      "path": "female-composite.png",
+      "sha256": "7DF4F43C0E45CAB4215074EB9C08D42D0426B053BEB38D7A358A6D9DEFDA3653"
+    },
+    {
+      "path": "female-fitted-source.png",
+      "sha256": "C853895EAB3C2B6E1836C2FA8989E4433363FA2B98011544B9557BA5AC32A26B"
+    },
+    {
+      "path": "female-layer.png",
+      "sha256": "500EB589AB194F39FA30C3F8F189EB58ACFA3A548BE8BB2F4D3DDA823FCD2364"
+    },
+    {
+      "path": "male-body.png",
+      "sha256": "B14A4D16B2343B67500C9F9843C6905C2E42357AF6B55597B723CD9BD946356B"
+    },
+    {
+      "path": "male-composite.png",
+      "sha256": "FEA1D3C01BA3CB36855528753CFE1D311D44F57632A6F659CF516397CC91FE82"
+    },
+    {
+      "path": "male-fitted-source.png",
+      "sha256": "99E660488FAD3607898CB71D1A0DBF54998893B360F8782DB35DA5039C980E41"
+    },
+    {
+      "path": "male-layer.png",
+      "sha256": "E6DEA6C8F900FE056AEBBA7A9B762389905E5C560309C1713E301CE435C34765"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: eight output hashes; all 20 poses; 480x64 sheets of native 48x64 frames; binary alpha and four-color jacket palette; exact mapped source pixels; explicit masks/counts; exact original body composition; protected face/hands/lower legs; torso/bra coverage; exact walk-1 and standing settling endpoints. All 49 previously frozen/accepted source hashes match.",
+    "previewChecks": "PASS: Node DOM/canvas stubs loaded 20 real PNGs, checked all four directions, eight-frame loops and all 28 start/walk/stop steps, wrap/pause/step/slider, separate standing, per-pose contact order, body/layer transform equality, full-frame/crop mirror mapping over 265848 pixel positions, scale and equipment toggle. No West assets loaded or authored. This is not live browser/game visual verification.",
+    "visual": "All source/composite poses inspected as static PixelLab images; user accepted East/West and clothed transitions. No browser/game launch by agent."
+  },
+  "remaining": "Welding helmet, wrench, multiple-item fit, NPC integration, mech and runtime promotion are outside this slice.",
+  "approvalBasis": "User: no issues! next phase. Accepts both East/West jacket fits and clothed transitions shown in the preview."
+}

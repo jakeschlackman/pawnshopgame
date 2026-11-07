@@ -1,0 +1,536 @@
+{
+  "version": 1,
+  "direction": "east",
+  "status": "east_west_standing_walk_settle_approved",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "sheetCanvas": [
+    480,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "standingColumn": 0,
+  "walkingColumns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "middleSettleColumn": 9,
+  "startingColumns": [
+    0,
+    9,
+    1
+  ],
+  "settlingColumns": [
+    1,
+    9,
+    0
+  ],
+  "walkingDurationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "previewTransitionColumns": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    9,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    9,
+    0
+  ],
+  "previewStepMs": 100,
+  "preview": "tools/player-equipment-review.html",
+  "west": "Mirror the complete East composition around canvas x=24 (pixel x becomes 47-x), including offsets, layers and review crops. Preserve pose order. No authored West sheets.",
+  "scope": "Review assets only. Standing, eight walking poses and middle settling pose on both bodies. No production C# changes or folder moves.",
+  "sourceBodyManifest": "docs/ReviewAssets/WorkJacketEast/review.json",
+  "headAttachment": {
+    "method": "Exhaustive exact RGBA matching of standing head region [15,5,33,21] inclusive against each accepted body pose. All 20 poses match without changes, using only the recorded integer translations. Apply the same translations to rigid mask and short hair.",
+    "offsets": {
+      "male": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "female": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "approval": {
+    "male": {
+      "standing": "approved_by_user",
+      "walking": "approved_by_user",
+      "settling": "approved_by_user",
+      "mirroredWest": "approved_by_user"
+    },
+    "female": {
+      "standing": "approved_by_user",
+      "walking": "approved_by_user",
+      "settling": "approved_by_user",
+      "mirroredWest": "approved_by_user"
+    }
+  },
+  "id": "hair_short_chestnut",
+  "compatibleItem": "helmet_welder",
+  "layers": {
+    "normal": "Independent transparent hair pixels only; no anatomy, clothing or mask baked in.",
+    "fitted": "Alpha-only clipped variant. Kept pixels retain exact colors and positions.",
+    "drawOrder": [
+      "original_body",
+      "optional_jacket",
+      "optional_normal_or_fitted_hair",
+      "optional_mask"
+    ]
+  },
+  "palette": [
+    "#120a06ff",
+    "#2c180fff",
+    "#4e2e20ff",
+    "#70452fff",
+    "#936047ff"
+  ],
+  "helmetRules": {
+    "allowedRows": [
+      [
+        8,
+        20,
+        30
+      ],
+      [
+        9,
+        18,
+        30
+      ],
+      [
+        10,
+        17,
+        30
+      ],
+      [
+        11,
+        17,
+        30
+      ],
+      [
+        12,
+        17,
+        30
+      ],
+      [
+        13,
+        17,
+        30
+      ],
+      [
+        14,
+        17,
+        30
+      ],
+      [
+        15,
+        17,
+        30
+      ],
+      [
+        16,
+        17,
+        30
+      ],
+      [
+        17,
+        17,
+        24
+      ],
+      [
+        18,
+        17,
+        24
+      ]
+    ],
+    "method": "Clip only crown/back protrusions to the fitted head envelope. Transparent strap openings reveal 27 male / 32 female hair pixels in each pose. Removing mask restores normal hair. This is one hairstyle/item compatibility fit, not a generic hide-hair rule."
+  },
+  "generation": {
+    "tool": "PixelLab edit_image_pro_flash reference",
+    "chargedGenerations": 10,
+    "paidOperations": 2,
+    "paidRetries": 0,
+    "derivatives": "Exact extraction, palette mapping and body-specific head translations in PixelLab pixelart_workbench."
+  },
+  "fits": [
+    {
+      "body": "male",
+      "source": "male-source.png",
+      "jobId": "7a9e7723-3cf1-48c5-ad20-a7ddd053681f",
+      "request": {
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/images/bfc8faaa-75bd-4577-bb73-eeb21ddb5f0c/download",
+          "usage_description": "Approved short chestnut hairstyle for this body, seen from SOUTH. Match same short crop and brown shades, but keep edit target's RIGHT-facing EAST profile exactly."
+        },
+        "description": "Add ONLY a short dark chestnut-brown practical haircut matching reference to this exact EAST/right-facing bald head. Same compact soft side-part crop, restrained one pixel thickness above original scalp, short sides above ear, a natural stepped front hairline. RIGHT-facing profile, preserve original forehead, eye, eyebrow, nose, ear, jaw and all face anatomy; no hair over eye. Three quiet brown shades plus dark brown outline. No quiff, tall spikes, ponytail, beard, long locks, hat or extra clothes. Preserve original head and body native coordinates, pose and proportions. All body pixels below hair unchanged. Crisp pixel art, quiet broad clusters, no texture noise or blur. Exact transparent48x64, pivot24,58; only actual hair pixels will be extracted onto original base.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63311,
+        "input": "Exact accepted male East standing body, WorkJacketEast body.png column 0, 48x64 lossless crop."
+      },
+      "maskRows": [
+        [
+          8,
+          20,
+          25
+        ],
+        [
+          9,
+          19,
+          28
+        ],
+        [
+          10,
+          18,
+          29
+        ],
+        [
+          11,
+          17,
+          30
+        ],
+        [
+          12,
+          16,
+          24
+        ],
+        [
+          13,
+          16,
+          22
+        ],
+        [
+          14,
+          16,
+          21
+        ],
+        [
+          15,
+          16,
+          19
+        ],
+        [
+          16,
+          17,
+          18
+        ],
+        [
+          17,
+          17,
+          18
+        ]
+      ],
+      "colorMap": {
+        "#130403ff": "#120a06ff",
+        "#0b0403ff": "#120a06ff",
+        "#532c15ff": "#4e2e20ff",
+        "#64371bff": "#4e2e20ff",
+        "#2b1306ff": "#2c180fff",
+        "#1b0503ff": "#120a06ff",
+        "#1c0a07ff": "#120a06ff",
+        "#754223ff": "#70452fff",
+        "#5b3218ff": "#4e2e20ff",
+        "#6b3c1fff": "#70452fff",
+        "#030101ff": "#120a06ff",
+        "#4c2913ff": "#4e2e20ff",
+        "#43220dff": "#4e2e20ff",
+        "#3a1e0eff": "#2c180fff",
+        "#130b09ff": "#120a06ff",
+        "#0c0a09ff": "#120a06ff"
+      },
+      "normal": "male-hair.png",
+      "fitted": "male-hair-equipped.png",
+      "withoutMask": "male-review-hair.png",
+      "withMask": "male-review-equipped.png",
+      "normalPixelCount": 72,
+      "fittedPixelCount": 68
+    },
+    {
+      "body": "female",
+      "source": "female-source.png",
+      "jobId": "80985d9c-d484-4a3e-bd97-63070b9f382a",
+      "request": {
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/images/be013979-804e-44dc-a075-e445fc7f3c50/download",
+          "usage_description": "Approved short chestnut hairstyle for this body, seen from SOUTH. Match same short crop and brown shades, but keep edit target's RIGHT-facing EAST profile exactly."
+        },
+        "description": "Add ONLY a short dark chestnut-brown practical haircut matching reference to this exact EAST/right-facing bald head. Same compact soft side-part crop, restrained one pixel thickness above original scalp, short sides above ear, a natural stepped front hairline. RIGHT-facing profile, preserve original forehead, eye, eyebrow, nose, ear, jaw and all face anatomy; no hair over eye. Three quiet brown shades plus dark brown outline. No quiff, tall spikes, ponytail, beard, long locks, hat or extra clothes. Preserve original head and body native coordinates, pose and proportions. All body pixels below hair unchanged. Crisp pixel art, quiet broad clusters, no texture noise or blur. Exact transparent48x64, pivot24,58; only actual hair pixels will be extracted onto original base.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63312,
+        "input": "Exact accepted female East standing body, WorkJacketEast body.png column 0, 48x64 lossless crop."
+      },
+      "maskRows": [
+        [
+          7,
+          21,
+          25
+        ],
+        [
+          8,
+          19,
+          27
+        ],
+        [
+          9,
+          18,
+          28
+        ],
+        [
+          10,
+          17,
+          29
+        ],
+        [
+          11,
+          17,
+          28
+        ],
+        [
+          12,
+          16,
+          24
+        ],
+        [
+          13,
+          16,
+          23
+        ],
+        [
+          14,
+          16,
+          22
+        ],
+        [
+          15,
+          16,
+          18,
+          20,
+          21
+        ],
+        [
+          16,
+          16,
+          17,
+          21,
+          21
+        ],
+        [
+          17,
+          17,
+          17,
+          21,
+          21
+        ],
+        [
+          18,
+          17,
+          17
+        ]
+      ],
+      "colorMap": {
+        "#1b0b06ff": "#120a06ff",
+        "#22120cff": "#2c180fff",
+        "#341f16ff": "#2c180fff",
+        "#452c1dff": "#4e2e20ff",
+        "#5b3a27ff": "#4e2e20ff",
+        "#633e2cff": "#70452fff",
+        "#513323ff": "#4e2e20ff",
+        "#0c0403ff": "#120a06ff",
+        "#0d0a09ff": "#120a06ff",
+        "#140a08ff": "#120a06ff"
+      },
+      "normal": "female-hair.png",
+      "fitted": "female-hair-equipped.png",
+      "withoutMask": "female-review-hair.png",
+      "withMask": "female-review-equipped.png",
+      "normalPixelCount": 85,
+      "fittedPixelCount": 74,
+      "protectedSourcePixels": [
+        [
+          19,
+          15
+        ]
+      ],
+      "extractionNote": "Source (19,15) is ear shading, explicitly excluded from hair selection. Original ear is retained underneath."
+    }
+  ],
+  "files": [
+    {
+      "sha256": "6C3D29B903D4191C8A5F6C3E3B13AA154DCFD3FA828523632D5F7A589284E31C",
+      "path": "female-hair-equipped.png"
+    },
+    {
+      "sha256": "121A56058C858377C968A1B0E43E29F02C171C36FB46648E29B71FADB7918396",
+      "path": "female-hair.png"
+    },
+    {
+      "sha256": "2BF84A8AA617195E778C0E2E24A90B6A395CC994872E34F792259D5D0F7F15E5",
+      "path": "female-review-equipped.png"
+    },
+    {
+      "sha256": "008C929C30F949D11FBA9AA4A7197507DF4D196D82EA3F2BE700F647B8F6ACBF",
+      "path": "female-review-hair.png"
+    },
+    {
+      "sha256": "7F366AB7ACB6AA185D82F6F389527150A0F0187157B7C66D51F65C7F296FFC06",
+      "path": "female-source.png"
+    },
+    {
+      "sha256": "F144478C6C78154FA532D435255E02B7F22D76A5A16EEC0C3EDE788BA907B5A6",
+      "path": "male-hair-equipped.png"
+    },
+    {
+      "sha256": "6135FC5E4AAF5A165C497CB4BBBA0A24669179B2E13B3981694F1AB4019EA6C3",
+      "path": "male-hair.png"
+    },
+    {
+      "sha256": "678B516B729F6BA72796C4A6CC70CE96801132243C9F61331CBD2DA182D1063B",
+      "path": "male-review-equipped.png"
+    },
+    {
+      "sha256": "D34BF1F27EC40005E49521409B4A9A4BD5DF2B543446BBDE75D89E84E4D03B94",
+      "path": "male-review-hair.png"
+    },
+    {
+      "sha256": "B952AE810D2E1C4AAE64FE9FCA6835BDF973DA1C2EB9F5350C02C3525B66C2F6",
+      "path": "male-source.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: 129 final locked file hashes (112 prior files preserved, 17 new PNGs); 20 head/overlay poses and 80 pixel-exact compositions, native dimensions, binary alpha, source selections/palette mappings, measured integer head translations, alpha-only hair clipping and visible hair through strap openings. Final female source-ear exclusion rechecked across all 10 poses and both hair compositions.",
+    "preview": "PASS: Node DOM/canvas checks loaded 42 actual PNGs and exercised 62 views, 704 direction/motion/loadout cases, 11264 mask/hair views and 2138752 mirror-coordinate checks. Shared columns, contact chronology, all eight item/hair combinations, static South comparisons, ear clearing/restoration, pause/step/slider/wrap, scaling and links. No live browser rendering claim.",
+    "visual": "Male/female standing hair/no-mask and hair/mask compositions inspected at 4x; all 20 equipped head poses inspected as static 2x PixelLab sheets. User review pending. No browser/game launched. Subsequently accepted by user: great, next phase; see approvalBasis."
+  },
+  "pixelLabExports": {
+    "male_normal": "37bb008a-1489-4dba-b70c-f67a185ce072",
+    "male_fitted": "27758a59-c1aa-4752-902c-5cafa61370da",
+    "male_without": "c7441be0-ef27-4918-810f-821108e38bf8",
+    "male_withMask": "10e5a923-19ea-4586-b4d3-007857a5335e",
+    "female_normal": "9f855ca4-3842-457d-a1c9-5be711f963e6",
+    "female_fitted": "29ec6fcd-358f-4811-b3bc-e2b72051affb",
+    "female_without": "906a1293-a747-42ce-b9f9-ebea44363c85",
+    "female_withMask": "47cba5a0-ca35-4ef6-9e36-0a77930b6d91"
+  },
+  "approvalBasis": "User: great, next phase. Accepts displayed male/female East and mirrored West mask/short-hair standing, walking and settling combinations. Other hairstyles and tools remain separate approval scopes."
+}

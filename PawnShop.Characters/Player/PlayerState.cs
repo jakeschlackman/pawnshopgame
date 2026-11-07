@@ -4,7 +4,7 @@ using PawnShop.Characters.Movement;
 namespace PawnShop.Characters.Player;
 
 public enum PlayerGender { Male, Female }
-public enum Facing { South, SouthEast, East, NorthEast, North, NorthWest, West, SouthWest }
+public enum Facing { South, East, North, West }
 public readonly record struct PlayerView(Guid Id, PlayerGender Gender, Vector2 Position, Facing Facing, bool Moving);
 
 // Session-owned authoritative movement; consumers receive value snapshots only.
@@ -15,6 +15,7 @@ public sealed class PlayerState
     private Vector2 position;
     private Facing facing = Facing.South;
     private bool moving;
+    private Vector2 previousIntent;
     private readonly Guid id = Guid.NewGuid();
     private readonly PlayerGender gender;
     public PlayerView View => new(id, gender, position, facing, moving);
@@ -35,10 +36,12 @@ public sealed class PlayerState
         if (walkArea.Width < HalfWidth * 2 || walkArea.Height < FootprintHeight)
             throw new ArgumentException("Walk area cannot contain the player's footprint.", nameof(walkArea));
         moving = false;
-        if (intent == Vector2.Zero || delta == TimeSpan.Zero) return;
+        if (delta == TimeSpan.Zero) return;
+        if (intent == Vector2.Zero) { previousIntent = intent; return; }
+        facing = Direction(intent);
+        previousIntent = intent;
         // Normalize before speed is applied: diagonals travel at the same speed as cardinals.
         intent = Vector2.Normalize(intent);
-        facing = Direction(intent);
         var amount = intent * Speed * (float)delta.TotalSeconds;
         if (!float.IsFinite(amount.X) || !float.IsFinite(amount.Y)) throw new ArgumentOutOfRangeException(nameof(delta));
         var before = position;
@@ -64,8 +67,19 @@ public sealed class PlayerState
         moving = position != before;
     }
 
-    private static Facing Direction(Vector2 direction) => direction.Y > 0
-        ? direction.X > 0 ? Facing.SouthEast : direction.X < 0 ? Facing.SouthWest : Facing.South
-        : direction.Y < 0 ? direction.X > 0 ? Facing.NorthEast : direction.X < 0 ? Facing.NorthWest : Facing.North
-        : direction.X > 0 ? Facing.East : Facing.West;
+    private Facing Direction(Vector2 direction)
+    {
+        float x = Math.Abs(direction.X), y = Math.Abs(direction.Y);
+        bool horizontal = x > y;
+        if (x == y)
+        {
+            bool changedX = Math.Sign(direction.X) != Math.Sign(previousIntent.X);
+            bool changedY = Math.Sign(direction.Y) != Math.Sign(previousIntent.Y);
+            // A newly pressed axis wins a diagonal tie; otherwise retain the last axis.
+            // A fresh simultaneous diagonal starts vertical (the initial South facing).
+            horizontal = changedX != changedY ? changedX : facing is Facing.East or Facing.West;
+        }
+        return horizontal ? direction.X > 0 ? Facing.East : Facing.West
+            : direction.Y > 0 ? Facing.South : Facing.North;
+    }
 }

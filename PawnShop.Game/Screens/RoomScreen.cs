@@ -43,7 +43,7 @@ internal sealed class RoomScreen : IDisposable
         catch { Dispose(); throw; }
     }
 
-    public void Draw(PixelRenderer renderer, RoomView view, PlayerView player, AppSettings settings, string? selectedNpcId, IReadOnlyDictionary<string, int> frames)
+    public void Draw(PixelRenderer renderer, RoomView view, PlayerView player, AppSettings settings, string? selectedNpcId, IReadOnlyDictionary<string, int> frames, int playerFrame)
     {
         var floor = ShopRoomLayout.Floor;
         for (int y = (int)floor.Top; y < floor.Bottom; y += 32)
@@ -57,13 +57,14 @@ internal sealed class RoomScreen : IDisposable
         renderer.Text("YOUR SHOP", 44, 58, Cream, 2);
         renderer.Text($"ROOM TIME: {(int)view.Elapsed.TotalSeconds} SECONDS", 36, 16, Cream);
         renderer.Text(player.Gender == PlayerGender.Male ? "MALE" : "FEMALE", 480, 16, Gold);
+        renderer.Text("PLACEHOLDER BODY + GEAR", 36, 298, Gold);
         renderer.Text($"MOVE KEYS: MOVE  {settings.InteractKey}: TALK  {settings.PauseKey}: PAUSE / BACK", 36, 315, Cream);
         if (selectedNpcId is null) renderer.Text("WALK NEAR THE VISITOR TO TALK", 36, 326, Cream);
         else renderer.Text($"{settings.InteractKey}: TALK TO THE VISITOR", 36, 326, Gold);
         bool playerDrawn = false;
         foreach (var npc in drawOrder)
         {
-            if (!playerDrawn && player.Position.Y <= npc.Y) { DrawPlayer(renderer, player); playerDrawn = true; }
+            if (!playerDrawn && player.Position.Y <= npc.Y) { players.DrawPlaceholder(renderer, player, playerFrame); playerDrawn = true; }
             if (npc.Id == selectedNpcId) renderer.Fill(npc.X - 13, npc.Y + 1, 26, 3, Gold);
             var asset = npc.Content.Sprite;
             var sheet = asset.Sheet;
@@ -75,11 +76,8 @@ internal sealed class RoomScreen : IDisposable
             int labelX = Math.Clamp(npc.X - labelWidth / 2, 36, 604 - labelWidth);
             renderer.Text(npc.Name, labelX, npc.Y + 11, npc.Id == selectedNpcId ? Gold : Cream);
         }
-        if (!playerDrawn) DrawPlayer(renderer, player);
+        if (!playerDrawn) players.DrawPlaceholder(renderer, player, playerFrame);
     }
-
-    private void DrawPlayer(PixelRenderer renderer, PlayerView player) =>
-        players.Draw(renderer, player.Gender, player.Facing, player.Position.X, player.Position.Y);
 
     public void Dispose()
     {

@@ -25,6 +25,7 @@ public sealed class ApplicationFlow : IDisposable
     public IReadOnlyList<PlacedNpc> Npcs => session?.Npcs ?? Array.Empty<PlacedNpc>();
     public string? SelectedNpcId => session?.NearbyNpcId;
     public PlayerView? Player => session?.Player;
+    public int PlayerFrame => session?.PlayerFrame ?? 0;
     public PlayerSpriteCatalog PlayerSprites { get; }
     public IReadOnlyDictionary<string, int> NpcFrames => session?.NpcFrames ?? System.Collections.Frozen.FrozenDictionary<string, int>.Empty;
     public DialoguePresenter? Dialogue { get; private set; }
@@ -184,7 +185,7 @@ public sealed class ApplicationFlow : IDisposable
             case MenuCommand.SelectMale:
             case MenuCommand.SelectFemale:
                 if (session is not null || Screen != Screen.CharacterSelect) throw new InvalidOperationException("Choose a character before starting a session.");
-                session = new GameSession(conversations.ShopNpcs, command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female);
+                session = new GameSession(PlayerSprites.PlaceholderSheet, conversations.ShopNpcs, command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female);
                 SessionsCreated++;
                 SetScreen(Screen.Room);
                 break;

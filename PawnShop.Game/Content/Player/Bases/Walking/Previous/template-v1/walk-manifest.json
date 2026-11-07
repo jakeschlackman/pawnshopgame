@@ -1,0 +1,592 @@
+﻿{
+    "version":  1,
+    "status":  "candidate_needs_visual_approval",
+    "date":  "2026-11-06",
+    "template":  "walking",
+    "canvas":  {
+                   "width":  48,
+                   "height":  64
+               },
+    "pivot":  {
+                  "x":  24,
+                  "y":  58
+              },
+    "directions":  [
+                       "north",
+                       "east",
+                       "south",
+                       "west"
+                   ],
+    "frameCount":  6,
+    "frameDurationMs":  100,
+    "loop":  true,
+    "eastPolicy":  "Exact horizontal mirror of west from PixelLab mirror_of; original independent east generation retained only as source evidence.",
+    "bodies":  [
+                   {
+                       "bodyType":  "male",
+                       "characterId":  "79b48db4-483d-4fe3-94bd-74bcec89eab9",
+                       "animationGroupId":  "68d35541-5018-46b1-aa27-af497b06eed0",
+                       "sheet":  "male/walk.png",
+                       "eastPixelLabResult":  "551aa0d5-daf3-4b12-8da5-4b37b3068244",
+                       "mirrorDrawings":  [
+                                              "4982f7fc-ce2a-4edf-b879-58e47dbea0d2",
+                                              "8a6eb057-2593-46a7-a8b7-ada6aea74970"
+                                          ],
+                       "visualApproval":  "pending"
+                   },
+                   {
+                       "bodyType":  "female",
+                       "characterId":  "5cd54c3f-d34a-4f02-83ca-0e9a21966fe5",
+                       "animationGroupId":  "d7308d85-7a4f-4539-8ae2-4391cef25072",
+                       "sheet":  "female/walk.png",
+                       "eastPixelLabResult":  "35c08c6f-a260-456b-9482-9399ad9faa3e",
+                       "mirrorDrawings":  [
+                                              "0126e8cc-3e01-4e59-9007-79bf8c105b22",
+                                              "fa336a52-ad22-4f0e-91ef-d41c2937ab3f"
+                                          ],
+                       "visualApproval":  "pending"
+                   }
+               ],
+    "sources":  [
+                    {
+                        "path":  "Sources/male/north/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/bce9470c-0e9f-4e40-9359-1de73f1f74c4/north/0.png?t=1794004000912",
+                        "bodyType":  "male",
+                        "direction":  "north",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "DDB75102E563A17DA3B232C53A5B8FCFC041E685E7F295358129E93ADF0602EE"
+                    },
+                    {
+                        "path":  "Sources/male/north/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/bce9470c-0e9f-4e40-9359-1de73f1f74c4/north/1.png?t=1794004000912",
+                        "bodyType":  "male",
+                        "direction":  "north",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "5F798F8E51B5E5F380D0560FCB18F6C0780716457DDB2C3409A9BB0A5E1F3EE9"
+                    },
+                    {
+                        "path":  "Sources/male/north/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/bce9470c-0e9f-4e40-9359-1de73f1f74c4/north/2.png?t=1794004000912",
+                        "bodyType":  "male",
+                        "direction":  "north",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "92DE77FA1F32DE834485D4C2A4E197D6BE74A1D6376ED7584D2C61901E5F950B"
+                    },
+                    {
+                        "path":  "Sources/male/north/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/bce9470c-0e9f-4e40-9359-1de73f1f74c4/north/3.png?t=1794004000912",
+                        "bodyType":  "male",
+                        "direction":  "north",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "1CE5D31BFEA897AACC4C703EC378DB21FFA39154AAE72F45C6F8D9EF2769E5B4"
+                    },
+                    {
+                        "path":  "Sources/male/north/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/bce9470c-0e9f-4e40-9359-1de73f1f74c4/north/4.png?t=1794004000912",
+                        "bodyType":  "male",
+                        "direction":  "north",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "4F5E806C72C750BA147191EA2777A75ECC030A5FE50484013F20E7089DAFA059"
+                    },
+                    {
+                        "path":  "Sources/male/north/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/bce9470c-0e9f-4e40-9359-1de73f1f74c4/north/5.png?t=1794004000912",
+                        "bodyType":  "male",
+                        "direction":  "north",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "973361DE038F9DDDFD3B60FD1FA881597AFB532E525FB31289BB7A65CC42776E"
+                    },
+                    {
+                        "path":  "Sources/male/east/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/14b40d7d-304e-489f-aba8-4a18b0c565c8/east/0.png?t=1794004025927",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  0,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "91A31B689B6E3838A5D485A4CFA4E6014541ACF848BDCB96E5D47C227FD44582"
+                    },
+                    {
+                        "path":  "Sources/male/east/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/14b40d7d-304e-489f-aba8-4a18b0c565c8/east/1.png?t=1794004025927",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  1,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "A43F6CD641CC32BAB1316852056719F5F4BCDB7A3DC7A48AEE69E3AF0BD08F2B"
+                    },
+                    {
+                        "path":  "Sources/male/east/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/14b40d7d-304e-489f-aba8-4a18b0c565c8/east/2.png?t=1794004025927",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  2,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "1ECD444B33C848B11D8FED07FC6664CF970E9A3DB0319E73FF521CC6321E3CAE"
+                    },
+                    {
+                        "path":  "Sources/male/east/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/14b40d7d-304e-489f-aba8-4a18b0c565c8/east/3.png?t=1794004025927",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  3,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "56DD2C7258270769DE985B3157B5B0233F404CFAFFDB4FC813D3C1BD40ABB16E"
+                    },
+                    {
+                        "path":  "Sources/male/east/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/14b40d7d-304e-489f-aba8-4a18b0c565c8/east/4.png?t=1794004025927",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  4,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "C5B5765C1F3715D577DDC910C1E0AB8A502E789A6857A3A5D58A6D11FD8C7AC1"
+                    },
+                    {
+                        "path":  "Sources/male/east/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/14b40d7d-304e-489f-aba8-4a18b0c565c8/east/5.png?t=1794004025927",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  5,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "03078D0C540DF1DEE5B0FF9E099C80C707A60F1DE747073EEBA5B39F77934AB0"
+                    },
+                    {
+                        "path":  "Sources/male/south/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/93be1cd0-0bb7-438e-8970-5c07e5c208e1/south/0.png?t=1794004003883",
+                        "bodyType":  "male",
+                        "direction":  "south",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "2F71BBF6346B10FB88283DB364F0018E605888D530AB7A1164C3E0C181C025EA"
+                    },
+                    {
+                        "path":  "Sources/male/south/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/93be1cd0-0bb7-438e-8970-5c07e5c208e1/south/1.png?t=1794004003883",
+                        "bodyType":  "male",
+                        "direction":  "south",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "F2B0C26DEB009F387BD811D9FF9AE6BE87E906160E11EEEB987720EBA159C4FE"
+                    },
+                    {
+                        "path":  "Sources/male/south/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/93be1cd0-0bb7-438e-8970-5c07e5c208e1/south/2.png?t=1794004003883",
+                        "bodyType":  "male",
+                        "direction":  "south",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "782EA42C1A56F04F0680B0A4D4E89F108C488C3EAEC37287F727488B26F11D82"
+                    },
+                    {
+                        "path":  "Sources/male/south/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/93be1cd0-0bb7-438e-8970-5c07e5c208e1/south/3.png?t=1794004003883",
+                        "bodyType":  "male",
+                        "direction":  "south",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "B6AC0ECD062E0F564875462567ECFCC554093678A8412D81071BD2973365078D"
+                    },
+                    {
+                        "path":  "Sources/male/south/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/93be1cd0-0bb7-438e-8970-5c07e5c208e1/south/4.png?t=1794004003883",
+                        "bodyType":  "male",
+                        "direction":  "south",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "A17D58885C2DAD96363C1D4EC7578327B8EB8D27FA25FC183ACA41638BCA35E0"
+                    },
+                    {
+                        "path":  "Sources/male/south/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/93be1cd0-0bb7-438e-8970-5c07e5c208e1/south/5.png?t=1794004003883",
+                        "bodyType":  "male",
+                        "direction":  "south",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "D98E8ECB18A58FA888682CB0F51EEA24288A6024485C9889543A3FCA5395C346"
+                    },
+                    {
+                        "path":  "Sources/male/west/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/0.png?t=1794004021395",
+                        "bodyType":  "male",
+                        "direction":  "west",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "99EEB7C39ED7724CC10ECDD36FD83F6EC3EBFFEA2671501A97C54A37401824FB"
+                    },
+                    {
+                        "path":  "Sources/male/west/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/1.png?t=1794004021395",
+                        "bodyType":  "male",
+                        "direction":  "west",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "138B49EC4F5F6C4D1780C5289054794434AB827C13108CDE6BE522CF430C5B73"
+                    },
+                    {
+                        "path":  "Sources/male/west/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/2.png?t=1794004021395",
+                        "bodyType":  "male",
+                        "direction":  "west",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "DD601F4DBF215E5D6EC41A35191F752BB5D35F7979CCA2C8D4EC79C886EB7A54"
+                    },
+                    {
+                        "path":  "Sources/male/west/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/3.png?t=1794004021395",
+                        "bodyType":  "male",
+                        "direction":  "west",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "20CD053094B917CB1FC008ECDAFB9E0BE1939EECBA4CF99E3488586B6F8E49E8"
+                    },
+                    {
+                        "path":  "Sources/male/west/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/4.png?t=1794004021395",
+                        "bodyType":  "male",
+                        "direction":  "west",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "735FC59C3E761290FD8E9ED24181FA755CDA6983E19AF766535BC0A098CD6C5A"
+                    },
+                    {
+                        "path":  "Sources/male/west/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/43276f68-bdbc-4920-91d0-04af4f4883b4/west/5.png?t=1794004021395",
+                        "bodyType":  "male",
+                        "direction":  "west",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "353E0C062D37CA2DDC2D104DFB412B9D699E8E9AC9F0C633814A8394412DB6CA"
+                    },
+                    {
+                        "path":  "Sources/male/east-mirrored/frame_000.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/4982f7fc-ce2a-4edf-b879-58e47dbea0d2/assets/east0/full.png",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "278D75D622DDF32566BE9F800F0C5A475D33ED64E430489B2D916B0D30A74F98"
+                    },
+                    {
+                        "path":  "Sources/male/east-mirrored/frame_001.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/4982f7fc-ce2a-4edf-b879-58e47dbea0d2/assets/east1/full.png",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "E0E7403E9514DE0B1AF7C2BFAB1087B410D05DE8D56F9333927D8A2A58784490"
+                    },
+                    {
+                        "path":  "Sources/male/east-mirrored/frame_002.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/4982f7fc-ce2a-4edf-b879-58e47dbea0d2/assets/east2/full.png",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "301D66421439EBC75DDC556161E4D127D868562EEF6B1DC6C03EBC229EC5788E"
+                    },
+                    {
+                        "path":  "Sources/male/east-mirrored/frame_003.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/8a6eb057-2593-46a7-a8b7-ada6aea74970/assets/east3/full.png",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "07E853CE0B18576DBCDC8AFA752B9287E82281C1DB3FC3A6FB1435DBE4A15D94"
+                    },
+                    {
+                        "path":  "Sources/male/east-mirrored/frame_004.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/8a6eb057-2593-46a7-a8b7-ada6aea74970/assets/east4/full.png",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "43D4FD6A09F8FB62119949EF42BFBBA0C1BD858BA19C5FB90196FFD449B17C8E"
+                    },
+                    {
+                        "path":  "Sources/male/east-mirrored/frame_005.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/8a6eb057-2593-46a7-a8b7-ada6aea74970/assets/east5/full.png",
+                        "bodyType":  "male",
+                        "direction":  "east",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "E7F0014226CFCA656FD2751C017C8026E3E726AEBAA5441ED9CE46C7DF61F827"
+                    },
+                    {
+                        "path":  "Sources/female/north/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/31b3cf2a-47a8-474c-b88a-ac79759a5f1c/north/0.png?t=1794004056055",
+                        "bodyType":  "female",
+                        "direction":  "north",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "31ED46EACA1983A601702135E31E773ADABA88EE16C61B7245505C71367167BF"
+                    },
+                    {
+                        "path":  "Sources/female/north/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/31b3cf2a-47a8-474c-b88a-ac79759a5f1c/north/1.png?t=1794004056055",
+                        "bodyType":  "female",
+                        "direction":  "north",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "2DA1FE1A619E3B04BA1688072A49E6C7FF42876003CDD7182BFA1FB51B4771D3"
+                    },
+                    {
+                        "path":  "Sources/female/north/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/31b3cf2a-47a8-474c-b88a-ac79759a5f1c/north/2.png?t=1794004056055",
+                        "bodyType":  "female",
+                        "direction":  "north",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "7B6FAF04F9F2CB76847A491158D5E7247D0456201BCFCC15F7CA4042A44F4B6E"
+                    },
+                    {
+                        "path":  "Sources/female/north/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/31b3cf2a-47a8-474c-b88a-ac79759a5f1c/north/3.png?t=1794004056055",
+                        "bodyType":  "female",
+                        "direction":  "north",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "56ACF04F4AE525167755C19685AADEA4BEB6CABD09C332AC0B62235F770F5427"
+                    },
+                    {
+                        "path":  "Sources/female/north/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/31b3cf2a-47a8-474c-b88a-ac79759a5f1c/north/4.png?t=1794004056055",
+                        "bodyType":  "female",
+                        "direction":  "north",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "EEA236E8162853B085B2AD967CC3B13E06AD49B16E5F8A11745D843EABF82CA0"
+                    },
+                    {
+                        "path":  "Sources/female/north/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/31b3cf2a-47a8-474c-b88a-ac79759a5f1c/north/5.png?t=1794004056055",
+                        "bodyType":  "female",
+                        "direction":  "north",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "AD9DD66E071F32A750D53AEC073D7146A29EB595FA02CF10837DF007DD4A9359"
+                    },
+                    {
+                        "path":  "Sources/female/east/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/19b89d75-02e6-4102-a1e3-406c39da5a61/east/0.png?t=1794004017521",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  0,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "823ABCAC0962955F583CCEE32D44CBFF5B9AFAB88023AD91B4344B99A5B5B0C8"
+                    },
+                    {
+                        "path":  "Sources/female/east/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/19b89d75-02e6-4102-a1e3-406c39da5a61/east/1.png?t=1794004017521",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  1,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "11171A0105C2087F3D32BD8D678E6B9F60C212D9563DD44CA8D1D451A344DCF8"
+                    },
+                    {
+                        "path":  "Sources/female/east/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/19b89d75-02e6-4102-a1e3-406c39da5a61/east/2.png?t=1794004017521",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  2,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "945B5A5FBF1E693369FA3275396F9DCAFC46DE0B0513E31002E8A15CD794BC70"
+                    },
+                    {
+                        "path":  "Sources/female/east/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/19b89d75-02e6-4102-a1e3-406c39da5a61/east/3.png?t=1794004017521",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  3,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "4A256E03B5CFAF309B696A8611E910ADAA3D15093258F081494585E9F675CDF0"
+                    },
+                    {
+                        "path":  "Sources/female/east/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/19b89d75-02e6-4102-a1e3-406c39da5a61/east/4.png?t=1794004017521",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  4,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "BDF6935259CFE30B41368DA34D2D575331D951B712F6DBA4F8789AB96603CE70"
+                    },
+                    {
+                        "path":  "Sources/female/east/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/19b89d75-02e6-4102-a1e3-406c39da5a61/east/5.png?t=1794004017521",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  5,
+                        "usage":  "superseded_independent_east",
+                        "sha256":  "1A5F4B9BBB2E5D585F2E4EC724FE50BB92260CCA82C1C4BF447CE4D6F6FC6F1E"
+                    },
+                    {
+                        "path":  "Sources/female/south/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/ecce0d9c-e9d1-46d6-970c-384ccc8f94ed/south/0.png?t=1794004014102",
+                        "bodyType":  "female",
+                        "direction":  "south",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "8DB7D96F703B0E0263D648EE3EDB1499C95EAA7CE7DE310CE77AB93D937F12C7"
+                    },
+                    {
+                        "path":  "Sources/female/south/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/ecce0d9c-e9d1-46d6-970c-384ccc8f94ed/south/1.png?t=1794004014102",
+                        "bodyType":  "female",
+                        "direction":  "south",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "7D3C7D57573CE8A01D757B56A9EC6BA1B1E6AADE17CCC01680040A4C531BDB6A"
+                    },
+                    {
+                        "path":  "Sources/female/south/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/ecce0d9c-e9d1-46d6-970c-384ccc8f94ed/south/2.png?t=1794004014102",
+                        "bodyType":  "female",
+                        "direction":  "south",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "87EBCAC195C7A783EC8D92B5A07BADDEB53F3B91A7B889816D090A7C25679900"
+                    },
+                    {
+                        "path":  "Sources/female/south/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/ecce0d9c-e9d1-46d6-970c-384ccc8f94ed/south/3.png?t=1794004014102",
+                        "bodyType":  "female",
+                        "direction":  "south",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "DFD2A6D16B72521DF37E2EBCE45BF2103354FE1C770C8DC1E79319E5E5A273F3"
+                    },
+                    {
+                        "path":  "Sources/female/south/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/ecce0d9c-e9d1-46d6-970c-384ccc8f94ed/south/4.png?t=1794004014102",
+                        "bodyType":  "female",
+                        "direction":  "south",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "243D951FF035E10A3E013A62794E3EEA588A83AA5B050F1C6373D1A7198FE488"
+                    },
+                    {
+                        "path":  "Sources/female/south/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/ecce0d9c-e9d1-46d6-970c-384ccc8f94ed/south/5.png?t=1794004014102",
+                        "bodyType":  "female",
+                        "direction":  "south",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "9715322E0230AE30968A029AF90E19ADE665DCB6BDBC9D28C4EB1F2B7460A4C9"
+                    },
+                    {
+                        "path":  "Sources/female/west/frame_000.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/326011fa-7205-4b06-a706-c4f5d3b29547/west/0.png?t=1794003996777",
+                        "bodyType":  "female",
+                        "direction":  "west",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "A99ED5A7A69ACEBB150E379626D6BD0AC79670A164C45BF964F538F382FFE28D"
+                    },
+                    {
+                        "path":  "Sources/female/west/frame_001.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/326011fa-7205-4b06-a706-c4f5d3b29547/west/1.png?t=1794003996777",
+                        "bodyType":  "female",
+                        "direction":  "west",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "F55391A610488B07C0F6BBCF0CFA7798C085A8F785CF935B69709DA5ECD6566E"
+                    },
+                    {
+                        "path":  "Sources/female/west/frame_002.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/326011fa-7205-4b06-a706-c4f5d3b29547/west/2.png?t=1794003996777",
+                        "bodyType":  "female",
+                        "direction":  "west",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "27F3A48832BB038E3EAB51CB3354AB8FC2F17C72B09A6F686125A15E1401CD65"
+                    },
+                    {
+                        "path":  "Sources/female/west/frame_003.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/326011fa-7205-4b06-a706-c4f5d3b29547/west/3.png?t=1794003996777",
+                        "bodyType":  "female",
+                        "direction":  "west",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "156384C11D4A864893B656434E9C2A710FFBC92385871984724321D791491AD6"
+                    },
+                    {
+                        "path":  "Sources/female/west/frame_004.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/326011fa-7205-4b06-a706-c4f5d3b29547/west/4.png?t=1794003996777",
+                        "bodyType":  "female",
+                        "direction":  "west",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "E7626D906932871758CAC0A4E397F197460146E73B15FADF82AD84ACAECEACFD"
+                    },
+                    {
+                        "path":  "Sources/female/west/frame_005.png",
+                        "url":  "https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/326011fa-7205-4b06-a706-c4f5d3b29547/west/5.png?t=1794003996777",
+                        "bodyType":  "female",
+                        "direction":  "west",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "780BB9521DC34D2079739C07EF2C3CBAEEC71A41445AC49A5815314C1737AC9A"
+                    },
+                    {
+                        "path":  "Sources/female/east-mirrored/frame_000.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/0126e8cc-3e01-4e59-9007-79bf8c105b22/assets/east0/full.png",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  0,
+                        "usage":  "active",
+                        "sha256":  "98989156267BDA04D9C30F939128C2E65813C31276EF54F5AA58FD76C20FD6F6"
+                    },
+                    {
+                        "path":  "Sources/female/east-mirrored/frame_001.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/0126e8cc-3e01-4e59-9007-79bf8c105b22/assets/east1/full.png",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  1,
+                        "usage":  "active",
+                        "sha256":  "2A70390668FC2690615F278BA2A728E98AC6AE42578F47D4E800D7485B78E836"
+                    },
+                    {
+                        "path":  "Sources/female/east-mirrored/frame_002.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/0126e8cc-3e01-4e59-9007-79bf8c105b22/assets/east2/full.png",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  2,
+                        "usage":  "active",
+                        "sha256":  "7930C6058D34BE7E95C0833AEF48D10903B700C425A9F168246850C7904A0D1F"
+                    },
+                    {
+                        "path":  "Sources/female/east-mirrored/frame_003.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/fa336a52-ad22-4f0e-91ef-d41c2937ab3f/assets/east3/full.png",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  3,
+                        "usage":  "active",
+                        "sha256":  "CD690327760A12462FCFAB573C22434CD022F0379401EDD2563620FFC42639EE"
+                    },
+                    {
+                        "path":  "Sources/female/east-mirrored/frame_004.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/fa336a52-ad22-4f0e-91ef-d41c2937ab3f/assets/east4/full.png",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  4,
+                        "usage":  "active",
+                        "sha256":  "13BCB385ECDA52AB0A06D6E2761F4B2665D399E98D274FC4CAF348C8C83B7A2A"
+                    },
+                    {
+                        "path":  "Sources/female/east-mirrored/frame_005.png",
+                        "url":  "https://api.pixellab.ai/mcp/pixel-tools/fa336a52-ad22-4f0e-91ef-d41c2937ab3f/assets/east5/full.png",
+                        "bodyType":  "female",
+                        "direction":  "east",
+                        "frame":  5,
+                        "usage":  "active",
+                        "sha256":  "3F34972EFDD6554F1A72ADBCC1A786B0531FFC61409D9B897A6A81892877A32E"
+                    }
+                ]
+}

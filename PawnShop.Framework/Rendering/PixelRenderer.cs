@@ -108,6 +108,9 @@ public sealed class PixelRenderer : IDisposable
     public void DrawTexture(Texture2D texture, Rectangle destination, Rectangle source) =>
         batch.Draw(texture, destination, source, Color.White);
 
+    public void DrawTexture(Texture2D texture, Rectangle destination, Rectangle source, SpriteEffects effects) =>
+        batch.Draw(texture, destination, source, Color.White, 0, Vector2.Zero, effects, 0);
+
     public void Dispose()
     {
         canvas.Dispose();

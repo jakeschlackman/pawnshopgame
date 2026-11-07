@@ -1,10 +1,12 @@
 using PawnShop.Tests;
 
 if (args.Length > 0 && args[0] == "--dialogue") return DialogueAuthoring.Run(args[1..], Console.In, Console.Out);
+if (args.Length > 0 && args[0] == "--assets") return PlayerAssets.Run(args[1..], Console.Out);
 
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
+    ("Offline player assets preserve pixels and reject invalid sources, attire and metadata", PlayerAssetTests.Run),
     ("Title has no session; Continue explains and rejects activation", RegressionTests.Title),
     ("Menu wraps, owns its items and separates navigation from activation", RegressionTests.Menus),
     ("Input edges reject held/replayed keys", RegressionTests.Edges),
@@ -47,6 +49,9 @@ var tests = new (string Name, Action Run)[]
     ("Player footprint sweeps prevent tunneling through furniture and room boundaries", RegressionTests.PlayerCollision),
     ("Nearby Z interaction revalidates range and captures dialogue/pause movement", RegressionTests.NearbyInteraction),
     ("Player atlas poses reach output and malformed content fails headlessly", RegressionTests.PlayerContent),
+    ("Cardinal facing follows the latest dominant axis without diagonal speed changes", RegressionTests.CardinalFacing),
+    ("Player animation shares one clock across turns, pauses, dialogue and session restart", RegressionTests.PlayerAnimation),
+    ("Both placeholder bodies keep layers, tool anchors and West mirroring in one canvas", RegressionTests.PlayerLayers),
     ("Legacy default controls adopt Z/X without rewriting custom preferences", RegressionTests.DefaultControlsMigration),
     ("Primary and alternate keys share movement speed, edges and focus safety", RegressionTests.DualBindingInput),
     ("Both binding columns edit, reject conflicts, clear alternates, apply and restore", RegressionTests.DualBindingEditing),

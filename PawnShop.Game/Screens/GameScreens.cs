@@ -70,7 +70,7 @@ internal sealed class GameScreens : IDisposable
         renderer.TextScale = flow.Options.Current.UiScale / 100f;
         renderer.Begin(new Color(26, 36, 38));
         if (flow.Room is { } view && room is not null && flow.Player is { } player)
-            room.Draw(renderer, view, player, flow.Options.Current, flow.SelectedNpcId, flow.NpcFrames);
+            room.Draw(renderer, view, player, flow.Options.Current, flow.SelectedNpcId, flow.NpcFrames, flow.PlayerFrame);
         if (flow.Menu is { } menu)
         {
             if (flow.Screen == Screen.CharacterSelect) CharacterSelectionScreen.Draw(renderer, menu, players);

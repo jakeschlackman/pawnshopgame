@@ -1,0 +1,921 @@
+{
+  "version": 1,
+  "status": "candidate_pending_visual_approval",
+  "rawCandidate": "docs/ReviewAssets/male-east-walk-compact-source.png",
+  "rawSha256": "8AFEA63C07DABB2CC349B28794BD5D2C46FFB5837D5339B3AF2E20E2B293D7FF",
+  "rawAnimation": "c6b6615a-cd5a-464d-b91b-71517370b79e",
+  "rawSheet": "d9a78995-4a33-4053-b51b-af4547f2cbba",
+  "candidate": "docs/ReviewAssets/male-east-walk-compact.png",
+  "sha256": "1AE2F4870759DCC291DACA3CA4ABDEAC80F4FE751898C76FEE92FCE07611D7FF",
+  "editedAnimation": "f1a58a59-7bf0-47b7-8a7a-c6ecc62f6373",
+  "editedSheet": "25443196-742d-4b87-9a9f-cb06630bc5fc",
+  "headReference": "PawnShop.Game/Content/Player/Bases/male/base.png",
+  "headReferenceRegion": [
+    112,
+    8,
+    128,
+    23
+  ],
+  "headReferenceOffset": [
+    17,
+    9
+  ],
+  "headEdits": [
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        1
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          39,
+          30,
+          "#955b43ff",
+          "#be7e60ff"
+        ],
+        [
+          40,
+          31,
+          "#955b43ff",
+          "#be7e60ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          35,
+          32,
+          "#363031ff",
+          "#080202ff"
+        ]
+      ]
+    },
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        2
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          39,
+          30,
+          "#955b43ff",
+          "#be7e60ff"
+        ],
+        [
+          40,
+          31,
+          "#955b43ff",
+          "#be7e60ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          35,
+          32,
+          "#363031ff",
+          "#080202ff"
+        ]
+      ]
+    },
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        3
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          46,
+          21,
+          "#be7e60ff",
+          "#e4a67eff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          39,
+          30,
+          "#955b43ff",
+          "#be7e60ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          35,
+          32,
+          "#363031ff",
+          "#080202ff"
+        ]
+      ]
+    },
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        4
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          46,
+          21,
+          "#be7e60ff",
+          "#e4a67eff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          40,
+          31,
+          "#955b43ff",
+          "#be7e60ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          35,
+          32,
+          "#363031ff",
+          "#080202ff"
+        ]
+      ]
+    },
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        5
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          45,
+          24,
+          "#be7e60ff",
+          "#5a2609ff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          40,
+          31,
+          "#955b43ff",
+          "#be7e60ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          35,
+          32,
+          "#363031ff",
+          "#080202ff"
+        ]
+      ]
+    },
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        6
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          46,
+          21,
+          "#be7e60ff",
+          "#e4a67eff"
+        ],
+        [
+          45,
+          24,
+          "#be7e60ff",
+          "#5a2609ff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          40,
+          29,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          41,
+          30,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ]
+      ]
+    },
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        7
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          20,
+          "#080202ff",
+          "#5a2609ff"
+        ],
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          46,
+          21,
+          "#955b43ff",
+          "#e4a67eff"
+        ],
+        [
+          45,
+          24,
+          "#be7e60ff",
+          "#5a2609ff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          40,
+          29,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          41,
+          30,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ]
+      ]
+    },
+    {
+      "operation": "patch_pixels",
+      "layer": "image",
+      "frames": [
+        8
+      ],
+      "reason": "Keep approved standing head, eyes and eyebrows at generated head position while preserving compact gait below neck.",
+      "pixels": [
+        [
+          35,
+          20,
+          "#be7e60ff",
+          "#5a2609ff"
+        ],
+        [
+          35,
+          21,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          36,
+          25,
+          "#e4a67eff",
+          "#be7e60ff"
+        ],
+        [
+          39,
+          27,
+          "#e4a67eff",
+          "#955b43ff"
+        ],
+        [
+          37,
+          30,
+          "#be7e60ff",
+          "#955b43ff"
+        ],
+        [
+          42,
+          31,
+          "#be7e60ff",
+          "#955b43ff"
+        ]
+      ]
+    }
+  ],
+  "frameCanvas": [
+    80,
+    80
+  ],
+  "frameCount": 8,
+  "frameDurationMs": 100,
+  "crop": [
+    16,
+    10,
+    48,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "verifiedFrames": [
+    {
+      "frame": 1,
+      "bottom": 57,
+      "oldFootSpan": 10,
+      "rgbaSha256": "B18230413DBC42BB2330E48D492776E112B0DD786020163F4D8AF36D4B076876",
+      "height": 51,
+      "headPixelsRestored": 8,
+      "top": 7,
+      "newFootSpan": 9
+    },
+    {
+      "frame": 2,
+      "bottom": 57,
+      "oldFootSpan": 10,
+      "rgbaSha256": "224CD690B4CBC18406809F3BE76E7784ED05BB3C131AD88B36A6BCBBA0917FCE",
+      "height": 51,
+      "headPixelsRestored": 8,
+      "top": 7,
+      "newFootSpan": 10
+    },
+    {
+      "frame": 3,
+      "bottom": 57,
+      "oldFootSpan": 10,
+      "rgbaSha256": "AE8AC28A9A3E359D7B87634F43A7F85815A98706149293E31557F9F4435AEBD2",
+      "height": 51,
+      "headPixelsRestored": 8,
+      "top": 7,
+      "newFootSpan": 10
+    },
+    {
+      "frame": 4,
+      "bottom": 57,
+      "oldFootSpan": 10,
+      "rgbaSha256": "7A405179BE8AF506239BA9C96128B75990AB25B34DDABF0EFCB8DEBDFDA9ECC2",
+      "height": 51,
+      "headPixelsRestored": 8,
+      "top": 7,
+      "newFootSpan": 10
+    },
+    {
+      "frame": 5,
+      "bottom": 57,
+      "oldFootSpan": 9,
+      "rgbaSha256": "FE7F144B5580784AD3A6B2DE01AC5A56D30A6F3970243489F3DEBF91C24EDC76",
+      "height": 51,
+      "headPixelsRestored": 8,
+      "top": 7,
+      "newFootSpan": 10
+    },
+    {
+      "frame": 6,
+      "bottom": 57,
+      "oldFootSpan": 7,
+      "rgbaSha256": "B9893B44388E469CEDC31C8EDD528EEE23B96DF01D686B3DA1FA1AC16C6A9502",
+      "height": 51,
+      "headPixelsRestored": 9,
+      "top": 7,
+      "newFootSpan": 10
+    },
+    {
+      "frame": 7,
+      "bottom": 57,
+      "oldFootSpan": 7,
+      "rgbaSha256": "28336F7A9897864990D3738BA467A909540256E39629E99D6F4A13DC34352ADA",
+      "height": 51,
+      "headPixelsRestored": 10,
+      "top": 7,
+      "newFootSpan": 10
+    },
+    {
+      "frame": 8,
+      "bottom": 56,
+      "oldFootSpan": 10,
+      "rgbaSha256": "F392CAC915360AE4277695CE2F14F1DF4ABF5A32D7AB0032F7DE2350F2EA11FC",
+      "height": 50,
+      "headPixelsRestored": 6,
+      "top": 7,
+      "newFootSpan": 9
+    }
+  ],
+  "footSpanMeasurement": "All opaque pixels in source rows 62..79; a coarse lower-foot silhouette width, not a measure of anatomical stride.",
+  "purpose": "Tighten male East/West stride after user reported splits during continuous side walking. User clarified loop itself is smooth; separate preview stop timing corrected.",
+  "request": {
+    "character_id": "79b48db4-483d-4fe3-94bd-74bcec89eab9",
+    "mode": "skeleton-v3",
+    "directions": [
+      "east"
+    ],
+    "action_description": "relaxed short-step walk",
+    "animation_name": "Compact side walk review",
+    "frame_count": 8,
+    "move": {
+      "name": "walk",
+      "energy": 0.6
+    },
+    "poses": [
+      {
+        "frame": 1,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          0,
+          0.02
+        ],
+        "left_foot": [
+          0,
+          0,
+          0
+        ],
+        "right_hand": [
+          0.143,
+          0.005,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          0.003,
+          0
+        ]
+      },
+      {
+        "frame": 2,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          -0.025,
+          0.015
+        ],
+        "left_foot": [
+          0,
+          0.025,
+          0
+        ],
+        "right_hand": [
+          0.143,
+          0.0225,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          -0.014499999999999999,
+          0
+        ]
+      },
+      {
+        "frame": 3,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          -0.04,
+          0
+        ],
+        "left_foot": [
+          0,
+          0.04,
+          0
+        ],
+        "right_hand": [
+          0.143,
+          0.032999999999999995,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          -0.024999999999999998,
+          0
+        ]
+      },
+      {
+        "frame": 4,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          -0.025,
+          0
+        ],
+        "left_foot": [
+          0,
+          0.025,
+          0.015
+        ],
+        "right_hand": [
+          0.143,
+          0.0225,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          -0.014499999999999999,
+          0
+        ]
+      },
+      {
+        "frame": 5,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          0,
+          0
+        ],
+        "left_foot": [
+          0,
+          0,
+          0.02
+        ],
+        "right_hand": [
+          0.143,
+          0.005,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          0.003,
+          0
+        ]
+      },
+      {
+        "frame": 6,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          0.025,
+          0
+        ],
+        "left_foot": [
+          0,
+          -0.025,
+          0.015
+        ],
+        "right_hand": [
+          0.143,
+          -0.012499999999999997,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          0.020499999999999997,
+          0
+        ]
+      },
+      {
+        "frame": 7,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          0.04,
+          0
+        ],
+        "left_foot": [
+          0,
+          -0.04,
+          0
+        ],
+        "right_hand": [
+          0.143,
+          -0.022999999999999996,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          0.030999999999999996,
+          0
+        ]
+      },
+      {
+        "frame": 8,
+        "hips": 0,
+        "chest": 0,
+        "lean": [
+          1,
+          0
+        ],
+        "head": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          0,
+          -0.005
+        ],
+        "right_foot": [
+          0,
+          0.025,
+          0.015
+        ],
+        "left_foot": [
+          0,
+          -0.025,
+          0
+        ],
+        "right_hand": [
+          0.143,
+          -0.012499999999999997,
+          0
+        ],
+        "left_hand": [
+          -0.145,
+          0.020499999999999997,
+          0
+        ]
+      }
+    ]
+  },
+  "receipt": "character: 79b48db4-483d-4fe3-94bd-74bcec89eab9\nanimation: relaxed short-step walk\nmode: skeleton-v3 (custom motion)\ndirections: east (1 jobs)\n  east: job 173944ae-2835-4431-a3be-5679f3081ec6\ngroup: e7058d75-5cab-48f7-a2cc-dcf3c2256bfc\nframes: 8\ncost: 3 generations per direction\neta: about 3-5 min per direction\nadjusted to fit the body:\n  frame 7: left hand still 0.001 short: stops at full reach\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"79b48db4-483d-4fe3-94bd-74bcec89eab9\", mode=\"skeleton-v3\", action_description=\"relaxed short-step walk\", animation_group_id=\"e7058d75-5cab-48f7-a2cc-dcf3c2256bfc\", directions=[...])\n\nhint: get_character(character_id=\"79b48db4-483d-4fe3-94bd-74bcec89eab9\")",
+  "jobId": "173944ae-2835-4431-a3be-5679f3081ec6",
+  "animationGroupId": "e7058d75-5cab-48f7-a2cc-dcf3c2256bfc",
+  "chargedGenerations": 3,
+  "original": "docs/ReviewAssets/male-east-walk-eyes-fixed.png",
+  "notes": "One East-only pilot. No female regeneration. Never overwrite previous sources or mark visual acceptance from numeric checks."
+}

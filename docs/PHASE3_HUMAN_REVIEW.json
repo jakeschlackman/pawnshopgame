@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "status": "standing_walk_and_side_settle_approved_idle_and_runtime_pending",
+  "approvalBasis": "After reviewing the corrected motion, male forward stride/head bob and both side settling clips, user said 'great, move onto the next phase'. This approves the current preview checkpoint, not superseded source candidates, future animated idle, clothing fits or runtime integration.",
+  "preview": "tools/player-base-review.html",
+  "source": "Approved existing references and South walks, existing North candidates, and two new native East Skeleton v3 walks",
+  "standingDirections": ["south", "north", "east"],
+  "west": "Mirror East in the preview; no stored West selected",
+  "approvedWalkDirections": ["south", "north", "east", "west_mirrored_from_east"],
+  "acceptedCurrentAssets": {
+    "male": {
+      "standing": "PawnShop.Game/Content/Player/Bases/male/base.png",
+      "southWalk": { "path": "docs/ReviewAssets/male-walk-south-frame-6-arm-fix.png", "frameCanvas": [48, 64], "row": 2 },
+      "northWalk": { "path": "docs/ReviewAssets/male-north-walk-bob.png", "frameCanvas": [80, 80], "crop": [16, 9, 48, 64] },
+      "eastWalk": { "path": "docs/ReviewAssets/male-east-walk-forward-bob.png", "frameCanvas": [80, 80], "crop": [16, 10, 48, 64] },
+      "eastSettle": "docs/ReviewAssets/male-east-settle.png"
+    },
+    "female": {
+      "standing": "PawnShop.Game/Content/Player/Bases/female/base.png",
+      "southWalk": { "path": "PawnShop.Game/Content/Player/Bases/Walking/female/walk.png", "frameCanvas": [48, 64], "row": 2 },
+      "northWalk": { "path": "PawnShop.Game/Content/Player/Bases/Walking/female/walk.png", "frameCanvas": [48, 64], "row": 0 },
+      "eastWalk": { "path": "docs/ReviewAssets/female-east-walk-head-fixed.png", "frameCanvas": [80, 80], "crop": [16, 11, 48, 64] },
+      "eastSettle": "docs/ReviewAssets/female-east-settle.png"
+    },
+    "west": "Mirror accepted East; no separate artwork"
+  },
+  "frameCount": 8,
+  "frameDurationMs": 100,
+  "canvas": [48, 64],
+  "pivot": [24, 58],
+  "sourceCrops": {
+    "southAndNorthLegacy": [16, 9, 48, 64],
+    "eastMale": [16, 10, 48, 64],
+    "eastFemale": [16, 11, 48, 64]
+  },
+  "eastGenerationRecord": "docs/ReviewAssets/east-walk-generation.json",
+  "eastFaceCorrectionRecord": "docs/ReviewAssets/east-face-correction.json",
+  "femaleEastHeightCorrectionRecord": "docs/ReviewAssets/female-height-correction.json",
+  "femaleEastHeadCorrectionRecord": "docs/ReviewAssets/female-head-correction.json",
+  "maleCompactWalkRecord": "docs/ReviewAssets/male-compact-walk.json",
+  "walkSettleCorrectionRecord": "docs/ReviewAssets/walk-settle-correction.json",
+  "corrections": [
+    {
+      "body": "male",
+      "direction": "south",
+      "displayFrame": 6,
+      "frameIndex": 5,
+      "status": "approved_by_user",
+      "reason": "User reported extra black on model-right/image-left arm; thin the doubled outline without changing the outer contour.",
+      "original": "PawnShop.Game/Content/Player/Bases/Walking/male/walk.png",
+      "candidate": "docs/ReviewAssets/male-walk-south-frame-6-arm-fix.png",
+      "tool": "PixelLab pixelart_workbench edit / patch_pixels",
+      "resultId": "b7460546-60de-4f18-af42-06c95b7109dc",
+      "resultUrl": "https://api.pixellab.ai/mcp/pixel-tools/b7460546-60de-4f18-af42-06c95b7109dc/image.png",
+      "coordinateSpace": "zero-based atlas pixels; original 80x80 source x=29, y=43..51",
+      "pixels": [
+        [253,162,"#080202ff","#e4a67eff"],
+        [253,163,"#080202ff","#e4a67eff"],
+        [253,164,"#080202ff","#e4a67eff"],
+        [253,165,"#080202ff","#e4a67eff"],
+        [253,166,"#080202ff","#e4a67eff"],
+        [253,167,"#080202ff","#e4a67eff"],
+        [253,168,"#080202ff","#e4a67eff"],
+        [253,169,"#080202ff","#e4a67eff"],
+        [253,170,"#080202ff","#be7e60ff"]
+      ],
+      "verification": "Exactly nine RGBA pixel differences; all other pixels, alpha and dimensions unchanged. No paid generation."
+    }
+  ],
+  "approvals": {
+    "maleStandingSNEAndMirroredW": "approved",
+    "femaleStandingSNEAndMirroredW": "approved",
+    "maleSouthWalk": "approved_with_recorded_nine_pixel_correction",
+    "femaleSouthWalk": "approved",
+    "maleNorthEastAndMirroredWestWalk": "approved_current_forward_bob_candidates",
+    "femaleNorthEastAndMirroredWestWalk": "approved_current_head_corrected_candidate",
+    "maleEastAndMirroredWestSettle": "approved",
+    "femaleEastAndMirroredWestSettle": "approved",
+    "maleAnimatedIdle": "not_generated",
+    "femaleAnimatedIdle": "not_generated"
+  },
+  "characters": {
+    "male": "79b48db4-483d-4fe3-94bd-74bcec89eab9",
+    "female": "5cd54c3f-d34a-4f02-83ca-0e9a21966fe5"
+  },
+  "walkAnimationGroups": {
+    "male": "a6783f36-96da-47ca-98cf-9111a465f555",
+    "female": "427b11f0-b2f3-40fb-aee5-74fb541f4783"
+  },
+  "files": [
+    { "path": "docs/ReviewAssets/male-east-walk-forward-bob.png", "sha256": "F326D20FFB3FA968547753A3A19A5BE01C433B099F18FBFB7498C21FD7FB5ECC" },
+    { "path": "docs/ReviewAssets/male-north-walk-bob.png", "sha256": "D439751148A00A8848B8C5D36178B737B7D87698DCF18A0D3F97076DC238E21B" },
+    { "path": "docs/ReviewAssets/male-east-stop-source.png", "sha256": "8EDFC035803CAD40960C33FF8F728070FDD9AFF1177FE22650F92D5D34AB7116" },
+    { "path": "docs/ReviewAssets/female-east-stop-source.png", "sha256": "A7550E1C37480C3F485AF7DD1F512A7125D38227598559C3D7B5BB283914F84D" },
+    { "path": "docs/ReviewAssets/male-east-settle.png", "sha256": "09299EA7E64854AD951F48C9BD411C16823BFBB222B4EF7DD2F33A4A63014C61" },
+    { "path": "docs/ReviewAssets/female-east-settle.png", "sha256": "47C193E882376FA84B6A3CCCACBB6E01FE270C83445C6528823408627D280639" },
+    { "path": "docs/ReviewAssets/male-east-walk-compact-source.png", "sha256": "8AFEA63C07DABB2CC349B28794BD5D2C46FFB5837D5339B3AF2E20E2B293D7FF" },
+    { "path": "docs/ReviewAssets/male-east-walk-compact.png", "sha256": "1AE2F4870759DCC291DACA3CA4ABDEAC80F4FE751898C76FEE92FCE07611D7FF" },
+    { "path": "docs/ReviewAssets/female-east-walk-head-fixed.png", "sha256": "897E733D62A3777B87E3B1E311C58E1AAA54AD9689AB48942ACDD0F7A04BA467" },
+    { "path": "docs/ReviewAssets/female-east-walk-height-fixed.png", "sha256": "89457079A0B47DE7C9560F63F1D411BC578AD825DE13024ED765EC7250C12571" },
+    { "path": "docs/ReviewAssets/male-east-walk-eyes-fixed.png", "sha256": "CB178D0C88B38473D42937CD7EDF10D9AF49F7975B766675B22A756594765EDE" },
+    { "path": "docs/ReviewAssets/female-east-walk-eyes-fixed.png", "sha256": "40232C4814EFA00805D8CCBA37569A717F56321D1EB25A41C8AB47BF4A3793A3" },
+    { "path": "docs/ReviewAssets/male-east-walk-source.png", "sha256": "DD27133B241729B2C5D7AAC986109148A03A3B055BA4C0BAF81F2EDD9CA50F44" },
+    { "path": "docs/ReviewAssets/female-east-walk-source.png", "sha256": "9376181D4A363DEF31A251504E3D1A72A6EAA730418CFC7B604BBF4CCB93C9D7" },
+    { "path": "docs/ReviewAssets/male-walk-south-frame-6-arm-fix.png", "sha256": "8CEACD898C30F72232A15A27B43EBA005748C42E44CF6871D07F6897D1FBB056" },
+    { "path": "PawnShop.Game/Content/Player/Bases/base-manifest.json", "sha256": "EB45599B93A395198958004D3AE64CE5896C3D2EEF3D0564200799C45BBB7CA9" },
+    { "path": "PawnShop.Game/Content/Player/Bases/male/base.png", "sha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67" },
+    { "path": "PawnShop.Game/Content/Player/Bases/female/base.png", "sha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52" },
+    { "path": "PawnShop.Game/Content/Player/Bases/Walking/walk-manifest.json", "sha256": "9FF7011B3D3BFC0210BD22820BAECC30EAF4087DCE220872FBD122FB9BE0DC58" },
+    { "path": "PawnShop.Game/Content/Player/Bases/Walking/male/walk.png", "sha256": "186D0EA1B6D068649C54A32F0C6C7FCECF241C88F36F76E68640C881A22E278B" },
+    { "path": "PawnShop.Game/Content/Player/Bases/Walking/female/walk.png", "sha256": "8B856411DA132B8F9F32AAB0B82683801D867713A83C62BD5DE7C4AC7D46BCDB" }
+  ]
+}

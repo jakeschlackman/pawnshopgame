@@ -1,0 +1,565 @@
+{
+  "version": 1,
+  "id": "tool_adjustable_wrench",
+  "slot": "main_hand",
+  "status": "inward_hilt_grip_south_standing_approved_by_user",
+  "direction": "south",
+  "pose": "standing",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "preview": "tools/player-equipment-review.html",
+  "scope": "south standing inward hilt-aligned wrench fit on both bodies. Replaces previous fits in place. Original fists unchanged. Approved by user; East/West and production integration remain outside this checkpoint.",
+  "design": "Steel adjustable wrench leaning inward toward torso, hilt aligned with original dark fist crease; separate male/female fits.",
+  "generation": {
+    "object": {
+      "tool": "PixelLab create_object_pro_flash",
+      "objectId": "31778f56-174c-467f-a65f-e182ebf32178",
+      "jobId": "a316e361-8f60-4a90-9e5d-4a1e766409b0",
+      "source": "object-source.png",
+      "request": {
+        "description": "One ordinary practical adjustable steel wrench for a cozy industrial salvage game. Broad readable open C-shaped jaw with a visible adjustable jaw/knurled screw, straight slim handle and small hole at handle end. Neutral worn steel gray with near-black outline and 3 restrained silver shades. No orange, gold, colored grip, rust patches, neon, ornate decorations or face. Front of the wrench, vertical with jaw at TOP and handle down. One simple compact tool, approximately 7 pixels wide by 17 pixels tall, centered inside transparent48x64 canvas with ample empty margin, readable native single pixels; not filling the canvas. It will be held by a 50-pixel-tall human character. No hand or body, no ground/shadow.",
+        "name": "Picker's Hollow - adjustable wrench design reference",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "max_colors": 5,
+        "palette": [
+          "#101416",
+          "#343c40",
+          "#66757c",
+          "#a4b2b7",
+          "#d6e0e2"
+        ],
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/fdf3cf05-2cd4-4145-abcb-08bd9f79861d/image.png",
+          "usage_description": "Match simple native pixel density, hard pixel clusters and dark outline of this 48x64 character. Generate only a small standalone steel wrench, not the character or helmet."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "seed": 63401
+      }
+    },
+    "fits": [
+      {
+        "body": "male",
+        "tool": "PixelLab edit_image_pro_flash reference",
+        "jobId": "7b473eb3-aa7d-4e9c-be71-a58245afa9c8",
+        "source": "male-fitted-source.png",
+        "request": {
+          "method": "reference",
+          "reference_image": {
+            "url": "https://api.pixellab.ai/mcp/objects/31778f56-174c-467f-a65f-e182ebf32178/download",
+            "usage_description": "Only the tool's steel adjustable-wrench design. Draw a much SMALLER held rendition matching the target character's native pixel density. Do not paste or resize the reference. Target human unchanged."
+          },
+          "description": "Add one SMALL neutral steel adjustable wrench naturally held in the existing character's anatomical RIGHT hand, the hand on the LEFT side of the image. South-facing standing person remains EXACTLY unchanged. Grip anchor (14,41) in 48x64 canvas. Tool hangs DOWN alongside the thigh: handle upper end near y36, passes BEHIND existing fingers at y39..42, short slim 2px shaft extends below fist, broad recognizable C-shaped adjustable JAW AT BOTTOM around y48..51. Total wrench height about16px and jaw width5-7px, tool lies around x10..17 for male or x11..18 for female. Slight outward lean toward left is okay, no sideways floating or giant wrench. Fingers must occlude the handle; no new arm, repositioned hand, changed fingers, pose or anatomy. Neutral near-black outline, dark steel, mid steel and light silver highlights. No orange, gold, rust or colored grip. Keep exact head/eyes/body proportions, skin, underwear, hands, feet and source coordinates. No jacket or helmet. Transparent48x64 nativecanvas, originalgroundpivot24,58. Full fitted source for tool-only extraction over original body; all generated anatomy will be discarded.",
+          "no_background": true,
+          "use_color_palette_correction": false,
+          "seed": 63411,
+          "input": "Canonical male base.png South column0, crop[0,0,48,64]"
+        },
+        "selection": "Retained source evidence. Its differing jaw was not selected; final male overlay uses the selected rigid wrench at the independently measured male hand anchor."
+      },
+      {
+        "body": "female",
+        "tool": "PixelLab edit_image_pro_flash reference",
+        "jobId": "c9a5a32f-f9fc-4d98-88c4-044de4eac2e8",
+        "source": "female-fitted-source.png",
+        "request": {
+          "method": "reference",
+          "reference_image": {
+            "url": "https://api.pixellab.ai/mcp/objects/31778f56-174c-467f-a65f-e182ebf32178/download",
+            "usage_description": "Only the tool's steel adjustable-wrench design. Draw a much SMALLER held rendition matching the target character's native pixel density. Do not paste or resize the reference. Target human unchanged."
+          },
+          "description": "Add one SMALL neutral steel adjustable wrench naturally held in the existing character's anatomical RIGHT hand, the hand on the LEFT side of the image. South-facing standing person remains EXACTLY unchanged. Grip anchor (15,41) in 48x64 canvas. Tool hangs DOWN alongside the thigh: handle upper end near y36, passes BEHIND existing fingers at y39..42, short slim 2px shaft extends below fist, broad recognizable C-shaped adjustable JAW AT BOTTOM around y48..51. Total wrench height about16px and jaw width5-7px, tool lies around x10..17 for male or x11..18 for female. Slight outward lean toward left is okay, no sideways floating or giant wrench. Fingers must occlude the handle; no new arm, repositioned hand, changed fingers, pose or anatomy. Neutral near-black outline, dark steel, mid steel and light silver highlights. No orange, gold, rust or colored grip. Keep exact head/eyes/body proportions, skin, underwear, hands, feet and source coordinates. No jacket or helmet. Transparent48x64 nativecanvas, originalgroundpivot24,58. Full fitted source for tool-only extraction over original body; all generated anatomy will be discarded.",
+          "no_background": true,
+          "use_color_palette_correction": false,
+          "seed": 63412,
+          "input": "Canonical female base.png South column0, crop[0,0,48,64]"
+        },
+        "selection": "Selected shared rigid wrench pixels; no generated anatomy."
+      }
+    ],
+    "estimatedGenerationUsage": 15,
+    "paidOperations": 3,
+    "paidRetries": 0,
+    "derivatives": "Exact PixelLab pixelart_workbench extraction and exports. No scaling, stretching, hand drawing or independent object animation.",
+    "discardedHandEditAttempts": [
+      {
+        "jobId": "dff7d539-fe77-4ff9-afb5-827ae51d883f",
+        "tool": "edit_image_pro_flash",
+        "chargedGenerations": 5,
+        "applied": false,
+        "reason": "Hand-edit interpretation superseded by user clarification; no candidate pixels used."
+      },
+      {
+        "jobId": "f40274c1-f95d-4cd6-a074-edb82197101b",
+        "tool": "inpaint_image_pro_flash",
+        "chargedGenerations": 5,
+        "applied": false,
+        "reason": "Cancellation requested after user clarified hand must remain unchanged; job already completed. No candidate pixels used."
+      }
+    ]
+  },
+  "extraction": {
+    "source": "female-fitted-source.png",
+    "maskRows": [
+      [
+        42,
+        14,
+        16
+      ],
+      [
+        43,
+        14,
+        16
+      ],
+      [
+        44,
+        14,
+        16
+      ],
+      [
+        45,
+        15,
+        16
+      ],
+      [
+        46,
+        15,
+        16
+      ],
+      [
+        47,
+        14,
+        16
+      ],
+      [
+        48,
+        14,
+        16
+      ],
+      [
+        49,
+        13,
+        17
+      ],
+      [
+        50,
+        13,
+        17
+      ],
+      [
+        51,
+        14,
+        14,
+        16,
+        16
+      ]
+    ],
+    "rowsFormat": "[y, inclusive x start, inclusive x end, ...]. Coordinates are source native 48x64.",
+    "colorMap": {
+      "#030302ff": "#101416ff",
+      "#8699a0ff": "#a4b2b7ff",
+      "#4f5d63ff": "#66757cff",
+      "#7c898dff": "#66757cff",
+      "#5b6a6fff": "#66757cff",
+      "#0b0a0aff": "#101416ff",
+      "#101112ff": "#101416ff",
+      "#afc1cbff": "#a4b2b7ff",
+      "#a9b6bdff": "#a4b2b7ff",
+      "#9daebaff": "#a4b2b7ff",
+      "#242323ff": "#101416ff"
+    },
+    "palette": [
+      "#101416ff",
+      "#343c40ff",
+      "#66757cff",
+      "#a4b2b7ff",
+      "#d6e0e2ff"
+    ],
+    "opaquePixels": 31,
+    "referenceGrip": [
+      15,
+      45
+    ],
+    "selection": "Select31 raw tool pixels, map steel palette, fit a steeper inward diagonal to the dark fist crease, and clip original fingers on source rows43..46. Fitted layers retain21 or22 pixels.",
+    "sourceTransform": {
+      "x": "gripX + 15 - sourceX + inwardOffset",
+      "y": "gripY + 45 - sourceY",
+      "inwardOffsetsBySourceRow": [
+        [
+          42,
+          -1
+        ],
+        [
+          43,
+          0
+        ],
+        [
+          44,
+          0
+        ],
+        [
+          45,
+          1
+        ],
+        [
+          46,
+          2
+        ],
+        [
+          47,
+          2
+        ],
+        [
+          48,
+          3
+        ],
+        [
+          49,
+          4
+        ],
+        [
+          50,
+          4
+        ],
+        [
+          51,
+          5
+        ]
+      ],
+      "orientation": "jaw_upward_and_inward",
+      "method": "Fit an inward pixel-stepped diagonal, approximately33deg from vertical (about15deg more than the first inward fit). Source rows42..51 use inward offsets[-1,0,0,1,2,2,3,4,4,5]. Align source handle center(15,45) with the unchanged fist's dark crease one pixel inward of the original hand anchor. Clip original opaque hand pixels on source rows43..46. Original fist, body and animation remain unchanged."
+    }
+  },
+  "compositing": {
+    "drawOrder": [
+      "original_body",
+      "existing_mask_body_occlusion",
+      "optional_jacket",
+      "optional_normal_or_fitted_hair",
+      "optional_mask",
+      "optional_finger_clipped_upright_wrench"
+    ],
+    "handOcclusion": "Fitted tool reveals original fingers at the dark fist crease. The original hand is never redrawn; unequipping restores the unchanged body/equipment composition.",
+    "west": "Future West will mirror the complete fitted East composition and grip offset; South is the only fitted direction in this checkpoint."
+  },
+  "bodies": [
+    {
+      "body": "male",
+      "approval": "approved_by_user",
+      "hand": "right",
+      "grip": [
+        14,
+        41
+      ],
+      "hiddenToolPixels": [
+        [
+          15,
+          43
+        ],
+        [
+          14,
+          43
+        ],
+        [
+          13,
+          43
+        ],
+        [
+          15,
+          42
+        ],
+        [
+          14,
+          42
+        ],
+        [
+          13,
+          42
+        ],
+        [
+          15,
+          41
+        ],
+        [
+          14,
+          41
+        ],
+        [
+          16,
+          40
+        ],
+        [
+          15,
+          40
+        ]
+      ],
+      "visibleToolPixels": 21,
+      "layer": "male-layer.png",
+      "bodyComposite": "male-body-composite.png",
+      "equippedComposite": "male-equipped-composite.png",
+      "canonicalBody": "PawnShop.Game/Content/Player/Bases/male/base.png",
+      "sourceCrop": [
+        0,
+        0,
+        48,
+        64
+      ],
+      "sourceSha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67",
+      "sourceTransform": {
+        "x": "gripX + 15 - sourceX + inwardOffset",
+        "y": "gripY + 45 - sourceY",
+        "inwardOffsetsBySourceRow": [
+          [
+            42,
+            -1
+          ],
+          [
+            43,
+            0
+          ],
+          [
+            44,
+            0
+          ],
+          [
+            45,
+            1
+          ],
+          [
+            46,
+            2
+          ],
+          [
+            47,
+            2
+          ],
+          [
+            48,
+            3
+          ],
+          [
+            49,
+            4
+          ],
+          [
+            50,
+            4
+          ],
+          [
+            51,
+            5
+          ]
+        ],
+        "orientation": "jaw_upward_and_inward",
+        "method": "Fit an inward pixel-stepped diagonal, approximately33deg from vertical (about15deg more than the first inward fit). Source rows42..51 use inward offsets[-1,0,0,1,2,2,3,4,4,5]. Align source handle center(15,45) with the unchanged fist's dark crease one pixel inward of the original hand anchor. Clip original opaque hand pixels on source rows43..46. Original fist, body and animation remain unchanged."
+      },
+      "handleEndPixels": 3,
+      "jawPixels": 15,
+      "toolGrip": [
+        15,
+        41
+      ]
+    },
+    {
+      "body": "female",
+      "approval": "approved_by_user",
+      "hand": "right",
+      "grip": [
+        15,
+        41
+      ],
+      "hiddenToolPixels": [
+        [
+          15,
+          43
+        ],
+        [
+          14,
+          43
+        ],
+        [
+          16,
+          42
+        ],
+        [
+          15,
+          42
+        ],
+        [
+          14,
+          42
+        ],
+        [
+          16,
+          41
+        ],
+        [
+          15,
+          41
+        ],
+        [
+          17,
+          40
+        ],
+        [
+          16,
+          40
+        ]
+      ],
+      "visibleToolPixels": 22,
+      "layer": "female-layer.png",
+      "bodyComposite": "female-body-composite.png",
+      "equippedComposite": "female-equipped-composite.png",
+      "canonicalBody": "PawnShop.Game/Content/Player/Bases/female/base.png",
+      "sourceCrop": [
+        0,
+        0,
+        48,
+        64
+      ],
+      "sourceSha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52",
+      "sourceTransform": {
+        "x": "gripX + 15 - sourceX + inwardOffset",
+        "y": "gripY + 45 - sourceY",
+        "inwardOffsetsBySourceRow": [
+          [
+            42,
+            -1
+          ],
+          [
+            43,
+            0
+          ],
+          [
+            44,
+            0
+          ],
+          [
+            45,
+            1
+          ],
+          [
+            46,
+            2
+          ],
+          [
+            47,
+            2
+          ],
+          [
+            48,
+            3
+          ],
+          [
+            49,
+            4
+          ],
+          [
+            50,
+            4
+          ],
+          [
+            51,
+            5
+          ]
+        ],
+        "orientation": "jaw_upward_and_inward",
+        "method": "Fit an inward pixel-stepped diagonal, approximately33deg from vertical (about15deg more than the first inward fit). Source rows42..51 use inward offsets[-1,0,0,1,2,2,3,4,4,5]. Align source handle center(15,45) with the unchanged fist's dark crease one pixel inward of the original hand anchor. Clip original opaque hand pixels on source rows43..46. Original fist, body and animation remain unchanged."
+      },
+      "handleEndPixels": 3,
+      "jawPixels": 15,
+      "toolGrip": [
+        16,
+        41
+      ]
+    }
+  ],
+  "acceptedEquipmentSources": [
+    "docs/ReviewAssets/WorkJacketPilot/review.json",
+    "docs/ReviewAssets/WeldingHelmetCharcoal/review.json",
+    "docs/ReviewAssets/HairMaskPilot/review.json"
+  ],
+  "files": [
+    {
+      "sha256": "6A63D1A98A4FEF0670E53F5BD51AB38D53012EEC07CC9817BFDB2E899AEE488F",
+      "path": "female-body-composite.png"
+    },
+    {
+      "sha256": "14549E6BBC4EAE3C4763D8E30A005710B16CAE61CEFD1A5EE8DCA41FD7E83FFA",
+      "path": "female-equipped-composite.png"
+    },
+    {
+      "sha256": "1218C43E12A7BA9785685BFCB161C3652635B81A63C005813CA9B70664DBFCE2",
+      "path": "female-fitted-source.png"
+    },
+    {
+      "sha256": "3B117366A3C0791485061F1DA94304E8F509C6D2CCA8EBBA1F90941E99B5E5AD",
+      "path": "female-layer.png"
+    },
+    {
+      "sha256": "979B9188549C522E7DFB0F4AC0022ED7A7AC6BA8C130BA3AEA3BBB2D7BF6F443",
+      "path": "male-body-composite.png"
+    },
+    {
+      "sha256": "32CD77A9E198AB63A418FF70D3C6D6767C1CA4C896BEC136DA7F17D3C960F0DF",
+      "path": "male-equipped-composite.png"
+    },
+    {
+      "sha256": "69B9BA943DA4D12D620F003CEE63781DB35036FE933889ED54EC3580034CDA91",
+      "path": "male-fitted-source.png"
+    },
+    {
+      "sha256": "3873AABC06618E2737E65133D62D0704EDDB0AECB76A7321934F140499740A14",
+      "path": "male-layer.png"
+    },
+    {
+      "sha256": "B1D3A2DEB17025A1953627D24A815B495970DCD90EA871B855CC2D51C8E3567D",
+      "path": "object-source.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: all22 PNGs decoded and compared pixel-for-pixel with31 selected source tool pixels, signed inward row offsets, original hand masks, and unchanged body/equipment sources. All36 poses and72 composites match; full tool covers each toolGrip while fitted layer reveals original fingers. Visible tool21/22, jaw15 and handle-end3 pixels. Original hand artwork unchanged.",
+    "preview": "PASS: Node loads53 PNGs and88 views across1408 direction/motion/loadout cases. All16 equipment combinations, image dimensions/frame bounds, unsupported-side hiding, step/wrap, slider, integer scales and links. No browser/game launched.",
+    "visual": "Approved by user: \"good enough, whats the next phase?\" for current male/female South/North standing and walking fits. No new browser/game test claimed."
+  },
+  "next": "East/mirrored West standing, walking and settling fit review; then pants, footwear and backpacks. Production follows user-guided folder organization.",
+  "approvalBasis": "User accepted current inward hilt fits with \"good enough, whats the next phase?\" and then requested the next checkpoint. This approves current South/North fits, not future side views.",
+  "orientation": "jaw_upward_and_inward",
+  "correction": {
+    "request": "Keep fist unchanged; wrench should face inward, follow its dark crease like a hilt and tilt another10ish degrees minimum.",
+    "method": "Fit an inward pixel-stepped diagonal, approximately33deg from vertical (about15deg more than the first inward fit). Source rows42..51 use inward offsets[-1,0,0,1,2,2,3,4,4,5]. Align source handle center(15,45) with the unchanged fist's dark crease one pixel inward of the original hand anchor. Clip original opaque hand pixels on source rows43..46. Original fist, body and animation remain unchanged.",
+    "paidGenerationsForFinalToolFit": 0,
+    "bodyArtworkChanged": false,
+    "visualAcceptance": "approved_by_user"
+  },
+  "supersededUprightExportIds": {
+    "male-body-composite.png": "3e2b834f-cd44-4f70-8bda-7e076f4c7c19",
+    "male-layer.png": "01e60ec6-a6f8-44ac-8702-259dbc1c516d",
+    "male-equipped-composite.png": "7012115e-d223-46a2-824c-bb181ab35b10",
+    "female-layer.png": "c2b5a914-89c8-4ebd-ba1b-877405271eb2",
+    "female-body-composite.png": "bf2a4295-deaf-43f0-98e7-ed421cc0b94e",
+    "female-equipped-composite.png": "419df6a1-4c63-4599-903d-f79dc83cba8a"
+  },
+  "exportProvenance": "pixelLabExports identifies current inward hilt-fit PNGs; files[].sha256 records downloaded bytes. supersededUprightExportIds is historical and does not identify current files.",
+  "pixelLabExports": {
+    "female-body-composite.png": "a383c133-83cd-40a6-a6c8-b6c5205379c6",
+    "female-equipped-composite.png": "9a5dc497-6950-4b5d-a6c3-38b1088b614d",
+    "female-layer.png": "35343b98-67fa-4481-99ce-1e2960ef811c",
+    "male-body-composite.png": "629b97d9-bf11-494a-a128-af3cbd34d097",
+    "male-equipped-composite.png": "8f6c647b-12ee-47bf-94a1-5e61164e8276",
+    "male-layer.png": "aceca80c-0f02-435c-b6a8-be27bbf0a108"
+  }
+}
