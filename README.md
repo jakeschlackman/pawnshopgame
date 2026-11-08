@@ -49,6 +49,12 @@ checks. Failed assertions exit nonzero. It references Framework, Core, and Game
 and exercises graphics-free input/menu/state/Bootstrap code without constructing
 the MonoGame host or initializing graphics/audio. The test framework is unchanged.
 
+`Directory.Build.rsp` disables MSBuild node reuse for command-line builds, so
+worker processes do not remain as background .NET Hosts after building/running.
+This is a development-tool setting; it does not change game shutdown. Use the
+`--no-build` launch above after building to avoid another build on each launch.
+Visual Studio's own builds do not use this response file.
+
 ## Human asset authoring
 
 Approved modular human art now belongs to common NPC shoppers under

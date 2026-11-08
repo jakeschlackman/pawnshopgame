@@ -1,0 +1,2 @@
+# Do not leave reusable MSBuild worker processes behind after command-line builds.
+-nodeReuse:false
