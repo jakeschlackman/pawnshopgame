@@ -6,6 +6,8 @@ if (args.Length > 0 && args[0] == "--assets") return PlayerAssets.Run(args[1..],
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
+    ("Options uses the complete source panel and keeps controls inside its boundaries", RegressionTests.OptionsPanelSource),
+    ("Options scroll, clipping hit boundaries and fixed actions share geometry at every UI scale", RegressionTests.OptionsScroll),
     ("Common shopper enters with synchronized walk/settle frames and cannot cross the player", CommonNpcRoomTests.Entrance),
     ("Room visitor replacement preserves dialogue, player state and session lifecycle", CommonNpcRoomTests.RoomLifecycle),
     ("Common shoppers reproduce seeded appearances and preserve independent identity", CommonNpcTests.Generation),

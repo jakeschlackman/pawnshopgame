@@ -64,7 +64,7 @@ internal sealed class GameScreens : IDisposable
         }
         if (flow.Screen == Screen.Options)
         {
-            options.Draw(flow.Options);
+            options.Draw(flow.Options, () => DrawRoomBackground(renderer, flow));
             return;
         }
         renderer.TextScale = flow.Options.Current.UiScale / 100f;
@@ -78,6 +78,15 @@ internal sealed class GameScreens : IDisposable
         }
         if (flow.Dialogue is { } dialogue) DialogueScreen.Draw(renderer, dialogue);
         renderer.Text("PROTOTYPE - NO SAVING", 18, 341, new Color(173, 184, 172));
+        renderer.Present();
+    }
+
+    private void DrawRoomBackground(PixelRenderer renderer, ApplicationFlow flow)
+    {
+        renderer.TextScale = flow.Options.Current.UiScale / 100f;
+        renderer.Begin(new Color(26, 36, 38));
+        if (flow.Room is { } view && room is not null && flow.Player is { } player)
+            room.Draw(renderer, view, player, flow.Options.Current, flow.SelectedNpcId, flow.NpcFrames, flow.PlayerFrame);
         renderer.Present();
     }
 

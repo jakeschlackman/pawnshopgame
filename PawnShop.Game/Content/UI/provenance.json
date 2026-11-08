@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "provider": "User-supplied active panel; PixelLab provisional controls and historical frames",
+  "terms": "https://pixellab.ai/termsofservice",
+  "visualAcceptance": "Supplied complete panel selected by user; in-game layout awaits user review.",
+  "assets": [
+    {
+      "file": "options-panel-source.png",
+      "tool": "user-supplied",
+      "width": 1586,
+      "height": 992,
+      "sha256": "77d11e44f365b1998822110ccb5c2ac17ffe3e0ed39a7cbfcb33a73f4c0ad94c",
+      "note": "Byte-identical copy of the supplied complete decorative panel. Source and original alpha preserved."
+    },
+    {
+      "file": "lanternwood-panel.png",
+      "tool": "ui-panel",
+      "id": "ce0e603c-53d5-4ddb-9a3e-cb07af0322fc",
+      "seed": 71511,
+      "width": 320,
+      "height": 192,
+      "sha256": "24db6d350196e5921a07d0a21e6e964b1cddcd55744b6cbd4c32937c831fd740",
+      "note": "Superseded generated frame, retained as source evidence."
+    },
+    {
+      "file": "workshop-panel.png",
+      "tool": "ui-panel",
+      "id": "83a37ad2-c556-40ea-9b73-03a88caa9e4a",
+      "seed": 71208,
+      "width": 256,
+      "height": 256,
+      "sha256": "a8f23489603e80e938bd54c2c7416ac753347053096ec794f6b2b83322bb4dd9",
+      "note": "Superseded first frame, retained as source evidence."
+    },
+    {
+      "file": "brass-button.png",
+      "tool": "pixflux",
+      "id": "3d60e8a8-02f0-4ba3-9a02-235dc761d1b7",
+      "seed": 71205,
+      "width": 96,
+      "height": 32,
+      "sha256": "00876a240726876b281ae16cb7d32632fbd79c4a8a935db58f6f7e2b0afbf1fe",
+      "note": "Earlier provisional control art; user will design controls separately."
+    },
+    {
+      "file": "teal-socket.png",
+      "tool": "pixflux",
+      "id": "9c36e33e-9aa6-4be5-a893-a31f013558df",
+      "seed": 71206,
+      "width": 32,
+      "height": 32,
+      "sha256": "388c360a86fc540bb2f9bf2a23a39fca22bdfffc7a6192c37bd993a77a1fbd1c",
+      "note": "Earlier provisional inset/track art."
+    },
+    {
+      "file": "parchment.png",
+      "tool": "pixflux",
+      "id": "0b46fc08-b437-4a98-b879-8f4a4d244c64",
+      "seed": 71207,
+      "width": 64,
+      "height": 64,
+      "sha256": "b9ea1105cadd845beb2eeb0b6af004a5ba3ece04070c32303742a80729046936",
+      "note": "Earlier provisional quiet content surface."
+    },
+    {
+      "file": "tab-inactive.png",
+      "tool": "ui-panel",
+      "id": "e9814ebf-f1b1-42c7-a0e9-07d1bd7ac23b",
+      "seed": 71601,
+      "width": 110,
+      "height": 28,
+      "sha256": "c5c952147cc53d05d8b20d789e44941267dac5ee1bb0c0a400ec347c8d2b5971",
+      "state": "inactive",
+      "sourceBounds": [
+        9,
+        50,
+        111,
+        29
+      ],
+      "note": "Native pixel nine-slice preparation with six-pixel corners; repeated/cropped center and straight edges; no interpolation. Rendered at 82.8 percent of original display size."
+    },
+    {
+      "file": "tab-selected.png",
+      "tool": "ui-panel",
+      "id": "e9814ebf-f1b1-42c7-a0e9-07d1bd7ac23b",
+      "seed": 71601,
+      "width": 110,
+      "height": 28,
+      "sha256": "3cbd87b0e0ad02651b2287349d56aa4b37ab015d0ebd96cf88c9037d785e153b",
+      "state": "selected",
+      "sourceBounds": [
+        137,
+        50,
+        111,
+        29
+      ],
+      "note": "Native pixel nine-slice preparation with six-pixel corners; repeated/cropped center and straight edges; no interpolation. Rendered at 82.8 percent of original display size."
+    },
+    {
+      "file": "tab-hovered.png",
+      "tool": "ui-panel",
+      "id": "e9814ebf-f1b1-42c7-a0e9-07d1bd7ac23b",
+      "seed": 71601,
+      "width": 110,
+      "height": 28,
+      "sha256": "64c0ed5009fdef1112362edec8d68bd50171d8d7ec88ed9a28b076377a031a66",
+      "state": "hovered",
+      "sourceBounds": [
+        12,
+        174,
+        107,
+        32
+      ],
+      "note": "Native pixel nine-slice preparation with six-pixel corners; repeated/cropped center and straight edges; no interpolation. Rendered at 82.8 percent of original display size."
+    },
+    {
+      "file": "tab-pressed.png",
+      "tool": "ui-panel",
+      "id": "e9814ebf-f1b1-42c7-a0e9-07d1bd7ac23b",
+      "seed": 71601,
+      "width": 110,
+      "height": 28,
+      "sha256": "55d5838e66989c9c27a96abd1e421f87111681c83a008c78b2e266e465d1b56a",
+      "state": "pressed",
+      "sourceBounds": [
+        137,
+        173,
+        106,
+        34
+      ],
+      "note": "Native pixel nine-slice preparation with six-pixel corners; repeated/cropped center and straight edges; no interpolation. Rendered at 82.8 percent of original display size."
+    }
+  ],
+  "activePanel": {
+    "file": "options-panel-source.png",
+    "rendering": "Complete image contained at original aspect ratio with point sampling; no nine-slice, texture assembly or custom opacity."
+  },
+  "sourceAssets": [
+    {
+      "file": "Sources/walnut-tab-states.png",
+      "tool": "ui-panel",
+      "id": "e9814ebf-f1b1-42c7-a0e9-07d1bd7ac23b",
+      "seed": 71601,
+      "width": 256,
+      "height": 256,
+      "sha256": "6c24d6ba5fbe7f853e49ac0ad1ff1a04847c19703366066fa9b6c438383b5fd3"
+    }
+  ],
+  "tabStates": {
+    "order": [
+      "inactive",
+      "selected",
+      "hovered",
+      "pressed"
+    ],
+    "nativeSize": [
+      110,
+      28
+    ],
+    "displaySize": [
+      182,
+      46
+    ],
+    "styleReference": "options-panel-source.png",
+    "styleReferenceSha256": "77d11e44f365b1998822110ccb5c2ac17ffe3e0ed39a7cbfcb33a73f4c0ad94c",
+    "text": "Rendered by existing game fonts, not embedded",
+    "visualAcceptance": "Pending user review",
+    "rendering": "82.8 percent of original artwork size (90% followed by another 8% reduction), centered within unchanged 220x56 tab hit bounds; point sampling; existing label rendering."
+  }
+}

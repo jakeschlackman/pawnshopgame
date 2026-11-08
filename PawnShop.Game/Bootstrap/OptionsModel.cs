@@ -1,5 +1,7 @@
 using Microsoft.Xna.Framework.Input;
 using PawnShop.Framework.Input;
+using PawnShop.Framework.UI;
+using PawnShop.Game.Screens;
 
 namespace PawnShop.Game.Bootstrap;
 
@@ -10,6 +12,10 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
     public AppSettings Draft { get; private set; } = initial;
     public int Tab { get; private set; }
     public int Selected { get; private set; }
+    public ScrollState Scroll { get; } = new();
+    public int? HoveredSelection { get; set; }
+    public int? HoveredTab { get; set; }
+    public bool PointerDown { get; set; }
     public int SelectedBinding { get; private set; }
     public string? Message { get; private set; }
     public bool CapturingKey { get; private set; }
@@ -37,7 +43,10 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
     public void Open()
     {
         Draft = Current;
+        Scroll.MoveTo(0);
+        HoveredSelection = HoveredTab = null;
         Tab = Selected = SelectedBinding = 0;
+        ConfigureScroll();
         CapturingKey = false;
         PreviewRemaining = TimeSpan.Zero;
         TextElapsed = TimeSpan.Zero;
@@ -63,6 +72,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
 
     public bool Update(InputFrame input, TimeSpan delta, bool active)
     {
+        ConfigureScroll();
         TextElapsed += delta;
         if (Previewing)
         {
@@ -73,9 +83,13 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         }
         if (!active || CapturingKey) return false;
         if (input.Cancel) { Cancel(); return true; }
+        if (input.ScrollPosition is { } position) { Scroll.MoveTo(position); return false; }
+        if (input.ScrollDelta != 0) { Scroll.MoveTo(Scroll.Offset + input.ScrollDelta); return false; }
         if (input.TabIndex is { } tab && tab >= 0 && tab < Tabs.Count)
         {
             Tab = tab;
+            ConfigureScroll();
+            Scroll.MoveTo(0);
             Selected = SelectedBinding = 0;
             Message = null;
             return false;
@@ -86,6 +100,8 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         if (input.NextTab)
         {
             Tab = (Tab + 1) % Tabs.Count;
+            ConfigureScroll();
+            Scroll.MoveTo(0);
             Selected = SelectedBinding = 0;
             Message = null;
             return false;
@@ -93,6 +109,9 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         if (input.Up != input.Down)
         {
             Selected = (Selected + (input.Down ? 1 : FieldCount + 2)) % (FieldCount + 3);
+            if (Selected < FieldCount)
+                Scroll.Reveal(36 + Selected * OptionsMenuLayout.RowHeight(Draft.UiScale),
+                    OptionsMenuLayout.RowHeight(Draft.UiScale), OptionsMenuLayout.Viewport.Height);
             return false;
         }
         if (Selected < FieldCount)
@@ -125,6 +144,9 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         }
         return false;
     }
+
+    private void ConfigureScroll() =>
+        Scroll.Configure(OptionsMenuLayout.ContentHeight(this), OptionsMenuLayout.Viewport.Height);
 
     public void Capture(IReadOnlyList<Keys> keys)
     {

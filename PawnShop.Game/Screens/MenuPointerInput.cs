@@ -11,32 +11,66 @@ public static class TitleMenuLayout
     public static Rectangle Row(int index) => new(240, (int)MathF.Round((FirstRow + index * RowSpacing) * 1080) - 6, 1340, 78);
 }
 
-public static class OptionsMenuLayout
-{
-    public static Rectangle Row(int index, bool controls = false) => new(42, (controls ? 186 : 158) + index * (controls ? 38 : 43), 1190, 36);
-    public static Rectangle Binding(int row, int slot) => new(slot == 0 ? 620 : 925, Row(row, controls: true).Y, 285, 36);
-    public static Rectangle Tab(int index) => new(50 + index * 300, 102, 280, 36);
-    public static Rectangle Keep => new(90, 470, 450, 40);
-    public static Rectangle Revert => new(650, 470, 450, 40);
-}
-
 // Pointer clicks translate to the same menu actions as keyboard input; no settings rules here.
 public sealed class MenuPointerInput
 {
     private bool wasDown;
     private bool wasActive;
+    private int wheel;
+    private bool dragging;
+    private int grab;
 
     public InputFrame Read(ApplicationFlow flow, MouseState mouse, bool active, int clientWidth, int clientHeight,
         int backBufferWidth, int backBufferHeight)
     {
         bool down = mouse.LeftButton == ButtonState.Pressed;
         bool clicked = active && wasActive && down && !wasDown;
+        int delta = active && wasActive ? mouse.ScrollWheelValue - wheel : 0;
+        wheel = mouse.ScrollWheelValue;
         wasDown = down;
         wasActive = active;
-        if (!clicked || clientWidth <= 0 || clientHeight <= 0) return default;
+        if (!active || clientWidth <= 0 || clientHeight <= 0) { dragging = false; return default; }
         int x = (int)((double)mouse.X * backBufferWidth / clientWidth);
         int y = (int)((double)mouse.Y * backBufferHeight / clientHeight);
-        return HitTest(flow, x, y, backBufferWidth, backBufferHeight);
+        var hit = HitTest(flow, x, y, backBufferWidth, backBufferHeight);
+        if (flow.Screen == Screen.Options)
+        {
+            var model = flow.Options;
+            model.HoveredSelection = hit.SelectionIndex;
+            model.HoveredTab = hit.TabIndex;
+            model.PointerDown = down;
+            var point = OptionsPoint(x, y, backBufferWidth, backBufferHeight);
+            if (!flow.TitleInteractionPlaying && !model.Previewing && !model.CapturingKey)
+            {
+                var thumb = OptionsMenuLayout.Thumb(model);
+                if (clicked && OptionsMenuLayout.Track.Contains(point))
+                {
+                    dragging = true;
+                    grab = thumb.Contains(point) ? point.Y - thumb.Y : thumb.Height / 2;
+                }
+                if (!down) dragging = false;
+                if (dragging)
+                {
+                    int travel = OptionsMenuLayout.Track.Height - thumb.Height;
+                    return new(ScrollPosition: travel <= 0 ? 0 :
+                        (point.Y - OptionsMenuLayout.Track.Y - grab) * model.Scroll.Maximum / travel);
+                }
+                if (delta != 0 && OptionsMenuLayout.Viewport.Contains(point))
+                    return new(ScrollDelta: -delta * 48 / 120);
+            }
+            else dragging = false;
+        }
+        else dragging = false;
+        return clicked ? hit : default;
+    }
+
+    private static Point OptionsPoint(int x, int y, int width, int height)
+    {
+        double scale = Math.Min(width / 1280d, height / 720d);
+        int w = (int)(1280 * scale), h = (int)(720 * scale);
+        return w <= 0 || h <= 0 ? new(-1, -1) : new(
+            (int)((x - (width - w) / 2) * 1280d / w),
+            (int)((y - (height - h) / 2) * 720d / h));
     }
 
     public static InputFrame HitTest(ApplicationFlow flow, int x, int y, int width, int height)
@@ -63,13 +97,17 @@ public sealed class MenuPointerInput
             }
             for (int i = 0; i < OptionsModel.Tabs.Count; i++)
                 if (OptionsMenuLayout.Tab(i).Contains(point)) return new(TabIndex: i);
-            for (int i = 0; i < flow.Options.FieldCount + 3; i++)
-                if (OptionsMenuLayout.Row(i, flow.Options.Tab == 3).Contains(point))
-                {
-                    int? slot = flow.Options.Tab == 3 && i < flow.Options.FieldCount
-                        ? OptionsMenuLayout.Binding(i, 1).Contains(point) ? 1 : 0 : null;
-                    return new(Confirm: true, SelectionIndex: i, BindingIndex: slot);
-                }
+            for (int action = 0; action < 3; action++)
+                if (OptionsMenuLayout.Footer(action).Contains(point))
+                    return new(Confirm: true, SelectionIndex: flow.Options.FieldCount + action);
+            if (OptionsMenuLayout.Viewport.Contains(point))
+                for (int i = 0; i < flow.Options.FieldCount; i++)
+                    if (OptionsMenuLayout.Field(i, flow.Options).Contains(point))
+                    {
+                        int? slot = flow.Options.Tab == 3
+                            ? OptionsMenuLayout.Cell(i, 1, flow.Options).Contains(point) ? 1 : 0 : null;
+                        return new(Confirm: true, SelectionIndex: i, BindingIndex: slot);
+                    }
         }
         else if (flow.Screen == Screen.Room)
         {

@@ -16,6 +16,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.4.1" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Content/UI/*.png;Content/UI/*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Update="Content/TitleScreen/*.png" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Update="Content/Player/player-sprite.json;Content/Player/placeholder-sprite.json;Content/Player/Bases/male/base.png;Content/Player/Bases/female/base.png" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Update="Content/Npcs/**/*.ink;Content/Npcs/**/*.json;Content/Npcs/**/*.png;Content/World/*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />

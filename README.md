@@ -109,7 +109,10 @@ Options is available from the title and pause menus. Tab cycles Display, Audio,
 Comfort, and Controls; Up/Down selects a row; Left/Right adjusts it; Interact or
 Enter activates buttons. Pause / Back or Escape leaves Options, discarding
 unapplied edits. During key capture, Escape cancels. The active session stays paused
-while Options is open.
+while Options is open. Tabs and Apply / Restore Defaults / Back stay fixed. Scroll
+the inner content with the mouse wheel or drag its scrollbar; keyboard navigation
+reveals the selected field. Tab changes reset scrolling. The complete decorative
+panel uses the supplied source PNG; control designs remain provisional.
 
 - Display: Windowed, Borderless, or Fullscreen; presets from 960x540 through
   3840x2160 (4K), including 16:10 and ultrawide choices; UI/text size at 100, 125,
@@ -292,7 +295,7 @@ logical pixel line heights. It loads once at application startup. Current roles
 are `TitleMenu`, `TitleBadge`, `TitleHelp`, `OptionsHeading`, `OptionsBody`, and
 `OptionsHelp`. `TitleMenu` uses bundled Silkscreen Regular; title badge/help uses
 Pixelify Sans Bold. All Options text uses Atkinson Hyperlegible: Bold headings,
-Regular body/help, with linear filtering for smoother scaling. Other renderers
+Regular body/help, with point sampling for the new pixel-art Options canvas. Other renderers
 retain point sampling. `Silkscreen` and `PixelifySansBold` are also available as
 general named entries. The title logo remains an image.
 

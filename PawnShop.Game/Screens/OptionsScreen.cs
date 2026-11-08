@@ -5,121 +5,180 @@ using PawnShop.Game.Bootstrap;
 
 namespace PawnShop.Game.Screens;
 
-internal sealed class OptionsScreen(GraphicsDevice device, FontLibrary fonts) : IDisposable
+internal sealed class OptionsScreen : IDisposable
 {
-    private readonly PixelRenderer renderer = new(device, 1280, 720, integerScaling: false, fonts: fonts,
-        samplerState: SamplerState.LinearClamp);
-    private static readonly Color Cream = new(255, 240, 210), Gold = new(255, 209, 108);
+    private readonly PixelRenderer renderer;
+    private readonly Texture2D frame, button, socket, paper;
+    private readonly Texture2D[] tabArtwork;
+    private static readonly Color Ink = new(57, 40, 31), Cream = new(255, 240, 204);
+    private static readonly Color Teal = new(130, 180, 165);
 
-    // Return title-canvas coordinates so the sprite keeps the same display scale
-    // while crossing from the 1920x1080 title UI to the 1280x720 Options UI.
+    public OptionsScreen(GraphicsDevice device, FontLibrary fonts)
+    {
+        renderer = new(device, 1280, 720, integerScaling: false, fonts: fonts);
+        frame = Load(device, "options-panel-source.png");
+        button = Load(device, "brass-button.png");
+        socket = Load(device, "teal-socket.png");
+        paper = Load(device, "parchment.png");
+        tabArtwork = [Load(device, "tab-inactive.png"), Load(device, "tab-selected.png"),
+            Load(device, "tab-hovered.png"), Load(device, "tab-pressed.png")];
+    }
+
+    private static Texture2D Load(GraphicsDevice device, string name)
+    {
+        using var stream = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Content", "UI", name));
+        return Texture2D.FromStream(device, stream, DefaultColorProcessors.PremultiplyAlpha);
+    }
+
     public Vector2 SelectorAnchor(OptionsModel model, bool first = false)
     {
         renderer.TextScale = model.Presentation.UiScale / 100f;
         int selected = first ? 0 : model.Selected;
-        var fields = model.Fields;
-        string label = selected < fields.Count ? fields[selected].Label : "APPLY";
-        return new Vector2(30, OptionsMenuLayout.Row(selected, model.Tab == 3).Y + 8
-            + renderer.MeasureTextVerticalCenter(label.Font("OptionsBody")) + 6) * 1.5f;
+        var bounds = selected < model.FieldCount ? OptionsMenuLayout.Field(selected, model)
+            : OptionsMenuLayout.Footer(selected - model.FieldCount);
+        // Keep the existing selector outside the viewport and away from clipped fields.
+        return new Vector2(bounds.X - 44, Math.Clamp(bounds.Center.Y, 240, 640)) * 1.5f;
     }
 
     public void Draw(OptionsModel model, Action? drawBackground = null)
     {
-        bool overPanorama = drawBackground is not null;
         renderer.TextScale = model.Presentation.UiScale / 100f;
-        renderer.Begin(overPanorama ? Color.Transparent : new Color(26, 36, 38));
-        renderer.Fill(24, 24, 1232, 672, new Color(36, 51, 51) * (overPanorama ? 0.82f : 1));
-        Text("OPTIONS", 50, 46, Gold, "OptionsHeading");
-        for (int i = 0; i < OptionsModel.Tabs.Count; i++)
-            Text(OptionsModel.Tabs[i], 50 + i * 300, 110, i == model.Tab ? Gold : Cream);
-        var fields = model.Fields;
-        if (model.Tab == 3)
+        renderer.Begin(Color.Transparent);
+        renderer.DrawTexture(frame, OptionsMenuLayout.Panel);
+        for (int tab = 0; tab < OptionsModel.Tabs.Count; tab++)
         {
-            Text("PRIMARY", 640, 154, Gold, "OptionsHelp");
-            Text("ALTERNATE", 945, 154, Gold, "OptionsHelp");
+            var bounds = OptionsMenuLayout.Tab(tab);
+            Button(bounds, OptionsModel.Tabs[tab], model.Tab == tab, model.HoveredTab == tab, model.PointerDown,
+                categoryTab: true);
         }
-        for (int i = 0; i < fields.Count + 3; i++)
+        // The complete supplied image owns the header, divider and inner surface.
+        renderer.BeginClip(OptionsMenuLayout.Viewport);
+        try
         {
-            int y = OptionsMenuLayout.Row(i, model.Tab == 3).Y + 8;
-            if (i == model.Selected) renderer.Fill(42, y - 8, 1190, 36, new Color(62, 78, 72));
-            string label = i < fields.Count ? fields[i].Label : (i - fields.Count) switch
+            int headerY = OptionsMenuLayout.Viewport.Y + 4 - model.Scroll.Offset;
+            Text(model.Tab == 3 ? "BINDINGS" : "PREFERENCES", 188, headerY, Cream, "OptionsHelp");
+            if (model.Tab == 3)
             {
-                0 => "APPLY", 1 => "RESTORE DEFAULTS", _ => "BACK - DISCARD UNAPPLIED EDITS"
-            };
-            Text(label, 60, y, i == model.Selected ? Gold : Cream);
-            if (i < fields.Count && model.Tab == 3)
+                Text("PRIMARY", 652, headerY, Cream, "OptionsHelp");
+                Text("ALTERNATE", 882, headerY, Cream, "OptionsHelp");
+            }
+            var fields = model.Fields;
+            for (int i = 0; i < fields.Count; i++)
             {
-                var binding = model.Binding(i);
-                for (int slot = 0; slot < 2; slot++)
+                var row = OptionsMenuLayout.Field(i, model);
+                if (!row.Intersects(OptionsMenuLayout.Viewport)) continue;
+                bool selected = i == model.Selected;
+                Text(fields[i].Label, 188, row.Y + 14, Cream);
+                if (selected) Text(">", 176, row.Y + 14, Cream);
+                if (model.Tab == 3)
                 {
-                    var bounds = OptionsMenuLayout.Binding(i, slot);
-                    bool focused = i == model.Selected && slot == model.SelectedBinding;
-                    if (focused) renderer.Fill(bounds.X, bounds.Y, bounds.Width, bounds.Height, new Color(83, 96, 82));
-                    Text(model.CapturingKey && focused ? "PRESS KEY..." : OptionsModel.KeyLabel(slot == 0 ? binding.Primary : binding.Alternate),
-                        bounds.X + 20, y, focused ? Gold : Cream);
+                    var binding = model.Binding(i);
+                    for (int slot = 0; slot < 2; slot++)
+                    {
+                        bool focus = selected && slot == model.SelectedBinding;
+                        string label = model.CapturingKey && focus ? "PRESS KEY" :
+                            OptionsModel.KeyLabel(slot == 0 ? binding.Primary : binding.Alternate);
+                        Button(OptionsMenuLayout.Cell(i, slot, model), label, focus,
+                            model.HoveredSelection == i, model.PointerDown);
+                    }
                 }
+                else if (model.Tab == 1 && i < 4)
+                {
+                    var track = new Rectangle(660, row.Y + 20, 278, 20);
+                    NineSlice.Draw(renderer, socket, socket.Bounds, track, 4, 2);
+                    int volume = i switch { 0 => model.Draft.Master, 1 => model.Draft.Music,
+                        2 => model.Draft.Ambient, _ => model.Draft.Effects };
+                    NineSlice.Draw(renderer, button, ButtonSource, new(660 + volume * 246 / 100, row.Y + 12, 32, 36), 6, 2);
+                    Text(fields[i].Value, 1020, row.Y + 14, Cream);
+                }
+                else
+                {
+                    Button(new(642, row.Y, 446, row.Height), fields[i].Value, selected,
+                        model.HoveredSelection == i, model.PointerDown);
+                }
+                // Divider comes from the generated brass button edge, with no stretched corners.
+                NineSlice.Tile(renderer, button, new(20, 5, 32, 2), new(188, row.Bottom + 4, 888, 2), 1, Color.White);
             }
-            else if (i < fields.Count) Text(fields[i].Value, 800, y, Cream);
-            if (model.Tab == 1 && i < 4)
+            int helpY = OptionsMenuLayout.Viewport.Y + 44 + fields.Count * OptionsMenuLayout.RowHeight(model.Draft.UiScale) - model.Scroll.Offset;
+            string help = model.Tab switch
             {
-                int volume = i switch { 0 => model.Draft.Master, 1 => model.Draft.Music,
-                    2 => model.Draft.Ambient, _ => model.Draft.Effects };
-                renderer.Fill(500, y + 4, 250, 8, new Color(20, 29, 33));
-                renderer.Fill(500, y + 4, volume * 250 / 100, 8, Gold);
-            }
+                0 => "Borderless uses desktop size. Resolution is retained for windowed / fullscreen. Apply to test for 15 seconds.",
+                1 => "Preview tones only. Game audio is not yet authored. Select a volume and use Left / Right to adjust.",
+                2 => OptionsModel.SampleText[..model.Draft.RevealedCharacters(model.TextElapsed, OptionsModel.SampleText.Length)],
+                _ => "Left / Right: slot. Enter: rebind. Escape: cancel capture. Delete clears an alternate. Apply saves both keys."
+            };
+            Wrap(help, 188, helpY, 888, Cream);
         }
-        if (model.Tab == 0)
-        {
-            Text("BORDERLESS USES DESKTOP SIZE. RESOLUTION IS RETAINED", 60, 540, Cream, "OptionsHelp");
-            Text("FOR WINDOWED / FULLSCREEN. APPLY TO TEST FOR 15 SECONDS.", 60, 569, Cream, "OptionsHelp");
-        }
-        else if (model.Tab == 1)
-            Text("PREVIEW TONES ONLY - GAME AUDIO IS NOT YET AUTHORED.", 60, 540, Cream, "OptionsHelp");
-        else if (model.Tab == 2)
-        {
-            int count = model.Draft.RevealedCharacters(model.TextElapsed, OptionsModel.SampleText.Length);
-            Text(OptionsModel.SampleText[..count], 60, 540, Gold);
-            Text("TEXT PREVIEW - CONVERSATIONS ARRIVE IN A LATER SLICE.", 60, 578, Cream, "OptionsHelp");
-        }
-        else
-        {
-            Text("LEFT/RIGHT: SLOT   ENTER: REBIND   ESC: CANCEL CAPTURE", 60, 548, Cream, "OptionsHelp");
-            Text("DELETE: CLEAR ALTERNATE. APPLY TO SAVE BOTH KEYS.", 60, 582, Cream, "OptionsHelp");
-        }
-        string message = model.Message ?? "TAB: CATEGORY   UP/DOWN: SELECT   LEFT/RIGHT: CHANGE";
-        if (renderer.MeasureText(message.Font("OptionsHelp")).X > 1160)
-        {
-            int split = message.LastIndexOf(' ');
-            while (split > 0 && renderer.MeasureText(message[..split].Font("OptionsHelp")).X > 1160)
-                split = message.LastIndexOf(' ', split - 1);
-            if (split > 0)
-            {
-                Text(message[..split], 60, 615, Gold, "OptionsHelp");
-                Text(message[(split + 1)..], 60, 643, Gold, "OptionsHelp");
-            }
-            else Text(message, 60, 628, Gold, "OptionsHelp");
-        }
-        else Text(message, 60, 628, Gold, "OptionsHelp");
-        Text($"{OptionsModel.KeyLabel(model.Current.InteractKey)} / ENTER: ACTIVATE   {OptionsModel.KeyLabel(model.Current.PauseKey)} / ESC: BACK", 60, 677, Cream, "OptionsHelp");
+        finally { renderer.EndClip(); }
+        NineSlice.Draw(renderer, socket, socket.Bounds, OptionsMenuLayout.Track, 4, 2);
+        if (model.Scroll.Maximum > 0)
+            NineSlice.Draw(renderer, button, ButtonSource, OptionsMenuLayout.Thumb(model), 4, 2);
+        Wrap(model.Message ?? "Tab: category   Up / Down: select   Left / Right: change   Mouse wheel: scroll",
+            176, 492, 912, Cream, maxLines: 2);
+        for (int action = 0; action < 3; action++)
+            Button(OptionsMenuLayout.Footer(action), action switch { 0 => "APPLY", 1 => "RESTORE DEFAULTS", _ => "BACK" },
+                model.Selected == model.FieldCount + action, model.HoveredSelection == model.FieldCount + action, model.PointerDown);
         if (model.Previewing)
         {
-            renderer.Fill(30, 160, 1220, 370, new Color(20, 29, 33));
-            Text("KEEP DISPLAY CHANGES?", 90, 220, Gold, "OptionsHeading");
-            Text($"REVERTING IN {(int)Math.Ceiling(model.PreviewRemaining.TotalSeconds)} SECONDS", 90, 310, Cream);
-            Text("ENTER: KEEP AND SAVE   ESC: REVERT", 90, 385, Cream);
-            Text("LOSING FOCUS ALSO REVERTS.", 90, 435, Cream);
-            foreach (var button in new[] { (OptionsMenuLayout.Keep, "KEEP"), (OptionsMenuLayout.Revert, "REVERT") })
-            {
-                var bounds = button.Item1;
-                renderer.Fill(bounds.X, bounds.Y, bounds.Width, bounds.Height, new Color(62, 78, 72));
-                Text(button.Item2, bounds.X + 20, bounds.Y + 10, Gold);
-            }
+            var panel = OptionsMenuLayout.Panel;
+            renderer.Fill(panel.X, panel.Y, panel.Width, panel.Height, Color.Black * 0.65f);
+            renderer.DrawTexture(frame, OptionsMenuLayout.Panel);
+            NineSlice.Tile(renderer, paper, paper.Bounds, new(184, 248, 912, 232), 2, Color.White);
+            Text("KEEP DISPLAY CHANGES?", 200, 254, Ink, "OptionsHeading");
+            Text($"Reverting in {(int)Math.Ceiling(model.PreviewRemaining.TotalSeconds)} seconds", 200, 330, Ink);
+            Text("Enter: keep and save. Escape / focus loss: revert.", 200, 386, Ink, "OptionsHelp");
+            Button(OptionsMenuLayout.Keep, "KEEP", true, false, false);
+            Button(OptionsMenuLayout.Revert, "REVERT", false, false, false);
         }
-        renderer.Present(clearBackBuffer: !overPanorama, drawBackground: drawBackground);
+        renderer.Present(clearBackBuffer: drawBackground is null, drawBackground: drawBackground);
     }
 
-    private void Text(string text, int x, int y, Color color, string fontName = "OptionsBody") =>
-        renderer.Text(text.Font(fontName), x, y, color);
+    private Rectangle ButtonSource => new(4, 3, 88, 26);
+    private void Button(Rectangle bounds, string text, bool selected, bool hover, bool pressed, bool categoryTab = false)
+    {
+        Color tint = selected ? new Color(255, 232, 161) : hover ? Color.White : new Color(200, 211, 202);
+        if (hover && pressed) tint = Teal;
+        if (categoryTab)
+        {
+            int state = hover && pressed ? 3 : hover ? 2 : selected ? 1 : 0;
+            int width = (int)MathF.Round(bounds.Width * 0.828f);
+            int height = (int)MathF.Round(bounds.Height * 0.828f);
+            var artworkBounds = new Rectangle(bounds.X + (bounds.Width - width) / 2,
+                bounds.Y + (bounds.Height - height) / 2, width, height);
+            renderer.DrawTexture(tabArtwork[state], artworkBounds);
+        }
+        else NineSlice.Draw(renderer, button, ButtonSource, bounds, 6, 2, tint);
+        var size = renderer.MeasureText(text.Font("OptionsHelp"));
+        Text(text, bounds.X + (int)(bounds.Width - size.X) / 2,
+            bounds.Y + (int)(bounds.Height - size.Y) / 2 + (hover && pressed ? 2 : 0), Cream, "OptionsHelp");
+    }
 
-    public void Dispose() => renderer.Dispose();
+    private void Wrap(string text, int x, int y, int width, Color color, int maxLines = 5)
+    {
+        string line = "";
+        int lines = 0;
+        foreach (string word in text.Split(' '))
+        {
+            string next = line.Length == 0 ? word : line + " " + word;
+            if (line.Length > 0 && renderer.MeasureText(next.Font("OptionsHelp")).X > width)
+            {
+                Text(line, x, y, color, "OptionsHelp");
+                y += (int)(24 * renderer.TextScale);
+                if (++lines >= maxLines) return;
+                line = word;
+            }
+            else line = next;
+        }
+        if (line.Length > 0) Text(line, x, y, color, "OptionsHelp");
+    }
+    private void Text(string text, int x, int y, Color color, string font = "OptionsBody")
+    {
+        if (color == Cream) renderer.Text(text.Font(font), x + 1, y + 1, Color.Black * 0.85f);
+        renderer.Text(text.Font(font), x, y, color);
+    }
+    public void Dispose()
+    {
+        frame.Dispose(); button.Dispose(); socket.Dispose(); paper.Dispose(); renderer.Dispose();
+        foreach (var texture in tabArtwork) texture.Dispose();
+    }
 }

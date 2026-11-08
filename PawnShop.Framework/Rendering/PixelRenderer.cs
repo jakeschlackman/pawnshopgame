@@ -14,6 +14,8 @@ public sealed class PixelRenderer : IDisposable
     private readonly bool integerScaling;
     private readonly SamplerState samplerState;
     private readonly FontLibrary? fonts;
+    private readonly RasterizerState clipping = new() { ScissorTestEnable = true };
+    private Rectangle savedScissor;
     public int Width { get; }
     public int Height { get; }
     public float TextScale { get; set; } = 1;
@@ -87,6 +89,25 @@ public sealed class PixelRenderer : IDisposable
     public void Fill(int x, int y, int width, int height, Color color) =>
         batch.Draw(pixel, new Rectangle(x, y, width, height), color);
 
+    // Flush before changing GPU scissor state; coordinates belong to this canvas.
+    public void BeginClip(Rectangle viewport)
+    {
+        batch.End();
+        savedScissor = device.ScissorRectangle;
+        device.ScissorRectangle = Rectangle.Intersect(new Rectangle(0, 0, Width, Height), viewport);
+        batch.Begin(samplerState: samplerState, rasterizerState: clipping);
+    }
+
+    public void EndClip()
+    {
+        batch.End();
+        device.ScissorRectangle = savedScissor;
+        batch.Begin(samplerState: samplerState);
+    }
+
+    public void DrawTexture(Texture2D texture, Rectangle destination, Rectangle source, Color tint) =>
+        batch.Draw(texture, destination, source, tint);
+
     public void Text(string text, int x, int y, Color color, int scale = 1) =>
         font.Draw(batch, text, x, y, color, scale * TextScale);
 
@@ -114,6 +135,7 @@ public sealed class PixelRenderer : IDisposable
     public void Dispose()
     {
         canvas.Dispose();
+        clipping.Dispose();
         pixel.Dispose();
         batch.Dispose();
     }

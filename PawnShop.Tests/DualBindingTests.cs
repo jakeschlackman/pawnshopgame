@@ -110,7 +110,8 @@ internal static partial class RegressionTests
         app.Update(new(TabIndex: 3), TimeSpan.Zero);
         foreach (int slot in new[] { 0, 1 })
         {
-            var bounds = OptionsMenuLayout.Binding(5, slot);
+            app.Options.Scroll.MoveTo(220);
+            var bounds = OptionsMenuLayout.Cell(5, slot, app.Options);
             // Pointer mapping through a 2x contained Options canvas.
             var click = MenuPointerInput.HitTest(app, bounds.Center.X * 2, bounds.Center.Y * 2, 2560, 1440);
             Check(click.SelectionIndex == 5 && click.BindingIndex == slot && click.Confirm);
@@ -119,7 +120,7 @@ internal static partial class RegressionTests
             Check(MenuPointerInput.HitTest(app, bounds.Center.X, bounds.Center.Y, 1280, 720) == default);
             app.Options.Capture(Array.Empty<Keys>()); app.Options.Capture(new[] { Keys.Escape });
         }
-        var back = OptionsMenuLayout.Row(app.Options.FieldCount + 2, controls: true).Center;
+        var back = OptionsMenuLayout.Footer(2).Center;
         app.Update(MenuPointerInput.HitTest(app, back.X, back.Y, 1280, 720), TimeSpan.Zero);
         Check(app.Screen == Screen.Title && app.LiveSessions == 0);
 

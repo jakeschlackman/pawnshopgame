@@ -153,7 +153,7 @@ renderers/screens, disposing it after those consumers. Catalog data and assets l
 once, never in Draw. TitleMenu uses bundled Silkscreen Regular (400); title badge/help
 use Pixelify Sans Bold (700). All Options roles use Atkinson Hyperlegible, with
 Bold for headings and Regular for body/help; every family includes its OFL license.
-Options opts into linear sampling for smooth glyph scaling and canvas presentation.
+Options now uses point sampling for its pixel-art frame, controls and canvas presentation.
 The renderer default and pixel-sprite overlays retain point sampling.
 The title logo remains an image. Room/pause placeholder text
 is unchanged. Named font size is a logical pixel line height multiplied by UI scale.
@@ -1108,3 +1108,33 @@ The development sequence and evidence ledger live in [ROADMAP.md](ROADMAP.md). N
 
 
 
+
+### Options pixel-art foundation - 2026-11-07
+
+Options retains its contained 1280x720 canvas and existing settings semantics.
+`OptionsMenuLayout` shares fixed tabs/footer and scrolled field/cell geometry with
+pointer input. `ScrollState` owns a bounded offset; wheel and scrollbar dragging
+request scrolling, keyboard navigation reveals the focused field, and tab changes
+reset the offset. `PixelRenderer.BeginClip/EndClip` flush SpriteBatch and apply a
+GPU scissor on the UI render target. Only content draws inside that clip.
+
+The user-supplied `Content/UI/options-panel-source.png` is the complete current
+panel, including its wooden header, divider, ornaments and inner surface. Its
+1586x992 source is preserved byte-for-byte and drawn once within 1074x672 logical
+bounds, preserving aspect ratio to integer rounding. The earlier generated
+nine-slice frame, assembled header and palette-specific opacity processor are
+superseded. Source alpha is retained; the custom 75% opacity no longer applies.
+PNG textures are premultiplied at upload for AlphaBlend. Point sampling preserves
+sharp edges; fractional downscaling cannot preserve a uniform physical pixel grid.
+
+The four tabs sit inside the source image's header; fields and fixed actions stay
+inside its body. The Options heading is omitted pending the user's placement
+decision. Existing generated button/track art remains provisional for separate
+user design. Framework's `NineSlice` still draws those controls with fixed corner
+sizes and repeating edge/center pixels. Provenance records the supplied source
+hash and retained earlier generated artwork. No other interface is redesigned.
+
+Options always uses a transparent UI canvas. Title-side Options composites over
+the panorama; pause-side Options composites over a fresh rendering of the frozen
+room without advancing simulation. In-game visual acceptance belongs to the user;
+see docs/VERIFICATION_OPTIONS.md.

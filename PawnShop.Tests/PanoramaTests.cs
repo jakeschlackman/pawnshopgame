@@ -122,7 +122,7 @@ internal static partial class RegressionTests
         Check(MenuPointerInput.HitTest(app, 100, 170, 1280, 720) == default);
         app.Update(default, PanoramaCamera.TransitionDuration);
         FinishOptionsFlight(app);
-        var back = OptionsMenuLayout.Row(app.Options.FieldCount + 2).Center;
+        var back = OptionsMenuLayout.Footer(2).Center;
         app.Update(MenuPointerInput.HitTest(app, back.X, back.Y, 1280, 720), TimeSpan.Zero);
         Check(app.Screen == Screen.Title && !app.TitleUiVisible);
         app.Update(default, PanoramaCamera.TransitionDuration);
