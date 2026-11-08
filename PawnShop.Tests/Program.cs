@@ -6,6 +6,14 @@ if (args.Length > 0 && args[0] == "--assets") return PlayerAssets.Run(args[1..],
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
+    ("Restore Defaults resets only the active tab and preserves other saved and pending settings", RegressionTests.OptionsTabDefaults),
+    ("Title sayings validate JSON, select once per startup and match the Comfort preview", RegressionTests.TitleSayingsContent),
+    ("Dirty Options require explicit discard, preserve editing and block underlying input", RegressionTests.OptionsDirtyConfirmation),
+    ("Mouse action alternates merge edges, respect focus/UI capture and preserve rebinding drafts", RegressionTests.MouseActionBindings),
+    ("Comfort checkbox and dialogue dropdown preserve input capture, previews and settings drafts", RegressionTests.OptionsComfortControls),
+    ("Audio sliders and mute checkbox preserve drafts, pointer input and keyboard/focus behavior", RegressionTests.OptionsAudioSliders),
+    ("Options dropdowns capture input, retain drafts and keep lists inside the viewport", RegressionTests.OptionsDropdowns),
+    ("Compact Options footer clicks restore drafts, apply once and discard from every scrolled tab", RegressionTests.OptionsFooterActions),
     ("Options uses the complete source panel and keeps controls inside its boundaries", RegressionTests.OptionsPanelSource),
     ("Options scroll, clipping hit boundaries and fixed actions share geometry at every UI scale", RegressionTests.OptionsScroll),
     ("Common shopper enters with synchronized walk/settle frames and cannot cross the player", CommonNpcRoomTests.Entrance),
@@ -42,6 +50,7 @@ var tests = new (string Name, Action Run)[]
     ("Title feedback delays actions once, captures input and respects cancellation/focus", RegressionTests.SproutSelection),
     ("Options Sprout floats to the first setting while continuing the pointing loop", RegressionTests.OptionsSproutSequence),
     ("Options Sprout captures input, freezes on focus loss and cancels cleanly", RegressionTests.OptionsSproutCancellation),
+    ("Sprout returns from the selected option to the main-menu Options entry without losing animation or input capture", RegressionTests.OptionsSproutReturn),
     ("Ink source matches build output and every visitor branch runs", RegressionTests.DialogueContent),
     ("Dialogue commands reject stale IDs, revisions and duplicate selections", RegressionTests.DialogueCommands),
     ("Ink compiler and adapter diagnose invalid graphs, tags, speakers and external calls", RegressionTests.DialogueValidation),

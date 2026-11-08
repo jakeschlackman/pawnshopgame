@@ -24,6 +24,7 @@ public sealed class ApplicationFlow : IDisposable
     public OptionsModel Options { get; }
     private readonly NpcContentCatalog conversations;
     private readonly CommonNpcCatalog? commonNpcs;
+    public string TitleSaying { get; }
     public CommonNpcRoomVisitor? CommonVisitor => session?.CommonVisitor;
     public IReadOnlyList<PlacedNpc> Npcs => session?.Npcs ?? Array.Empty<PlacedNpc>();
     public string? SelectedNpcId => session?.NearbyNpcId;
@@ -36,9 +37,11 @@ public sealed class ApplicationFlow : IDisposable
     public bool UsesTitleBackground => session is null && Screen is Screen.Title or Screen.Options;
     public bool TitleUiVisible => UsesTitleBackground && !TitleCamera.IsMoving;
     public ApplicationFlow(AppSettings? settings = null, Action<AppSettings>? saveSettings = null, NpcContentCatalog? conversations = null,
-        CommonNpcCatalog? commonNpcs = null)
+        CommonNpcCatalog? commonNpcs = null, TitleSayings? titleSayings = null)
     {
-        Options = new(settings ?? new(), saveSettings);
+        TitleSaying = (titleSayings ?? TitleSayings.Load(
+            Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-sayings.json"), new Random())).Next();
+        Options = new(settings ?? new(), saveSettings, TitleSaying);
         PlayerSprites = new(Path.Combine(AppContext.BaseDirectory, "Content", "Player"));
         this.conversations = conversations ?? NpcContentCatalog.Load(Path.Combine(AppContext.BaseDirectory, "Content", "Npcs"), Path.Combine(AppContext.BaseDirectory, "Content", "World", "shop.npcs.json"));
         // Only the bundled room gets the example by default. Injected authored NPC
@@ -70,10 +73,10 @@ public sealed class ApplicationFlow : IDisposable
         if (OptionsFlight.IsBusy)
         {
             if (!active) return;
-            if (input.Cancel) { Options.Cancel(); SetScreen(Screen.Title); return; }
+            if (input.Cancel && !OptionsFlight.IsReturning) { Options.Cancel(); SetScreen(Screen.Title); return; }
             var before = OptionsFlight.Phase;
             OptionsFlight.Update(delta);
-            if (before == OptionsSproutPhase.FinishingPoint && OptionsFlight.Phase == OptionsSproutPhase.Flying)
+            if (!OptionsFlight.IsReturning && before == OptionsSproutPhase.FinishingPoint && OptionsFlight.Phase == OptionsSproutPhase.Flying)
             {
                 optionsOrigin = Screen.Title;
                 Options.Open();
@@ -110,7 +113,18 @@ public sealed class ApplicationFlow : IDisposable
         if (Screen == Screen.Options)
         {
             if (UsesTitleBackground && active) TitleSelector.Update(delta);
-            if (Options.Update(input, delta, active)) SetScreen(optionsOrigin);
+            // Capture the visible anchor before Cancel restores draft settings/scale.
+            var returnAnchor = OptionsMenuLayout.SelectorAnchor(Options);
+            if (Options.Update(input, delta, active))
+            {
+                if (optionsOrigin == Screen.Title)
+                {
+                    OptionsFlight.StartReturn(returnAnchor);
+                    SetScreen(Screen.Title, preserveOptionsFlight: true);
+                    Menu!.Handle(new(SelectionIndex: 2)); // Land beside the main menu's Options entry.
+                }
+                else SetScreen(optionsOrigin);
+            }
             return;
         }
         if (Screen == Screen.Dialogue)

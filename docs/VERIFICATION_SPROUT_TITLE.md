@@ -1,5 +1,35 @@
 # Sprout title selector verification
 
+## Main-menu return flight - 2026-11-08
+
+Leaving Options opened from the main menu now retains Sprout and floats him from
+the current highlighted option back to the main menu's Options entry. Both the
+footer Back and cancel binding use the same path. The visible anchor is captured
+before draft cancellation restores settings/scale, so scrolling, the current tab
+and uncommitted defaults do not move his departure point. Main-menu Options is
+selected for the destination; the title menu draws during return without a second
+selector. The existing 800ms SmoothStep travel/pan and point-sampled overlay are
+reused, keeping Idle and its clock continuous without new clips, rotation or art.
+
+Return input is captured through the arrival frame; repeated Back cannot skip
+the flight. Focus loss freezes camera, progress and animation together. Exit and
+disposal reset presentation state. Existing entry cancellation and pause-side
+Options behavior are preserved. The requested change concerns the main menu;
+no future pause menu was designed or implemented.
+
+Added headless return checks for footer/cancel, scrolled-row departure, three
+saved UI scales, discarded defaults, exact endpoints/midpoint, focus freeze,
+input capture, main-menu destination selection, animation continuity, repeat
+entry and exit cleanup. Test setup now selects intended title entries explicitly
+because returning keeps Options selected. In-game travel/rendering acceptance
+remains with the user; no game was launched or controlled.
+
+Verification: `dotnet build PawnShopSimulator.sln --no-restore -m:1
+-p:UseSharedCompilation=false -p:OutputPath=bin/NotJamVerification/` passed with
+zero warnings/errors. `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj
+--no-build -p:OutputPath=bin/NotJamVerification/` passed 65/65.
+`git diff --check` passed.
+
 Date: 2026-10-31. Existing uncommitted work preserved. No GUI launch, screenshots,
 Computer Use or computer-vision testing; visual testing remains with the user.
 

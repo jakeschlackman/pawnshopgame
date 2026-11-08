@@ -35,7 +35,7 @@ internal sealed class TitleScreen : IDisposable
         }
     }
 
-    public void Draw(Menu<MenuCommand> menu, float textScale, SpriteAnimator selector, bool drawSelector = true)
+    public void Draw(Menu<MenuCommand> menu, float textScale, SpriteAnimator selector, string saying, bool drawSelector = true)
     {
         renderer.TextScale = textScale;
         renderer.Begin(Color.Transparent);
@@ -53,13 +53,16 @@ internal sealed class TitleScreen : IDisposable
                 new Color(221, 198, 162), "TitleBadge");
         }
 
-        // Keep help readable against the foreground without obscuring the composition.
+        // Keep the saying readable against the foreground without obscuring the composition.
         var helpBounds = Bounds(0, 0.905556f, 1, 0.094444f);
         renderer.Fill(helpBounds.X, helpBounds.Y, helpBounds.Width, helpBounds.Height, Color.Black * 0.6f);
-        Text(menu.Selected.DisabledReason ?? "Every treasure deserves a second chance.",
-            0.15625f, 0.922222f, new Color(255, 240, 193), "TitleHelp");
-        Text("CLICK / MOVE KEYS: SELECT   ENTER: CONFIRM   ESC: BACK", 0.15625f, 0.962963f,
-            new Color(221, 198, 162), "TitleHelp");
+        float availableWidth = renderer.Width - X(0.15625f) - X(0.05f);
+        float measuredWidth = renderer.MeasureText(saying.Font("TitleSaying")).X;
+        // Keep longer authored entries within the footer width.
+        if (measuredWidth > availableWidth) renderer.TextScale *= availableWidth / measuredWidth;
+        Text(saying,
+            0.15625f, 0.922222f, new Color(255, 240, 193), "TitleSaying");
+        renderer.TextScale = textScale;
         renderer.Present(clearBackBuffer: false, drawBackground: DrawBackground);
         if (drawSelector) DrawSelector(selector, SelectorAnchor(menu.SelectedIndex, menu.Selected.Label, textScale));
     }

@@ -150,9 +150,17 @@ the small string extension `"text".Font("TitleMenu")` selects a role. FontLibrar
 uses MonoGame ContentManager/SpriteFont/DrawString/MeasureString rather than custom
 font processing. Game bootstrap creates one shared font scope and passes it to
 renderers/screens, disposing it after those consumers. Catalog data and assets load
-once, never in Draw. TitleMenu uses bundled Silkscreen Regular (400); title badge/help
-use Pixelify Sans Bold (700). All Options roles use Atkinson Hyperlegible, with
-Bold for headings and Regular for body/help; every family includes its OFL license.
+once, never in Draw. TitleMenu uses bundled Pixeloid Sans Bold, matching inner Options text; the title badge
+uses Pixelify Sans Bold (700). Options heading/label/body/help roles use Pixeloid
+Sans Bold; OptionsTab and OptionsAction use Jersey 25 Regular for category tabs
+and footer labels. Every family includes its OFL license.
+TitleSaying also uses Pixeloid Sans Bold at 28. ApplicationFlow loads the small
+TitleSayings JSON pool once and chooses one line at startup. The immutable line
+is also supplied to OptionsModel for the Comfort dialogue-speed preview and stays
+fixed through all screen transitions until restart. Randomness is injected for headless
+checks. Draw only reads the chosen line, even when an unavailable entry is selected,
+and fits long entries to the footer width; no content I/O or random choice occurs
+in rendering. The footer navigation hint is omitted; unavailable entries retain their badge.
 Options now uses point sampling for its pixel-art frame, controls and canvas presentation.
 The renderer default and pixel-sprite overlays retain point sampling.
 The title logo remains an image. Room/pause placeholder text
@@ -176,8 +184,39 @@ and the graphics-free `OptionsModel`. `ApplicationFlow` owns the options overlay
 it captures input and pauses the session from both title and pause. The host applies
 display changes, key bindings, and audio previews; Screens renders the options UI.
 Settings persist outside gameplay saves with temporary-write/backup replacement.
+The host uses only `%LOCALAPPDATA%/PickersHollow/settings.json`; it does not read
+or migrate the former RummageHollow directory. A missing file is created with
+defaults during startup load through the existing safe-write flow. If creation
+fails, launch continues with in-memory defaults and an Options warning. Existing
+files, including corrupt or unsupported files, are not rewritten on load.
+The centered display-confirmation dialog uses a PixelLab ivywood frame with
+russet walnut, golden trim and restrained ivy/iron corners. Its native-scale
+64-pixel nine-slice corners preserve all foliage; only plain edges repeat. The
+generated center is transparent, backed by a PixelLab cocoa-to-chocolate gradient
+with very faint fiber texture. The opaque 192x293 inset repeats horizontally at
+native scale; its height matches the inset so the gradient never restarts vertically.
+Pixeloid text uses OptionsHeading at 36 and OptionsLabel at 26 for secondary text.
+Keep/Revert reuse the complete
+PixelLab walnut/brass binding-button art with six-pixel slices at 2x, including
+their own lower borders. They retain OptionsLabel at 26 and sit 16px above the
+frame's gold rail, inset clear of ivy. Underlying Controls slot
+buttons and the main Options footer retain their own artwork.
+It dims the underlying Options view without redrawing its frame. Keep/Revert
+share draw/hit rectangles and support pointer hover/press feedback. Routine Apply/revert status messages
+are silent; save/display failures still report errors.
+OptionsModel compares Draft and Current by value for dirty state. Back/cancel
+with differences opens a confirmation sharing the existing frame, gradient,
+typography and button bounds. Keep Editing is the safe default; Escape also keeps
+the draft. Only explicit Discard Changes restores Current and permits leaving.
+The modal owns keyboard/pointer input, blocks underlying scrolling/controls and
+waits through focus loss. Clean exits skip it. Main-menu return flight begins
+only after the close is accepted. Display-preview rollback retains its separate
+countdown/cancel behavior; no settings are written by the discard confirmation.
 Display edits require a 15-second confirmation and revert on cancellation, timeout,
-focus loss, or application failure. Resolutions reach 3840x2160; manual window
+focus loss, or application failure. Resolutions range from 1280x720 through
+3840x2160. Earlier saved 960x540 preferences load at 1280x720 while retaining
+other settings, without rewriting the original until Apply. The host rejects
+actual display dimensions below the minimum, including a smaller borderless desktop; manual window
 resizing is disabled and users change resolution through Options. UI/text size previews independently of world scale. Audio
 and dialogue speed have live previews; the Ink conversation draft also uses the
 text-speed setting. Authored audio remains future work. See README.md for controls
@@ -219,12 +258,18 @@ cancels, and focus loss holds pending activation. Disabled entries may animate b
 cannot execute. TitleScreen only reads the frame and draws through PixelRenderer
 using a source rectangle and stable pivot at the text's vertical center. The
 selector is application UI and does not create a gameplay companion entity.
-OptionsSproutFlight owns the title-to-Options presentation: finish the current
+OptionsSproutFlight owns the main-menu/Options presentation: finish the current
 Idle cycle, then float upright to the first Display field over the 800 ms
 panorama pan while continuing the same pointing loop. There are no takeoff,
 jet-flight or landing clips and no rotation. Arrival does not restart Idle.
-Options input unlocks after arrival; Escape cancels and focus loss freezes the
-sequence and camera. Pause-side Options and other title commands are unchanged.
+Options input unlocks after arrival; Escape cancels entry and focus loss freezes
+the sequence and camera. Closing main-menu Options captures Sprout's visible
+anchor before restoring draft settings, then floats him back over the same 800ms
+pan to the main menu's selected Options entry. The pointing loop and animation
+clock continue throughout without a restart. Return travel captures input through
+arrival; repeated Back does not skip it. The title menu renders behind the return
+flight without its normal duplicate selector. Existing pause-side Options and
+other title commands are unchanged; no future pause-menu work is implemented.
 PixelRenderer draws Sprout as a point-sampled overlay directly on the backbuffer
 after presenting the UI target, using the same contained viewport transform and
 a snapped pixel position. This avoids scaling the sprite twice at different ratios.
@@ -1138,3 +1183,87 @@ Options always uses a transparent UI canvas. Title-side Options composites over
 the panorama; pause-side Options composites over a fresh rendering of the frozen
 room without advancing simulation. In-game visual acceptance belongs to the user;
 see docs/VERIFICATION_OPTIONS.md.
+
+Options footer actions use a separate PixelLab-generated walnut/brass state set
+through the existing nine-slice renderer. Apply/Back are 128x36 and Restore
+Defaults is 232x36, with shared drawing/hit bounds and preserved centers. The
+OptionsAction font role reuses Jersey 25 at line height 16. Header and panel
+artwork are unaffected.
+
+Window Mode and Resolution share a PixelLab walnut/brass dropdown style with
+four button states, a nine-slice popup surface, row highlight and separate chevron.
+OptionsModel owns its open row, candidate choice and first visible choice;
+OptionsMenuLayout supplies bounded popup/item/scrollbar geometry to drawing and
+pointer input. The popup draws last inside the existing content scissor and owns
+input while open. InputFrame.ChoiceIndex selects an explicit choice, while existing
+scroll intents move either the popup or body according to focus. Choice selection
+edits the draft only; Apply retains the existing display-preview/rollback contract.
+
+The six Audio volume controls (Master, Music, Ambient, Sound Effects, Combat
+and Monster) use PixelLab-authored thin brass tracks, a green
+fill strip and wristwatch thumbs. Shared AudioTrack/AudioFill/AudioThumb geometry
+maps draft volume to the clock-face pivot and pointer position back to 0-100.
+Pointer drag emits InputFrame.SliderValue with the option row; OptionsModel owns
+clamping, draft edits and preview-tone requests. Left/Right retains five-point
+steps; Apply/Back retain existing commit/discard behavior. This artwork does not
+replace the menu's vertical scrollbar or the dropdown scrollbar.
+Combat and Monster are independent channels, each multiplied by Master and
+respecting Mute When Unfocused. Both default to 80, including when absent from
+older version-1 settings files. Existing Apply, Back and Restore Defaults semantics
+apply to both values; authored combat/monster sounds remain future work.
+
+Mute When Unfocused uses PixelLab checkbox states: a gold frame with a tick for
+true and an empty cool-steel frame for false, each with a matching hover state.
+The 44x44 sources render at 30x30, centered beneath the audio tracks, using shared
+AudioCheckbox draw/hit geometry. The checkbox and its label toggle the existing
+draft boolean through the same confirmation action.
+Comfort's Pause When Unfocused reuses the same checkbox art and shared row-based
+checkbox geometry. Dialogue Text Speed reuses the bounded dropdown with Slow,
+Normal, Fast and Instant choices; selection updates only the draft and restarts
+the existing text preview. Dropdown choice metadata includes the active tab,
+keeping Comfort choices distinct from Display's mode/resolution lists. Apply,
+Back, defaults and settings storage retain their existing behavior. The former
+Replay Text Preview row is replaced by Screen Shake, using the same checkbox
+style and defaulting to true. It is an application preference persisted through
+Apply; old files missing it use true. No screen-shake effect currently exists;
+future effects must respect this preference. Changing dialogue speed still
+restarts its sample automatically.
+
+Controls' Primary and Alternate cells share one PixelLab walnut/brass button
+set, with inactive, selected, hovered and pressed/capturing states. Six-pixel
+corners render at 2x with tiled edges/center; bounds and font roles are unchanged.
+Pointer hover identifies the individual binding slot. The static Controls footer
+instructions and their scroll tail are removed; status/capture messages remain.
+The action labels are Interact / Attack (Z/Left Click) and Back / Block
+(X/Right Click). KeyBinding adds an optional alternate MouseBinding; action
+alternates permit a keyboard key or one mouse button, with duplicate validation.
+KeyboardInput merges keyboard/mouse action state before edge detection and
+synchronizes both on focus changes. Mouse confirmation remains with UI hit
+testing, and the host consumes rebinding input after all keys/buttons are released.
+Missing defaults and earlier Enter/Escape defaults migrate to mouse alternates;
+custom mappings and deliberate clears are retained. ActionAlternateDefaultsVersion
+2 marks current defaults on save; the original file is not rewritten on load.
+Restore Defaults selects the new pairs. This adds bindings/labels, not combat rules.
+
+The main Options scrollbar uses a PixelLab walnut rail with brass edging, sparse
+ivy and a fixed-size 32x42 vintage compass thumb. Native rail end caps stay fixed
+while the wood grain repeats vertically; the compass is never stretched to
+represent content size. Its travel maps to ScrollState's full offset range. The
+shared 40-pixel-wide track supplies rendering and pointer bounds, with hover/
+pressed compass art. Wheel input
+works over content or the rail. Both pieces remain hidden when content fits.
+The horizontal audio wristwatches and dropdown scrollbars retain their own art.
+
+ThumbTravel reserves 12 logical pixels at both rail ends, keeping the compass
+clear of the fixed brass caps. Both thumb placement and pointer-to-scroll mapping
+use that inset area, so dragging still reaches offsets zero and maximum.
+
+The three footer buttons dock at the original panel's bottom rail (source row
+880); Apply and Back have adjoining bounds with a shared exclusive edge. Their
+new PixelLab-generated states use orange/golden frame trim including #ee700b.
+Sizes, font roles and the existing action semantics are retained.
+
+Footer sprites now have top/side trim only, colored from exact original-rail
+samples. Their open lower edges meet the panel's gold cap at source row 879,
+which supplies their bottom border. The existing sizes and adjoining Apply/Back
+bounds are retained.

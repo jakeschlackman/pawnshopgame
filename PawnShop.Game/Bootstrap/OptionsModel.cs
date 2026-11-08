@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text.RegularExpressions;
 using Microsoft.Xna.Framework.Input;
 using PawnShop.Framework.Input;
 using PawnShop.Framework.UI;
@@ -6,46 +8,97 @@ using PawnShop.Game.Screens;
 namespace PawnShop.Game.Bootstrap;
 
 // Focus, edits, preview rollback and persistence; no window or device required.
-public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save = null)
+public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save = null,
+    string sampleText = "Every treasure deserves a second chance.")
 {
     public AppSettings Current { get; private set; } = initial;
     public AppSettings Draft { get; private set; } = initial;
     public int Tab { get; private set; }
     public int Selected { get; private set; }
+    // Sprout stays with the last option while the footer has keyboard/pointer focus.
+    public int IndicatorRow { get; private set; }
     public ScrollState Scroll { get; } = new();
     public int? HoveredSelection { get; set; }
+    public int? HoveredBinding { get; set; }
+    public int? HoveredModalAction { get; set; }
     public int? HoveredTab { get; set; }
     public bool PointerDown { get; set; }
+    public bool HoveredScrollbar { get; set; }
     public int SelectedBinding { get; private set; }
+    public int? DropdownRow { get; private set; }
+    public int DropdownChoice { get; private set; }
+    public int DropdownFirst { get; private set; }
+    public int? HoveredChoice { get; set; }
+    public bool IsDropdown(int row) => (Tab == 0 && row is 0 or 1) || (Tab == 2 && row == 2);
+    public int DropdownCount => (Tab, DropdownRow) switch
+    {
+        (0, 0) => 3, (0, 1) => AppSettings.Resolutions.Count, (2, 2) => 4, _ => 0
+    };
+    public string ChoiceLabel(int index) => (Tab, DropdownRow) switch
+    {
+        (0, 0) => ((WindowMode)index).ToString(),
+        (0, 1) => $"{AppSettings.Resolutions[index].Width} X {AppSettings.Resolutions[index].Height}",
+        (2, 2) => ((DialogueSpeed)index).ToString(),
+        _ => throw new InvalidOperationException("No dropdown is open.")
+    };
     public string? Message { get; private set; }
     public bool CapturingKey { get; private set; }
     private bool captureReleased;
     public TimeSpan PreviewRemaining { get; private set; }
     public bool Previewing => PreviewRemaining > TimeSpan.Zero;
+    public bool IsDirty => Draft != Current;
+    public bool ConfirmingDiscard { get; private set; }
+    public int DiscardChoice { get; private set; }
+    public bool HasModal => Previewing || ConfirmingDiscard;
     public DisplaySettings DisplayForHost => Previewing ? Draft.Display : Current.Display;
     public AppSettings Presentation => Draft;
-    public const string SampleText = "Every treasure deserves a second chance.";
+    public string SampleText { get; } = sampleText;
     public TimeSpan TextElapsed { get; private set; }
     public AudioChannel? RequestedTone { get; private set; }
     public static IReadOnlyList<string> Tabs { get; } = Array.AsReadOnly(new[] { "DISPLAY", "AUDIO", "COMFORT", "CONTROLS" });
     public static IReadOnlyList<ControlAction> ControlActions { get; } = Array.AsReadOnly(Enum.GetValues<ControlAction>());
-    public int FieldCount => Tab switch { 0 => 3, 1 => 5, 2 => 3, _ => ControlActions.Count };
+    public const int AudioVolumeCount = 6;
+    public int FieldCount => Tab switch { 0 => 2, 1 => AudioVolumeCount + 1, 2 => 3, _ => ControlActions.Count };
     public KeyBinding Binding(int row) => Draft.Bindings.Get(ControlActions[row]);
+    public int Volume(int row) => row switch
+    {
+        0 => Draft.Master, 1 => Draft.Music, 2 => Draft.Ambient, 3 => Draft.Effects,
+        4 => Draft.Combat, 5 => Draft.Monster,
+        _ => throw new ArgumentOutOfRangeException(nameof(row))
+    };
     public static string ActionLabel(ControlAction action) => action switch
     {
-        ControlAction.Interact => "INTERACT", ControlAction.PauseBack => "PAUSE / BACK",
+        ControlAction.Interact => "INTERACT / ATTACK", ControlAction.PauseBack => "BACK / BLOCK",
         ControlAction.MoveUp => "MOVE UP", ControlAction.MoveLeft => "MOVE LEFT",
         ControlAction.MoveDown => "MOVE DOWN", ControlAction.MoveRight => "MOVE RIGHT",
         _ => throw new ArgumentOutOfRangeException(nameof(action))
     };
-    public static string KeyLabel(Keys key) => key == Keys.None ? "UNBOUND" : key.ToString().ToUpperInvariant();
+    public static string KeyLabel(Keys key)
+    {
+        if (key == Keys.None) return "Unbound";
+        string name = key.ToString();
+        if (name.Length == 1) return name;
+        // Turn enum names such as LeftShift and NumPad8 into readable words.
+        string words = Regex.Replace(name, "(?<=[a-z])(?=[A-Z0-9])|(?<=[A-Z])(?=[A-Z][a-z])", " ");
+        return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(words.ToLowerInvariant());
+    }
+    public static string AlternateLabel(KeyBinding binding) => binding.AlternateMouse switch
+    {
+        MouseBinding.Left => "Left Click", MouseBinding.Right => "Right Click", _ => KeyLabel(binding.Alternate)
+    };
 
     public void Open()
     {
+        CloseDropdown();
         Draft = Current;
         Scroll.MoveTo(0);
         HoveredSelection = HoveredTab = null;
-        Tab = Selected = SelectedBinding = 0;
+        HoveredBinding = null;
+        HoveredModalAction = null;
+        ConfirmingDiscard = false;
+        DiscardChoice = 0;
+        HoveredScrollbar = false;
+        Tab = Selected = SelectedBinding = IndicatorRow = 0;
         ConfigureScroll();
         CapturingKey = false;
         PreviewRemaining = TimeSpan.Zero;
@@ -55,9 +108,12 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
 
     public void Cancel()
     {
+        CloseDropdown();
         Draft = Current;
         CapturingKey = false;
         PreviewRemaining = TimeSpan.Zero;
+        ConfirmingDiscard = false;
+        HoveredModalAction = null;
     }
 
     public void Report(string message) => Message = message;
@@ -77,12 +133,45 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         if (Previewing)
         {
             PreviewRemaining -= delta;
-            if (PreviewRemaining <= TimeSpan.Zero || !active || input.Cancel) RejectDisplay("Display changes reverted.");
+            if (PreviewRemaining <= TimeSpan.Zero || !active || input.Cancel) RejectDisplay(null);
             else if (input.Confirm) Commit();
             return false;
         }
-        if (!active || CapturingKey) return false;
-        if (input.Cancel) { Cancel(); return true; }
+        if (ConfirmingDiscard)
+        {
+            if (!active) return false;
+            if (input.Cancel)
+            {
+                ConfirmingDiscard = false;
+                HoveredModalAction = null;
+                return false;
+            }
+            if (input.ChoiceIndex is { } choice)
+            {
+                if (choice is not (0 or 1)) return false;
+                DiscardChoice = choice;
+            }
+            else if (input.Left != input.Right || input.Up != input.Down)
+                DiscardChoice = 1 - DiscardChoice;
+            if (!input.Confirm) return false;
+            if (DiscardChoice == 1) { Cancel(); return true; }
+            ConfirmingDiscard = false;
+            HoveredModalAction = null;
+            return false;
+        }
+        if (!active) { CloseDropdown(); return false; }
+        if (CapturingKey) return false;
+        if (DropdownRow is not null)
+        {
+            if (input.Cancel) { CloseDropdown(); return false; }
+            if (input.TabIndex is not null || input.NextTab) CloseDropdown();
+            else
+            {
+                UpdateDropdown(input);
+                return false; // An open list owns input, including outside clicks.
+            }
+        }
+        if (input.Cancel) return RequestClose();
         if (input.ScrollPosition is { } position) { Scroll.MoveTo(position); return false; }
         if (input.ScrollDelta != 0) { Scroll.MoveTo(Scroll.Offset + input.ScrollDelta); return false; }
         if (input.TabIndex is { } tab && tab >= 0 && tab < Tabs.Count)
@@ -90,19 +179,29 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             Tab = tab;
             ConfigureScroll();
             Scroll.MoveTo(0);
-            Selected = SelectedBinding = 0;
+            Selected = SelectedBinding = IndicatorRow = 0;
             Message = null;
             return false;
         }
         if (input.SelectionIndex is { } selection && selection >= 0 && selection < FieldCount + 3)
+        {
             Selected = selection;
+            if (selection < FieldCount) IndicatorRow = selection;
+        }
         if (Tab == 3 && input.BindingIndex is 0 or 1) SelectedBinding = input.BindingIndex.Value;
+        if (Tab == 1 && Selected < AudioVolumeCount && input.SliderValue is { } volume)
+        {
+            volume = Math.Clamp(volume, 0, 100);
+            if (volume != Volume(Selected)) SetVolume(Selected, volume);
+            Message = null;
+            return false;
+        }
         if (input.NextTab)
         {
             Tab = (Tab + 1) % Tabs.Count;
             ConfigureScroll();
             Scroll.MoveTo(0);
-            Selected = SelectedBinding = 0;
+            Selected = SelectedBinding = IndicatorRow = 0;
             Message = null;
             return false;
         }
@@ -110,8 +209,11 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         {
             Selected = (Selected + (input.Down ? 1 : FieldCount + 2)) % (FieldCount + 3);
             if (Selected < FieldCount)
+            {
+                IndicatorRow = Selected;
                 Scroll.Reveal(36 + Selected * OptionsMenuLayout.RowHeight(Draft.UiScale),
                     OptionsMenuLayout.RowHeight(Draft.UiScale), OptionsMenuLayout.Viewport.Height);
+            }
             return false;
         }
         if (Selected < FieldCount)
@@ -121,11 +223,13 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
                 SelectedBinding = input.Right ? 1 : 0;
                 return false;
             }
-            if (Tab == 3 && input.Confirm)
+            if (IsDropdown(Selected) && input.Confirm)
+                OpenDropdown();
+            else if (Tab == 3 && input.Confirm)
             {
                 CapturingKey = true;
                 captureReleased = false;
-                Message = "Release keys, then press a new key. ESC cancels; Delete clears an alternate.";
+                Message = "Release keys and mouse, then choose an input. ESC cancels; Delete clears an alternate.";
             }
             else if (input.Left != input.Right || input.Confirm)
                 Adjust(input.Left ? -1 : 1);
@@ -138,22 +242,153 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
                     if (Draft.Display != Current.Display) PreviewRemaining = TimeSpan.FromSeconds(15);
                     else Commit();
                     break;
-                case 1: Draft = new(); TextElapsed = TimeSpan.Zero; Message = "Defaults selected. Apply to save."; break;
-                case 2: Cancel(); return true;
+                case 1: RestoreTabDefaults(); break;
+                case 2: return RequestClose();
             }
         }
+        return false;
+    }
+
+    private void RestoreTabDefaults()
+    {
+        var defaults = new AppSettings();
+        Draft = Tab switch
+        {
+            0 => Draft with { Display = defaults.Display },
+            1 => Draft with
+            {
+                Master = defaults.Master, Music = defaults.Music, Ambient = defaults.Ambient,
+                Effects = defaults.Effects, Combat = defaults.Combat, Monster = defaults.Monster,
+                MuteUnfocused = defaults.MuteUnfocused
+            },
+            2 => Draft with
+            {
+                PauseUnfocused = defaults.PauseUnfocused, ScreenShake = defaults.ScreenShake,
+                Dialogue = defaults.Dialogue
+            },
+            3 => Draft with
+            {
+                MoveUp = defaults.MoveUp, MoveLeft = defaults.MoveLeft,
+                MoveDown = defaults.MoveDown, MoveRight = defaults.MoveRight,
+                InteractKey = defaults.InteractKey, InteractAlternateKey = defaults.InteractAlternateKey,
+                InteractAlternateMouse = defaults.InteractAlternateMouse,
+                PauseKey = defaults.PauseKey, PauseAlternateKey = defaults.PauseAlternateKey,
+                PauseAlternateMouse = defaults.PauseAlternateMouse
+            },
+            _ => throw new InvalidOperationException("Unknown Options tab.")
+        };
+        if (Tab == 2) TextElapsed = TimeSpan.Zero;
+        Message = "Tab defaults selected. Apply to save.";
+    }
+
+    private bool RequestClose()
+    {
+        if (!IsDirty) { Cancel(); return true; }
+        ConfirmingDiscard = true;
+        DiscardChoice = 0; // Keep Editing is the safe default.
+        HoveredModalAction = null;
         return false;
     }
 
     private void ConfigureScroll() =>
         Scroll.Configure(OptionsMenuLayout.ContentHeight(this), OptionsMenuLayout.Viewport.Height);
 
-    public void Capture(IReadOnlyList<Keys> keys)
+    private void OpenDropdown()
+    {
+        DropdownRow = Selected;
+        DropdownChoice = Tab == 2 ? (int)Draft.Dialogue
+            : Selected == 0 ? (int)Draft.Display.Mode : Enumerable.Range(0, AppSettings.Resolutions.Count)
+            .First(i => AppSettings.Resolutions[i] == (Draft.Display.Width, Draft.Display.Height));
+        Scroll.Reveal(36 + Selected * OptionsMenuLayout.RowHeight(Draft.UiScale),
+            OptionsMenuLayout.RowHeight(Draft.UiScale), OptionsMenuLayout.Viewport.Height);
+        DropdownFirst = 0;
+        RevealDropdownChoice();
+    }
+
+    private void CloseDropdown()
+    {
+        DropdownRow = null;
+        HoveredChoice = null;
+    }
+
+    private void RevealDropdownChoice()
+    {
+        int visible = OptionsMenuLayout.DropdownVisibleCount(this);
+        DropdownFirst = Math.Clamp(DropdownFirst, Math.Max(0, DropdownChoice - visible + 1), DropdownChoice);
+        DropdownFirst = Math.Min(DropdownFirst, Math.Max(0, DropdownCount - visible));
+    }
+
+    private void UpdateDropdown(InputFrame input)
+    {
+        if (input.ChoiceIndex is { } choice)
+        {
+            if (choice < 0 || choice >= DropdownCount) return;
+            DropdownChoice = choice;
+        }
+        else if (input.ScrollPosition is { } position)
+        {
+            int visible = OptionsMenuLayout.DropdownVisibleCount(this);
+            DropdownFirst = Math.Clamp(position, 0, Math.Max(0, DropdownCount - visible));
+            DropdownChoice = Math.Clamp(DropdownChoice, DropdownFirst, DropdownFirst + visible - 1);
+        }
+        else if (input.Up != input.Down || input.Left != input.Right)
+        {
+            int direction = input.Down || input.Right ? 1 : -1;
+            DropdownChoice = (DropdownChoice + direction + DropdownCount) % DropdownCount;
+            RevealDropdownChoice();
+        }
+        else if (input.ScrollDelta != 0)
+        {
+            int visible = OptionsMenuLayout.DropdownVisibleCount(this);
+            DropdownFirst = Math.Clamp(DropdownFirst + Math.Sign(input.ScrollDelta), 0, Math.Max(0, DropdownCount - visible));
+            DropdownChoice = Math.Clamp(DropdownChoice, DropdownFirst, DropdownFirst + visible - 1);
+        }
+        if (!input.Confirm) return;
+        if (Tab == 2)
+        {
+            Draft = Draft with { Dialogue = (DialogueSpeed)DropdownChoice };
+            TextElapsed = TimeSpan.Zero;
+        }
+        else if (DropdownRow == 0)
+            Draft = Draft with { Display = Draft.Display with { Mode = (WindowMode)DropdownChoice } };
+        else
+        {
+            var size = AppSettings.Resolutions[DropdownChoice];
+            Draft = Draft with { Display = Draft.Display with { Width = size.Width, Height = size.Height } };
+        }
+        Message = null;
+        CloseDropdown();
+    }
+
+    public void Capture(IReadOnlyList<Keys> keys, MouseState mouse = default)
     {
         if (!CapturingKey) return;
-        if (keys.Count == 0) { captureReleased = true; return; }
+        bool left = mouse.LeftButton == ButtonState.Pressed;
+        bool right = mouse.RightButton == ButtonState.Pressed;
+        if (keys.Count == 0 && !left && !right) { captureReleased = true; return; }
         if (!captureReleased) return;
         if (keys.Contains(Keys.Escape)) { CapturingKey = false; Message = "Binding unchanged."; return; }
+        if (left || right)
+        {
+            if (keys.Count != 0 || left && right) { Message = "Choose one key or mouse button."; return; }
+            var mouseAction = ControlActions[Selected];
+            if (SelectedBinding != 1 || mouseAction is not (ControlAction.Interact or ControlAction.PauseBack))
+            {
+                Message = "Mouse buttons are supported in the two action alternates.";
+                return;
+            }
+            var button = left ? MouseBinding.Left : MouseBinding.Right;
+            foreach (var other in ControlActions)
+                if (other != mouseAction && Draft.Bindings.Get(other).AlternateMouse == button)
+                {
+                    Message = $"Already used by {ActionLabel(other)} (ALTERNATE).";
+                    return;
+                }
+            Draft = Draft.WithMouseBinding(mouseAction, button);
+            CapturingKey = false;
+            Message = "Binding changed. Apply to save.";
+            return;
+        }
         if (keys.Count != 1 || !AppSettings.ValidKey(keys[0])) { Message = "Choose one supported key."; return; }
         Keys key = keys[0];
         var action = ControlActions[Selected];
@@ -192,7 +427,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         return result;
     }
 
-    public void RejectDisplay(string reason)
+    public void RejectDisplay(string? reason)
     {
         PreviewRemaining = TimeSpan.Zero;
         Draft = Draft with { Display = Current.Display };
@@ -206,7 +441,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             save?.Invoke(Draft);
             Current = Draft;
             PreviewRemaining = TimeSpan.Zero;
-            Message = "Options saved.";
+            Message = null;
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
@@ -214,10 +449,26 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         }
     }
 
+    private void SetVolume(int row, int value)
+    {
+        value = Math.Clamp(value, 0, 100);
+        Draft = row switch
+        {
+            0 => Draft with { Master = value }, 1 => Draft with { Music = value },
+            2 => Draft with { Ambient = value }, 3 => Draft with { Effects = value },
+            4 => Draft with { Combat = value }, 5 => Draft with { Monster = value },
+            _ => throw new ArgumentOutOfRangeException(nameof(row))
+        };
+        RequestedTone = row switch
+        {
+            1 => AudioChannel.Music, 2 => AudioChannel.Ambient,
+            4 => AudioChannel.Combat, 5 => AudioChannel.Monster, _ => AudioChannel.Effects
+        };
+    }
+
     private void Adjust(int direction)
     {
         int Cycle(int value, int count) => (value + direction + count) % count;
-        int Volume(int value) => Math.Clamp(value + direction * 5, 0, 100);
         if (Tab == 0)
         {
             switch (Selected)
@@ -229,28 +480,24 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
                     var size = choices[Cycle(index, choices.Count)];
                     Draft = Draft with { Display = Draft.Display with { Width = size.Width, Height = size.Height } };
                     break;
-                case 2: Draft = Draft with { UiScale = 100 + 25 * Cycle((Draft.UiScale - 100) / 25, 3) }; break;
             }
         }
         else if (Tab == 1)
         {
-            Draft = Selected switch
+            if (Selected < AudioVolumeCount) SetVolume(Selected, Volume(Selected) + direction * 5);
+            else
             {
-                0 => Draft with { Master = Volume(Draft.Master) },
-                1 => Draft with { Music = Volume(Draft.Music) },
-                2 => Draft with { Ambient = Volume(Draft.Ambient) },
-                3 => Draft with { Effects = Volume(Draft.Effects) },
-                _ => Draft with { MuteUnfocused = !Draft.MuteUnfocused }
-            };
-            RequestedTone = Selected switch { 1 => AudioChannel.Music, 2 => AudioChannel.Ambient, _ => AudioChannel.Effects };
+                Draft = Draft with { MuteUnfocused = !Draft.MuteUnfocused };
+                RequestedTone = AudioChannel.Effects;
+            }
         }
         else if (Tab == 2)
         {
             switch (Selected)
             {
                 case 0: Draft = Draft with { PauseUnfocused = !Draft.PauseUnfocused }; break;
-                case 1: Draft = Draft with { Dialogue = (DialogueSpeed)Cycle((int)Draft.Dialogue, 4) }; TextElapsed = TimeSpan.Zero; break;
-                case 2: TextElapsed = TimeSpan.Zero; break;
+                case 1: Draft = Draft with { ScreenShake = !Draft.ScreenShake }; break;
+                case 2: Draft = Draft with { Dialogue = (DialogueSpeed)Cycle((int)Draft.Dialogue, 4) }; TextElapsed = TimeSpan.Zero; break;
             }
         }
         Message = null;
@@ -259,11 +506,13 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
     public IReadOnlyList<(string Label, string Value)> Fields => Tab switch
     {
         0 => new[] { ("WINDOW MODE", Draft.Display.Mode.ToString()),
-            ("RESOLUTION", $"{Draft.Display.Width} X {Draft.Display.Height}"), ("UI / TEXT SIZE", $"{Draft.UiScale} PERCENT") },
+            ("RESOLUTION", $"{Draft.Display.Width} X {Draft.Display.Height}") },
         1 => new[] { ("MASTER", $"{Draft.Master}"), ("MUSIC", $"{Draft.Music}"),
-            ("AMBIENT", $"{Draft.Ambient}"), ("SOUND EFFECTS", $"{Draft.Effects}"), ("MUTE WHEN UNFOCUSED", Draft.MuteUnfocused ? "ON" : "OFF") },
+            ("AMBIENT", $"{Draft.Ambient}"), ("SOUND EFFECTS", $"{Draft.Effects}"),
+            ("COMBAT", $"{Draft.Combat}"), ("MONSTER", $"{Draft.Monster}"),
+            ("MUTE WHEN UNFOCUSED", Draft.MuteUnfocused ? "ON" : "OFF") },
         2 => new[] { ("PAUSE WHEN UNFOCUSED", Draft.PauseUnfocused ? "ON" : "OFF"),
-            ("DIALOGUE TEXT SPEED", Draft.Dialogue.ToString()), ("REPLAY TEXT PREVIEW", "ENTER") },
+            ("SCREEN SHAKE", Draft.ScreenShake ? "ON" : "OFF"), ("DIALOGUE TEXT SPEED", Draft.Dialogue.ToString()) },
         _ => ControlActions.Select(action => (ActionLabel(action), KeyLabel(Draft.Bindings.Get(action).Primary))).ToArray()
     };
 }

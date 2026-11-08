@@ -29,7 +29,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
     public PawnShopGame()
     {
         var store = new SettingsStore(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RummageHollow", "settings.json"));
+            "PickersHollow", "settings.json"));
         var settings = store.Load(out startupWarning);
         flow = new(settings, store.Save);
         graphics = new GraphicsDeviceManager(this)
@@ -64,12 +64,13 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
             input.Bindings = appliedInputSettings.Bindings;
         }
         bool capturing = flow.Screen == Screen.Options && flow.Options.CapturingKey;
-        var frame = input.Read(IsActive);
+        var mouse = Mouse.GetState();
+        var frame = input.Read(mouse, IsActive);
         var bounds = GraphicsDevice.PresentationParameters;
-        var click = pointer.Read(flow, Mouse.GetState(), IsActive, Window.ClientBounds.Width, Window.ClientBounds.Height,
+        var click = pointer.Read(flow, mouse, IsActive, Window.ClientBounds.Width, Window.ClientBounds.Height,
             bounds.BackBufferWidth, bounds.BackBufferHeight);
         if (click != default) frame = click; // One UI intent per frame; pointer and keyboard cannot double-activate.
-        if (capturing && IsActive) flow.Options.Capture(input.State.GetPressedKeys());
+        if (capturing && IsActive) flow.Options.Capture(input.State.GetPressedKeys(), mouse);
         flow.Update(capturing ? default : frame, gameTime.ElapsedGameTime, IsActive);
         if (flow.Screen == Screen.Options && startupWarning is { } warning)
         {
@@ -117,6 +118,10 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
     {
         // Retain the desktop size: CurrentDisplayMode can change in exclusive fullscreen.
         var desktop = desktopSize;
+        int width = display.Mode == WindowMode.Borderless ? desktop.Width : display.Width;
+        int height = display.Mode == WindowMode.Borderless ? desktop.Height : display.Height;
+        if (width < AppSettings.MinimumWidth || height < AppSettings.MinimumHeight)
+            throw new ArgumentException("Display resolution must be at least 1280x720.");
         if (display.Mode == WindowMode.Windowed && (display.Width > desktop.Width || display.Height > desktop.Height))
             throw new ArgumentException("Window exceeds the desktop.");
         if (display.Mode == WindowMode.Fullscreen && !GraphicsAdapter.DefaultAdapter.SupportedDisplayModes
@@ -125,8 +130,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         graphics.HardwareModeSwitch = display.Mode == WindowMode.Fullscreen;
         graphics.IsFullScreen = display.Mode != WindowMode.Windowed;
         Window.IsBorderless = display.Mode == WindowMode.Borderless;
-        graphics.PreferredBackBufferWidth = display.Mode == WindowMode.Borderless ? desktop.Width : display.Width;
-        graphics.PreferredBackBufferHeight = display.Mode == WindowMode.Borderless ? desktop.Height : display.Height;
+        graphics.PreferredBackBufferWidth = width;
+        graphics.PreferredBackBufferHeight = height;
         graphics.ApplyChanges();
         Window.AllowUserResizing = false;
     }

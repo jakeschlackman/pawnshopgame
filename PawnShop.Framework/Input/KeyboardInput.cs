@@ -15,8 +15,12 @@ public sealed class KeyboardInput
         return Read(keys, active);
     }
 
+    public InputFrame Read(MouseState mouse, bool active) => Read(Keyboard.GetState(), mouse, active);
+
     // Device-independent overload lets headless tests exercise the actual action mapping.
-    public InputFrame Read(KeyboardState keys, bool active)
+    public InputFrame Read(KeyboardState keys, bool active) => Read(keys, default, active);
+
+    public InputFrame Read(KeyboardState keys, MouseState mouse, bool active)
     {
         bool ready = active && wasActive;
         State = keys;
@@ -24,8 +28,9 @@ public sealed class KeyboardInput
         if (Bindings.MoveUp.IsDown(keys)) held |= InputButtons.Up;
         if (Bindings.MoveDown.IsDown(keys)) held |= InputButtons.Down;
         if (Bindings.Interact.IsDown(keys) || keys.IsKeyDown(Keys.Enter) || keys.IsKeyDown(Keys.Space)) held |= InputButtons.Confirm;
-        if (Bindings.PauseBack.IsDown(keys) || keys.IsKeyDown(Keys.Escape)) held |= InputButtons.Cancel;
-        if (Bindings.Interact.IsDown(keys)) held |= InputButtons.Interact;
+        if (Bindings.PauseBack.IsDown(keys, mouse) || keys.IsKeyDown(Keys.Escape)) held |= InputButtons.Cancel;
+        // Mouse confirmation stays with UI hit testing; a blank click must not activate a menu.
+        if (Bindings.Interact.IsDown(keys, mouse)) held |= InputButtons.Interact;
         if (Bindings.MoveLeft.IsDown(keys)) held |= InputButtons.Left;
         if (Bindings.MoveRight.IsDown(keys)) held |= InputButtons.Right;
         if (keys.IsKeyDown(Keys.Tab)) held |= InputButtons.NextTab;

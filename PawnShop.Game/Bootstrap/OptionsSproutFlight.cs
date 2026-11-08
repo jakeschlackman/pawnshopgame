@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using PawnShop.Framework.Rendering;
 
 namespace PawnShop.Game.Bootstrap;
@@ -12,6 +13,8 @@ public sealed class OptionsSproutFlight
     private TimeSpan remainingPoint;
     private TimeSpan flightElapsed;
     public OptionsSproutPhase Phase { get; private set; }
+    public bool IsReturning { get; private set; }
+    public Vector2 ReturnAnchor { get; private set; }
     public bool IsBusy => Phase is not (OptionsSproutPhase.None or OptionsSproutPhase.Arrived);
     public float Progress => (float)(flightElapsed.TotalSeconds / PanoramaCamera.TransitionDuration.TotalSeconds);
 
@@ -25,14 +28,30 @@ public sealed class OptionsSproutFlight
     public void Start()
     {
         if (IsBusy) return;
+        IsReturning = false;
         remainingPoint = animator.Remaining;
         flightElapsed = TimeSpan.Zero;
         Phase = OptionsSproutPhase.FinishingPoint;
     }
 
+    public void StartReturn(Vector2 anchor)
+    {
+        if (IsBusy) return;
+        ReturnAnchor = anchor;
+        IsReturning = true;
+        remainingPoint = flightElapsed = TimeSpan.Zero;
+        Phase = OptionsSproutPhase.Flying;
+        // Keep the current pointing frame/clock; no new takeoff or restart.
+    }
+
+    public Vector2 GetAnchor(Vector2 menuAnchor, Vector2 firstOptionAnchor) => Vector2.SmoothStep(
+        IsReturning ? ReturnAnchor : menuAnchor, IsReturning ? menuAnchor : firstOptionAnchor, Progress);
+
     public void Reset()
     {
         Phase = OptionsSproutPhase.None;
+        IsReturning = false;
+        ReturnAnchor = Vector2.Zero;
         remainingPoint = flightElapsed = TimeSpan.Zero;
     }
 

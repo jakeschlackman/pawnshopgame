@@ -1,4 +1,28 @@
-# Primary and alternate keyboard controls
+# Primary and alternate controls
+
+## Mouse action alternates - 2026-11-08
+
+Current action labels/defaults: Interact / Attack is Z/Left Click; Back / Block is
+X/Right Click. Both primary keys remain keyboard inputs. KeyBinding carries an
+optional alternate MouseBinding (None/Left/Right); AppSettings stores separate
+keyboard and mouse alternate fields and rejects two inputs in one slot or duplicate
+mouse assignments. Selecting an action alternate can capture a key or mouse click
+after releasing the activation input. Escape cancels; Delete clears both kinds.
+Keyboard/mouse action edges merge before dispatch and synchronize on focus changes.
+UI hit testing still owns mouse confirmation, preventing blank clicks from
+activating focused buttons. Capturing suppresses normal action dispatch.
+
+Older Enter/Escape defaults migrate in memory to mouse defaults with defaults
+marker 2. Custom keys and deliberate clears remain intact; current mouse mappings
+round-trip through the existing settings store. Restore Defaults chooses the new
+pairs. Actual combat attack/block mechanics remain future work.
+
+Separate-output solution build passed with zero warnings/errors; the existing
+regression runner passed 64/64, including new mouse edge/focus, pause/resume,
+interaction/dialogue, capture/conflict, draft and persistence checks. No game was
+launched; in-game input feel and new label wrapping remain manual checks.
+
+## Earlier keyboard implementation
 
 Date: 2026-11-05. Requested: rename Pause to Pause / Back, permit movement
 rebinding and support primary/alternate keys with WASD/arrow movement defaults.
@@ -7,8 +31,14 @@ rebinding and support primary/alternate keys with WASD/arrow movement defaults.
 
 Controls has six rows: Interact, Pause / Back, Move Up, Move Left, Move Down,
 Move Right. All have primary and alternate slots. Default movement pairs are
-W/Up, A/Left, S/Down, D/Right. Interact defaults to Z and Pause / Back to X;
-their alternates start unbound.
+W/Up, A/Left, S/Down, D/Right. As of 2026-11-08, Interact defaults to Z/Enter and
+Pause / Back to X/Escape. Missing alternate fields receive these defaults when
+nonconflicting; custom mappings and deliberate clears in current saves are retained.
+
+Follow-up: old files with Z/X primaries and unbound alternates now adopt
+Enter/Escape on load too. The additive ActionAlternateDefaultsVersion marker is
+written through Apply, allowing subsequent deliberate clears to remain unbound.
+Custom mappings are retained; loading does not rewrite the original settings.
 
 Select a row with the vertical direction controls and a slot with the horizontal
 direction controls, or click a slot. Interact/Enter begins capture. Release keys,

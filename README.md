@@ -83,19 +83,21 @@ that convention; historical eight-facing bases and NESW candidates remain intact
   and NPC footprints. A newly pressed axis wins diagonal ties; otherwise the last
   axis persists. West mirrors East. The room shows a four-phase placeholder walk
   with jacket, helmet, backpack and wrench, sharing one frame clock and feet pivot.
-- Z near the shop visitor: talk. The prompt appears within 48 logical pixels;
+- Z or Left Click near the shop visitor: talk. The prompt appears within 48 logical pixels;
   clicking the NPC also requires proximity. Z reveals text, then advances or
   selects on a later press. W/S or Up/Down selects responses; X leaves dialogue.
-- X in the room: pause. X resumes or backs out of the current menu. Movement is
+- X or Right Click in the room: pause. Either resumes or backs out of the current menu. Movement is
   captured during selection, dialogue, pause, Options and confirmation screens.
 - Z activates ordinary menus. Enter/Space remain menu-confirm aliases, Escape
   remains a back/pause alias, and nearby Tab Talk remains a legacy shortcut.
   The old Space-to-ring-bell room shortcut has been removed.
 
 These are the default controls. Both primary and alternate bindings are editable
-in Options. Direction bindings also navigate menus; Interact confirms and
-Pause / Back cancels throughout the UI. Enter/Space confirm and Escape back remain
+in Options. Direction bindings also navigate menus; keyboard Interact / Attack confirms and
+Back / Block cancels throughout the UI. Enter/Space confirm and Escape back remain
 available after rebinding.
+Left Click confirms UI targets through hit testing; blank clicks never activate
+the focused button. Attack/block mechanics are not implemented by these bindings.
 
 Continue is visibly unavailable; focus it to read the reason.
 Gameplay saves are not implemented. Returning to title or exiting during a session
@@ -107,14 +109,16 @@ Losing application focus pauses the room by default; focus return requires expli
 
 Options is available from the title and pause menus. Tab cycles Display, Audio,
 Comfort, and Controls; Up/Down selects a row; Left/Right adjusts it; Interact or
-Enter activates buttons. Pause / Back or Escape leaves Options, discarding
-unapplied edits. During key capture, Escape cancels. The active session stays paused
+Enter activates buttons. Back / Block or Escape requests leaving Options.
+Unapplied changes open a matching confirmation with Keep Editing (the default)
+and Discard Changes; Escape/right-click keeps editing. Clean exits leave immediately.
+During key capture, Escape cancels. The active session stays paused
 while Options is open. Tabs and Apply / Restore Defaults / Back stay fixed. Scroll
 the inner content with the mouse wheel or drag its scrollbar; keyboard navigation
 reveals the selected field. Tab changes reset scrolling. The complete decorative
 panel uses the supplied source PNG; control designs remain provisional.
 
-- Display: Windowed, Borderless, or Fullscreen; presets from 960x540 through
+- Display: Windowed, Borderless, or Fullscreen; presets from 1280x720 through
   3840x2160 (4K), including 16:10 and ultrawide choices; UI/text size at 100, 125,
   or 150 percent. Manual window resizing and maximizing are disabled. Borderless
   uses the desktop size; the chosen resolution applies to windowed/fullscreen.
@@ -124,30 +128,39 @@ panel uses the supplied source PNG; control designs remain provisional.
   tracks yet. Audio categories multiply their volume by Master.
 - Comfort: Pause When Unfocused and Slow/Normal/Fast/Instant dialogue text speed,
   with a live text preview. The visitor conversation uses this preference.
-- Controls: Interact, **Pause / Back**, Move Up, Move Left, Move Down and Move Right
+- Controls: **Interact / Attack**, **Back / Block**, Move Up, Move Left, Move Down and Move Right
   each have **Primary** and **Alternate** columns. Select a row and use Left/Right
-  to choose a slot, or click a slot, then activate it. Release the activation key
-  before pressing the replacement. Escape cancels capture; Delete/Backspace clears
+  to choose a slot, or click a slot, then activate it. Release keys and mouse
+  before choosing the replacement. Action alternates accept Left or Right Click
+  as well as keys; primaries and movement slots remain keyboard-only.
+  Escape cancels capture; Delete/Backspace clears
   an alternate. A primary is required. Duplicate keys across either column are
   rejected with the conflicting action and slot. Holding both bindings performs
   one action and does not double movement speed.
-- Restore Defaults chooses Z for Interact, X for Pause / Back, and W/A/S/D with
-  Up/Left/Down/Right arrows as movement alternates. Interact and Pause / Back start
-  with no alternate. Enter/Space are reserved for confirmation, Escape for Back,
+- Restore Defaults chooses Z/Left Click for Interact / Attack, X/Right Click for Back / Block, and W/A/S/D with
+  Up/Left/Down/Right arrows as movement alternates. Both binding columns share the
+  same walnut-and-brass button style. Enter/Space are reserved for confirmation, Escape for Back,
   Tab for categories, and Delete/Backspace for clearing alternates.
 - Older settings gain the movement defaults in memory. Legacy Space/Escape
   defaults adopt Z/X. Custom action keys are retained; if they occupy a new movement
   default, movement uses its remaining default or an unused I/J/K/L key and shows
   a review message. The original file is preserved until Apply. Newly saved
   bindings, including deliberate Space/Escape choices, round-trip unchanged.
+  Missing action alternates receive Left/Right Click unless they conflict with an
+  existing binding. Old default Enter/Escape alternates also adopt these mouse defaults.
+  A saved defaults marker preserves deliberate clears made after upgrading;
+  custom primary/alternate mappings remain unchanged.
 
 Apply saves preferences. Display changes first require confirmation within 15
 seconds; X/Escape, timeout, or losing focus reverts them. Restore Defaults edits all
 categories and still requires Apply. UI size, audio, and text speed preview while
 editing; leaving without Apply restores the saved values.
 
-Application preferences live in `%LOCALAPPDATA%/RummageHollow/settings.json`,
-independently of game sessions. Writes use a temporary file and replacement with
+Application preferences live in `%LOCALAPPDATA%/PickersHollow/settings.json`,
+independently of game sessions. Only this folder is used; the older RummageHollow
+folder is not read or migrated. A missing settings file is created with defaults
+at launch. If creation fails, defaults are used in memory and Options shows a warning.
+Writes use a temporary file and replacement with
 a `.bak` backup. Invalid/unsupported files load defaults and show a warning in
 Options; the original remains untouched until Apply. A failed write retains the
 current preferences and reverts any display preview. An unavailable saved display
@@ -206,7 +219,8 @@ an unmodified 2106x747 copy of the supplied single-pass illustration. The older
 Rummage Hollow artwork remains preserved but is no longer loaded. The supplied
 `logo-pickers-hollow.png` replaces the title text as an independent transparent
 overlay; the main menu uses Silkscreen, title badge/help uses Pixelify Sans Bold,
-and Options uses Atkinson Hyperlegible through the font catalog. See the
+and Options uses Jersey 25 for header tabs and Atkinson Hyperlegible for other
+text through the font catalog. See the
 [asset record](PawnShop.Game/Content/TitleScreen/README.md) for provenance and hash.
 Normal build/publish copies PNGs beside the executable; runtime resolves them
 relative to the executable. PNG loading is unchanged; fonts compile to XNB using
@@ -228,10 +242,10 @@ The title and Options UI retain separate, contained 1920x1080 and 1280x720 canva
 their layout and mouse coordinates do not pan with the background. Transparent
 UI targets composite over the panorama after switching back to the backbuffer.
 
-The default window is 1280x720. Resolution presets reach 3840x2160; users change
+The default/minimum window is 1280x720. Resolution presets reach 3840x2160; users change
 window size only through Options. Manual resizing and maximizing are disabled,
-including after display-mode changes. Existing preferences stay in the original
-`RummageHollow` settings directory so renaming the visible title loses no settings.
+including after display-mode changes. Preferences use only the `PickersHollow`
+settings directory, creating a default settings file when it is absent.
 TitleScreen owns its panorama texture, batches and UI target for the application
 lifetime and releases them on disposal. No gameplay camera behavior changed.
 
@@ -286,16 +300,29 @@ Options finishes the current pointing cycle, then Sprout floats upright to the
 first Display setting during the 0.8-second panorama pan. The Floating Point
 Right Loop continues throughout travel and arrival, without rotation or jet clips.
 Input is captured until arrival; Escape cancels and focus loss pauses the float.
+Leaving main-menu Options keeps Sprout visible and floats him from the selected
+setting back to the main menu's Options entry over the same 0.8-second pan.
+His pointing animation continues without restarting, and Options remains selected
+on arrival. Return travel captures input and freezes with focus loss.
 All frames are bundled locally; the game never calls PixelLab.
 
 ## Central font catalog
 
+Main-menu footer sayings live in
+`PawnShop.Game/Content/TitleScreen/title-sayings.json`. Edit the `sayings` array,
+keeping `version` at 1, then rebuild/restart. Each entry must be unique, one line,
+and 1-80 printable ASCII characters (the current font atlas's supported range).
+A random saying is chosen once on launch and shared with the Comfort tab's
+dialogue-speed preview. It stays fixed until the app restarts, including returns
+to the main menu and selection of unavailable entries. The saying uses Pixeloid Sans Bold through
+`TitleSaying` at 28 and fits to the available footer width when needed.
+
 `PawnShop.Game/Content/Fonts/fonts.json` maps names to compiled font assets and
 logical pixel line heights. It loads once at application startup. Current roles
 are `TitleMenu`, `TitleBadge`, `TitleHelp`, `OptionsHeading`, `OptionsBody`, and
-`OptionsHelp`. `TitleMenu` uses bundled Silkscreen Regular; title badge/help uses
-Pixelify Sans Bold. All Options text uses Atkinson Hyperlegible: Bold headings,
-Regular body/help, with point sampling for the new pixel-art Options canvas. Other renderers
+`OptionsHelp`. `TitleMenu` uses bundled Pixeloid Sans Bold, matching inner Options text; title badge/help uses
+Pixelify Sans Bold. Options header tabs/footer labels use Jersey 25; inner Options
+text uses Pixeloid Sans Bold, with point sampling for the pixel-art Options canvas. Other renderers
 retain point sampling. `Silkscreen` and `PixelifySansBold` are also available as
 general named entries. The title logo remains an image.
 

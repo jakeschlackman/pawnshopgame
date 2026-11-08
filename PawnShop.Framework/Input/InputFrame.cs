@@ -5,7 +5,8 @@ public enum InputButtons { None = 0, Up = 1, Down = 2, Confirm = 4, Cancel = 8, 
 public readonly record struct InputFrame(bool Up = false, bool Down = false, bool Confirm = false,
     bool Cancel = false, bool Interact = false, bool Left = false, bool Right = false, bool NextTab = false,
     int? SelectionIndex = null, int? TabIndex = null, string? TalkTargetId = null,
-    float MoveX = 0, float MoveY = 0, int? BindingIndex = null, int ScrollDelta = 0, int? ScrollPosition = null);
+    float MoveX = 0, float MoveY = 0, int? BindingIndex = null, int ScrollDelta = 0, int? ScrollPosition = null,
+    int? ChoiceIndex = null, int? SliderValue = null);
 
 public sealed class InputEdges
 {

@@ -12,6 +12,20 @@
 /processorParam:TextureFormat=Color
 /build:Fonts/PixelifySans-Bold.spritefont
 
+#begin Fonts/PixeloidSans-Bold.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/PixeloidSans-Bold.spritefont
+
+#begin Fonts/PixelifySans-SemiBold.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/PixelifySans-SemiBold.spritefont
+
 #begin Fonts/Silkscreen-Regular.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -32,3 +46,52 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Color
 /build:Fonts/AtkinsonHyperlegible-Bold.spritefont
+
+#begin Fonts/Jersey10-Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/Jersey10-Regular.spritefont
+
+#begin Fonts/GeistPixel-Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/GeistPixel-Regular.spritefont
+
+#begin Fonts/PressStart2P-Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/PressStart2P-Regular.spritefont
+
+#begin Fonts/NotJamSlabSerif11-Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/NotJamSlabSerif11-Regular.spritefont
+
+#begin Fonts/UpheavalPro.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/UpheavalPro.spritefont
+
+#begin Fonts/Phatone-Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/Phatone-Regular.spritefont
+
+#begin Fonts/Jersey25-Regular.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Fonts/Jersey25-Regular.spritefont

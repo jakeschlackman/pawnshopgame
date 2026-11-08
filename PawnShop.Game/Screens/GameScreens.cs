@@ -49,7 +49,7 @@ internal sealed class GameScreens : IDisposable
             {
                 if (flow.Screen == Screen.Options) options.Draw(flow.Options, title.DrawBackground);
                 else if (flow.Menu is { } departureMenu)
-                    title.Draw(departureMenu, flow.Options.Current.UiScale / 100f, flow.TitleSelector, drawSelector: false);
+                    title.Draw(departureMenu, flow.Options.Current.UiScale / 100f, flow.TitleSelector, flow.TitleSaying, drawSelector: false);
                 DrawOptionsFlight(flow);
                 return;
             }
@@ -57,9 +57,9 @@ internal sealed class GameScreens : IDisposable
             if (flow.Screen == Screen.Options)
             {
                 options.Draw(flow.Options, title.DrawBackground);
-                if (!flow.Options.Previewing) title.DrawSelector(flow.TitleSelector, options.SelectorAnchor(flow.Options));
+                if (!flow.Options.HasModal) title.DrawSelector(flow.TitleSelector, options.SelectorAnchor(flow.Options));
             }
-            else if (flow.Menu is { } titleMenu) title.Draw(titleMenu, flow.Options.Current.UiScale / 100f, flow.TitleSelector);
+            else if (flow.Menu is { } titleMenu) title.Draw(titleMenu, flow.Options.Current.UiScale / 100f, flow.TitleSelector, flow.TitleSaying);
             return;
         }
         if (flow.Screen == Screen.Options)
@@ -93,10 +93,9 @@ internal sealed class GameScreens : IDisposable
     private void DrawOptionsFlight(ApplicationFlow flow)
     {
         var flight = flow.OptionsFlight;
-        var start = title.SelectorAnchor(2, "Options", flow.Options.Current.UiScale / 100f);
-        var end = options.SelectorAnchor(flow.Options, first: true);
-        float progress = MathHelper.SmoothStep(0, 1, flight.Progress);
-        title.DrawSelector(flow.TitleSelector, Vector2.Lerp(start, end, progress));
+        var menuAnchor = title.SelectorAnchor(2, "Options", flow.Options.Current.UiScale / 100f);
+        var optionAnchor = options.SelectorAnchor(flow.Options, first: true);
+        title.DrawSelector(flow.TitleSelector, flight.GetAnchor(menuAnchor, optionAnchor));
     }
 
     public void Dispose()

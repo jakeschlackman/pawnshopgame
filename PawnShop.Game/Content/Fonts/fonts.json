@@ -3,11 +3,17 @@
   "fonts": {
     "PixelifySansBold": { "asset": "Fonts/PixelifySans-Bold", "size": 24 },
     "Silkscreen": { "asset": "Fonts/Silkscreen-Regular", "size": 24 },
-    "TitleMenu": { "asset": "Fonts/Silkscreen-Regular", "size": 76 },
+    "TitleMenu": { "asset": "Fonts/PixeloidSans-Bold", "size": 76 },
     "TitleBadge": { "asset": "Fonts/PixelifySans-Bold", "size": 28 },
     "TitleHelp": { "asset": "Fonts/PixelifySans-Bold", "size": 28 },
-    "OptionsHeading": { "asset": "Fonts/AtkinsonHyperlegible-Bold", "size": 36 },
-    "OptionsBody": { "asset": "Fonts/AtkinsonHyperlegible-Regular", "size": 24 },
-    "OptionsHelp": { "asset": "Fonts/AtkinsonHyperlegible-Regular", "size": 22 }
+    "TitleSaying": { "asset": "Fonts/PixeloidSans-Bold", "size": 28 },
+    "OptionsHeading": { "asset": "Fonts/PixeloidSans-Bold", "size": 36 },
+    "OptionsLabel": { "asset": "Fonts/PixeloidSans-Bold", "size": 26 },
+    "OptionsDropdownLabel": { "asset": "Fonts/PixeloidSans-Bold", "size": 26 },
+    "OptionsBody": { "asset": "Fonts/PixeloidSans-Bold", "size": 24 },
+    "OptionsDropdown": { "asset": "Fonts/PixeloidSans-Bold", "size": 24 },
+    "OptionsHelp": { "asset": "Fonts/PixeloidSans-Bold", "size": 20 },
+    "OptionsTab": { "asset": "Fonts/Jersey25-Regular", "size": 24 },
+    "OptionsAction": { "asset": "Fonts/Jersey25-Regular", "size": 16 }
   }
 }

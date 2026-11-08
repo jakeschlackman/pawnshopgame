@@ -39,15 +39,16 @@ internal static partial class RegressionTests
     {
         string directory = Path.Combine(AppContext.BaseDirectory, "Content", "Fonts");
         var catalog = FontCatalog.Load(Path.Combine(directory, "fonts.json"));
-        foreach (string role in new[] { "PixelifySansBold", "Silkscreen", "TitleMenu", "TitleBadge", "TitleHelp",
-            "OptionsHeading", "OptionsBody", "OptionsHelp" })
+        foreach (string role in new[] { "PixelifySansBold", "Silkscreen", "TitleMenu", "TitleBadge", "TitleHelp", "TitleSaying",
+            "OptionsHeading", "OptionsLabel", "OptionsDropdownLabel", "OptionsBody", "OptionsDropdown", "OptionsHelp", "OptionsTab", "OptionsAction" })
         {
             var font = catalog.Get(role);
             string expectedAsset = role switch
             {
-                "TitleMenu" or "Silkscreen" => "Fonts/Silkscreen-Regular",
-                "OptionsHeading" => "Fonts/AtkinsonHyperlegible-Bold",
-                "OptionsBody" or "OptionsHelp" => "Fonts/AtkinsonHyperlegible-Regular",
+                "Silkscreen" => "Fonts/Silkscreen-Regular",
+                "TitleMenu" or "TitleSaying" or "OptionsHeading" or "OptionsLabel" or "OptionsDropdownLabel" or "OptionsBody"
+                    or "OptionsDropdown" or "OptionsHelp" => "Fonts/PixeloidSans-Bold",
+                "OptionsTab" or "OptionsAction" => "Fonts/Jersey25-Regular",
                 _ => "Fonts/PixelifySans-Bold"
             };
             Check(font.Asset == expectedAsset && font.Size > 0);
@@ -56,7 +57,16 @@ internal static partial class RegressionTests
             Check(bytes.Length > 10 && bytes[0] == 'X' && bytes[1] == 'N' && bytes[2] == 'B', "Missing compiled MonoGame font.");
         }
         Check(File.ReadAllText(Path.Combine(directory, "OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
+        Check(File.ReadAllText(Path.Combine(directory, "Pixeloid-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
         Check(File.ReadAllText(Path.Combine(directory, "Silkscreen-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
         Check(File.ReadAllText(Path.Combine(directory, "AtkinsonHyperlegible-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
+        Check(File.ReadAllText(Path.Combine(directory, "Jersey10-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
+        Check(File.ReadAllText(Path.Combine(directory, "GeistPixel-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
+        Check(File.ReadAllText(Path.Combine(directory, "PressStart2P-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
+        Check(File.ReadAllText(Path.Combine(directory, "Jersey25-OFL.txt")).Contains("SIL OPEN FONT LICENSE"));
+        Check(File.ReadAllText(Path.Combine(directory, "UpheavalPro-License.txt")).Contains("Commercial use"));
+        Check(File.ReadAllBytes(Path.Combine(directory, "Phatone-License.pdf")).AsSpan(0, 4)
+            .SequenceEqual("%PDF"u8));
+        Check(File.ReadAllText(Path.Combine(directory, "NotJamSlabSerif11-CC0.txt")).Contains("CC0"));
     }
 }

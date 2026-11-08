@@ -36,6 +36,8 @@ internal static partial class RegressionTests
     internal static void Back(ApplicationFlow app) => Step(app, new(Cancel: true));
     internal static void Begin(ApplicationFlow app)
     {
+        if (app.OptionsFlight.IsBusy && app.OptionsFlight.IsReturning) FinishOptionsFlight(app);
+        app.Update(new(SelectionIndex: 0), TimeSpan.Zero); // Returning from Options keeps that title entry selected.
         Confirm(app);
         Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0);
         Confirm(app);
