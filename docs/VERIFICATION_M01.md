@@ -1,5 +1,27 @@
 # M00 baseline and M01 evidence
 
+## CLI build-worker lifetime - 2026-11-08
+
+After the user reported five .NET Hosts remaining after main-menu Exit, read-only
+process inspection identified all five as MSBuild.dll workers with nodeReuse:true,
+sharing an already-exited parent. No PawnShop.Game process remained. The user
+confirmed launching with dotnet run in a terminal. This identifies the surviving
+processes; the reported difference between Exit and window-close was not reproduced.
+
+Added Directory.Build.rsp with -nodeReuse:false so command-line builds release
+their worker nodes. README documents its scope and --no-build launches. No game
+runtime or shutdown code was changed; no process-killing logic was added to the
+game. Existing workers were stopped with dotnet build-server shutdown --msbuild.
+
+Verification: dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-restore
+--no-cache -p:UseSharedCompilation=false -p:OutputPath=bin/NotJamVerification/
+completed 68/68 headless checks. A parallel dotnet build PawnShopSimulator.sln
+--no-restore -m:4 -p:UseSharedCompilation=false
+-p:OutputPath=bin/NotJamVerification/ passed with zero warnings/errors. Process
+inspection after both commands found no dotnet.exe or PawnShop.Game.exe remaining.
+git diff --check passed. The game was not launched or controlled; the user's normal
+terminal launch followed by main-menu Exit remains a manual confirmation.
+
 Verification date: 2026-10-24. No commit, branch, remote, or publishing operations
 were performed. This record describes an uncommitted implementation.
 
