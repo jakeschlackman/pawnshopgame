@@ -1,0 +1,323 @@
+{
+  "version": 1,
+  "status": "completed_pending_visual_review",
+  "createdUtc": "2026-11-06T23:28:30Z",
+  "purpose": "Add native East walks using each approved South walk's existing Skeleton v3 motion; West mirrors East. Bounded batch of two East-only jobs; no paid retries or additional generation submitted.",
+  "jobs": [
+    {
+      "body": "male",
+      "arguments": {
+        "character_id": "79b48db4-483d-4fe3-94bd-74bcec89eab9",
+        "animation_group_id": "a6783f36-96da-47ca-98cf-9111a465f555",
+        "mode": "skeleton-v3",
+        "directions": [
+          "east"
+        ],
+        "action_description": "relaxed small-step walk",
+        "frame_count": 8
+      },
+      "receipt": "character: 79b48db4-483d-4fe3-94bd-74bcec89eab9\nanimation: relaxed small-step walk\nmode: skeleton-v3 (custom motion)\ndirections: east (1 jobs)\n  east: job f48b9ecf-c388-4cda-b491-f291f64449b2\ngroup: a6783f36-96da-47ca-98cf-9111a465f555\nframes: 8\ncost: 3 generations per direction\neta: about 3-5 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"79b48db4-483d-4fe3-94bd-74bcec89eab9\", mode=\"skeleton-v3\", action_description=\"relaxed small-step walk\", animation_group_id=\"a6783f36-96da-47ca-98cf-9111a465f555\", directions=[...])\n\nhint: get_character(character_id=\"79b48db4-483d-4fe3-94bd-74bcec89eab9\")",
+      "approval": "pending",
+      "completedSource": "east: https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/79b48db4-483d-4fe3-94bd-74bcec89eab9/animations/1c4fd3c3-02cc-4a70-b38e-bb362e4a12ce/east/{i}.png?t=1794007807812 (i=0..7)",
+      "export": "image_id: 434ad506-444e-4044-8836-2a2582283375\ncanvas: 640x80, 1 frame — a sheet of 8 frame(s) in 8 column(s) x 1 row(s) of 80x80, left to right\npalette (8): #e4a67eff x2096, #080202ff x1294, #be7e60ff x484, #955b43ff x85, #363031ff x72, #4c494eff x65, #5a2609ff x34, #f9ede3ff x28\ndownload https://api.pixellab.ai/mcp/pixel-tools/434ad506-444e-4044-8836-2a2582283375/: image.png, frames.png\nnext: split 434ad506-444e-4044-8836-2a2582283375 --grid 8x1",
+      "previewSource": "434ad506-444e-4044-8836-2a2582283375"
+    },
+    {
+      "body": "female",
+      "arguments": {
+        "character_id": "5cd54c3f-d34a-4f02-83ca-0e9a21966fe5",
+        "animation_group_id": "427b11f0-b2f3-40fb-aee5-74fb541f4783",
+        "mode": "skeleton-v3",
+        "directions": [
+          "east"
+        ],
+        "action_description": "relaxed small-step walk",
+        "frame_count": 8
+      },
+      "receipt": "character: 5cd54c3f-d34a-4f02-83ca-0e9a21966fe5\nanimation: relaxed small-step walk\nmode: skeleton-v3 (custom motion)\ndirections: east (1 jobs)\n  east: job 12e5602f-c31a-4754-a00a-801685f43570\ngroup: 427b11f0-b2f3-40fb-aee5-74fb541f4783\nframes: 8\ncost: 3 generations per direction\neta: about 3-5 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"5cd54c3f-d34a-4f02-83ca-0e9a21966fe5\", mode=\"skeleton-v3\", action_description=\"relaxed small-step walk\", animation_group_id=\"427b11f0-b2f3-40fb-aee5-74fb541f4783\", directions=[...])\n\nhint: get_character(character_id=\"5cd54c3f-d34a-4f02-83ca-0e9a21966fe5\")",
+      "approval": "pending",
+      "completedSource": "east: https://backblaze.pixellab.ai/file/pixellab-characters/131a077c-86a9-4e90-b57c-a9bb0b37d72b/5cd54c3f-d34a-4f02-83ca-0e9a21966fe5/animations/18f20456-f5c5-4f50-b78a-207b425eb1b4/east/{i}.png?t=1794007794772 (i=0..7)",
+      "export": "image_id: fb2b8652-734a-4b7f-ab62-4c4271ef15ca\ncanvas: 640x80, 1 frame — a sheet of 8 frame(s) in 8 column(s) x 1 row(s) of 80x80, left to right\npalette (8): #e4a67eff x1355, #080202ff x1194, #be7e60ff x685, #955b43ff x353, #211917ff x162, #363031ff x132, #4c494eff x54, #5a2609ff x39\ndownload https://api.pixellab.ai/mcp/pixel-tools/fb2b8652-734a-4b7f-ab62-4c4271ef15ca/: image.png, frames.png\nnext: split fb2b8652-734a-4b7f-ab62-4c4271ef15ca --grid 8x1",
+      "previewSource": "fb2b8652-734a-4b7f-ab62-4c4271ef15ca"
+    }
+  ],
+  "validation": [
+    {
+      "body": "male",
+      "path": "docs/ReviewAssets/male-east-walk-source.png",
+      "sha256": "DD27133B241729B2C5D7AAC986109148A03A3B055BA4C0BAF81F2EDD9CA50F44",
+      "dimensions": [
+        640,
+        80
+      ],
+      "frameCanvas": [
+        80,
+        80
+      ],
+      "crop": [
+        16,
+        10,
+        48,
+        64
+      ],
+      "status": "numeric_checks_pass_visual_approval_pending",
+      "frames": [
+        {
+          "frame": 1,
+          "bounds": [
+            17,
+            7,
+            31,
+            57
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 562,
+          "rgbaSha256": "112409DF8DBCFDAC151A710BB87F309FFFFA077F3EC81AC81CD09A6F9F89D4AF"
+        },
+        {
+          "frame": 2,
+          "bounds": [
+            17,
+            7,
+            30,
+            57
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 540,
+          "rgbaSha256": "52BE57CBD2D3CBAAF764FB8BC71FCB60B9E40A355E6AD9A363D1E2A7EFE28108"
+        },
+        {
+          "frame": 3,
+          "bounds": [
+            17,
+            6,
+            30,
+            56
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 507,
+          "rgbaSha256": "B9B9928387511B2DC0D769D97A4F84E9102EF05B8C8096F528FD7B948A3AF3F5"
+        },
+        {
+          "frame": 4,
+          "bounds": [
+            17,
+            6,
+            30,
+            56
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 520,
+          "rgbaSha256": "4ACF11A4FA07D96B3D1DE86E90157569B59366AF3AE19FB305335C9FD8108A54"
+        },
+        {
+          "frame": 5,
+          "bounds": [
+            17,
+            7,
+            31,
+            57
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 531,
+          "rgbaSha256": "8C998CBE677166E4396033074E96B4448CBC7E28E3275CF806D0FB1C43636BF5"
+        },
+        {
+          "frame": 6,
+          "bounds": [
+            17,
+            7,
+            30,
+            57
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 486,
+          "rgbaSha256": "AA0EBE42656D0FBAFADD2565AAEFE47050649810C9F26D47E6F377FE51E72749"
+        },
+        {
+          "frame": 7,
+          "bounds": [
+            17,
+            6,
+            30,
+            57
+          ],
+          "visibleHeight": 52,
+          "colors": 8,
+          "opaquePixels": 501,
+          "rgbaSha256": "096102526FF592F239FEA50210109FCC773B1B7896C4BEDAD4815C715C009448"
+        },
+        {
+          "frame": 8,
+          "bounds": [
+            17,
+            6,
+            30,
+            56
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 511,
+          "rgbaSha256": "AE6862603BC59A6C4FAC016C2EA29F5C70E9C4E959D54BD071461085CFE20E9C"
+        }
+      ],
+      "sourcePivot": [
+        40,
+        68
+      ],
+      "pivot": [
+        24,
+        58
+      ],
+      "notes": "Fixed clip crop from the contact-foot plane. No per-frame shift, scaling, or opaque-pixel removal. East body height 51-52 versus standing reference 50: visual review required."
+    },
+    {
+      "body": "female",
+      "path": "docs/ReviewAssets/female-east-walk-source.png",
+      "sha256": "9376181D4A363DEF31A251504E3D1A72A6EAA730418CFC7B604BBF4CCB93C9D7",
+      "dimensions": [
+        640,
+        80
+      ],
+      "frameCanvas": [
+        80,
+        80
+      ],
+      "crop": [
+        16,
+        11,
+        48,
+        64
+      ],
+      "status": "numeric_checks_pass_visual_approval_pending",
+      "frames": [
+        {
+          "frame": 1,
+          "bounds": [
+            17,
+            6,
+            31,
+            57
+          ],
+          "visibleHeight": 52,
+          "colors": 8,
+          "opaquePixels": 527,
+          "rgbaSha256": "5A431B396E7850CCEB48D591DA14020D774A55834C41CE5CF4A4A9284AFF6CE3"
+        },
+        {
+          "frame": 2,
+          "bounds": [
+            17,
+            6,
+            30,
+            57
+          ],
+          "visibleHeight": 52,
+          "colors": 8,
+          "opaquePixels": 504,
+          "rgbaSha256": "F4C7F0DB2FE43BE8394A4FB9A8B5721C62B949E88507AD19C3F6EEE1E89C0128"
+        },
+        {
+          "frame": 3,
+          "bounds": [
+            17,
+            6,
+            30,
+            57
+          ],
+          "visibleHeight": 52,
+          "colors": 8,
+          "opaquePixels": 470,
+          "rgbaSha256": "68C8DFA3774FC22459D8BF0930983039B2F4BDCCBA5A98F8906E5FB577A07D6F"
+        },
+        {
+          "frame": 4,
+          "bounds": [
+            17,
+            5,
+            30,
+            56
+          ],
+          "visibleHeight": 52,
+          "colors": 8,
+          "opaquePixels": 498,
+          "rgbaSha256": "CD3101C782E4EBD85D5B239CE9492E6310AE294A5ED8B52F2338DDDBB171B020"
+        },
+        {
+          "frame": 5,
+          "bounds": [
+            17,
+            6,
+            31,
+            56
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 512,
+          "rgbaSha256": "0EF7951E8EB2F0202915778A17C04036095E59BBF00AE289633FD1D76E5A1C0D"
+        },
+        {
+          "frame": 6,
+          "bounds": [
+            17,
+            6,
+            30,
+            56
+          ],
+          "visibleHeight": 51,
+          "colors": 8,
+          "opaquePixels": 469,
+          "rgbaSha256": "390808C260C5C9DDB416A2FA943F482A6AC6D6B2305056544DBE9B146609701D"
+        },
+        {
+          "frame": 7,
+          "bounds": [
+            17,
+            5,
+            30,
+            56
+          ],
+          "visibleHeight": 52,
+          "colors": 8,
+          "opaquePixels": 488,
+          "rgbaSha256": "7E7FC4584AE93D93FD1C95D4B4E24EDEF40A947931A9624FD813F795C40D4105"
+        },
+        {
+          "frame": 8,
+          "bounds": [
+            17,
+            5,
+            30,
+            56
+          ],
+          "visibleHeight": 52,
+          "colors": 8,
+          "opaquePixels": 506,
+          "rgbaSha256": "8545A5AC971A6021E9682D4A6CEDFC4A46B5DB45B2E84E3ADF0AEF53285793C5"
+        }
+      ],
+      "sourcePivot": [
+        40,
+        69
+      ],
+      "pivot": [
+        24,
+        58
+      ],
+      "notes": "Fixed clip crop from the contact-foot plane. No per-frame shift, scaling, or opaque-pixel removal. East body height 51-52 versus standing reference 50: visual review required."
+    }
+  ],
+  "chargedGenerations": 6,
+  "failedSubmissions": [
+    {
+      "body": "male",
+      "reason": "Required action_description missing; validation rejected before a job was queued. Added the existing motion description; no paid retry."
+    }
+  ]
+}

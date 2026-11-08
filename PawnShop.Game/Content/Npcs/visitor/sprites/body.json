@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "frameWidth": 24,
+  "frameHeight": 40,
+  "columns": 1,
+  "rows": 1,
+  "pivotX": 12,
+  "pivotY": 40,
+  "displayScale": 1,
+  "animations": {
+    "Idle": {
+      "firstFrame": 0,
+      "frameCount": 1,
+      "frameDurationMs": 500,
+      "loop": true
+    }
+  }
+}

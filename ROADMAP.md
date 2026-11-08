@@ -42,11 +42,11 @@ The sequence is a dependency order, not a calendar estimate. M00 maps existing c
 | --- | --- | --- | --- | --- |
 | M00 | Repository reality and build baseline | Authorized repository access | Reproducible starting point | Complete; see M00/M01 verification record |
 | M01 | Title and session lifecycle | M00 | Launch, start, pause, return, restart | Implemented; headless checks and title launch pass; desktop lifecycle/resource acceptance pending |
-| M02 | Movement, time, interactions, scale lab | M01 | Walk around and inspect a small room | Planned; not repository-verified |
+| M02 | Movement, time, interactions, scale lab | M01 | Walk around and inspect a small room | Partial: selection, movement and nearby Talk headless-tested; scale lab/calendar pending |
 | M03 | Shared inventory and ownership | M02 | Move the same objects between containers | Planned; not repository-verified |
 | M04 | Minimal robust save/load | M03 | Continue a consistent saved session | Planned; not repository-verified |
 | M05 | Local shop/restoration economy loop | M04 | Search, repair, list, sell, save | Planned; not repository-verified |
-| M06 | Dialogue and quests | M05 | Accept and fulfill an authored request | Planned; not repository-verified |
+| M06 | Dialogue and quests | M05 | Accept and fulfill an authored request | Ink dialogue foundation implemented by explicit request; full quest integration remains planned |
 | M07 | Mech and companion | M03–M06 | Ride the mech with a distinct expressive follower | Planned; not repository-verified |
 | M08 | Authored mall and integrated slice | M07 | Expedition, extraction, restoration, sale, quest | Planned; not repository-verified |
 | M09 | Renewal, upgrades, daily cadence, story | M08 | Repeat the loop with meaningful progression | Planned; not repository-verified |
@@ -116,17 +116,100 @@ Use an issue, pull-request description, or brief task record containing: milesto
 
 ### M02 — Movement, time, shared interactions, and scale lab
 
+**Art-only progress (2026-11-05):** canonical 48×64 player bases are available,
+and separate male/female south-facing teal-shirt layers have user visual approval.
+The [wearable authoring workflow](docs/WEARABLE_ART_WORKFLOW.md) is now standard.
+This art slice did not implement movement, layered rendering/equipment, other shirt
+directions, animation or the in-game scale lab. M02 acceptance remains pending;
+see [art evidence](docs/VERIFICATION_PLAYER_PAPER_DOLLS.md).
+
+**Playable progress (2026-11-05):** New Game now selects male/female before creating
+a session. WASD moves the chosen base with eight standing facings and normalized
+diagonals, room/counter/NPC collision, and nearby Z Talk; X backs out/pauses.
+Selection, input capture, movement, range checks and settings-default migration
+have headless regression coverage. Walking cycles, wearable rendering, calendar
+and the scale lab remain pending. No game window was launched for this slice;
+see [verification and manual checks](docs/VERIFICATION_PLAYER_CONTROLS.md).
+
+The follow-up Controls slice adds editable primary/alternate bindings for all six
+actions, with arrow movement alternates and shared Pause / Back behavior. It is
+headless-tested; Controls layout/readability remains manual acceptance. See
+[binding verification](docs/VERIFICATION_DUAL_BINDINGS.md).
+
+**Walking authoring (2026-11-06):** produce male and female cardinal walk candidates
+using PixelLab Skeleton v3. The historical candidates generated W/N/S and copied E
+from W. The current policy authors S/N/E and renders mirrored W at runtime.
+Preserve raw exports and provenance; standing atlases stay
+independent. Every future wearable item requires both body fits, matching NESW
+frames/timing, coverage/protected-pixel checks, locked body hashes and separate
+visual acceptance. See [the wearable workflow](docs/WEARABLE_ART_WORKFLOW.md).
+Runtime walk playback and layered equipment remain separate implementation work.
+
+**Phase 1 cleanup (2026-11-06):** C# `--assets` commands replace five human art
+PowerShell scripts; validation uses the runtime sprite parser, outputs cannot
+overwrite sources, and local import verifies existing hashes. Existing PNGs and
+Sprout remain unchanged. Runtime cardinal/mirroring changes are Phase 2.
+See [cleanup verification](docs/VERIFICATION_ASSET_CLEANUP.md).
+
+**Phase 2 rendering foundation (2026-11-06):** four cardinal facings use S/N/E
+sources and runtime-mirrored West. The room demonstrates male/female placeholder
+bodies with jacket, helmet, backpack and anchored wrench, sharing one Idle/Walk
+clock and full-canvas transform. Movement, collision and session lifetimes remain
+intact. Selection keeps the original art; all existing PNGs and Sprout are unchanged.
+Approved character animation and production equipment remain Phases 3/4. The user
+subsequently accepted the placeholder demo; see [rendering verification](docs/VERIFICATION_CARDINAL_RENDERING.md).
+
+**Phase 3 motion accepted:** user accepted the current standing/cardinal walks and
+side settling after face/proportion, forward-gait and head-bob corrections.
+Animated idle and runtime promotion remain unfinished. At the user's instruction,
+Phase 4 begins with a male/female South-standing jacket design-and-fit checkpoint;
+walking equipment fitting follows approval of that design. See
+[human pilot review](docs/VERIFICATION_HUMAN_PILOT.md).
+
+**Phase 4 equipment previews:** jacket, charcoal welding mask/hair combinations,
+and wrench grip/angle fits in all four directions and side settling are accepted.
+The North-only wrench head-occlusion correction now awaits review. The user
+selected dark blue jeans for the pants checkpoint; both richer South-standing fits
+and corrected South-walking fits are accepted. North standing/walking fits are
+accepted; corrected East/West standing, walking and side settling jeans are also
+accepted (user: "fixed in, next phase"). Separate male/female brown leather work
+boots are accepted South standing (user: "it looks good, next phase"). Both
+South-walking boot fits are accepted (user: "perfect"). North standing/walking
+boots are accepted ("good, next"), as are East/mirrored-West standing, walking and
+settling ("looks good"), for both bodies. Backpacks were explicitly skipped.
+This modular art is now intended for ordinary, procedurally varied NPC shoppers,
+not the main player or notable characters. The user selected
+`PawnShop.Characters/Npcs/Common` as its home. The approved layout now contains
+52 byte-identical promoted PNGs, pose/compatibility metadata and a seeded
+appearance generator. Items, hair and headgear are data-driven, with headless
+checks for adding choices without C# registration. Game packages the assets and
+renders one generated shopper replacing the bundled visitor. It enters from the
+right using the approved walk/settle poses, then waits at the original placement.
+Pause, dialogue, collision and restart are covered headlessly; appearance still
+has the user's in-game approval ("ok we're good, youre good to clean up").
+The authorized disposable-cache cleanup is complete. General browsing and
+trading remain later slices.
+Existing player/review sources remain intact.
+Resume details and the walkthrough are in
+[equipment verification](docs/VERIFICATION_EQUIPMENT_PILOT.md).
+Shared item data remains in `PawnShop.Core/Items`; Game retains rendering and
+content packaging; Characters owns the approved common-NPC library.
+The [authoring guide](PawnShop.Characters/Npcs/Common/AUTHORING.md) documents
+working outfit, hair and hat examples, compatibility and validation commands. See
+[equipment verification](docs/VERIFICATION_EQUIPMENT_PILOT.md) and
+[the wearable workflow](docs/WEARABLE_ART_WORKFLOW.md).
+
 **Goal:** make the room a reliable test bed for the reusable foundation.
 
 **Small slices:** action-based input; movement/collision/camera; clocks and pause policy; contextual Inspect/Search interactions; placeholder scale and animation comparison.
 
 **Acceptance criteria**
 
-- [ ] Cardinal and diagonal movement cover equivalent distances for equal elapsed time within a documented test tolerance. Movement is not tied to draw rate.
-- [ ] One owner advances simulation systems once per tick. Draw does not mutate authoritative gameplay state.
+- [x] Cardinal and diagonal movement cover equivalent distances for equal elapsed time within a documented test tolerance. Movement is not tied to draw rate.
+- [x] One owner advances simulation systems once per tick. Draw does not mutate authoritative gameplay state.
 - [ ] Simulation time, game minutes, and presentation time are distinguishable. Pausing does not accrue hidden gameplay time; restarting the application does not simulate offline progress.
-- [ ] Input is handled by focused UI before the world. Held movement and pressed-once actions have different semantics.
-- [ ] A contextual interaction provides availability and a useful denial reason, then revalidates on execution.
+- [x] Input is handled by focused UI before the world. Held movement and pressed-once actions have different semantics.
+- [x] A contextual interaction provides availability and a useful denial reason, then revalidates on execution.
 - [ ] Collision footprints are independent of sprite canvases. Scale comparison shows the little companion smaller than the player and the rideable mech appropriately larger.
 - [ ] Point-sampled rendering, stable sprite origins, and actual gameplay-size readability are manually checked. A 48×48 source frame is not treated as a world-size requirement.
 
@@ -196,6 +279,20 @@ Use provisional fixtures such as `item.radio` and `recipe.radio_repair`; names a
 **Verification:** failed-operation before/after tests; duplicate completion/sale tests; manual local loop. **Defer:** haggling trees, complex demand simulation, loans/collateral, decorative shop expansion, broad recipe catalogs.
 
 ### M06 — Reusable dialogue, conditions, and quests
+
+**Partial implementation, 2026-11-04:** explicitly requested first Ink draft:
+authored branching visitor dialogue, stable choice IDs/revisions, validated tags,
+modal presentation, adjustable reveal/paging, cancellation and lifecycle tests.
+This foundation was selected independently of M02–M05; it does not implement or
+complete those prerequisites or M06's radio quest/rewards/persistence criteria.
+See [dialogue verification](docs/VERIFICATION_DIALOGUE.md).
+
+Authoring follow-up: VS Code tasks/snippets, data-driven NPC bindings, automatic
+Ink build compilation, a safe scaffold command and terminal branch previews now
+make conversations editable without C# registration or Inky. The NPC-first refactor
+adds per-NPC folders, sprite metadata/assets, optional multi-conversation bindings, and
+separate shop placements. NPC animation follows room simulation pause. This is still text
+dialogue groundwork, not quest/economy implementation or world NPC movement.
 
 **Goal:** prove authored narrative uses the same world rules as ordinary play.
 

@@ -1,5 +1,13 @@
 # AGENTS.md — Pawn Shop Game
 
+## Required startup reading
+
+At the beginning of each new session, before analyzing or changing the project, discover and read all repository Markdown files, including subdirectories, except files named README.md (case-insensitive).
+
+Exclude .git, dependency folders, and generated build output. Read AGENTS.md first, then ARCHITECTURE.md, GAME_DESIGN.md, ROADMAP.md, and the remaining Markdown files.
+
+Briefly confirm which files were read. If any cannot be read, report that explicitly.
+
 ## 1. Purpose and scope
 
 Build a cozy, humorous, top-down pixel-art pawn shop and salvage game in C# with MonoGame. Favor reusable, understandable components and small, playable milestones.
@@ -32,7 +40,7 @@ Default to local, single-player gameplay. Multiplayer, online services, runtime 
 
 ## 3. Inspect the repository before changing it
 
-Read applicable repository instructions, README, solution/project files, SDK configuration, package references, build scripts, and nearby tests. Read relevant design/decision documents if present.
+Read applicable repository instructions, solution/project files, SDK configuration, package references, build scripts, and nearby tests. Read README files only when needed for the current task. Read relevant design/decision documents if present.
 
 Use the actual repository as evidence for what exists. Do not assume an earlier discussion's class names, folders, dependencies, or milestones have been implemented.
 
@@ -212,6 +220,12 @@ Separate source canvas size, visible body bounds, world size, origin, collision 
 - Use data-driven animation metadata and a reusable animator. Gameplay requests animation states, not sprite-sheet row numbers.
 - Define arbitration between locomotion, actions, reactions, and dialogue expressions so systems do not overwrite one another every tick.
 - Preserve source artwork; keep derivative sheets and generated build output distinct. Record third-party asset provenance/licenses.
+- For customizable player clothing, follow [the approved wearable art workflow](docs/WEARABLE_ART_WORKFLOW.md): AI-generate separate body-specific PixelLab object references, fit each to its exact base, and extract garment-only layers over the unchanged body. Do not substitute hand-drawn shapes or force fitting by shifting, stretching or repeating fabric rows.
+- Generate every player wearable design for **both male and female models**, with separate fitted art and acceptance records for each body. A shared item identity does not imply interchangeable artwork. Walking attire must match the exact body, direction and animation frame; standing-pose approval never approves walking fit. Validate all north/east/south/west frames for both bodies before describing a wearable as walk-compatible.
+- Use PixelLab **Skeleton v3** for player walk generation. Author south, north and east for each body; render west from east with MonoGame `SpriteEffects.FlipHorizontally`. Four movement facings require only three stored visual directions. Apply one character-space mirror to body, clothing, masks, anchors and held-item offsets. Opposite-hand appearance is acceptable; independently authored west requires a concrete visual/gameplay reason. Preserve historical W-to-E sources as evidence, without relabeling them as newly authored east or granting approval.
+- Human asset authoring uses the existing C# test/authoring executable (`--assets`; see `docs/WEARABLE_ART_WORKFLOW.md`). Do not add PowerShell scripts, runtime generation services or new tooling projects for this pipeline. Sprout's existing artwork, animations and implementation are frozen.
+- Use the canonical `Content/Player/Bases` and `Content/Player/Wearables` assets and their manifests. The current source-frame contract is 48×64 with 48–52 visible body pixels (currently 50) and pivot (24,58); it does not establish collision/world scale. Keep full transparent canvases and native coordinates.
+- Check shoulder/underwear coverage and enlarged/native-size composition before requesting visual acceptance. Record approval per body, direction and pose; numeric checks alone cannot approve fit. Archive rejected source work before cleanup, and keep approved files independent of the archive.
 - Own and dispose textures, render targets, audio, and content scopes deliberately; do not dispose shared assets while another scene uses them.
 
 ## 13. Persistence and content validation
@@ -248,7 +262,7 @@ dotnet test <actual-test-project-or-solution> --no-build
 git diff --check
 ```
 
-These are command forms, not a claim that the repository already builds. Use matching configurations/frameworks for build and test. Run the content build and manual launch checks required by the existing workflow.
+These are command forms, not a claim that the repository already builds. Use matching configurations/frameworks for build and test. Run the content build required by the existing workflow; the user performs manual launch and desktop checks.
 
 The current solution is `PawnShopSimulator.sln`. Its existing dependency-free test runner uses `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build`; `dotnet test` does not execute those checks. Build/run details and the current code-authored content workflow are in README.md.
 
@@ -264,7 +278,9 @@ Add focused regression tests for changed behavior, especially:
 - Mount/dismount, pause, time advancement, and seeded generation obey their contracts.
 - Save round trips, corrupt/unsupported data, migrations, and interrupted writes have defined outcomes.
 
-Use headless tests for rules and explicit manual checks for rendering, audio, animation, and feel. Never claim visual behavior is verified merely because compilation succeeded.
+Use headless tests for rules. The user handles manual testing of rendering, audio, animation, input feel, window behavior, and desktop workflows. Do not launch or control the game, use computer vision, inspect screenshots, or use Computer Use to verify changes unless the user explicitly requests that testing. Such agent-driven testing is never required to finish an implementation task, even when other repository documents call for visual or desktop acceptance checks.
+
+Continue running relevant builds, automated tests, and nonvisual content checks. Briefly identify any manual checks left for the user, without treating their pending testing as a blocker to the implementation handoff. Record visual acceptance separately and only mark it verified after the user reports results or explicitly requested testing provides evidence. Never claim visual behavior is verified merely because compilation succeeded.
 
 ## 15. Milestones and completion
 

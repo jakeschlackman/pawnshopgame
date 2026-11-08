@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NPC: Add NPC and conversation",
+      "type": "shell",
+      "command": "./npc.ps1",
+      "args": ["new"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "focus": true }
+    },
+    {
+      "label": "NPC: Check all conversations",
+      "type": "shell",
+      "command": "./npc.ps1",
+      "args": ["check"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "NPC: List NPCs and source files",
+      "type": "shell",
+      "command": "./npc.ps1",
+      "args": ["list"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "NPC: Preview conversation in terminal",
+      "type": "shell",
+      "command": "./npc.ps1",
+      "args": ["play"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": "$msCompile",
+      "presentation": { "reveal": "always", "focus": true }
+    }
+  ]
+}

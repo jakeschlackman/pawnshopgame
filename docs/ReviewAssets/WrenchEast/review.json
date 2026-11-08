@@ -1,0 +1,1414 @@
+{
+  "version": 1,
+  "id": "tool_adjustable_wrench",
+  "slot": "main_hand",
+  "direction": "east",
+  "status": "east_west_standing_walk_settle_approved_by_user",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "sheetCanvas": [
+    480,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "standingColumn": 0,
+  "walkingColumns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "settlingColumns": [
+    1,
+    9,
+    0
+  ],
+  "startingColumns": [
+    0,
+    9,
+    1
+  ],
+  "walkingDurationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "previewTransitionColumns": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    9,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    9,
+    0
+  ],
+  "previewStepMs": 100,
+  "preview": "tools/player-equipment-review.html",
+  "scope": "Separate male/female East tool fits on unchanged accepted standing, eight walking and middle settling poses. Mirror complete East composition for West. Side-view angle lowered approximately12deg at user's request; original hands unchanged. Approved review assets only; no production integration.",
+  "source": {
+    "path": "docs/ReviewAssets/WrenchPilot/female-fitted-source.png",
+    "sha256": "1218C43E12A7BA9785685BFCB161C3652635B81A63C005813CA9B70664DBFCE2",
+    "selectionManifest": "docs/ReviewAssets/WrenchPilot/review.json",
+    "maskRowsPath": "extraction.maskRows",
+    "colorMapPath": "extraction.colorMap",
+    "opaquePixels": 31,
+    "referenceGrip": [
+      15,
+      45
+    ],
+    "provenance": "Reuse the accepted generated wrench design and mapped native steel pixels; body-specific East anchors and finger masks are independently fitted."
+  },
+  "sourceTransform": {
+    "x": "gripX + 15 - sourceX + sourceY - 45",
+    "y": "gripY + 45 - sourceY",
+    "angle": "Approximately45deg from vertical, lowered about12deg from initial East fit, per user.",
+    "method": "Exact pixel-stepped diagonal placement with unchanged source pixel count and palette; no interpolating rotation or scaling."
+  },
+  "generation": {
+    "tool": "PixelLab pixelart_workbench",
+    "paidOperations": 0,
+    "independentObjectAnimation": false,
+    "method": "Reuse approved rigid wrench; exact native pixels and guarded source-composite exports. One body pose clock drives tool, fingers and other equipment."
+  },
+  "layers": {
+    "tool": "Full31-pixel tool at each pose's grip.",
+    "layer": "Tool-only RGBA sheet with per-pose original finger exclusions.",
+    "bodyComposite": "Original accepted body plus fitted tool.",
+    "equippedComposite": "Accepted jacket/hair/mask composition plus fitted tool.",
+    "drawOrder": [
+      "original_body",
+      "optional_jacket",
+      "optional_normal_or_fitted_hair",
+      "optional_mask",
+      "optional_finger_clipped_wrench"
+    ],
+    "occlusion": "Clip source rows43..46 only where mapped pixels lie in this pose's near-hand rectangle and the original body is opaque. Reveal original fingers at the grip. Preserve jaw and handle-end pixels."
+  },
+  "bodies": [
+    {
+      "body": "female",
+      "hand": "right_near_hand",
+      "approvals": {
+        "eastStanding": "approved_by_user",
+        "eastWalking": "approved_by_user",
+        "eastSettling": "approved_by_user",
+        "mirroredWest": "approved_by_user"
+      },
+      "bodySource": "docs/ReviewAssets/WorkJacketEast/female-body.png",
+      "bodySourceSha256": "3A4EBEEB8DB8F09F0DE05F180B664C388352376AB128CE134631F34076BC96B0",
+      "equippedSource": "docs/ReviewAssets/HairMaskEast/female-review-equipped.png",
+      "equippedSourceSha256": "2BF84A8AA617195E778C0E2E24A90B6A395CC994872E34F792259D5D0F7F15E5",
+      "tool": "female-tool.png",
+      "layer": "female-layer.png",
+      "bodyComposite": "female-body-composite.png",
+      "equippedComposite": "female-equipped-composite.png",
+      "poses": [
+        {
+          "hiddenToolPixels": [
+            [
+              23,
+              44
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              21,
+              44
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              25,
+              41
+            ],
+            [
+              24,
+              41
+            ]
+          ],
+          "handRect": [
+            20,
+            40,
+            25,
+            44
+          ],
+          "handleEndPixels": 3,
+          "pose": "standing",
+          "grip": [
+            24,
+            42
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 0,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              22,
+              44
+            ],
+            [
+              21,
+              44
+            ],
+            [
+              20,
+              44
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              21,
+              43
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              22,
+              42
+            ],
+            [
+              23,
+              41
+            ]
+          ],
+          "handRect": [
+            19,
+            40,
+            23,
+            44
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_1",
+          "grip": [
+            23,
+            42
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 22,
+          "column": 1,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              23,
+              44
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              21,
+              44
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              24,
+              41
+            ]
+          ],
+          "handRect": [
+            20,
+            40,
+            24,
+            44
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_2",
+          "grip": [
+            24,
+            42
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 22,
+          "column": 2,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              25,
+              43
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              26,
+              42
+            ],
+            [
+              25,
+              42
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              26,
+              41
+            ],
+            [
+              25,
+              41
+            ],
+            [
+              27,
+              40
+            ],
+            [
+              26,
+              40
+            ]
+          ],
+          "handRect": [
+            22,
+            39,
+            27,
+            43
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_3",
+          "grip": [
+            26,
+            41
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 3,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              27,
+              43
+            ],
+            [
+              26,
+              43
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              28,
+              42
+            ],
+            [
+              27,
+              42
+            ],
+            [
+              26,
+              42
+            ],
+            [
+              28,
+              41
+            ],
+            [
+              27,
+              41
+            ],
+            [
+              29,
+              40
+            ],
+            [
+              28,
+              40
+            ]
+          ],
+          "handRect": [
+            23,
+            39,
+            29,
+            43
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_4",
+          "grip": [
+            28,
+            41
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 4,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              28,
+              43
+            ],
+            [
+              27,
+              43
+            ],
+            [
+              26,
+              43
+            ],
+            [
+              29,
+              42
+            ],
+            [
+              28,
+              42
+            ],
+            [
+              27,
+              42
+            ],
+            [
+              29,
+              41
+            ],
+            [
+              28,
+              41
+            ],
+            [
+              30,
+              40
+            ],
+            [
+              29,
+              40
+            ]
+          ],
+          "handRect": [
+            24,
+            39,
+            31,
+            43
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_5",
+          "grip": [
+            29,
+            41
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 5,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              27,
+              43
+            ],
+            [
+              26,
+              43
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              28,
+              42
+            ],
+            [
+              27,
+              42
+            ],
+            [
+              26,
+              42
+            ],
+            [
+              28,
+              41
+            ],
+            [
+              27,
+              41
+            ],
+            [
+              28,
+              40
+            ]
+          ],
+          "handRect": [
+            23,
+            39,
+            29,
+            43
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_6",
+          "grip": [
+            28,
+            41
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 22,
+          "column": 6,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              24,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              25,
+              42
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              25,
+              41
+            ],
+            [
+              24,
+              41
+            ],
+            [
+              26,
+              40
+            ],
+            [
+              25,
+              40
+            ]
+          ],
+          "handRect": [
+            22,
+            39,
+            27,
+            43
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_7",
+          "grip": [
+            25,
+            41
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 7,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              23,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              21,
+              43
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              22,
+              42
+            ],
+            [
+              24,
+              41
+            ],
+            [
+              23,
+              41
+            ],
+            [
+              25,
+              40
+            ],
+            [
+              24,
+              40
+            ]
+          ],
+          "handRect": [
+            20,
+            39,
+            25,
+            43
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_8",
+          "grip": [
+            24,
+            41
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 8,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              20,
+              43
+            ],
+            [
+              19,
+              43
+            ],
+            [
+              18,
+              43
+            ],
+            [
+              21,
+              42
+            ],
+            [
+              20,
+              42
+            ],
+            [
+              19,
+              42
+            ],
+            [
+              21,
+              41
+            ],
+            [
+              20,
+              41
+            ],
+            [
+              22,
+              40
+            ],
+            [
+              21,
+              40
+            ]
+          ],
+          "handRect": [
+            17,
+            39,
+            23,
+            43
+          ],
+          "handleEndPixels": 3,
+          "pose": "settle_middle",
+          "grip": [
+            21,
+            41
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 9,
+          "fullToolPixels": 31
+        }
+      ]
+    },
+    {
+      "body": "male",
+      "hand": "right_near_hand",
+      "approvals": {
+        "eastStanding": "approved_by_user",
+        "eastWalking": "approved_by_user",
+        "eastSettling": "approved_by_user",
+        "mirroredWest": "approved_by_user"
+      },
+      "bodySource": "docs/ReviewAssets/WorkJacketEast/male-body.png",
+      "bodySourceSha256": "B14A4D16B2343B67500C9F9843C6905C2E42357AF6B55597B723CD9BD946356B",
+      "equippedSource": "docs/ReviewAssets/HairMaskEast/male-review-equipped.png",
+      "equippedSourceSha256": "678B516B729F6BA72796C4A6CC70CE96801132243C9F61331CBD2DA182D1063B",
+      "tool": "male-tool.png",
+      "layer": "male-layer.png",
+      "bodyComposite": "male-body-composite.png",
+      "equippedComposite": "male-equipped-composite.png",
+      "poses": [
+        {
+          "hiddenToolPixels": [
+            [
+              23,
+              45
+            ],
+            [
+              22,
+              45
+            ],
+            [
+              21,
+              45
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              25,
+              42
+            ],
+            [
+              24,
+              42
+            ]
+          ],
+          "handRect": [
+            19,
+            41,
+            26,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "standing",
+          "grip": [
+            24,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 0,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              24,
+              45
+            ],
+            [
+              23,
+              45
+            ],
+            [
+              22,
+              45
+            ],
+            [
+              25,
+              44
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              26,
+              42
+            ],
+            [
+              25,
+              42
+            ]
+          ],
+          "handRect": [
+            20,
+            42,
+            27,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_1",
+          "grip": [
+            25,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 1,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              23,
+              45
+            ],
+            [
+              22,
+              45
+            ],
+            [
+              21,
+              45
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              25,
+              42
+            ],
+            [
+              24,
+              42
+            ]
+          ],
+          "handRect": [
+            19,
+            42,
+            26,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_2",
+          "grip": [
+            24,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 2,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              22,
+              45
+            ],
+            [
+              21,
+              45
+            ],
+            [
+              20,
+              45
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              21,
+              44
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              24,
+              42
+            ],
+            [
+              23,
+              42
+            ]
+          ],
+          "handRect": [
+            18,
+            42,
+            25,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_3",
+          "grip": [
+            23,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 3,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              23,
+              45
+            ],
+            [
+              22,
+              45
+            ],
+            [
+              21,
+              45
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              22,
+              44
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              25,
+              42
+            ],
+            [
+              24,
+              42
+            ]
+          ],
+          "handRect": [
+            19,
+            42,
+            26,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_4",
+          "grip": [
+            24,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 4,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              24,
+              45
+            ],
+            [
+              23,
+              45
+            ],
+            [
+              22,
+              45
+            ],
+            [
+              25,
+              44
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              23,
+              44
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              24,
+              43
+            ],
+            [
+              26,
+              42
+            ],
+            [
+              25,
+              42
+            ]
+          ],
+          "handRect": [
+            20,
+            42,
+            27,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_5",
+          "grip": [
+            25,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 5,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              25,
+              45
+            ],
+            [
+              24,
+              45
+            ],
+            [
+              23,
+              45
+            ],
+            [
+              26,
+              44
+            ],
+            [
+              25,
+              44
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              26,
+              43
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              27,
+              42
+            ],
+            [
+              26,
+              42
+            ]
+          ],
+          "handRect": [
+            21,
+            42,
+            28,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_6",
+          "grip": [
+            26,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 6,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              26,
+              46
+            ],
+            [
+              25,
+              46
+            ],
+            [
+              24,
+              46
+            ],
+            [
+              27,
+              45
+            ],
+            [
+              26,
+              45
+            ],
+            [
+              25,
+              45
+            ],
+            [
+              27,
+              44
+            ],
+            [
+              26,
+              44
+            ],
+            [
+              28,
+              43
+            ],
+            [
+              27,
+              43
+            ]
+          ],
+          "handRect": [
+            22,
+            43,
+            29,
+            46
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_7",
+          "grip": [
+            27,
+            44
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 7,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              25,
+              45
+            ],
+            [
+              24,
+              45
+            ],
+            [
+              23,
+              45
+            ],
+            [
+              26,
+              44
+            ],
+            [
+              25,
+              44
+            ],
+            [
+              24,
+              44
+            ],
+            [
+              26,
+              43
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              27,
+              42
+            ],
+            [
+              26,
+              42
+            ]
+          ],
+          "handRect": [
+            21,
+            42,
+            28,
+            45
+          ],
+          "handleEndPixels": 3,
+          "pose": "walk_8",
+          "grip": [
+            26,
+            43
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 8,
+          "fullToolPixels": 31
+        },
+        {
+          "hiddenToolPixels": [
+            [
+              22,
+              44
+            ],
+            [
+              21,
+              44
+            ],
+            [
+              20,
+              44
+            ],
+            [
+              23,
+              43
+            ],
+            [
+              22,
+              43
+            ],
+            [
+              21,
+              43
+            ],
+            [
+              23,
+              42
+            ],
+            [
+              22,
+              42
+            ],
+            [
+              24,
+              41
+            ],
+            [
+              23,
+              41
+            ]
+          ],
+          "handRect": [
+            18,
+            41,
+            25,
+            44
+          ],
+          "handleEndPixels": 3,
+          "pose": "settle_middle",
+          "grip": [
+            23,
+            42
+          ],
+          "jawPixels": 15,
+          "visibleToolPixels": 21,
+          "column": 9,
+          "fullToolPixels": 31
+        }
+      ]
+    }
+  ],
+  "west": "No authored or stored West sheet. Reflect every layer, finger exclusion, attachment and review crop in the same48px character space: pixel x becomes47-x. Keep frame order and timing; contact-sheet poses flip individually. Mirrored handedness is acceptable. Runtime integration will use SpriteEffects.FlipHorizontally.",
+  "pixelLabExports": {
+    "female-tool.png": "9e8a8329-0069-43b2-bfb7-8e5fa3fb65eb",
+    "female-layer.png": "f0c370b9-14fa-47f4-8d5f-aaf3aa17e993",
+    "female-body-composite.png": "0a20e143-47b3-4bed-bb63-d5f77cc28dbe",
+    "female-equipped-composite.png": "4b4d8337-caeb-4e47-a8d3-01f89b9f99c2",
+    "male-tool.png": "9410fadf-c9ed-4df2-bf88-3315efd15e72",
+    "male-layer.png": "7dcc5601-ccfc-4ca2-8577-19e9d7bdb8e7",
+    "male-body-composite.png": "7d76f61a-beae-41c9-a730-fe1416301b14",
+    "male-equipped-composite.png": "53427dc6-3cd0-42cc-8e11-d1db02bd5b0e"
+  },
+  "pixelLabExportUrls": {
+    "female-tool.png": "https://api.pixellab.ai/mcp/pixel-tools/9e8a8329-0069-43b2-bfb7-8e5fa3fb65eb/assets/east/full.png",
+    "female-layer.png": "https://api.pixellab.ai/mcp/pixel-tools/f0c370b9-14fa-47f4-8d5f-aaf3aa17e993/assets/east/full.png",
+    "female-body-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/0a20e143-47b3-4bed-bb63-d5f77cc28dbe/image.png",
+    "female-equipped-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/4b4d8337-caeb-4e47-a8d3-01f89b9f99c2/image.png",
+    "male-tool.png": "https://api.pixellab.ai/mcp/pixel-tools/9410fadf-c9ed-4df2-bf88-3315efd15e72/assets/east/full.png",
+    "male-layer.png": "https://api.pixellab.ai/mcp/pixel-tools/7dcc5601-ccfc-4ca2-8577-19e9d7bdb8e7/assets/east/full.png",
+    "male-body-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/7d76f61a-beae-41c9-a730-fe1416301b14/image.png",
+    "male-equipped-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/53427dc6-3cd0-42cc-8e11-d1db02bd5b0e/image.png"
+  },
+  "files": [
+    {
+      "sha256": "638C007389A5F99DA69CE8C611E4632D80B60555463A9F8B2B9F3DBD2B48B7B1",
+      "path": "female-body-composite.png"
+    },
+    {
+      "sha256": "C983265270353E5EC69FCC6AFCD17D3AF555E56DE9493A8156CF31A6DDD281B0",
+      "path": "female-equipped-composite.png"
+    },
+    {
+      "sha256": "8754DBA0685973C7F55C2EE1D8D5BA3638629AF566E193DB7D3597D11DD96F1C",
+      "path": "female-layer.png"
+    },
+    {
+      "sha256": "6A93CECC26EA60EA54BE165DC318C48EBF656BB813B685AB9B44E6F091879BB0",
+      "path": "female-tool.png"
+    },
+    {
+      "sha256": "D90CA2E44476E222DE3B3EB79C82F3CB8C96BF289C765B2FECB1D1160D750982",
+      "path": "male-body-composite.png"
+    },
+    {
+      "sha256": "6ED9C66C2A067D8212B79F178377FD718DDFED214EB6870B1F7BD55AC79DCB95",
+      "path": "male-equipped-composite.png"
+    },
+    {
+      "sha256": "CF2CF2742A16CDEAABCD218FB5AA5169F1A8367C3B7BBE16376B9B596D1E08BF",
+      "path": "male-layer.png"
+    },
+    {
+      "sha256": "FD2E61D22B111204542C729F9407C0FFC0954669DFC14615495EB1CA10B9C948",
+      "path": "male-tool.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: all8 PNGs decoded against exact source-tool placement and original body/equipment pixels;20 poses and40 composites;480x64, binary alpha, transparent canvases, original fingers at each grip. All154 prior locked file records unchanged.",
+    "preview": "PASS: Node loads57 PNGs/88 views across1408 direction/motion/loadout cases. Exact draw sources/order/frames/transforms checked for19712 wrench views, including8064 West views and8448 legacy South-standing composites. All16 equipment combinations, crops, chronological contacts, standing/settle endpoints, stepping, direction changes, slider and integer scale.",
+    "visual": "User accepted the lowered East/West standing, walking and settling fits with \"good, next phase\". No browser/game testing by agent claimed."
+  },
+  "next": "Dark blue jeans South-standing design/fit pilot for both bodies; then pants motion/directions, footwear and backpacks. Folder walkthrough before production integration.",
+  "approvalBasis": "User approved the lowered side-view wrench fit with \"good, next phase\". Covers both bodies, East/mirrored West standing, walking and side settling."
+}

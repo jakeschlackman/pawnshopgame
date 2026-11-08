@@ -1,0 +1,5720 @@
+{
+  "schemaVersion": 1,
+  "itemId": "brown_leather_work_boots",
+  "slot": "feet",
+  "status": "both_bodies_east_and_mirrored_west_standing_walking_settling_approved",
+  "intendedUse": {
+    "role": "procedurally_varied_shop_customers",
+    "basis": "User redirected this modular body/hair/clothing work to NPC visitors who buy and sell. Main player and notable characters will follow a separate distinct design strategy.",
+    "variation": "Future customer generation can select compatible body-specific clothing and hair combinations; no generator or production integration is implemented by this review.",
+    "heldItems": "Not a requirement for this customer asset set. Existing wrench artwork is preserved as optional reference; preview defaults it off.",
+    "organization": "No folder moves before user walkthrough. Existing player-prefixed filenames remain historical source paths, not a claim of intended protagonist use."
+  },
+  "direction": "east",
+  "frameSize": [
+    48,
+    64
+  ],
+  "sheetSize": [
+    480,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "standingColumn": 0,
+  "walkingColumns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "settlingColumn": 9,
+  "walkingDurationMs": 100,
+  "transitionColumns": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    9,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    9,
+    0
+  ],
+  "west": "Mirror the complete East composition in 48px character space, x maps to 47-x. Same source column, clock, pivot and crop transform for every layer. No West sheet.",
+  "layerOrder": [
+    "original body",
+    "boots",
+    "jeans",
+    "jacket",
+    "hair",
+    "mask",
+    "optional wrench (HTML only; excluded from saved equipped composite)"
+  ],
+  "palette": [
+    "#15191bff",
+    "#353234ff",
+    "#352820ff",
+    "#594030ff",
+    "#80583bff",
+    "#aa7c50ff",
+    "#c4a071ff"
+  ],
+  "provenance": {
+    "tool": "PixelLab transfer_outfit (Pro)",
+    "created": "2026-11-07",
+    "estimatedGenerations": 20,
+    "requests": {
+      "male": {
+        "frame_urls": [
+          "https://api.pixellab.ai/mcp/pixel-tools/5d8f35d1-2621-499f-bbf4-ecbc07dc8f08/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/95b08f42-4b26-484d-8378-d416a4eecf90/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/09418985-765d-4210-a9ca-47c73c27fd7a/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/331e305a-de52-4382-94ca-3b4df3b710ab/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/867a3bb3-e77d-4f90-b18a-816e495468c7/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/98df0773-ca59-4221-9174-687311f0ff70/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/eeabe2bb-a57c-47f0-b427-2a63e2724390/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/a09da679-07c7-44b6-8916-75d8cc623b3e/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/7b46b1bc-c2c9-4431-87fd-dcfb14c69145/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/de9d68b6-1628-45a1-9883-c7f5f4577221/assets/east/full.png"
+        ],
+        "reference_image_url": "https://api.pixellab.ai/mcp/pixel-tools/e0afaf49-1eeb-4b3e-9524-e2fafe2b0dc2/assets/south/full.png",
+        "width": 48,
+        "height": 64,
+        "no_background": true,
+        "seed": 63921,
+        "additional_instructions": "EAST-FACING RIGHT SIDE PROFILE ONLY of the same male body. Fit ONLY the approved brown leather work boots from this same-body reference onto all TEN exact input poses: standing first, eight walking frames next, middle settling pose last. Reference shows the FRONT design/material; preserve target SIDE view. Same practical ankle-height work boots, warm dark brown leather, charcoal rubber sole, stout rounded toe facing RIGHT, small muted lace marks on the upper front, restrained side seam and heel shading. No oversized shoes, pointed toes, high heels, gold/orange accents or new outfit. Full separate boot shafts needed: approved jeans will overlap their tops as another layer. Follow EACH existing near/far foot, its precise contact/lift, toe direction and occlusion, including raised far foot; cover original toes and ankles. Do NOT flatten raised feet to standing ground row, enlarge stance, change leg positions or invent gait. Preserve native 48x64 full canvas, pivot (24,58), all original head/hand/body coordinates and frame order. Stable leather detail across standing, motion and settling without flashes. No jeans, jacket, hair, tools or ground shadow. Original body will remain authoritative: only boot pixels will be extracted at their original native coordinates, all generated anatomy discarded. West will mirror this entire East composition; do not generate West."
+      },
+      "female": {
+        "frame_urls": [
+          "https://api.pixellab.ai/mcp/pixel-tools/805de3ce-058b-4c31-82a9-f5a81a92f76f/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/dbabda40-6b7b-4278-91d6-93078de7173d/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/4b090d3f-4b81-4929-ad86-ee6b54edc4d7/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/3601e079-2ade-40a4-9dd2-fad6f22b75e5/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/46b52023-bfa1-4d24-9d54-d8c223da5e4d/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/be07a62e-b2f2-4ec3-9200-8342524a3f37/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/6060ba8a-7c4c-4815-96b5-1b35805d59f3/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/52c4f5fa-9b18-4e84-a930-dadfb30c6407/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/b4bfeb25-a149-4ed8-a3f8-06bb63c5ff79/assets/east/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/24415773-7e4f-462c-8f1c-7da840c7b332/assets/east/full.png"
+        ],
+        "reference_image_url": "https://api.pixellab.ai/mcp/pixel-tools/0ea5c120-2385-45b6-a5e1-dcdfe38b0a39/assets/south/full.png",
+        "width": 48,
+        "height": 64,
+        "no_background": true,
+        "seed": 63922,
+        "additional_instructions": "EAST-FACING RIGHT SIDE PROFILE ONLY of the same female body. Fit ONLY the approved brown leather work boots from this same-body reference onto all TEN exact input poses: standing first, eight walking frames next, middle settling pose last. Reference shows the FRONT design/material; preserve target SIDE view. Same practical ankle-height work boots, warm dark brown leather, charcoal rubber sole, stout rounded toe facing RIGHT, small muted lace marks on the upper front, restrained side seam and heel shading. No oversized shoes, pointed toes, high heels, gold/orange accents or new outfit. Full separate boot shafts needed: approved jeans will overlap their tops as another layer. Follow EACH existing near/far foot, its precise contact/lift, toe direction and occlusion, including raised far foot; cover original toes and ankles. Do NOT flatten raised feet to standing ground row, enlarge stance, change leg positions or invent gait. Preserve native 48x64 full canvas, pivot (24,58), all original head/hand/body coordinates and frame order. Stable leather detail across standing, motion and settling without flashes. No jeans, jacket, hair, tools or ground shadow. Original body will remain authoritative: only boot pixels will be extracted at their original native coordinates, all generated anatomy discarded. West will mirror this entire East composition; do not generate West."
+      }
+    },
+    "animationGeneration": false,
+    "jobs": {
+      "male": "73cb6842-0420-4c69-8c34-3dc1f8e22971",
+      "female": "ae42d153-ebeb-4f1c-8daf-6468177f273e"
+    },
+    "bodyLayouts": {
+      "male": {
+        "standingSource": {
+          "path": "PawnShop.Game/Content/Player/Bases/male/base.png",
+          "sha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67",
+          "crop": [
+            96,
+            0,
+            48,
+            64
+          ]
+        },
+        "walkSource": {
+          "path": "docs/ReviewAssets/male-east-walk-forward-bob.png",
+          "frameCanvas": [
+            80,
+            80
+          ],
+          "crop": [
+            16,
+            10,
+            48,
+            64
+          ],
+          "sha256": "F326D20FFB3FA968547753A3A19A5BE01C433B099F18FBFB7498C21FD7FB5ECC"
+        },
+        "settleSource": {
+          "path": "docs/ReviewAssets/male-east-settle.png",
+          "sha256": "09299EA7E64854AD951F48C9BD411C16823BFBB222B4EF7DD2F33A4A63014C61",
+          "crop": [
+            48,
+            0,
+            48,
+            64
+          ],
+          "endpoints": "Source column 0 must equal walk frame 1; source column 2 must equal standing. Reuse those fitted poses; generate only middle."
+        },
+        "bodySheet": "male-body.png"
+      },
+      "female": {
+        "standingSource": {
+          "path": "PawnShop.Game/Content/Player/Bases/female/base.png",
+          "sha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52",
+          "crop": [
+            96,
+            0,
+            48,
+            64
+          ]
+        },
+        "walkSource": {
+          "path": "docs/ReviewAssets/female-east-walk-head-fixed.png",
+          "frameCanvas": [
+            80,
+            80
+          ],
+          "crop": [
+            16,
+            11,
+            48,
+            64
+          ],
+          "sha256": "897E733D62A3777B87E3B1E311C58E1AAA54AD9689AB48942ACDD0F7A04BA467"
+        },
+        "settleSource": {
+          "path": "docs/ReviewAssets/female-east-settle.png",
+          "sha256": "47C193E882376FA84B6A3CCCACBB6E01FE270C83445C6528823408627D280639",
+          "crop": [
+            48,
+            0,
+            48,
+            64
+          ],
+          "endpoints": "Source column 0 must equal walk frame 1; source column 2 must equal standing. Reuse those fitted poses; generate only middle."
+        },
+        "bodySheet": "female-body.png"
+      }
+    },
+    "sourceUrls": {
+      "male": "https://api.pixellab.ai/mcp/pixel-tools/ce5dd021-e72e-4227-ae59-3b983ec5bb22/image.png",
+      "female": "https://api.pixellab.ai/mcp/pixel-tools/b148f4f8-67ab-479a-a4be-5d98eeab7488/image.png"
+    },
+    "chargedGenerations": 20,
+    "equippedCompositeLoadout": "Boots, jeans, jacket, fitted hair and mask over original body. No held item. Existing wrench remains an optional HTML-only reference toggle.",
+    "method": "Copy native source leather and adjacent dark outline/sole pixels in explicit per-pose ankle/foot regions, within the original silhouette plus at most one horizontal source-authored edge pixel. Match the approved seven-color boot palette by nearest RGB. Twenty-nine explicit native foot-boundary/source-shade repairs retain all original distal foot pixels. No shifts, stretching, scaling, repeated fabric rows, new body pixels or new gait.",
+    "exports": {
+      "male": {
+        "drawingId": "fa2a2204-b95f-4812-9ac2-358590fe97e0",
+        "urls": {
+          "layer": "https://api.pixellab.ai/mcp/pixel-tools/fa2a2204-b95f-4812-9ac2-358590fe97e0/assets/layer/full.png",
+          "body-composite": "https://api.pixellab.ai/mcp/pixel-tools/fa2a2204-b95f-4812-9ac2-358590fe97e0/assets/body-composite/full.png",
+          "jeans-composite": "https://api.pixellab.ai/mcp/pixel-tools/fa2a2204-b95f-4812-9ac2-358590fe97e0/assets/jeans-composite/full.png",
+          "equipped-composite": "https://api.pixellab.ai/mcp/pixel-tools/fa2a2204-b95f-4812-9ac2-358590fe97e0/assets/equipped-composite/full.png"
+        }
+      },
+      "female": {
+        "drawingId": "2401985d-ee2d-4ddf-b757-ab6a10f52522",
+        "urls": {
+          "layer": "https://api.pixellab.ai/mcp/pixel-tools/2401985d-ee2d-4ddf-b757-ab6a10f52522/assets/layer/full.png",
+          "body-composite": "https://api.pixellab.ai/mcp/pixel-tools/2401985d-ee2d-4ddf-b757-ab6a10f52522/assets/body-composite/full.png",
+          "jeans-composite": "https://api.pixellab.ai/mcp/pixel-tools/2401985d-ee2d-4ddf-b757-ab6a10f52522/assets/jeans-composite/full.png",
+          "equipped-composite": "https://api.pixellab.ai/mcp/pixel-tools/2401985d-ee2d-4ddf-b757-ab6a10f52522/assets/equipped-composite/full.png"
+        }
+      }
+    }
+  },
+  "bodies": {
+    "male": {
+      "approval": {
+        "eastStanding": "approved_by_user",
+        "eastWalking": "approved_by_user",
+        "eastSettling": "approved_by_user",
+        "mirroredWest": "approved_by_user"
+      },
+      "bodySource": "../WorkJacketEast/male-body.png",
+      "bodySha256": "B14A4D16B2343B67500C9F9843C6905C2E42357AF6B55597B723CD9BD946356B",
+      "standingReference": "../BootsPilot/male-body-composite.png",
+      "standingReferenceSha256": "5953E1F0352FFD77F229B798DB6AFE6F17B199F752AEE45E68E21EEA7CA99BB5",
+      "footCoverageReference": {
+        "manifest": "../JeansEast/review.json",
+        "maskConfig": {
+          "top": [
+            38,
+            37,
+            37,
+            37,
+            37,
+            37,
+            37,
+            37,
+            37,
+            37
+          ],
+          "nearFoot": [
+            54,
+            54,
+            53,
+            54,
+            54,
+            54,
+            54,
+            54,
+            53,
+            54
+          ],
+          "farFoot": [
+            [
+              [
+                26,
+                52,
+                34,
+                63
+              ]
+            ],
+            [],
+            [
+              [
+                14,
+                48,
+                21,
+                50
+              ]
+            ],
+            [
+              [
+                14,
+                48,
+                20,
+                51
+              ]
+            ],
+            [
+              [
+                14,
+                48,
+                21,
+                50
+              ]
+            ],
+            [
+              [
+                14,
+                47,
+                20,
+                49
+              ]
+            ],
+            [
+              [
+                28,
+                48,
+                34,
+                50
+              ]
+            ],
+            [
+              [
+                28,
+                48,
+                34,
+                50
+              ]
+            ],
+            [
+              [
+                28,
+                49,
+                34,
+                51
+              ]
+            ],
+            [
+              [
+                14,
+                52,
+                20,
+                63
+              ]
+            ]
+          ]
+        },
+        "meaning": "Original distal feet protected by accepted jeans masks; shoes must cover these exact native pixels."
+      },
+      "fittedSource": "male-fitted-source.png",
+      "layer": "male-layer.png",
+      "bodyComposite": "male-body-composite.png",
+      "jeansComposite": "male-jeans-composite.png",
+      "equippedComposite": "male-equipped-composite.png",
+      "colorMap": {
+        "#080202ff": "#15191bff",
+        "#0c0403ff": "#15191bff",
+        "#0c0706ff": "#15191bff",
+        "#684a37ff": "#594030ff",
+        "#1a0e0bff": "#15191bff",
+        "#4e2412ff": "#352820ff",
+        "#433b38ff": "#353234ff",
+        "#362c2aff": "#352820ff",
+        "#4d4747ff": "#594030ff"
+      },
+      "poses": [
+        {
+          "column": 0,
+          "pose": "standing",
+          "footCoverage": {
+            "near": [
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                18,
+                55
+              ],
+              [
+                19,
+                55
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                18,
+                56
+              ],
+              [
+                19,
+                56
+              ],
+              [
+                20,
+                56
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                19,
+                57
+              ],
+              [
+                20,
+                57
+              ],
+              [
+                21,
+                57
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ]
+            ],
+            "far": [
+              [
+                26,
+                52
+              ],
+              [
+                27,
+                52
+              ],
+              [
+                26,
+                53
+              ],
+              [
+                27,
+                53
+              ],
+              [
+                28,
+                53
+              ]
+            ]
+          },
+          "nativePixelCleanup": [],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              24,
+              48,
+              35,
+              53
+            ]
+          ],
+          "rows": [
+            [
+              49,
+              19,
+              20,
+              24,
+              25
+            ],
+            [
+              50,
+              19,
+              25
+            ],
+            [
+              51,
+              19,
+              27
+            ],
+            [
+              52,
+              19,
+              22,
+              24,
+              28
+            ],
+            [
+              53,
+              19,
+              28
+            ],
+            [
+              54,
+              18,
+              27
+            ],
+            [
+              55,
+              18,
+              27
+            ],
+            [
+              56,
+              18,
+              27
+            ],
+            [
+              57,
+              19,
+              26
+            ]
+          ],
+          "pixelCount": 77
+        },
+        {
+          "column": 1,
+          "pose": "walk_1",
+          "footCoverage": {
+            "near": [
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ]
+            ],
+            "far": []
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 28,
+              "y": 55,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ]
+          ],
+          "rows": [
+            [
+              49,
+              20,
+              22
+            ],
+            [
+              50,
+              20,
+              23,
+              27,
+              27
+            ],
+            [
+              51,
+              20,
+              26
+            ],
+            [
+              52,
+              21,
+              26
+            ],
+            [
+              53,
+              20,
+              26
+            ],
+            [
+              54,
+              20,
+              28
+            ],
+            [
+              55,
+              20,
+              29
+            ],
+            [
+              56,
+              20,
+              28
+            ],
+            [
+              57,
+              22,
+              27
+            ]
+          ],
+          "pixelCount": 62
+        },
+        {
+          "column": 2,
+          "pose": "walk_2",
+          "footCoverage": {
+            "near": [
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                25,
+                53
+              ],
+              [
+                26,
+                53
+              ],
+              [
+                27,
+                53
+              ],
+              [
+                28,
+                53
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ]
+            ],
+            "far": [
+              [
+                18,
+                48
+              ],
+              [
+                19,
+                48
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                21,
+                48
+              ],
+              [
+                18,
+                49
+              ],
+              [
+                19,
+                49
+              ],
+              [
+                20,
+                49
+              ],
+              [
+                21,
+                49
+              ],
+              [
+                19,
+                50
+              ],
+              [
+                20,
+                50
+              ],
+              [
+                21,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 28,
+              "y": 54,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              56
+            ],
+            [
+              12,
+              44,
+              22,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              44,
+              19,
+              20
+            ],
+            [
+              45,
+              19,
+              22
+            ],
+            [
+              46,
+              18,
+              22
+            ],
+            [
+              47,
+              18,
+              22
+            ],
+            [
+              48,
+              17,
+              23
+            ],
+            [
+              49,
+              17,
+              23,
+              27,
+              27
+            ],
+            [
+              50,
+              18,
+              27
+            ],
+            [
+              51,
+              20,
+              25,
+              27,
+              27
+            ],
+            [
+              52,
+              21,
+              27
+            ],
+            [
+              53,
+              21,
+              28
+            ],
+            [
+              54,
+              21,
+              29
+            ],
+            [
+              55,
+              21,
+              29
+            ],
+            [
+              56,
+              21,
+              28
+            ]
+          ],
+          "pixelCount": 89
+        },
+        {
+          "column": 3,
+          "pose": "walk_3",
+          "footCoverage": {
+            "near": [
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                30,
+                54
+              ],
+              [
+                31,
+                54
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                30,
+                55
+              ],
+              [
+                31,
+                55
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ],
+              [
+                29,
+                56
+              ],
+              [
+                30,
+                56
+              ],
+              [
+                31,
+                56
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ],
+              [
+                28,
+                57
+              ],
+              [
+                29,
+                57
+              ],
+              [
+                30,
+                57
+              ]
+            ],
+            "far": [
+              [
+                17,
+                48
+              ],
+              [
+                18,
+                48
+              ],
+              [
+                19,
+                48
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                17,
+                49
+              ],
+              [
+                18,
+                49
+              ],
+              [
+                19,
+                49
+              ],
+              [
+                20,
+                49
+              ],
+              [
+                18,
+                50
+              ],
+              [
+                19,
+                50
+              ],
+              [
+                20,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 31,
+              "y": 54,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 30,
+              "y": 55,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            },
+            {
+              "x": 17,
+              "y": 49,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 18,
+              "y": 50,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              12,
+              44,
+              21,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              44,
+              18,
+              19
+            ],
+            [
+              45,
+              18,
+              19,
+              21,
+              21
+            ],
+            [
+              46,
+              17,
+              21
+            ],
+            [
+              47,
+              17,
+              21
+            ],
+            [
+              48,
+              17,
+              21
+            ],
+            [
+              49,
+              17,
+              24,
+              28,
+              28
+            ],
+            [
+              50,
+              18,
+              28
+            ],
+            [
+              51,
+              20,
+              28
+            ],
+            [
+              52,
+              22,
+              26,
+              28,
+              28
+            ],
+            [
+              53,
+              23,
+              28
+            ],
+            [
+              54,
+              22,
+              31
+            ],
+            [
+              55,
+              22,
+              31
+            ],
+            [
+              56,
+              22,
+              31
+            ],
+            [
+              57,
+              22,
+              31
+            ]
+          ],
+          "pixelCount": 101
+        },
+        {
+          "column": 4,
+          "pose": "walk_4",
+          "footCoverage": {
+            "near": [
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                30,
+                55
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ],
+              [
+                29,
+                56
+              ],
+              [
+                30,
+                56
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ],
+              [
+                28,
+                57
+              ],
+              [
+                29,
+                57
+              ]
+            ],
+            "far": [
+              [
+                18,
+                48
+              ],
+              [
+                19,
+                48
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                21,
+                48
+              ],
+              [
+                18,
+                49
+              ],
+              [
+                19,
+                49
+              ],
+              [
+                20,
+                49
+              ],
+              [
+                21,
+                49
+              ],
+              [
+                19,
+                50
+              ],
+              [
+                20,
+                50
+              ],
+              [
+                21,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              12,
+              44,
+              22,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              44,
+              19,
+              20
+            ],
+            [
+              45,
+              19,
+              21
+            ],
+            [
+              46,
+              18,
+              22
+            ],
+            [
+              47,
+              18,
+              22
+            ],
+            [
+              48,
+              17,
+              22
+            ],
+            [
+              49,
+              18,
+              23,
+              27,
+              27
+            ],
+            [
+              50,
+              19,
+              27
+            ],
+            [
+              51,
+              21,
+              27
+            ],
+            [
+              52,
+              21,
+              25,
+              27,
+              27
+            ],
+            [
+              53,
+              22,
+              27
+            ],
+            [
+              54,
+              21,
+              29
+            ],
+            [
+              55,
+              21,
+              30
+            ],
+            [
+              56,
+              21,
+              30
+            ],
+            [
+              57,
+              22,
+              30
+            ]
+          ],
+          "pixelCount": 94
+        },
+        {
+          "column": 5,
+          "pose": "walk_5",
+          "footCoverage": {
+            "near": [
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                20,
+                56
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ],
+              [
+                29,
+                56
+              ],
+              [
+                21,
+                57
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ],
+              [
+                28,
+                57
+              ]
+            ],
+            "far": [
+              [
+                19,
+                47
+              ],
+              [
+                20,
+                47
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                20,
+                49
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 28,
+              "y": 55,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              12,
+              43,
+              21,
+              49
+            ]
+          ],
+          "rows": [
+            [
+              44,
+              20,
+              20
+            ],
+            [
+              45,
+              20,
+              21
+            ],
+            [
+              46,
+              18,
+              21
+            ],
+            [
+              47,
+              18,
+              21
+            ],
+            [
+              48,
+              19,
+              21
+            ],
+            [
+              49,
+              20,
+              22
+            ],
+            [
+              50,
+              21,
+              22,
+              26,
+              26
+            ],
+            [
+              51,
+              21,
+              26
+            ],
+            [
+              52,
+              21,
+              24,
+              26,
+              26
+            ],
+            [
+              53,
+              20,
+              26
+            ],
+            [
+              54,
+              20,
+              28
+            ],
+            [
+              55,
+              20,
+              29
+            ],
+            [
+              56,
+              20,
+              29
+            ],
+            [
+              57,
+              21,
+              29
+            ]
+          ],
+          "pixelCount": 76
+        },
+        {
+          "column": 6,
+          "pose": "walk_6",
+          "footCoverage": {
+            "near": [
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                18,
+                55
+              ],
+              [
+                19,
+                55
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                18,
+                56
+              ],
+              [
+                19,
+                56
+              ],
+              [
+                20,
+                56
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                20,
+                57
+              ],
+              [
+                21,
+                57
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ]
+            ],
+            "far": [
+              [
+                28,
+                48
+              ],
+              [
+                29,
+                48
+              ],
+              [
+                28,
+                49
+              ],
+              [
+                29,
+                49
+              ],
+              [
+                28,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 26,
+              "y": 55,
+              "source": "#b57e64ff",
+              "result": "#aa7c50ff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            },
+            {
+              "x": 18,
+              "y": 56,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 28,
+              "y": 48,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              26,
+              44,
+              35,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              45,
+              27,
+              27
+            ],
+            [
+              46,
+              26,
+              27
+            ],
+            [
+              47,
+              26,
+              28
+            ],
+            [
+              48,
+              26,
+              29
+            ],
+            [
+              49,
+              20,
+              20,
+              24,
+              29
+            ],
+            [
+              50,
+              19,
+              21,
+              24,
+              28
+            ],
+            [
+              51,
+              19,
+              24
+            ],
+            [
+              52,
+              19,
+              24
+            ],
+            [
+              53,
+              18,
+              24
+            ],
+            [
+              54,
+              18,
+              26
+            ],
+            [
+              55,
+              18,
+              27
+            ],
+            [
+              56,
+              18,
+              27
+            ],
+            [
+              57,
+              20,
+              26
+            ]
+          ],
+          "pixelCount": 80
+        },
+        {
+          "column": 7,
+          "pose": "walk_7",
+          "footCoverage": {
+            "near": [
+              [
+                18,
+                54
+              ],
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                17,
+                55
+              ],
+              [
+                18,
+                55
+              ],
+              [
+                19,
+                55
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                17,
+                56
+              ],
+              [
+                18,
+                56
+              ],
+              [
+                19,
+                56
+              ],
+              [
+                20,
+                56
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                18,
+                57
+              ],
+              [
+                19,
+                57
+              ],
+              [
+                20,
+                57
+              ],
+              [
+                21,
+                57
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ]
+            ],
+            "far": [
+              [
+                28,
+                48
+              ],
+              [
+                29,
+                48
+              ],
+              [
+                30,
+                48
+              ],
+              [
+                28,
+                49
+              ],
+              [
+                29,
+                49
+              ],
+              [
+                30,
+                49
+              ],
+              [
+                28,
+                50
+              ],
+              [
+                29,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 25,
+              "y": 55,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            },
+            {
+              "x": 29,
+              "y": 48,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              26,
+              44,
+              35,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              45,
+              26,
+              26,
+              28,
+              28
+            ],
+            [
+              46,
+              26,
+              27
+            ],
+            [
+              47,
+              26,
+              29
+            ],
+            [
+              48,
+              26,
+              30
+            ],
+            [
+              49,
+              18,
+              20,
+              23,
+              30
+            ],
+            [
+              50,
+              18,
+              30
+            ],
+            [
+              51,
+              18,
+              21,
+              23,
+              23
+            ],
+            [
+              52,
+              18,
+              23
+            ],
+            [
+              53,
+              17,
+              23
+            ],
+            [
+              54,
+              17,
+              25
+            ],
+            [
+              55,
+              17,
+              26
+            ],
+            [
+              56,
+              17,
+              26
+            ],
+            [
+              57,
+              18,
+              26
+            ]
+          ],
+          "pixelCount": 93
+        },
+        {
+          "column": 8,
+          "pose": "walk_8",
+          "footCoverage": {
+            "near": [
+              [
+                17,
+                53
+              ],
+              [
+                18,
+                53
+              ],
+              [
+                19,
+                53
+              ],
+              [
+                20,
+                53
+              ],
+              [
+                21,
+                53
+              ],
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                18,
+                54
+              ],
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                18,
+                55
+              ],
+              [
+                19,
+                55
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                20,
+                56
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ]
+            ],
+            "far": [
+              [
+                28,
+                49
+              ],
+              [
+                29,
+                49
+              ],
+              [
+                28,
+                50
+              ],
+              [
+                29,
+                50
+              ],
+              [
+                28,
+                51
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 18,
+              "y": 55,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 28,
+              "y": 49,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              57
+            ],
+            [
+              26,
+              45,
+              35,
+              51
+            ]
+          ],
+          "rows": [
+            [
+              46,
+              26,
+              26
+            ],
+            [
+              47,
+              26,
+              27
+            ],
+            [
+              48,
+              20,
+              21,
+              26,
+              28
+            ],
+            [
+              49,
+              20,
+              22,
+              25,
+              29
+            ],
+            [
+              50,
+              19,
+              29
+            ],
+            [
+              51,
+              18,
+              29
+            ],
+            [
+              52,
+              17,
+              23
+            ],
+            [
+              53,
+              17,
+              24
+            ],
+            [
+              54,
+              18,
+              25
+            ],
+            [
+              55,
+              18,
+              26
+            ],
+            [
+              56,
+              20,
+              26
+            ],
+            [
+              57,
+              22,
+              25
+            ]
+          ],
+          "pixelCount": 82
+        },
+        {
+          "column": 9,
+          "pose": "settling",
+          "footCoverage": {
+            "near": [
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ],
+              [
+                29,
+                56
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ],
+              [
+                28,
+                57
+              ]
+            ],
+            "far": [
+              [
+                19,
+                52
+              ],
+              [
+                20,
+                52
+              ],
+              [
+                19,
+                53
+              ],
+              [
+                20,
+                53
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 29,
+              "y": 54,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 28,
+              "y": 55,
+              "source": "#8b5d4aff",
+              "result": "#80583bff",
+              "reason": "Normalize a source shade inside the original distal foot to the approved boot palette."
+            },
+            {
+              "x": 19,
+              "y": 53,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              12,
+              48,
+              21,
+              53
+            ]
+          ],
+          "rows": [
+            [
+              48,
+              17,
+              21
+            ],
+            [
+              49,
+              17,
+              21,
+              25,
+              25
+            ],
+            [
+              50,
+              17,
+              26
+            ],
+            [
+              51,
+              18,
+              26
+            ],
+            [
+              52,
+              19,
+              26
+            ],
+            [
+              53,
+              19,
+              26
+            ],
+            [
+              54,
+              21,
+              29
+            ],
+            [
+              55,
+              21,
+              29
+            ],
+            [
+              56,
+              21,
+              29
+            ],
+            [
+              57,
+              21,
+              29
+            ]
+          ],
+          "pixelCount": 82
+        }
+      ]
+    },
+    "female": {
+      "approval": {
+        "eastStanding": "approved_by_user",
+        "eastWalking": "approved_by_user",
+        "eastSettling": "approved_by_user",
+        "mirroredWest": "approved_by_user"
+      },
+      "bodySource": "../WorkJacketEast/female-body.png",
+      "bodySha256": "3A4EBEEB8DB8F09F0DE05F180B664C388352376AB128CE134631F34076BC96B0",
+      "standingReference": "../BootsPilot/female-body-composite.png",
+      "standingReferenceSha256": "FE9591C05123D4B8740EFBF8B3BBD122350432456D6EF012030547F0A454AF02",
+      "footCoverageReference": {
+        "manifest": "../JeansEast/review.json",
+        "maskConfig": {
+          "top": [
+            38,
+            37,
+            37,
+            36,
+            36,
+            36,
+            36,
+            36,
+            36,
+            37
+          ],
+          "nearFoot": [
+            54,
+            54,
+            54,
+            54,
+            53,
+            53,
+            53,
+            53,
+            53,
+            53
+          ],
+          "farFoot": [
+            [
+              [
+                28,
+                52,
+                34,
+                63
+              ]
+            ],
+            [
+              [
+                14,
+                47,
+                21,
+                49
+              ]
+            ],
+            [
+              [
+                14,
+                47,
+                21,
+                49
+              ]
+            ],
+            [],
+            [
+              [
+                28,
+                48,
+                34,
+                50
+              ]
+            ],
+            [
+              [
+                29,
+                48,
+                34,
+                50
+              ]
+            ],
+            [
+              [
+                29,
+                49,
+                34,
+                50
+              ]
+            ],
+            [
+              [
+                14,
+                48,
+                22,
+                49
+              ]
+            ],
+            [
+              [
+                14,
+                48,
+                21,
+                50
+              ]
+            ],
+            [
+              [
+                28,
+                51,
+                34,
+                63
+              ]
+            ]
+          ]
+        },
+        "meaning": "Original distal feet protected by accepted jeans masks; shoes must cover these exact native pixels."
+      },
+      "fittedSource": "female-fitted-source.png",
+      "layer": "female-layer.png",
+      "bodyComposite": "female-body-composite.png",
+      "jeansComposite": "female-jeans-composite.png",
+      "equippedComposite": "female-equipped-composite.png",
+      "colorMap": {
+        "#120502ff": "#15191bff",
+        "#090202ff": "#15191bff",
+        "#110a08ff": "#15191bff",
+        "#120605ff": "#15191bff",
+        "#0c0807ff": "#15191bff",
+        "#0a0606ff": "#15191bff",
+        "#0d0a0aff": "#15191bff",
+        "#0d0505ff": "#15191bff",
+        "#543d2eff": "#594030ff",
+        "#160d0bff": "#15191bff",
+        "#4a372aff": "#594030ff",
+        "#20130fff": "#15191bff",
+        "#3c312eff": "#353234ff",
+        "#705440ff": "#80583bff",
+        "#5c483cff": "#594030ff",
+        "#3b2a23ff": "#352820ff",
+        "#120e0cff": "#15191bff",
+        "#3d3734ff": "#353234ff",
+        "#171211ff": "#15191bff",
+        "#302827ff": "#352820ff",
+        "#1a0e0bff": "#15191bff",
+        "#463c36ff": "#353234ff",
+        "#150a05ff": "#15191bff",
+        "#342f30ff": "#353234ff",
+        "#775841ff": "#80583bff",
+        "#201919ff": "#15191bff",
+        "#060000ff": "#15191bff",
+        "#1a0701ff": "#15191bff",
+        "#2e1b15ff": "#352820ff",
+        "#1d0b06ff": "#15191bff",
+        "#120200ff": "#15191bff",
+        "#0e0201ff": "#15191bff",
+        "#080402ff": "#15191bff",
+        "#0d0402ff": "#15191bff",
+        "#625e5bff": "#80583bff",
+        "#050404ff": "#15191bff",
+        "#4a464bff": "#594030ff"
+      },
+      "poses": [
+        {
+          "column": 0,
+          "pose": "standing",
+          "footCoverage": {
+            "near": [
+              [
+                18,
+                54
+              ],
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                30,
+                54
+              ],
+              [
+                18,
+                55
+              ],
+              [
+                19,
+                55
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                19,
+                56
+              ],
+              [
+                20,
+                56
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                21,
+                57
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ]
+            ],
+            "far": [
+              [
+                28,
+                52
+              ],
+              [
+                29,
+                52
+              ],
+              [
+                28,
+                53
+              ],
+              [
+                29,
+                53
+              ],
+              [
+                30,
+                53
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 30,
+              "y": 54,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 21,
+              "y": 57,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              26,
+              48,
+              35,
+              53
+            ]
+          ],
+          "rows": [
+            [
+              48,
+              26,
+              27
+            ],
+            [
+              49,
+              18,
+              27
+            ],
+            [
+              50,
+              18,
+              27
+            ],
+            [
+              51,
+              18,
+              28
+            ],
+            [
+              52,
+              18,
+              30
+            ],
+            [
+              53,
+              18,
+              30
+            ],
+            [
+              54,
+              18,
+              30
+            ],
+            [
+              55,
+              18,
+              27
+            ],
+            [
+              56,
+              18,
+              27
+            ],
+            [
+              57,
+              20,
+              27
+            ]
+          ],
+          "pixelCount": 100
+        },
+        {
+          "column": 1,
+          "pose": "walk_1",
+          "footCoverage": {
+            "near": [
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                30,
+                54
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                30,
+                55
+              ],
+              [
+                31,
+                55
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ],
+              [
+                29,
+                56
+              ],
+              [
+                30,
+                56
+              ],
+              [
+                31,
+                56
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ],
+              [
+                28,
+                57
+              ],
+              [
+                29,
+                57
+              ],
+              [
+                30,
+                57
+              ]
+            ],
+            "far": [
+              [
+                18,
+                47
+              ],
+              [
+                19,
+                47
+              ],
+              [
+                20,
+                47
+              ],
+              [
+                21,
+                47
+              ],
+              [
+                18,
+                48
+              ],
+              [
+                19,
+                48
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                21,
+                48
+              ],
+              [
+                18,
+                49
+              ],
+              [
+                19,
+                49
+              ],
+              [
+                20,
+                49
+              ],
+              [
+                21,
+                49
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 25,
+              "y": 57,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              12,
+              43,
+              22,
+              49
+            ]
+          ],
+          "rows": [
+            [
+              43,
+              20,
+              20
+            ],
+            [
+              44,
+              19,
+              22
+            ],
+            [
+              45,
+              18,
+              22
+            ],
+            [
+              46,
+              17,
+              22
+            ],
+            [
+              47,
+              17,
+              22
+            ],
+            [
+              48,
+              17,
+              22
+            ],
+            [
+              49,
+              17,
+              23,
+              26,
+              28
+            ],
+            [
+              50,
+              21,
+              28
+            ],
+            [
+              51,
+              21,
+              28
+            ],
+            [
+              52,
+              21,
+              28
+            ],
+            [
+              53,
+              21,
+              28
+            ],
+            [
+              54,
+              22,
+              30
+            ],
+            [
+              55,
+              22,
+              31
+            ],
+            [
+              56,
+              22,
+              31
+            ],
+            [
+              57,
+              24,
+              30
+            ]
+          ],
+          "pixelCount": 106
+        },
+        {
+          "column": 2,
+          "pose": "walk_2",
+          "footCoverage": {
+            "near": [
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                30,
+                55
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ],
+              [
+                29,
+                56
+              ],
+              [
+                30,
+                56
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ],
+              [
+                28,
+                57
+              ],
+              [
+                29,
+                57
+              ]
+            ],
+            "far": [
+              [
+                18,
+                47
+              ],
+              [
+                19,
+                47
+              ],
+              [
+                20,
+                47
+              ],
+              [
+                21,
+                47
+              ],
+              [
+                18,
+                48
+              ],
+              [
+                19,
+                48
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                21,
+                48
+              ],
+              [
+                19,
+                49
+              ],
+              [
+                20,
+                49
+              ],
+              [
+                21,
+                49
+              ]
+            ]
+          },
+          "nativePixelCleanup": [],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ],
+            [
+              12,
+              43,
+              22,
+              49
+            ]
+          ],
+          "rows": [
+            [
+              43,
+              20,
+              20
+            ],
+            [
+              44,
+              20,
+              22
+            ],
+            [
+              45,
+              19,
+              22
+            ],
+            [
+              46,
+              18,
+              22
+            ],
+            [
+              47,
+              17,
+              22
+            ],
+            [
+              48,
+              17,
+              22
+            ],
+            [
+              49,
+              18,
+              27
+            ],
+            [
+              50,
+              21,
+              27
+            ],
+            [
+              51,
+              21,
+              27
+            ],
+            [
+              52,
+              21,
+              27
+            ],
+            [
+              53,
+              21,
+              27
+            ],
+            [
+              54,
+              21,
+              29
+            ],
+            [
+              55,
+              22,
+              30
+            ],
+            [
+              56,
+              22,
+              30
+            ],
+            [
+              57,
+              23,
+              29
+            ]
+          ],
+          "pixelCount": 97
+        },
+        {
+          "column": 3,
+          "pose": "walk_3",
+          "footCoverage": {
+            "near": [
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ]
+            ],
+            "far": []
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 23,
+              "y": 56,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 25,
+              "y": 57,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 26,
+              "y": 57,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 27,
+              "y": 57,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              49,
+              35,
+              57
+            ]
+          ],
+          "rows": [
+            [
+              49,
+              20,
+              26
+            ],
+            [
+              50,
+              20,
+              26
+            ],
+            [
+              51,
+              20,
+              26
+            ],
+            [
+              52,
+              20,
+              26
+            ],
+            [
+              53,
+              20,
+              27
+            ],
+            [
+              54,
+              20,
+              28
+            ],
+            [
+              55,
+              20,
+              28
+            ],
+            [
+              56,
+              21,
+              28
+            ],
+            [
+              57,
+              25,
+              27
+            ]
+          ],
+          "pixelCount": 65
+        },
+        {
+          "column": 4,
+          "pose": "walk_4",
+          "footCoverage": {
+            "near": [
+              [
+                19,
+                53
+              ],
+              [
+                20,
+                53
+              ],
+              [
+                21,
+                53
+              ],
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                25,
+                53
+              ],
+              [
+                26,
+                53
+              ],
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                20,
+                56
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ]
+            ],
+            "far": [
+              [
+                28,
+                48
+              ],
+              [
+                29,
+                48
+              ],
+              [
+                28,
+                49
+              ],
+              [
+                29,
+                49
+              ],
+              [
+                28,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 21,
+              "y": 56,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              56
+            ],
+            [
+              26,
+              44,
+              35,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              45,
+              26,
+              26
+            ],
+            [
+              46,
+              26,
+              26
+            ],
+            [
+              47,
+              26,
+              28
+            ],
+            [
+              48,
+              19,
+              29
+            ],
+            [
+              49,
+              19,
+              29
+            ],
+            [
+              50,
+              19,
+              28
+            ],
+            [
+              51,
+              19,
+              24
+            ],
+            [
+              52,
+              19,
+              24
+            ],
+            [
+              53,
+              19,
+              26
+            ],
+            [
+              54,
+              19,
+              27
+            ],
+            [
+              55,
+              19,
+              27
+            ],
+            [
+              56,
+              19,
+              27
+            ]
+          ],
+          "pixelCount": 84
+        },
+        {
+          "column": 5,
+          "pose": "walk_5",
+          "footCoverage": {
+            "near": [
+              [
+                17,
+                53
+              ],
+              [
+                18,
+                53
+              ],
+              [
+                19,
+                53
+              ],
+              [
+                20,
+                53
+              ],
+              [
+                21,
+                53
+              ],
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                17,
+                54
+              ],
+              [
+                18,
+                54
+              ],
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                19,
+                55
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ]
+            ],
+            "far": [
+              [
+                29,
+                48
+              ],
+              [
+                30,
+                48
+              ],
+              [
+                31,
+                48
+              ],
+              [
+                29,
+                49
+              ],
+              [
+                30,
+                49
+              ],
+              [
+                31,
+                49
+              ],
+              [
+                29,
+                50
+              ],
+              [
+                30,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 17,
+              "y": 54,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 26,
+              "y": 55,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            },
+            {
+              "x": 25,
+              "y": 56,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              56
+            ],
+            [
+              27,
+              44,
+              35,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              44,
+              27,
+              28
+            ],
+            [
+              45,
+              27,
+              28
+            ],
+            [
+              46,
+              27,
+              28
+            ],
+            [
+              47,
+              27,
+              30
+            ],
+            [
+              48,
+              19,
+              22,
+              26,
+              31
+            ],
+            [
+              49,
+              19,
+              31
+            ],
+            [
+              50,
+              18,
+              30
+            ],
+            [
+              51,
+              17,
+              24
+            ],
+            [
+              52,
+              17,
+              23
+            ],
+            [
+              53,
+              16,
+              24
+            ],
+            [
+              54,
+              17,
+              25
+            ],
+            [
+              55,
+              19,
+              26
+            ],
+            [
+              56,
+              20,
+              25
+            ]
+          ],
+          "pixelCount": 93
+        },
+        {
+          "column": 6,
+          "pose": "walk_6",
+          "footCoverage": {
+            "near": [
+              [
+                19,
+                53
+              ],
+              [
+                20,
+                53
+              ],
+              [
+                21,
+                53
+              ],
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                25,
+                53
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ]
+            ],
+            "far": [
+              [
+                29,
+                49
+              ]
+            ]
+          },
+          "nativePixelCleanup": [],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              56
+            ],
+            [
+              27,
+              45,
+              35,
+              49
+            ]
+          ],
+          "rows": [
+            [
+              47,
+              28,
+              29
+            ],
+            [
+              48,
+              21,
+              25,
+              28,
+              29
+            ],
+            [
+              49,
+              20,
+              29
+            ],
+            [
+              50,
+              19,
+              28
+            ],
+            [
+              51,
+              18,
+              26
+            ],
+            [
+              52,
+              18,
+              24
+            ],
+            [
+              53,
+              18,
+              25
+            ],
+            [
+              54,
+              19,
+              26
+            ],
+            [
+              55,
+              21,
+              26
+            ],
+            [
+              56,
+              22,
+              25
+            ]
+          ],
+          "pixelCount": 71
+        },
+        {
+          "column": 7,
+          "pose": "walk_7",
+          "footCoverage": {
+            "near": [
+              [
+                21,
+                53
+              ],
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                25,
+                53
+              ],
+              [
+                26,
+                53
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                25,
+                56
+              ]
+            ],
+            "far": [
+              [
+                20,
+                48
+              ],
+              [
+                21,
+                48
+              ],
+              [
+                22,
+                48
+              ],
+              [
+                20,
+                49
+              ],
+              [
+                21,
+                49
+              ],
+              [
+                22,
+                49
+              ]
+            ]
+          },
+          "nativePixelCleanup": [],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              56
+            ],
+            [
+              12,
+              44,
+              23,
+              49
+            ]
+          ],
+          "rows": [
+            [
+              44,
+              20,
+              20,
+              23,
+              23
+            ],
+            [
+              45,
+              20,
+              22
+            ],
+            [
+              46,
+              20,
+              23
+            ],
+            [
+              47,
+              20,
+              23
+            ],
+            [
+              48,
+              20,
+              28
+            ],
+            [
+              49,
+              20,
+              28
+            ],
+            [
+              50,
+              20,
+              27
+            ],
+            [
+              51,
+              19,
+              26
+            ],
+            [
+              52,
+              19,
+              26
+            ],
+            [
+              53,
+              20,
+              27
+            ],
+            [
+              54,
+              21,
+              27
+            ],
+            [
+              55,
+              22,
+              26
+            ],
+            [
+              56,
+              24,
+              26
+            ]
+          ],
+          "pixelCount": 78
+        },
+        {
+          "column": 8,
+          "pose": "walk_8",
+          "footCoverage": {
+            "near": [
+              [
+                21,
+                53
+              ],
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                25,
+                53
+              ],
+              [
+                26,
+                53
+              ],
+              [
+                27,
+                53
+              ],
+              [
+                28,
+                53
+              ],
+              [
+                29,
+                53
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                26,
+                54
+              ],
+              [
+                27,
+                54
+              ],
+              [
+                28,
+                54
+              ],
+              [
+                29,
+                54
+              ],
+              [
+                30,
+                54
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                28,
+                55
+              ],
+              [
+                29,
+                55
+              ],
+              [
+                30,
+                55
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                28,
+                56
+              ]
+            ],
+            "far": [
+              [
+                19,
+                48
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                21,
+                48
+              ],
+              [
+                19,
+                49
+              ],
+              [
+                20,
+                49
+              ],
+              [
+                21,
+                49
+              ],
+              [
+                20,
+                50
+              ],
+              [
+                21,
+                50
+              ]
+            ]
+          },
+          "nativePixelCleanup": [],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              56
+            ],
+            [
+              12,
+              44,
+              22,
+              50
+            ]
+          ],
+          "rows": [
+            [
+              44,
+              19,
+              22
+            ],
+            [
+              45,
+              18,
+              22
+            ],
+            [
+              46,
+              18,
+              22
+            ],
+            [
+              47,
+              18,
+              22
+            ],
+            [
+              48,
+              18,
+              22,
+              27,
+              27
+            ],
+            [
+              49,
+              18,
+              27
+            ],
+            [
+              50,
+              19,
+              27
+            ],
+            [
+              51,
+              20,
+              27
+            ],
+            [
+              52,
+              21,
+              27
+            ],
+            [
+              53,
+              21,
+              29
+            ],
+            [
+              54,
+              21,
+              30
+            ],
+            [
+              55,
+              21,
+              30
+            ],
+            [
+              56,
+              25,
+              29
+            ]
+          ],
+          "pixelCount": 93
+        },
+        {
+          "column": 9,
+          "pose": "settling",
+          "footCoverage": {
+            "near": [
+              [
+                19,
+                53
+              ],
+              [
+                20,
+                53
+              ],
+              [
+                21,
+                53
+              ],
+              [
+                22,
+                53
+              ],
+              [
+                23,
+                53
+              ],
+              [
+                24,
+                53
+              ],
+              [
+                25,
+                53
+              ],
+              [
+                26,
+                53
+              ],
+              [
+                27,
+                53
+              ],
+              [
+                28,
+                53
+              ],
+              [
+                29,
+                53
+              ],
+              [
+                19,
+                54
+              ],
+              [
+                20,
+                54
+              ],
+              [
+                21,
+                54
+              ],
+              [
+                22,
+                54
+              ],
+              [
+                23,
+                54
+              ],
+              [
+                24,
+                54
+              ],
+              [
+                25,
+                54
+              ],
+              [
+                20,
+                55
+              ],
+              [
+                21,
+                55
+              ],
+              [
+                22,
+                55
+              ],
+              [
+                23,
+                55
+              ],
+              [
+                24,
+                55
+              ],
+              [
+                25,
+                55
+              ],
+              [
+                26,
+                55
+              ],
+              [
+                27,
+                55
+              ],
+              [
+                21,
+                56
+              ],
+              [
+                22,
+                56
+              ],
+              [
+                23,
+                56
+              ],
+              [
+                24,
+                56
+              ],
+              [
+                25,
+                56
+              ],
+              [
+                26,
+                56
+              ],
+              [
+                27,
+                56
+              ],
+              [
+                22,
+                57
+              ],
+              [
+                23,
+                57
+              ],
+              [
+                24,
+                57
+              ],
+              [
+                25,
+                57
+              ],
+              [
+                26,
+                57
+              ],
+              [
+                27,
+                57
+              ]
+            ],
+            "far": [
+              [
+                28,
+                51
+              ],
+              [
+                28,
+                52
+              ],
+              [
+                29,
+                52
+              ]
+            ]
+          },
+          "nativePixelCleanup": [
+            {
+              "x": 27,
+              "y": 57,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover an original native foot boundary pixel omitted by fitted source."
+            }
+          ],
+          "extractionRegions": [
+            [
+              12,
+              48,
+              35,
+              57
+            ],
+            [
+              26,
+              47,
+              35,
+              52
+            ]
+          ],
+          "rows": [
+            [
+              48,
+              19,
+              20,
+              26,
+              26
+            ],
+            [
+              49,
+              19,
+              26
+            ],
+            [
+              50,
+              19,
+              26
+            ],
+            [
+              51,
+              19,
+              28
+            ],
+            [
+              52,
+              19,
+              29
+            ],
+            [
+              53,
+              19,
+              29
+            ],
+            [
+              54,
+              19,
+              26
+            ],
+            [
+              55,
+              19,
+              27
+            ],
+            [
+              56,
+              20,
+              27
+            ],
+            [
+              57,
+              22,
+              27
+            ]
+          ],
+          "pixelCount": 82
+        }
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "female-body-composite.png",
+      "sha256": "22328A469F144810CBB756948AA79809258A7F8475C5B5DA456C1862A1E8EE91"
+    },
+    {
+      "path": "female-equipped-composite.png",
+      "sha256": "8CFE6F386375D8F84DECDC1A7B78A7B352C9F15FAA07C279FC62C8E16F88053D"
+    },
+    {
+      "path": "female-fitted-source.png",
+      "sha256": "37AEA942ACABDDE89523AB721D5553EBFB9698F385518C0F1D40D3D3AD9486B9"
+    },
+    {
+      "path": "female-jeans-composite.png",
+      "sha256": "9C5D047DEC2D5C2C7C093BFD889567B0A6ADEEAE51433B79503C2A8507EFF1A8"
+    },
+    {
+      "path": "female-layer.png",
+      "sha256": "B9982216F428B85DAB2E619BD6BE353E7CAC614C278AF3F0534B24F5358EF217"
+    },
+    {
+      "path": "male-body-composite.png",
+      "sha256": "2456EF8011FF98FDBF949D737D8DA7659719ED7E86D1D4C5A68D2A1D38E906A9"
+    },
+    {
+      "path": "male-equipped-composite.png",
+      "sha256": "5DA72910B7C0F06976924C7D7AB2D566E717C28F7D23837DE9621BB473A0D5AF"
+    },
+    {
+      "path": "male-fitted-source.png",
+      "sha256": "C56A84BC1F7592F891FC31680935F6BB9AAE73592FDBE6711ED98F128FA2B2C0"
+    },
+    {
+      "path": "male-jeans-composite.png",
+      "sha256": "247F537A662D04573B5FA61F068908F72F01EF48070FD5A905FD713ED88211E3"
+    },
+    {
+      "path": "male-layer.png",
+      "sha256": "7E11C9DF25B340F239A778A6D7B2B7C63C68C09D8616511FA20505D45B44F6FD"
+    }
+  ],
+  "verification": {
+    "numeric": "passed",
+    "visual": "Approved by the user with \"looks good\" for both bodies, East and mirrored West, standing, walking and settling. No browser/game launch or agent visual inspection.",
+    "remoteBodyInputs": "All 20 frame URLs decoded and matched the exact local standing, walk and settling body poses pixel for pixel.",
+    "sourceMaskPixelsChecked": 61440,
+    "exportChecks": {
+      "sheets": 8,
+      "comparedPixels": 245760,
+      "footPixels": 771,
+      "cleanupPixels": 29
+    },
+    "palette": "Seven approved South/North boot colors; binary alpha; full 48x64 native pose canvases.",
+    "preservation": "All 713 existing non-generated files were hashed at the start of this slice. Only the existing HTML, this verification record and North approval metadata may change. All prior PNGs, Sprout and production files remain byte-identical.",
+    "reviewManifestPngHashesChecked": 210,
+    "preview": {
+      "images": 77,
+      "views": 220,
+      "cases": 6656,
+      "priorViewComparisons": 1331200,
+      "sideViewChecks": 133120,
+      "controls": "East/West timeline, step wrap, slider, pause, 100ms playback and 1x/2x/4x scales passed. Default East; wrench off; local links resolve."
+    },
+    "build": "Not run: review PNG/JSON, HTML and documentation only; no C# or content integration."
+  },
+  "next": "Boot review is complete for both bodies across South, North, East and mirrored West, including side settling. User skipped backpacks. Next checkpoint: folder walkthrough for the NPC customer assets, before production integration or any folder moves.",
+  "approvalBasis": {
+    "userStatement": "looks good",
+    "scope": "Both male and female East and mirrored-West standing, walking and settling boots, following the side-boot review handoff."
+  }
+}

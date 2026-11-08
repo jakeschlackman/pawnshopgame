@@ -1,0 +1,555 @@
+{
+  "version": 1,
+  "id": "helmet_welder",
+  "slot": "head",
+  "status": "both_north_standing_and_walks_approved",
+  "direction": "north",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "sheetCanvas": [
+    432,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "standingColumn": 0,
+  "walkingColumns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "walkingDurationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "preview": "tools/player-equipment-review.html",
+  "design": "Rear of the accepted charcoal welding face shield: horizontal suspension band, crown strap and side hinges/edges. The front visor faces away and is not visible. The canonical bald scalp remains visible between straps. No new body-specific helmet design.",
+  "scope": "North standing plus eight walking poses on each body. South already approved. East/mirrored West, side settling, wrench and runtime promotion remain pending.",
+  "generation": {
+    "tool": "PixelLab edit_image_pro_flash reference",
+    "jobId": "78a54693-48a5-4d47-a579-e925e3c8f54f",
+    "source": "male-fitted-source.png",
+    "request": {
+      "method": "reference",
+      "reference_image": {
+        "url": "https://api.pixellab.ai/mcp/pixel-tools/fdf3cf05-2cd4-4145-abcb-08bd9f79861d/image.png",
+        "usage_description": "Approved SAME character wearing charcoal welding face shield from FRONT. Design/colors only: produce the REAR of this item on the North-facing input. Do not turn the input body/head around."
+      },
+      "description": "Add the REAR VIEW of the reference's lowered charcoal-gray classic welding face shield to this exact NORTH-facing standing character. Viewer sees the BACK OF THE BALD HEAD, not a face. Shield is in front of the wearer, facing AWAY: no visor/window/eyes visible from the back. Show a simple dark charcoal horizontal suspension HEADBAND around the back of the head at ear level, a narrow gray crown strap up the middle, small dark side hinges at either temple and a slim charcoal shield edge at each side. Back of bald scalp remains visible between straps. This is one practical unisex rigid mask, restrained 3-tone neutral charcoal palette, squared straight shield edges consistent with reference. No orange/gold/rust, no round metal dome or full helmet shell, no goggles or rear window, no gasmask, backpack or extra clothing. Fit EXACT existing head pixels (near x17..31,y8..21), keep original scalp/human shape and all body/neck/shoulders/arms/legs/feet/canvas coordinates unchanged. Ground pivot24,58; transparent48x64 nativecanvas. No head resizing or recentering. Only headgear pixels; full fitted source for overlay extraction onto unchanged base.",
+      "no_background": true,
+      "use_color_palette_correction": false,
+      "seed": 63231,
+      "input": "Exact canonical North standing crop [192,0,48,64] from male/base.png."
+    },
+    "chargedGenerations": 5,
+    "paidOperations": 1,
+    "paidRetries": 0,
+    "standingReference": "docs/ReviewAssets/WeldingHelmetCharcoal/male-composite-ear-fixed.png",
+    "sourceInput": "Canonical male/base.png crop [192,0,48,64], lossless native pixels passed as base64.",
+    "derivatives": "Exact pixelart_workbench exports. No object animator or AI walk generation; rigid gear follows measured head positions."
+  },
+  "extraction": {
+    "source": "male-fitted-source.png",
+    "maskRows": [
+      [
+        8,
+        20,
+        27
+      ],
+      [
+        9,
+        18,
+        29
+      ],
+      [
+        10,
+        17,
+        18,
+        23,
+        24,
+        29,
+        30
+      ],
+      [
+        11,
+        17,
+        18,
+        23,
+        24,
+        29,
+        31
+      ],
+      [
+        12,
+        17,
+        17,
+        23,
+        24,
+        30,
+        30
+      ],
+      [
+        13,
+        17,
+        17,
+        23,
+        24,
+        30,
+        31
+      ],
+      [
+        14,
+        16,
+        17,
+        23,
+        24,
+        30,
+        31
+      ],
+      [
+        15,
+        16,
+        17,
+        23,
+        24,
+        30,
+        31
+      ],
+      [
+        16,
+        16,
+        31
+      ],
+      [
+        17,
+        16,
+        31
+      ],
+      [
+        18,
+        16,
+        31
+      ],
+      [
+        19,
+        16,
+        18,
+        29,
+        30
+      ],
+      [
+        20,
+        16,
+        18,
+        29,
+        31
+      ],
+      [
+        21,
+        16,
+        20,
+        27,
+        30
+      ],
+      [
+        22,
+        17,
+        20,
+        27,
+        30
+      ],
+      [
+        23,
+        17,
+        19,
+        28,
+        30
+      ]
+    ],
+    "maskRowsFormat": "[y,xStartInclusive,xEndInclusive,...]",
+    "colorMap": {
+      "#2c2c2cff": "#202428ff",
+      "#343232ff": "#383e43ff",
+      "#504e53ff": "#596269ff",
+      "#53545aff": "#596269ff",
+      "#141515ff": "#080808ff",
+      "#686b72ff": "#596269ff",
+      "#232424ff": "#202428ff",
+      "#0b0a0aff": "#080808ff",
+      "#030302ff": "#080808ff",
+      "#62656dff": "#596269ff",
+      "#1b1b1cff": "#202428ff",
+      "#5b5d63ff": "#596269ff",
+      "#4e4c52ff": "#383e43ff",
+      "#3e3b3cff": "#383e43ff",
+      "#414145ff": "#383e43ff",
+      "#151e23ff": "#202428ff",
+      "#44454aff": "#383e43ff",
+      "#3e3e43ff": "#383e43ff",
+      "#57433fff": "#383e43ff",
+      "#60443aff": "#383e43ff",
+      "#090605ff": "#080808ff"
+    },
+    "maskPixels": 136,
+    "palette": [
+      "#202428ff",
+      "#383e43ff",
+      "#596269ff",
+      "#080808ff"
+    ],
+    "method": "Copy only inspected rear gear pixels at native coordinates; palette map to approved charcoal ramp. Preserve skin showing through suspension gaps from the original canonical body, never generated anatomy.",
+    "sharedArt": "The same rigid rear suspension fits both standing heads at native coordinates. Reused only after separate compositions were checked. Body-specific sheets retain their own head offsets and separate approval.",
+    "occlusion": "No extra body-clear pixels needed in North; opaque gear covers the head where present. All other canonical pixels remain unchanged.",
+    "motion": "Translate the rigid generated mask with measured integer head attachment, without resizing/warping or shifting fabric to force a fit."
+  },
+  "headMeasurement": {
+    "regionInclusive": [
+      14,
+      5,
+      34,
+      21
+    ],
+    "searchOffsetsInclusive": [
+      -2,
+      -2,
+      2,
+      2
+    ],
+    "metric": "Minimum RGBA mismatch against that body's standing North head, ignoring RGB under alpha zero.",
+    "standingAnchor": [
+      24,
+      14
+    ],
+    "existingVisibleChanges": "Small original scalp shade differences remain visible on some walk poses; no base pixels were corrected or regenerated."
+  },
+  "drawOrder": [
+    "unchanged_original_body",
+    "optional_approved_jacket",
+    "rear_mask_gear"
+  ],
+  "bodies": [
+    {
+      "body": "male",
+      "approvals": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "bodySheet": {
+        "path": "docs/ReviewAssets/WorkJacketNorth/male-body.png",
+        "sha256": "122A2C1DA12D05F5D96CE35F38E226161CA35D2C7CFEE770D23C17137D7EE005"
+      },
+      "jacketSheet": {
+        "path": "docs/ReviewAssets/WorkJacketNorth/male-layer.png",
+        "sha256": "0BDD9FD9F563BA3016FAE29EB8AFC303EC7924062379A653C2397C0DCBDA222B"
+      },
+      "offsetY": [
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "offsetX": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frameAnchors": [
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ]
+      ],
+      "headMatches": [
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": 0,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 1,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 1,
+          "alphaDiff": 0
+        }
+      ],
+      "hiddenBodyPixels": [],
+      "files": {
+        "layer": "male-layer.png",
+        "composite": "male-composite.png",
+        "jacketComposite": "male-jacket-composite.png"
+      },
+      "drawIds": {
+        "layer": "cf99465f-0e8e-4b7b-9769-8f92aa2986ee",
+        "composite": "3a5c69a4-9edb-4afd-a18c-ae3097012779",
+        "jacket-composite": "7cd06fac-5760-4969-8a54-f807d4f4e986"
+      }
+    },
+    {
+      "body": "female",
+      "approvals": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "bodySheet": {
+        "path": "docs/ReviewAssets/WorkJacketNorth/female-body.png",
+        "sha256": "4C1641C700F06A87048D2FF63890470D9BCEE596E1F9549C30228B06CFE0D0F8"
+      },
+      "jacketSheet": {
+        "path": "docs/ReviewAssets/WorkJacketNorth/female-layer.png",
+        "sha256": "2B389C1BA1946A3E5F8A58A85F02DB0C602AA261D58C3BD47AB9515A6CD98993"
+      },
+      "offsetY": [
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "offsetX": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frameAnchors": [
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ]
+      ],
+      "headMatches": [
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 0,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 1,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 1,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 2,
+          "alphaDiff": 0
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 5,
+          "alphaDiff": 1
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 3,
+          "alphaDiff": 1
+        },
+        {
+          "dx": 0,
+          "dy": -1,
+          "mismatches": 3,
+          "alphaDiff": 1
+        }
+      ],
+      "hiddenBodyPixels": [],
+      "files": {
+        "layer": "female-layer.png",
+        "composite": "female-composite.png",
+        "jacketComposite": "female-jacket-composite.png"
+      },
+      "drawIds": {
+        "layer": "520a54ca-2a3a-4923-9c55-b78c849a6b48",
+        "composite": "49785267-50a5-43fb-a5ce-3519da63ae73",
+        "jacket-composite": "68f1aaf9-c7cc-4696-a256-07eccb0ae78b"
+      }
+    }
+  ],
+  "files": [
+    {
+      "sha256": "4C8F94C537C5EDB5197EB0BDCF33C1BBBE7EF9285BFADA82D077347C77479DE1",
+      "path": "female-composite.png"
+    },
+    {
+      "sha256": "18AFD6C656869DDCCACC037C8A2AA902D49CB1DCBCDBA2AD654180D0A8413808",
+      "path": "female-jacket-composite.png"
+    },
+    {
+      "sha256": "CA2D17886BE6F711FDD70EF01EDB93C5FBA82E9E2E7F65741E8F27E6181A0412",
+      "path": "female-layer.png"
+    },
+    {
+      "sha256": "C2CE5BB1EBF66C3E0D1CF3557D18BC33580616A8E706B2C9484DA1B13F79C963",
+      "path": "male-composite.png"
+    },
+    {
+      "sha256": "482F57A18836E43CF921FF00F19E0144BE2CDC589C8C3FB70C51FDA19EABCAD7",
+      "path": "male-fitted-source.png"
+    },
+    {
+      "sha256": "721D4FC7A237FFE275027ED9D0BDAF77D9CA3D445AF462DF869A1BD0270C3294",
+      "path": "male-jacket-composite.png"
+    },
+    {
+      "sha256": "0EF778F4A7AD7B214DE21AA7AF79E9236ECA1B5EADBD86BA048759A4D72C287A",
+      "path": "male-layer.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: all 18 poses exactly reproduce 136 source-selected/mapped gear pixels at measured head offsets, with binary alpha and native dimensions; original scalp/body pixels and approved jacket compositions preserved. All 92 file hashes match (85 preserved, 7 new). Six 432x64 sheets plus one 48x64 raw fitted source.",
+    "preview": "PASS: Node DOM/canvas checks loaded 28 real PNGs and exercised 58 views and 768 North/South cases: four loadouts, separate standing, eight-walk selection excluding North column 0, crops/contact chronology, shared frame clock, South ear restoration, no North body clearing, pause/step/slider/wrap, scale and links. Side mask facings remain hidden; accepted 28-step jacket transitions retained. No browser rendering claim.",
+    "visual": "Both standing head/collar composites inspected at 10x and all 18 combined poses inspected in static 3x PixelLab contact sheets during authoring. Subsequently accepted with the South/North short-hair combination review: user, looks good, next phase. No browser/game launched."
+  },
+  "approvalBasis": "User: looks good, next phase. Accepts the displayed male/female South/North short-hair and mask combinations, standing and walking. Side directions and other hairstyles are not covered."
+}

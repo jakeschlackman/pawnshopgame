@@ -1,0 +1,2127 @@
+{
+  "schemaVersion": 1,
+  "itemId": "brown_leather_work_boots",
+  "slot": "feet",
+  "status": "both_bodies_north_standing_and_walking_approved",
+  "scope": "Male and female North standing plus eight walking poses only. Review assets; no production promotion. South approval remains intact. East/West and settling are not included.",
+  "direction": "north",
+  "frameSize": [
+    48,
+    64
+  ],
+  "sheetSize": [
+    432,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "standingColumn": 0,
+  "walkingColumns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "walkingDurationMs": 100,
+  "layerOrder": [
+    "original body",
+    "boots",
+    "jeans",
+    "jacket",
+    "hair",
+    "mask",
+    "wrench"
+  ],
+  "palette": [
+    "#15191bff",
+    "#353234ff",
+    "#352820ff",
+    "#594030ff",
+    "#80583bff",
+    "#aa7c50ff",
+    "#c4a071ff"
+  ],
+  "provenance": {
+    "tool": "PixelLab transfer_outfit (Pro)",
+    "created": "2026-11-07",
+    "estimatedGenerations": 20,
+    "requests": {
+      "male": {
+        "frame_urls": [
+          "https://api.pixellab.ai/mcp/pixel-tools/1ff2a1e1-50c0-4e2c-8853-4fbbe3532997/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/cb650b91-c189-48ef-8697-9e58b9966b70/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/b4baa952-b007-4976-8e75-efe42e0810e1/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/4581c9de-9224-4e30-bceb-fbb26f0cbfe6/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/9122c62b-6a2a-4483-8753-10ceee30f811/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/0f61bbb9-26f8-4612-b899-549be0a8b1e6/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/72b5b454-5ae7-41b1-abd6-a14bd5523a3b/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/8e296ec8-573a-481e-b4bc-f82a9752665f/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/312672ad-3f90-4622-82d1-5e78318fff71/assets/north/full.png"
+        ],
+        "reference_image_url": "https://api.pixellab.ai/mcp/pixel-tools/e0afaf49-1eeb-4b3e-9524-e2fafe2b0dc2/assets/south/full.png",
+        "width": 48,
+        "height": 64,
+        "no_background": true,
+        "seed": 63901,
+        "additional_instructions": "NORTH/REAR VIEW ONLY of the SAME male character. First input is the exact standing rear pose; next eight are the exact approved rear walk poses in order. Fit ONLY the approved brown leather work boots from the same-body South standing reference, seen FROM BEHIND. Reference is a FRONT design/material guide: do not rotate the bodies or draw front-facing lace panels on their heels. Practical low ankle-height work boots, warm medium-dark brown leather, dark charcoal rubber soles, simple back seam and small pull tab, restrained heel shading. No bright badges, gold, orange, spurs or fashion heels. Full boot shafts, because accepted jeans will draw OVER the tops as a separate layer. Cover each original ankle and bare foot at its exact native position; preserve EACH foot's actual lowest opaque row, ground contact and lift in every pose. Keep central leg gap. No enlarged stance, dragging soles, floating boots, new gait or shifted/scaled anatomy. Stable coherent leather shading across the sequence. No jeans, jacket, hair or other gear. Keep original head, hands, underwear, limbs and 48x64 canvas with pivot (24,58). Only footwear pixels will be extracted over unchanged original bodies; all generated anatomy is discarded."
+      },
+      "female": {
+        "frame_urls": [
+          "https://api.pixellab.ai/mcp/pixel-tools/dd70d859-791e-40be-9dbe-b3342f57bb50/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/6aec5160-c122-4174-90e3-dff67d4249ec/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/7af65d9e-b596-4f25-8b9a-02ecae535055/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/6d6ce9fa-e478-462f-8041-870163a81a64/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/cbc16511-e951-4860-9db0-2784f98f40ae/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/aaacab4e-5539-4d93-ac10-fc5f97fd119f/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/e6a27e1d-a6a0-4362-afb7-deb1ad9aa5a6/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/64ba9786-cb6c-4b07-bbf1-c21398e55f52/assets/north/full.png",
+          "https://api.pixellab.ai/mcp/pixel-tools/b6684704-0a07-4480-8ee1-f43f856a3113/assets/north/full.png"
+        ],
+        "reference_image_url": "https://api.pixellab.ai/mcp/pixel-tools/0ea5c120-2385-45b6-a5e1-dcdfe38b0a39/assets/south/full.png",
+        "width": 48,
+        "height": 64,
+        "no_background": true,
+        "seed": 63902,
+        "additional_instructions": "NORTH/REAR VIEW ONLY of the SAME female character. First input is the exact standing rear pose; next eight are the exact approved rear walk poses in order. Fit ONLY the approved brown leather work boots from the same-body South standing reference, seen FROM BEHIND. Reference is a FRONT design/material guide: do not rotate the bodies or draw front-facing lace panels on their heels. Practical low ankle-height work boots, warm medium-dark brown leather, dark charcoal rubber soles, simple back seam and small pull tab, restrained heel shading. No bright badges, gold, orange, spurs or fashion heels. Full boot shafts, because accepted jeans will draw OVER the tops as a separate layer. Cover each original ankle and bare foot at its exact native position; preserve EACH foot's actual lowest opaque row, ground contact and lift in every pose. Keep central leg gap. No enlarged stance, dragging soles, floating boots, new gait or shifted/scaled anatomy. Stable coherent leather shading across the sequence. No jeans, jacket, hair or other gear. Keep original head, hands, underwear, limbs and 48x64 canvas with pivot (24,58). Only footwear pixels will be extracted over unchanged original bodies; all generated anatomy is discarded."
+      }
+    },
+    "jobs": {
+      "male": "8eba1cff-8ead-4e6c-b98a-175eaa0758ba",
+      "female": "e7740f7d-e402-4a3a-9768-41ff7ff9fff9"
+    },
+    "animationGeneration": false,
+    "chargedGenerations": 20,
+    "sourceUrls": {
+      "male": "https://api.pixellab.ai/mcp/pixel-tools/c047436c-e247-4ca8-97c9-a1ee8b20d0ad/image.png",
+      "female": "https://api.pixellab.ai/mcp/pixel-tools/01b18799-69f5-403d-860c-fa13fbff3746/image.png"
+    },
+    "exportIds": {
+      "male": "65906331-64fd-4f2e-b23b-eeb9a96f6831",
+      "female": "43a8ac34-3e31-446c-b1a0-b704dc005b2e"
+    },
+    "supersededMaleExport": {
+      "id": "f186e18e-9b0f-4ef0-a126-b396cee9fe99",
+      "reason": "Two exposed original ankle boundary pixels found in column 1 before local export; corrected in final export. No local approved file replaced."
+    },
+    "exportUrls": {
+      "male": {
+        "layer": "https://api.pixellab.ai/mcp/pixel-tools/65906331-64fd-4f2e-b23b-eeb9a96f6831/assets/layer/full.png",
+        "body-composite": "https://api.pixellab.ai/mcp/pixel-tools/65906331-64fd-4f2e-b23b-eeb9a96f6831/assets/body-composite/full.png",
+        "jeans-composite": "https://api.pixellab.ai/mcp/pixel-tools/65906331-64fd-4f2e-b23b-eeb9a96f6831/assets/jeans-composite/full.png",
+        "equipped-composite": "https://api.pixellab.ai/mcp/pixel-tools/65906331-64fd-4f2e-b23b-eeb9a96f6831/assets/equipped-composite/full.png"
+      },
+      "female": {
+        "layer": "https://api.pixellab.ai/mcp/pixel-tools/43a8ac34-3e31-446c-b1a0-b704dc005b2e/assets/layer/full.png",
+        "body-composite": "https://api.pixellab.ai/mcp/pixel-tools/43a8ac34-3e31-446c-b1a0-b704dc005b2e/assets/body-composite/full.png",
+        "jeans-composite": "https://api.pixellab.ai/mcp/pixel-tools/43a8ac34-3e31-446c-b1a0-b704dc005b2e/assets/jeans-composite/full.png",
+        "equipped-composite": "https://api.pixellab.ai/mcp/pixel-tools/43a8ac34-3e31-446c-b1a0-b704dc005b2e/assets/equipped-composite/full.png"
+      }
+    },
+    "method": "Per-pose native boot masks select source leather and adjacent dark outline/sole colors inside the original leg silhouette plus at most one horizontal source-authored edge pixel. Each foot retains its exact original bottom row. Nearest-RGB mapping to approved seven-color palette; ten explicit native boundary/color corrections. No shifting, stretching, repeated rows or changed body motion. PixelLab workbench exports selected source-derived pixels and exact original-body composites.",
+    "rearSourceColors": {
+      "male": [
+        "#0b0504ff",
+        "#070101ff",
+        "#0b0302ff",
+        "#221613ff",
+        "#402b20ff",
+        "#75523bff",
+        "#53392dff",
+        "#332c2cff",
+        "#474449ff"
+      ],
+      "female": [
+        "#0b0504ff",
+        "#080201ff",
+        "#67503eff",
+        "#150d0bff",
+        "#71553fff",
+        "#533d2fff",
+        "#342c2aff",
+        "#211512ff",
+        "#2a2729ff",
+        "#454448ff"
+      ]
+    }
+  },
+  "bodies": {
+    "male": {
+      "approval": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "bodySource": "../WorkJacketNorth/male-body.png",
+      "bodySha256": "122A2C1DA12D05F5D96CE35F38E226161CA35D2C7CFEE770D23C17137D7EE005",
+      "standingReference": "../BootsPilot/male-body-composite.png",
+      "standingReferenceSha256": "5953E1F0352FFD77F229B798DB6AFE6F17B199F752AEE45E68E21EEA7CA99BB5",
+      "fittedSource": "male-fitted-source.png",
+      "layer": "male-layer.png",
+      "bodyComposite": "male-body-composite.png",
+      "jeansComposite": "male-jeans-composite.png",
+      "equippedComposite": "male-equipped-composite.png",
+      "colorMap": {
+        "#0b0504ff": "#15191bff",
+        "#402b20ff": "#352820ff",
+        "#221613ff": "#15191bff",
+        "#0b0302ff": "#15191bff",
+        "#75523bff": "#80583bff",
+        "#53392dff": "#594030ff",
+        "#332c2cff": "#353234ff",
+        "#070101ff": "#15191bff",
+        "#474449ff": "#594030ff"
+      },
+      "poses": [
+        {
+          "column": 0,
+          "pose": "standing",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 50,
+              "bottom": 57,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 50,
+              "bottom": 57,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              50,
+              17,
+              22,
+              25,
+              30
+            ],
+            [
+              51,
+              17,
+              21,
+              26,
+              30
+            ],
+            [
+              52,
+              17,
+              21,
+              26,
+              30
+            ],
+            [
+              53,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              54,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              55,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              56,
+              17,
+              21,
+              26,
+              30
+            ],
+            [
+              57,
+              18,
+              20,
+              27,
+              29
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 84
+        },
+        {
+          "column": 1,
+          "pose": "walk_1",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 48,
+              "bottom": 57,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 46,
+              "bottom": 54,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              46,
+              26,
+              30
+            ],
+            [
+              47,
+              26,
+              30
+            ],
+            [
+              48,
+              16,
+              16,
+              21,
+              21,
+              26,
+              30
+            ],
+            [
+              49,
+              16,
+              16,
+              18,
+              21,
+              26,
+              30
+            ],
+            [
+              50,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              51,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              53,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              54,
+              16,
+              21,
+              27,
+              29
+            ],
+            [
+              55,
+              16,
+              21
+            ],
+            [
+              56,
+              16,
+              21
+            ],
+            [
+              57,
+              17,
+              20
+            ]
+          ],
+          "nativePixelCleanup": [
+            {
+              "x": 16,
+              "y": 52,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover original native foot/ankle boundary omitted by fitted source."
+            },
+            {
+              "x": 16,
+              "y": 53,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover original native foot/ankle boundary omitted by fitted source."
+            }
+          ],
+          "pixelCount": 98
+        },
+        {
+          "column": 2,
+          "pose": "walk_2",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 47,
+              "bottom": 55,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              47,
+              26,
+              30
+            ],
+            [
+              48,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              49,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              50,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              51,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              53,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              54,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              55,
+              17,
+              21,
+              27,
+              29
+            ],
+            [
+              56,
+              18,
+              20
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 95
+        },
+        {
+          "column": 3,
+          "pose": "walk_3",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 47,
+              "bottom": 54,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 47,
+              "bottom": 56,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              47,
+              17,
+              21,
+              25,
+              28,
+              30,
+              30
+            ],
+            [
+              48,
+              17,
+              21,
+              25,
+              30
+            ],
+            [
+              49,
+              17,
+              21,
+              25,
+              30
+            ],
+            [
+              50,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              51,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              53,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              54,
+              18,
+              20,
+              26,
+              31
+            ],
+            [
+              55,
+              26,
+              30
+            ],
+            [
+              56,
+              27,
+              29
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 94
+        },
+        {
+          "column": 4,
+          "pose": "walk_4",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 47,
+              "bottom": 54,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              47,
+              17,
+              21
+            ],
+            [
+              48,
+              17,
+              21,
+              25,
+              30
+            ],
+            [
+              49,
+              17,
+              21,
+              25,
+              30
+            ],
+            [
+              50,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              51,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              53,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              54,
+              18,
+              20,
+              26,
+              31
+            ],
+            [
+              55,
+              26,
+              30
+            ],
+            [
+              56,
+              27,
+              29
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 89
+        },
+        {
+          "column": 5,
+          "pose": "walk_5",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 46,
+              "bottom": 54,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 49,
+              "bottom": 57,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              46,
+              17,
+              17,
+              21,
+              21
+            ],
+            [
+              47,
+              17,
+              21
+            ],
+            [
+              48,
+              17,
+              21
+            ],
+            [
+              49,
+              17,
+              21,
+              26,
+              29,
+              31,
+              31
+            ],
+            [
+              50,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              51,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              53,
+              17,
+              21,
+              26,
+              30
+            ],
+            [
+              54,
+              18,
+              20,
+              26,
+              31
+            ],
+            [
+              55,
+              26,
+              31
+            ],
+            [
+              56,
+              26,
+              31
+            ],
+            [
+              57,
+              27,
+              30
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 90
+        },
+        {
+          "column": 6,
+          "pose": "walk_6",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 49,
+              "bottom": 56,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              48,
+              26,
+              29,
+              31,
+              31
+            ],
+            [
+              49,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              50,
+              17,
+              21,
+              26,
+              30
+            ],
+            [
+              51,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              53,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              54,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              55,
+              17,
+              21,
+              26,
+              30
+            ],
+            [
+              56,
+              18,
+              20,
+              27,
+              29
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 90
+        },
+        {
+          "column": 7,
+          "pose": "walk_7",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 49,
+              "bottom": 56,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 46,
+              "bottom": 54,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              46,
+              26,
+              26,
+              31,
+              31
+            ],
+            [
+              47,
+              26,
+              31
+            ],
+            [
+              48,
+              26,
+              30
+            ],
+            [
+              49,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              50,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              51,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              53,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              54,
+              16,
+              21,
+              27,
+              29
+            ],
+            [
+              55,
+              17,
+              21
+            ],
+            [
+              56,
+              18,
+              20
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 86
+        },
+        {
+          "column": 8,
+          "pose": "walk_8",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 49,
+              "bottom": 56,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 46,
+              "bottom": 54,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              46,
+              26,
+              26,
+              30,
+              30
+            ],
+            [
+              47,
+              26,
+              30
+            ],
+            [
+              48,
+              26,
+              30
+            ],
+            [
+              49,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              50,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              51,
+              17,
+              21,
+              26,
+              31
+            ],
+            [
+              52,
+              16,
+              21,
+              26,
+              31
+            ],
+            [
+              53,
+              16,
+              21,
+              26,
+              30
+            ],
+            [
+              54,
+              16,
+              21,
+              27,
+              29
+            ],
+            [
+              55,
+              17,
+              21
+            ],
+            [
+              56,
+              18,
+              20
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 85
+        }
+      ]
+    },
+    "female": {
+      "approval": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "bodySource": "../WorkJacketNorth/female-body.png",
+      "bodySha256": "4C1641C700F06A87048D2FF63890470D9BCEE596E1F9549C30228B06CFE0D0F8",
+      "standingReference": "../BootsPilot/female-body-composite.png",
+      "standingReferenceSha256": "FE9591C05123D4B8740EFBF8B3BBD122350432456D6EF012030547F0A454AF02",
+      "fittedSource": "female-fitted-source.png",
+      "layer": "female-layer.png",
+      "bodyComposite": "female-body-composite.png",
+      "jeansComposite": "female-jeans-composite.png",
+      "equippedComposite": "female-equipped-composite.png",
+      "colorMap": {
+        "#0b0504ff": "#15191bff",
+        "#150d0bff": "#15191bff",
+        "#67503eff": "#594030ff",
+        "#71553fff": "#80583bff",
+        "#533d2fff": "#594030ff",
+        "#080201ff": "#15191bff",
+        "#342c2aff": "#352820ff",
+        "#211512ff": "#15191bff",
+        "#2a2729ff": "#352820ff",
+        "#454448ff": "#353234ff"
+      },
+      "poses": [
+        {
+          "column": 0,
+          "pose": "standing",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 50,
+              "bottom": 57,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 50,
+              "bottom": 57,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              50,
+              18,
+              23,
+              25,
+              30
+            ],
+            [
+              51,
+              18,
+              23,
+              25,
+              30
+            ],
+            [
+              52,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              53,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              54,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              55,
+              17,
+              22,
+              26,
+              31
+            ],
+            [
+              56,
+              17,
+              22,
+              26,
+              31
+            ],
+            [
+              57,
+              18,
+              22,
+              26,
+              30
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 88
+        },
+        {
+          "column": 1,
+          "pose": "walk_1",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 49,
+              "bottom": 57,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 45,
+              "bottom": 53,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              45,
+              25,
+              30
+            ],
+            [
+              46,
+              25,
+              30
+            ],
+            [
+              47,
+              26,
+              30
+            ],
+            [
+              48,
+              26,
+              30
+            ],
+            [
+              49,
+              17,
+              17,
+              19,
+              22,
+              26,
+              30
+            ],
+            [
+              50,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              51,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              52,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              53,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              54,
+              18,
+              22
+            ],
+            [
+              55,
+              17,
+              22
+            ],
+            [
+              56,
+              17,
+              22
+            ],
+            [
+              57,
+              18,
+              22
+            ]
+          ],
+          "nativePixelCleanup": [
+            {
+              "x": 30,
+              "y": 51,
+              "source": "#8e6150ff",
+              "result": "#80583bff",
+              "reason": "Normalize stray skin-like source shade within boot boundary to leather."
+            }
+          ],
+          "pixelCount": 97
+        },
+        {
+          "column": 2,
+          "pose": "walk_2",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 49,
+              "bottom": 57,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 45,
+              "bottom": 54,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              45,
+              25,
+              30
+            ],
+            [
+              46,
+              25,
+              30
+            ],
+            [
+              47,
+              26,
+              30
+            ],
+            [
+              48,
+              26,
+              30
+            ],
+            [
+              49,
+              17,
+              17,
+              19,
+              22,
+              26,
+              30
+            ],
+            [
+              50,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              51,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              52,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              53,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              54,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              55,
+              17,
+              22
+            ],
+            [
+              56,
+              17,
+              22
+            ],
+            [
+              57,
+              18,
+              22
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 101
+        },
+        {
+          "column": 3,
+          "pose": "walk_3",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 45,
+              "bottom": 56,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              45,
+              17,
+              17,
+              19,
+              21
+            ],
+            [
+              46,
+              17,
+              22
+            ],
+            [
+              47,
+              17,
+              22
+            ],
+            [
+              48,
+              17,
+              22,
+              25,
+              30
+            ],
+            [
+              49,
+              18,
+              22,
+              25,
+              30
+            ],
+            [
+              50,
+              18,
+              22,
+              25,
+              30
+            ],
+            [
+              51,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              52,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              53,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              54,
+              17,
+              22,
+              26,
+              31
+            ],
+            [
+              55,
+              18,
+              21,
+              26,
+              31
+            ],
+            [
+              56,
+              19,
+              20,
+              26,
+              30
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 111
+        },
+        {
+          "column": 4,
+          "pose": "walk_4",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 46,
+              "bottom": 54,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              46,
+              17,
+              17,
+              19,
+              22
+            ],
+            [
+              47,
+              17,
+              22
+            ],
+            [
+              48,
+              17,
+              22,
+              25,
+              30
+            ],
+            [
+              49,
+              18,
+              22,
+              25,
+              30
+            ],
+            [
+              50,
+              18,
+              22,
+              25,
+              30
+            ],
+            [
+              51,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              52,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              53,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              54,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              55,
+              26,
+              31
+            ],
+            [
+              56,
+              26,
+              30
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 99
+        },
+        {
+          "column": 5,
+          "pose": "walk_5",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 45,
+              "bottom": 53,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 49,
+              "bottom": 57,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              45,
+              18,
+              22
+            ],
+            [
+              46,
+              18,
+              22
+            ],
+            [
+              47,
+              18,
+              22
+            ],
+            [
+              48,
+              18,
+              22
+            ],
+            [
+              49,
+              18,
+              22,
+              26,
+              29,
+              31,
+              31
+            ],
+            [
+              50,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              51,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              52,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              53,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              54,
+              26,
+              30
+            ],
+            [
+              55,
+              26,
+              31
+            ],
+            [
+              56,
+              26,
+              31
+            ],
+            [
+              57,
+              26,
+              30
+            ]
+          ],
+          "nativePixelCleanup": [
+            {
+              "x": 29,
+              "y": 54,
+              "source": "#8b5844ff",
+              "result": "#80583bff",
+              "reason": "Normalize stray skin-like source shade within boot boundary to leather."
+            },
+            {
+              "x": 30,
+              "y": 55,
+              "source": "#8e6150ff",
+              "result": "#80583bff",
+              "reason": "Normalize stray skin-like source shade within boot boundary to leather."
+            }
+          ],
+          "pixelCount": 95
+        },
+        {
+          "column": 6,
+          "pose": "walk_6",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 46,
+              "bottom": 55,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              46,
+              18,
+              22
+            ],
+            [
+              47,
+              18,
+              22
+            ],
+            [
+              48,
+              18,
+              22,
+              26,
+              29,
+              31,
+              31
+            ],
+            [
+              49,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              50,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              51,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              52,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              53,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              54,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              55,
+              19,
+              22,
+              26,
+              31
+            ],
+            [
+              56,
+              26,
+              30
+            ]
+          ],
+          "nativePixelCleanup": [],
+          "pixelCount": 99
+        },
+        {
+          "column": 7,
+          "pose": "walk_7",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 45,
+              "bottom": 55,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              45,
+              26,
+              29,
+              31,
+              31
+            ],
+            [
+              46,
+              26,
+              31
+            ],
+            [
+              47,
+              26,
+              31
+            ],
+            [
+              48,
+              18,
+              23,
+              26,
+              30
+            ],
+            [
+              49,
+              18,
+              23,
+              26,
+              30
+            ],
+            [
+              50,
+              18,
+              23,
+              26,
+              30
+            ],
+            [
+              51,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              52,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              53,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              54,
+              17,
+              22,
+              26,
+              31
+            ],
+            [
+              55,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              56,
+              18,
+              22
+            ]
+          ],
+          "nativePixelCleanup": [
+            {
+              "x": 29,
+              "y": 49,
+              "source": "#8b5844ff",
+              "result": "#80583bff",
+              "reason": "Normalize stray skin-like source shade within boot boundary to leather."
+            },
+            {
+              "x": 26,
+              "y": 54,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover original native foot/ankle boundary omitted by fitted source."
+            },
+            {
+              "x": 26,
+              "y": 55,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover original native foot/ankle boundary omitted by fitted source."
+            },
+            {
+              "x": 27,
+              "y": 55,
+              "source": "#00000000",
+              "result": "#15191bff",
+              "reason": "Cover original native foot/ankle boundary omitted by fitted source."
+            }
+          ],
+          "pixelCount": 110
+        },
+        {
+          "column": 8,
+          "pose": "walk_8",
+          "legs": [
+            {
+              "screenSide": "left",
+              "top": 48,
+              "bottom": 56,
+              "xRange": [
+                14,
+                23
+              ]
+            },
+            {
+              "screenSide": "right",
+              "top": 45,
+              "bottom": 54,
+              "xRange": [
+                25,
+                34
+              ]
+            }
+          ],
+          "rows": [
+            [
+              45,
+              25,
+              29,
+              31,
+              31
+            ],
+            [
+              46,
+              26,
+              28,
+              30,
+              31
+            ],
+            [
+              47,
+              26,
+              31
+            ],
+            [
+              48,
+              18,
+              23,
+              26,
+              30
+            ],
+            [
+              49,
+              18,
+              23,
+              26,
+              30
+            ],
+            [
+              50,
+              18,
+              23,
+              26,
+              30
+            ],
+            [
+              51,
+              18,
+              22,
+              26,
+              30
+            ],
+            [
+              52,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              53,
+              18,
+              22,
+              26,
+              31
+            ],
+            [
+              54,
+              17,
+              22,
+              26,
+              30
+            ],
+            [
+              55,
+              17,
+              22
+            ],
+            [
+              56,
+              18,
+              22
+            ]
+          ],
+          "nativePixelCleanup": [
+            {
+              "x": 29,
+              "y": 47,
+              "source": "#8b5844ff",
+              "result": "#80583bff",
+              "reason": "Normalize stray skin-like source shade within boot boundary to leather."
+            }
+          ],
+          "pixelCount": 104
+        }
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "female-body-composite.png",
+      "sha256": "60A53A5C4CD1C57114B3514FD6BC483F78390518088A3EF28FAF1EBCE7E61019"
+    },
+    {
+      "path": "female-equipped-composite.png",
+      "sha256": "2FC1C2C90EEC9113B36E5B1DF9F8EAC2EE03812DC6614515AD9B1583DEE086EA"
+    },
+    {
+      "path": "female-fitted-source.png",
+      "sha256": "2A45098926ED54078321BB5C900E449B9AA655B7B73E9134BAF103F0435E52E6"
+    },
+    {
+      "path": "female-jeans-composite.png",
+      "sha256": "2D5435A4D1A8D5160A439F7B077DD945F60082A3D279AB6BE9904C88CD1268DF"
+    },
+    {
+      "path": "female-layer.png",
+      "sha256": "960E07A0B6D8661BFCE50F16834372FC41DFA3CB1DA8A83D20AA915FBB9A29A6"
+    },
+    {
+      "path": "male-body-composite.png",
+      "sha256": "C4A73ACD9E180985EA42255A3B699B8973B6E5D0BCFBCE68211AB28F44719F66"
+    },
+    {
+      "path": "male-equipped-composite.png",
+      "sha256": "4EEACA98F6900FE96753FFA4E482C4466963791888E40B66C95ABB082D7221CA"
+    },
+    {
+      "path": "male-fitted-source.png",
+      "sha256": "C016CEEF36BB47CC97D5DED225412243A8E59382D61B4A75B83DDFD49A97C3F7"
+    },
+    {
+      "path": "male-jeans-composite.png",
+      "sha256": "EB666D06EE143C9C89F1C19700B5F17D1236356A870FA396729FD3071614EE10"
+    },
+    {
+      "path": "male-layer.png",
+      "sha256": "86659AC02B205DE01FA6B180EB937883F599022A4C0250FC4A38170BCA1BF31D"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: 18 poses, 55296 native mask/source pixel checks, 8 exact 432x64 binary-alpha derivative exports, 36 separate connected boots, original foot bottom/lift and ankle coverage. Ten documented native corrections. All 221 prior recorded PNGs unchanged; 10 new PNG hashes recorded.",
+    "preview": "PASS: 75 PNGs, 200 views; 6656 direction/motion/loadout cases with all 64 equipment combinations, 133120 North view checks and 1198080 preserved view comparisons. Standing column 0 excluded from walk loop; shared body/gear frames, crops, contacts, West mirroring, side settling, pause/step/slider/wrap, 100 ms clock, scales and links pass. Nonvisual DOM/canvas harness; no browser launch.",
+    "visual": "Both North standing/walking boot fits approved by user: good, next. No agent browser/game launch claimed.",
+    "preservation": "All 702 files present at task start were hashed. Only the existing HTML preview and equipment verification record are intentionally edited; original artwork, production code and Sprout remain unchanged.",
+    "inputReferences": "All 18 recorded remote pose inputs and both approved boot references decoded and matched pixel-for-pixel against local canonical/review files."
+  },
+  "next": "East/mirrored West boots, including standing, eight walking poses and side settling, then stop for visual approval.",
+  "intendedUse": {
+    "role": "procedurally_varied_shop_customers",
+    "basis": "User redirected this modular body/hair/clothing work to NPC visitors who buy and sell. Main player and notable characters will follow a separate distinct design strategy.",
+    "variation": "Future customer generation can select compatible body-specific clothing and hair combinations; no generator or production integration is implemented by this review.",
+    "heldItems": "Not a requirement for this customer asset set. Existing wrench artwork is preserved as optional reference; preview defaults it off.",
+    "organization": "No folder moves before user walkthrough. Existing player-prefixed filenames remain historical source paths, not a claim of intended protagonist use."
+  },
+  "approvalBasis": "User: good, next. Approves both North-standing and North-walking boot fits shown; does not separately approve the optional North wrench correction."
+}

@@ -1,0 +1,384 @@
+{
+  "version": 1,
+  "direction": "east",
+  "status": "east_west_standing_walk_settle_approved",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "sheetCanvas": [
+    480,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "standingColumn": 0,
+  "walkingColumns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "middleSettleColumn": 9,
+  "startingColumns": [
+    0,
+    9,
+    1
+  ],
+  "settlingColumns": [
+    1,
+    9,
+    0
+  ],
+  "walkingDurationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "previewTransitionColumns": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    9,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    9,
+    0
+  ],
+  "previewStepMs": 100,
+  "preview": "tools/player-equipment-review.html",
+  "west": "Mirror the complete East composition around canvas x=24 (pixel x becomes 47-x), including offsets, layers and review crops. Preserve pose order. No authored West sheets.",
+  "scope": "Review assets only. Standing, eight walking poses and middle settling pose on both bodies. No production C# changes or folder moves.",
+  "sourceBodyManifest": "docs/ReviewAssets/WorkJacketEast/review.json",
+  "headAttachment": {
+    "method": "Exhaustive exact RGBA matching of standing head region [15,5,33,21] inclusive against each accepted body pose. All 20 poses match without changes, using only the recorded integer translations. Apply the same translations to rigid mask and short hair.",
+    "offsets": {
+      "male": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "female": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "approval": {
+    "male": {
+      "standing": "approved_by_user",
+      "walking": "approved_by_user",
+      "settling": "approved_by_user",
+      "mirroredWest": "approved_by_user"
+    },
+    "female": {
+      "standing": "approved_by_user",
+      "walking": "approved_by_user",
+      "settling": "approved_by_user",
+      "mirroredWest": "approved_by_user"
+    }
+  },
+  "id": "helmet_welder",
+  "slot": "head",
+  "design": "Side of accepted charcoal welding face shield, lowered front faces right. Open rear suspension, crown strap and rigid squared shell. Same 134-pixel mask on both bodies after inspecting both native fits; no generated anatomy retained.",
+  "generation": {
+    "tool": "PixelLab edit_image_pro_flash reference",
+    "jobId": "5b30d756-c823-4c5e-bf83-f342a945290e",
+    "source": "male-fitted-source.png",
+    "request": {
+      "method": "reference",
+      "reference_image": {
+        "url": "https://api.pixellab.ai/mcp/pixel-tools/fdf3cf05-2cd4-4145-abcb-08bd9f79861d/image.png",
+        "usage_description": "Same approved charcoal welding mask from FRONT; use design and neutral gray palette. Edit target is EAST/right-facing profile: retain its exact pose and show this same shield from SIDE."
+      },
+      "description": "Add ONLY the reference's lowered rigid CHARCOAL GRAY welding face shield to the exact right-facing EAST standing head. SIDE PROFILE, wearer faces RIGHT. Squared practical industrial shield in front of the face, narrow dark visor at eye level on RIGHT-facing front, slim hard straight shell, small round temple pivot, horizontal suspension band wrapping LEFT behind head and a thin crown strap. Rear scalp remains visible beneath open straps. Same modest dimensions as reference, not an oversized helmet, not a rounded dome. Match neutral dark gray reference; no orange, gold, rust or colored lights. Keep EXACT original head/body/face/neck anatomy and native position; do not turn person toward camera or resize/recenter. Feet and all pixels below neck unchanged. Transparent 48x64 native canvas, ground pivot24,58. Return full fitted source for gear-only extraction; no jacket/hair or new clothing.",
+      "no_background": true,
+      "use_color_palette_correction": false,
+      "seed": 63301,
+      "input": "Exact accepted male East standing body, WorkJacketEast body.png column 0, 48x64 lossless crop."
+    },
+    "chargedGenerations": 5,
+    "paidOperations": 1,
+    "paidRetries": 0,
+    "derivatives": "PixelLab pixelart_workbench exact pixel exports; no independent animation generation."
+  },
+  "extraction": {
+    "source": "male-fitted-source.png",
+    "maskRows": [
+      [
+        8,
+        21,
+        25
+      ],
+      [
+        9,
+        22,
+        29
+      ],
+      [
+        10,
+        22,
+        30
+      ],
+      [
+        11,
+        22,
+        30
+      ],
+      [
+        12,
+        22,
+        30
+      ],
+      [
+        13,
+        22,
+        30
+      ],
+      [
+        14,
+        17,
+        30
+      ],
+      [
+        15,
+        17,
+        30
+      ],
+      [
+        16,
+        22,
+        30
+      ],
+      [
+        17,
+        24,
+        30
+      ],
+      [
+        18,
+        24,
+        30
+      ],
+      [
+        19,
+        24,
+        30
+      ],
+      [
+        20,
+        24,
+        30
+      ],
+      [
+        21,
+        24,
+        30
+      ],
+      [
+        22,
+        24,
+        30
+      ],
+      [
+        23,
+        25,
+        30
+      ]
+    ],
+    "rowsFormat": "[y, inclusive x start, inclusive x end, ...], native standing coordinates.",
+    "colorMap": {
+      "#0a0a0aff": "#080808ff",
+      "#1e2124ff": "#202428ff",
+      "#2e3235ff": "#383e43ff",
+      "#030202ff": "#080808ff",
+      "#41464aff": "#383e43ff",
+      "#222325ff": "#202428ff",
+      "#4e555bff": "#596269ff",
+      "#26292cff": "#202428ff",
+      "#2b2c2eff": "#202428ff",
+      "#3c4246ff": "#383e43ff",
+      "#1a1d1fff": "#202428ff",
+      "#545b61ff": "#596269ff",
+      "#393e42ff": "#383e43ff",
+      "#363a3dff": "#383e43ff",
+      "#5c646aff": "#596269ff",
+      "#323639ff": "#383e43ff",
+      "#131416ff": "#080808ff",
+      "#464d53ff": "#383e43ff"
+    },
+    "palette": [
+      "#080808ff",
+      "#202428ff",
+      "#383e43ff",
+      "#596269ff",
+      "#899297ff"
+    ],
+    "opaquePixelsPerPose": 134,
+    "bodyOcclusion": "None beyond gear's own alpha. Original body is unchanged."
+  },
+  "bodies": [
+    {
+      "body": "male",
+      "layer": "male-layer.png",
+      "bodyComposite": "male-composite.png",
+      "jacketComposite": "male-jacket-composite.png"
+    },
+    {
+      "body": "female",
+      "layer": "female-layer.png",
+      "bodyComposite": "female-composite.png",
+      "jacketComposite": "female-jacket-composite.png"
+    }
+  ],
+  "files": [
+    {
+      "path": "female-composite.png",
+      "sha256": "D50818EDE81B6FD403C758B13B621C2E3AA3CDE6AFB0860BE108E59231B57A3F"
+    },
+    {
+      "path": "female-jacket-composite.png",
+      "sha256": "338DA3B32F4D10786256AC12864D75110E6DB84157D3A90120143851FA546AAC"
+    },
+    {
+      "path": "female-layer.png",
+      "sha256": "3F90699E87CD1B77C6EF6016A8F15EFF60F45640C9131A035A2F4D23F82B4570"
+    },
+    {
+      "path": "male-composite.png",
+      "sha256": "0CA9E198162C173F1F75E0D047B896282CC4AE1FD126ABC12380EA7784D0D622"
+    },
+    {
+      "path": "male-fitted-source.png",
+      "sha256": "0168EF11170827E7DA7DEA90E762359CBD84F0C5B5A731F83FC9E53ECB632FBE"
+    },
+    {
+      "path": "male-jacket-composite.png",
+      "sha256": "784754D8294E60558B4F72711134096B6CBC64B3EB3ED3D58BC68C973EC66968"
+    },
+    {
+      "path": "male-layer.png",
+      "sha256": "09CD5510ACA399DB38A374170BE3C97BCA38D97194DC0FA8C955ADDE8BDA9F1A"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: 129 final locked file hashes (112 prior files preserved, 17 new PNGs); 20 head/overlay poses and 80 pixel-exact compositions, native dimensions, binary alpha, source selections/palette mappings, measured integer head translations, alpha-only hair clipping and visible hair through strap openings. Final female source-ear exclusion rechecked across all 10 poses and both hair compositions.",
+    "preview": "PASS: Node DOM/canvas checks loaded 42 actual PNGs and exercised 62 views, 704 direction/motion/loadout cases, 11264 mask/hair views and 2138752 mirror-coordinate checks. Shared columns, contact chronology, all eight item/hair combinations, static South comparisons, ear clearing/restoration, pause/step/slider/wrap, scaling and links. No live browser rendering claim.",
+    "visual": "Standing original-body and jacket/hair compositions inspected as static PixelLab images, plus all 20 equipped head poses. User East/West and settling acceptance pending. No browser/game launch. Subsequently accepted by user: great, next phase; see approvalBasis."
+  },
+  "pixelLabExports": {
+    "male_mask": "d1e9005c-901a-4b22-aea6-874a77dfe3b7",
+    "male_composite": "6ab7a391-0c3e-4bbf-89a9-5979f338eaf8",
+    "male_jacketComposite": "a1d37721-f7c0-44b8-abfc-481b9adec3b3",
+    "female_mask": "65d7dba7-1e14-46f4-81c9-ef5a01c3ca89",
+    "female_composite": "aa287970-f142-441a-8fce-451113686e95",
+    "female_jacketComposite": "b58c3af7-e207-4ba4-a105-a9f0fe7cb190"
+  },
+  "approvalBasis": "User: great, next phase. Accepts displayed male/female East and mirrored West mask/short-hair standing, walking and settling combinations. Other hairstyles and tools remain separate approval scopes."
+}

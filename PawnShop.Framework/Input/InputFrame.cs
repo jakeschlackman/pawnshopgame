@@ -1,9 +1,12 @@
 namespace PawnShop.Framework.Input;
 
 [Flags]
-public enum InputButtons { None = 0, Up = 1, Down = 2, Confirm = 4, Cancel = 8, Interact = 16 }
+public enum InputButtons { None = 0, Up = 1, Down = 2, Confirm = 4, Cancel = 8, Interact = 16, Left = 32, Right = 64, NextTab = 128 }
 public readonly record struct InputFrame(bool Up = false, bool Down = false, bool Confirm = false,
-    bool Cancel = false, bool Interact = false);
+    bool Cancel = false, bool Interact = false, bool Left = false, bool Right = false, bool NextTab = false,
+    int? SelectionIndex = null, int? TabIndex = null, string? TalkTargetId = null,
+    float MoveX = 0, float MoveY = 0, int? BindingIndex = null, int ScrollDelta = 0, int? ScrollPosition = null,
+    int? ChoiceIndex = null, int? SliderValue = null);
 
 public sealed class InputEdges
 {
@@ -14,7 +17,8 @@ public sealed class InputEdges
         previous = held;
         return new(pressed.HasFlag(InputButtons.Up), pressed.HasFlag(InputButtons.Down),
             pressed.HasFlag(InputButtons.Confirm), pressed.HasFlag(InputButtons.Cancel),
-            pressed.HasFlag(InputButtons.Interact));
+            pressed.HasFlag(InputButtons.Interact), pressed.HasFlag(InputButtons.Left),
+            pressed.HasFlag(InputButtons.Right), pressed.HasFlag(InputButtons.NextTab));
     }
 
     // Seed with the held keys when focus returns; do not replay input from another app.

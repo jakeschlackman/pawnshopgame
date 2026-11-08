@@ -12,9 +12,45 @@ internal static partial class RegressionTests
     }
     internal static void Step(ApplicationFlow app, InputFrame input = default) => app.Update(input, TimeSpan.FromSeconds(1));
     internal static void Down(ApplicationFlow app) => Step(app, new(Down: true));
-    internal static void Confirm(ApplicationFlow app) => Step(app, new(Confirm: true));
+    internal static void Confirm(ApplicationFlow app)
+    {
+        Step(app, new(Confirm: true));
+        FinishTitleInteraction(app);
+    }
+    internal static void FinishTitleInteraction(ApplicationFlow app)
+    {
+        // Options' departure replaces Interact; leave flight/pan available to callers.
+        if (app.OptionsFlight.IsBusy)
+        {
+            for (int i = 0; i < 8 && app.Screen == Screen.Title; i++) app.Update(default, TimeSpan.FromSeconds(2));
+            Check(app.OptionsFlight.Phase == OptionsSproutPhase.Flying);
+            return;
+        }
+        if (app.TitleInteractionPlaying) app.Update(default, app.TitleSelector.Remaining);
+    }
+    internal static void FinishOptionsFlight(ApplicationFlow app)
+    {
+        for (int i = 0; i < 8 && app.OptionsFlight.IsBusy; i++) app.Update(default, TimeSpan.FromSeconds(2));
+        Check(app.OptionsFlight.Phase == OptionsSproutPhase.Arrived);
+    }
     internal static void Back(ApplicationFlow app) => Step(app, new(Cancel: true));
-    internal static void Begin(ApplicationFlow app) => Confirm(app);
+    internal static void Begin(ApplicationFlow app)
+    {
+        if (app.OptionsFlight.IsBusy && app.OptionsFlight.IsReturning) FinishOptionsFlight(app);
+        app.Update(new(SelectionIndex: 0), TimeSpan.Zero); // Returning from Options keeps that title entry selected.
+        Confirm(app);
+        Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0);
+        Confirm(app);
+    }
+    internal static void Approach(ApplicationFlow app, string npcId)
+    {
+        var npc = app.Npcs.Single(n => n.Id == npcId);
+        float current = app.Player!.Value.Position.X;
+        float target = npc.X + (npc.X >= current ? -32 : 32);
+        float difference = target - current;
+        app.Update(new(MoveX: Math.Sign(difference)), TimeSpan.FromSeconds(Math.Abs(difference) / PawnShop.Characters.Player.PlayerState.Speed));
+        Check(app.SelectedNpcId == npcId, "Test player did not reach NPC interaction range.");
+    }
     internal static void ReturnPrompt(ApplicationFlow app) { Back(app); Down(app); Confirm(app); }
     internal static void Discard(ApplicationFlow app) { Down(app); Confirm(app); }
 
@@ -23,7 +59,7 @@ internal static partial class RegressionTests
         using var app = new ApplicationFlow();
         Step(app);
         Check(app.Screen == Screen.Title && app.Room is null && app.LiveSessions == 0 && app.SessionsCreated == 0);
-        foreach (var command in new[] { MenuCommand.Continue, MenuCommand.Settings })
+        foreach (var command in new[] { MenuCommand.Continue })
         {
             Down(app);
             Check(app.Menu!.Selected.Command == command && !app.Menu.Selected.Enabled);
@@ -38,12 +74,17 @@ internal static partial class RegressionTests
     {
         using var app = new ApplicationFlow();
         Step(app, new(Confirm: true, Interact: true));
+        Check(app.Screen == Screen.Title && app.LiveSessions == 0 && app.TitleInteractionPlaying);
+        FinishTitleInteraction(app);
+        Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0 && app.Room is null);
+        Step(app, new(Confirm: true, Interact: true, MoveX: 1));
         Check(app.Screen == Screen.Room && app.LiveSessions == 1 && app.SessionsCreated == 1);
+        Check(app.Player!.Value.Position == ShopRoomLayout.PlayerSpawn);
         Check(app.Room!.Value.Elapsed == TimeSpan.Zero && app.Room.Value.BellRings == 0);
         Confirm(app);
         Check(app.SessionsCreated == 1);
         Step(app, new(Interact: true));
-        Check(app.Room.Value.BellRings == 1);
+        Check(app.Room.Value.BellRings == 0 && app.Dialogue is null); // Too far from the NPC; no bell shortcut remains.
     }
     internal static void Pause()
     {

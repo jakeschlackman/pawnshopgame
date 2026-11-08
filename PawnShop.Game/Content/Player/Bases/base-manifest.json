@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "id": "player.base",
+  "canvas": {
+    "width": 48,
+    "height": 64
+  },
+  "visibleBodyHeight": {
+    "minimum": 48,
+    "maximum": 52,
+    "target": 50
+  },
+  "pivot": {
+    "x": 24,
+    "y": 58
+  },
+  "directions": [
+    "south",
+    "south-east",
+    "east",
+    "north-east",
+    "north",
+    "north-west",
+    "west",
+    "south-west"
+  ],
+  "frameLayout": {
+    "columns": 8,
+    "rows": 1,
+    "order": [
+      "south",
+      "south-east",
+      "east",
+      "north-east",
+      "north",
+      "north-west",
+      "west",
+      "south-west"
+    ]
+  },
+  "baseBounds": {
+    "top": 8,
+    "bottom": 57
+  },
+  "characters": {
+    "male": "79b48db4-483d-4fe3-94bd-74bcec89eab9",
+    "female": "5cd54c3f-d34a-4f02-83ca-0e9a21966fe5"
+  },
+  "visualApproval": {
+    "directions": [
+      "south"
+    ],
+    "basis": "User approved the south-facing male/female shirt composites on these unchanged bases."
+  },
+  "provenance": {
+    "sourceCharacters": {
+      "male": "812c9296-b8ae-47cd-8f08-4b363237da98",
+      "female": "5a13f6ab-c4a8-46cb-bb55-c9e4a409c06d"
+    },
+    "revisionJob": "9346883f-75af-4167-9f92-0df65d78a12b",
+    "revisionTool": "PixelLab edit_image",
+    "revisionSeed": 24517,
+    "revisionPrompt": "Precisely revise these sixteen existing pixel-art adult player base sprites; first eight male, next eight female, each in south, south-east, east, north-east, north, north-west, west, south-west order. Preserve EACH input's corresponding facing, identity, anatomy design, underwear coverage, bald head, clean-shaven face, neutral stance, skin colors and crisp pixel style. Output each on EXACTLY 48x64 transparent canvas. Redraw anatomy slightly taller with deliberate native pixel work, never scale or stretch the input. Visible bald scalp-to-bare-soles height exactly 50 pixels in EVERY view: topmost body pixel y=8, bottommost sole pixel y=57 inclusive, bottom-center ground pivot (24,58); center torso around x=24. Add a few anatomical rows through torso and legs to reach the height without oversized heads. Same head scale and ground anchor for both bodies. Stabilize stance, head placement and proportions when turning; arms slightly separated for clothing. Keep all visible body pixels inside x=8..39 and y=8..57. Keep underwear only: male opaque charcoal boxer briefs, female opaque charcoal sports bra and full coverage boyshort briefs. No hair, facial hair, clothing, accessories, shadows or backgrounds. These are reusable paper doll master poses, exact geometry and directional consistency are essential.",
+    "method": "Native-pixel base normalization preserved in Recipes; no clothing or hair is part of these bases."
+  },
+  "sheets": [
+    {
+      "sex": "male",
+      "layer": "base",
+      "id": "2671edd4-349c-40d4-b29b-27b9c5760bf5",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/2671edd4-349c-40d4-b29b-27b9c5760bf5/image.png",
+      "file": "male/base.png",
+      "gallery": "gallery:84d55fd2-59d7-44e6-94d1-e8a45a6e91eb"
+    },
+    {
+      "sex": "female",
+      "layer": "base",
+      "id": "fb049177-fe58-4cf6-a612-715a366c9f7d",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/fb049177-fe58-4cf6-a612-715a366c9f7d/image.png",
+      "file": "female/base.png",
+      "gallery": "gallery:0fabe126-3e66-4540-abfa-f90d6095a614"
+    }
+  ],
+  "files": [
+    "male/base.png",
+    "female/base.png",
+    "base-review.png",
+    "Sources/male-original.png",
+    "Sources/female-original.png",
+    "Sources/pixellab-revision.png"
+  ],
+  "status": "Reference bases: eight standing directions available; animations and in-game scale not verified."
+}

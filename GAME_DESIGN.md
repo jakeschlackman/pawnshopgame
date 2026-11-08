@@ -274,6 +274,17 @@ Procedural assembly is a later gated proposal. If adopted, generation must produ
 
 ### 10.1 Conversation experience
 
+The first implemented conversation draft uses text-only Ink authored in VS Code
+(Inky is optional), with a placeholder shop visitor and conversation-local follow-up
+questions. Each NPC has a folder with identity/sprite JSON, PNG assets, and separate
+conversation bindings/Ink files. Shop placement is separate from character identity;
+preferences, quests and schedules remain future work. Walk near an
+NPC with WASD, then press Z or click it; X backs out. Text reveal,
+paging, keyboard/mouse responses, speed
+settings and cancellation are implemented. Names/text are prototype content.
+Quests, item delivery, rewards, durable facts and portraits below remain future
+integration work; this draft does not establish new story canon.
+
 Conversations are authored branches with identifiable speakers, text, optional portraits/emotions, and choices. One interaction can reveal more text; a separate action chooses or advances. Skipping a typewriter effect is not automatically selecting the first answer.
 
 Choice availability can depend on inventory, a quest state, a relationship, a story fact, or location access. If the state changes before selection, the choice is checked again and explains why it is no longer available. Text itself does not contain executable business logic.
@@ -360,7 +371,7 @@ Paused timers do not prohibit the open UI's authorized domain actions. Transfers
 
 ### 12.2 Title and session flow
 
-The first playable screen is the title screen. New Game creates a fresh session. Continue remains unavailable with a clear reason until loading and a valid compatible save exist. Settings either change real behavior or are explicitly unavailable. Returning to title ends the session cleanly; opening another session does not retain the old inventory, quests, or subscriptions.
+The first playable screen is the title screen. New Game opens male/female character selection; confirming creates a fresh session, while X returns to title without one. Continue remains unavailable with a clear reason until loading and a valid compatible save exist. Settings either change real behavior or are explicitly unavailable. Returning to title ends the session cleanly; opening another session does not retain the old inventory, quests, or subscriptions.
 
 ### 12.3 Save policy
 
@@ -380,6 +391,39 @@ Earlier tile sizes, body canvases, sprite-sheet counts, and display-resolution s
 
 Keep original source art, production sprite sheets, and generated build content separate. Validate transparent padding, frame rectangles, duration, foot/origin positions, facing, attachment points, and rider occlusion. Generated images are concept inputs until those checks pass.
 
+**Current destination of modular human art:** the approved body, hair and clothing
+work is for ordinary, procedurally varied townies and shop visitors who buy and
+sell. Their home is `PawnShop.Characters/Npcs/Common`; the main player and notable
+NPCs will use a separate, more distinct art strategy. Held items are optional and
+backpacks were skipped. Seeded, data-driven appearance generation is implemented
+for this library; shopper spawning, browsing and trade behavior remain future
+work. The player demo
+described below still uses its existing assets pending a later migration.
+
+**Historical player customization art direction:** use bald underwear bases with
+separate clothing, armor, hair and facial-hair artwork. The current player source
+frames are 48×64 with 48–52 visible body pixels (50 in the reference bases),
+independent of world size. Clothing that fits differently uses separate male and
+female cuts of the same design. Their PixelLab object references and fitted
+wearable layers are distinct assets; body-specific art need not create separate
+economy items. The teal work shirt is visually approved for both south-facing
+standing poses. See [the standard process](docs/WEARABLE_ART_WORKFLOW.md).
+Male/female selection retains the original standing base art. Room movement now
+demonstrates four cardinal facings, West mirrored from East, and a synchronized
+placeholder body/jacket/helmet/backpack/wrench walking loop. These are diagnostic
+shapes, not approved human art or fitted clothing. Other shirt directions, approved
+walking animation, hair, armor and wearable customization remain pending; in-game
+visual acceptance is recorded separately from art approval.
+
+Generate **every worn item for both male and female models**, with fitted variants
+and acceptance for each; neither body is an optional later addition. Player walking
+uses PixelLab Skeleton v3 for S/N/E; West will mirror East at runtime. Matching
+clothes, anchors and held gear share the frame clock and character-space mirror.
+Historical W-to-E walking candidates remain preserved, unapproved source evidence.
+Review asymmetric item details explicitly. Walking candidates and a synchronized
+attire preview live under `Content/Player/Bases/Walking`; generated walks do not
+grant clothing approval or imply runtime walking/equipment integration.
+
 ### 13.2 Animation priorities
 
 Movement, interactions, reactions, and dialogue expressions need deliberate priority. A panic reaction should not be overwritten every frame by a walking state; a cosmetic bonk must not permanently block following. Separately layered riders need facing/frame-specific placement and a cockpit rim/mask where appropriate.
@@ -395,6 +439,9 @@ Use placeholders for the first lifecycle and mechanics slices. Build only the st
 - Separate audio-volume controls once audio is present.
 - Limited camera shake and reduced-motion options when such effects are introduced.
 - Keyboard navigation from the first title/menu slice; additional device support follows an explicit input decision.
+- Primary and alternate keyboard bindings for Interact, Pause / Back and all four
+  movement directions. Default movement is WASD plus arrows; either binding has
+  the same effect, and both held together do not multiply movement speed.
 
 Use short mechanical sounds and reactions to distinguish successful, blocked, and completed actions. Audio is feedback, not the only indicator of a required event. Recorded dialogue, complex adaptive music, and large cinematic sequences are outside the baseline.
 

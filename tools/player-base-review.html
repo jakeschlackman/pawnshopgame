@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase 3 — Cardinal human walk review</title>
+<style>
+body{font:16px system-ui;background:#20282b;color:#eef4ec;margin:24px;max-width:1100px}
+h1{font-size:26px}button,select,input{font:inherit;margin:5px;padding:5px}a{color:#9ddbd0}
+.grid{display:flex;flex-wrap:wrap;gap:12px}figure{margin:0;padding:12px;background:#303b3d;border-radius:8px}
+figcaption{margin-bottom:8px}canvas{image-rendering:pixelated;display:block;background:repeating-conic-gradient(#394448 0 25%,#455257 0 50%) 0/16px 16px}
+.strip{overflow:auto;max-width:100%}small{display:block;color:#bac7c9}fieldset{border:0;padding:0}
+</style>
+<h1>Phase 3 · Cardinal human walks</h1>
+<p>The current standing references, cardinal walks and side-view settling poses were
+accepted by the user. West mirrors East. This is the frozen body checkpoint for
+equipment fitting; older comparison sources are not the accepted versions.
+Underwear is intentional: clothing will be separate. This page does not change the game.</p>
+<p>Standing columns: <strong>South, North, East, West mirrored from East</strong>.
+Walk panels use only South/North/East sources. Historical West-to-East copies are excluded.</p>
+<p>The female side walk has been shortened to 49–50 visible pixels to match her 50-pixel
+standing reference; its head now matches the standing head exactly at each gait offset.
+Repaired eyes and feet are preserved. The male side walk now uses a shorter-stride
+pilot with forward foot travel and a one-pixel head bob. North also has a one-pixel
+head bob. Use the comparison panels to judge the transition.</p>
+<p>Male South frame 6: the doubled outline on the model's right forearm (image-left)
+has a nine-pixel correction. The original is preserved; compare it with the checkbox below.</p>
+<p>Side-view face correction: male frames 2–4 and all female frames restore the approved
+eye/brow details. West inherits the East correction. Toggle the original side walks to compare.</p>
+<fieldset id="controls" disabled>
+<button id="play">Pause</button><button id="step">Next frame</button>
+<label>Frame <input id="frame" type="range" min="0" max="7" value="0"><output id="number">1 / 8</output></label>
+<label>Scale <select id="scale"><option value="1">1× native</option><option value="2">2×</option><option value="4" selected>4×</option></select></label>
+<label><input id="anchor" type="checkbox" checked>Show feet anchor</label>
+<label><input id="original" type="checkbox">Show original male South arm</label>
+<label><input id="original-east" type="checkbox">Show original side walks (before fixes)</label>
+<label><input id="previous-stride" type="checkbox">Show previous male side stride</label>
+<label>Comparison direction <select id="direction"><option>South</option><option>North</option><option selected>East</option><option>West</option></select></label>
+</fieldset>
+<p id="status" role="status">Loading local PNGs…</p>
+<main id="bodies"></main>
+<p>Check head/body proportions, palette, foot placement, leg alternation and the last-to-first
+loop seam. East/West transition panels use a three-pose settling strip between the exact
+walk and standing poses, reversed for starting, at the same (24,58) anchor. North/South
+still use the cycle-aligned transition. Comparison checkboxes affect walk panels and
+contact strips; transition panels always show current candidates.</p>
+<p>Acceptance covers the current bodies and motion, not future clothing fits or runtime integration.
+Standing is a single reference pose, <strong>not a completed animated idle</strong>.
+Idle loops follow once the full walking set is accepted.</p>
+<p><a href="../docs/PHASE3_HUMAN_REVIEW.json">Source hashes and review scope</a> ·
+<a href="../docs/VERIFICATION_HUMAN_PILOT.md">Generation and acceptance record</a></p>
+<script>
+const width=48,height=64,count=8,duration=100,images={},views=[];
+const standingDuration=800,walkingDuration=count*duration*2,bridgeDuration=duration*2;
+const transitionDuration=standingDuration+bridgeDuration+walkingDuration+bridgeDuration;
+const frame=document.getElementById('frame'),number=document.getElementById('number');
+let playing=true,elapsed=0,transitionTime=0,last=null;
+function transitionPose(time,direction){
+  if(direction!=='East'&&direction!=='West'){
+    const walking=time>=standingDuration&&time<standingDuration+walkingDuration+duration;
+    return {kind:walking?'walk':'base',phase:walking?Math.floor((time-standingDuration)/duration)%count:0};
+  }
+  let local=time-standingDuration;
+  if(local<0)return {kind:'base',phase:0};
+  if(local<bridgeDuration)return {kind:'settle',phase:1-Math.floor(local/duration)};
+  local-=bridgeDuration;
+  if(local<walkingDuration)return {kind:'walk',phase:(Math.floor(local/duration)+1)%count};
+  local-=walkingDuration;
+  return {kind:'settle',phase:1+Math.floor(local/duration)};
+}
+function addView(parent,label,body,kind,direction='South'){
+  const figure=document.createElement('figure'),caption=document.createElement('figcaption'),canvas=document.createElement('canvas');
+  caption.textContent=label;canvas.width=kind==='strip'?width*count:width;canvas.height=height;
+  canvas.setAttribute('aria-label',body+' '+label);figure.append(caption,canvas);parent.append(figure);
+  if(kind==='strip')figure.className='strip';views.push({canvas,body,kind,direction});
+}
+function drawPose(context,body,direction,phase,walking,destinationX=0,useComparison=true,settling=false){
+  const column={South:0,North:4,East:2,West:2}[direction];
+  const side=direction==='East'||direction==='West';
+  let image=images[body].base,x=column*width,y=0;
+  if(settling){image=images[body].settle;x=phase*width;}
+  else if(walking){
+    // Fixed ground-plane crops for the whole clip, never per-frame bounding-box alignment.
+    if(side){image=useComparison&&document.getElementById('original-east').checked?images[body].eastOriginal:images[body].east;
+      if(useComparison&&body==='male'&&!document.getElementById('original-east').checked&&document.getElementById('previous-stride').checked)image=images[body].previousEast;
+      x=phase*80+16;y=body==='male'?10:11;}
+    else if(body==='male'&&direction==='North'){image=images[body].north;x=phase*80+16;y=9;}
+    else {image=useComparison&&body==='male'&&document.getElementById('original').checked?images[body].original:images[body].walk;
+      x=phase*width;y=direction==='South'?2*height:0;}
+  }
+  context.save();context.translate(destinationX,0);
+  if(direction==='West'){context.translate(width,0);context.scale(-1,1);}
+  context.drawImage(image,x,y,width,height,0,0,width,height);context.restore();
+}
+function redraw(){
+  const phase=Number(frame.value),scale=Number(document.getElementById('scale').value);
+  number.value=(phase+1)+' / '+count;
+  for(const {canvas,body,kind,direction} of views){
+    const context=canvas.getContext('2d');context.clearRect(0,0,canvas.width,height);context.imageSmoothingEnabled=false;
+    canvas.style.width=canvas.width*scale+'px';canvas.style.height=height*scale+'px';
+    const facing=direction==='Selected'?document.getElementById('direction').value:direction;
+    const transition=transitionPose(transitionTime,facing);
+    const walking=kind==='walk'||kind==='strip'||kind==='transition'&&transition.kind==='walk';
+    if(kind==='strip')for(let f=0;f<count;f++)drawPose(context,body,facing,f,true,f*width);
+    else if(kind==='transition')drawPose(context,body,facing,transition.phase,walking,0,false,transition.kind==='settle');
+    else drawPose(context,body,facing,phase,walking);
+    if(document.getElementById('anchor').checked){
+      context.fillStyle='#f0c86a';
+      for(let x=24;x<canvas.width;x+=width){context.fillRect(x-3,58,7,1);context.fillRect(x,56,1,5);}
+    }
+  }
+}
+function pause(){playing=false;document.getElementById('play').textContent='Play';last=null;}
+document.getElementById('play').onclick=()=>{playing=!playing;document.getElementById('play').textContent=playing?'Pause':'Play';last=null;};
+document.getElementById('step').onclick=()=>{pause();frame.value=(Number(frame.value)+1)%count;transitionTime=(transitionTime+duration)%transitionDuration;redraw();};
+frame.oninput=()=>{pause();const side=['East','West'].includes(document.getElementById('direction').value);
+  transitionTime=standingDuration+(side?bridgeDuration+((Number(frame.value)+count-1)%count)*duration:Number(frame.value)*duration);redraw();};
+for(const id of ['scale','anchor','original','original-east','previous-stride','direction'])document.getElementById(id).onchange=redraw;
+function load(path,expectedWidth,expectedHeight){return new Promise((resolve,reject)=>{
+  const image=new Image();image.onload=()=>image.naturalWidth===expectedWidth&&image.naturalHeight===expectedHeight
+    ?resolve(image):reject(new Error('Unexpected dimensions: '+path));
+  image.onerror=()=>reject(new Error('Cannot load '+path+'. Keep this page in the repository tools folder.'));image.src=path;
+});}
+async function start(){
+  for(const body of ['male','female']){
+    const root='../PawnShop.Game/Content/Player/Bases/';
+    const [base,original]=await Promise.all([load(root+body+'/base.png',384,64),load(root+'Walking/'+body+'/walk.png',384,256)]);
+    const walk=body==='male'?await load('../docs/ReviewAssets/male-walk-south-frame-6-arm-fix.png',384,256):original;
+    const [east,eastOriginal]=await Promise.all([
+      load('../docs/ReviewAssets/'+body+'-east-walk-'+(body==='female'?'head-fixed':'forward-bob')+'.png',640,80),
+      load('../docs/ReviewAssets/'+body+'-east-walk-source.png',640,80)]);
+    const previousEast=body==='male'?await load('../docs/ReviewAssets/male-east-walk-eyes-fixed.png',640,80):east;
+    const north=body==='male'?await load('../docs/ReviewAssets/male-north-walk-bob.png',640,80):null;
+    const settle=await load('../docs/ReviewAssets/'+body+'-east-settle.png',144,64);
+    images[body]={base,walk,original,east,eastOriginal,previousEast,north,settle};
+    const section=document.createElement('section'),heading=document.createElement('h2');heading.textContent=body==='male'?'Male':'Female';
+    const standing=document.createElement('div'),motion=document.createElement('div');standing.className=motion.className='grid';
+    section.append(heading,standing,document.createElement('p'),motion);document.getElementById('bodies').append(section);
+    for(const direction of ['South','North','East','West']){
+      addView(standing,direction+' · standing',body,'base',direction);
+      addView(motion,direction+(direction==='West'?' · approved mirrored East':' · approved walk'),body,'walk',direction);
+    }
+    const comparison=document.createElement('div');comparison.className='grid';section.append(document.createElement('p'),comparison);
+    addView(comparison,'Selected direction · standing',body,'base','Selected');
+    addView(comparison,'Selected direction · standing ↔ walking',body,'transition','Selected');
+    addView(section,'Selected direction · all eight frames in order',body,'strip','Selected');
+  }
+  document.getElementById('controls').disabled=false;
+  document.getElementById('status').textContent='Loaded both bodies · 100 ms/frame · current motion checkpoint approved';redraw();
+  function tick(time){
+    if(last!==null&&playing){const delta=Math.min(time-last,250);elapsed+=delta;transitionTime=(transitionTime+delta)%transitionDuration;
+      if(elapsed>=duration){const steps=Math.floor(elapsed/duration);frame.value=(Number(frame.value)+steps)%count;elapsed%=duration;}redraw();}
+    last=time;requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+start().catch(error=>{document.getElementById('status').textContent=error.message;});
+</script>
+</html>

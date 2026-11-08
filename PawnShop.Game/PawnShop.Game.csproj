@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="../PawnShop.Characters/Npcs/Common/Assets/**/*.png;../PawnShop.Characters/Npcs/Common/Assets/catalog.json"
+          Link="Content/CommonNpcs/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <ProjectReference Include="../PawnShop.Framework/PawnShop.Framework.csproj" />
     <ProjectReference Include="../PawnShop.Core/PawnShop.Core.csproj" />
     <ProjectReference Include="../PawnShop.Narrative/PawnShop.Narrative.csproj" />
@@ -10,8 +13,27 @@
     <ProjectReference Include="../PawnShop.Shop/PawnShop.Shop.csproj" />
     <ProjectReference Include="../PawnShop.Exploration/PawnShop.Exploration.csproj" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4.1" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.4.1" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Content/UI/*.png;Content/UI/*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Update="Content/TitleScreen/*.png" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Player/player-sprite.json;Content/Player/placeholder-sprite.json;Content/Player/Bases/male/base.png;Content/Player/Bases/female/base.png" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Npcs/**/*.ink;Content/Npcs/**/*.json;Content/Npcs/**/*.png;Content/World/*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="../third_party/ink/LICENSE.txt" Link="Content/Licenses/Ink.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/TitleScreen/*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/fonts.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/Pixeloid-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/Silkscreen-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/AtkinsonHyperlegible-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/Jersey10-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/GeistPixel-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/PressStart2P-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/NotJamSlabSerif11-CC0.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/UpheavalPro-License.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/Phatone-License.pdf" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Update="Content/Fonts/Jersey25-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
+  <Import Project="../build/Ink.targets" />
 </Project>

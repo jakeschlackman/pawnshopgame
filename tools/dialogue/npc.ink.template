@@ -1,0 +1,18 @@
+// Edit this file in VS Code. Normal builds compile it automatically.
+// IDs stay the same when you change wording. See Content/Dialogue/README.md.
+-> greeting
+
+=== greeting ===
+Hello! What can I help you with? # line: __NPC_ID__.greeting # speaker: __NPC_ID__
++ [Tell me about yourself. # id: __NPC_ID__.about]
+    -> about
++ [Goodbye. # id: __NPC_ID__.goodbye]
+    -> farewell
+
+=== about ===
+Write this character's introduction here. # line: __NPC_ID__.about # speaker: __NPC_ID__ # emotion: pleased
+-> greeting
+
+=== farewell ===
+See you around! # line: __NPC_ID__.farewell # speaker: __NPC_ID__
+-> END

@@ -1,0 +1,1329 @@
+{
+  "version": 1,
+  "id": "hair_short_chestnut",
+  "compatibleItem": "helmet_welder",
+  "status": "south_north_hair_compatibility_approved",
+  "scope": "One short hairstyle, both bodies, South/North standing and eight walking poses. Review-only; no side directions, long/bulky styles, ponytail physics or production runtime hair system implied.",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "sheetCanvas": [
+    432,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "standingColumn": 0,
+  "walkingColumns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "walkingDurationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "preview": "tools/player-equipment-review.html",
+  "layers": {
+    "hair": "Independent transparent PNG; no body, jacket or mask pixels baked in.",
+    "helmetCompatibleHair": "Separate alpha-clipped variant of the normal hair. Kept source pixels retain their exact color and native position. Equipping selects it; unequipping restores normal hair.",
+    "drawOrder": [
+      "original_body",
+      "existing_equipped_body_occlusion",
+      "optional_jacket",
+      "optional_normal_or_clipped_hair",
+      "optional_mask"
+    ]
+  },
+  "palette": [
+    "#120a06ff",
+    "#2c180fff",
+    "#4e2e20ff",
+    "#70452fff",
+    "#936047ff"
+  ],
+  "helmetRules": {
+    "south": "Keep only hair inside the opaque shield silhouette. This short cut is completely concealed after the unchanged shield draws. Protruding crown/side hair is alpha-clipped, never recolored or painted over on the body.",
+    "north": "Keep hair inside the rear gear envelope; the short pilot already fits so its normal/clipped layers are identical. Draw the straps/hinges above the hair while showing hair through their open spaces. No blanket hide-hair rule.",
+    "allowedRows": {
+      "south": [
+        [
+          8,
+          20,
+          27
+        ],
+        [
+          9,
+          19,
+          28
+        ],
+        [
+          10,
+          19,
+          29
+        ],
+        [
+          11,
+          18,
+          30
+        ],
+        [
+          12,
+          18,
+          30
+        ],
+        [
+          13,
+          18,
+          30
+        ],
+        [
+          14,
+          18,
+          30
+        ],
+        [
+          15,
+          17,
+          31
+        ],
+        [
+          16,
+          17,
+          31
+        ],
+        [
+          17,
+          17,
+          31
+        ],
+        [
+          18,
+          17,
+          31
+        ],
+        [
+          19,
+          18,
+          30
+        ],
+        [
+          20,
+          18,
+          30
+        ],
+        [
+          21,
+          18,
+          30
+        ],
+        [
+          22,
+          18,
+          29
+        ],
+        [
+          23,
+          18,
+          30
+        ],
+        [
+          24,
+          19,
+          28
+        ]
+      ],
+      "north": [
+        [
+          8,
+          20,
+          27
+        ],
+        [
+          9,
+          18,
+          29
+        ],
+        [
+          10,
+          17,
+          30
+        ],
+        [
+          11,
+          17,
+          31
+        ],
+        [
+          12,
+          17,
+          30
+        ],
+        [
+          13,
+          17,
+          31
+        ],
+        [
+          14,
+          16,
+          31
+        ],
+        [
+          15,
+          16,
+          31
+        ],
+        [
+          16,
+          16,
+          31
+        ],
+        [
+          17,
+          16,
+          31
+        ],
+        [
+          18,
+          16,
+          31
+        ],
+        [
+          19,
+          16,
+          30
+        ],
+        [
+          20,
+          16,
+          31
+        ],
+        [
+          21,
+          16,
+          30
+        ],
+        [
+          22,
+          17,
+          30
+        ],
+        [
+          23,
+          17,
+          30
+        ]
+      ]
+    },
+    "rowsFormat": "[y,xStartInclusive,xEndInclusive,...], standing native coordinates; follows the same head offset as hair/mask.",
+    "bulkierStyles": "Would need their own permitted silhouette or specifically fitted hair variant; this pilot does not declare compatibility for untested hairstyles."
+  },
+  "generation": {
+    "tool": "PixelLab edit_image_pro_flash; exact pixelart_workbench extraction/packing",
+    "paidOperations": 4,
+    "chargedGenerations": 20,
+    "paidRetries": 0,
+    "reference": "male_south is the shared short-hair design reference for the other three fits."
+  },
+  "fits": [
+    {
+      "body": "male",
+      "direction": "south",
+      "approvals": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "source": "male-south-source.png",
+      "jobId": "bfc8faaa-75bd-4577-bb73-eeb21ddb5f0c",
+      "request": {
+        "method": "text",
+        "description": "Add ONLY a short dark chestnut-brown practical haircut to the exact SOUTH-facing bald head in this pixel-art game sprite. One simple unisex short crop: low soft side-part, compact crown with a few solid stepped locks, short sides above ears, short natural hairline with forehead/eyes/eyebrows fully readable. Three quiet brown shades plus dark brown outline, distinct from peach skin and gray equipment. No tall spikes, quiff, hat, long tail, braid, beard, hair over eyes or neck. Hair sits on existing head, modest one or two pixels of thickness above scalp; retain face size and native coordinates. Preserve every face/body/skin/underwear/arms/hands/legs/feet pixel outside intended scalp/hair coverage; no regeneration of anatomy or pose. Crisp native single-pixel game art with broad quiet color clusters, no texture noise or blur. Exact transparent48x64 canvas and pivot24,58. Output fitted source character; only hair will be extracted and layered over the unchanged canonical body.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63301,
+        "source": "Canonical male/base.png crop [0,0,48,64]."
+      },
+      "extraction": {
+        "maskRows": [
+          [
+            7,
+            22,
+            25
+          ],
+          [
+            8,
+            20,
+            27
+          ],
+          [
+            9,
+            19,
+            28
+          ],
+          [
+            10,
+            18,
+            29
+          ],
+          [
+            11,
+            17,
+            30
+          ],
+          [
+            12,
+            17,
+            19,
+            21,
+            26,
+            28,
+            30
+          ],
+          [
+            13,
+            17,
+            18,
+            29,
+            30
+          ],
+          [
+            14,
+            17,
+            18,
+            29,
+            30
+          ]
+        ],
+        "colorMap": {
+          "#140906ff": "#120a06ff",
+          "#1a0a06ff": "#120a06ff",
+          "#0c0503ff": "#120a06ff",
+          "#23130eff": "#2c180fff",
+          "#6d412eff": "#70452fff",
+          "#643c2aff": "#70452fff",
+          "#120604ff": "#120a06ff",
+          "#5a3625ff": "#4e2e20ff",
+          "#1b0d09ff": "#120a06ff",
+          "#0c0a0aff": "#120a06ff",
+          "#543324ff": "#4e2e20ff",
+          "#331d14ff": "#2c180fff",
+          "#45281dff": "#4e2e20ff",
+          "#2a1912ff": "#2c180fff",
+          "#3a1e13ff": "#2c180fff",
+          "#130c09ff": "#120a06ff"
+        },
+        "method": "Inspected hair regions only; no source face, eyebrow, ear, neck or other anatomy copied. Palette normalization applies only to selected hair."
+      },
+      "offsetY": [
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "frameAnchors": [
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ]
+      ],
+      "hairPixels": 68,
+      "equippedHairPixels": 59,
+      "bodySource": {
+        "standing": "PawnShop.Game/Content/Player/Bases/male/base.png",
+        "standingCrop": [
+          0,
+          0,
+          48,
+          64
+        ],
+        "walkSheet": "docs/ReviewAssets/WorkJacketWalkSouth/male-body.png",
+        "walkingColumns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "jacketSource": {
+        "standing": "docs/ReviewAssets/WorkJacketPilot/male-layer-teal-pockets.png",
+        "walkSheet": "docs/ReviewAssets/WorkJacketWalkSouth/male-layer.png"
+      },
+      "maskSource": {
+        "standing": "docs/ReviewAssets/WeldingHelmetCharcoal/male-layer.png",
+        "walkSheet": "docs/ReviewAssets/WeldingHelmetWalkSouth/male-layer.png"
+      },
+      "hiddenBodyPixels": [
+        [
+          [
+            17,
+            13
+          ],
+          [
+            17,
+            14
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            16,
+            18
+          ],
+          [
+            17,
+            19
+          ]
+        ],
+        [
+          [
+            17,
+            13
+          ],
+          [
+            17,
+            14
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            16,
+            18
+          ],
+          [
+            17,
+            19
+          ]
+        ],
+        [
+          [
+            17,
+            13
+          ],
+          [
+            17,
+            14
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            16,
+            18
+          ],
+          [
+            17,
+            19
+          ]
+        ],
+        [
+          [
+            17,
+            12
+          ],
+          [
+            17,
+            13
+          ],
+          [
+            16,
+            16
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            17,
+            18
+          ]
+        ],
+        [
+          [
+            17,
+            12
+          ],
+          [
+            17,
+            13
+          ],
+          [
+            16,
+            16
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            17,
+            18
+          ]
+        ],
+        [
+          [
+            17,
+            13
+          ],
+          [
+            17,
+            14
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            16,
+            18
+          ],
+          [
+            17,
+            19
+          ]
+        ],
+        [
+          [
+            17,
+            13
+          ],
+          [
+            17,
+            14
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            16,
+            18
+          ],
+          [
+            17,
+            19
+          ]
+        ],
+        [
+          [
+            17,
+            12
+          ],
+          [
+            17,
+            13
+          ],
+          [
+            16,
+            16
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            17,
+            18
+          ]
+        ],
+        [
+          [
+            17,
+            12
+          ],
+          [
+            17,
+            13
+          ],
+          [
+            16,
+            16
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            17,
+            18
+          ]
+        ]
+      ],
+      "files": {
+        "normal": "male-south-hair.png",
+        "fitted": "male-south-hair-equipped.png",
+        "without": "male-south-review-hair.png",
+        "withMask": "male-south-review-equipped.png"
+      },
+      "drawIds": {
+        "normal": "7a68b440-0827-4065-b72a-5d889a1b9b4c",
+        "fitted": "32c8041c-13ed-4d99-945a-8f6d40b409ba",
+        "without": "5f21e1de-0a19-4a89-a0dd-99a690210c20",
+        "withMask": "45fc4448-e45c-442b-b9e3-8ca163e64e54"
+      }
+    },
+    {
+      "body": "female",
+      "direction": "south",
+      "approvals": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "source": "female-south-source.png",
+      "jobId": "be013979-804e-44dc-a075-e445fc7f3c50",
+      "request": {
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/images/bfc8faaa-75bd-4577-bb73-eeb21ddb5f0c/download",
+          "usage_description": "HAIRSTYLE ONLY: same short chestnut crop, simple side-part, low crown and quiet brown palette. Keep this input's body identity and facing, not the reference person's body."
+        },
+        "description": "Add ONLY the reference's same short brown haircut to this exact SOUTH-facing bald head. FRONT view: same modest side-part and short sides, forehead/eyes/eyebrows readable; no hair across eyes. Same unisex short practical crop, no gender-specific longer cut. Dark chestnut brown with 3 quiet broad pixel clusters and dark brown outline. At most 1–2px thickness around original scalp. No tall quiff, spikes, ponytail, braids, beard, hat, helmet, jacket, background or shadow. Match original native pixel size. Preserve exact head/anatomy/face if visible, neck, shoulders, arms/hands, underwear, legs/feet and pose. Do not resize/recenter head or canvas. Transparent48x64, pivot24,58. Fitted source for hair-only extraction onto the unchanged canonical body; generated body pixels will be discarded.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63302,
+        "source": "Canonical female/base.png crop [0,0,48,64]."
+      },
+      "extraction": {
+        "maskRows": [
+          [
+            6,
+            22,
+            26
+          ],
+          [
+            7,
+            20,
+            27
+          ],
+          [
+            8,
+            19,
+            29
+          ],
+          [
+            9,
+            18,
+            30
+          ],
+          [
+            10,
+            17,
+            31
+          ],
+          [
+            11,
+            17,
+            22,
+            28,
+            31
+          ],
+          [
+            12,
+            17,
+            20,
+            29,
+            31
+          ],
+          [
+            13,
+            17,
+            19,
+            29,
+            31
+          ],
+          [
+            14,
+            17,
+            18,
+            30,
+            31
+          ]
+        ],
+        "colorMap": {
+          "#24110bff": "#2c180fff",
+          "#1b0d08ff": "#120a06ff",
+          "#0b0a09ff": "#120a06ff",
+          "#643a29ff": "#70452fff",
+          "#5c3324ff": "#4e2e20ff",
+          "#4d2b1eff": "#4e2e20ff",
+          "#2a160eff": "#2c180fff",
+          "#532f20ff": "#4e2e20ff",
+          "#44261bff": "#4e2e20ff",
+          "#3b2217ff": "#2c180fff",
+          "#341f17ff": "#2c180fff"
+        },
+        "method": "Inspected hair regions only; no source face, eyebrow, ear, neck or other anatomy copied. Palette normalization applies only to selected hair."
+      },
+      "offsetY": [
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "frameAnchors": [
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ]
+      ],
+      "hairPixels": 79,
+      "equippedHairPixels": 48,
+      "bodySource": {
+        "standing": "PawnShop.Game/Content/Player/Bases/female/base.png",
+        "standingCrop": [
+          0,
+          0,
+          48,
+          64
+        ],
+        "walkSheet": "docs/ReviewAssets/WorkJacketWalkSouth/female-body.png",
+        "walkingColumns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "jacketSource": {
+        "standing": "docs/ReviewAssets/WorkJacketPilot/female-layer.png",
+        "walkSheet": "docs/ReviewAssets/WorkJacketWalkSouth/female-layer-shading-fixed.png"
+      },
+      "maskSource": {
+        "standing": "docs/ReviewAssets/WeldingHelmetCharcoal/female-layer.png",
+        "walkSheet": "docs/ReviewAssets/WeldingHelmetWalkSouth/female-layer.png"
+      },
+      "hiddenBodyPixels": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "files": {
+        "normal": "female-south-hair.png",
+        "fitted": "female-south-hair-equipped.png",
+        "without": "female-south-review-hair.png",
+        "withMask": "female-south-review-equipped.png"
+      },
+      "drawIds": {
+        "normal": "a74466c6-a434-4689-9e58-37e28ebffd50",
+        "fitted": "a59050b5-6d34-4b1b-b520-190b1503829e",
+        "without": "9be94541-da50-45c2-a7e0-1daa9b8b990f",
+        "withMask": "dc4a7177-7c8d-4568-8bd3-927d58c3a156"
+      }
+    },
+    {
+      "body": "male",
+      "direction": "north",
+      "approvals": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "source": "male-north-source.png",
+      "jobId": "399ede16-cf0a-490d-8642-ce5f794567c9",
+      "request": {
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/images/bfc8faaa-75bd-4577-bb73-eeb21ddb5f0c/download",
+          "usage_description": "HAIRSTYLE ONLY: same short chestnut crop, simple side-part, low crown and quiet brown palette. Keep this input's body identity and facing, not the reference person's body."
+        },
+        "description": "Add ONLY the reference's same short brown haircut to this exact NORTH-facing bald head. REAR view: back of short cropped hair, compact crown and short nape ending above neck, ears readable. No face, fringe across back, or turning the person toward camera. Same unisex short practical crop, no gender-specific longer cut. Dark chestnut brown with 3 quiet broad pixel clusters and dark brown outline. At most 1–2px thickness around original scalp. No tall quiff, spikes, ponytail, braids, beard, hat, helmet, jacket, background or shadow. Match original native pixel size. Preserve exact head/anatomy/face if visible, neck, shoulders, arms/hands, underwear, legs/feet and pose. Do not resize/recenter head or canvas. Transparent48x64, pivot24,58. Fitted source for hair-only extraction onto the unchanged canonical body; generated body pixels will be discarded.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63303,
+        "source": "Canonical male/base.png crop [192,0,48,64]."
+      },
+      "extraction": {
+        "maskRows": [
+          [
+            8,
+            21,
+            26
+          ],
+          [
+            9,
+            19,
+            28
+          ],
+          [
+            10,
+            18,
+            29
+          ],
+          [
+            11,
+            17,
+            30
+          ],
+          [
+            12,
+            17,
+            30
+          ],
+          [
+            13,
+            17,
+            30
+          ],
+          [
+            14,
+            17,
+            30
+          ],
+          [
+            15,
+            17,
+            30
+          ],
+          [
+            16,
+            18,
+            29
+          ],
+          [
+            17,
+            18,
+            29
+          ],
+          [
+            18,
+            19,
+            28
+          ],
+          [
+            19,
+            20,
+            27
+          ],
+          [
+            20,
+            21,
+            26
+          ]
+        ],
+        "colorMap": {
+          "#0b0403ff": "#120a06ff",
+          "#0b0909ff": "#120a06ff",
+          "#7d4c3bff": "#70452fff",
+          "#6a4130ff": "#70452fff",
+          "#643d2dff": "#70452fff",
+          "#120402ff": "#120a06ff",
+          "#a3705bff": "#936047ff",
+          "#593628ff": "#4e2e20ff",
+          "#3c241aff": "#4e2e20ff",
+          "#8d5945ff": "#936047ff",
+          "#ab7962ff": "#936047ff",
+          "#543426ff": "#4e2e20ff",
+          "#5d392aff": "#4e2e20ff",
+          "#4c2e21ff": "#4e2e20ff",
+          "#41261bff": "#4e2e20ff",
+          "#040202ff": "#120a06ff",
+          "#331d15ff": "#2c180fff",
+          "#44291eff": "#4e2e20ff",
+          "#855340ff": "#936047ff"
+        },
+        "method": "Inspected hair regions only; no source face, eyebrow, ear, neck or other anatomy copied. Palette normalization applies only to selected hair."
+      },
+      "offsetY": [
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "frameAnchors": [
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ]
+      ],
+      "hairPixels": 146,
+      "equippedHairPixels": 146,
+      "bodySource": {
+        "sheet": "docs/ReviewAssets/WorkJacketNorth/male-body.png",
+        "standingColumn": 0,
+        "walkingColumns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "jacketSource": {
+        "sheet": "docs/ReviewAssets/WorkJacketNorth/male-layer.png"
+      },
+      "maskSource": {
+        "sheet": "docs/ReviewAssets/WeldingHelmetNorth/male-layer.png"
+      },
+      "hiddenBodyPixels": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "files": {
+        "normal": "male-north-hair.png",
+        "fitted": "male-north-hair-equipped.png",
+        "without": "male-north-review-hair.png",
+        "withMask": "male-north-review-equipped.png"
+      },
+      "drawIds": {
+        "normal": "361e0443-40cd-481e-a326-5253f45fe0ea",
+        "fitted": "e157de86-aedd-4465-8a9a-8e30539e1cb2",
+        "without": "5fe6d75b-248e-4a62-8b62-0a23ee38ae9e",
+        "withMask": "54c6d699-3fde-4429-9fe5-fc5085cb9c77"
+      }
+    },
+    {
+      "body": "female",
+      "direction": "north",
+      "approvals": {
+        "standing": "approved_by_user",
+        "walking": "approved_by_user"
+      },
+      "source": "female-north-source.png",
+      "jobId": "f3cac283-4ddc-40ee-a55c-a26e70211d13",
+      "request": {
+        "method": "reference",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/images/bfc8faaa-75bd-4577-bb73-eeb21ddb5f0c/download",
+          "usage_description": "HAIRSTYLE ONLY: same short chestnut crop, simple side-part, low crown and quiet brown palette. Keep this input's body identity and facing, not the reference person's body."
+        },
+        "description": "Add ONLY the reference's same short brown haircut to this exact NORTH-facing bald head. REAR view: back of short cropped hair, compact crown and short nape ending above neck, ears readable. No face, fringe across back, or turning the person toward camera. Same unisex short practical crop, no gender-specific longer cut. Dark chestnut brown with 3 quiet broad pixel clusters and dark brown outline. At most 1–2px thickness around original scalp. No tall quiff, spikes, ponytail, braids, beard, hat, helmet, jacket, background or shadow. Match original native pixel size. Preserve exact head/anatomy/face if visible, neck, shoulders, arms/hands, underwear, legs/feet and pose. Do not resize/recenter head or canvas. Transparent48x64, pivot24,58. Fitted source for hair-only extraction onto the unchanged canonical body; generated body pixels will be discarded.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63304,
+        "source": "Canonical female/base.png crop [192,0,48,64]."
+      },
+      "extraction": {
+        "maskRows": [
+          [
+            8,
+            22,
+            26
+          ],
+          [
+            9,
+            20,
+            28
+          ],
+          [
+            10,
+            19,
+            29
+          ],
+          [
+            11,
+            19,
+            29
+          ],
+          [
+            12,
+            18,
+            30
+          ],
+          [
+            13,
+            18,
+            30
+          ],
+          [
+            14,
+            18,
+            30
+          ],
+          [
+            15,
+            18,
+            30
+          ],
+          [
+            16,
+            19,
+            29
+          ],
+          [
+            17,
+            19,
+            29
+          ],
+          [
+            18,
+            19,
+            29
+          ],
+          [
+            19,
+            19,
+            30
+          ],
+          [
+            20,
+            21,
+            27
+          ]
+        ],
+        "colorMap": {
+          "#040201ff": "#120a06ff",
+          "#0a0403ff": "#120a06ff",
+          "#6c4532ff": "#70452fff",
+          "#633e2dff": "#70452fff",
+          "#5b3a2bff": "#4e2e20ff",
+          "#533527ff": "#4e2e20ff",
+          "#7e513cff": "#70452fff",
+          "#82533cff": "#936047ff",
+          "#0b0a09ff": "#120a06ff",
+          "#1a0a06ff": "#120a06ff",
+          "#734935ff": "#70452fff",
+          "#4d3125ff": "#4e2e20ff",
+          "#492e23ff": "#4e2e20ff",
+          "#432c21ff": "#4e2e20ff",
+          "#3b261cff": "#4e2e20ff"
+        },
+        "method": "Inspected hair regions only; no source face, eyebrow, ear, neck or other anatomy copied. Palette normalization applies only to selected hair."
+      },
+      "offsetY": [
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "frameAnchors": [
+        [
+          24,
+          14
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          24,
+          13
+        ]
+      ],
+      "hairPixels": 140,
+      "equippedHairPixels": 140,
+      "bodySource": {
+        "sheet": "docs/ReviewAssets/WorkJacketNorth/female-body.png",
+        "standingColumn": 0,
+        "walkingColumns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "jacketSource": {
+        "sheet": "docs/ReviewAssets/WorkJacketNorth/female-layer.png"
+      },
+      "maskSource": {
+        "sheet": "docs/ReviewAssets/WeldingHelmetNorth/female-layer.png"
+      },
+      "hiddenBodyPixels": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "files": {
+        "normal": "female-north-hair.png",
+        "fitted": "female-north-hair-equipped.png",
+        "without": "female-north-review-hair.png",
+        "withMask": "female-north-review-equipped.png"
+      },
+      "drawIds": {
+        "normal": "386016d5-d119-4b77-8134-d2c0a26ca1cd",
+        "fitted": "b66d6d8d-aaf8-4cb8-8da8-f8a87c2952f9",
+        "without": "c7eb2cd8-6b7f-4dbd-a87a-1557d82af4bc",
+        "withMask": "8bd6d56a-fcf0-492f-b33d-5a0c0e87681e"
+      }
+    }
+  ],
+  "frozenSourceManifests": [
+    "docs/PHASE3_HUMAN_REVIEW.json",
+    "docs/ReviewAssets/WorkJacketPilot/review.json",
+    "docs/ReviewAssets/WorkJacketWalkSouth/review.json",
+    "docs/ReviewAssets/WorkJacketNorth/review.json",
+    "docs/ReviewAssets/WorkJacketEast/review.json",
+    "docs/ReviewAssets/WeldingHelmetPilot/review.json",
+    "docs/ReviewAssets/WeldingHelmetCharcoal/review.json",
+    "docs/ReviewAssets/WeldingHelmetWalkSouth/review.json",
+    "docs/ReviewAssets/WeldingHelmetNorth/review.json"
+  ],
+  "files": [
+    {
+      "sha256": "B4C197604BE51969962231D5AD31747BFB83847397A70244B1176C1E5E2EE72A",
+      "path": "female-north-hair-equipped.png"
+    },
+    {
+      "sha256": "B4C197604BE51969962231D5AD31747BFB83847397A70244B1176C1E5E2EE72A",
+      "path": "female-north-hair.png"
+    },
+    {
+      "sha256": "D65A5C38EEA1449B2F072B55264502115F9BA6247E1A4CB0D71B529D8FA7A1CF",
+      "path": "female-north-review-equipped.png"
+    },
+    {
+      "sha256": "B27A748D90D5FD967EB00F0A9D6F90E5B581251240AA012085395AF3BDA5D532",
+      "path": "female-north-review-hair.png"
+    },
+    {
+      "sha256": "574B31B0F8A6E51527151AABFB012CDDBC48A0AF2535DBD8FE4171E69752B5A6",
+      "path": "female-north-source.png"
+    },
+    {
+      "sha256": "A2069905AAD3ED4E9EFFFF9F60281A0F8155D5CE73725B961F5A42AE7B84A76A",
+      "path": "female-south-hair-equipped.png"
+    },
+    {
+      "sha256": "BA0179960B4A32AD913B42ABDBE8C453C4967D72F6EAB9C8386B89C95C1C19A5",
+      "path": "female-south-hair.png"
+    },
+    {
+      "sha256": "137E6C82AF977CC8CEF680B3B10D11A16E2A957CB581E10AD11C23B0B0AD4BFC",
+      "path": "female-south-review-equipped.png"
+    },
+    {
+      "sha256": "2820A7F23DA1CDB656B23E627C986D3CDED8EF6A1BBA7DBA60560519D2144A0C",
+      "path": "female-south-review-hair.png"
+    },
+    {
+      "sha256": "5BFF231A9DABB67F2BF5337A5623664907BE5F338546C90BC0534D739802370E",
+      "path": "female-south-source.png"
+    },
+    {
+      "sha256": "C1D0357916524C77BBBD75586E84ABD62EE00709B1CECA4A2DE9028F90CE3E0C",
+      "path": "male-north-hair-equipped.png"
+    },
+    {
+      "sha256": "C1D0357916524C77BBBD75586E84ABD62EE00709B1CECA4A2DE9028F90CE3E0C",
+      "path": "male-north-hair.png"
+    },
+    {
+      "sha256": "4A953AEE101390725572570A9788B44CFE715A1D260777FED2125AF7AF2E4646",
+      "path": "male-north-review-equipped.png"
+    },
+    {
+      "sha256": "2A5F41FC983AD4EF4526B9E531B963F2AAF1C1EDFDB52C4D1C6661E64C600F3D",
+      "path": "male-north-review-hair.png"
+    },
+    {
+      "sha256": "AF1ADC2BFB3932D3EF398D4CC2B3F30AA606ECA5D0EBF53541FE70CF3A576A38",
+      "path": "male-north-source.png"
+    },
+    {
+      "sha256": "7DB6D3E44FB723249D6C6DA3BA83814C9A4E43597B95E1730A937F2CD931ECB7",
+      "path": "male-south-hair-equipped.png"
+    },
+    {
+      "sha256": "1DFFF834346D4E8A9678A12D7F02330FCA3AEEB9893ADBA80CAE87655491E3DF",
+      "path": "male-south-hair.png"
+    },
+    {
+      "sha256": "CFE730001F51C2E728D41517DBE539814442CBCADF5DAEBD6FCAAD74004B6549",
+      "path": "male-south-review-equipped.png"
+    },
+    {
+      "sha256": "61190FB9718E8BA8D329964F5195144D7AFEFE5134C97F80C23AB1E2D3EA0659",
+      "path": "male-south-review-hair.png"
+    },
+    {
+      "sha256": "0E8E647129403CF7B0859FCB0B1E6335F024705DB622F4BFA954FB0982FDD534",
+      "path": "male-south-source.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: all 112 artwork hashes (92 preserved, 20 new), four 48x64 fitted sources and sixteen 432x64 derivative sheets; 36 pose fits, 72 exported compositions, exact hair source/mask/palette/anchor mapping, alpha-only clipping, protected South face/eyebrows, no body/gear pixels baked into hair, binary derivative alpha and exact layer compositions. South equipped result remains pixel-identical to prior approved mask/jacket compositions. North exposes 70 male and 73 female hair pixels per pose between unchanged straps.",
+    "preview": "PASS: Node DOM/canvas checks load 36 actual PNGs and exercise 62 views, 2048 direction/pose/loadout cases and 1024 static comparison cases. All eight jacket/hair/mask combinations, correct normal/clipped hair and column selection, layer order, shared clock, crops/contacts, South ear clearing/restoration, independent layer panels, pause/step/wrap, scale, links and unsupported-side hiding. No browser rendering claim.",
+    "visual": "Four standing hair/no-mask and hair/mask comparisons inspected at 4x; all 36 equipped head poses inspected in static 3x PixelLab contact sheets during authoring. Subsequently accepted by the user: looks good, next phase. Acceptance covers the displayed South/North short-hair and mask combinations, both bodies, standing and walking. No browser/game launched."
+  },
+  "approvalBasis": "User: looks good, next phase. Accepts the displayed male/female South/North short-hair and mask combinations, standing and walking. Side directions and other hairstyles are not covered."
+}

@@ -1,0 +1,36 @@
+﻿{
+    "version":  1,
+    "frameWidth":  48,
+    "frameHeight":  64,
+    "columns":  8,
+    "rows":  4,
+    "pivotX":  24,
+    "pivotY":  58,
+    "displayScale":  1,
+    "animations":  {
+                       "WalkNorth":  {
+                                         "firstFrame":  0,
+                                         "frameCount":  8,
+                                         "frameDurationMs":  100,
+                                         "loop":  true
+                                     },
+                       "WalkEast":  {
+                                        "firstFrame":  8,
+                                        "frameCount":  8,
+                                        "frameDurationMs":  100,
+                                        "loop":  true
+                                    },
+                       "WalkSouth":  {
+                                         "firstFrame":  16,
+                                         "frameCount":  8,
+                                         "frameDurationMs":  100,
+                                         "loop":  true
+                                     },
+                       "WalkWest":  {
+                                        "firstFrame":  24,
+                                        "frameCount":  8,
+                                        "frameDurationMs":  100,
+                                        "loop":  true
+                                    }
+                   }
+}

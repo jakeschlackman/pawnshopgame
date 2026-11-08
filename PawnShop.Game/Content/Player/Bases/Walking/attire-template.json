@@ -1,0 +1,49 @@
+﻿{
+    "version":  1,
+    "status":  "incomplete_template_not_walk_compatible",
+    "directions":  [
+                       "north",
+                       "east",
+                       "south",
+                       "west"
+                   ],
+    "frameCount":  8,
+    "frameDurationMs":  100,
+    "pivot":  {
+                  "y":  58,
+                  "x":  24
+              },
+    "asymmetricEastException":  null,
+    "variants":  [
+                     {
+                         "bodyType":  "male",
+                         "baseSheet":  "male/walk.png",
+                         "baseSha256":  "186D0EA1B6D068649C54A32F0C6C7FCECF241C88F36F76E68640C881A22E278B",
+                         "layerSheet":  null,
+                         "coverageMask":  null,
+                         "protectedMask":  null,
+                         "compositeSheet":  null,
+                         "visualApproval":  {
+                                                "north":  "pending",
+                                                "south":  "pending",
+                                                "west":  "pending",
+                                                "east":  "pending"
+                                            }
+                     },
+                     {
+                         "bodyType":  "female",
+                         "baseSheet":  "female/walk.png",
+                         "baseSha256":  "8B856411DA132B8F9F32AAB0B82683801D867713A83C62BD5DE7C4AC7D46BCDB",
+                         "layerSheet":  null,
+                         "coverageMask":  null,
+                         "protectedMask":  null,
+                         "compositeSheet":  null,
+                         "visualApproval":  {
+                                                "north":  "pending",
+                                                "south":  "pending",
+                                                "west":  "pending",
+                                                "east":  "pending"
+                                            }
+                     }
+                 ]
+}

@@ -1,0 +1,17 @@
+{
+  "Dialogue line": {
+    "prefix": "inkline",
+    "body": ["${1:Hello there.} # line: ${2:visitor}.${3:greeting} # speaker: ${2:visitor}"],
+    "description": "Spoken text with a stable line ID and NPC speaker ID."
+  },
+  "Dialogue choice": {
+    "prefix": "inkchoice",
+    "body": ["+ [${1:Ask a question.} # id: ${2:visitor}.${3:ask}]", "    -> ${4:answer}"],
+    "description": "Response with its stable ID inside the choice-only brackets."
+  },
+  "Dialogue branch": {
+    "prefix": "inkbranch",
+    "body": ["=== ${1:answer} ===", "${2:Write the reply here.} # line: ${3:visitor}.${1:answer} # speaker: ${3:visitor}", "-> ${4:END}"],
+    "description": "Named branch with one reply and a destination."
+  }
+}

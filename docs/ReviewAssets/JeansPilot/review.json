@@ -1,0 +1,1156 @@
+{
+  "version": 1,
+  "id": "dark_blue_jeans",
+  "slot": "legs",
+  "direction": "south",
+  "pose": "standing",
+  "status": "both_bodies_richer_denim_south_standing_approved",
+  "frameCanvas": [
+    48,
+    64
+  ],
+  "pivot": [
+    24,
+    58
+  ],
+  "preview": "tools/player-equipment-review.html",
+  "scope": "Separate male/female South-standing jeans fits only. User chose dark blue jeans, then richer denim with shaped folds, clear pockets/seams and subtle wear for both bodies. Walking, North/East/mirrored West and settling are not authored or approved. No runtime promotion.",
+  "palette": [
+    "#080e19ff",
+    "#111f32ff",
+    "#1c304aff",
+    "#29445fff",
+    "#395a7bff",
+    "#557795ff"
+  ],
+  "bodies": [
+    {
+      "body": "male",
+      "approval": "approved_by_user",
+      "base": "PawnShop.Game/Content/Player/Bases/male/base.png",
+      "baseSha256": "81B5FD86552A24B2959CE6E4D0118E221122EA717A10E927AC342A2F6844AD67",
+      "baseCrop": [
+        0,
+        0,
+        48,
+        64
+      ],
+      "object": "male-object.png",
+      "objectId": "a5e77aef-4f79-47d1-95a2-8f1fc10097e7",
+      "objectJob": "29671ed6-0608-4f47-a582-233ed3157191",
+      "objectRequest": {
+        "name": "Picker's Hollow - dark blue work jeans - male",
+        "description": "One standalone empty pair of dark indigo blue denim work jeans, front/south view for a cozy low-top-down pixel-art RPG. Plain practical straight legs, modest waistband with small belt loops, subtle front pockets and fly, subdued denim seams, full length ankle hems, no rolled cuffs. Restrained dark blue palette, crisp native one-pixel outline, simple readable clusters and minimal highlights. No distressing, holes, patches, cargo pockets, logos, orange/gold stitching, belt, boots or body. Male cut: straight waist and broad practical hips, relaxed straight legs. Garment only, no head, hands, skin, feet, mannequin, hanger, scenery or ground shadow. Transparent48x64 canvas. Small game-scale design reference matching the anchor character's native pixel density; final wearable will be fitted separately.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match native single-pixel scale, dark outline and restrained clusters of this canonical48x64 human; create only empty jeans, not the body."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#080e19",
+          "#15233b",
+          "#243c5a",
+          "#365777",
+          "#547595"
+        ],
+        "max_colors": 5,
+        "seed": 63601
+      },
+      "fittedSource": "male-fitted-source.png",
+      "fitJob": "4f3edb37-b294-447d-b475-30c870b095dd",
+      "fitRequest": {
+        "method": "reference",
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/a5e77aef-4f79-47d1-95a2-8f1fc10097e7/download",
+          "usage_description": "Use this male-cut dark blue jeans design, material and restrained palette. Fit to the exact target legs and waist, not reference position, size or stance."
+        },
+        "description": "Dress this EXACT male South-facing standing base ONLY in the reference dark indigo blue denim jeans. Preserve every original head, face, torso, arms, hands, feet, pose, height, width, leg placement and native48x64 canvas. Only clothing over existing waist/hips/legs changes. Natural waist begins y37; fully conceal gray underwear, including upper edge and hip sides. Jeans cover legs down to ankle hems around y54, with ORIGINAL bare feet at y55..57 fully visible and unchanged. Keep crotch and gap between legs aligned to original stance. Waist/hips around x17..30, left leg x17..22 and right leg x25..30. Straight practical male cut. Plain waistband, subtle front pockets, fly and belt loops; simple straight legs, unrolled hems. Dark denim colors #080e19 #15233b #243c5a #365777 #547595; restrained clustered shading, NO bright blue, gold/orange stitching, copper studs, holes, patches, cargo pockets, belt or shoes. Leave original hands in front of hips, no material on fingers. No jacket, hair, gloves, accessories or changed anatomy. Full fitted source on transparency for garment-only extraction over unchanged base. Do not resize, recenter or lengthen the body.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63611
+      },
+      "detailSource": "male-detail-source.png",
+      "detailFrame": 0,
+      "layer": "male-layer.png",
+      "bodyComposite": "male-body-composite.png",
+      "equippedComposite": "male-equipped-composite.png",
+      "garmentPixels": 235,
+      "maskRows": [
+        [
+          36,
+          18,
+          18,
+          20,
+          20,
+          29,
+          29
+        ],
+        [
+          37,
+          18,
+          29
+        ],
+        [
+          38,
+          18,
+          29
+        ],
+        [
+          39,
+          17,
+          30
+        ],
+        [
+          40,
+          17,
+          30
+        ],
+        [
+          41,
+          17,
+          30
+        ],
+        [
+          42,
+          17,
+          30
+        ],
+        [
+          43,
+          17,
+          30
+        ],
+        [
+          44,
+          17,
+          30
+        ],
+        [
+          45,
+          17,
+          22,
+          25,
+          30
+        ],
+        [
+          46,
+          17,
+          22,
+          25,
+          30
+        ],
+        [
+          47,
+          17,
+          22,
+          25,
+          30
+        ],
+        [
+          48,
+          17,
+          22,
+          25,
+          30
+        ],
+        [
+          49,
+          16,
+          22,
+          25,
+          31
+        ],
+        [
+          50,
+          16,
+          22,
+          25,
+          31
+        ],
+        [
+          51,
+          16,
+          21,
+          26,
+          31
+        ],
+        [
+          52,
+          16,
+          21,
+          26,
+          31
+        ],
+        [
+          53,
+          16,
+          21,
+          26,
+          31
+        ],
+        [
+          54,
+          16,
+          21,
+          26,
+          31
+        ]
+      ],
+      "initialColorMap": {
+        "#030202ff": "#080e19ff",
+        "#111e31ff": "#15233bff",
+        "#2b415dff": "#243c5aff",
+        "#2d4462ff": "#243c5aff",
+        "#334b6aff": "#365777ff",
+        "#0b1524ff": "#080e19ff",
+        "#3c526cff": "#365777ff",
+        "#293e59ff": "#243c5aff",
+        "#111d2dff": "#15233bff",
+        "#3a5373ff": "#365777ff",
+        "#142235ff": "#15233bff",
+        "#1c2c41ff": "#15233bff",
+        "#273b55ff": "#243c5aff",
+        "#0d1b2bff": "#15233bff",
+        "#23354cff": "#243c5aff",
+        "#323c4bff": "#243c5aff"
+      },
+      "initialBoundaryCorrections": [
+        {
+          "at": [
+            22,
+            49
+          ],
+          "originalBodyColor": "#211917ff",
+          "garmentColor": "#080e19ff",
+          "reason": "Cover exposed original dark inner-leg outline at its unchanged native coordinate; four-pixel denim-outline cleanup, no fabric shifting/stretching."
+        },
+        {
+          "at": [
+            25,
+            49
+          ],
+          "originalBodyColor": "#080202ff",
+          "garmentColor": "#080e19ff",
+          "reason": "Cover exposed original dark inner-leg outline at its unchanged native coordinate; four-pixel denim-outline cleanup, no fabric shifting/stretching."
+        },
+        {
+          "at": [
+            22,
+            50
+          ],
+          "originalBodyColor": "#211917ff",
+          "garmentColor": "#080e19ff",
+          "reason": "Cover exposed original dark inner-leg outline at its unchanged native coordinate; four-pixel denim-outline cleanup, no fabric shifting/stretching."
+        },
+        {
+          "at": [
+            25,
+            50
+          ],
+          "originalBodyColor": "#080202ff",
+          "garmentColor": "#080e19ff",
+          "reason": "Cover exposed original dark inner-leg outline at its unchanged native coordinate; four-pixel denim-outline cleanup, no fabric shifting/stretching."
+        }
+      ],
+      "detailColorMap": {
+        "#0e131aff": "#080e19ff",
+        "#1b1f28ff": "#111f32ff",
+        "#111924ff": "#111f32ff",
+        "#132338ff": "#111f32ff",
+        "#182a40ff": "#1c304aff",
+        "#0d1b2dff": "#111f32ff",
+        "#0e1929ff": "#111f32ff",
+        "#0b1625ff": "#080e19ff",
+        "#15263bff": "#111f32ff",
+        "#172a43ff": "#1c304aff",
+        "#273c54ff": "#29445fff",
+        "#293e5aff": "#29445fff",
+        "#798596ff": "#557795ff",
+        "#2a425eff": "#29445fff",
+        "#0f1e32ff": "#111f32ff",
+        "#0a1521ff": "#080e19ff",
+        "#07111eff": "#080e19ff",
+        "#4c637bff": "#395a7bff",
+        "#09172aff": "#111f32ff",
+        "#1c2c3eff": "#1c304aff",
+        "#415873ff": "#395a7bff",
+        "#081222ff": "#080e19ff",
+        "#405166ff": "#395a7bff",
+        "#60778eff": "#557795ff",
+        "#20354fff": "#1c304aff",
+        "#2e4662ff": "#29445fff",
+        "#364e69ff": "#29445fff",
+        "#1c314aff": "#1c304aff",
+        "#1e3046ff": "#1c304aff",
+        "#050c19ff": "#080e19ff",
+        "#213853ff": "#1c304aff",
+        "#060e1eff": "#080e19ff",
+        "#1a2d46ff": "#1c304aff"
+      },
+      "preservedEdgePixels": [
+        [
+          18,
+          36,
+          "#080e19ff"
+        ],
+        [
+          20,
+          36,
+          "#111f32ff"
+        ],
+        [
+          29,
+          36,
+          "#080e19ff"
+        ],
+        [
+          19,
+          37,
+          "#29445fff"
+        ],
+        [
+          21,
+          37,
+          "#080e19ff"
+        ],
+        [
+          22,
+          37,
+          "#29445fff"
+        ],
+        [
+          23,
+          37,
+          "#29445fff"
+        ],
+        [
+          24,
+          37,
+          "#395a7bff"
+        ],
+        [
+          25,
+          37,
+          "#29445fff"
+        ],
+        [
+          26,
+          37,
+          "#111f32ff"
+        ],
+        [
+          27,
+          37,
+          "#395a7bff"
+        ],
+        [
+          28,
+          37,
+          "#29445fff"
+        ],
+        [
+          17,
+          39,
+          "#080e19ff"
+        ],
+        [
+          30,
+          39,
+          "#080e19ff"
+        ],
+        [
+          31,
+          49,
+          "#111f32ff"
+        ]
+      ],
+      "discardedDetailPixelsOutsideMask": [
+        [
+          23,
+          45
+        ],
+        [
+          24,
+          45
+        ],
+        [
+          22,
+          51
+        ],
+        [
+          25,
+          51
+        ],
+        [
+          17,
+          55
+        ],
+        [
+          18,
+          55
+        ],
+        [
+          19,
+          55
+        ],
+        [
+          20,
+          55
+        ],
+        [
+          21,
+          55
+        ],
+        [
+          26,
+          55
+        ],
+        [
+          27,
+          55
+        ],
+        [
+          28,
+          55
+        ],
+        [
+          29,
+          55
+        ],
+        [
+          30,
+          55
+        ],
+        [
+          31,
+          55
+        ]
+      ],
+      "jacketLayer": "docs/ReviewAssets/WorkJacketPilot/male-layer-teal-pockets.png",
+      "wrenchLayer": "docs/ReviewAssets/WrenchPilot/male-layer.png",
+      "priorEquippedSource": "docs/ReviewAssets/WrenchPilot/male-equipped-composite.png"
+    },
+    {
+      "body": "female",
+      "approval": "approved_by_user",
+      "base": "PawnShop.Game/Content/Player/Bases/female/base.png",
+      "baseSha256": "B8672ADB350031F4B140C8EF9240EECE32CF71B5BF461A764243DB4CACA9BC52",
+      "baseCrop": [
+        0,
+        0,
+        48,
+        64
+      ],
+      "object": "female-object.png",
+      "objectId": "70b2532b-8fed-4d7b-b16e-c87fd76b42ec",
+      "objectJob": "23bfd638-18f7-4b8d-a5d3-d1bb9cf22ce4",
+      "objectRequest": {
+        "name": "Picker's Hollow - dark blue work jeans - female",
+        "description": "One standalone empty pair of dark indigo blue denim work jeans, front/south view for a cozy low-top-down pixel-art RPG. Plain practical straight legs, modest waistband with small belt loops, subtle front pockets and fly, subdued denim seams, full length ankle hems, no rolled cuffs. Restrained dark blue palette, crisp native one-pixel outline, simple readable clusters and minimal highlights. No distressing, holes, patches, cargo pockets, logos, orange/gold stitching, belt, boots or body. Female cut: natural narrower waist and modest wider hips, practical straight legs; same design and denim as male version. Garment only, no head, hands, skin, feet, mannequin, hanger, scenery or ground shadow. Transparent48x64 canvas. Small game-scale design reference matching the anchor character's native pixel density; final wearable will be fitted separately.",
+        "width": 48,
+        "height": 64,
+        "n_directions": 1,
+        "view": "low top-down",
+        "style_image": {
+          "url": "https://api.pixellab.ai/mcp/pixel-tools/02a08604-9421-4e79-9021-e84b41edb086/image.png",
+          "usage_description": "Match native single-pixel scale, dark outline and restrained clusters of this canonical48x64 human; create only empty jeans, not the body."
+        },
+        "style_options": {
+          "outline": true,
+          "shading": true,
+          "detail": true,
+          "color_palette": false
+        },
+        "palette": [
+          "#080e19",
+          "#15233b",
+          "#243c5a",
+          "#365777",
+          "#547595"
+        ],
+        "max_colors": 5,
+        "seed": 63602
+      },
+      "fittedSource": "female-fitted-source.png",
+      "fitJob": "1ca0d0d5-1803-4313-be1f-bb6e08f460e8",
+      "fitRequest": {
+        "method": "reference",
+        "image_url": "https://api.pixellab.ai/mcp/pixel-tools/d13b9b04-3d54-4997-b90d-eabc5a17612b/image.png",
+        "reference_image": {
+          "url": "https://api.pixellab.ai/mcp/objects/70b2532b-8fed-4d7b-b16e-c87fd76b42ec/download",
+          "usage_description": "Use this female-cut dark blue jeans design, material and restrained palette. Fit to the exact target legs and waist, not reference position, size or stance."
+        },
+        "description": "Dress this EXACT female South-facing standing base ONLY in the reference dark indigo blue denim jeans. Preserve every original head, face, torso, arms, hands, feet, pose, height, width, leg placement and native48x64 canvas. Only clothing over existing waist/hips/legs changes. Natural waist begins y37; fully conceal gray underwear, including upper edge and hip sides. Jeans cover legs down to ankle hems around y54, with ORIGINAL bare feet at y55..57 fully visible and unchanged. Keep crotch and gap between legs aligned to original stance. Natural female waist/hips around x17..31; follow original hips into left leg x18..22 and right leg x25..29. Practical female cut, same recognizable jeans design. Plain waistband, subtle front pockets, fly and belt loops; simple straight legs, unrolled hems. Dark denim colors #080e19 #15233b #243c5a #365777 #547595; restrained clustered shading, NO bright blue, gold/orange stitching, copper studs, holes, patches, cargo pockets, belt or shoes. Leave original hands in front of hips, no material on fingers. No jacket, hair, gloves, accessories or changed anatomy. Full fitted source on transparency for garment-only extraction over unchanged base. Do not resize, recenter or lengthen the body.",
+        "no_background": true,
+        "use_color_palette_correction": false,
+        "seed": 63612
+      },
+      "detailSource": "female-detail-source.png",
+      "detailFrame": 1,
+      "layer": "female-layer.png",
+      "bodyComposite": "female-body-composite.png",
+      "equippedComposite": "female-equipped-composite.png",
+      "garmentPixels": 254,
+      "maskRows": [
+        [
+          35,
+          18,
+          30
+        ],
+        [
+          36,
+          18,
+          30
+        ],
+        [
+          37,
+          18,
+          30
+        ],
+        [
+          38,
+          18,
+          30
+        ],
+        [
+          39,
+          18,
+          30
+        ],
+        [
+          40,
+          18,
+          30
+        ],
+        [
+          41,
+          18,
+          30
+        ],
+        [
+          42,
+          18,
+          30
+        ],
+        [
+          43,
+          18,
+          30
+        ],
+        [
+          44,
+          17,
+          23,
+          25,
+          31
+        ],
+        [
+          45,
+          17,
+          23,
+          25,
+          31
+        ],
+        [
+          46,
+          18,
+          23,
+          25,
+          30
+        ],
+        [
+          47,
+          18,
+          23,
+          25,
+          30
+        ],
+        [
+          48,
+          18,
+          23,
+          25,
+          30
+        ],
+        [
+          49,
+          18,
+          23,
+          25,
+          30
+        ],
+        [
+          50,
+          18,
+          23,
+          25,
+          30
+        ],
+        [
+          51,
+          18,
+          23,
+          25,
+          30
+        ],
+        [
+          52,
+          18,
+          23,
+          25,
+          30
+        ],
+        [
+          53,
+          17,
+          22,
+          26,
+          31
+        ],
+        [
+          54,
+          17,
+          22,
+          25,
+          31
+        ]
+      ],
+      "initialColorMap": {
+        "#2b3d53ff": "#243c5aff",
+        "#1e2b3dff": "#15233bff",
+        "#384b63ff": "#365777ff",
+        "#0c1423ff": "#080e19ff",
+        "#3d536aff": "#365777ff",
+        "#31455cff": "#243c5aff",
+        "#131c2bff": "#15233bff",
+        "#29394dff": "#243c5aff",
+        "#25354aff": "#243c5aff",
+        "#627b94ff": "#547595ff",
+        "#445d77ff": "#365777ff",
+        "#192334ff": "#15233bff",
+        "#233245ff": "#15233bff",
+        "#2e4359ff": "#243c5aff",
+        "#030202ff": "#080e19ff",
+        "#080e1cff": "#080e19ff",
+        "#0b0a0aff": "#080e19ff",
+        "#03040bff": "#080e19ff"
+      },
+      "initialBoundaryCorrections": [],
+      "detailColorMap": {
+        "#081222ff": "#080e19ff",
+        "#07111eff": "#080e19ff",
+        "#0e1929ff": "#111f32ff",
+        "#0b1625ff": "#080e19ff",
+        "#24303eff": "#1c304aff",
+        "#09172aff": "#111f32ff",
+        "#2e4662ff": "#29445fff",
+        "#132338ff": "#111f32ff",
+        "#273c54ff": "#29445fff",
+        "#0d1b2dff": "#111f32ff",
+        "#6f7a8cff": "#557795ff",
+        "#0f1e32ff": "#111f32ff",
+        "#060e1eff": "#080e19ff",
+        "#15263bff": "#111f32ff",
+        "#2a425eff": "#29445fff",
+        "#293e5aff": "#29445fff",
+        "#20354fff": "#1c304aff",
+        "#364e69ff": "#29445fff",
+        "#182a40ff": "#1c304aff",
+        "#1a2d46ff": "#1c304aff",
+        "#415873ff": "#395a7bff",
+        "#1c314aff": "#1c304aff",
+        "#172a43ff": "#1c304aff",
+        "#213853ff": "#1c304aff",
+        "#1e3046ff": "#1c304aff",
+        "#050c19ff": "#080e19ff",
+        "#050d24ff": "#080e19ff",
+        "#0a1521ff": "#080e19ff",
+        "#111924ff": "#111f32ff"
+      },
+      "preservedEdgePixels": [
+        [
+          18,
+          35,
+          "#29445fff"
+        ],
+        [
+          19,
+          35,
+          "#111f32ff"
+        ],
+        [
+          18,
+          36,
+          "#111f32ff"
+        ],
+        [
+          18,
+          37,
+          "#111f32ff"
+        ],
+        [
+          18,
+          38,
+          "#111f32ff"
+        ],
+        [
+          18,
+          39,
+          "#29445fff"
+        ],
+        [
+          25,
+          43,
+          "#111f32ff"
+        ],
+        [
+          17,
+          44,
+          "#080e19ff"
+        ],
+        [
+          25,
+          44,
+          "#080e19ff"
+        ],
+        [
+          17,
+          45,
+          "#080e19ff"
+        ],
+        [
+          25,
+          45,
+          "#080e19ff"
+        ],
+        [
+          25,
+          46,
+          "#080e19ff"
+        ],
+        [
+          18,
+          47,
+          "#111f32ff"
+        ],
+        [
+          25,
+          47,
+          "#080e19ff"
+        ],
+        [
+          18,
+          48,
+          "#111f32ff"
+        ],
+        [
+          25,
+          48,
+          "#080e19ff"
+        ],
+        [
+          18,
+          49,
+          "#111f32ff"
+        ],
+        [
+          25,
+          49,
+          "#080e19ff"
+        ],
+        [
+          18,
+          50,
+          "#111f32ff"
+        ],
+        [
+          25,
+          50,
+          "#080e19ff"
+        ],
+        [
+          18,
+          51,
+          "#111f32ff"
+        ],
+        [
+          25,
+          51,
+          "#080e19ff"
+        ],
+        [
+          18,
+          52,
+          "#111f32ff"
+        ],
+        [
+          25,
+          52,
+          "#080e19ff"
+        ],
+        [
+          17,
+          53,
+          "#080e19ff"
+        ],
+        [
+          18,
+          53,
+          "#29445fff"
+        ],
+        [
+          26,
+          53,
+          "#111f32ff"
+        ],
+        [
+          17,
+          54,
+          "#080e19ff"
+        ],
+        [
+          18,
+          54,
+          "#29445fff"
+        ],
+        [
+          19,
+          54,
+          "#395a7bff"
+        ],
+        [
+          25,
+          54,
+          "#080e19ff"
+        ],
+        [
+          26,
+          54,
+          "#29445fff"
+        ]
+      ],
+      "discardedDetailPixelsOutsideMask": [
+        [
+          31,
+          36
+        ],
+        [
+          31,
+          37
+        ],
+        [
+          31,
+          38
+        ],
+        [
+          31,
+          39
+        ],
+        [
+          32,
+          39
+        ],
+        [
+          31,
+          40
+        ],
+        [
+          32,
+          40
+        ],
+        [
+          31,
+          41
+        ],
+        [
+          32,
+          41
+        ],
+        [
+          31,
+          42
+        ],
+        [
+          32,
+          42
+        ],
+        [
+          31,
+          43
+        ],
+        [
+          32,
+          43
+        ],
+        [
+          24,
+          44
+        ],
+        [
+          32,
+          44
+        ],
+        [
+          24,
+          45
+        ],
+        [
+          32,
+          45
+        ],
+        [
+          24,
+          46
+        ],
+        [
+          31,
+          46
+        ],
+        [
+          32,
+          46
+        ],
+        [
+          24,
+          47
+        ],
+        [
+          31,
+          47
+        ],
+        [
+          24,
+          48
+        ],
+        [
+          31,
+          48
+        ],
+        [
+          24,
+          49
+        ],
+        [
+          31,
+          49
+        ],
+        [
+          24,
+          50
+        ],
+        [
+          31,
+          50
+        ],
+        [
+          24,
+          51
+        ],
+        [
+          31,
+          51
+        ],
+        [
+          24,
+          52
+        ],
+        [
+          31,
+          52
+        ],
+        [
+          23,
+          53
+        ],
+        [
+          23,
+          54
+        ]
+      ],
+      "jacketLayer": "docs/ReviewAssets/WorkJacketPilot/female-layer.png",
+      "wrenchLayer": "docs/ReviewAssets/WrenchPilot/female-layer.png",
+      "priorEquippedSource": "docs/ReviewAssets/WrenchPilot/female-equipped-composite.png"
+    }
+  ],
+  "extraction": {
+    "maskRowsFormat": "[y, inclusive xStart, inclusive xEnd, ...], native48x64 coordinates.",
+    "geometry": "Extract actual denim and adjacent dark outline from each body-specific fitted source, protecting original hands. Four exposed original male dark inner-leg outline pixels receive denim-outline cleanup at unchanged coordinates. Fixed235/254-pixel masks retain those fits through later shading edits.",
+    "detail": "Read the paired Pro detail source at each fixed-mask coordinate and apply its recorded color map. Discard all new source pixels outside the mask. Where the model removed an existing mask pixel, retain the previously fitted edge, mapped to the final shared palette; exact preservedEdgePixels are recorded. No repositioning, scaling, stretching or repeated fabric rows.",
+    "body": "Composites always use original canonical body. No generated skin, face, hands or feet used."
+  },
+  "coverage": {
+    "garmentBoundsInclusive": [
+      16,
+      35,
+      31,
+      54
+    ],
+    "requiredOriginalBodyCoverageInclusive": [
+      16,
+      37,
+      31,
+      54
+    ],
+    "handProtection": "For y<=43, protect x<=16 male / x<=17 female and x>=31 both. Original hand pixels remain exposed.",
+    "feetProtection": "Every pixel at y>=55 is unchanged from original body; no shoe generation implied.",
+    "underwear": "All original body pixels in required waist/leg area outside protected hands have garment coverage."
+  },
+  "compositing": {
+    "drawOrder": [
+      "original_body",
+      "existing_mask_body_occlusion_if_equipped",
+      "optional_jeans",
+      "optional_jacket",
+      "optional_normal_or_fitted_hair",
+      "optional_mask",
+      "optional_finger_clipped_wrench"
+    ],
+    "scope": "Jeans are used only by explicitly labeled South-standing jeans panels. Direction, motion and frame controls do not animate or rotate them; accepted equipment panels stay unchanged."
+  },
+  "generation": {
+    "estimatedOrChargedTotal": 35,
+    "operations": [
+      {
+        "kind": "body_specific_design_objects",
+        "count": 2,
+        "generationsEach": 5
+      },
+      {
+        "kind": "body_specific_reference_fits",
+        "count": 2,
+        "generationsEach": 5
+      },
+      {
+        "kind": "superseded_female_only_simplification",
+        "count": 1,
+        "generations": 5,
+        "jobId": "bff18e9a-377d-4460-b07a-327112aeca72",
+        "source": "female-shading-source.png",
+        "request": {
+          "method": "reference",
+          "image_url": "https://api.pixellab.ai/mcp/pixel-tools/ecb052ea-286c-4561-8bb4-e0fb4deadeab/assets/south/full.png",
+          "reference_image": {
+            "url": "https://api.pixellab.ai/mcp/pixel-tools/5e61e972-2725-4014-97d2-f054c72de21a/assets/south/full.png",
+            "usage_description": "Match ONLY this male jeans layer's quiet shading density and matte dark denim material. Do not copy its male silhouette, waistband size or leg placement."
+          },
+          "description": "Simplify ONLY the shading of the existing female dark blue jeans layer to match reference's understated male jeans. Keep every occupied/transparent pixel, waistband, outline, pockets, leg positions, ankle hems and48x64 canvas EXACTLY unchanged. Main cloth mostly broad flat #243c5a areas; #15233b only for narrow coherent inner-leg folds and restrained pocket shadows; #080e19 outline. Very few #365777 edge accents, NO bright #547595 specks, mottling, scratches, texture flecks, shiny knee highlights, repeated stripes or dither. Same ordinary matte denim as reference. Color/shading-only edit; no skin, body, belt, shoes, new seams or garment geometry changes. The final extraction will keep original female mask coordinates.",
+          "no_background": true,
+          "use_color_palette_correction": false,
+          "seed": 63621
+        },
+        "status": "Superseded after user clarified that both jeans should improve; not current acceptance target."
+      },
+      {
+        "kind": "paired_richer_denim_edit",
+        "count": 1,
+        "frames": 2,
+        "generations": 10,
+        "jobId": "7a2b2f42-6476-4ccd-a5a0-82040feb351e",
+        "request": {
+          "image_urls": [
+            "https://api.pixellab.ai/mcp/pixel-tools/5e61e972-2725-4014-97d2-f054c72de21a/assets/south/full.png",
+            "https://api.pixellab.ai/mcp/pixel-tools/9d9b029e-2276-465a-9a9d-9549e065d934/image.png"
+          ],
+          "width": 48,
+          "height": 64,
+          "no_background": true,
+          "seed": 63631,
+          "description": "Improve BOTH existing dark-blue jeans layers as a matching premium-quality pixel-art pair for a cozy industrial RPG. Frame1 male cut, frame2 female cut: SAME denim material, same level of detail, matching pockets/stitching and lighting; each keeps its own existing silhouette and native48x64 coordinates EXACTLY. Upgrade bland/uneven rendering into convincing dark indigo denim: clearly readable subtle front pocket openings and fly, small coherent folds at hips/knees/ankles, restrained desaturated blue seam accents and very subtle wear. Use deliberate clean pixel clusters, strong readable shape, rich but controlled shading. Avoid noisy speckles/dither, random tiny patches, glossy stripes, bright faded white areas, orange/gold stitches, rips, cargo pockets, belts, boots or skin. Keep dark blue overall: outline #080e19, deep shadow #152b45, denim #284a70, midlight #3d648a, sparse seam highlight #6687a4. MATCH visual richness across both bodies; do not make male flat and female noisy. Preserve occupied/transparent mask, waistband height, crotch gap, leg positions, hems and stance; only color/detail within current garment, no scaling, shifting, extending legs or changing cut. Final extraction will retain original garment masks. Improve both deliberately rather than making either simpler or blurrier."
+        },
+        "inputOrder": [
+          "male",
+          "female"
+        ],
+        "status": "Current style source; garment masks remain fixed."
+      }
+    ],
+    "derivatives": "Free exact PixelLab workbench exports; original inputs retained for provenance."
+  },
+  "pixelLabExports": {
+    "male-equipped-composite.png": "1cc4fd03-b33a-4b97-8e46-b5020e2e3099",
+    "female-equipped-composite.png": "ac1fecb9-67cc-4af4-b97d-c758b46cd3ff",
+    "male-layer.png": "fc0ecaf6-13e2-45a5-8577-f02ab75265a8",
+    "male-body-composite.png": "bab50ff5-db61-43e6-a06d-e65e9111ad1d",
+    "female-layer.png": "fedab5b9-40cb-4ac7-96a7-4e926ba8664b",
+    "female-body-composite.png": "cbb77397-ff89-47a0-b7a5-be0e15d0364e"
+  },
+  "pixelLabExportUrls": {
+    "male-equipped-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/1cc4fd03-b33a-4b97-8e46-b5020e2e3099/assets/south/full.png",
+    "female-equipped-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/ac1fecb9-67cc-4af4-b97d-c758b46cd3ff/assets/south/full.png",
+    "male-layer.png": "https://api.pixellab.ai/mcp/pixel-tools/fc0ecaf6-13e2-45a5-8577-f02ab75265a8/assets/south/full.png",
+    "male-body-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/bab50ff5-db61-43e6-a06d-e65e9111ad1d/assets/south/full.png",
+    "female-layer.png": "https://api.pixellab.ai/mcp/pixel-tools/fedab5b9-40cb-4ac7-96a7-4e926ba8664b/assets/south/full.png",
+    "female-body-composite.png": "https://api.pixellab.ai/mcp/pixel-tools/cbb77397-ff89-47a0-b7a5-be0e15d0364e/assets/south/full.png"
+  },
+  "files": [
+    {
+      "sha256": "D66E4695C71CE2EDBA585F28FEFC86D5BE42DE53DF7D49290653ECE5AC59FBEB",
+      "path": "female-body-composite.png"
+    },
+    {
+      "sha256": "0F8A22D1E34B5188838FB75252E91E6D55E8C9EB19A8A1D1C323ABDA4E6323D3",
+      "path": "female-detail-source.png"
+    },
+    {
+      "sha256": "B7DF77B54707C992A44AE97A4EE5EAF7481E6151A754C47A339F3BDEB6512F02",
+      "path": "female-equipped-composite.png"
+    },
+    {
+      "sha256": "7013ADEE53CEF57539B322315CBC9DBD7DF39952BB206C0D9B5864929E49BA95",
+      "path": "female-fitted-source.png"
+    },
+    {
+      "sha256": "B861CD621C534B80D8ED4812224904D32662AFDE6A89F5F098A2819689A70B65",
+      "path": "female-layer.png"
+    },
+    {
+      "sha256": "184CC0B7472FE1BF33823759C0EC6BF9B69E664AAF72F7B881B459D06848233C",
+      "path": "female-object.png"
+    },
+    {
+      "sha256": "1E679D3005CA8F546D171E477C1F80D62CE9A4B7B17878C6E92DF9FC62D4DA28",
+      "path": "female-shading-source.png"
+    },
+    {
+      "sha256": "316AACC9A068456E47BF66ED023D8A87AEFE9CA60BBC14A08EF12CF7F6724B5E",
+      "path": "male-body-composite.png"
+    },
+    {
+      "sha256": "4EA5C0307C9FB66B9668129812E3EF90E7327D51D581F8AF024EE58A16D2BA85",
+      "path": "male-detail-source.png"
+    },
+    {
+      "sha256": "AFA52ECBFAF03B2BF74A9CCCAC77F50A140743815AFF82F40FC8623A45157728",
+      "path": "male-equipped-composite.png"
+    },
+    {
+      "sha256": "7F1642CB9F3ABA1AF1EC86F3524F22F39493682ADFACDE0A07102198903BD27F",
+      "path": "male-fitted-source.png"
+    },
+    {
+      "sha256": "B0D4FD198D151D5EC5D5115801F7E07D855F7097F6E43CD2037E7372C0E5E1AD",
+      "path": "male-layer.png"
+    },
+    {
+      "sha256": "87A152A81E908CDBF981FF82D1FB8D27E8FC1252E707B801A661903AFA1DC928",
+      "path": "male-object.png"
+    }
+  ],
+  "verification": {
+    "automated": "PASS: six derivative PNGs48x64/binary alpha; original-body and layered-equipped pixel-exact compositions, fixed235/254-pixel masks, complete waist/leg coverage, hands and feet protected. All162 earlier asset records unchanged.",
+    "preview": "PASS:61 loaded PNGs,104 views. Jeans:2816 direction/motion/loadout cases and45056 view checks across all32 combinations; correct pants-before-jacket ordering and independent South-standing poses. Existing equipment:1408 cases,19712 wrench views including8064 West views and8448 South-standing composites; frame/transform/order/crop/control/scale checks pass.",
+    "visual": "Current richer-denim South-standing fits approved by user: \"perfect, next phase\". No browser/game test by agent claimed."
+  },
+  "next": "South-walking fit checkpoint on both bodies, then remaining directions/settling. Footwear and backpacks follow before production folder walkthrough.",
+  "approvalBasis": "User accepted current richer-denim standing fits with \"perfect, next phase\". Approval covers both bodies South standing only."
+}

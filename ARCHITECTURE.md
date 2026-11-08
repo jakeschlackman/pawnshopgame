@@ -100,9 +100,71 @@ Required folders, relative to each project directory:
 
 The tests retain the dependency-free console runner. They reference Game's graphics-free Bootstrap classes for lifecycle tests without constructing PawnShopGame, a window, or graphics resources. Framework menu/input tests are under Tests/Framework. Run `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build` after building the solution; `dotnet test` does not execute this runner.
 
-`Game/Content/TitleScreen` contains the four supplied Rummage Hollow PNG layers (the robot is omitted), copied to build/publish output and loaded by the application-owned TitleScreen. It uses a contained 1920x1080 presentation canvas with point sampling and the existing runtime bitmap font. The room/overlays retain their 640x360 target and original code-authored placeholder shapes/font/floor. No MGCB/XNB workflow has been introduced. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
+`Game/Content/TitleScreen/title-screen-panorama.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Older Rummage Hollow artwork is preserved but no longer loaded. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport, uniformly scaled with point sampling. The graphics-free PanoramaCamera tracks normalized horizontal travel with 0.8-second SmoothStep easing and calculates source bounds for the actual viewport aspect ratio. ApplicationFlow advances it once using presentation time; gameplay cameras are unaffected. Title and Options UI remain on contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. Options is visible but input-captured during Sprout's outgoing float; UI is hidden on the return pan. Escape can cancel the flight and reverse the pan. Pause-menu Options does not pan. The room/overlays retain their 640x360 target and original code-authored placeholder content. Fonts now use the standard MGCB/SpriteFont workflow, with the content builder and local tool pinned to 3.8.4.1; existing PNG loading is unchanged. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
+
+### Common NPC ownership — approved destination
+
+`PawnShop.Characters/Npcs/Common` is the user-approved home for ordinary,
+procedurally generated townies and shop visitors. Their character logic uses
+the namespace `PawnShop.Characters.Npcs.Common`. This includes seeded
+generation of compatible body, hair and clothing combinations from the approved
+modular art library. Main-player and notable NPC designs are separate.
+
+The approved layout is implemented:
+`Common/Assets/Bases`, `Common/Assets/Hair` and `Common/Assets/Clothing` for approved
+runtime images and animation/compatibility metadata, with generation code under
+`Common/Generation`. Fifty-two approved PNGs were promoted as byte-identical
+copies with source hashes in `Assets/migration.json`. Original PixelLab sources,
+rejected revisions, recipes and review
+composites remain authoring evidence, outside the runtime asset library.
+
+Game packages the selected Characters-owned PNGs and `catalog.json` into
+`Content/CommonNpcs` at build/publish time. Texture loading/rendering remains a
+Game responsibility. The bundled room renders one generated common visitor,
+entering from x=672 at 80 logical pixels/second to its existing placement. This
+does not require Characters to reference Game or hold graphics objects in NPC
+state. Existing `Content/Player` base images are still loaded by character
+selection; promotion preserves that working dependency until replacement.
+Existing authored NPC content and the general `Npcs/NpcDefinition` stay separate
+from generated instances. `CommonNpcGenerator` produces realized appearances with
+seeded choices, body-specific compatibility, caller-supplied stable instance IDs
+and content/generator versions. Catalog items and hair/headgear compatibility are
+data-driven; adding approved outfits, hairstyles or hats requires no generator
+code changes. `CommonNpcCatalog.Resolve` returns ordered native frame rectangles,
+body occlusion and a shared West-mirror flag without advancing a clock. The
+session-owned `CommonNpcEntrance` drives a bounded West-facing entrance, eight
+100 ms walk frames and the accepted walk-1/settling/standing stop. Room-owned
+textures load once and are disposed with the room. Live NPC placement drives
+collision, click bounds, proximity and drawing; pause/dialogue freeze the entrance.
+New Game realizes one appearance; the existing visitor speaker/dialogue remains.
+General navigation, browsing, trading and persistence integration are later work. See
+[common NPC authoring](PawnShop.Characters/Npcs/Common/AUTHORING.md).
+Shop customer transactions remain in Shop/Core, composed with characters by Game.
+See the [folder walkthrough](docs/VERIFICATION_EQUIPMENT_PILOT.md#common-npc-folder-walkthrough).
 
 ### 2.3 Definition, state, operation, and presentation
+
+`Game/Content/Fonts/fonts.json` is the application-wide font-role catalog.
+Framework's graphics-free FontCatalog validates names, content IDs and line heights;
+the small string extension `"text".Font("TitleMenu")` selects a role. FontLibrary
+uses MonoGame ContentManager/SpriteFont/DrawString/MeasureString rather than custom
+font processing. Game bootstrap creates one shared font scope and passes it to
+renderers/screens, disposing it after those consumers. Catalog data and assets load
+once, never in Draw. TitleMenu uses bundled Pixeloid Sans Bold, matching inner Options text; the title badge
+uses Pixelify Sans Bold (700). Options heading/label/body/help roles use Pixeloid
+Sans Bold; OptionsTab and OptionsAction use Jersey 25 Regular for category tabs
+and footer labels. Every family includes its OFL license.
+TitleSaying also uses Pixeloid Sans Bold at 28. ApplicationFlow loads the small
+TitleSayings JSON pool once and chooses one line at startup. The immutable line
+is also supplied to OptionsModel for the Comfort dialogue-speed preview and stays
+fixed through all screen transitions until restart. Randomness is injected for headless
+checks. Draw only reads the chosen line, even when an unavailable entry is selected,
+and fits long entries to the footer width; no content I/O or random choice occurs
+in rendering. The footer navigation hint is omitted; unavailable entries retain their badge.
+Options now uses point sampling for its pixel-art frame, controls and canvas presentation.
+The renderer default and pixel-sprite overlays retain point sampling.
+The title logo remains an image. Room/pause placeholder text
+is unchanged. Named font size is a logical pixel line height multiplied by UI scale.
 
 These four concepts must remain distinct:
 
@@ -116,6 +178,101 @@ These four concepts must remain distinct:
 `IReadOnlyList<ItemInstance>` is not an immutable read model if each instance can still be edited. Return immutable value snapshots, immutable nested collections, or deliberately read-only projections that cannot expose a mutation path.
 
 ## 3. Identity, state ownership, and reusable capabilities
+
+Application preferences now live in `Game/Bootstrap/AppSettings`, `SettingsStore`,
+and the graphics-free `OptionsModel`. `ApplicationFlow` owns the options overlay;
+it captures input and pauses the session from both title and pause. The host applies
+display changes, key bindings, and audio previews; Screens renders the options UI.
+Settings persist outside gameplay saves with temporary-write/backup replacement.
+The host uses only `%LOCALAPPDATA%/PickersHollow/settings.json`; it does not read
+or migrate the former RummageHollow directory. A missing file is created with
+defaults during startup load through the existing safe-write flow. If creation
+fails, launch continues with in-memory defaults and an Options warning. Existing
+files, including corrupt or unsupported files, are not rewritten on load.
+The centered display-confirmation dialog uses a PixelLab ivywood frame with
+russet walnut, golden trim and restrained ivy/iron corners. Its native-scale
+64-pixel nine-slice corners preserve all foliage; only plain edges repeat. The
+generated center is transparent, backed by a PixelLab cocoa-to-chocolate gradient
+with very faint fiber texture. The opaque 192x293 inset repeats horizontally at
+native scale; its height matches the inset so the gradient never restarts vertically.
+Pixeloid text uses OptionsHeading at 36 and OptionsLabel at 26 for secondary text.
+Keep/Revert reuse the complete
+PixelLab walnut/brass binding-button art with six-pixel slices at 2x, including
+their own lower borders. They retain OptionsLabel at 26 and sit 16px above the
+frame's gold rail, inset clear of ivy. Underlying Controls slot
+buttons and the main Options footer retain their own artwork.
+It dims the underlying Options view without redrawing its frame. Keep/Revert
+share draw/hit rectangles and support pointer hover/press feedback. Routine Apply/revert status messages
+are silent; save/display failures still report errors.
+OptionsModel compares Draft and Current by value for dirty state. Back/cancel
+with differences opens a confirmation sharing the existing frame, gradient,
+typography and button bounds. Keep Editing is the safe default; Escape also keeps
+the draft. Only explicit Discard Changes restores Current and permits leaving.
+The modal owns keyboard/pointer input, blocks underlying scrolling/controls and
+waits through focus loss. Clean exits skip it. Main-menu return flight begins
+only after the close is accepted. Display-preview rollback retains its separate
+countdown/cancel behavior; no settings are written by the discard confirmation.
+Display edits require a 15-second confirmation and revert on cancellation, timeout,
+focus loss, or application failure. Resolutions range from 1280x720 through
+3840x2160. Earlier saved 960x540 preferences load at 1280x720 while retaining
+other settings, without rewriting the original until Apply. The host rejects
+actual display dimensions below the minimum, including a smaller borderless desktop; manual window
+resizing is disabled and users change resolution through Options. UI/text size previews independently of world scale. Audio
+and dialogue speed have live previews; the Ink conversation draft also uses the
+text-speed setting. Authored audio remains future work. See README.md for controls
+and persistence behavior.
+
+`Framework/Input/KeyboardBindings` is an immutable mapping of six actions to
+primary/alternate `KeyBinding` pairs. `KeyboardInput` merges each pair before edge
+detection and held-axis calculation, so alternate keys cannot duplicate actions
+or speed. Movement mappings also navigate UI, Interact confirms and Pause / Back
+cancels in every screen. Enter/Space and Escape remain recovery shortcuts.
+`AppSettings` keeps its existing action fields and adds alternate/movement fields
+without changing gameplay saves. Missing movement fields receive defaults; legacy
+custom action conflicts adjust new movement defaults with an explicit message.
+Loading never rewrites preferences. The host updates the input map only when the
+immutable current settings change.
+
+The Controls tab has six rows and two focusable columns. `OptionsModel` owns slot
+focus, release-before-capture, duplicate/reserved-key checks, alternate clearing,
+and draft/apply/discard behavior. `OptionsMenuLayout` shares row/cell geometry
+between drawing, the title selector and mouse input. Escape cancels capture;
+Delete/Backspace clears only an alternate, preserving a required primary.
+See [dual-binding verification](docs/VERIFICATION_DUAL_BINDINGS.md).
+
+MenuPointerInput maps mouse clicks through the same contained UI viewport used for
+drawing (including gameplay integer scaling), then produces the existing semantic
+menu input. Main-menu rows, Options tabs/rows, Back and display Keep/Revert buttons
+share keyboard command paths. Focus-return held clicks and clicks outside the UI
+canvas are ignored; a single frame cannot apply both pointer and keyboard actions.
+
+The title selector uses `Content/TitleScreen/sprout-title.json` and bundled `sprout-title-menu.png`.
+Idle uses the 13-frame PixelLab Floating Point Right Loop (east); the original
+Interact pixels are padded into the shared 68x80 grid without resizing. No runtime
+network connection is used.
+Framework's immutable SpriteSheetDefinition validates the grid/clips/pivot;
+SpriteAnimator selects frames from presentation time without a graphics device.
+ApplicationFlow advances the selector once and defers non-Options title commands until its
+one-shot Interact clip finishes (0.8 seconds at 50 ms/frame; Idle uses 90 ms/frame). Repeated input is captured, Escape
+cancels, and focus loss holds pending activation. Disabled entries may animate but
+cannot execute. TitleScreen only reads the frame and draws through PixelRenderer
+using a source rectangle and stable pivot at the text's vertical center. The
+selector is application UI and does not create a gameplay companion entity.
+OptionsSproutFlight owns the main-menu/Options presentation: finish the current
+Idle cycle, then float upright to the first Display field over the 800 ms
+panorama pan while continuing the same pointing loop. There are no takeoff,
+jet-flight or landing clips and no rotation. Arrival does not restart Idle.
+Options input unlocks after arrival; Escape cancels entry and focus loss freezes
+the sequence and camera. Closing main-menu Options captures Sprout's visible
+anchor before restoring draft settings, then floats him back over the same 800ms
+pan to the main menu's selected Options entry. The pointing loop and animation
+clock continue throughout without a restart. Return travel captures input through
+arrival; repeated Back does not skip it. The title menu renders behind the return
+flight without its normal duplicate selector. Existing pause-side Options and
+other title commands are unchanged; no future pause-menu work is implemented.
+PixelRenderer draws Sprout as a point-sampled overlay directly on the backbuffer
+after presenting the UI target, using the same contained viewport transform and
+a snapped pixel position. This avoids scaling the sprite twice at different ratios.
 
 Use strongly distinguished IDs conceptually: `EntityId`, `ItemInstanceId`, `InventoryId`, `LocationId`, `DungeonRunId`, `DefinitionId`, `QuestId`, `DialogueId`, `OperationId`, and `ClaimId`. Their exact implementation follows repository conventions. Display text and collection indexes are never persistent identities.
 
@@ -451,6 +608,10 @@ Register action providers explicitly at composition. An NPC can offer Talk and T
 
 ### 8.2 Condition and action vocabulary
 
+The user-requested Ink first draft is implemented separately from the future
+gameplay condition/action vocabulary below. Ink 1.2.1 owns conversation-local
+branching only. No external functions or gameplay effect handlers are exposed.
+
 Use a small typed vocabulary shared by dialogue, quests, location gates, and interactions. Initial condition types can be `All`, `Any`, `Not`, `HasItem`, `QuestStatusIs`, `StoryFactIs`, `LocationUnlocked`, and an approved relationship threshold. Each reads narrow immutable views and produces a result/failure explanation.
 
 Separate durable gameplay actions from presentation cues:
@@ -462,9 +623,57 @@ Separate durable gameplay actions from presentation cues:
 | Open a shop view or journal | Presentation/navigation output after relevant checks |
 | Play an expression, sound, or speech bubble | Nonpersistent presentation cue; cannot determine whether a trade succeeded |
 
-Handlers are registered explicitly; serialized IDs map only to approved handlers and validated parameters. No reflection-selected method names, arbitrary C#, dynamically evaluated expressions, or executable scripts in content files. Do not turn this vocabulary into a general scripting engine preemptively.
+Handlers are registered explicitly; serialized IDs map only to approved handlers and validated parameters. The explicitly approved Ink integration permits authored narrative control flow in `.ink` files. It does not permit reflection-selected method names, arbitrary C#, or unregistered gameplay callbacks. Do not turn the gameplay vocabulary into a general scripting engine preemptively.
 
 ### 8.3 Dialogue data and runtime API
+
+**Implemented first draft (2026-11-04):** Narrative's DialogueDefinition and
+DialogueSession wrap the pinned Ink runtime with immutable views, session/revision
+checks and authored choice IDs. Game/Bootstrap owns loading, session lifetime and
+DialoguePresenter; Screens draws the modal. Framework supplies shared selection
+and fixed-width wrapping. Z or a click opens a nearby placeholder visitor conversation
+without advancing time. X cancels. Cancel/finish consumes input; reopening
+resets conversation-local state. Focus loss retains the paused modal. Window-close
+confirmation ends the conversation and returns to Pause if exit is cancelled.
+There is no gameplay saving, reward integration, world-condition binding or
+portrait adapter yet. Current content/workflow:
+[authoring guide](PawnShop.Game/Content/Npcs/README.md),
+[verification](docs/VERIFICATION_DIALOGUE.md).
+
+The interfaces and custom JSON example below remain conceptual reference designs
+for later integration; the executable content format is compiled Ink JSON, not
+the illustrative schema. Narrative depends on Core and the headless Ink assembly;
+the compiler is used only by the build task and existing test/authoring runner.
+
+**NPC content refactor:** `Characters/Npcs/NpcDefinition` owns immutable authored
+identity, sprite references and local interaction bounds. Each `Content/Npcs/<id>/`
+folder contains `npc.json`, `sprites/`, optional `conversations.json`, and `dialogue/`
+Ink sources. Narrative's `ConversationBindings` maps stable conversation IDs to Ink
+paths and names a default. It has no dependency on Characters. Game/Bootstrap's
+`NpcContentCatalog` resolves these into validated assets/conversations and loads
+`Content/World/shop.npcs.json` placements separately. Folder names must match NPC IDs.
+An NPC may omit conversations; unused NPC definitions need not be placed.
+`TryTalkTo(npcId, conversationId?)` requires a present NPC and ordinary room play,
+then selects the explicit/default conversation. Unknown, unavailable and non-speaking
+targets have typed outcomes. Clicks use authored interaction bounds; keyboard Talk
+chooses the nearest NPC within 48 logical pixels. Both paths revalidate proximity
+and return `OutOfRange` for a distant target. NPC movement, preferences and schedules
+are not implemented.
+
+GameSession owns NPC animators and their read-only frame projection. Room simulation
+advances them once per tick; dialogue and pause freeze them. RoomScreen owns/disposes
+PNG textures and draws using shared sheet metadata, pivot, scale and frame rectangles.
+Headless validation checks PNG header dimensions, frame/clip ranges and asset references;
+full texture decoding occurs only when the room graphics scope loads.
+
+Normal builds compile Ink using build/Ink.targets and generate a current content index.
+Deleted source assets cannot be revived by stale output files. Source Ink is authoritative;
+compiled JSON lives under obj/ and is copied to build/publish output. VS Code tasks/snippets
+and npc.ps1 scaffold complete NPC folders, list, check and preview conversations.
+dialogue.ps1 remains a compatibility entry point. Inky is optional; dialogue is text only.
+The bounded checker does not prove arbitrary visit-count/random-dependent paths; those
+require authored tests. Future quests, relationships and schedules can reference stable
+NPC IDs without making the dialogue engine own character state.
 
 Dialogue definitions contain stable conversation, node, choice, and speaker IDs; text/portrait/emotion references; conditions; explicit action references; and transitions. Runtime state contains the current participants, node, view revision, and any transient presentation state.
 
@@ -774,6 +983,88 @@ Before finalizing the art specification, put the player, little robot, mounted m
 
 Track third-party licenses/provenance. No new art pipeline service or image-generation runtime is needed inside the shipped game.
 
+#### Player wearable authoring contract
+
+The user-approved workflow is [documented here](docs/WEARABLE_ART_WORKFLOW.md).
+Canonical player references live in `Game/Content/Player/Bases` (48×64 cells,
+50-pixel bodies, pivot (24,58)); body-specific wearable assets live under
+`Content/Player/Wearables`. `TealWorkShirt` contains the approved male/female
+south-facing static fit, AI sources, exact layer recipes and approval manifest.
+The game copies and loads the two base PNG atlases and `Content/Player/player-sprite.json`.
+Wearables, recipes, manifests and source artwork remain authoring artifacts;
+they are not runtime equipment/save schemas or executable content.
+
+The future renderer selects one action/facing/frame for the actor and resolves
+all its body/equipment layers from that same pose and ground anchor. Item ownership
+continues through Core's authoritative inventory/transactions; different body-fit
+art must not duplicate an equipment item. Source pictures and worn layers remain
+separate. Other facings, animation, helmet/hair hiding and in-game scale still need
+their own implementation and acceptance; this artwork does not complete M02/M07.
+
+Every wearable design must have fitted **male and female** art and separate
+acceptance for both bodies. For player walks, use PixelLab **Skeleton v3** for
+S/N/E, with W rendered from E using `SpriteEffects.FlipHorizontally`. Keep one frame
+clock and one character-space mirror for body, clothing, masks, anchors and offsets.
+Mirroring changes asymmetric details; record reviewed exceptions for anatomical-side
+pockets or handed equipment without changing the mirrored body. Walking authoring
+assets and attire checks live in `Content/Player/Bases/Walking` and
+the C# `--assets walk` command; see the workflow for body hashes, per-frame coverage
+and protected-pixel masks. Static-shirt approval is not walking approval. These
+authoring assets are not loaded by the runtime renderer.
+
+Phase 1 consolidates human PNG checks, packing, review and local import under
+`PawnShop.Tests/Assets`, exposed through `--assets`. It reuses the runtime metadata
+parser and pins System.Drawing.Common 10.0.0 only in the test/authoring project.
+No production dependencies or rendering behavior changed. Existing NESW walking
+sources retain their historical W-to-E provenance and pending approval. New S/N/E
+runtime data and mirrored West drawing are implemented in the Phase 2 placeholder
+demo below; the legacy validator is not a production promotion gate.
+See docs/VERIFICATION_ASSET_CLEANUP.md.
+
+#### Implemented player selection and movement
+
+New Game opens a sessionless male/female selection screen. Confirmation creates
+one fresh session; X returns to title. `Characters/Player/PlayerState` owns the
+player's ID, gender, ground position and facing, exposing an immutable `PlayerView`.
+`GameSession` advances movement and player/NPC animation once per room tick. Held movement
+is separate from pressed-once Z/X actions; focused menus and dialogue consume
+input before room simulation. Dialogue, pause and character confirmation cannot
+also move or interact with the world.
+
+Movement is 90 logical pixels per second, normalized diagonally. A 12-by-6 foot
+rectangle is swept separately along X and Y against the room bounds, counter and
+NPC footprints, allowing sliding without tunneling. This is independent of the
+48-by-64 artwork. `ShopRoomLayout` shares floor/counter geometry with rendering.
+`PlayerSpriteCatalog` validates metadata and both PNG headers without a device.
+The application-owned `PlayerSpriteRenderer` retains both original base textures
+for selection. The room demonstrates four cardinal facings with temporary,
+code-authored body, jacket, helmet, backpack and wrench layers for both appearances.
+`PlayerPlaceholderSprites` creates those diagnostic textures once at load; it is
+not an asset generator or a production clothing-fit method. Existing PNGs remain
+unchanged, including their unused legacy directions. NPC textures remain location-owned.
+
+`PlayerState` chooses the dominant cardinal axis; a newly pressed/reversed axis wins
+equal diagonal input, otherwise the last axis persists (initially vertical).
+Translation stays normalized diagonally. One session-owned `SpriteAnimator` reads
+`Content/Player/placeholder-sprite.json`: static Idle and four-phase Walk at 100ms.
+Direction changes preserve phase; stopping or fully blocked movement selects Idle.
+Pause/dialogue freeze the clock. Draw never advances it.
+
+Every placeholder layer has the same 48x64 frame and pivot (24,58), with S/N/E rows
+and four columns. West selects East's source rectangle and applies
+`SpriteEffects.FlipHorizontally` to every full-canvas layer using identical destination
+bounds. Hand anchors and wrench offsets are authored in that canvas before reflection;
+the pivot also reflects for an off-center rig. Backpacks draw behind the body from
+South/East/West and in front from North; North's wrench draws behind the body.
+Shared layer identities have separate male/female shapes, with no independent layer clocks.
+Production item definitions/equipping, fitted overlays and approved human walks remain
+later phases; these placeholders do not claim art acceptance. See
+[Phase 2 verification](docs/VERIFICATION_CARDINAL_RENDERING.md) and the earlier
+[player verification](docs/VERIFICATION_PLAYER_CONTROLS.md).
+
+Movement defaults to WASD with arrow alternates. All six actions now support
+rebinding in both slots; Z/X above describe the default Interact/Pause / Back keys.
+
 ### 12.4 Reusable UI and feedback
 
 Start with reusable buttons, panels, labels, focus navigation, selection lists, item slots, tooltips, and modal behavior. Compose title, pause, inventory, trade, dialogue, and journal from them. A generic widget library with editors/layout tooling is unnecessary until a real requirement justifies it.
@@ -862,3 +1153,117 @@ The development sequence and evidence ledger live in [ROADMAP.md](ROADMAP.md). N
 
 
 
+
+### Options pixel-art foundation - 2026-11-07
+
+Options retains its contained 1280x720 canvas and existing settings semantics.
+`OptionsMenuLayout` shares fixed tabs/footer and scrolled field/cell geometry with
+pointer input. `ScrollState` owns a bounded offset; wheel and scrollbar dragging
+request scrolling, keyboard navigation reveals the focused field, and tab changes
+reset the offset. `PixelRenderer.BeginClip/EndClip` flush SpriteBatch and apply a
+GPU scissor on the UI render target. Only content draws inside that clip.
+
+The user-supplied `Content/UI/options-panel-source.png` is the complete current
+panel, including its wooden header, divider, ornaments and inner surface. Its
+1586x992 source is preserved byte-for-byte and drawn once within 1074x672 logical
+bounds, preserving aspect ratio to integer rounding. The earlier generated
+nine-slice frame, assembled header and palette-specific opacity processor are
+superseded. Source alpha is retained; the custom 75% opacity no longer applies.
+PNG textures are premultiplied at upload for AlphaBlend. Point sampling preserves
+sharp edges; fractional downscaling cannot preserve a uniform physical pixel grid.
+
+The four tabs sit inside the source image's header; fields and fixed actions stay
+inside its body. The Options heading is omitted pending the user's placement
+decision. Existing generated button/track art remains provisional for separate
+user design. Framework's `NineSlice` still draws those controls with fixed corner
+sizes and repeating edge/center pixels. Provenance records the supplied source
+hash and retained earlier generated artwork. No other interface is redesigned.
+
+Options always uses a transparent UI canvas. Title-side Options composites over
+the panorama; pause-side Options composites over a fresh rendering of the frozen
+room without advancing simulation. In-game visual acceptance belongs to the user;
+see docs/VERIFICATION_OPTIONS.md.
+
+Options footer actions use a separate PixelLab-generated walnut/brass state set
+through the existing nine-slice renderer. Apply/Back are 128x36 and Restore
+Defaults is 232x36, with shared drawing/hit bounds and preserved centers. The
+OptionsAction font role reuses Jersey 25 at line height 16. Header and panel
+artwork are unaffected.
+
+Window Mode and Resolution share a PixelLab walnut/brass dropdown style with
+four button states, a nine-slice popup surface, row highlight and separate chevron.
+OptionsModel owns its open row, candidate choice and first visible choice;
+OptionsMenuLayout supplies bounded popup/item/scrollbar geometry to drawing and
+pointer input. The popup draws last inside the existing content scissor and owns
+input while open. InputFrame.ChoiceIndex selects an explicit choice, while existing
+scroll intents move either the popup or body according to focus. Choice selection
+edits the draft only; Apply retains the existing display-preview/rollback contract.
+
+The six Audio volume controls (Master, Music, Ambient, Sound Effects, Combat
+and Monster) use PixelLab-authored thin brass tracks, a green
+fill strip and wristwatch thumbs. Shared AudioTrack/AudioFill/AudioThumb geometry
+maps draft volume to the clock-face pivot and pointer position back to 0-100.
+Pointer drag emits InputFrame.SliderValue with the option row; OptionsModel owns
+clamping, draft edits and preview-tone requests. Left/Right retains five-point
+steps; Apply/Back retain existing commit/discard behavior. This artwork does not
+replace the menu's vertical scrollbar or the dropdown scrollbar.
+Combat and Monster are independent channels, each multiplied by Master and
+respecting Mute When Unfocused. Both default to 80, including when absent from
+older version-1 settings files. Existing Apply, Back and Restore Defaults semantics
+apply to both values; authored combat/monster sounds remain future work.
+
+Mute When Unfocused uses PixelLab checkbox states: a gold frame with a tick for
+true and an empty cool-steel frame for false, each with a matching hover state.
+The 44x44 sources render at 30x30, centered beneath the audio tracks, using shared
+AudioCheckbox draw/hit geometry. The checkbox and its label toggle the existing
+draft boolean through the same confirmation action.
+Comfort's Pause When Unfocused reuses the same checkbox art and shared row-based
+checkbox geometry. Dialogue Text Speed reuses the bounded dropdown with Slow,
+Normal, Fast and Instant choices; selection updates only the draft and restarts
+the existing text preview. Dropdown choice metadata includes the active tab,
+keeping Comfort choices distinct from Display's mode/resolution lists. Apply,
+Back, defaults and settings storage retain their existing behavior. The former
+Replay Text Preview row is replaced by Screen Shake, using the same checkbox
+style and defaulting to true. It is an application preference persisted through
+Apply; old files missing it use true. No screen-shake effect currently exists;
+future effects must respect this preference. Changing dialogue speed still
+restarts its sample automatically.
+
+Controls' Primary and Alternate cells share one PixelLab walnut/brass button
+set, with inactive, selected, hovered and pressed/capturing states. Six-pixel
+corners render at 2x with tiled edges/center; bounds and font roles are unchanged.
+Pointer hover identifies the individual binding slot. The static Controls footer
+instructions and their scroll tail are removed; status/capture messages remain.
+The action labels are Interact / Attack (Z/Left Click) and Back / Block
+(X/Right Click). KeyBinding adds an optional alternate MouseBinding; action
+alternates permit a keyboard key or one mouse button, with duplicate validation.
+KeyboardInput merges keyboard/mouse action state before edge detection and
+synchronizes both on focus changes. Mouse confirmation remains with UI hit
+testing, and the host consumes rebinding input after all keys/buttons are released.
+Missing defaults and earlier Enter/Escape defaults migrate to mouse alternates;
+custom mappings and deliberate clears are retained. ActionAlternateDefaultsVersion
+2 marks current defaults on save; the original file is not rewritten on load.
+Restore Defaults selects the new pairs. This adds bindings/labels, not combat rules.
+
+The main Options scrollbar uses a PixelLab walnut rail with brass edging, sparse
+ivy and a fixed-size 32x42 vintage compass thumb. Native rail end caps stay fixed
+while the wood grain repeats vertically; the compass is never stretched to
+represent content size. Its travel maps to ScrollState's full offset range. The
+shared 40-pixel-wide track supplies rendering and pointer bounds, with hover/
+pressed compass art. Wheel input
+works over content or the rail. Both pieces remain hidden when content fits.
+The horizontal audio wristwatches and dropdown scrollbars retain their own art.
+
+ThumbTravel reserves 12 logical pixels at both rail ends, keeping the compass
+clear of the fixed brass caps. Both thumb placement and pointer-to-scroll mapping
+use that inset area, so dragging still reaches offsets zero and maximum.
+
+The three footer buttons dock at the original panel's bottom rail (source row
+880); Apply and Back have adjoining bounds with a shared exclusive edge. Their
+new PixelLab-generated states use orange/golden frame trim including #ee700b.
+Sizes, font roles and the existing action semantics are retained.
+
+Footer sprites now have top/side trim only, colored from exact original-rail
+samples. Their open lower edges meet the panel's gold cap at source row 879,
+which supplies their bottom border. The existing sizes and adjoining Apply/Back
+bounds are retained.

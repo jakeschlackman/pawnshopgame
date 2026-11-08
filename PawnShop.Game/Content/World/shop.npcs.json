@@ -1,0 +1,13 @@
+{
+  "$schema": "shop.npcs.schema.json",
+  "version": 1,
+  "spawns": [
+    {
+      "npcId": "visitor",
+      "x": 479,
+      "y": 210
+    }
+  ]
+}
+
+
