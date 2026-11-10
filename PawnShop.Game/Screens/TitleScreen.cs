@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PawnShop.Framework.Rendering;
 using PawnShop.Framework.UI;
+using PawnShop.Game.Bootstrap.Cinematics;
 
 namespace PawnShop.Game.Screens;
 
@@ -12,6 +13,12 @@ internal sealed class TitleScreen : IDisposable
     private readonly PanoramicBackground background;
     private readonly Texture2D logo;
     private readonly Texture2D sprout;
+    private readonly TitleCinematicRenderer cinematicDrawing;
+    private readonly CinematicPlayer? cinematic;
+    internal static string CinematicPath => Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "arrival-cinematic.json");
+#if DEBUG
+    private readonly CinematicEditor.CinematicEditorOverlay editor;
+#endif
     public Action DrawBackground { get; }
 
     public TitleScreen(GraphicsDevice device, PanoramaCamera camera, FontLibrary fonts, SpriteSheetDefinition titleSheet)
@@ -23,10 +30,27 @@ internal sealed class TitleScreen : IDisposable
                 Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-screen-panorama.png"));
             logo = LoadTexture(device, "logo-pickers-hollow.png", 1774, 887);
             sprout = LoadTexture(device, "sprout-title-menu.png", titleSheet.ImageWidth, titleSheet.ImageHeight);
-            DrawBackground = () => background.Draw(camera);
+            cinematicDrawing = new(device);
+            if (File.Exists(CinematicPath)) cinematic = new(CinematicDefinition.Load(CinematicPath)) { Playing = true };
+#if DEBUG
+            editor = new(device, cinematic?.Definition);
+#endif
+            DrawBackground = () =>
+            {
+                background.Draw(camera);
+                if (cinematic is not null)
+                {
+                    var viewport = device.Viewport;
+                    cinematicDrawing.DrawCar(cinematic, new(camera.GetView(2106, 747, viewport.Width, viewport.Height), viewport.Bounds));
+                }
+            };
         }
         catch
         {
+#if DEBUG
+            editor?.Dispose();
+#endif
+            cinematicDrawing?.Dispose();
             logo?.Dispose();
             sprout?.Dispose();
             background?.Dispose();
@@ -34,6 +58,24 @@ internal sealed class TitleScreen : IDisposable
             throw;
         }
     }
+
+    internal void UpdateCinematic(TimeSpan delta, bool active)
+    {
+        if (active) cinematic?.Update(delta);
+    }
+
+#if DEBUG
+    internal bool UpdateEditor(Microsoft.Xna.Framework.Input.KeyboardState keys, Microsoft.Xna.Framework.Input.MouseState mouse,
+        bool active, bool canOpen, Vector2 screenPoint, int width, int height, TimeSpan delta) =>
+        editor.Input.Read(keys, mouse, active, canOpen, screenPoint, width, height, CinematicPath, delta);
+
+    internal bool DrawEditor()
+    {
+        if (!editor.Input.Open) return false;
+        editor.Draw(background.Draw);
+        return true;
+    }
+#endif
 
     public void Draw(Menu<MenuCommand> menu, float textScale, SpriteAnimator selector, string saying, bool drawSelector = true)
     {
@@ -117,6 +159,10 @@ internal sealed class TitleScreen : IDisposable
 
     public void Dispose()
     {
+#if DEBUG
+        editor.Dispose();
+#endif
+        cinematicDrawing.Dispose();
         logo.Dispose();
         sprout.Dispose();
         background.Dispose();

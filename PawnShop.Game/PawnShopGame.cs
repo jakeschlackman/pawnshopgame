@@ -67,11 +67,14 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         var mouse = Mouse.GetState();
         var frame = input.Read(mouse, IsActive);
         var bounds = GraphicsDevice.PresentationParameters;
-        var click = pointer.Read(flow, mouse, IsActive, Window.ClientBounds.Width, Window.ClientBounds.Height,
+        var screenPoint = CinematicsPoint(mouse.X, mouse.Y, bounds.BackBufferWidth, bounds.BackBufferHeight);
+        bool cinematicCapture = screens?.UpdateCinematic(flow, input.State, mouse, IsActive, screenPoint,
+            bounds.BackBufferWidth, bounds.BackBufferHeight, gameTime.ElapsedGameTime) ?? false;
+        var click = pointer.Read(flow, mouse, IsActive && !cinematicCapture, Window.ClientBounds.Width, Window.ClientBounds.Height,
             bounds.BackBufferWidth, bounds.BackBufferHeight);
         if (click != default) frame = click; // One UI intent per frame; pointer and keyboard cannot double-activate.
         if (capturing && IsActive) flow.Options.Capture(input.State.GetPressedKeys(), mouse);
-        flow.Update(capturing ? default : frame, gameTime.ElapsedGameTime, IsActive);
+        if (!cinematicCapture) flow.Update(capturing ? default : frame, gameTime.ElapsedGameTime, IsActive);
         if (flow.Screen == Screen.Options && startupWarning is { } warning)
         {
             flow.Options.Report(warning);
@@ -90,6 +93,10 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         if (flow.ExitRequested) Exit();
         base.Update(gameTime);
     }
+
+    private Vector2 CinematicsPoint(int x, int y, int width, int height) =>
+        Bootstrap.Cinematics.CinematicCoordinates.ClientToScreen(new(x, y),
+            Math.Max(1, Window.ClientBounds.Width), Math.Max(1, Window.ClientBounds.Height), width, height);
 
     private void SynchronizeDisplay()
     {

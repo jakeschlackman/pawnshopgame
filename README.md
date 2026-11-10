@@ -81,6 +81,25 @@ that convention; historical eight-facing bases and NESW candidates remain intact
 
 ## Controls and current behavior
 
+Debug builds have a temporary title-scene cinematic editor: press **F8** once
+the title menu is settled. Click to append points, drag handles, right-click to
+delete; Space plays/pauses, R restarts, and the bottom playhead scrubs. The panel
+edits image X/Y (including offscreen coordinates), duration, speed, and independent
+scale/yaw/pitch/visibility keys. C pans across the existing panorama. Ctrl+S exports
+`Content/TitleScreen/arrival-cinematic.json` **beside the running executable**;
+Ctrl+L reloads it, and Ctrl+Z undoes edits. No file is created until Save.
+The initial path starts onscreen for easy editing. Ctrl+N creates a fresh onscreen
+draft (undoable). Space previews its scaling from 2 to .25. The path is unapproved
+and the car is a wire placeholder.
+Press V for an expanded authoring canvas: the gold frame marks the player's
+visible screen, and points outside it can be grabbed to author offscreen entry.
+Hold Left/Right or a panel adjustment button to repeat with larger increments;
+Shift keeps fine steps, and Ctrl+Z undoes the whole hold. Car scale supports .01-64.
+KEY PITCH controls nose-up/down tilt (-90 to +90 degrees; positive is nose-up).
+Scrub and press K to author pitch later in the drive; older exports default to level.
+See [controls, data contract and verification](docs/VERIFICATION_CINEMATIC_EDITOR.md).
+Release excludes the editor; its small runtime player can load the same JSON.
+
 - New Game opens Male/Female selection. No gameplay session exists until you
   choose a character. WASD/arrows select; Z confirms; X returns to title.
   Clicking a character card also starts a new session with that gender.

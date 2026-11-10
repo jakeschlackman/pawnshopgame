@@ -43,6 +43,9 @@ internal sealed class GameScreens : IDisposable
 
     public void Draw(PixelRenderer renderer, ApplicationFlow flow)
     {
+#if DEBUG
+        if (title.DrawEditor()) return;
+#endif
         if (flow.UsesTitleBackground)
         {
             if (flow.OptionsFlight.IsBusy)
@@ -79,6 +82,18 @@ internal sealed class GameScreens : IDisposable
         if (flow.Dialogue is { } dialogue) DialogueScreen.Draw(renderer, dialogue);
         renderer.Text("PROTOTYPE - NO SAVING", 18, 341, new Color(173, 184, 172));
         renderer.Present();
+    }
+
+    public bool UpdateCinematic(ApplicationFlow flow, Microsoft.Xna.Framework.Input.KeyboardState keys,
+        Microsoft.Xna.Framework.Input.MouseState mouse, bool active, Vector2 screenPoint, int width, int height, TimeSpan delta)
+    {
+#if DEBUG
+        if (title.UpdateEditor(keys, mouse, active,
+            flow.Screen == Screen.Title && flow.TitleUiVisible && !flow.TitleInteractionPlaying,
+            screenPoint, width, height, delta)) return true;
+#endif
+        title.UpdateCinematic(delta, active && flow.Screen == Screen.Title && !flow.TitleInteractionPlaying);
+        return false;
     }
 
     private void DrawRoomBackground(PixelRenderer renderer, ApplicationFlow flow)

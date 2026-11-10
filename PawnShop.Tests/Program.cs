@@ -6,6 +6,18 @@ if (args.Length > 0 && args[0] == "--assets") return PlayerAssets.Run(args[1..],
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
+    ("Cinematic runtime uses delta time, independent pose keys and bounded playback", CinematicTests.Runtime),
+    ("Cinematic pitch interpolates, projects around ground contact and preserves older JSON exports", CinematicTests.Pitch),
+    ("Cinematic bounded spline preserves waypoints and approximates constant arc-length speed", CinematicTests.Spline),
+    ("Cinematic image coordinates, offscreen entry and ground anchors survive camera/output transforms", CinematicTests.Coordinates),
+    ("Cinematic JSON round-trips, retains backups and rejects invalid data without overwriting originals", CinematicTests.Storage),
+    ("Cinematic exports play without the editor and Release excludes editing classes", CinematicTests.Shipping),
+#if DEBUG
+    ("Held cinematic adjustments accelerate, preserve fine steps and undo once, with scales through 64", CinematicTests.HeldAdjustments),
+    ("Expanded cinematic canvas supports offscreen entry placement without changing playback coordinates", CinematicTests.ExpandedCanvas),
+    ("Cinematic editor adds, moves, deletes, undoes and authors independent pose keys", CinematicTests.Editing),
+    ("Cinematic F8, pointer editing, scrub/play and focus transitions capture input", CinematicTests.Input),
+#endif
     ("Restore Defaults resets only the active tab and preserves other saved and pending settings", RegressionTests.OptionsTabDefaults),
     ("Title sayings validate JSON, select once per startup and match the Comfort preview", RegressionTests.TitleSayingsContent),
     ("Dirty Options require explicit discard, preserve editing and block underlying input", RegressionTests.OptionsDirtyConfirmation),

@@ -102,6 +102,31 @@ The tests retain the dependency-free console runner. They reference Game's graph
 
 `Game/Content/TitleScreen/title-screen-panorama.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Older Rummage Hollow artwork is preserved but no longer loaded. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport, uniformly scaled with point sampling. The graphics-free PanoramaCamera tracks normalized horizontal travel with 0.8-second SmoothStep easing and calculates source bounds for the actual viewport aspect ratio. ApplicationFlow advances it once using presentation time; gameplay cameras are unaffected. Title and Options UI remain on contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. Options is visible but input-captured during Sprout's outgoing float; UI is hidden on the return pan. Escape can cancel the flight and reverse the pan. Pause-menu Options does not pan. The room/overlays retain their 640x360 target and original code-authored placeholder content. Fonts now use the standard MGCB/SpriteFont workflow, with the content builder and local tool pinned to 3.8.4.1; existing PNG loading is unchanged. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
 
+The temporary Phase 1 cinematic utility is isolated under `Game/Screens/CinematicEditor`
+and compiled only with DEBUG. F8 captures the settled title scene's input and
+freezes its ordinary presentation until closed. It draws the existing panorama
+with its own instance of the same camera; Sprout and gameplay state are unchanged.
+`Game/Bootstrap/Cinematics` owns the graphics-free JSON validation, bounded cubic
+path/arc-length sampling, coordinate conversion and delta-time player. These
+runtime classes have no editor dependency. Title optionally loads an exported
+`Content/TitleScreen/arrival-cinematic.json` and draws the diagnostic wire car;
+there is no bundled/approved cinematic yet. Removing the editor leaves exported
+playback intact. See [the utility's verification record](docs/VERIFICATION_CINEMATIC_EDITOR.md).
+
+The editor's V view toggle fits the actual player crop inside a wider canvas;
+its gold viewport outline is presentation-only. `CinematicEditorView` shares the
+expanded transform between pointer input and drawing. PanoramicBackground accepts
+an explicit source-space view/viewport and clips the image to that canvas; car/path
+overlays use the same clip. Extra canvas space does not change exported coordinates,
+car scale or the production camera.
+
+Cinematic pose keys also support optional `pitchDegrees` (-90 to +90), added by
+user request. Missing pitch in older version-1 JSON defaults to zero. The runtime
+player interpolates it independently of yaw and ground position; the diagnostic
+projection pitches about its registered ground origin before yaw. The editor's
+KEY PITCH shares existing hold/fine/undo and export paths. No terrain physics or
+hill masks are implemented by this addition.
+
 ### Common NPC ownership — approved destination
 
 `PawnShop.Characters/Npcs/Common` is the user-approved home for ordinary,
