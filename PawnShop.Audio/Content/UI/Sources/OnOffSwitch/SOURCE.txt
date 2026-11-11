@@ -1,0 +1,22 @@
+User-supplied source: 874829__cb9382__onoff-switch.flac
+Creator/name inferred from the download filename: cb9382 / OnOff Switch
+Freesound ID inferred from filename: 874829
+Source URL: https://freesound.org/people/cb9382/sounds/874829/
+License: not supplied in the task or embedded in the file; source page could not
+be verified. No CC0 license is inferred from the separate rotary-click recording.
+Original SHA256: 04CDC7E8E251E575D795A53FD624937830DE28435E87DE051FFE02788188115E
+
+The original FLAC is preserved byte-for-byte. It contains stereo 48 kHz 24-bit
+audio, 80800 frames (1.683333 seconds). No source outside the repository was changed.
+onoff-switch.wav is the complete recording converted to stereo 48 kHz 16-bit PCM
+using the existing MonoGame-bundled FFmpeg 083443d, without saved scripts.
+Converted WAV SHA256: F00B98066A2B914BB9A5E18BB508D9618F71D9FF2B9381ADBA9BAA785CFF8290
+
+Runtime derivatives, relative to this directory:
+../../switch_on.wav: first sound, source window 0.272-0.360 seconds, 4224 frames.
+../../switch_off.wav: second sound, source window 1.188-1.288 seconds, 4800 frames.
+Both are stereo 48 kHz 16-bit PCM with 1 ms entrance and 8 ms exit fades.
+The attacks and decays are retained. No normalization, filtering, compression,
+pitch variation, reverb or synthetic audio was added. Both peaks are -0.3 dBFS;
+the application applies 0.15 base gain before Master x Sound Effects.
+Only the two derivatives are registered in MGCB; this source folder is not shipped.

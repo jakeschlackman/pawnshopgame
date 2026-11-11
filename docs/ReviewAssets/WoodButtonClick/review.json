@@ -1,0 +1,49 @@
+{
+  "status": "awaiting_user_audition",
+  "runtime_integration": false,
+  "role": "button_click",
+  "user_direction": "ok new sound, I need like a wood texture click sound for a button",
+  "scope": "Separate button candidate. Slider assets unchanged.",
+  "duration_assumption": "Use the recent 150 ms preference for this first button candidate.",
+  "generation": {
+    "tool": "Audio Studio MCP generate_audio",
+    "audio_type": "sfx",
+    "seed": 1176391,
+    "model": "Stable Audio 3 medium + same-l",
+    "cfg": 1,
+    "steps": 8,
+    "duration_seconds": 1.5,
+    "variations": 1
+  },
+  "processing": {
+    "tool": "Audio Studio MCP process_audio",
+    "start_seconds": 0.19,
+    "end_seconds": 0.34,
+    "selection": "First clear smaller click; avoids the much louder later transient.",
+    "fade_in_ms": 0.3,
+    "fade_out_ms": 30,
+    "normalize": "peak",
+    "peak_ceiling_db": -12,
+    "mono": true,
+    "sample_rate": 48000,
+    "format": "wav"
+  },
+  "final": "Pickers_Hollow_Wood_Button_Click_150ms.wav",
+  "source": "Sources/Pickers_Hollow_Wood_Button_Click_Source.wav",
+  "verification": {
+    "frames": 7200,
+    "sample_rate": 48000,
+    "duration_seconds": 0.15,
+    "channels": 1,
+    "bits_per_sample": 24,
+    "compression": "NONE",
+    "peak_dbfs": -12.0,
+    "rms_dbfs": -34.626,
+    "clipped_samples": 0,
+    "first_sample": 0.0,
+    "last_sample": 0.0,
+    "onset_above_minus60db_ms": 0.16666666666666666,
+    "sha256": "9375936391b2ea1f51875429a2f1db607c8dc51966e2acaab9260d757aaad807"
+  },
+  "listening_acceptance": "Pending user review; no audible texture or game playback verification claimed."
+}

@@ -1,0 +1,141 @@
+{
+  "status": "single_note_restored_pending_acceptance",
+  "runtime_integration": false,
+  "user_direction": "150 ms going forward, make it like a melancholy maramba.",
+  "duration_policy": "150 milliseconds for this and future slider candidates unless the user changes it. Supersedes the earlier 100 ms requirement.",
+  "method": "New text-to-audio SFX generation; no music or sampled reference track.",
+  "generation": {
+    "tool": "Audio Studio MCP generate_audio",
+    "audio_type": "sfx",
+    "seed": 1065281,
+    "model": "Stable Audio 3 medium + same-l",
+    "cfg": 1,
+    "steps": 8,
+    "duration_seconds": 1.5,
+    "variations": 1
+  },
+  "processing": {
+    "tool": "Audio Studio MCP process_audio",
+    "start_seconds": 0.053,
+    "end_seconds": 0.203,
+    "fade_in_ms": 0.5,
+    "fade_out_ms": 45,
+    "normalize": "peak",
+    "peak_ceiling_db": -15,
+    "mono": true,
+    "sample_rate": 48000,
+    "format": "wav"
+  },
+  "final": "Pickers_Hollow_Melancholy_Marimba_150ms.wav",
+  "source": "Sources/Pickers_Hollow_Melancholy_Marimba_Source.wav",
+  "verification": {
+    "frames": 7200,
+    "sample_rate": 48000,
+    "duration_seconds": 0.15,
+    "channels": 1,
+    "bits_per_sample": 24,
+    "compression": "NONE",
+    "peak_dbfs": -15.0,
+    "rms_dbfs": -23.839,
+    "clipped_samples": 0,
+    "first_sample": 0.0,
+    "last_sample": 0.0,
+    "onset_above_minus60db_ms": 0.125,
+    "sha256": "c38c592767e9d8c0b430c0d48f20db37814af4f688e64c43dde0fea13bae88db"
+  },
+  "listening_acceptance": "User said closer and requested a bit warmer. Baseline not finally approved.",
+  "warmer_revision": {
+    "status": "user_requested_more_body_and_warmth",
+    "file": "Pickers_Hollow_Melancholy_Marimba_Warmer_150ms.wav",
+    "based_on": "Pickers_Hollow_Melancholy_Marimba_150ms.wav",
+    "user_direction": "closer, can we make it a bit warmer",
+    "method": "EQ the same note using existing FFmpeg, then Audio Studio process_audio. No new generation, pitch or time change.",
+    "eq": {
+      "treble_shelf_db": -3,
+      "treble_frequency_hz": 1800,
+      "bass_shelf_db": 1.5,
+      "bass_frequency_hz": 400,
+      "q": 0.7,
+      "rms_matched_to_baseline": true
+    },
+    "export": {
+      "tool": "Audio Studio MCP process_audio",
+      "fade_out_ms": 1,
+      "normalize": "none",
+      "peak_ceiling_db": -15,
+      "sample_rate": 48000,
+      "format": "wav"
+    },
+    "verification": {
+      "frames": 7200,
+      "sample_rate": 48000,
+      "duration_seconds": 0.15,
+      "channels": 1,
+      "bits_per_sample": 24,
+      "compression": "NONE",
+      "peak_dbfs": -15.188,
+      "rms_dbfs": -23.839,
+      "rms_difference_from_original_db": 0.0,
+      "clipped_samples": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "onset_above_minus60db_ms": 0.125,
+      "sha256": "4e01e1ba92a270c09e9b5c4938173f4c13d0b3af270b817f4f62326cbd26f0c3"
+    },
+    "runtime_integration": false
+  },
+  "warm_body_revision": {
+    "status": "current_candidate_pending_acceptance",
+    "file": "Pickers_Hollow_Melancholy_Marimba_WarmBody_150ms.wav",
+    "based_on": "Pickers_Hollow_Melancholy_Marimba_150ms.wav",
+    "follows": "Pickers_Hollow_Melancholy_Marimba_Warmer_150ms.wav",
+    "user_direction": "slightly more body and warmer",
+    "method": "Adjusted cumulative EQ from the original note using existing FFmpeg, then Audio Studio process_audio. Original and first warmer version preserved.",
+    "eq": {
+      "treble_shelf_db": -4.5,
+      "treble_frequency_hz": 1800,
+      "bass_shelf_db": 1.5,
+      "bass_frequency_hz": 400,
+      "shelf_q": 0.7,
+      "low_mid_bell_db": 1.25,
+      "low_mid_bell_frequency_hz": 500,
+      "low_mid_bell_q": 0.8,
+      "rms_matched_to_baseline": true
+    },
+    "export": {
+      "tool": "Audio Studio MCP process_audio",
+      "fade_out_ms": 1,
+      "normalize": "none",
+      "peak_ceiling_db": -15,
+      "sample_rate": 48000,
+      "format": "wav"
+    },
+    "verification": {
+      "frames": 7200,
+      "sample_rate": 48000,
+      "duration_seconds": 0.15,
+      "channels": 1,
+      "bits_per_sample": 24,
+      "compression": "NONE",
+      "peak_dbfs": -15.069,
+      "rms_dbfs": -23.839,
+      "rms_difference_from_previous_db": 0.0,
+      "clipped_samples": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "onset_above_minus60db_ms": 0.125,
+      "sha256": "f7d7a58da0afa9428631d9155a9d7f3afce238e8c314b25d3544a4b0a4dfb2a0"
+    },
+    "runtime_integration": false
+  },
+  "current_candidate": "Pickers_Hollow_Melancholy_Marimba_WarmBody_150ms.wav",
+  "latest_user_direction": "Remove the second note and return to the warm-body single-note candidate.",
+  "archived_rejections": [
+    {
+      "name": "Pickers_Hollow_Melancholy_Marimba_OffsetHalfStep_150ms.wav",
+      "reason": "User rejected the second note.",
+      "archive": ".cache/DocsArchive/docs-cleanup-20261111-040437.zip",
+      "entry": "docs/ReviewAssets/MelancholyMarimba/Pickers_Hollow_Melancholy_Marimba_OffsetHalfStep_150ms.wav"
+    }
+  ]
+}

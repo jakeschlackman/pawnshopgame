@@ -8,11 +8,39 @@ using PawnShop.Game.Screens;
 namespace PawnShop.Game.Bootstrap;
 
 // Focus, edits, preview rollback and persistence; no window or device required.
-public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save = null,
-    string sampleText = "Every treasure deserves a second chance.")
+public sealed class OptionsModel
 {
-    public AppSettings Current { get; private set; } = initial;
-    public AppSettings Draft { get; private set; } = initial;
+    private readonly Action<AppSettings>? save;
+    private readonly Button[] bindingButtons;
+    private bool requestedButtonClick;
+    private bool requestedTabClick;
+    private bool requestedSliderClick;
+    private bool? requestedCheckboxState;
+    private bool requestedDropdownClick;
+    private bool closeRequested;
+    // Apply, Restore Defaults, Back use a different cue from tabs and sliders.
+    public IReadOnlyList<Button> FooterButtons { get; }
+    public IReadOnlyList<Button> TabButtons { get; }
+
+    public OptionsModel(AppSettings initial, Action<AppSettings>? save = null,
+        string sampleText = "Every treasure deserves a second chance.")
+    {
+        Current = Draft = initial;
+        this.save = save;
+        SampleText = sampleText;
+        TabButtons = Array.AsReadOnly(Enumerable.Range(0, Tabs.Count)
+            .Select(tab => new Button(() => SelectTab(tab), RequestTabClick)).ToArray());
+        FooterButtons = Array.AsReadOnly<Button>([
+            new(Apply, RequestButtonClick),
+            new(RestoreTabDefaults, RequestButtonClick),
+            new(() => closeRequested = RequestClose(), RequestButtonClick)
+        ]);
+        bindingButtons = Enumerable.Range(0, ControlActions.Count * 2)
+            .Select(index => new Button(() => BeginCapture(index / 2, index % 2), RequestButtonClick)).ToArray();
+    }
+
+    public AppSettings Current { get; private set; }
+    public AppSettings Draft { get; private set; }
     public int Tab { get; private set; }
     public int Selected { get; private set; }
     // Sprout stays with the last option while the footer has keyboard/pointer focus.
@@ -52,14 +80,21 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
     public bool HasModal => Previewing || ConfirmingDiscard;
     public DisplaySettings DisplayForHost => Previewing ? Draft.Display : Current.Display;
     public AppSettings Presentation => Draft;
-    public string SampleText { get; } = sampleText;
+    public string SampleText { get; }
     public TimeSpan TextElapsed { get; private set; }
-    public AudioChannel? RequestedTone { get; private set; }
     public static IReadOnlyList<string> Tabs { get; } = Array.AsReadOnly(new[] { "DISPLAY", "AUDIO", "COMFORT", "CONTROLS" });
     public static IReadOnlyList<ControlAction> ControlActions { get; } = Array.AsReadOnly(Enum.GetValues<ControlAction>());
     public const int AudioVolumeCount = 6;
     public int FieldCount => Tab switch { 0 => 2, 1 => AudioVolumeCount + 1, 2 => 3, _ => ControlActions.Count };
     public KeyBinding Binding(int row) => Draft.Bindings.Get(ControlActions[row]);
+    public Button BindingButton(int row, int slot)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(row);
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(row, ControlActions.Count);
+        ArgumentOutOfRangeException.ThrowIfNegative(slot);
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(slot, 2);
+        return bindingButtons[row * 2 + slot];
+    }
     public int Volume(int row) => row switch
     {
         0 => Draft.Master, 1 => Draft.Music, 2 => Draft.Ambient, 3 => Draft.Effects,
@@ -89,6 +124,11 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
 
     public void Open()
     {
+        requestedDropdownClick = false;
+        requestedSliderClick = false;
+        requestedCheckboxState = null;
+        requestedButtonClick = false;
+        requestedTabClick = false;
         CloseDropdown();
         Draft = Current;
         Scroll.MoveTo(0);
@@ -108,6 +148,11 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
 
     public void Cancel()
     {
+        requestedDropdownClick = false;
+        requestedSliderClick = false;
+        requestedCheckboxState = null;
+        requestedButtonClick = false;
+        requestedTabClick = false;
         CloseDropdown();
         Draft = Current;
         CapturingKey = false;
@@ -128,6 +173,9 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
 
     public bool Update(InputFrame input, TimeSpan delta, bool active)
     {
+        requestedDropdownClick = false;
+        requestedSliderClick = false;
+        requestedCheckboxState = null;
         ConfigureScroll();
         TextElapsed += delta;
         if (Previewing)
@@ -176,11 +224,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         if (input.ScrollDelta != 0) { Scroll.MoveTo(Scroll.Offset + input.ScrollDelta); return false; }
         if (input.TabIndex is { } tab && tab >= 0 && tab < Tabs.Count)
         {
-            Tab = tab;
-            ConfigureScroll();
-            Scroll.MoveTo(0);
-            Selected = SelectedBinding = IndicatorRow = 0;
-            Message = null;
+            TabButtons[tab].TryClick();
             return false;
         }
         if (input.SelectionIndex is { } selection && selection >= 0 && selection < FieldCount + 3)
@@ -192,17 +236,13 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         if (Tab == 1 && Selected < AudioVolumeCount && input.SliderValue is { } volume)
         {
             volume = Math.Clamp(volume, 0, 100);
-            if (volume != Volume(Selected)) SetVolume(Selected, volume);
+            SetVolume(Selected, volume);
             Message = null;
             return false;
         }
         if (input.NextTab)
         {
-            Tab = (Tab + 1) % Tabs.Count;
-            ConfigureScroll();
-            Scroll.MoveTo(0);
-            Selected = SelectedBinding = IndicatorRow = 0;
-            Message = null;
+            TabButtons[(Tab + 1) % Tabs.Count].TryClick();
             return false;
         }
         if (input.Up != input.Down)
@@ -226,27 +266,58 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             if (IsDropdown(Selected) && input.Confirm)
                 OpenDropdown();
             else if (Tab == 3 && input.Confirm)
-            {
-                CapturingKey = true;
-                captureReleased = false;
-                Message = "Release keys and mouse, then choose an input. ESC cancels; Delete clears an alternate.";
-            }
+                BindingButton(Selected, SelectedBinding).TryClick();
             else if (input.Left != input.Right || input.Confirm)
                 Adjust(input.Left ? -1 : 1);
         }
         else if (input.Confirm)
         {
-            switch (Selected - FieldCount)
-            {
-                case 0:
-                    if (Draft.Display != Current.Display) PreviewRemaining = TimeSpan.FromSeconds(15);
-                    else Commit();
-                    break;
-                case 1: RestoreTabDefaults(); break;
-                case 2: return RequestClose();
-            }
+            closeRequested = false;
+            FooterButtons[Selected - FieldCount].TryClick();
+            return closeRequested;
         }
         return false;
+    }
+
+    private void Apply()
+    {
+        if (Draft.Display != Current.Display) PreviewRemaining = TimeSpan.FromSeconds(15);
+        else Commit();
+    }
+
+    private void SelectTab(int tab)
+    {
+        Tab = tab;
+        ConfigureScroll();
+        Scroll.MoveTo(0);
+        Selected = SelectedBinding = IndicatorRow = 0;
+        Message = null;
+    }
+
+    private void BeginCapture(int row, int slot)
+    {
+        Selected = IndicatorRow = row;
+        SelectedBinding = slot;
+        CapturingKey = true;
+        captureReleased = false;
+        Message = "Release keys and mouse, then choose an input. ESC cancels; Delete clears an alternate.";
+    }
+
+    private void RequestButtonClick() => requestedButtonClick = true;
+    private void RequestTabClick() => requestedTabClick = true;
+
+    public bool TakeTabClick()
+    {
+        bool result = requestedTabClick;
+        requestedTabClick = false;
+        return result;
+    }
+
+    public bool TakeButtonClick()
+    {
+        bool result = requestedButtonClick;
+        requestedButtonClick = false;
+        return result;
     }
 
     private void RestoreTabDefaults()
@@ -303,6 +374,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             OptionsMenuLayout.RowHeight(Draft.UiScale), OptionsMenuLayout.Viewport.Height);
         DropdownFirst = 0;
         RevealDropdownChoice();
+        requestedDropdownClick = true;
     }
 
     private void CloseDropdown()
@@ -357,6 +429,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             Draft = Draft with { Display = Draft.Display with { Width = size.Width, Height = size.Height } };
         }
         Message = null;
+        requestedDropdownClick = true;
         CloseDropdown();
     }
 
@@ -420,10 +493,25 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
         Message = "Binding changed. Apply to save.";
     }
 
-    public AudioChannel? TakeTone()
+    // null means no toggle; false is an explicit request for the off sound.
+    public bool? TakeCheckboxSwitch()
     {
-        var result = RequestedTone;
-        RequestedTone = null;
+        var result = requestedCheckboxState;
+        requestedCheckboxState = null;
+        return result;
+    }
+
+    public bool TakeSliderClick()
+    {
+        bool result = requestedSliderClick;
+        requestedSliderClick = false;
+        return result;
+    }
+
+    public bool TakeDropdownClick()
+    {
+        bool result = requestedDropdownClick;
+        requestedDropdownClick = false;
         return result;
     }
 
@@ -452,6 +540,7 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
     private void SetVolume(int row, int value)
     {
         value = Math.Clamp(value, 0, 100);
+        if (value == Volume(row)) return;
         Draft = row switch
         {
             0 => Draft with { Master = value }, 1 => Draft with { Music = value },
@@ -459,11 +548,9 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             4 => Draft with { Combat = value }, 5 => Draft with { Monster = value },
             _ => throw new ArgumentOutOfRangeException(nameof(row))
         };
-        RequestedTone = row switch
-        {
-            1 => AudioChannel.Music, 2 => AudioChannel.Ambient,
-            4 => AudioChannel.Combat, 5 => AudioChannel.Monster, _ => AudioChannel.Effects
-        };
+        // Pointer input is already quantized to whole percentages. The audio
+        // cooldown limits rapid changes without silencing small adjustments.
+        requestedSliderClick = true;
     }
 
     private void Adjust(int direction)
@@ -488,18 +575,25 @@ public sealed class OptionsModel(AppSettings initial, Action<AppSettings>? save 
             else
             {
                 Draft = Draft with { MuteUnfocused = !Draft.MuteUnfocused };
-                RequestedTone = AudioChannel.Effects;
+                requestedCheckboxState = Draft.MuteUnfocused;
             }
         }
         else if (Tab == 2)
         {
             switch (Selected)
             {
-                case 0: Draft = Draft with { PauseUnfocused = !Draft.PauseUnfocused }; break;
-                case 1: Draft = Draft with { ScreenShake = !Draft.ScreenShake }; break;
+                case 0:
+                    Draft = Draft with { PauseUnfocused = !Draft.PauseUnfocused };
+                    requestedCheckboxState = Draft.PauseUnfocused;
+                    break;
+                case 1:
+                    Draft = Draft with { ScreenShake = !Draft.ScreenShake };
+                    requestedCheckboxState = Draft.ScreenShake;
+                    break;
                 case 2: Draft = Draft with { Dialogue = (DialogueSpeed)Cycle((int)Draft.Dialogue, 4) }; TextElapsed = TimeSpan.Zero; break;
             }
         }
+        if (IsDropdown(Selected)) requestedDropdownClick = true;
         Message = null;
     }
 

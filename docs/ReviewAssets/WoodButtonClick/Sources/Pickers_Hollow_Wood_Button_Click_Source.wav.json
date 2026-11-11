@@ -1,0 +1,31 @@
+{
+  "kind": "generate",
+  "title": "Pickers_Hollow_Wood_Button_Click_Source",
+  "original_idea": "ok new sound, I need like a wood texture click sound for a button. Separate new button SFX for Picker's Hollow; preserve existing slider sounds. One candidate, 150 ms first export, no integration before user acceptance.",
+  "audio_type": "sfx",
+  "prompt": "A single small wooden button click. Dry, crisp and tactile, with a warm rounded woody body, faint wood-grain texture, and an immediate short decay. Close-miked and isolated.",
+  "prompt_used": "TrackType: SFX, A single small wooden button click. Dry, crisp and tactile, with a warm rounded woody body, faint wood-grain texture, and an immediate short decay. Close-miked and isolated, Small polished walnut pushbutton, Pressed once, one compact wooden click settling quickly to silence, Dry warm wood, a little grainy tactile texture, Very close microphone, isolated and dry.",
+  "sound_fields": {
+    "source": "Small polished walnut pushbutton",
+    "action": "Pressed once, one compact wooden click settling quickly to silence",
+    "material": "Dry warm wood, a little grainy tactile texture",
+    "space": "Very close microphone, isolated and dry"
+  },
+  "bpm": null,
+  "seconds": 1.5,
+  "negative_prompt": null,
+  "cfg": 1.0,
+  "steps": 8,
+  "variations": 1,
+  "seed": 1176391,
+  "candidate": 1,
+  "file": "Pickers_Hollow_Wood_Button_Click_Source.wav",
+  "sample_rate": 44100,
+  "bit_depth": 24,
+  "created": "2026-11-10T22:17:31",
+  "backend": "sa3-torch",
+  "model": "medium + same-l",
+  "peak_dbfs": -9.0,
+  "raw_peak_dbfs": 0.0,
+  "ceiling_gain_db": -9.0
+}

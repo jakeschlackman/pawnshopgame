@@ -1,5 +1,11 @@
 # Menu theme music
 
+Current ownership (2026-11-10): music source is
+`PawnShop.Audio/Content/Music/Forgotten_Treasures.wav`; playback types now use
+`PawnShop.Audio`, with `AudioAssets.MenuTheme` resolving to
+`Audio/Music/Forgotten_Treasures`. The unchanged source hash, loop behavior and
+listening limitations below still apply. Earlier Game/Framework paths are historical.
+
 Date: 2026-11-10. User supplied the theme WAV and requested menu/Options playback,
 automatic repetition and fades only at the loop boundary. Existing uncommitted
 title-intro/panorama work is preserved. No game launch or listening check was performed.
@@ -38,7 +44,8 @@ and the fade envelope. At the default 80/80 settings, steady gain is 0.32 rather
 than 0.64. Saved preferences are unchanged. Master/Music preview gain multiplies
 the fade envelope. Focus mute sets gain to zero without stopping or
 resetting the audio cursor. Applying/discarding settings keeps/restores gain through
-the existing Options workflow. Existing preview tones remain available.
+the existing Options workflow. Slider feedback now uses the authored marimba
+SoundEffect described in [Options verification](VERIFICATION_OPTIONS.md).
 
 ## Ownership and changed files
 

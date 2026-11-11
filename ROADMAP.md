@@ -32,6 +32,12 @@ Build the title screen first, then a minimal room, shared item handling, and sav
 
 Use placeholder art as soon as it makes movement, scale, layering, or interaction testable. Polished sprite sheets are not a prerequisite for the first playable milestone. The explicitly requested structural refactor establishes `PawnShopSimulator.sln` with eight root-level projects: PawnShop.Framework, Core, Narrative, Characters, Shop, Exploration, Game, and Tests (all prefixed PawnShop.). This supersedes earlier layout proposals. Retain the requested future folders with `.gitkeep` and do not populate them with speculative systems, an engine, or an editor.
 
+The user-approved 2026-11-10 Audio extraction adds the ninth project, PawnShop.Audio,
+owning playback and categorized content. Game is now a thin executable/composition
+and main-menu boundary for new work; check for a better library home before adding
+files there, and ask when ownership is unclear. This extends the eight-project
+layout above without changing milestone completion. See agents.md section 4.
+
 The refactor preserves M00 completion and M01's implemented/pending-verification status. It is structural work, not another gameplay milestone. Game/Bootstrap owns lifecycle composition, Core owns shared rules and neutral persistence, and feature-specific save data remains with each feature. README.md documents the current solution build, console regression runner, launch, and code-authored content workflow. Folder/project creation earns no future milestone acceptance credit.
 
 The sequence is a dependency order, not a calendar estimate. M00 maps existing code onto it; proven functionality may satisfy a gate without being rewritten. A compile-only result does not satisfy a visual or gameplay gate.

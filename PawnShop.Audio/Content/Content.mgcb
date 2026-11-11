@@ -1,0 +1,96 @@
+# Audio sources and their build definitions are owned by PawnShop.Audio.
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/profile:Reach
+/compress:False
+
+#begin Music/Forgotten_Treasures.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Forgotten_Treasures.wav
+
+#begin UI/switch_on.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/switch_on.wav
+
+#begin UI/switch_off.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/switch_off.wav
+
+#begin UI/sub_click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/sub_click.wav
+
+#begin UI/tab_click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/tab_click.wav
+
+#begin UI/rotary_click_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/rotary_click_01.wav
+
+#begin UI/rotary_click_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/rotary_click_02.wav
+
+#begin UI/rotary_click_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/rotary_click_03.wav
+
+#begin UI/rotary_click_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/rotary_click_04.wav
+
+#begin UI/rotary_click_05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/rotary_click_05.wav
+
+#begin UI/rotary_click_06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/rotary_click_06.wav
+
+#begin UI/dropdown_click_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/dropdown_click_01.wav
+
+#begin UI/dropdown_click_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/dropdown_click_02.wav
+
+#begin UI/dropdown_click_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/dropdown_click_03.wav
+
+#begin UI/dropdown_click_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:UI/dropdown_click_04.wav

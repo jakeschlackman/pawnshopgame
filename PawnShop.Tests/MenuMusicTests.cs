@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
-using PawnShop.Framework.Audio;
-using PawnShop.Game;
+using PawnShop.Audio;
 using PawnShop.Game.Bootstrap;
 using PawnShop.Game.Screens;
 
@@ -12,7 +11,7 @@ internal static partial class RegressionTests
     {
         var settings = app.Screen == Screen.Options ? app.Options.Presentation : app.Options.Current;
         music.Update(app.UsesTitleBackground && !app.ExitRequested,
-            PawnShopGame.MenuThemeGain * settings.Gain(AudioChannel.Music, active));
+            AudioPlayback.MenuThemeGain * settings.Gain(AudioChannel.Music, active));
     }
 
     internal static void MenuMusicNavigation()
@@ -112,8 +111,8 @@ internal static partial class RegressionTests
 
     internal static void MenuMusicContent()
     {
-        string name = Path.GetFileName(PawnShopGame.MenuThemeAssetId);
-        string output = Path.Combine(AppContext.BaseDirectory, "Content", "Audio");
+        string name = Path.GetFileName(AudioAssets.MenuTheme);
+        string output = Path.Combine(AppContext.BaseDirectory, "Content", "Audio", "Music");
         string ogg = Path.Combine(output, name + ".ogg");
         Check(File.Exists(Path.Combine(output, name + ".xnb")) && File.Exists(ogg));
         using var stream = File.OpenRead(ogg);
@@ -121,7 +120,7 @@ internal static partial class RegressionTests
         stream.ReadExactly(header);
         Check(header.SequenceEqual("OggS"u8) && stream.Length > 0 && stream.Length < 37044044);
         string root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
-        string source = Path.Combine(root, "PawnShop.Game", "Content", "Audio", name + ".wav");
+        string source = Path.Combine(root, "PawnShop.Audio", "Content", "Music", name + ".wav");
         using var wav = File.OpenRead(source);
         Check(Convert.ToHexString(SHA256.HashData(wav)) == "D5AAD4009AC742BF84CDE2697391A8D57E7D78C4D9123AB23AF7A8B61FE6F5EA",
             "The imported source WAV must remain byte-identical to the supplied theme.");

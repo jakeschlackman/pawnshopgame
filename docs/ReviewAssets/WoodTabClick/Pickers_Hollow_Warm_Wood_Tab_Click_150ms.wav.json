@@ -1,0 +1,57 @@
+{
+  "kind": "process",
+  "input_audio": "warm-wood-tab-click-eq.wav",
+  "source": {
+    "kind": "eq_and_isolate",
+    "input_audio": "Pickers_Hollow_Warm_Wood_Tab_Click_Source.wav",
+    "source": {
+      "kind": "generate",
+      "title": "Pickers_Hollow_Warm_Wood_Tab_Click_Source",
+      "original_idea": "ok I want a more drawn wood clicking sound, little warmer, for the tab headers, give me the preview in the standard folder. Separate tab header preview only, final 150 ms, standard Audio Studio outputs directory, no tab integration before review.",
+      "audio_type": "sfx",
+      "prompt": "A single warm wooden switch click with a slightly drawn-out grainy wooden contact and a rounded soft knock, followed by a short mellow woody resonance that settles smoothly. Close-miked, dry, tactile and restrained.",
+      "prompt_used": "TrackType: SFX, A single warm wooden switch click with a slightly drawn-out grainy wooden contact and a rounded soft knock, followed by a short mellow woody resonance that settles smoothly. Close-miked, dry, tactile and restrained, Handcrafted wooden tab switch in a walnut housing, One deliberate press, a soft textured wooden contact followed by one warm click and a brief rounded decay, Warm walnut wood, mellow low-mid body, softly textured grain, Isolated close microphone, dry.",
+      "sound_fields": {
+        "source": "Handcrafted wooden tab switch in a walnut housing",
+        "action": "One deliberate press, a soft textured wooden contact followed by one warm click and a brief rounded decay",
+        "material": "Warm walnut wood, mellow low-mid body, softly textured grain",
+        "space": "Isolated close microphone, dry"
+      },
+      "bpm": null,
+      "seconds": 1.5,
+      "negative_prompt": null,
+      "cfg": 1.0,
+      "steps": 8,
+      "variations": 1,
+      "seed": 1287401,
+      "candidate": 1,
+      "file": "Pickers_Hollow_Warm_Wood_Tab_Click_Source.wav",
+      "sample_rate": 44100,
+      "bit_depth": 24,
+      "created": "2026-11-10T22:32:42",
+      "backend": "sa3-torch",
+      "model": "medium + same-l",
+      "peak_dbfs": -9.0,
+      "raw_peak_dbfs": -4.16,
+      "ceiling_gain_db": -4.84
+    },
+    "utility": "FFmpeg bundled with dotnet-mgcb 3.8.4.1",
+    "filters": "atrim=start=0.09:end=0.24,asetpts=PTS-STARTPTS,treble=g=-2.5:f=2000:t=q:w=0.7,bass=g=1.5:f=450:t=q:w=0.7",
+    "purpose": "Warm, slightly longer textured wood contact for tab-header audition, 150 ms.",
+    "runtime_integration": false
+  },
+  "created": "2026-11-10T22:34:18",
+  "format": "wav",
+  "sample_rate": 48000,
+  "channels": 1,
+  "seconds": 0.15,
+  "steps": [
+    "trim 0.0\u20130.15",
+    "fade 0.3/40.0 ms",
+    "peak normalize -12.0 dBFS (-4.16 dB)"
+  ],
+  "peak": 0.251,
+  "peak_dbfs": -12.0,
+  "rms": 0.0156,
+  "file": "Pickers_Hollow_Warm_Wood_Tab_Click_150ms.wav"
+}

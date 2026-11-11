@@ -92,3 +92,19 @@ completion-frame consumption, six Escape timings, repeated cancellation, focus
 loss and application exit. The content check verifies the bundled 1254×1254 PNG
 and its SHA-256 against the supplied image. Logo size, visual fade and playback
 remain for manual review.
+
+## Picker's Hollow logo replacement — 2026-11-10
+
+The supplied `Pickers Hollow pixel-art title logo.png` replaces the active logo
+byte-for-byte under the existing name `Content/TitleScreen/logo-pickers-hollow.png`.
+Its 1774×887 RGBA dimensions match the existing loader and 920×460 placement;
+the transparent corner is retained. No code, scaling or layout changed. The
+previous logo is preserved under `Content/TitleScreen/Sources/Logos` outside
+runtime output. Provenance and the current hash are in the title asset README.
+
+`dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false -p:CopyRetryCount=0`
+passed with zero warnings/errors; `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build`
+passed 92/92 checks, and `git diff --check` passed. Source/imported/build-output
+SHA256 hashes match; the archived logo matches its previous hash. No new tests
+or game launch were needed for this asset replacement. In-game appearance remains
+pending user review.

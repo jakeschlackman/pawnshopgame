@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Mouse = Microsoft.Xna.Framework.Input.Mouse;
 using PawnShop.Framework.Input;
 using PawnShop.Framework.Rendering;
-using PawnShop.Framework.Audio;
+using PawnShop.Audio;
 using PawnShop.Game.Bootstrap;
 using PawnShop.Game.Screens;
 
@@ -11,20 +11,14 @@ namespace PawnShop.Game;
 
 public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
 {
-    public const string MenuThemeAssetId = "Audio/Forgotten_Treasures";
-    // Balance this recording before applying the user's Master/Music preferences.
-    public const float MenuThemeGain = .5f;
     private const int Width = 640, Height = 360;
     private readonly ApplicationFlow flow;
     private readonly GraphicsDeviceManager graphics;
     private readonly KeyboardInput input = new();
     private AppSettings? appliedInputSettings;
     private readonly MenuPointerInput pointer = new();
-    private readonly PreviewAudio audio = new();
-    private LoopingMusic? menuMusic;
-    private bool musicWarningReported;
+    private AudioPlayback? audio;
     private DisplaySettings appliedDisplay = new(1280, 720);
-    private AudioChannel previewChannel = AudioChannel.Effects;
     private string? startupWarning;
     private (int Width, int Height) desktopSize;
     private PixelRenderer? renderer;
@@ -55,7 +49,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         var desktop = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode;
         desktopSize = (desktop.Width, desktop.Height);
         string contentRoot = Path.Combine(AppContext.BaseDirectory, "Content");
-        menuMusic = new(new SongMusicTrack(Services, contentRoot, MenuThemeAssetId));
+        audio = new(Services, contentRoot);
         var catalog = FontCatalog.Load(Path.Combine(contentRoot, "Fonts", "fonts.json"));
         fonts = new FontLibrary(Services, contentRoot, catalog);
         renderer = new PixelRenderer(GraphicsDevice, Width, Height, fonts: fonts);
@@ -85,21 +79,15 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
             startupWarning = null;
         }
         SynchronizeDisplay();
-        if (flow.Options.TakeTone() is { } channel)
-        {
-            previewChannel = channel;
-            audio.Play(flow.Options.Presentation.Gain(channel, IsActive));
-            if (audio.Error is { } error) flow.Options.Report(error);
-        }
         var audioSettings = flow.Screen == Screen.Options ? flow.Options.Presentation : flow.Options.Current;
-        audio.SetVolume(audioSettings.Gain(previewChannel, IsActive));
-        menuMusic?.Update(flow.UsesTitleBackground && !flow.ExitRequested,
-            MenuThemeGain * audioSettings.Gain(AudioChannel.Music, IsActive));
-        if (!musicWarningReported && flow.Screen == Screen.Options && menuMusic?.Error is { } musicError)
-        {
-            flow.Options.Report(musicError);
-            musicWarningReported = true;
-        }
+        bool? checkboxState = flow.Options.TakeCheckboxSwitch();
+        bool buttonClick = flow.Options.TakeButtonClick();
+        bool tabClick = flow.Options.TakeTabClick();
+        bool sliderClick = flow.Options.TakeSliderClick();
+        bool dropdownClick = flow.Options.TakeDropdownClick();
+        audio?.Update(gameTime.ElapsedGameTime, flow.UsesTitleBackground && !flow.ExitRequested, audioSettings.AudioMix, IsActive,
+            checkboxState, buttonClick, tabClick, sliderClick, dropdownClick);
+        if (flow.Screen == Screen.Options && audio?.TakeError() is { } audioError) flow.Options.Report(audioError);
         screens?.SynchronizeRoom(flow.Room, flow.Npcs, flow.CommonVisitor);
         if (flow.ExitRequested) Exit();
         base.Update(gameTime);
@@ -169,8 +157,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
 
     protected override void UnloadContent()
     {
-        menuMusic?.Dispose();
-        menuMusic = null;
+        audio?.Dispose();
+        audio = null;
         ReleaseGraphics();
         base.UnloadContent();
     }
@@ -190,9 +178,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         if (disposing)
         {
             flow.Dispose();
-            audio.Dispose();
-            menuMusic?.Dispose();
-            menuMusic = null;
+            audio?.Dispose();
+            audio = null;
             ReleaseGraphics();
         }
         base.Dispose(disposing);

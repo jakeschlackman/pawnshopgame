@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
+    <EnableMGCBItems>false</EnableMGCBItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4.1" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.4.1" />
+    <MonoGameContentReference Include="Content/Content.mgcb" ContentFolder="Content/Audio" />
+  </ItemGroup>
+  <!-- Register generated content before the SDK assigns copy/publish paths,
+       including when a consuming application publishes without rebuilding. -->
+  <Target Name="PrepareAudioContentForConsumers" BeforeTargets="AssignTargetPaths"
+          DependsOnTargets="IncludeContent" Condition="'$(DesignTimeBuild)' != 'true'" />
+</Project>

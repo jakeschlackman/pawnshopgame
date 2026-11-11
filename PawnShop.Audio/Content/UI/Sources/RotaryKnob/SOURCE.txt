@@ -1,0 +1,25 @@
+Radial knob clicks turning dial
+Creator: el_boss (recording metadata: Final Boss)
+Freesound ID: 643563
+Source: https://freesound.org/people/el_boss/sounds/643563/
+License: Creative Commons CC0 1.0 Universal
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+
+Original: 643563__el_boss__radial-knob-clicks-turning-dial.wav
+Original SHA256: 990CBD06C541BD06F856244226DAA3A6E19EB1DFB2D13FEBB5099098970CE030
+Preserved byte-for-byte, stereo 16-bit PCM, 44100 Hz, 314791 frames.
+This original is authoring evidence and is excluded from the MGCB runtime build.
+
+Derivatives: ../../rotary_click_01.wav through ../../rotary_click_06.wav
+Six distinct recorded clicks; no duplicated or synthesized variations.
+Extraction used the existing MonoGame-bundled FFmpeg 083443d, without saved scripts.
+Source start times, seconds: 5.204, 5.382, 5.537, 5.816, 5.972, 6.371.
+Each window is 48 ms (2117 output frames at 44100 Hz).
+Processing: equal-weight mono downmix, 80 Hz high-pass to reduce handling rumble,
+0.5 ms fade-in before the attack, 8 ms fade-out starting at 40 ms.
+Per-sample attenuation only, matching whole-window RMS to -41.31 dBFS:
+01: -2.039 dB; 02: -3.746 dB; 03: -2.652 dB;
+04: -0.779 dB; 05: 0 dB; 06: -2.906 dB.
+No amplification, compression, reverb, distortion, gating or added effects.
+Final files: mono, 44100 Hz, signed 16-bit PCM. Peaks below -18.6 dBFS.
+Audible character and gameplay mix remain subject to user listening acceptance.

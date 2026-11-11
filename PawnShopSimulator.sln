@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawnShop.Game", "PawnShop.G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawnShop.Tests", "PawnShop.Tests\PawnShop.Tests.csproj", "{F346EF69-D8E7-42E3-B850-3AA3F7495F93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawnShop.Audio", "PawnShop.Audio\PawnShop.Audio.csproj", "{A6675819-7601-45D0-9651-D2509EF86EA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{F346EF69-D8E7-42E3-B850-3AA3F7495F93}.Release|x64.Build.0 = Release|Any CPU
 		{F346EF69-D8E7-42E3-B850-3AA3F7495F93}.Release|x86.ActiveCfg = Release|Any CPU
 		{F346EF69-D8E7-42E3-B850-3AA3F7495F93}.Release|x86.Build.0 = Release|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Debug|x64.Build.0 = Debug|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Debug|x86.Build.0 = Debug|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Release|x64.ActiveCfg = Release|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Release|x64.Build.0 = Release|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Release|x86.ActiveCfg = Release|Any CPU
+		{A6675819-7601-45D0-9651-D2509EF86EA3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,24 @@
+User-supplied WAV recordings by fmaudio (creator/title inferred from filenames):
+Battering end of battery into wooden panel, takes 1-4.
+Freesound sources:
+Take 1: https://freesound.org/people/fmaudio/sounds/560336/
+Take 2: https://freesound.org/people/fmaudio/sounds/560335/
+Take 3: https://freesound.org/people/fmaudio/sounds/560334/
+Take 4: https://freesound.org/people/fmaudio/sounds/560333/
+License not supplied in the task or verified from source pages; no license asserted.
+
+Original files are preserved byte-for-byte here: mono 96 kHz 24-bit PCM WAV.
+Original SHA256, by take:
+1: 2D7B28870ADD4158C63302CCCA030CD0EC1C2F206D61EBAB9B9EA6EBA174BDB2
+2: 7AAFA8AD71221461AE1BF30749F251702A1A5B00EE495904A3770A6D0528C9DD
+3: 486E1A5F6F94A8BD2099F58804941EC42EBA080815657C14F59250C33BEA3870
+4: BEEF0E657F837D173B68D3EE8D6BBC9ECC293CD895BD4D9D884034851BA4231C
+
+Runtime files: ../../dropdown_click_01.wav through ../../dropdown_click_04.wav,
+matching takes 1 through 4. Converted with existing MonoGame-bundled FFmpeg 083443d
+to mono 48 kHz 16-bit PCM, retaining the first 220 ms (10560 frames) of each.
+No leading trim or fade: the original impacts occur immediately and remain intact.
+Only a 10 ms exit fade at 210 ms removes the quiet trailing edge. No normalization,
+compression, reverb, added effects or synthesis. Fixed-pitch playback uses 0.15 base
+gain before Master x Sound Effects and focus mute. No permanent extraction script.
+This source folder is excluded from MGCB and consumer output; only derivatives build.

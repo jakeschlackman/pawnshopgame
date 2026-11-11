@@ -58,22 +58,44 @@ Use the repository's existing SDK, MonoGame target, content build workflow, test
 
 Use composition over deep inheritance. Components describe focused state/capabilities; systems or services implement behavior. Not every class needs an interface, component, factory, or event.
 
-Build a game-specific reusable foundation, not a general-purpose engine. Introduce abstractions for demonstrated reuse, important invariants, or testability. Avoid speculative ECS frameworks, editor platforms, and plugin systems. The explicitly approved eight-project layout below includes scaffolding for future features; do not add speculative classes to fill it or infer feature completion from its folders.
+Build a game-specific reusable foundation, not a general-purpose engine. Introduce abstractions for demonstrated reuse, important invariants, or testability. Avoid speculative ECS frameworks, editor platforms, and plugin systems. The explicitly approved nine-project layout below includes scaffolding for future features; do not add speculative classes to fill it or infer feature completion from its folders. The user approved extracting PawnShop.Audio on 2026-11-10.
 
-`PawnShopSimulator.sln` and these eight project directories live together at the repository root. This approved structure supersedes earlier project-layout proposals:
+`PawnShopSimulator.sln` and these nine project directories live together at the repository root. This approved structure supersedes earlier project-layout proposals:
 
 | Project | Owns | Allowed PawnShop project references |
 | --- | --- | --- |
-| PawnShop.Framework | Reusable entities/components/systems, scenes, input, UI, events, rendering, audio | None; no game-specific rules |
+| PawnShop.Framework | Reusable entities/components/systems, scenes, input, UI, events, rendering | None; no game-specific rules |
+| PawnShop.Audio | Playback, mix snapshots, audio asset IDs and categorized audio content/build pipeline | None; presentation audio, no domain rules |
 | PawnShop.Core | Shared items, inventory, interactions, conditions/effects, transactions, economy, world state, persistence contracts/storage | Neutral Framework contracts only when needed; remain headless-testable |
 | PawnShop.Narrative | Dialogue, quests, relationships, story flags, progression | Core |
 | PawnShop.Characters | AI, behaviors, movement, combat, player, mech, companion | Core, Framework |
 | PawnShop.Shop | Customers, appraisal, restoration, displays, shop workflows | Core |
 | PawnShop.Exploration | Dungeons, salvage, monsters, hazards, generation | Core, Characters, Framework |
-| PawnShop.Game | MonoGame executable; Bootstrap session/service composition; concrete Screens and Content | All six production libraries |
+| PawnShop.Game | Thin MonoGame executable/composition layer and main-menu UI; feature code/content belongs in its owning project | All seven production libraries |
 | PawnShop.Tests | Existing regression runner and future focused tests | Projects exercised by each test |
 
 Keep project references acyclic. Put shared contracts in a dependency-neutral location. Register feature-specific handlers at the composition boundary. Integration tests may reference the layers they exercise.
+
+### File placement: keep PawnShop.Game thin
+
+Before creating or moving a file into `PawnShop.Game`, explicitly check whether an
+existing feature project or `PawnShop.Framework` is a better owner. Prefer that
+home for feature behavior, services, reusable UI, and feature content. Game is not
+the default destination simply because it can reference every library.
+
+Keep new Game code limited to the executable host, thin application/session
+composition and main-menu UI (including Options). Keep the host mechanically
+simple: delegate work to the owning library rather than implementing it there.
+If no suitable home is clear, ask the user before placing the file in Game or
+introducing a further project split. Do not add graphics/audio dependencies to a
+headless domain project just to avoid Game. Existing non-menu code in Game does
+not justify adding more; move it through separately scoped refactors, preserving
+working behavior.
+
+PawnShop.Audio owns `Content/Music`, `UI`, `Environmental`, `Combat`, `Monster`
+and `Speech`. Its MGCB pipeline supplies compiled `Content/Audio` assets to
+consumers. Game creates and updates playback; settings storage and main-menu
+interaction rules stay at the application boundary.
 
 Session creation, service wiring, and cross-feature coordination belong under `PawnShop.Game/Bootstrap`. Shared atomic operations belong in `Core/Transactions`; `Shop/Transactions` uses them rather than creating another inventory or currency model. Lower production projects never reference Game.
 

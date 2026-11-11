@@ -2,7 +2,7 @@
 
 **Document status:** approved solution organization with proposed future gameplay contracts, grounded in `agents.md` and the requested structural refactor.  
 **Prepared:** 2026-10-24.  
-**Implementation status:** eight-project organization verified against the repository. M01's existing lifecycle is implemented; desktop lifecycle/resource acceptance remains pending. Later gameplay APIs below remain reference designs. See [verification evidence](docs/VERIFICATION_M01.md).
+**Implementation status:** nine-project organization, including the user-approved PawnShop.Audio extraction. M01's existing lifecycle is implemented; desktop lifecycle/resource acceptance remains pending. Later gameplay APIs below remain reference designs. See [verification evidence](docs/VERIFICATION_M01.md).
 
 ## 1. Purpose, sources, and authority
 
@@ -51,22 +51,24 @@ Use explicit construction at bootstrap. A dependency-injection container is opti
 
 ### 2.2 Approved solution layout
 
-The requested structural refactor establishes `PawnShopSimulator.sln` and eight actual C# projects at the repository root. It supersedes the earlier Domain/Application/Infrastructure proposal and the initial three-project M01 organization. Future-system folders are retained with `.gitkeep`; their existence does not mean those systems are implemented.
+The approved layout has `PawnShopSimulator.sln` and nine C# projects at the root. The 2026-11-10 extraction of PawnShop.Audio extends the earlier eight-project layout. Future-system folders are retained with `.gitkeep`; their existence does not mean those systems are implemented.
 
 | Project | Responsibility | PawnShop references |
 | --- | --- | --- |
-| `PawnShop.Framework` | Reusable infrastructure: entities/components/systems, scenes, input, UI, events, rendering, audio; no game rules | None |
+| `PawnShop.Framework` | Reusable infrastructure: entities/components/systems, scenes, input, UI, events, rendering; no game rules | None |
+| `PawnShop.Audio` | Playback, immutable mix snapshots, audio asset IDs, categorized sources and MGCB build | None |
 | `PawnShop.Core` | Shared gameplay rules/models, world state, atomic operations, neutral persistence contracts/storage | None currently; neutral Framework contracts permitted if needed |
 | `PawnShop.Narrative` | Dialogue, quests, relationships, story flags, progression | Core |
 | `PawnShop.Characters` | Character AI/behavior, movement/combat, player, mech, companion | Core, Framework |
 | `PawnShop.Shop` | Customers, appraisal, restoration, displays, shop transactions using Core transactions | Core |
 | `PawnShop.Exploration` | Dungeons, salvage, monsters, hazards, eventual generation | Core, Characters, Framework |
-| `PawnShop.Game` | MonoGame executable; Bootstrap composition and lifecycle; concrete Screens and Content | All six production libraries |
-| `PawnShop.Tests` | Existing executable regression runner; tests reference the projects they exercise | Framework, Core, Game currently |
+| `PawnShop.Game` | Thin executable host/composition and main-menu UI; existing non-menu presentation awaits scoped extraction | All seven production libraries |
+| `PawnShop.Tests` | Existing executable regression runner; tests reference the projects they exercise | Projects exercised by each test, including Audio |
 
 ```mermaid
 flowchart TD
     Game --> Framework
+    Game --> Audio
     Game --> Core
     Game --> Narrative
     Game --> Characters
@@ -81,13 +83,21 @@ flowchart TD
     Exploration --> Framework
 ```
 
-Arrows show current compile-time dependencies. Framework references no PawnShop project. Core currently has no project or package dependencies, keeping its rules independent of graphics. Features never reference Game. Framework and Game retain the same MonoGame DesktopGL 3.8.4.1 package; sharing that package introduces no new backend. All projects retain net10.0 and SDK 10.0.401. No future gameplay feature was added by this refactor.
+Arrows show current compile-time dependencies. Framework and Audio reference no PawnShop project. Core has no project or package dependencies. Features never reference Game. Framework, Audio and Game use MonoGame DesktopGL 3.8.4.1; Audio and Game use the same pinned content builder. All projects retain net10.0 and SDK 10.0.401.
+
+**Placement rule:** before adding or moving any file into Game, check for a better
+feature/library owner. New Game code is limited to the thin executable/composition
+layer and main-menu UI, including Options. If ownership is unclear, ask before
+placing it there or splitting another project. Preserve headless domain boundaries.
+Existing non-menu Game code is a candidate for separately scoped extraction, not
+an example to copy. The durable rule is in agents.md section 4.
 
 Required folders, relative to each project directory:
 
 | Project | Feature folders |
 | --- | --- |
-| Framework | `Entities`, `Components`, `Systems`, `Scenes`, `Input`, `UI`, `Events`, `Rendering`, `Audio` |
+| Framework | `Entities`, `Components`, `Systems`, `Scenes`, `Input`, `UI`, `Events`, `Rendering` |
+| Audio | `Playback`, `Content/Music`, `Content/UI`, `Content/Environmental`, `Content/Combat`, `Content/Monster`, `Content/Speech` |
 | Core | `Inventory`, `Items`, `Interactions`, `Conditions`, `Effects`, `Transactions`, `Economy`, `World`, `Persistence` |
 | Narrative | `Dialogue`, `Quests`, `Relationships`, `StoryFlags`, `Progression` |
 | Characters | `AI`, `Behaviors`, `Movement`, `Combat`, `Player`, `Mech`, `Companion` |
@@ -219,7 +229,7 @@ other settings, without rewriting the original until Apply. The host rejects
 actual display dimensions below the minimum, including a smaller borderless desktop; manual window
 resizing is disabled and users change resolution through Options. UI/text size previews independently of world scale. Audio
 and dialogue speed have live previews; the Ink conversation draft also uses the
-text-speed setting. The application owns one Framework `LoopingMusic`/`SongMusicTrack`
+text-speed setting. AudioPlayback owns one Audio `LoopingMusic`/`SongMusicTrack`
 for the supplied Forgotten Treasures menu theme, balanced at 50% gain before
 Master/Music preferences. The existing MGCB pipeline compiles its preserved WAV
 source to an Ogg-backed Song. It plays during the startup intro, title and title-side
@@ -230,7 +240,49 @@ after each repeat the first 1.5 seconds fade up, using a monotonic presentation
 clock reset by native track-start/repeat notifications rather than simulation time.
 Initial entry and screen departure have no playback fades. The track stops before
 its ContentManager is disposed on unload/shutdown; expected audio failures release
-it and report once in Options. Other authored audio remains future work. See README.md
+it and report once in Options. `SoundEffectPlayer` loads compiled SoundEffects through
+its own ContentManager, caches instances and permits one active sample per player.
+The six `Audio/UI/rotary_click_01` through `_06` detents replace marimba slider feedback.
+Audio's graphics-free `ShuffledSoundBag` owns seeded-testable sampling without
+replacement and boundary repeat prevention. `SliderClickSequence` uses it with
++/-2.5% playback-rate pitch and a 50 ms presentation-time cooldown. OptionsModel requests clicks only for
+user changes: each changed whole-percent mouse value and actual keyboard steps.
+Pixel movement within the same value stays silent. Open, restore, discard, unchanged values, focus loss
+and modal capture are silent. Excess requests are dropped without delayed playback.
+AudioPlayback applies 0.8 × Master × Sound Effects and focus mute using the new draft
+gain in the same update, including when adjusting SFX. Samples finish inside the
+cooldown even at the lowest pitch. Original CC0 evidence stays under Audio's
+`Content/UI/Sources/RotaryKnob`, excluded from MGCB; only the six derivatives build.
+All three Options checkboxes share a separate two-sample SoundEffectPlayer using
+`Audio/UI/switch_on` and `Audio/UI/switch_off`. OptionsModel emits a nullable boolean
+containing the new checked state: null is no request, false explicitly selects off.
+The host consumes it once after input, and AudioPlayback applies 0.15 × Master ×
+Sound Effects plus focus mute. Samples use fixed pitch; rapid toggles replace the
+previous switch voice. Open/restore/discard, inactive and captured input remain
+silent. The user-supplied FLAC and complete converted WAV stay under
+`Content/UI/Sources/OnOffSwitch`; only the extracted on/off WAVs are in MGCB.
+The former marimba asset remains preserved without a runtime reference.
+Dropdowns own a separate ShuffledSoundBag and one SoundEffectPlayer for the four
+`Audio/UI/dropdown_click_01` through `_04` wood-panel impacts. OptionsModel requests
+a cue for opening, valid confirmation (including the current option), and closed
+Left/Right adjustments of Window Mode, Resolution or Dialogue Text Speed. Highlight
+navigation, scrolling, cancellation, initialization, restore and invalid/captured
+input are silent. Opening and selecting consume adjacent bag entries and therefore
+always differ, including across reshuffles. There is no dropdown cooldown or delayed
+queue; rapid explicit actions play immediately and replace the previous dropdown
+voice. Fixed-pitch gain is 0.15 × Master × Sound Effects and focus mute. Original
+96 kHz WAVs remain under `Content/UI/Sources/DropdownClicks`; MGCB builds only the
+220 ms mono 48 kHz 16-bit derivatives with preserved attacks and short exit fades.
+Unload/shutdown releases all instances before their content scope. Framework's headless `Button` accepts an
+optional `onClickSound` callback, defaults to silent and rejects disabled activation.
+Options opts in Apply/Restore Defaults/Back and both binding slots on each
+Controls row to the button cue. Their shared request is consumed once after Options updates, including
+Back transitions. AudioPlayback owns a separate SoundEffectPlayer for `Audio/UI/sub_click`,
+using Master × Effects and focus mute and disposing it with the application. Rendering
+reads each button's enabled state. The four tab headers use the same Button contract
+with a separate request and owned `Audio/UI/tab_click` instance. Pointer activation
+and keyboard NextTab share the path; disabled controls, focus loss, key capture and
+modals block tab feedback. Initial tab selection is silent. Other authored audio remains future work. See README.md
 for controls and persistence behavior and [music verification](docs/VERIFICATION_MENU_MUSIC.md).
 
 `Framework/Input/KeyboardBindings` is an immutable mapping of six actions to
@@ -1145,7 +1197,7 @@ Add an interface when it expresses a meaningful boundary, multiple implementatio
 
 | Decision | Working position | Resolve by |
 | --- | --- | --- |
-| Actual projects, SDK, platform target, content pipeline | Approved eight-project layout; retained SDK/backend/package/test/content workflow in section 2.2 | M00 and structural refactor |
+| Actual projects, SDK, platform target, content pipeline | Approved nine-project layout; retained SDK/backend/package/test/content workflow in section 2.2 | M00 and audio extraction |
 | Scene/overlay and timestep integration | One session/update owner; scoped focus/pause; existing host strategy | M01–M02 |
 | Art scale, tile metrics, camera, animation frame counts | Source canvas and world size are separate; validate one scene first | M02 before broad asset production |
 | Inventory capacity/weight/access policies | Common model; implement only chosen limits; explicit nearby cargo access | M03 |
@@ -1215,7 +1267,7 @@ and Monster) use PixelLab-authored thin brass tracks, a green
 fill strip and wristwatch thumbs. Shared AudioTrack/AudioFill/AudioThumb geometry
 maps draft volume to the clock-face pivot and pointer position back to 0-100.
 Pointer drag emits InputFrame.SliderValue with the option row; OptionsModel owns
-clamping, draft edits and preview-tone requests. Left/Right retains five-point
+clamping, draft edits and mechanical-click requests. Left/Right retains five-point
 steps; Apply/Back retain existing commit/discard behavior. This artwork does not
 replace the menu's vertical scrollbar or the dropdown scrollbar.
 Combat and Monster are independent channels, each multiplied by Master and

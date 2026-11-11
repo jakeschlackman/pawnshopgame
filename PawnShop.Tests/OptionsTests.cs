@@ -1,3 +1,4 @@
+using PawnShop.Audio;
 using Microsoft.Xna.Framework.Input;
 using PawnShop.Framework.Input;
 using PawnShop.Game.Bootstrap;

@@ -2,12 +2,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework.Input;
 using PawnShop.Framework.Input;
+using PawnShop.Audio;
 
 namespace PawnShop.Game.Bootstrap;
 
 public enum WindowMode { Windowed, Borderless, Fullscreen }
 public enum DialogueSpeed { Slow, Normal, Fast, Instant }
-public enum AudioChannel { Music, Ambient, Effects, Combat, Monster }
 public readonly record struct DisplaySettings(int Width = 1280, int Height = 720, WindowMode Mode = WindowMode.Windowed);
 
 // Application preferences are independent of gameplay saves and session lifetimes.
@@ -118,12 +118,10 @@ public sealed record AppSettings
         (1920, 1200), (2560, 1440), (2560, 1600), (3440, 1440), (3840, 2160)
     });
 
-    public float Gain(AudioChannel channel, bool active) => !active && MuteUnfocused ? 0
-        : Master / 100f * (channel switch
-        {
-            AudioChannel.Music => Music, AudioChannel.Ambient => Ambient,
-            AudioChannel.Combat => Combat, AudioChannel.Monster => Monster, _ => Effects
-        }) / 100f;
+    [JsonIgnore]
+    public AudioMix AudioMix => new(Master, Music, Ambient, Effects, Combat, Monster, MuteUnfocused);
+
+    public float Gain(AudioChannel channel, bool active) => AudioMix.Gain(channel, active);
 
     public int RevealedCharacters(TimeSpan elapsed, int length) => Dialogue == DialogueSpeed.Instant ? length
         : Math.Clamp((int)(elapsed.TotalSeconds * (Dialogue switch

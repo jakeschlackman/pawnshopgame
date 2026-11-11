@@ -1,3 +1,4 @@
+using PawnShop.Audio;
 using Microsoft.Xna.Framework.Input;
 using PawnShop.Framework.Input;
 using PawnShop.Game.Bootstrap;
@@ -18,10 +19,13 @@ internal static partial class RegressionTests
         {
             model.Update(new(SelectionIndex: row, SliderValue: 50), TimeSpan.Zero, true);
             Check(model.Volume(row) == 50 && model.Current == original && model.IndicatorRow == row);
+            Check(model.TakeSliderClick());
             model.Update(new(Right: true), TimeSpan.Zero, true);
             Check(model.Volume(row) == 55);
+            Check(model.TakeSliderClick());
             model.Update(new(Left: true), TimeSpan.Zero, true);
             Check(model.Volume(row) == 50);
+            Check(model.TakeSliderClick());
             model.Update(new(SliderValue: -100), TimeSpan.Zero, true);
             Check(model.Volume(row) == 0);
             var empty = OptionsMenuLayout.AudioThumb(row, model);
@@ -29,13 +33,10 @@ internal static partial class RegressionTests
             Check(empty.X + 14 == fill.Left);
             model.Update(new(SliderValue: 200), TimeSpan.Zero, true);
             Check(model.Volume(row) == 100 && OptionsMenuLayout.AudioThumb(row, model).X + 14 == fill.Right);
-            Check(model.TakeTone() == (row switch
-            {
-                1 => AudioChannel.Music, 2 => AudioChannel.Ambient,
-                4 => AudioChannel.Combat, 5 => AudioChannel.Monster, _ => AudioChannel.Effects
-            }));
+            Check(model.TakeSliderClick() && model.TakeCheckboxSwitch() is null,
+                "Every slider uses rotary feedback, including Music, Ambient, Combat and Monster.");
             model.Update(new(SliderValue: 100), TimeSpan.Zero, true);
-            Check(model.TakeTone() is null, "Holding a stationary watch must not restart its preview tone.");
+            Check(!model.TakeSliderClick(), "Holding a stationary watch must not restart its click.");
             model.Update(new(SliderValue: 20), TimeSpan.Zero, false);
             Check(model.Volume(row) == 100);
             Check(OptionsMenuLayout.Field(row, model).Contains(OptionsMenuLayout.AudioTrack(row, model)));
@@ -71,16 +72,16 @@ internal static partial class RegressionTests
         var trackFill = OptionsMenuLayout.AudioFill(0, app.Options);
         Read(trackFill.Left, trackFill.Center.Y);
         app.Update(Read(trackFill.Left, trackFill.Center.Y, true), TimeSpan.Zero);
-        Check(app.Options.Draft.Master == 0);
+        Check(app.Options.Draft.Master == 0 && app.Options.TakeSliderClick());
         app.Update(Read(trackFill.Right + 100, trackFill.Center.Y, true), TimeSpan.Zero);
-        Check(app.Options.Draft.Master == 100 && app.Options.Current.Master == 80);
+        Check(app.Options.Draft.Master == 100 && app.Options.Current.Master == 80 && app.Options.TakeSliderClick());
         Read(trackFill.Right, trackFill.Center.Y);
         var watch = OptionsMenuLayout.AudioThumb(0, app.Options);
         int grabX = watch.X + 6;
         app.Update(Read(grabX, watch.Center.Y, true), TimeSpan.Zero);
-        Check(app.Options.Draft.Master == 100, "Grabbing away from the dial center must not jump the volume.");
+        Check(app.Options.Draft.Master == 100 && !app.Options.TakeSliderClick(), "Grabbing away from the dial center must not jump the volume or click.");
         app.Update(Read(grabX - trackFill.Width / 2, watch.Center.Y, true), TimeSpan.Zero);
-        Check(app.Options.Draft.Master == 50 && app.Options.IndicatorRow == 0);
+        Check(app.Options.Draft.Master == 50 && app.Options.IndicatorRow == 0 && app.Options.TakeSliderClick());
         Read(grabX, watch.Center.Y, true, active: false);
         Check(Read(trackFill.Left, trackFill.Center.Y, true) == default);
         Check(app.Options.Draft.Master == 50);

@@ -1,0 +1,27 @@
+{
+  "kind": "process",
+  "input_audio": "melancholy-marimba-warm-body-eq.wav",
+  "source": {
+    "kind": "eq",
+    "input_audio": "docs/ReviewAssets/MelancholyMarimba/Pickers_Hollow_Melancholy_Marimba_150ms.wav",
+    "source_sha256": "c38c592767e9d8c0b430c0d48f20db37814af4f688e64c43dde0fea13bae88db",
+    "utility": "FFmpeg already bundled with dotnet-mgcb 3.8.4.1",
+    "filters": "treble=g=-4.5:f=1800:t=q:w=0.7,bass=g=1.5:f=400:t=q:w=0.7,equalizer=g=1.25:f=500:t=q:w=0.8",
+    "gain_to_match_original_rms_db": -2.007822892942416,
+    "purpose": "Second warmth revision: slightly fuller low mids and softer top end; same note, pitch and duration.",
+    "runtime_integration": false
+  },
+  "created": "2026-11-10T21:59:11",
+  "format": "wav",
+  "sample_rate": 48000,
+  "channels": 1,
+  "seconds": 0.15,
+  "steps": [
+    "trim 0.0\u20130.15",
+    "fade 0.0/1.0 ms"
+  ],
+  "peak": 0.176,
+  "peak_dbfs": -15.07,
+  "rms": 0.0643,
+  "file": "Pickers_Hollow_Melancholy_Marimba_WarmBody_150ms.wav"
+}

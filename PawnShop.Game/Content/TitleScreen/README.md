@@ -56,8 +56,12 @@ TitleScreen loads and disposes the texture with the other title artwork.
 ## Active title logo
 
 `logo-pickers-hollow.png` is an unmodified copy of the user-supplied
-`34dd3659-a6f1-4afe-a7cb-86c3ba40a834.png`, imported on 2026-10-31. The original
-is preserved. Native dimensions: **1774x887**, RGBA with transparency. It replaces
+`Pickers Hollow pixel-art title logo.png`, replacing the earlier logo on 2026-11-10.
+SHA-256: `E91E730397136A3D0556B0B92EC4135C1CA15E88C9E33AFBF66BDB9E6B48BE1F`.
+The supplied original remains unchanged. The previous logo (originally imported
+from `34dd3659-a6f1-4afe-a7cb-86c3ba40a834.png`) is preserved as
+`Sources/Logos/logo-pickers-hollow-previous-ab8f43110347.png` outside runtime output.
+Native dimensions: **1774x887**, RGBA with transparency. It replaces
 the bitmap title heading as a separate overlay, centered in a 920x460 rectangle
 at (500, 40) on the existing 1920x1080 title UI canvas. Its original 2:1 aspect
 ratio is preserved, and menu text scaling does not change the artwork's size.

@@ -68,7 +68,7 @@ internal sealed class OptionsScreen : IDisposable
         {
             var bounds = OptionsMenuLayout.Tab(tab);
             Button(bounds, OptionsModel.Tabs[tab], model.Tab == tab, model.HoveredTab == tab, model.PointerDown,
-                categoryTab: true);
+                categoryTab: true, enabled: model.TabButtons[tab].Enabled);
         }
         // The complete supplied image owns the header, divider and inner surface.
         renderer.BeginClip(OptionsMenuLayout.Viewport);
@@ -107,7 +107,8 @@ internal sealed class OptionsScreen : IDisposable
                             slot == 0 ? OptionsModel.KeyLabel(binding.Primary) : OptionsModel.AlternateLabel(binding);
                         Button(OptionsMenuLayout.Cell(i, slot, model), label, focus,
                             model.HoveredSelection == i && model.HoveredBinding == slot,
-                            model.PointerDown || model.CapturingKey && focus, bindingSlot: true);
+                            model.PointerDown || model.CapturingKey && focus, bindingSlot: true,
+                            enabled: model.BindingButton(i, slot).Enabled);
                     }
                 }
                 else if (model.Tab == 1 && i < OptionsModel.AudioVolumeCount)
@@ -175,7 +176,7 @@ internal sealed class OptionsScreen : IDisposable
         for (int action = 0; action < 3; action++)
             Button(OptionsMenuLayout.Footer(action), action switch { 0 => "APPLY", 1 => "RESTORE DEFAULTS", _ => "BACK" },
                 model.Selected == model.FieldCount + action, model.HoveredSelection == model.FieldCount + action, model.PointerDown,
-                footerAction: true);
+                footerAction: true, enabled: model.FooterButtons[action].Enabled);
         if (model.HasModal)
         {
             bool discard = model.ConfirmingDiscard;
@@ -249,8 +250,10 @@ internal sealed class OptionsScreen : IDisposable
 
     private void Button(Rectangle bounds, string text, bool selected, bool hover, bool pressed,
         bool categoryTab = false, bool footerAction = false, string? fontRole = null, bool bindingSlot = false,
-        bool confirmationAction = false)
+        bool confirmationAction = false, bool enabled = true)
     {
+        if (!enabled) selected = hover = pressed = false;
+        Color artworkTint = enabled ? Color.White : new Color(130, 130, 130);
         Color tint = selected ? new Color(255, 232, 161) : hover ? Color.White : new Color(200, 211, 202);
         if (hover && pressed) tint = Teal;
         if (categoryTab)
@@ -260,7 +263,7 @@ internal sealed class OptionsScreen : IDisposable
             int height = (int)MathF.Round(bounds.Height * 0.828f);
             var artworkBounds = new Rectangle(bounds.X + (bounds.Width - width) / 2,
                 bounds.Y + (bounds.Height - height) / 2, width, height);
-            renderer.DrawTexture(tabArtwork[state], artworkBounds);
+            renderer.DrawTexture(tabArtwork[state], artworkBounds, tabArtwork[state].Bounds, artworkTint);
         }
         else if (footerAction)
         {
@@ -270,21 +273,21 @@ internal sealed class OptionsScreen : IDisposable
             // supplies the bottom border where these bounds meet it.
             // Include the inset shadow and its corner pixels in the fixed sides
             // so neither seams nor corner dots repeat through a wider button.
-            NineSlice.Draw(renderer, texture, texture.Bounds, bounds, 6, 2);
+            NineSlice.Draw(renderer, texture, texture.Bounds, bounds, 6, 2, artworkTint);
         }
         else if (bindingSlot || confirmationAction)
         {
             int state = pressed && (hover || bindingSlot && selected) ? 3 : hover ? 2 : selected ? 1 : 0;
             var texture = bindingArtwork[state];
             // Confirmation actions reuse the complete closed walnut/brass border.
-            NineSlice.Draw(renderer, texture, texture.Bounds, bounds, 6, 2);
+            NineSlice.Draw(renderer, texture, texture.Bounds, bounds, 6, 2, artworkTint);
         }
         else NineSlice.Draw(renderer, button, ButtonSource, bounds, 6, 2, tint);
         string font = categoryTab ? "OptionsTab" : footerAction ? "OptionsAction" : fontRole ?? "OptionsBody";
         var size = renderer.MeasureText(text.Font(font));
         Text(text, bounds.X + (int)(bounds.Width - size.X) / 2,
             bounds.Y + (int)(bounds.Height - size.Y) / 2 + (footerAction ? 3 : 0)
-                + (hover && pressed ? 2 : 0), Cream, font);
+                + (hover && pressed ? 2 : 0), enabled ? Cream : Cream * .5f, font);
     }
 
     private void Wrap(string text, int x, int y, int width, Color color, int maxLines = 5,

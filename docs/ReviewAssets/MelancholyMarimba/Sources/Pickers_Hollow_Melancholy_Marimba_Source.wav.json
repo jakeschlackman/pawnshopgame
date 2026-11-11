@@ -1,0 +1,31 @@
+{
+  "kind": "generate",
+  "title": "Pickers_Hollow_Melancholy_Marimba_Source",
+  "original_idea": "150 ms going forward, make it like a melancholy maramba. One newly generated melancholy marimba note for a game audio slider, slight reverb, quiet and comfortable for repetition. Final exactly 0.150 seconds PCM WAV. No music or melody, no sampling the reference track, no UI integration before selection.",
+  "audio_type": "sfx",
+  "prompt": "A single soft marimba note in the lower middle register, gently struck with a yarn mallet. Muted warm rosewood tone with a wistful melancholy character, a rounded attack, and a little short reverb fading away.",
+  "prompt_used": "TrackType: SFX, A single soft marimba note in the lower middle register, gently struck with a yarn mallet. Muted warm rosewood tone with a wistful melancholy character, a rounded attack, and a little short reverb fading away.",
+  "sound_fields": {
+    "source": "",
+    "action": "",
+    "material": "",
+    "space": ""
+  },
+  "bpm": null,
+  "seconds": 1.5,
+  "negative_prompt": null,
+  "cfg": 1.0,
+  "steps": 8,
+  "variations": 1,
+  "seed": 1065281,
+  "candidate": 1,
+  "file": "Pickers_Hollow_Melancholy_Marimba_Source.wav",
+  "sample_rate": 44100,
+  "bit_depth": 24,
+  "created": "2026-11-10T21:50:46",
+  "backend": "sa3-torch",
+  "model": "medium + same-l",
+  "peak_dbfs": -9.0,
+  "raw_peak_dbfs": -3.65,
+  "ceiling_gain_db": -5.35
+}

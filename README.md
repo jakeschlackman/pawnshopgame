@@ -129,8 +129,8 @@ panel uses the supplied source PNG; control designs remain provisional.
   or 150 percent. Manual window resizing and maximizing are disabled. Borderless
   uses the desktop size; the chosen resolution applies to windowed/fullscreen.
   Unsupported fullscreen modes and windows larger than the desktop are rejected.
-- Audio: Master, Music, Ambient, and Sound Effects in steps of five, with preview
-  tones and a Mute When Unfocused toggle. There are no authored gameplay audio
+- Audio: Master, Music, Ambient, Sound Effects, Combat and Monster in keyboard
+  steps of five, with mechanical slider clicks and a Mute When Unfocused toggle. There are no authored gameplay audio
   tracks yet. Audio categories multiply their volume by Master.
 - Comfort: Pause When Unfocused and Slow/Normal/Fast/Instant dialogue text speed,
   with a live text preview. The visitor conversation uses this preference.
@@ -162,6 +162,58 @@ seconds; X/Escape, timeout, or losing focus reverts them. Restore Defaults edits
 categories and still requires Apply. UI size, audio, and text speed preview while
 editing; leaving without Apply restores the saved values.
 
+Moving any Audio volume slider plays one of six 48 ms mechanical clicks in
+`PawnShop.Audio/Content/UI/rotary_click_01.wav` through `rotary_click_06.wav`.
+They are distinct extracts of el_boss's [CC0 rotary-knob recording](https://freesound.org/people/el_boss/sounds/643563/).
+The unchanged original, license links and extraction details are retained under
+`PawnShop.Audio/Content/UI/Sources/RotaryKnob`, outside the runtime content build.
+Mouse dragging requests feedback for each changed whole-percent value; pixel motion
+that leaves the value unchanged is silent. Keyboard changes use the same feedback. Controller input is not
+currently implemented. Initialization, unchanged/clamped values, Restore Defaults
+and discard do not request slider clicks. The shuffled bag uses every sample once,
+then reshuffles without repeating the previous sample at the boundary. Each click
+varies playback rate by +/-2.5%, converted to MonoGame octave pitch with log2(rate).
+A 50 ms presentation-time cooldown drops excess requests without queuing them.
+The existing SoundEffectPlayer owns cached instances and stops the previous sample
+before switching, so slider samples cannot overlap. Even the slowest variation is
+shorter than the cooldown. Gain is 0.8 × Master × Sound Effects with live draft
+settings and focus mute, including while adjusting SFX itself; zero SFX is silent.
+MGCB compiles all six WAVs as SoundEffects; buttons and tabs retain their own sounds.
+
+All three Options checkboxes (Mute When Unfocused in Audio, and Pause When Unfocused
+and Screen Shake in Comfort) play `PawnShop.Audio/Content/UI/switch_on.wav` when
+checked and `switch_off.wav` when unchecked, using their new draft state. These
+are the first and second sounds from the supplied `874829__cb9382__onoff-switch.flac`.
+The unchanged FLAC, complete converted stereo 48 kHz 16-bit WAV and source record
+are preserved under `Content/UI/Sources/OnOffSwitch`. The on/off extracts are 88/100 ms
+with short edge fades, fixed pitch and 0.15 × Master × Sound Effects gain, respecting
+focus mute. The existing SoundEffectPlayer owns one switch voice, so rapid toggles
+replace the prior sample. Mouse and keyboard share the request path; opening Options,
+Apply, Restore Defaults and discard do not play switch sounds. The previous marimba
+WAV is preserved but no longer registered in MGCB or used by the menu.
+
+Apply, Restore Defaults, Back, and all Primary/Alternate binding selectors use
+`PawnShop.Audio/Content/UI/sub_click.wav` for button activation. This sound also uses Master
+× Sound Effects and focus mute, with its own reusable playback instance. Framework's
+`Button(Action onClick, Action? onClickSound = null)` defaults to silent; pass the
+optional sound-request callback to opt in. Disabled buttons neither act nor request
+audio. The four top tabs opt in separately to `PawnShop.Audio/Content/UI/tab_click.wav`, including
+keyboard Tab activation. Confirmation actions remain silent; slider and dropdown
+feedback are separate. Tab playback also uses Master × Sound Effects and focus mute.
+
+Window Mode, Resolution and Dialogue Text Speed dropdowns use four supplied fmaudio
+wood-panel impacts, `PawnShop.Audio/Content/UI/dropdown_click_01.wav` through `_04.wav`.
+A separate shuffled bag plays each once before reshuffling and prevents consecutive
+repeats across bag boundaries. Opening and confirming an option always use different
+samples, including confirming the already selected option. Closed-dropdown Left/Right
+changes also click. Highlight navigation, scrolling, cancel, invalid selections and
+settings restoration are silent. Explicit open/select actions have no cooldown, so
+quick selections retain their feedback. One cached playback voice prevents stacking.
+The 220 ms mono 48 kHz 16-bit derivatives preserve each initial impact, trim excess
+tail silence and fade only the last 10 ms. Fixed-pitch gain is 0.15 × Master × Sound
+Effects with focus mute. Originals and source details remain under
+`Content/UI/Sources/DropdownClicks`, outside the runtime content build.
+
 Application preferences live in `%LOCALAPPDATA%/PickersHollow/settings.json`,
 independently of game sessions. Only this folder is used; the older RummageHollow
 folder is not read or migrated. A missing settings file is created with defaults
@@ -174,21 +226,34 @@ falls back to a 1280x720 window without overwriting the file.
 
 ## Implementation boundaries
 
-`PawnShopSimulator.sln` and all eight project directories sit at the repository
-root. Six class libraries support the MonoGame executable and existing console
+`PawnShopSimulator.sln` and all nine project directories sit at the repository
+root. Seven class libraries support the MonoGame executable and existing console
 regression project. The approved dependency graph and full folder list are in
 [ARCHITECTURE.md](ARCHITECTURE.md#22-approved-solution-layout).
 
 | Project | Current responsibility |
 | --- | --- |
 | PawnShop.Framework | Reusable input/edges, generic menus, renderer, font catalog and SpriteFont adapter. No PawnShop project references or game-specific commands. |
+| PawnShop.Audio | Audio playback, music loop/fades, gain snapshots, asset IDs and categorized audio sources/build pipeline. No PawnShop project references. |
 | PawnShop.Core | Authoritative room clock/bell fixture and immutable view under World. No graphics/project/package dependencies. |
 | PawnShop.Narrative | Headless Ink definition/session adapter, immutable dialogue views, stable choice IDs and content diagnostics. Quest/relationship folders remain empty. |
 | PawnShop.Characters | NPC definitions plus headless player identity, gender, facing, held movement and swept ground-footprint collision. Other actor features remain future work. |
 | PawnShop.Shop | Requested class library and empty future folders; no shop implementation. |
 | PawnShop.Exploration | Requested class library and empty future folders; no exploration implementation. |
-| PawnShop.Game | Executable; Bootstrap owns ApplicationFlow/GameSession; Screens owns title, menus and the room texture scope. |
+| PawnShop.Game | Thin executable/composition and main-menu UI. Existing non-menu presentation remains until a separately scoped extraction. Check for a better library home before placing new files here. |
 | PawnShop.Tests | Existing lifecycle checks plus input/menu checks under Framework, using the same console runner. |
+
+Audio source files live under `PawnShop.Audio/Content`: `Music`, `UI`,
+`Environmental`, `Combat`, `Monster`, and `Speech`. Empty categories retain
+`.gitkeep`. Add audio to the appropriate category and to that project's
+`Content/Content.mgcb`; Game's MGCB now builds fonts only. The pinned pipeline
+ships compiled assets under `Content/Audio/Music`, `Content/Audio/UI`, etc.
+`AudioAssets` owns their runtime IDs. `AudioPlayback` owns the device resources;
+Game constructs it, supplies an `AudioMix` snapshot and consumes presentation
+requests. Existing application settings and their JSON format are preserved.
+Asset categories are distinct from mix channels: UI uses Sound Effects, and
+Environmental maps to Ambient. Additional playback channels are not implied by
+creating a source folder.
 
 The floor and NPC textures follow the active session ID and are disposed on return.
 Two application-owned player base textures are shared by character selection and
@@ -332,7 +397,7 @@ level without changing saved preferences. Master and Music sliders preview immed
 edits restores the saved gain. Mute When Unfocused silences playback while its audio
 cursor continues, so focus changes do not restart the theme.
 
-The unmodified 24-bit stereo WAV lives under `Content/Audio`. The existing MGCB
+The unmodified 24-bit stereo WAV lives at `PawnShop.Audio/Content/Music/Forgotten_Treasures.wav`. Audio's MGCB
 build compiles it with `WavImporter`/`SongProcessor` into an Ogg stream and XNB;
 only these compiled files ship. No additional dependencies or runtime conversion
 are required. See [source provenance, checks and listening checklist](docs/VERIFICATION_MENU_MUSIC.md).
