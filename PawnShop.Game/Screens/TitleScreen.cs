@@ -8,26 +8,31 @@ namespace PawnShop.Game.Screens;
 // Application-owned artwork: returning to title reuses it without creating a session.
 internal sealed class TitleScreen : IDisposable
 {
+    private const int SkyExtensionHeight = 747;
     private readonly PixelRenderer renderer;
     private readonly PanoramicBackground background;
     private readonly Texture2D logo;
+    private readonly Texture2D studioLogo;
     private readonly Texture2D sprout;
     public Action DrawBackground { get; }
 
-    public TitleScreen(GraphicsDevice device, PanoramaCamera camera, FontLibrary fonts, SpriteSheetDefinition titleSheet)
+    public TitleScreen(GraphicsDevice device, PanoramaCamera camera, Func<double> titleDescent, FontLibrary fonts,
+        SpriteSheetDefinition titleSheet)
     {
         renderer = new PixelRenderer(device, 1920, 1080, integerScaling: false, fonts: fonts);
         try
         {
             background = new PanoramicBackground(device,
-                Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-screen-panorama.png"));
+                Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-screen-panorama-day-to-dusk.png"));
             logo = LoadTexture(device, "logo-pickers-hollow.png", 1774, 887);
+            studioLogo = LoadTexture(device, "logo-torcalev-studios.png", 1254, 1254);
             sprout = LoadTexture(device, "sprout-title-menu.png", titleSheet.ImageWidth, titleSheet.ImageHeight);
-            DrawBackground = () => background.Draw(camera);
+            DrawBackground = () => background.Draw(camera, SkyExtensionHeight, titleDescent());
         }
         catch
         {
             logo?.Dispose();
+            studioLogo?.Dispose();
             sprout?.Dispose();
             background?.Dispose();
             renderer.Dispose();
@@ -35,7 +40,15 @@ internal sealed class TitleScreen : IDisposable
         }
     }
 
-    public void Draw(Menu<MenuCommand> menu, float textScale, SpriteAnimator selector, string saying, bool drawSelector = true)
+    public void DrawStudioLogo(float opacity)
+    {
+        renderer.Begin(Color.Transparent);
+        renderer.DrawTexture(studioLogo, Bounds(0.33125f, 0.2f, 0.3375f, 0.6f));
+        renderer.Present(clearBackBuffer: false, drawBackground: DrawBackground, opacity: opacity);
+    }
+
+    public void Draw(Menu<MenuCommand> menu, float textScale, SpriteAnimator selector, string saying,
+        bool drawSelector = true, float opacity = 1)
     {
         renderer.TextScale = textScale;
         renderer.Begin(Color.Transparent);
@@ -63,8 +76,8 @@ internal sealed class TitleScreen : IDisposable
         Text(saying,
             0.15625f, 0.922222f, new Color(255, 240, 193), "TitleSaying");
         renderer.TextScale = textScale;
-        renderer.Present(clearBackBuffer: false, drawBackground: DrawBackground);
-        if (drawSelector) DrawSelector(selector, SelectorAnchor(menu.SelectedIndex, menu.Selected.Label, textScale));
+        renderer.Present(clearBackBuffer: false, drawBackground: DrawBackground, opacity: opacity);
+        if (drawSelector) DrawSelector(selector, SelectorAnchor(menu.SelectedIndex, menu.Selected.Label, textScale), opacity: opacity);
     }
 
     public Vector2 SelectorAnchor(int index, string label, float textScale)
@@ -74,12 +87,12 @@ internal sealed class TitleScreen : IDisposable
         return new Vector2(X(0.145833f), Y(y) + renderer.MeasureTextVerticalCenter(label.Font("TitleMenu")) + 9);
     }
 
-    public void DrawSelector(SpriteAnimator selector, Vector2 anchor, float rotation = 0)
+    public void DrawSelector(SpriteAnimator selector, Vector2 anchor, float rotation = 0, float opacity = 1)
     {
         var sheet = selector.Definition;
         // Keep the stable authored pivot, and avoid resampling the sprite through two targets.
         renderer.DrawPixelOverlay(sprout, sheet.GetFrame(selector.FrameIndex),
-            anchor, sheet.Pivot, sheet.DisplayScale, rotation);
+            anchor, sheet.Pivot, sheet.DisplayScale, rotation, opacity);
     }
 
     private int X(float fraction) => (int)MathF.Round(renderer.Width * fraction);
@@ -118,6 +131,7 @@ internal sealed class TitleScreen : IDisposable
     public void Dispose()
     {
         logo.Dispose();
+        studioLogo.Dispose();
         sprout.Dispose();
         background.Dispose();
         renderer.Dispose();

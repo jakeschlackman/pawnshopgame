@@ -134,7 +134,8 @@ public sealed class MenuPointerInput
 
     public static InputFrame HitTest(ApplicationFlow flow, int x, int y, int width, int height)
     {
-        if (width <= 0 || height <= 0 || flow.TitleInteractionPlaying || flow.UsesTitleBackground && !flow.TitleUiVisible) return default;
+        if (width <= 0 || height <= 0 || flow.TitleIntroPlaying || flow.TitleInteractionPlaying
+            || flow.UsesTitleBackground && !flow.TitleUiVisible) return default;
         bool options = flow.Screen == Screen.Options;
         if (options && flow.Options.CapturingKey) return default;
         int canvasWidth = options ? 1280 : flow.Screen == Screen.Title ? 1920 : 640;

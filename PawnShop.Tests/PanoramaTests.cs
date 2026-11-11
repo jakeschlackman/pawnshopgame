@@ -1,3 +1,4 @@
+using System.Buffers.Binary;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using PawnShop.Framework.Rendering;
@@ -8,6 +9,124 @@ namespace PawnShop.Tests;
 
 internal static partial class RegressionTests
 {
+    internal static void TitleIntroSequence()
+    {
+        using var app = new ApplicationFlow(playTitleIntro: true);
+        var newGame = TitleMenuLayout.Row(0).Center;
+        var halfPan = TimeSpan.FromSeconds(1.6);
+        var halfFadeLead = TimeSpan.FromMilliseconds(125);
+        Check(app.UsesTitleBackground && app.TitleIntroPlaying && !app.TitleUiVisible);
+        Check(app.TitleDescent == 0 && app.TitleMenuOpacity == 0 && app.TitleCamera.Position == 0);
+        Check(MenuPointerInput.HitTest(app, newGame.X, newGame.Y, 1920, 1080) == default);
+
+        app.Update(new(Confirm: true), TimeSpan.FromSeconds(.5));
+        Check(app.StudioLogoOpacity == .5f && app.TitleDescent == 0 && !app.TitleUiVisible);
+        app.Update(new(Down: true), TimeSpan.FromSeconds(.5));
+        Check(app.StudioLogoOpacity == 1 && app.TitleDescent == 0);
+        app.Update(default, TimeSpan.FromSeconds(2));
+        Check(app.StudioLogoOpacity == 1 && app.TitleDescent == 0);
+        app.Update(new(Confirm: true), TimeSpan.FromSeconds(.5));
+        Check(app.StudioLogoOpacity == .5f && app.TitleDescent == 0 && app.LiveSessions == 0);
+        app.Update(default, TimeSpan.FromSeconds(.5));
+        Check(app.StudioLogoOpacity == 0 && app.TitleDescent == 0);
+
+        app.Update(new(Down: true), halfPan);
+        Check(app.TitleDescent == .5 && app.TitleMenuOpacity == 0 && app.Menu!.SelectedIndex == 0);
+        app.Update(new(Confirm: true), halfPan, active: false);
+        Check(app.TitleDescent == .5 && app.TitleMenuOpacity == 0);
+        app.Update(new(Confirm: true), halfPan - halfFadeLead * 2);
+        Check(app.TitleDescent < 1 && app.TitleMenuOpacity == 0);
+        app.Update(new(Confirm: true), halfFadeLead);
+        Check(app.TitleDescent < 1 && app.TitleMenuOpacity is > .2f and < .4f && app.TitleUiVisible);
+        Check(app.TitleIntroPlaying && !app.TitleInteractionPlaying && app.LiveSessions == 0);
+        Check(MenuPointerInput.HitTest(app, newGame.X, newGame.Y, 1920, 1080) == default);
+        app.Update(new(Confirm: true), halfFadeLead);
+        Check(app.TitleDescent == 1 && app.TitleMenuOpacity is > .5f and < .6f && app.TitleIntroPlaying);
+
+        app.Update(new(Confirm: true), TimeSpan.FromSeconds(30));
+        Check(!app.TitleIntroPlaying && app.TitleMenuOpacity == 1 && app.TitleUiVisible);
+        Check(app.Screen == Screen.Title && !app.TitleInteractionPlaying && app.SessionsCreated == 0);
+        Check(MenuPointerInput.HitTest(app, newGame.X, newGame.Y, 1920, 1080).Confirm);
+        Begin(app);
+        ReturnPrompt(app);
+        Discard(app);
+        Check(app.Screen == Screen.Title && app.LiveSessions == 0);
+        Check(!app.TitleIntroPlaying && app.TitleDescent == 1 && app.TitleMenuOpacity == 1 && app.TitleUiVisible);
+    }
+
+    internal static void StudioIntroSkip()
+    {
+        foreach (double seconds in new[] { 0, .5, 2, 3.5, 5.2, 7.3 })
+        {
+            using var app = new ApplicationFlow(playTitleIntro: true);
+            app.Update(default, TimeSpan.FromSeconds(seconds));
+            double descent = app.TitleDescent;
+            float studio = app.StudioLogoOpacity;
+            float menu = app.TitleMenuOpacity;
+            app.Update(new(Cancel: true, Confirm: true), TimeSpan.Zero);
+            Check(app.TitleDescent == descent && app.StudioLogoOpacity == studio && app.TitleMenuOpacity == menu);
+            app.Update(new(Cancel: true, Down: true), TimeSpan.FromSeconds(.4));
+            Check(app.TitleDescent >= descent && app.TitleDescent <= 1 && app.StudioLogoOpacity <= studio);
+            Check(app.StudioLogoOpacity == studio * .5f && app.TitleIntroPlaying);
+            double frozen = app.TitleDescent;
+            float opacity = app.StudioLogoOpacity;
+            app.Update(new(Cancel: true), TimeSpan.FromSeconds(10), active: false);
+            Check(app.TitleDescent == frozen && app.StudioLogoOpacity == opacity);
+            app.Update(new(Cancel: true), TimeSpan.FromSeconds(.4));
+            Check(app.StudioLogoOpacity == 0 && app.TitleIntroPlaying);
+            app.Update(new(Cancel: true, Confirm: true), TimeSpan.FromSeconds(1.2));
+            Check(!app.TitleIntroPlaying && app.TitleDescent == 1 && app.TitleMenuOpacity == 1);
+            Check(app.Screen == Screen.Title && app.TitleUiVisible && !app.TitleInteractionPlaying);
+            Check(app.Menu!.SelectedIndex == 0 && app.LiveSessions == 0 && !app.ExitRequested);
+            Confirm(app);
+            Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0);
+        }
+
+        using var closing = new ApplicationFlow(playTitleIntro: true);
+        closing.RequestExit();
+        Check(closing.ExitRequested && closing.LiveSessions == 0);
+    }
+
+    internal static void TitleIntroFraming()
+    {
+        using var panorama = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen",
+            "title-screen-panorama-day-to-dusk.png"));
+        Span<byte> header = stackalloc byte[24];
+        panorama.ReadExactly(header);
+        Check(header.Slice(12, 4).SequenceEqual("IHDR"u8));
+        int imageWidth = BinaryPrimitives.ReadInt32BigEndian(header.Slice(16, 4));
+        int imageHeight = BinaryPrimitives.ReadInt32BigEndian(header.Slice(20, 4));
+        const int skyHeight = 747, originalHeight = 747;
+        Check(imageWidth == 2106 && imageHeight == skyHeight + originalHeight);
+
+        byte[] studio = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "logo-torcalev-studios.png"));
+        Check(BinaryPrimitives.ReadInt32BigEndian(studio.AsSpan(16, 4)) == 1254);
+        Check(BinaryPrimitives.ReadInt32BigEndian(studio.AsSpan(20, 4)) == 1254);
+        Check(Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(studio)) ==
+            "FDA003D1324FC428EA05068FF4C077C69B4A35598FF6ACE59612B78D9CE9845D");
+
+        var camera = new PanoramaCamera();
+        var sizes = AppSettings.Resolutions.Concat(new[] { (800, 600), (720, 1280), (5120, 1440) });
+        foreach (var (width, height) in sizes)
+        {
+            var original = camera.GetView(imageWidth, originalHeight, width, height);
+            var opening = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, descent: 0);
+            var middle = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, descent: .5);
+            var settled = camera.GetView(imageWidth, imageHeight, width, height, skyHeight);
+            Check(opening == original with { Y = 0 } && opening.Height <= skyHeight);
+            Check(middle == original with { Y = (original.Y + skyHeight) / 2 });
+            Check(settled == original with { Y = original.Y + skyHeight });
+
+            camera.NavigateToOptions();
+            camera.Update(PanoramaCamera.TransitionDuration);
+            original = camera.GetView(imageWidth, originalHeight, width, height);
+            settled = camera.GetView(imageWidth, imageHeight, width, height, skyHeight);
+            Check(settled == original with { Y = original.Y + skyHeight });
+            camera.NavigateToMainMenu();
+            camera.Update(PanoramaCamera.TransitionDuration);
+        }
+    }
+
     internal static void PanoramaTiming()
     {
         foreach (int rate in new[] { 20, 30, 60, 144 })

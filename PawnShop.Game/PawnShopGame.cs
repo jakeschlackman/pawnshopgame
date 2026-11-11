@@ -11,6 +11,9 @@ namespace PawnShop.Game;
 
 public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
 {
+    public const string MenuThemeAssetId = "Audio/Forgotten_Treasures";
+    // Balance this recording before applying the user's Master/Music preferences.
+    public const float MenuThemeGain = .5f;
     private const int Width = 640, Height = 360;
     private readonly ApplicationFlow flow;
     private readonly GraphicsDeviceManager graphics;
@@ -18,6 +21,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
     private AppSettings? appliedInputSettings;
     private readonly MenuPointerInput pointer = new();
     private readonly PreviewAudio audio = new();
+    private LoopingMusic? menuMusic;
+    private bool musicWarningReported;
     private DisplaySettings appliedDisplay = new(1280, 720);
     private AudioChannel previewChannel = AudioChannel.Effects;
     private string? startupWarning;
@@ -31,7 +36,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         var store = new SettingsStore(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "PickersHollow", "settings.json"));
         var settings = store.Load(out startupWarning);
-        flow = new(settings, store.Save);
+        flow = new(settings, store.Save, playTitleIntro: true);
         graphics = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = Width * 2,
@@ -50,10 +55,12 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         var desktop = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode;
         desktopSize = (desktop.Width, desktop.Height);
         string contentRoot = Path.Combine(AppContext.BaseDirectory, "Content");
+        menuMusic = new(new SongMusicTrack(Services, contentRoot, MenuThemeAssetId));
         var catalog = FontCatalog.Load(Path.Combine(contentRoot, "Fonts", "fonts.json"));
         fonts = new FontLibrary(Services, contentRoot, catalog);
         renderer = new PixelRenderer(GraphicsDevice, Width, Height, fonts: fonts);
-        screens = new GameScreens(GraphicsDevice, flow.TitleCamera, fonts, flow.TitleSelector.Definition, flow.PlayerSprites);
+        screens = new GameScreens(GraphicsDevice, flow.TitleCamera, () => flow.TitleDescent, fonts,
+            flow.TitleSelector.Definition, flow.PlayerSprites);
     }
 
     protected override void Update(GameTime gameTime)
@@ -86,6 +93,13 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         }
         var audioSettings = flow.Screen == Screen.Options ? flow.Options.Presentation : flow.Options.Current;
         audio.SetVolume(audioSettings.Gain(previewChannel, IsActive));
+        menuMusic?.Update(flow.UsesTitleBackground && !flow.ExitRequested,
+            MenuThemeGain * audioSettings.Gain(AudioChannel.Music, IsActive));
+        if (!musicWarningReported && flow.Screen == Screen.Options && menuMusic?.Error is { } musicError)
+        {
+            flow.Options.Report(musicError);
+            musicWarningReported = true;
+        }
         screens?.SynchronizeRoom(flow.Room, flow.Npcs, flow.CommonVisitor);
         if (flow.ExitRequested) Exit();
         base.Update(gameTime);
@@ -155,6 +169,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
 
     protected override void UnloadContent()
     {
+        menuMusic?.Dispose();
+        menuMusic = null;
         ReleaseGraphics();
         base.UnloadContent();
     }
@@ -175,6 +191,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         {
             flow.Dispose();
             audio.Dispose();
+            menuMusic?.Dispose();
+            menuMusic = null;
             ReleaseGraphics();
         }
         base.Dispose(disposing);

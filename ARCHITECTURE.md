@@ -100,7 +100,7 @@ Required folders, relative to each project directory:
 
 The tests retain the dependency-free console runner. They reference Game's graphics-free Bootstrap classes for lifecycle tests without constructing PawnShopGame, a window, or graphics resources. Framework menu/input tests are under Tests/Framework. Run `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build` after building the solution; `dotnet test` does not execute this runner.
 
-`Game/Content/TitleScreen/title-screen-panorama.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Older Rummage Hollow artwork is preserved but no longer loaded. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport, uniformly scaled with point sampling. The graphics-free PanoramaCamera tracks normalized horizontal travel with 0.8-second SmoothStep easing and calculates source bounds for the actual viewport aspect ratio. ApplicationFlow advances it once using presentation time; gameplay cameras are unaffected. Title and Options UI remain on contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. Options is visible but input-captured during Sprout's outgoing float; UI is hidden on the return pan. Escape can cancel the flight and reverse the pan. Pause-menu Options does not pan. The room/overlays retain their 640x360 target and original code-authored placeholder content. Fonts now use the standard MGCB/SpriteFont workflow, with the content builder and local tool pinned to 3.8.4.1; existing PNG loading is unchanged. See README.md for resource ownership and the asset record. Build with `dotnet restore PawnShopSimulator.sln` and `dotnet build PawnShopSimulator.sln --no-restore`. Launch with `dotnet run --project PawnShop.Game/PawnShop.Game.csproj --no-build`.
+`PawnShop.Game/Content/TitleScreen/title-screen-panorama-day-to-dusk.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport with uniform scale and point sampling. On launch, Bootstrap's TitleIntro holds the camera in the daytime sky for a centered Torcalev Studios splash, with a one-second fade in, two-second hold and one-second fade out. ApplicationFlow advances the sequence once with presentation time, then starts the 3.2-second descent. Escape fades out the splash and reaches the ready menu within two seconds. The 0.8-second title fade begins 0.25 seconds before arrival. It captures menu input through the fade. PanoramaCamera uses the original 2106x747 band to calculate scale and the settled crop for the actual viewport. Its horizontal Options travel retains 0.8-second SmoothStep easing. Title and Options UI use contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. Options is visible during Sprout's outgoing float and accepts input on arrival. The return pan hides the menu until arrival. Escape can cancel the flight and reverse the pan. Pause-menu Options uses the room background. The room and overlays use a 640x360 target. Fonts use MGCB/SpriteFont, with the content builder and local tool pinned to 3.8.4.1. See README.md for resource ownership, asset provenance, and build and launch commands.
 
 ### Common NPC ownership — approved destination
 
@@ -219,8 +219,19 @@ other settings, without rewriting the original until Apply. The host rejects
 actual display dimensions below the minimum, including a smaller borderless desktop; manual window
 resizing is disabled and users change resolution through Options. UI/text size previews independently of world scale. Audio
 and dialogue speed have live previews; the Ink conversation draft also uses the
-text-speed setting. Authored audio remains future work. See README.md for controls
-and persistence behavior.
+text-speed setting. The application owns one Framework `LoopingMusic`/`SongMusicTrack`
+for the supplied Forgotten Treasures menu theme, balanced at 50% gain before
+Master/Music preferences. The existing MGCB pipeline compiles its preserved WAV
+source to an Ogg-backed Song. It plays during the startup intro, title and title-side
+Options, retaining position through their transitions. Character selection, gameplay
+and pause-side Options stop it; returning to title restarts it. Master/Music draft
+gain and focus mute apply live without restarting. The final 1.5 seconds fade down;
+after each repeat the first 1.5 seconds fade up, using a monotonic presentation
+clock reset by native track-start/repeat notifications rather than simulation time.
+Initial entry and screen departure have no playback fades. The track stops before
+its ContentManager is disposed on unload/shutdown; expected audio failures release
+it and report once in Options. Other authored audio remains future work. See README.md
+for controls and persistence behavior and [music verification](docs/VERIFICATION_MENU_MUSIC.md).
 
 `Framework/Input/KeyboardBindings` is an immutable mapping of six actions to
 primary/alternate `KeyBinding` pairs. `KeyboardInput` merges each pair before edge

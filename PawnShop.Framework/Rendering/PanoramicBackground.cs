@@ -19,11 +19,11 @@ public sealed class PanoramicBackground : IDisposable
         catch { texture.Dispose(); throw; }
     }
 
-    public void Draw(PanoramaCamera camera)
+    public void Draw(PanoramaCamera camera, int topExtension = 0, double descent = 1)
     {
         device.SetRenderTarget(null);
         var viewport = device.Viewport;
-        var view = camera.GetView(texture.Width, texture.Height, viewport.Width, viewport.Height);
+        var view = camera.GetView(texture.Width, texture.Height, viewport.Width, viewport.Height, topExtension, descent);
         device.Clear(Color.Black);
         batch.Begin(blendState: BlendState.Opaque, samplerState: SamplerState.PointClamp);
         // One uniform scale avoids rounding a source rectangle into a stretched image.

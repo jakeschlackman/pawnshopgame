@@ -50,3 +50,45 @@ No application launch, screenshots, Computer Use or computer-vision testing was
 performed, following agents.md. Visual pan smoothness, image/text composition,
 readability, mouse feel and actual window/display resizing are for the user to test.
 These pending manual checks do not block the implementation handoff.
+
+## Day-to-dusk launch intro
+
+The extended panorama starts in daylight, descends for four seconds, and then
+fades in the title UI over 0.8 seconds. Menu input is captured until the fade
+finishes. The original band sets the settled scale and crop for Main and Options.
+Returning to title during play opens the settled menu.
+
+- `dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false -p:OutputPath=bin/TitleIntroVerification/` passed with zero warnings and errors.
+- `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build -p:OutputPath=bin/TitleIntroVerification/` passed 70/70 checks. The two launch checks cover timing, input capture, focus loss, returning to title, bundled PNG dimensions, and the original crop and scale across aspect ratios.
+- SHA-256 matched between the new source PNG and the built game copy. Desktop pan smoothness and the fade remain for manual review.
+
+### Timing and cloud retouch
+
+The descent now takes 3.2 seconds. The 0.8-second fade begins 250 ms before
+arrival with an ease-out curve. The launch test checks partial opacity before
+arrival and menu input capture through the end of the fade.
+
+An ImageGen retouch reconnects the diagonal cloud banks and smooths the change
+from lavender to coral. The installed 2106×1494 PNG was inspected at native size
+around the join. Pixel comparison confined changes to rows 537–863 and matched
+the original dusk scene from row 864 down. The same build and test commands
+passed again with zero warnings or errors and 70/70 checks. In-game playback
+remains for manual review.
+
+### Torcalev Studios splash
+
+The supplied transparent logo is bundled byte-for-byte as
+`Content/TitleScreen/logo-torcalev-studios.png`. Bootstrap's TitleIntro owns the
+studio fade, hold, descent and skip clock. TitleScreen owns the texture and draws
+the centered splash over the stationary daytime sky. The normal sequence fades
+in over one second, holds for two seconds and fades out over one second before
+the existing descent. Escape fades the splash out over 0.8 seconds and reaches
+the ready menu within two seconds, including when pressed during descent or the
+game-menu fade. Repeated Escape preserves skip progress and focus loss freezes it.
+
+The recorded build and regression commands passed with zero warnings or errors
+and 71/71 checks. Tests cover splash timing, hold position, input capture,
+completion-frame consumption, six Escape timings, repeated cancellation, focus
+loss and application exit. The content check verifies the bundled 1254×1254 PNG
+and its SHA-256 against the supplied image. Logo size, visual fade and playback
+remain for manual review.

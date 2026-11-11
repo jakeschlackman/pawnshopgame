@@ -43,7 +43,7 @@ public sealed class PixelRenderer : IDisposable
         batch.Begin(samplerState: samplerState);
     }
 
-    public void Present(bool clearBackBuffer = true, Action? drawBackground = null)
+    public void Present(bool clearBackBuffer = true, Action? drawBackground = null, float opacity = 1)
     {
         batch.End();
         device.SetRenderTarget(null);
@@ -53,13 +53,14 @@ public sealed class PixelRenderer : IDisposable
         drawBackground?.Invoke();
         var destination = GetPresentationBounds();
         batch.Begin(samplerState: samplerState);
-        batch.Draw(canvas, destination, Color.White);
+        batch.Draw(canvas, destination, Color.White * opacity);
         batch.End();
     }
 
     // Call after Present: scale small pixel sprites once, directly from their source
     // sheet to the backbuffer, while preserving the canvas's contained UI coordinates.
-    public void DrawPixelOverlay(Texture2D texture, Rectangle source, Vector2 anchor, Vector2 pivot, float logicalScale, float rotation = 0)
+    public void DrawPixelOverlay(Texture2D texture, Rectangle source, Vector2 anchor, Vector2 pivot, float logicalScale,
+        float rotation = 0, float opacity = 1)
     {
         var destination = GetPresentationBounds();
         float outputScale = (float)destination.Width / Width;
@@ -70,7 +71,7 @@ public sealed class PixelRenderer : IDisposable
         position = new Vector2(MathF.Round(position.X), MathF.Round(position.Y));
         position += offset;
         batch.Begin(samplerState: SamplerState.PointClamp);
-        batch.Draw(texture, position, source, Color.White, rotation, pivot,
+        batch.Draw(texture, position, source, Color.White * opacity, rotation, pivot,
             logicalScale * outputScale, SpriteEffects.None, 0);
         batch.End();
     }

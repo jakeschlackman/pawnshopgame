@@ -12,6 +12,9 @@ namespace PawnShop.Game.Bootstrap;
 // Sole session and simulation owner. UI requests pass here before room input.
 public sealed class ApplicationFlow : IDisposable
 {
+    public static readonly TimeSpan TitlePanDuration = TitleIntro.PanDuration;
+    public static readonly TimeSpan TitleFadeDuration = TitleIntro.MenuFadeDuration;
+    private readonly TitleIntro titleIntro;
     private GameSession? session;
     private Screen confirmationOrigin;
     private bool disposed;
@@ -35,10 +38,15 @@ public sealed class ApplicationFlow : IDisposable
     public DialoguePresenter? Dialogue { get; private set; }
     public PanoramaCamera TitleCamera { get; } = new();
     public bool UsesTitleBackground => session is null && Screen is Screen.Title or Screen.Options;
-    public bool TitleUiVisible => UsesTitleBackground && !TitleCamera.IsMoving;
+    public bool TitleIntroPlaying => titleIntro.IsPlaying;
+    public double TitleDescent => titleIntro.Descent;
+    public float StudioLogoOpacity => titleIntro.StudioOpacity;
+    public float TitleMenuOpacity => titleIntro.MenuOpacity;
+    public bool TitleUiVisible => UsesTitleBackground && !TitleCamera.IsMoving && TitleMenuOpacity > 0;
     public ApplicationFlow(AppSettings? settings = null, Action<AppSettings>? saveSettings = null, NpcContentCatalog? conversations = null,
-        CommonNpcCatalog? commonNpcs = null, TitleSayings? titleSayings = null)
+        CommonNpcCatalog? commonNpcs = null, TitleSayings? titleSayings = null, bool playTitleIntro = false)
     {
+        titleIntro = new(playTitleIntro);
         TitleSaying = (titleSayings ?? TitleSayings.Load(
             Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-sayings.json"), new Random())).Next();
         Options = new(settings ?? new(), saveSettings, TitleSaying);
@@ -70,6 +78,13 @@ public sealed class ApplicationFlow : IDisposable
         if (delta < TimeSpan.Zero) throw new ArgumentOutOfRangeException(nameof(delta));
         if (ExitRequested) return;
         PresentationTime += delta;
+        if (TitleIntroPlaying)
+        {
+            if (!active) return;
+            titleIntro.Update(delta, input.Cancel);
+            TitleSelector.Update(delta);
+            return; // Consume input through the end of the fade.
+        }
         if (OptionsFlight.IsBusy)
         {
             if (!active) return;

@@ -14,12 +14,13 @@ internal sealed class GameScreens : IDisposable
     private readonly PlayerSpriteRenderer players;
     private RoomScreen? room;
 
-    public GameScreens(GraphicsDevice device, PanoramaCamera camera, FontLibrary fonts, SpriteSheetDefinition titleSheet, PlayerSpriteCatalog playerCatalog)
+    public GameScreens(GraphicsDevice device, PanoramaCamera camera, Func<double> titleDescent, FontLibrary fonts,
+        SpriteSheetDefinition titleSheet, PlayerSpriteCatalog playerCatalog)
     {
         this.device = device;
         try
         {
-            title = new(device, camera, fonts, titleSheet);
+            title = new(device, camera, titleDescent, fonts, titleSheet);
             options = new(device, fonts);
             players = new(device, playerCatalog);
         }
@@ -53,13 +54,19 @@ internal sealed class GameScreens : IDisposable
                 DrawOptionsFlight(flow);
                 return;
             }
-            if (!flow.TitleUiVisible) { title.DrawBackground(); return; }
+            if (!flow.TitleUiVisible)
+            {
+                if (flow.StudioLogoOpacity > 0) title.DrawStudioLogo(flow.StudioLogoOpacity);
+                else title.DrawBackground();
+                return;
+            }
             if (flow.Screen == Screen.Options)
             {
                 options.Draw(flow.Options, title.DrawBackground);
                 if (!flow.Options.HasModal) title.DrawSelector(flow.TitleSelector, options.SelectorAnchor(flow.Options));
             }
-            else if (flow.Menu is { } titleMenu) title.Draw(titleMenu, flow.Options.Current.UiScale / 100f, flow.TitleSelector, flow.TitleSaying);
+            else if (flow.Menu is { } titleMenu)
+                title.Draw(titleMenu, flow.Options.Current.UiScale / 100f, flow.TitleSelector, flow.TitleSaying, opacity: flow.TitleMenuOpacity);
             return;
         }
         if (flow.Screen == Screen.Options)

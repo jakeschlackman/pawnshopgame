@@ -1,9 +1,15 @@
-# Fonts use MonoGame's standard content pipeline. Existing PNGs stay direct-loaded.
+# Fonts and music use MonoGame's standard content pipeline. Existing PNGs stay direct-loaded.
 /outputDir:bin/$(Platform)
 /intermediateDir:obj/$(Platform)
 /platform:DesktopGL
 /profile:Reach
 /compress:False
+
+#begin Audio/Forgotten_Treasures.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Forgotten_Treasures.wav
 
 #begin Fonts/PixelifySans-Bold.spritefont
 /importer:FontDescriptionImporter

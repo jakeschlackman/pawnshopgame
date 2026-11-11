@@ -1,6 +1,6 @@
 # Picker's Hollow title artwork
 
-## Active panorama
+## Original panorama
 
 `title-screen-panorama.png` is an unmodified copy of the user-supplied
 `pickers-hollow-panorama-single-pass.png`, imported on 2026-10-31. The source file
@@ -11,14 +11,23 @@ asset is asserted. SHA-256 of source and imported copy:
 55D058617655602B5545B581ECB22949B527F55EEC3559113E04233D29C76DDE
 ```
 
-The application loads this single background using Texture2D.FromStream. Build
-and publish copy it via the existing `Content/TitleScreen/*.png` item; no content
-compiler or image transformation is involved. The background uses a uniform
-cover scale with PointClamp sampling. The visible source width/height and maximum
-horizontal offset are calculated from the current viewport. Main shows the left
-edge, Options shows the right edge, with a 0.8-second SmoothStep pan between them.
-For a viewport wider than the panorama's aspect ratio, the full source width is
-already visible and the image is cropped vertically.
+## Active panorama
+
+`title-screen-panorama-day-to-dusk.png` is **2106×1494**. The upper 747 rows
+extend the original with ImageGen artwork. A targeted ImageGen retouch connects
+the diagonal cloud banks across the join. The dusk framing still starts at
+`(0, 747)`. Rows 537–863 contain the retouch and its feathered edges. The
+original dusk pixels from row 864 down were verified in place.
+
+The application loads the extended PNG using Texture2D.FromStream. Build and
+publish copy it via the existing `Content/TitleScreen/*.png` item. The background
+uses point sampling and a uniform cover scale based on the original band and the
+current viewport. On launch, the camera descends for 3.2 seconds from the top of
+the sky to the original crop. The 0.8-second fade starts 0.25 seconds before
+arrival and reveals the logo, menu and selector. Main shows the left edge and Options
+shows the right edge, with a 0.8-second SmoothStep pan between them. For a viewport
+wider than the original band, the full width is already visible and the band is
+cropped vertically.
 
 The title logo, menu rows and Options controls are separate UI. The Options panel is visible during outgoing flight, with input captured until arrival;
 UI is hidden on the return pan. Back/Escape pans to Main. The title-side
@@ -29,6 +38,20 @@ adapt to display changes without altering the image or gameplay camera.
 
 Active title menu text uses Silkscreen Regular; help/badge and Options text use
 Pixelify Sans Bold through `Content/Fonts/fonts.json`. The title logo below remains an image.
+
+## Studio splash
+
+`logo-torcalev-studios.png` is a byte-identical copy of the studio-owned
+`Torcalev Tiger Bomber Pixel Emblem.png` supplied by the user. Dimensions are
+**1254×1254**, RGBA with transparency. SHA-256 is
+`FDA003D1324FC428EA05068FF4C077C69B4A35598FF6ACE59612B78D9CE9845D`.
+
+The splash is centered in a 648×648 rectangle at (636, 216) on the title UI
+canvas. It fades in for one second, holds for two seconds and fades out for
+one second while the camera stays at the top. The normal descent follows.
+Escape during the intro fades the splash out over 0.8 seconds and finishes the
+descent and menu reveal within two seconds. Focus loss freezes the sequence.
+TitleScreen loads and disposes the texture with the other title artwork.
 
 ## Active title logo
 

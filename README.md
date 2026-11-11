@@ -220,9 +220,8 @@ The NPC and furniture remain static, and M02's scale lab is still pending.
 
 ## Content and title screen
 
-The Picker's Hollow title uses `Content/TitleScreen/title-screen-panorama.png`,
-an unmodified 2106x747 copy of the supplied single-pass illustration. The older
-Rummage Hollow artwork remains preserved but is no longer loaded. The supplied
+The Picker's Hollow title uses `Content/TitleScreen/title-screen-panorama-day-to-dusk.png`,
+which adds 747 rows of daytime sky above the supplied 2106x747 illustration. The supplied
 `logo-pickers-hollow.png` replaces the title text as an independent transparent
 overlay; the main menu uses Silkscreen, title badge/help uses Pixelify Sans Bold,
 and Options uses Jersey 25 for header tabs and Atkinson Hyperlegible for other
@@ -232,7 +231,14 @@ Normal build/publish copies PNGs beside the executable; runtime resolves them
 relative to the executable. PNG loading is unchanged; fonts compile to XNB using
 the standard MonoGame content pipeline in `Content/Content.mgcb`.
 
-The title starts at the panorama's left edge. Click Options (or use keyboard
+At launch the camera stays in the daytime sky while the centered Torcalev Studios
+logo fades in over one second, holds for two seconds, and fades out over one second.
+It then descends for 3.2 seconds to the dusk framing. The game logo and menu begin
+fading in 0.25 seconds before arrival. The menu accepts input after the 0.8-second
+fade. Escape during the intro fades the studio logo out over 0.8 seconds and
+reaches the ready menu within two seconds. Returning to title during play opens
+the settled menu.
+Click Options (or use keyboard
 confirmation) to pan to the right edge over 0.8 seconds with SmoothStep easing.
 Options appears during Sprout's flight and accepts input after arrival. Back/Escape hides Options and pans left; Escape
 can also reverse an outgoing pan. Repeated navigation does not restart the camera.
@@ -240,8 +246,8 @@ Controls cannot activate during travel. Options opened from the pause
 menu does not use this title animation and keeps the session paused.
 
 The background fills the actual viewport using a uniform cover scale, without
-stretching or revealing outside pixels. Its visible source area and right limit
-are recomputed from the image and viewport dimensions, including during resizing.
+stretching or revealing outside pixels. The original 2106x747 band determines the
+scale and settled crop, so the descent preserves the title and Options framing.
 Very wide viewports that already show the entire image width have no horizontal
 travel and crop vertically instead. Point sampling preserves sharp pixel edges.
 The title and Options UI retain separate, contained 1920x1080 and 1280x720 canvases;
@@ -311,6 +317,25 @@ setting back to the main menu's Options entry over the same 0.8-second pan.
 His pointing animation continues without restarting, and Options remains selected
 on arrival. Return travel captures input and freezes with focus loss.
 All frames are bundled locally; the game never calls PixelLab.
+
+## Menu music
+
+The supplied **Forgotten Treasures** theme starts with the launch intro and
+loops across the main menu and title-side Options without restarting during travel.
+Each loop fades out over its final 1.5 seconds and fades in over the next pass's
+first 1.5 seconds. There are no entrance/departure fades. Character selection and
+gameplay stop the theme, including Options opened from pause; returning to title
+starts it again.
+
+The theme's base gain is 50% before the Master/Music sliders, reducing its playback
+level without changing saved preferences. Master and Music sliders preview immediately. Apply keeps their values; discarding
+edits restores the saved gain. Mute When Unfocused silences playback while its audio
+cursor continues, so focus changes do not restart the theme.
+
+The unmodified 24-bit stereo WAV lives under `Content/Audio`. The existing MGCB
+build compiles it with `WavImporter`/`SongProcessor` into an Ogg stream and XNB;
+only these compiled files ship. No additional dependencies or runtime conversion
+are required. See [source provenance, checks and listening checklist](docs/VERIFICATION_MENU_MUSIC.md).
 
 ## Central font catalog
 

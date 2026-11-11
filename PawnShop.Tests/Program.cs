@@ -6,6 +6,10 @@ if (args.Length > 0 && args[0] == "--assets") return PlayerAssets.Run(args[1..],
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
+    ("Menu music survives title/Options travel, stops outside title and releases once", RegressionTests.MenuMusicNavigation),
+    ("Menu music previews saved/draft gain and focus mute without restarting; failures release once", RegressionTests.MenuMusicSettings),
+    ("Theme source is preserved and the compiled Ogg music stream reaches output", RegressionTests.MenuMusicContent),
+    ("Theme fades only at repeat boundaries using the audio cursor and preserves live gain", RegressionTests.MenuMusicLoopFades),
     ("Restore Defaults resets only the active tab and preserves other saved and pending settings", RegressionTests.OptionsTabDefaults),
     ("Title sayings validate JSON, select once per startup and match the Comfort preview", RegressionTests.TitleSayingsContent),
     ("Dirty Options require explicit discard, preserve editing and block underlying input", RegressionTests.OptionsDirtyConfirmation),
@@ -39,6 +43,9 @@ var tests = new (string Name, Action Run)[]
     ("Bindings require key release and reject duplicate actions", RegressionTests.Bindings),
     ("Audio gain, text speed and configurable focus pause obey settings", RegressionTests.Preferences),
     ("Failed settings writes retain current preferences and revert display", RegressionTests.SettingsFailure),
+    ("Title intro pans, fades, gates input and plays only at launch", RegressionTests.TitleIntroSequence),
+    ("Studio splash Escape fades out and descends quickly without restarting or activating the menu", RegressionTests.StudioIntroSkip),
+    ("Day-to-dusk art is bundled and the intro lands on the original title framing", RegressionTests.TitleIntroFraming),
     ("Panorama easing is time based, reaches endpoints and reverses without jumps", RegressionTests.PanoramaTiming),
     ("Panorama cover crops stay inside the image across aspect ratios and resizing", RegressionTests.PanoramaGeometry),
     ("Title navigation gates hidden controls, reverses and leaves paused options alone", RegressionTests.PanoramaNavigation),
