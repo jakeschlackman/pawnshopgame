@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PawnShop.Characters.Player.Create;
 using PawnShop.Core.World;
 using PawnShop.Framework.Rendering;
 using PawnShop.Game.Bootstrap;
@@ -54,6 +55,20 @@ internal sealed class GameScreens : IDisposable
                 DrawOptionsFlight(flow);
                 return;
             }
+            if (flow.Screen == Screen.CharacterSelect && flow.Menu is { } selectionMenu)
+            {
+                renderer.TextScale = flow.Options.Current.UiScale / 100f;
+                renderer.Begin(Color.Transparent);
+                if (!flow.CharacterSelectionFlying)
+                    PlayerModel_SelectionScreen.Draw(renderer, selectionMenu, players.Draw);
+                renderer.Present(clearBackBuffer: false, drawBackground: title.DrawBackground);
+                var departure = title.SelectorAnchor(renderer, 0, "New Game", renderer.TextScale);
+                var anchor = flow.CharacterSelectionFlying
+                    ? CharacterSelectionLayout.FlightAnchor(departure, flow.TitleCamera.Position, renderer.TextScale)
+                    : CharacterSelectionLayout.SelectorAnchor(selectionMenu.SelectedIndex, renderer.TextScale);
+                title.DrawSelector(flow.TitleSelector, anchor, target: renderer);
+                return;
+            }
             if (!flow.TitleUiVisible)
             {
                 if (flow.StudioLogoOpacity > 0) title.DrawStudioLogo(flow.StudioLogoOpacity);
@@ -80,8 +95,7 @@ internal sealed class GameScreens : IDisposable
             room.Draw(renderer, view, player, flow.Options.Current, flow.SelectedNpcId, flow.NpcFrames, flow.PlayerFrame);
         if (flow.Menu is { } menu)
         {
-            if (flow.Screen == Screen.CharacterSelect) CharacterSelectionScreen.Draw(renderer, menu, players);
-            else MenuScreen.Draw(renderer, flow, menu);
+            MenuScreen.Draw(renderer, flow, menu);
         }
         if (flow.Dialogue is { } dialogue) DialogueScreen.Draw(renderer, dialogue);
         renderer.Text("PROTOTYPE - NO SAVING", 18, 341, new Color(173, 184, 172));

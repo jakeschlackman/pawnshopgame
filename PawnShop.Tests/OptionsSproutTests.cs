@@ -19,12 +19,12 @@ internal static partial class RegressionTests
         app.Update(default, TimeSpan.Zero);
         Check(app.Screen == Screen.Options && app.OptionsFlight.Phase == OptionsSproutPhase.Flying);
         Check(app.TitleSelector.AnimationName == "Idle" && app.TitleCamera.Position == 0);
-        app.Update(new(Right: true, Confirm: true, NextTab: true), TimeSpan.FromMilliseconds(400));
+        app.Update(new(Right: true, Confirm: true, NextTab: true), PanoramaCamera.TransitionDuration / 2);
         Check(app.OptionsFlight.Progress == .5f && app.TitleCamera.Position == .5);
         Check(app.Options.Draft == app.Options.Current && app.Options.Selected == 0 && app.Options.Tab == 0);
         Check(app.TitleSelector.AnimationName == "Idle" && app.TitleSelector.FrameIndex is >= 0 and <= 12);
         Check(MenuPointerInput.HitTest(app, 100, 170, 1280, 720) == default);
-        app.Update(new(Confirm: true, Right: true), TimeSpan.FromMilliseconds(400));
+        app.Update(new(Confirm: true, Right: true), PanoramaCamera.TransitionDuration / 2);
         Check(app.OptionsFlight.Progress == 1 && app.TitleCamera.Position == 1);
         Check(app.OptionsFlight.Phase == OptionsSproutPhase.Arrived && !app.TitleInteractionPlaying);
         Check(app.TitleSelector.AnimationName == "Idle");
@@ -108,11 +108,11 @@ internal static partial class RegressionTests
             Check(MenuPointerInput.HitTest(app, titleOptions.X, titleOptions.Y, 1920, 1080) == default);
             app.Update(new(Cancel: true, Confirm: true, Down: true), TimeSpan.FromSeconds(30), active: false);
             Check(app.OptionsFlight.Progress == 0 && app.TitleCamera.Position == 1 && app.TitleSelector.FrameIndex == pointingFrame);
-            app.Update(new(Cancel: true, Confirm: true, Down: true, TabIndex: 2), TimeSpan.FromMilliseconds(400));
+            app.Update(new(Cancel: true, Confirm: true, Down: true, TabIndex: 2), PanoramaCamera.TransitionDuration / 2);
             Check(app.OptionsFlight.Progress == .5f && app.TitleCamera.Position == .5 && app.LiveSessions == 0);
             Check(app.OptionsFlight.GetAnchor(menuAnchor, firstOption) == Vector2.Lerp(source, menuAnchor, .5f));
             Check(app.Menu.Selected.Command == MenuCommand.Settings && app.Options.Tab == 3);
-            app.Update(new(Confirm: true, Down: true), TimeSpan.FromMilliseconds(400));
+            app.Update(new(Confirm: true, Down: true), PanoramaCamera.TransitionDuration / 2);
             Check(app.OptionsFlight.Phase == OptionsSproutPhase.Arrived && !app.TitleInteractionPlaying);
             Check(app.TitleCamera.Position == 0 && app.TitleUiVisible && app.LiveSessions == 0);
             Check(app.OptionsFlight.GetAnchor(menuAnchor, firstOption) == menuAnchor && app.Menu.SelectedIndex == 2);

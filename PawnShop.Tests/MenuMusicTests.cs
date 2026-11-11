@@ -10,7 +10,7 @@ internal static partial class RegressionTests
     private static void SynchronizeMusic(ApplicationFlow app, LoopingMusic music, bool active = true)
     {
         var settings = app.Screen == Screen.Options ? app.Options.Presentation : app.Options.Current;
-        music.Update(app.UsesTitleBackground && !app.ExitRequested,
+        music.Update(app.PlaysTitleMusic,
             AudioPlayback.MenuThemeGain * settings.Gain(AudioChannel.Music, active));
     }
 
@@ -34,29 +34,36 @@ internal static partial class RegressionTests
         Check(track.Plays == 1 && track.Stops == 0);
 
         app.Update(new(SelectionIndex: 0), TimeSpan.Zero);
-        Confirm(app);
+        app.Update(new(Confirm: true), TimeSpan.Zero);
         SynchronizeMusic(app, music);
-        Check(app.Screen == Screen.CharacterSelect && track.Stops == 1 && !track.Playing);
+        Check(app.CharacterSelectionFlying && track.Plays == 1 && track.Stops == 0 && track.Playing);
+        app.Update(default, PawnShop.Framework.Rendering.PanoramaCamera.TransitionDuration);
+        SynchronizeMusic(app, music);
+        Check(app.Screen == Screen.CharacterSelect && track.Plays == 1 && track.Stops == 0 && track.Playing);
+        SynchronizeMusic(app, music, active: false);
+        Check(track.Volume == 0 && track.Playing && track.Stops == 0);
+        SynchronizeMusic(app, music);
+        Check(track.Volume > 0 && track.Plays == 1);
         Back(app);
         SynchronizeMusic(app, music);
-        Check(track.Plays == 2 && track.Playing);
+        Check(track.Plays == 1 && track.Stops == 0 && track.Playing);
         Begin(app);
         SynchronizeMusic(app, music);
-        Check(app.Screen == Screen.Room && track.Stops == 2 && !track.Playing);
+        Check(app.Screen == Screen.Room && track.Stops == 1 && !track.Playing);
         Back(app);
         app.Update(new(SelectionIndex: 3, Confirm: true), TimeSpan.Zero);
         Check(app.Screen == Screen.Options && app.LiveSessions == 1);
         SynchronizeMusic(app, music);
-        Check(track.Plays == 2 && !track.Playing, "Pause-menu Options must not start title music.");
+        Check(track.Plays == 1 && !track.Playing, "Pause-menu Options must not start title music.");
         Back(app);
         Back(app); // Resume before the normal return-to-title confirmation.
         ReturnPrompt(app);
         Discard(app);
         SynchronizeMusic(app, music);
-        Check(app.Screen == Screen.Title && track.Plays == 3 && track.Playing);
+        Check(app.Screen == Screen.Title && track.Plays == 2 && track.Playing);
         app.RequestExit();
         SynchronizeMusic(app, music);
-        Check(track.Stops == 3 && !track.Playing);
+        Check(track.Stops == 2 && !track.Playing);
         music.Dispose();
         music.Dispose();
         Check(track.Disposals == 1);

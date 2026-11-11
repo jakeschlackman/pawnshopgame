@@ -95,7 +95,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         bool tabClick = flow.Options.TakeTabClick();
         bool sliderClick = flow.Options.TakeSliderClick();
         bool dropdownClick = flow.Options.TakeDropdownClick();
-        audio?.Update(gameTime.ElapsedGameTime, flow.UsesTitleBackground && !flow.ExitRequested, audioSettings.AudioMix, IsActive,
+        audio?.Update(gameTime.ElapsedGameTime, flow.PlaysTitleMusic, audioSettings.AudioMix, IsActive,
             checkboxState, buttonClick, tabClick, sliderClick, dropdownClick);
         if (flow.Screen == Screen.Options && audio?.TakeError() is { } audioError) flow.Options.Report(audioError);
         screens?.SynchronizeRoom(flow.Room, flow.Npcs, flow.CommonVisitor);

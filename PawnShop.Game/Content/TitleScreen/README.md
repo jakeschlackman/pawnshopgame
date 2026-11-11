@@ -13,6 +13,37 @@ asset is asserted. SHA-256 of source and imported copy:
 
 ## Active panorama
 
+`title-screen-panorama-day-to-dusk-forest.png` is the active **1902x827**
+native ImageGen output. The left 736 pixels add a screen of wooded city green
+space, with a grassy clearing, moss, roots, autumn trees and glimpses of rooftops.
+The road stays on the town side. The sky and foliage are generated as one
+continuous image; the town is a reference-based redraw, not an exact pixel copy.
+The previous source below remains unchanged. The selected output is used without
+manual stitching or resampling. SHA-256:
+
+```text
+65A963D4AE159BE57CC444609377F909385D425B2EFE9DEC74DCB6F14A578011
+```
+
+The camera frames the 1166x413 town band starting at (736,414). Position 0 is
+Main, -1 is the left forest and +1 is Options. Cover scale uses the town band,
+so adding width does not zoom out the title. At 16:9 the forest is just over one
+viewport wide; ultrawide screens can include adjacent town scenery. New Game
+immediately floats Sprout to Male during a 1.1-second left pan, then shows the
+two original player models on a transparent UI canvas with translucent cards.
+Back reverses to Main. Travel freezes while unfocused and consumes arrival input;
+there is no gameplay session until a model is confirmed. Sprout uses the unchanged
+pointing loop throughout and follows Male/Female/Back after arrival. Menu music
+continues through selection and Back, stopping when gameplay starts.
+
+The existing root PNG copy rule packages this asset. The exact final built-in
+ImageGen prompt, input/output hashes, native framing and rejected road version
+are recorded under [Sources/ForestPanorama](Sources/ForestPanorama/generation.json).
+Sources are not copied to runtime output. Raw art was inspected; in-game pan,
+seams, model placement and readability remain user acceptance checks.
+
+## Preserved day-to-dusk source
+
 `title-screen-panorama-day-to-dusk.png` is **2106×1494**. The upper 747 rows
 extend the original with ImageGen artwork. A targeted ImageGen retouch connects
 the diagonal cloud banks across the join. The dusk framing still starts at
@@ -103,7 +134,7 @@ into the same numbered cell plus (10,16), leaving all other pixels transparent.
 Only root title PNGs/JSON are copied to output; source frames are archival inputs.
 The game loads bundled files only; no runtime PixelLab/network connection exists.
 
-Non-Options title confirmations play the full 0.8-second reaction before executing an enabled
+Continue/Exit title confirmations play the full 0.8-second reaction before executing an enabled
 command. Disabled entries react without executing. Selection/repeated activation
 is captured, Escape cancels, and focus loss pauses pending feedback. Ordinary
 window-close requests remain immediate on title. Textures are loaded once with
@@ -139,7 +170,7 @@ not a new character body-size standard.
 
 The flight exports above are preserved but are no longer used by Options.
 Options finishes the current Idle cycle, then floats Sprout upright to the first
-Display field along a SmoothStep path over the 0.8-second panorama pan. The same
+Display field along a SmoothStep path over the 1.1-second panorama pan. The same
 pointing loop continues throughout travel and arrival; there is no rotation,
 takeoff, jet animation or landing transition. Input unlocks after arrival.
 Focus loss freezes travel; Escape cancels and returns to title. Other title

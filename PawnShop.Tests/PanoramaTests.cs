@@ -90,14 +90,14 @@ internal static partial class RegressionTests
     internal static void TitleIntroFraming()
     {
         using var panorama = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen",
-            "title-screen-panorama-day-to-dusk.png"));
+            "title-screen-panorama-day-to-dusk-forest.png"));
         Span<byte> header = stackalloc byte[24];
         panorama.ReadExactly(header);
         Check(header.Slice(12, 4).SequenceEqual("IHDR"u8));
         int imageWidth = BinaryPrimitives.ReadInt32BigEndian(header.Slice(16, 4));
         int imageHeight = BinaryPrimitives.ReadInt32BigEndian(header.Slice(20, 4));
-        const int skyHeight = 747, originalHeight = 747;
-        Check(imageWidth == 2106 && imageHeight == skyHeight + originalHeight);
+        const int skyHeight = 414, originalHeight = 413, forestWidth = 736, townWidth = 1166;
+        Check(imageWidth == forestWidth + townWidth && imageHeight == skyHeight + originalHeight);
 
         byte[] studio = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "logo-torcalev-studios.png"));
         Check(BinaryPrimitives.ReadInt32BigEndian(studio.AsSpan(16, 4)) == 1254);
@@ -109,19 +109,19 @@ internal static partial class RegressionTests
         var sizes = AppSettings.Resolutions.Concat(new[] { (800, 600), (720, 1280), (5120, 1440) });
         foreach (var (width, height) in sizes)
         {
-            var original = camera.GetView(imageWidth, originalHeight, width, height);
-            var opening = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, descent: 0);
-            var middle = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, descent: .5);
-            var settled = camera.GetView(imageWidth, imageHeight, width, height, skyHeight);
-            Check(opening == original with { Y = 0 } && opening.Height <= skyHeight);
-            Check(middle == original with { Y = (original.Y + skyHeight) / 2 });
-            Check(settled == original with { Y = original.Y + skyHeight });
+            var original = camera.GetView(townWidth, originalHeight, width, height);
+            var opening = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, descent: 0, leftExtension: forestWidth);
+            var middle = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, descent: .5, leftExtension: forestWidth);
+            var settled = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, leftExtension: forestWidth);
+            Check(opening == original with { X = original.X + forestWidth, Y = 0 } && opening.Height <= skyHeight);
+            Check(middle == original with { X = original.X + forestWidth, Y = (original.Y + skyHeight) / 2 });
+            Check(settled == original with { X = original.X + forestWidth, Y = original.Y + skyHeight });
 
             camera.NavigateToOptions();
             camera.Update(PanoramaCamera.TransitionDuration);
-            original = camera.GetView(imageWidth, originalHeight, width, height);
-            settled = camera.GetView(imageWidth, imageHeight, width, height, skyHeight);
-            Check(settled == original with { Y = original.Y + skyHeight });
+            original = camera.GetView(townWidth, originalHeight, width, height);
+            settled = camera.GetView(imageWidth, imageHeight, width, height, skyHeight, leftExtension: forestWidth);
+            Check(settled == original with { X = original.X + forestWidth, Y = original.Y + skyHeight });
             camera.NavigateToMainMenu();
             camera.Update(PanoramaCamera.TransitionDuration);
         }
@@ -135,13 +135,13 @@ internal static partial class RegressionTests
             Check(camera.Position == 0 && !camera.IsMoving);
             camera.NavigateToOptions();
             var delta = TimeSpan.FromSeconds(1.0 / rate);
-            int frames = (int)Math.Round(.4 * rate);
+            int frames = (int)Math.Round(PanoramaCamera.TransitionDuration.TotalSeconds / 2 * rate);
             for (int i = 0; i < frames; i++)
             {
                 camera.Update(delta);
                 camera.NavigateToOptions(); // Must not restart repeated navigation.
             }
-            double t = delta.TotalSeconds * frames / .8;
+            double t = delta.TotalSeconds * frames / PanoramaCamera.TransitionDuration.TotalSeconds;
             Check(Math.Abs(camera.Position - t * t * (3 - 2 * t)) < 1e-9);
             camera.Update(TimeSpan.FromSeconds(1));
             Check(camera.Position == 1 && !camera.IsMoving);
@@ -160,9 +160,9 @@ internal static partial class RegressionTests
         }
         var ease = new PanoramaCamera();
         ease.NavigateToOptions();
-        ease.Update(TimeSpan.FromSeconds(.2));
+        ease.Update(PanoramaCamera.TransitionDuration / 4);
         Check(Math.Abs(ease.Position - .15625) < 1e-9, "Expected SmoothStep rather than linear movement.");
-        ease.Update(TimeSpan.FromSeconds(.2));
+        ease.Update(PanoramaCamera.TransitionDuration / 4);
         Check(Math.Abs(ease.Position - .5) < 1e-9);
     }
 
@@ -199,6 +199,48 @@ internal static partial class RegressionTests
         catch (ArgumentOutOfRangeException) { }
     }
 
+    internal static void ForestPanoramaGeometry()
+    {
+        const int forest = 736, sky = 414, townWidth = 1166, townHeight = 413;
+        var sizes = AppSettings.Resolutions.Concat(new[] { (800, 600), (720, 1280), (5120, 1440), (1, 1) });
+        foreach (var (width, height) in sizes)
+        {
+            var camera = new PanoramaCamera();
+            var town = camera.GetView(townWidth, townHeight, width, height);
+            var main = camera.GetView(forest + townWidth, sky + townHeight, width, height, sky, leftExtension: forest);
+            Check(main == town with { X = forest, Y = town.Y + sky });
+            camera.NavigateToCharacterSelection();
+            camera.Update(PanoramaCamera.TransitionDuration / 2);
+            camera.NavigateToCharacterSelection(); // Repeated target requests preserve progress.
+            var halfway = camera.GetView(forest + townWidth, sky + townHeight, width, height, sky, leftExtension: forest);
+            Check(camera.Position == -.5 && halfway.X == forest / 2.0 && halfway.Width == main.Width);
+            camera.Update(PanoramaCamera.TransitionDuration / 2);
+            var selection = camera.GetView(forest + townWidth, sky + townHeight, width, height, sky, leftExtension: forest);
+            Check(camera.Position == -1 && selection == main with { X = 0 });
+            Check(selection.X >= 0 && selection.X + selection.Width <= forest + townWidth);
+            Check(Math.Abs(selection.Width * selection.Scale - width) < 1e-8);
+            Check(Math.Abs(selection.Height * selection.Scale - height) < 1e-8);
+            if ((double)width / height <= 16.0 / 9)
+                Check(selection.Width <= forest, "Standard screens must fit entirely within the forest extension.");
+            camera.NavigateToMainMenu();
+            camera.Update(PanoramaCamera.TransitionDuration);
+            Check(camera.GetView(forest + townWidth, sky + townHeight, width, height, sky, leftExtension: forest) == main);
+            camera.NavigateToOptions();
+            camera.Update(PanoramaCamera.TransitionDuration);
+            var options = camera.GetView(forest + townWidth, sky + townHeight, width, height, sky, leftExtension: forest);
+            Check(Math.Abs(options.X + options.Width - (forest + townWidth)) < 1e-8);
+        }
+        string root = Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen");
+        var active = File.ReadAllBytes(Path.Combine(root, "title-screen-panorama-day-to-dusk-forest.png"));
+        Check(Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(active)) ==
+            "65A963D4AE159BE57CC444609377F909385D425B2EFE9DEC74DCB6F14A578011");
+        var previous = File.ReadAllBytes(Path.Combine(root, "title-screen-panorama-day-to-dusk.png"));
+        Check(Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(previous)) ==
+            "596C4EE3E8BBA47449D00475B9DFBFC3D2D5A5C2D575104B6937E6E97A251ED2");
+        try { new PanoramaCamera().GetView(1902, 827, 1280, 720, leftExtension: 1902); throw new Exception("Expected extension validation"); }
+        catch (ArgumentOutOfRangeException) { }
+    }
+
     internal static void PanoramaNavigation()
     {
         using var app = new ApplicationFlow();
@@ -212,7 +254,7 @@ internal static partial class RegressionTests
         Check(app.Screen == Screen.Title && app.TitleCamera.Position == before && !app.TitleUiVisible);
         app.Update(new(Confirm: true, Interact: true), TimeSpan.FromSeconds(.1));
         Check(app.LiveSessions == 0 && app.TitleCamera.Position < before);
-        app.Update(default, TimeSpan.FromSeconds(.7));
+        app.Update(default, PanoramaCamera.TransitionDuration);
         Check(app.TitleUiVisible && app.TitleCamera.Position == 0);
         OpenOptions(app);
         app.Update(default, PanoramaCamera.TransitionDuration);

@@ -19,6 +19,16 @@ public sealed class PixelRenderer : IDisposable
     public int Width { get; }
     public int Height { get; }
     public float TextScale { get; set; } = 1;
+    public float OutputScale => (float)GetPresentationBounds().Width / Width;
+
+    // Keep overlays continuous when moving between canvases with different scaling policies.
+    public Vector2 MapPointTo(PixelRenderer target, Vector2 point)
+    {
+        var sourceBounds = GetPresentationBounds();
+        var targetBounds = target.GetPresentationBounds();
+        return (new Vector2(sourceBounds.X - targetBounds.X, sourceBounds.Y - targetBounds.Y)
+            + point * OutputScale) / target.OutputScale;
+    }
 
     public PixelRenderer(GraphicsDevice device, int width, int height, bool integerScaling = true, FontLibrary? fonts = null,
         SamplerState? samplerState = null)

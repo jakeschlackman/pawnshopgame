@@ -71,19 +71,16 @@ internal static partial class RegressionTests
     internal static void SproutSelection()
     {
         using var app = new ApplicationFlow();
-        app.Update(new(Confirm: true), TimeSpan.Zero);
+        app.Update(new(SelectionIndex: 3, Confirm: true), TimeSpan.Zero);
         Check(app.TitleInteractionPlaying && app.TitleSelector.FrameIndex == 16 && app.LiveSessions == 0);
         app.Update(new(Down: true, Confirm: true), TimeSpan.FromMilliseconds(50));
-        Check(app.Menu!.SelectedIndex == 0 && app.TitleSelector.FrameIndex == 17);
+        Check(app.Menu!.SelectedIndex == 3 && app.TitleSelector.FrameIndex == 17);
         app.Update(default, TimeSpan.FromSeconds(10), active: false);
         Check(app.LiveSessions == 0 && app.TitleSelector.FrameIndex == 17);
         app.Update(new(Confirm: true, Interact: true), TimeSpan.FromMilliseconds(749));
         Check(app.TitleInteractionPlaying && app.TitleSelector.FrameIndex == 31 && app.LiveSessions == 0);
         app.Update(new(Confirm: true, Interact: true), TimeSpan.FromMilliseconds(1));
-        Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0 && app.SessionsCreated == 0);
-        Confirm(app);
-        Check(app.Screen == Screen.Room && app.LiveSessions == 1);
-        Check(app.Room!.Value.BellRings == 0 && app.Room.Value.Elapsed == TimeSpan.Zero);
+        Check(app.ExitRequested && app.LiveSessions == 0 && app.SessionsCreated == 0);
 
         using var cancelled = new ApplicationFlow();
         cancelled.Update(new(Confirm: true), TimeSpan.Zero);

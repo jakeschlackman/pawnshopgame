@@ -1,5 +1,48 @@
 # Panoramic title screen verification
 
+## New Game forest pan — 2026-11-11
+
+The active `title-screen-panorama-day-to-dusk-forest.png` is a native 1902x827
+ImageGen panorama. The revised left scene uses a grassy urban forest rather than
+extending the road. The complete selected output is used without stitching;
+the earlier road candidate is retained under `Sources/ForestPanorama`, alongside
+the final prompt/provenance JSON. The original 2106x1494 source remains unchanged.
+The generated town retains the reference composition but is not pixel-identical.
+
+The 1166x413 town band starts at (736,414). Main/Options keep that band as their
+cover-scale reference; the 736px extension adds roughly one 16:9 screen of left
+travel. New Game now immediately starts a 1.1-second SmoothStep pan, with Sprout
+floating from the New Game label to Male using his existing pointing loop.
+The two existing player models appear only on arrival, over the forest. Selection
+presentation stays in `Characters/Player/Create`; Game composes it with the shared
+background and retains ownership of preview textures. Back reverses the pan.
+Focus loss freezes travel; arrival input is consumed; confirming a model creates
+exactly one session. Returning from play opens the settled Main view. Sprout follows
+Male/Female/Back after landing, and music continues throughout the selection screen
+and Back transition without restarting. Gameplay stops it. Options pans also use
+the shared 1.1-second duration; the startup descent and title fade are unchanged.
+
+Verification commands:
+
+```text
+dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false -p:CopyRetryCount=0
+dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build
+git diff --check
+```
+
+Build/MGCB/Ink passed with zero warnings/errors; 95/95 headless regressions passed.
+New checks cover forest/Main/Options crops across resolutions and aspect ratios,
+unchanged source/output hashes, travel boundaries, repeated targets, focus freeze,
+keyboard/pointer input capture, cancellation, reentry and fresh session creation
+at all three UI scales. The follow-up checks verify no Interact/restart on entry,
+camera-derived flight endpoints/midpoint, pointing-loop continuity through landing,
+all selector choices, immediate keyboard/mouse entry, and uninterrupted music with
+focus mute. Existing lifecycle, slower Options flight and audio checks pass.
+The active PNG fully decodes and its built copy matches the source hash.
+No game was launched or controlled. Raw artwork inspection does not establish
+in-game continuity, pan feel, model placement or readability; those remain with
+the user. The historical records below describe the previous artwork.
+
 Date: 2026-10-31. No branch, commit, push, framework or package changes.
 Existing uncommitted options-menu and agents.md edits were preserved.
 

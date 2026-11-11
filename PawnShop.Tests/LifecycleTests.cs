@@ -14,8 +14,12 @@ internal static partial class RegressionTests
     internal static void Down(ApplicationFlow app) => Step(app, new(Down: true));
     internal static void Confirm(ApplicationFlow app)
     {
+        if (app.UsesTitleBackground && app.TitleCamera.IsMoving && !app.OptionsFlight.IsBusy)
+            app.Update(default, PawnShop.Framework.Rendering.PanoramaCamera.TransitionDuration);
         Step(app, new(Confirm: true));
         FinishTitleInteraction(app);
+        if (app.Screen == Screen.CharacterSelect && app.TitleCamera.IsMoving)
+            app.Update(default, PawnShop.Framework.Rendering.PanoramaCamera.TransitionDuration);
     }
     internal static void FinishTitleInteraction(ApplicationFlow app)
     {
@@ -74,9 +78,11 @@ internal static partial class RegressionTests
     {
         using var app = new ApplicationFlow();
         Step(app, new(Confirm: true, Interact: true));
-        Check(app.Screen == Screen.Title && app.LiveSessions == 0 && app.TitleInteractionPlaying);
+        Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0 && app.CharacterSelectionFlying
+            && !app.TitleInteractionPlaying && app.TitleSelector.AnimationName == "Idle");
         FinishTitleInteraction(app);
         Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0 && app.Room is null);
+        app.Update(default, PawnShop.Framework.Rendering.PanoramaCamera.TransitionDuration);
         Step(app, new(Confirm: true, Interact: true, MoveX: 1));
         Check(app.Screen == Screen.Room && app.LiveSessions == 1 && app.SessionsCreated == 1);
         Check(app.Player!.Value.Position == ShopRoomLayout.PlayerSpawn);

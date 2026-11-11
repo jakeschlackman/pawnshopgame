@@ -1,12 +1,13 @@
 # AGENTS.md — Pawn Shop Game
 
-## Required startup reading
+## Reading and scope
 
-At the beginning of each new session, before analyzing or changing the project, discover and read all repository Markdown files, including subdirectories, except files named README.md (case-insensitive).
-
-Exclude .git, dependency folders, and generated build output. Read AGENTS.md first, then ARCHITECTURE.md, GAME_DESIGN.md, ROADMAP.md, and the remaining Markdown files.
-
-Briefly confirm which files were read. If any cannot be read, report that explicitly.
+- Read this file and the AGENTS.md / AGENTS.override.md files governing the files being changed, including when starting at the repository root.
+- Read only relevant code, tests, and docs. Do not read every project's guide, every Markdown file, or all historical verification records.
+- **HumanAssist.md is human-only.** Do not read its contents, include it in routine searches, or treat it as agent instructions. Read/create/edit it only when the user explicitly requests creating or updating those files. Exclude it case-insensitively from content searches, for example with `rg --iglob '!HumanAssist.md'`.
+- Reuse unchanged session context. Consult ARCHITECTURE.md for ownership/contracts and GAME_DESIGN.md or ROADMAP.md for gameplay/scope.
+- Detailed rules remain binding in [engineering contracts](docs/ENGINEERING_CONTRACTS.md); read only the topic affected by the task. Project guides provide entry points and targeted links.
+- Report unreadable required guidance. Routine work needs no document inventory.
 
 ## 1. Purpose and scope
 
@@ -40,7 +41,7 @@ Default to local, single-player gameplay. Multiplayer, online services, runtime 
 
 ## 3. Inspect the repository before changing it
 
-Read applicable repository instructions, solution/project files, SDK configuration, package references, build scripts, and nearby tests. Read README files only when needed for the current task. Read relevant design/decision documents if present.
+Read applicable instructions, relevant code, and nearby tests. Inspect project/SDK/package/build configuration when needed for the affected build or dependencies. Read supporting docs as described above.
 
 Use the actual repository as evidence for what exists. Do not assume an earlier discussion's class names, folders, dependencies, or milestones have been implemented.
 
@@ -54,6 +55,14 @@ Before substantive changes:
 
 Use the repository's existing SDK, MonoGame target, content build workflow, test framework, naming, and formatting. Do not upgrade packages or retarget projects incidentally. Pin newly approved dependencies consistently with existing conventions; do not assume the latest version is appropriate.
 
+### Keep small changes focused
+
+- Make the smallest complete change; reuse existing helpers and avoid unrelated refactors.
+- Run appropriate build, regression, and content checks after implementation. Run a separate baseline when relevant unknown failures or risk warrant it.
+- Repeat passing checks only after relevant changes, failures, or unresolved concerns.
+- For docs-only edits, review the text and run `git diff --check`; build/test only if commands, build/content inputs, or affected behavior require verification.
+- Update the owning documentation for durable changes; avoid duplicating routine updates across design docs and logs.
+
 ## 4. Architecture and dependency boundaries
 
 Use composition over deep inheritance. Components describe focused state/capabilities; systems or services implement behavior. Not every class needs an interface, component, factory, or event.
@@ -64,46 +73,23 @@ Build a game-specific reusable foundation, not a general-purpose engine. Introdu
 
 | Project | Owns | Allowed PawnShop project references |
 | --- | --- | --- |
-| PawnShop.Framework | Reusable entities/components/systems, scenes, input, UI, events, rendering | None; no game-specific rules |
-| PawnShop.Audio | Playback, mix snapshots, audio asset IDs and categorized audio content/build pipeline | None; presentation audio, no domain rules |
-| PawnShop.Core | Shared items, inventory, interactions, conditions/effects, transactions, economy, world state, persistence contracts/storage | Neutral Framework contracts only when needed; remain headless-testable |
-| PawnShop.Narrative | Dialogue, quests, relationships, story flags, progression | Core |
-| PawnShop.Characters | AI, behaviors, movement, combat, player, mech, companion | Core, Framework |
-| PawnShop.Shop | Customers, appraisal, restoration, displays, shop workflows | Core |
-| PawnShop.Exploration | Dungeons, salvage, monsters, hazards, generation | Core, Characters, Framework |
-| PawnShop.Game | Thin MonoGame executable/composition layer and main-menu UI; feature code/content belongs in its owning project | All seven production libraries |
-| PawnShop.Tests | Existing regression runner and future focused tests | Projects exercised by each test |
+| [PawnShop.Framework](PawnShop.Framework/AGENTS.md) | Reusable entities/components/systems, scenes, input, UI, events, rendering | None; no game-specific rules |
+| [PawnShop.Audio](PawnShop.Audio/AGENTS.md) | Playback, mix snapshots, audio asset IDs and categorized audio content/build pipeline | None; presentation audio, no domain rules |
+| [PawnShop.Core](PawnShop.Core/AGENTS.md) | Shared items, inventory, interactions, conditions/effects, transactions, economy, world state, persistence contracts/storage | Neutral Framework contracts only when needed; remain headless-testable |
+| [PawnShop.Narrative](PawnShop.Narrative/AGENTS.md) | Dialogue, quests, relationships, story flags, progression | Core |
+| [PawnShop.Characters](PawnShop.Characters/AGENTS.md) | AI, behaviors, movement, combat, player, mech, companion | Core, Framework |
+| [PawnShop.Shop](PawnShop.Shop/AGENTS.md) | Customers, appraisal, restoration, displays, shop workflows | Core |
+| [PawnShop.Exploration](PawnShop.Exploration/AGENTS.md) | Dungeons, salvage, monsters, hazards, generation | Core, Characters, Framework |
+| [PawnShop.Game](PawnShop.Game/AGENTS.md) | Thin MonoGame executable/composition layer and main-menu UI; feature code/content belongs in its owning project | All seven production libraries |
+| [PawnShop.Tests](PawnShop.Tests/AGENTS.md) | Existing regression runner and future focused tests | Projects exercised by each test |
 
 Keep project references acyclic. Put shared contracts in a dependency-neutral location. Register feature-specific handlers at the composition boundary. Integration tests may reference the layers they exercise.
 
-### File placement: keep PawnShop.Game thin
-
-Before creating or moving a file into `PawnShop.Game`, explicitly check whether an
-existing feature project or `PawnShop.Framework` is a better owner. Prefer that
-home for feature behavior, services, reusable UI, and feature content. Game is not
-the default destination simply because it can reference every library.
-
-Keep new Game code limited to the executable host, thin application/session
-composition and main-menu UI (including Options). Keep the host mechanically
-simple: delegate work to the owning library rather than implementing it there.
-If no suitable home is clear, ask the user before placing the file in Game or
-introducing a further project split. Do not add graphics/audio dependencies to a
-headless domain project just to avoid Game. Existing non-menu code in Game does
-not justify adding more; move it through separately scoped refactors, preserving
-working behavior.
-
-PawnShop.Audio owns `Content/Music`, `UI`, `Environmental`, `Combat`, `Monster`
-and `Speech`. Its MGCB pipeline supplies compiled `Content/Audio` assets to
-consumers. Game creates and updates playback; settings storage and main-menu
-interaction rules stay at the application boundary.
-
-Session creation, service wiring, and cross-feature coordination belong under `PawnShop.Game/Bootstrap`. Shared atomic operations belong in `Core/Transactions`; `Shop/Transactions` uses them rather than creating another inventory or currency model. Lower production projects never reference Game.
-
-Gameplay rules must run in headless tests without a window, graphics/audio device, or MonoGame ContentManager. Do not make domain projects reference a rendering-heavy Framework project just to obtain IDs or event types. Domain data can refer to asset IDs, not Texture2D, SpriteBatch, or audio instances.
-
-Use the feature folders documented in ARCHITECTURE.md within the approved projects. Retain empty folders with `.gitkeep`; they do not authorize implementation. Further project splits require a concrete need or explicit authorization.
-
-Feature-specific save data stays with its owning feature. `Core/Persistence` owns neutral persistence contracts and reusable storage mechanics; `Game/Bootstrap` coordinates complete snapshots without reverse references for serialization.
+Read the owning project's AGENTS.md before adding feature files. Game remains
+limited to the thin host, composition, and main-menu UI; lower projects never
+reference it. Keep domain rules headless and references acyclic. Detailed
+[placement/composition rules](docs/ENGINEERING_CONTRACTS.md#application-placement-and-composition)
+apply when ownership or wiring changes.
 
 ## 5. Components and authoritative state
 
@@ -118,18 +104,7 @@ Feature-specific save data stays with its owning feature. `Core/Persistence` own
 
 ## 6. Application, session, scene, and UI lifecycle
 
-Separate application lifetime, game-session lifetime, location lifetime, and overlay lifetime.
-
-- The title screen works without a live gameplay session.
-- New Game creates a fresh session. Continue validates and loads an existing one. Only one gameplay session is active at a time; neither action silently overwrites a save.
-- Returning to title disposes the session, subscriptions, and owned resources. Starting again must not duplicate handlers or retain old state.
-- A location transition preserves persistent world changes, validates the destination/spawn, and handles loading failure without losing the session.
-- Scenes/presenters display session state; scene replacement must not reset inventories, quests, or relationships.
-- Every overlay explicitly defines input capture, whether simulation pauses, and whether underlying scenes remain visible.
-- Route input through the focused UI first. The action closing a modal must not also interact with the world.
-- Distinguish application exit from returning to title, with appropriate unsaved-progress handling.
-
-Reuse small UI controls for menus, dialogue, inventories, tooltips, and journals. Inventory views bind to inventory IDs/read models rather than a special player-only implementation. Controls dispatch commands and display errors; they do not contain economy or quest rules.
+Preserve application/session/location/overlay lifetimes and focused input capture. For affected behavior read the [lifecycle rules](docs/ENGINEERING_CONTRACTS.md#application-session-scene-and-ui-lifecycle) and Game instructions.
 
 ## 7. Simulation, input, and time
 
@@ -144,179 +119,72 @@ Reuse small UI controls for menus, dialogue, inventories, tooltips, and journals
 
 ## 8. Commands, events, and transactions
 
-Use direct commands for requested actions and immutable events for committed facts.
-
-Examples: TryTransferItem is a command; ItemTransferred is an event. An attempted sale must not emit SaleCompleted.
-
-A multi-resource operation follows this rule:
-
-1. Validate ownership, quantities, capacity, money, reservations, and current preconditions.
-2. Prepare the complete state change.
-3. Commit all related changes together.
-4. Publish committed events afterward.
-
-Failure must not partially consume items, money, or rewards. Design a small explicit unit of work where necessary; an event bus is not a transaction manager. Observer failures must not imply a committed transaction was rolled back.
-
-Document event ordering and process events at controlled boundaries. Avoid unbounded synchronous event recursion. Release subscriptions when their owner exits.
-
-Use persistent, stable operation/claim IDs for retryable consequential actions. Repeating a reward claim or restoration completion must not duplicate its effects. Do not add an event-sourcing platform or distributed messaging to achieve local correctness.
+Commands request changes; immutable events describe committed facts. Multi-resource changes must be atomic, with events after commit and retry protection. Read the [transaction rules](docs/ENGINEERING_CONTRACTS.md#commands-events-and-transactions) when changing these operations.
 
 ## 9. Shared inventory and economy
 
-Use one inventory model with configurable ownership, capacity, and acceptance rules for the player, mech cargo, storage, shelves, workstations, loot containers, and customers.
-
-- Route transfers through one authoritative service. Do not let callers bypass invariants through public mutable lists or independent remove-then-add calls.
-- Each unique item has exactly one authoritative location/owner, including world pickups, equipment, workstations, and inventories.
-- Preserve instance identity, condition, modifications, discovery state, and relevant provenance when items move.
-- Stack only explicitly fungible items with compatible properties. Two individually damaged antiques are not interchangeable stacks.
-- Reject invalid/negative quantities. Define same-container transfers, stack splits/merges, full capacity, weight limits, and reservations.
-- Prices use a documented money representation, preferably integer smallest units; avoid floating-point balances.
-- A sale coordinates item ownership, listing state, and money atomically. Listings reference authoritative items rather than duplicating them.
-- Restoration coordinates inputs, item reservations, job state, and outputs. Completion happens once; blocked output capacity has an explicit policy.
-- Quest-item protection and reward overflow are explicit rules, not silent deletion or duplication.
-- Keep appraisal uncertainty separate from an item's authoritative properties.
-
-Do not assume collateral loans/redemption mechanics are required merely because the game is a pawn shop. Implement that distinction when the design calls for it.
+Use one authoritative inventory/ownership and money model across features. Failures preserve all related state. Before implementing transfers, sales, listings, or restoration, read the [inventory/economy rules](docs/ENGINEERING_CONTRACTS.md#inventory-and-economy) and Core/Shop instructions.
 
 ## 10. Interactions, dialogue, and quests
 
-### Shared interactions
-
-Expose contextual actions such as Talk, Search, Transfer, Mount, Inspect, and Repair through a common interaction contract. Availability checks provide useful failure reasons. Revalidate on execution; a previously enabled UI button is not proof the action remains valid.
-
-### Dialogue
-
-- Author branching content as definitions with stable conversation, node, choice, and speaker IDs.
-- Runtime sessions track participants and current progression; UI renders a dialogue view.
-- Select by stable choice ID, not visible index or localized text. Recheck conditions when selected.
-- Keep text, portraits, emotion keys, and presentation cues separate from game rules.
-- Apply gameplay effects through the authoritative services. Do not place irreversible unguarded rewards in repeatable node-entry callbacks.
-- Distinguish skipping text animation from choosing/advancing dialogue. Cancellation and unavailable speakers have explicit outcomes.
-- Specify whether conversations pause simulation and how saving during a conversation behaves.
-- Use reusable text identifiers where practical; do not embed quest/business logic in displayed strings.
-
-### Conditions and effects
-
-Use a small, registered vocabulary of typed conditions and effects. Inventory checks, quest status, relationships, story facts, and location access can be shared by conversations, interactions, and quests.
-
-Validate serialized parameters before runtime use. Unknown handlers, missing IDs, invalid types, and broken graph links must produce actionable diagnostics. Never execute arbitrary C#, reflection-selected methods, or scripts from content files.
-
-A dialogue choice that exchanges items/money or claims a reward uses an atomic domain operation—not an unchecked list of independent effects. Audio/animation cues are presentation outputs, not prerequisites for successful economic state changes.
-
-### Quests
-
-- Separate immutable definitions from persistent runtime progress.
-- Define stages, objective activation, and completion explicitly. If a quest supports failure, abandonment, or optional objectives, define those semantics; do not implement unsupported quest modes preemptively.
-- Distinguish state objectives ("possess a repaired radio") from event objectives ("sell three radios after acceptance").
-- Reconcile state objectives on acceptance/load and relevant state changes; define whether earlier actions qualify for event objectives.
-- Count qualifying committed events with appropriate filters and identity rules. Moving the same object repeatedly must not count as discovering new objects.
-- Use semantic facts such as ItemRestored or ItemDelivered, not UI clicks, where progression depends on world changes.
-- Persist completion/claim state together with reward changes. Reloads, duplicate commands/events, and repeat conversations must not grant rewards twice.
-- Handle full inventory during reward delivery explicitly: leave a claim pending or use a defined destination. Never silently lose rewards.
-- Keep narrative integration optional for ordinary shop/exploration actions unless an explicit progression gate requires it.
+Reuse interaction/condition contracts and authoritative domain operations. For affected dialogue, quest, reward, or interaction behavior read the [narrative rules](docs/ENGINEERING_CONTRACTS.md#interactions-dialogue-and-quests) and Core/Narrative instructions.
 
 ## 11. Player, mech, companion, and exploration
 
-The player, rideable mech, and little companion are distinct entities. Mounting changes a control/attachment relationship, not the player's identity.
-
-Define movement control, collision, damage ownership, cargo access, and valid dismount placement. Attached riders must not also run independent ground movement/collision. If no safe dismount position exists, refuse with a clear result.
-
-Render riders independently through named attachment points, facing/frame-specific offsets, and appropriate layering or masks. Do not bake the companion or player into mech sprites as the canonical asset.
-
-Reuse appropriate movement, pathfinding, state-machine, and interaction capabilities across actors. Begin with simple explicit behaviors; a behavior-tree editor or utility-AI framework is not a prerequisite.
-
-Locations own local entities and changes; the session owns persistent player/world progression. Unloaded locations use explicit dormant/time-skip policies rather than accidentally continuing full simulation.
-
-For generated dungeons, use controlled seeds and a generator/content version. Persist relevant layout/state or a compatible seed plus changes; seed alone must not respawn collected loot. Validate reachability, spawn safety, and required exits, and bound generation retries.
+The player, rideable mech, and smaller companion remain separate identities. For movement/control, mounting, combat, locations, or generation, read [actor/exploration rules](docs/ENGINEERING_CONTRACTS.md#actors-and-exploration) and Characters/Exploration instructions.
 
 ## 12. Pixel art, animation, and resources
 
-Separate source canvas size, visible body bounds, world size, origin, collision footprint, and final display scale.
+Separate source canvas, visible body, world size, origin, footprint, and output
+scale. Preserve source/provenance, point sampling, stable origins, shared clocks,
+and deliberate resource lifetimes.
 
-- A 48×48 companion source frame is allowed; it does not make the companion larger than the player.
-- Earlier numbers for tiles, canvases, render resolution, and frame counts are provisional. Verify the asset files and an in-game scale comparison before standardizing them.
-- Use point/nearest-neighbor sampling for crisp pixel art, with a documented camera and scaling policy. Prefer integer output scaling when preserving a uniform pixel grid.
-- Downscaling is not lossless. Inspect outlines, eyes, silhouette, and animation consistency at actual gameplay size; use a simplified gameplay asset when needed.
-- Validate actual image dimensions, transparency, frame rectangles, padding, origins, animation names, durations, and attachment points. Generated art is not automatically a correctly aligned production sheet.
-- Keep sprite origins stable between frames. Animation changes must not cause unintended positional jumps.
-- Use data-driven animation metadata and a reusable animator. Gameplay requests animation states, not sprite-sheet row numbers.
-- Define arbitration between locomotion, actions, reactions, and dialogue expressions so systems do not overwrite one another every tick.
-- Preserve source artwork; keep derivative sheets and generated build output distinct. Record third-party asset provenance/licenses.
-- For customizable player clothing, follow [the approved wearable art workflow](docs/WEARABLE_ART_WORKFLOW.md): AI-generate separate body-specific PixelLab object references, fit each to its exact base, and extract garment-only layers over the unchanged body. Do not substitute hand-drawn shapes or force fitting by shifting, stretching or repeating fabric rows.
-- Generate every player wearable design for **both male and female models**, with separate fitted art and acceptance records for each body. A shared item identity does not imply interchangeable artwork. Walking attire must match the exact body, direction and animation frame; standing-pose approval never approves walking fit. Validate all north/east/south/west frames for both bodies before describing a wearable as walk-compatible.
-- Use PixelLab **Skeleton v3** for player walk generation. Author south, north and east for each body; render west from east with MonoGame `SpriteEffects.FlipHorizontally`. Four movement facings require only three stored visual directions. Apply one character-space mirror to body, clothing, masks, anchors and held-item offsets. Opposite-hand appearance is acceptable; independently authored west requires a concrete visual/gameplay reason. Preserve historical W-to-E sources as evidence, without relabeling them as newly authored east or granting approval.
-- Human asset authoring uses the existing C# test/authoring executable (`--assets`; see `docs/WEARABLE_ART_WORKFLOW.md`). Do not add PowerShell scripts, runtime generation services or new tooling projects for this pipeline. Sprout's existing artwork, animations and implementation are frozen.
-- Use the canonical `Content/Player/Bases` and `Content/Player/Wearables` assets and their manifests. The current source-frame contract is 48×64 with 48–52 visible body pixels (currently 50) and pivot (24,58); it does not establish collision/world scale. Keep full transparent canvases and native coordinates.
-- Check shoulder/underwear coverage and enlarged/native-size composition before requesting visual acceptance. Record approval per body, direction and pose; numeric checks alone cannot approve fit. Archive rejected source work before cleanup, and keep approved files independent of the archive.
-- Own and dispose textures, render targets, audio, and content scopes deliberately; do not dispose shared assets while another scene uses them.
+For human art work anywhere in the repository, read
+[artwork rules](docs/ENGINEERING_CONTRACTS.md#artwork-and-resources),
+[the wearable workflow](docs/WEARABLE_ART_WORKFLOW.md), and Tests/Assets/AGENTS.md.
+Those retain the exact two-body, native-coordinate, Skeleton v3 S/N/E, mirrored
+West, garment extraction, and per-pose approval requirements. Sprout's existing
+artwork, animation, and implementation are frozen unless explicitly requested.
+Existing UI wiring does not require regenerating assets.
 
 ## 13. Persistence and content validation
 
-Save explicit, versioned data models—not live entities with service references, subscriptions, tasks, or graphics objects.
-
-Persist authoritative ownership, player/mech/companion state, time, world changes, active restoration jobs, quest/reward state, story facts, and necessary dungeon state. Reconstruct runtime wiring after load.
-
-Capture a consistent snapshot at a simulation boundary. Coordinate pending events and transactions so a save cannot record a quest reward without its claim state, or a completed sale without its money transfer.
-
-Before snapshotting, either finish processing committed events that affect persistent state or include their pending processing state in the save. Loading must not lose a committed quest-progress event or apply it twice.
-
-Write through a temporary file and safe replacement appropriate to the platform; retain a recoverable backup. Do not overwrite an unsupported or corrupt save while reporting load failure. Specify migration and missing-content policies; preserve the original during migration.
-
-Tests use isolated temporary save directories, never actual player saves. Add round-trip tests as persistent systems arrive, not after the entire game is built.
-
-Validate content IDs, references, numeric ranges, required assets, graph links, and schema versions. Diagnostics should identify the file and relevant entity/node/field. Do not silently substitute empty content for invalid required definitions.
+Persist versioned data snapshots at a consistent boundary, not live services or device objects. Preserve corrupt/unsupported originals and use isolated test saves. For saving/loading or content-schema work read the [persistence rules](docs/ENGINEERING_CONTRACTS.md#persistence-and-content-validation).
 
 ## 14. Coding, performance, and verification
 
-Follow repository conventions. Keep methods focused, dependencies explicit, nullable behavior meaningful, and APIs documented where invariants are non-obvious. Avoid catch-and-ignore errors, unexplained null suppression, and generic "manager" classes with unrelated responsibilities.
+Follow repository conventions; keep methods focused, dependencies explicit, and
+errors actionable. Avoid speculative abstractions, new frameworks, and premature
+optimization. Measure before pooling, parallel simulation, or complex indexing.
+For the detailed invariants relevant to a change, read
+[verification rules](docs/ENGINEERING_CONTRACTS.md#coding-performance-and-verification).
 
-Use asynchronous I/O where useful without blocking Update/Draw. Avoid avoidable allocations, repeated content parsing, and large searches in frame loops. Measure before introducing pooling, parallel simulation, or complex indexing.
-
-### Build and test procedure
-
-Discover exact project paths; do not invent a solution filename. Use existing scripts/CI commands first. Otherwise adapt these command forms to verified paths:
+After a code/content change use the verified root commands as appropriate:
 
 ```text
-dotnet --info
-dotnet restore <actual-solution-or-project>
-dotnet build <actual-solution-or-project> --no-restore
-dotnet test <actual-test-project-or-solution> --no-build
+dotnet build PawnShopSimulator.sln --no-restore -m:1 -p:UseSharedCompilation=false -p:CopyRetryCount=0
+dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build
 git diff --check
 ```
 
-These are command forms, not a claim that the repository already builds. Use matching configurations/frameworks for build and test. Run the content build required by the existing workflow; the user performs manual launch and desktop checks.
+Restore only when needed; do not install SDKs, upgrade dependencies, alter security
+settings, or bypass access restrictions to hide environment problems. Keep
+configuration/framework consistent. The normal build runs the existing MGCB/Ink
+workflow. `dotnet test` does not execute this console runner. See Tests/AGENTS.md
+for focused test/tool entry points.
 
-The current solution is `PawnShopSimulator.sln`. Its existing dependency-free test runner uses `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build`; `dotnet test` does not execute those checks. Build/run details and the current code-authored content workflow are in README.md.
-
-Do not install SDKs, alter security settings, or bypass access restrictions to hide an environment problem. Report missing prerequisites precisely.
-
-Add focused regression tests for changed behavior, especially:
-
-- Failed inventory/economy operations leave all related state unchanged.
-- Unique-item ownership is conserved across pickup, transfer, listing, sale, and save/load.
-- Stale dialogue choices are rejected and rewards cannot be claimed twice.
-- Quest counters distinguish state, historical events, and repeated transfers.
-- Title/session/overlay transitions capture input and release owned resources.
-- Mount/dismount, pause, time advancement, and seeded generation obey their contracts.
-- Save round trips, corrupt/unsupported data, migrations, and interrupted writes have defined outcomes.
-
-Use headless tests for rules. The user handles manual testing of rendering, audio, animation, input feel, window behavior, and desktop workflows. Do not launch or control the game, use computer vision, inspect screenshots, or use Computer Use to verify changes unless the user explicitly requests that testing. Such agent-driven testing is never required to finish an implementation task, even when other repository documents call for visual or desktop acceptance checks.
-
-Continue running relevant builds, automated tests, and nonvisual content checks. Briefly identify any manual checks left for the user, without treating their pending testing as a blocker to the implementation handoff. Record visual acceptance separately and only mark it verified after the user reports results or explicitly requested testing provides evidence. Never claim visual behavior is verified merely because compilation succeeded.
+Use headless rules tests. The user handles rendering, audio, animation, input feel,
+window behavior, and desktop workflows. Do not launch/control the game, inspect
+screenshots, use computer vision, or use Computer Use for verification unless the
+user explicitly requests it. Manual acceptance is not a blocker to a completed
+implementation handoff; compilation/numeric checks do not prove visual behavior.
 
 ## 15. Milestones and completion
 
-If there is no implemented application lifecycle, the first playable milestone is:
-
-1. Launch to the title screen without creating a gameplay session.
-2. Navigate reusable menu controls.
-3. Start a new session and enter a minimal room.
-4. Open pause, resume, and return to title cleanly.
-5. Start again without leaked state, resources, or subscriptions.
-
-Continue is disabled with a clear reason until a valid load implementation/save exists. Settings must affect real settings or be clearly unavailable. Do not present nonfunctional buttons as finished features.
-
-Use placeholders where they prove behavior. Add inventory, interactions, conversations, quests, robots, and dungeons in subsequent requested slices. Do not build the whole roadmap automatically.
+Implement only the requested slice. Empty folders are scaffolding, not feature
+completion. ROADMAP.md owns milestone status; the original
+[lifecycle acceptance rules](docs/ENGINEERING_CONTRACTS.md#milestones-and-completion)
+remain applicable when that work is requested.
 
 A change is complete when:
 
@@ -330,8 +198,8 @@ Final handoff: summarize behavior and files changed, exact verification performe
 
 ## 16. Keep guidance coherent
 
-This file owns durable development rules. Use the existing root ARCHITECTURE.md, GAME_DESIGN.md, and ROADMAP.md for detailed architecture, gameplay design, and milestone status. Verification records live under docs/. Do not create an art specification or move documentation merely because earlier proposals suggested it.
+This file owns shared development rules; scoped guides and engineering contracts retain the detailed rules. Use the existing root ARCHITECTURE.md, GAME_DESIGN.md, and ROADMAP.md for detailed architecture, gameplay design, and milestone status. Verification records live under docs/. Do not create an art specification or move documentation merely because earlier proposals suggested it.
 
-Distinguish approved decisions from proposals. Update relevant documentation when an authorized change alters a contract. Do not accumulate transcripts, speculative APIs, copied tutorials, or temporary progress logs in this file.
+Distinguish decisions from proposals. Update the owning document; change others only to correct misleading guidance. Small UI edits need not update every design doc/log. Keep verification records for milestones or substantial evidence; ordinary results belong in the handoff. No transcripts, speculative APIs, copied tutorials, or progress logs here.
 
 When existing code and these rules conflict, identify the smallest safe alignment needed for the current task. Propose consequential redesigns rather than silently rewriting the repository.

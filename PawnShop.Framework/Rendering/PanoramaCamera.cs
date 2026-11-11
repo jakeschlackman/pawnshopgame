@@ -5,7 +5,7 @@ public readonly record struct PanoramaView(double X, double Y, double Width, dou
 // Presentation-only horizontal travel and viewport framing.
 public sealed class PanoramaCamera
 {
-    public static readonly TimeSpan TransitionDuration = TimeSpan.FromSeconds(0.8);
+    public static readonly TimeSpan TransitionDuration = TimeSpan.FromSeconds(1.1);
     private double start;
     private double target;
     private TimeSpan elapsed;
@@ -14,6 +14,7 @@ public sealed class PanoramaCamera
 
     public void NavigateToMainMenu() => Navigate(0);
     public void NavigateToOptions() => Navigate(1);
+    public void NavigateToCharacterSelection() => Navigate(-1);
 
     private void Navigate(double destination)
     {
@@ -30,24 +31,27 @@ public sealed class PanoramaCamera
         elapsed = delta >= TransitionDuration - elapsed ? TransitionDuration : elapsed + delta;
         double t = elapsed.TotalSeconds / TransitionDuration.TotalSeconds;
         double eased = t * t * (3 - 2 * t);
-        Position = elapsed == TransitionDuration ? target : Math.Clamp(start + (target - start) * eased, 0, 1);
+        Position = elapsed == TransitionDuration ? target : Math.Clamp(start + (target - start) * eased, -1, 1);
     }
 
     public PanoramaView GetView(int imageWidth, int imageHeight, int viewportWidth, int viewportHeight,
-        int topExtension = 0, double descent = 1)
+        int topExtension = 0, double descent = 1, int leftExtension = 0)
     {
         if (imageWidth <= 0 || imageHeight <= 0 || viewportWidth <= 0 || viewportHeight <= 0)
             throw new ArgumentOutOfRangeException(nameof(viewportWidth), "Image and viewport dimensions must be positive.");
         if (topExtension < 0 || topExtension >= imageHeight) throw new ArgumentOutOfRangeException(nameof(topExtension));
+        if (leftExtension < 0 || leftExtension >= imageWidth) throw new ArgumentOutOfRangeException(nameof(leftExtension));
         if (!(descent >= 0 && descent <= 1)) throw new ArgumentOutOfRangeException(nameof(descent));
 
-        // Use the original band for the cover scale and settled framing. The extension adds travel above it.
+        // Frame the town band independently; extensions add travel without zooming the town out.
         int framedHeight = imageHeight - topExtension;
-        double scale = Math.Max((double)viewportWidth / imageWidth, (double)viewportHeight / framedHeight);
-        double width = Math.Min(imageWidth, viewportWidth / scale);
+        int framedWidth = imageWidth - leftExtension;
+        double scale = Math.Max((double)viewportWidth / framedWidth, (double)viewportHeight / framedHeight);
+        double width = Math.Min(framedWidth, viewportWidth / scale);
         double height = Math.Min(framedHeight, viewportHeight / scale);
-        double maxX = Math.Max(0, imageWidth - width);
+        double mainX = leftExtension;
+        double travel = Position < 0 ? leftExtension : Math.Max(0, framedWidth - width);
         double settledY = topExtension + (framedHeight - height) / 2;
-        return new(Math.Clamp(Position * maxX, 0, maxX), settledY * descent, width, height, scale);
+        return new(Math.Clamp(mainX + Position * travel, 0, imageWidth - width), settledY * descent, width, height, scale);
     }
 }

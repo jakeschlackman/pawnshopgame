@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "tool": "Built-in image_gen",
+  "date": "2026-11-11",
+  "useCase": "compositing",
+  "source": "../../title-screen-panorama-day-to-dusk.png",
+  "sourceSha256": "596C4EE3E8BBA47449D00475B9DFBFC3D2D5A5C2D575104B6937E6E97A251ED2",
+  "output": "../../title-screen-panorama-day-to-dusk-forest.png",
+  "outputSha256": "65A963D4AE159BE57CC444609377F909385D425B2EFE9DEC74DCB6F14A578011",
+  "nativeCanvas": {
+    "width": 1902,
+    "height": 827
+  },
+  "framing": {
+    "leftExtension": 736,
+    "topExtension": 414,
+    "townBandWidth": 1166,
+    "townBandHeight": 413
+  },
+  "processing": "Selected complete native ImageGen output. No manual resampling, stitching, or pixel edits. The generated town is a reference-based redraw, not a pixel-identical copy; original artwork is retained separately.",
+  "rejected": {
+    "file": "rejected-forest-road.png",
+    "sha256": "3443C4FE0490E4249EC7EF4D9878AAA3C6A0E6C9267FB16CDF6BB6B5789F1C9F",
+    "reason": "User requested a more contiguous forest transition and no road extension to the left."
+  },
+  "prompt": "Use case: compositing / seamless panorama repair. Image 1 is the original town panorama and sky reference. Image 2 is the current extended panorama EDIT TARGET (1902 x 827). Revise the extended panorama into ONE completely contiguous landscape, particularly where the new LEFT forest meets the existing RIGHT town. Keep Image 2's overall 1902 x 827 wide composition and daytime-sky-above/dusk-landscape-below arrangement. Keep the right-hand town, hilltop building, distant sunset, rooftops, foreground shops and original road recognizable and framed in the same region as Image 1. The newly added LEFT area is the left 39 percent. REDESIGN that area as a small urban forest embedded in the same cozy town: layered pines, autumn deciduous trees, natural grassy mossy ground, roots, ferns and scattered fallen leaves, with occasional distant rooftops glimpsed through foliage. Make a quiet, natural level grassy clearing in its lower center for two separately rendered character models. IMPORTANT: DO NOT extend the town road to the left. NO broad paved plaza, stone promenade, paved park square, horizontal continuation of the street, steps or bench area in the left forest. Let the existing road remain in the right-hand town and become screened by trees / grass near the forest. Most important is continuity: draw sky gradients, cloud banks, horizon, tree canopies and ground planes continuously across the entire composition; no pasted-on panel, vertical seam, change of sunset height, repeated edge trees, sudden perspective change or contrasting left/right color grading. Clouds should flow naturally across the join, and forest trees should interleave into the town's existing left-edge trees so there is no visually obvious boundary. Match the original warm, crisp, richly detailed pixel-art texture and autumn sunset lighting consistently. Avoid overlarge isolated trees of a different pixel size. The top half remains blue daytime sky fading through lavender/pink into the orange dusk, with no jump at the forest boundary. This is a background only: no people, robots, character models, UI, text, labels, signs with writing, logos or watermarks. Return one seamless finished wide panorama, not separate panels.",
+  "acceptance": "Raw generated artwork inspected; in-game visual acceptance pending user review."
+}

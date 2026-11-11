@@ -23,6 +23,24 @@ no C# registration or manual JSON export is needed. Use `./npc.ps1 check`
 to validate branches or `./npc.ps1 play -Id mechanic` for a terminal preview.
 VS Code's **Terminal > Run Task** also lists the four **Dialogue:** authoring tasks.
 
+## Contributor guides
+
+Each subproject has a HumanAssist.md for contributors and a compact AGENTS.md for
+coding agents. HumanAssist files are excluded from routine agent reading/searches;
+agents consult them only when explicitly asked to create or update them.
+
+| Project | Contributor walkthrough | Agent entry points |
+| --- | --- | --- |
+| PawnShop.Framework | [HumanAssist.md](PawnShop.Framework/HumanAssist.md) | [AGENTS.md](PawnShop.Framework/AGENTS.md) |
+| PawnShop.Audio | [HumanAssist.md](PawnShop.Audio/HumanAssist.md) | [AGENTS.md](PawnShop.Audio/AGENTS.md) |
+| PawnShop.Core | [HumanAssist.md](PawnShop.Core/HumanAssist.md) | [AGENTS.md](PawnShop.Core/AGENTS.md) |
+| PawnShop.Narrative | [HumanAssist.md](PawnShop.Narrative/HumanAssist.md) | [AGENTS.md](PawnShop.Narrative/AGENTS.md) |
+| PawnShop.Characters | [HumanAssist.md](PawnShop.Characters/HumanAssist.md) | [AGENTS.md](PawnShop.Characters/AGENTS.md) |
+| PawnShop.Shop | [HumanAssist.md](PawnShop.Shop/HumanAssist.md) | [AGENTS.md](PawnShop.Shop/AGENTS.md) |
+| PawnShop.Exploration | [HumanAssist.md](PawnShop.Exploration/HumanAssist.md) | [AGENTS.md](PawnShop.Exploration/AGENTS.md) |
+| PawnShop.Game | [HumanAssist.md](PawnShop.Game/HumanAssist.md) | [AGENTS.md](PawnShop.Game/AGENTS.md) |
+| PawnShop.Tests | [HumanAssist.md](PawnShop.Tests/HumanAssist.md) | [AGENTS.md](PawnShop.Tests/AGENTS.md) |
+
 ## Build and run
 
 Requires .NET SDK 10.0.401 (or a compatible later 10.0.4xx patch) and desktop
@@ -100,7 +118,8 @@ that convention; historical eight-facing bases and NESW candidates remain intact
 
 ## Controls and current behavior
 
-- New Game opens Male/Female selection. No gameplay session exists until you
+- New Game pans left to Male/Female selection over a wooded city clearing.
+  No gameplay session exists until you
   choose a character. WASD/arrows select; Z confirms; X returns to title.
   Clicking a character card also starts a new session with that gender.
 - WASD or arrow keys in the room: held movement, with equal cardinal/diagonal speed. The player
@@ -304,8 +323,10 @@ The NPC and furniture remain static, and M02's scale lab is still pending.
 
 ## Content and title screen
 
-The Picker's Hollow title uses `Content/TitleScreen/title-screen-panorama-day-to-dusk.png`,
-which adds 747 rows of daytime sky above the supplied 2106x747 illustration. The supplied
+The Picker's Hollow title uses `Content/TitleScreen/title-screen-panorama-day-to-dusk-forest.png`,
+a native 1902x827 ImageGen revision with a screen of grassy urban forest on the
+left and the day-to-dusk sky above the town. The previous panorama is preserved.
+The supplied
 `logo-pickers-hollow.png` replaces the title text as an independent transparent
 overlay; the main menu uses Silkscreen, title badge/help uses Pixelify Sans Bold,
 and Options uses Jersey 25 for header tabs and Atkinson Hyperlegible for other
@@ -321,19 +342,24 @@ It then descends for 3.2 seconds to the dusk framing. The game logo and menu beg
 fading in 0.25 seconds before arrival. The menu accepts input after the 0.8-second
 fade. Escape during the intro fades the studio logo out over 0.8 seconds and
 reaches the ready menu within two seconds. Returning to title during play opens
-the settled menu.
+the settled menu. New Game immediately pans left over 1.1 seconds to the forest,
+with Sprout floating to Male using his existing pointing loop. The two character models appear on arrival;
+Back pans right to the main menu. Travel pauses while unfocused and captures
+input through arrival. Selection uses a transparent canvas and translucent cards.
 Click Options (or use keyboard
-confirmation) to pan to the right edge over 0.8 seconds with SmoothStep easing.
+confirmation) to pan to the right edge over 1.1 seconds with SmoothStep easing.
 Options appears during Sprout's flight and accepts input after arrival. Back/Escape hides Options and pans left; Escape
 can also reverse an outgoing pan. Repeated navigation does not restart the camera.
 Controls cannot activate during travel. Options opened from the pause
 menu does not use this title animation and keeps the session paused.
 
 The background fills the actual viewport using a uniform cover scale, without
-stretching or revealing outside pixels. The original 2106x747 band determines the
-scale and settled crop, so the descent preserves the title and Options framing.
-Very wide viewports that already show the entire image width have no horizontal
-travel and crop vertically instead. Point sampling preserves sharp pixel edges.
+stretching or revealing outside pixels. The 1166x413 town band at (736,414)
+determines the scale and settled town crop, independently of the extensions.
+The forest occupies the left 736 pixels, just over one viewport at 16:9.
+Very wide viewports can also show adjacent town scenery from the forest, and
+have no Main-to-Options travel when the complete town band is already visible.
+Point sampling preserves sharp pixel edges.
 The title and Options UI retain separate, contained 1920x1080 and 1280x720 canvases;
 their layout and mouse coordinates do not pan with the background. Transparent
 UI targets composite over the panorama after switching back to the backbuffer.
@@ -379,8 +405,9 @@ Sprout replaces the title menu's selection diamond. The bundled local
 `sprout-title-menu.png` uses 68x80 cells: frames 0-12 loop PixelLab's east-facing
 Floating Point Right Loop at 90 ms/frame; frames 16-31 preserve the original
 selection reaction, padded without resizing, at 50 ms/frame on confirmation by
-Enter, Space, or mouse. For entries other than Options, the selected action runs after the 0.8-second Interact
-clip finishes, so the reaction is visible before starting a game or exiting. Repeated input is captured during the clip; Escape cancels
+Enter, Space, or mouse. Continue/Exit retain the 0.8-second Interact reaction.
+New Game keeps the pointing loop and floats with the camera to Male, then follows
+Male/Female/Back selection without restarting the loop. Repeated input is captured during the clip; Escape cancels
 it. Focus loss holds pending activation until focus returns. Disabled Continue
 reacts but cannot start a session. Pause/Options controls keep their normal timing.
 
@@ -393,11 +420,11 @@ pixel position, avoiding a second scaling pass through the title render target.
 Clip timings are independently editable in the metadata.
 
 Options finishes the current pointing cycle, then Sprout floats upright to the
-first Display setting during the 0.8-second panorama pan. The Floating Point
+first Display setting during the 1.1-second panorama pan. The Floating Point
 Right Loop continues throughout travel and arrival, without rotation or jet clips.
 Input is captured until arrival; Escape cancels and focus loss pauses the float.
 Leaving main-menu Options keeps Sprout visible and floats him from the selected
-setting back to the main menu's Options entry over the same 0.8-second pan.
+setting back to the main menu's Options entry over the same 1.1-second pan.
 His pointing animation continues without restarting, and Options remains selected
 on arrival. Return travel captures input and freezes with focus loss.
 All frames are bundled locally; the game never calls PixelLab.
@@ -405,10 +432,10 @@ All frames are bundled locally; the game never calls PixelLab.
 ## Menu music
 
 The supplied **Forgotten Treasures** theme starts with the launch intro and
-loops across the main menu and title-side Options without restarting during travel.
+loops across the main menu, title-side Options and character selection without restarting during travel.
 Each loop fades out over its final 1.5 seconds and fades in over the next pass's
-first 1.5 seconds. There are no entrance/departure fades. Character selection and
-gameplay stop the theme, including Options opened from pause; returning to title
+first 1.5 seconds. There are no entrance/departure fades. Gameplay
+stops the theme, including Options opened from pause; returning to title
 starts it again.
 
 The theme's base gain is 50% before the Master/Music sliders, reducing its playback

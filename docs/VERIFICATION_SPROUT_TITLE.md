@@ -1,5 +1,29 @@
 # Sprout title selector verification
 
+## New Game float and slower menu pans — 2026-11-11
+
+New Game now starts its camera pan immediately and keeps the current pointing
+loop, bypassing Interact. Sprout floats with the camera's eased progress to Male,
+then follows the active Male/Female/Back label. Creation anchors are owned by
+`Characters/Player/Create`. The overlay maps between the title and integer-scaled
+selection canvases while preserving its screen position and pixel scale. Travel
+and animation freeze while unfocused; arrival consumes input. Existing sprites,
+metadata, frame durations and artwork remain unchanged.
+
+Horizontal menu pans now take 1.1 seconds rather than 0.8 seconds, including Options
+entry/return. Options' existing pointing-cycle departure and loop continuity remain.
+Music continues through New Game travel, selection and Back without restarting,
+and stops on entry to gameplay. The intro descent and title fade are unchanged.
+
+The solution/content build passed with zero warnings/errors, 95/95 headless
+regressions passed, and `git diff --check` passed. Exact commands are in
+[panorama verification](VERIFICATION_PANORAMA.md). Tests cover keyboard/pointer
+entry, existing animation phase preservation, shared camera progress, landing on
+Male, all three selector anchors, cancellation, focus freeze, input capture, reentry
+and music continuity. No game launch, screenshots or listening test was performed;
+flight appearance, landing alignment, pan feel and audible continuity remain user
+acceptance. Historical timing/behavior below is retained as earlier evidence.
+
 ## Main-menu return flight - 2026-11-08
 
 Leaving Options opened from the main menu now retains Sprout and floats him from

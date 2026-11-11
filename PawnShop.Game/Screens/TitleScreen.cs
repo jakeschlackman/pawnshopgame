@@ -8,7 +8,8 @@ namespace PawnShop.Game.Screens;
 // Application-owned artwork: returning to title reuses it without creating a session.
 internal sealed class TitleScreen : IDisposable
 {
-    private const int SkyExtensionHeight = 747;
+    private const int SkyExtensionHeight = 414;
+    private const int ForestExtensionWidth = 736;
     private readonly PixelRenderer renderer;
     private readonly PanoramicBackground background;
     private readonly Texture2D logo;
@@ -23,11 +24,11 @@ internal sealed class TitleScreen : IDisposable
         try
         {
             background = new PanoramicBackground(device,
-                Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-screen-panorama-day-to-dusk.png"));
+                Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-screen-panorama-day-to-dusk-forest.png"));
             logo = LoadTexture(device, "logo-pickers-hollow.png", 1774, 887);
             studioLogo = LoadTexture(device, "logo-torcalev-studios.png", 1254, 1254);
             sprout = LoadTexture(device, "sprout-title-menu.png", titleSheet.ImageWidth, titleSheet.ImageHeight);
-            DrawBackground = () => background.Draw(camera, SkyExtensionHeight, titleDescent());
+            DrawBackground = () => background.Draw(camera, SkyExtensionHeight, titleDescent(), ForestExtensionWidth);
         }
         catch
         {
@@ -87,12 +88,18 @@ internal sealed class TitleScreen : IDisposable
         return new Vector2(X(0.145833f), Y(y) + renderer.MeasureTextVerticalCenter(label.Font("TitleMenu")) + 9);
     }
 
-    public void DrawSelector(SpriteAnimator selector, Vector2 anchor, float rotation = 0, float opacity = 1)
+    public Vector2 SelectorAnchor(PixelRenderer target, int index, string label, float textScale) =>
+        renderer.MapPointTo(target, SelectorAnchor(index, label, textScale));
+
+    public void DrawSelector(SpriteAnimator selector, Vector2 anchor, float rotation = 0, float opacity = 1,
+        PixelRenderer? target = null)
     {
         var sheet = selector.Definition;
         // Keep the stable authored pivot, and avoid resampling the sprite through two targets.
-        renderer.DrawPixelOverlay(sprout, sheet.GetFrame(selector.FrameIndex),
-            anchor, sheet.Pivot, sheet.DisplayScale, rotation, opacity);
+        var overlay = target ?? renderer;
+        float scale = target is null ? sheet.DisplayScale : sheet.DisplayScale * renderer.OutputScale / overlay.OutputScale;
+        overlay.DrawPixelOverlay(sprout, sheet.GetFrame(selector.FrameIndex),
+            anchor, sheet.Pivot, scale, rotation, opacity);
     }
 
     private int X(float fraction) => (int)MathF.Round(renderer.Width * fraction);

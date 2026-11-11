@@ -371,7 +371,13 @@ Paused timers do not prohibit the open UI's authorized domain actions. Transfers
 
 ### 12.2 Title and session flow
 
-The first playable screen is the title screen. New Game opens male/female character selection; confirming creates a fresh session, while X returns to title without one. Continue remains unavailable with a clear reason until loading and a valid compatible save exist. Settings either change real behavior or are explicitly unavailable. Returning to title ends the session cleanly; opening another session does not retain the old inventory, quests, or subscriptions.
+The first playable screen is the title screen. New Game pans left into a wooded
+city clearing, then shows male/female character selection. Confirming creates a
+fresh session; X pans back to title without one. Travel captures input and pauses
+while unfocused. Continue remains unavailable with a clear reason until loading
+and a valid compatible save exist. Settings either change real behavior or are
+explicitly unavailable. Returning to title ends the session cleanly; opening
+another session does not retain the old inventory, quests, or subscriptions.
 
 ### 12.3 Save policy
 

@@ -110,7 +110,37 @@ Required folders, relative to each project directory:
 
 The tests retain the dependency-free console runner. They reference Game's graphics-free Bootstrap classes for lifecycle tests without constructing PawnShopGame, a window, or graphics resources. Framework menu/input tests are under Tests/Framework. Run `dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build` after building the solution; `dotnet test` does not execute this runner.
 
-`PawnShop.Game/Content/TitleScreen/title-screen-panorama-day-to-dusk.png` is the active Picker's Hollow title background, copied unchanged to build/publish output. Application-owned TitleScreen uses Framework's PanoramicBackground to draw directly to the viewport with uniform scale and point sampling. On launch, Bootstrap's TitleIntro holds the camera in the daytime sky for a centered Torcalev Studios splash, with a one-second fade in, two-second hold and one-second fade out. ApplicationFlow advances the sequence once with presentation time, then starts the 3.2-second descent. Escape fades out the splash and reaches the ready menu within two seconds. The 0.8-second title fade begins 0.25 seconds before arrival. It captures menu input through the fade. PanoramaCamera uses the original 2106x747 band to calculate scale and the settled crop for the actual viewport. Its horizontal Options travel retains 0.8-second SmoothStep easing. Title and Options UI use contained 1920x1080 and 1280x720 targets, composited over the panorama after returning to the backbuffer. Options is visible during Sprout's outgoing float and accepts input on arrival. The return pan hides the menu until arrival. Escape can cancel the flight and reverse the pan. Pause-menu Options uses the room background. The room and overlays use a 640x360 target. Fonts use MGCB/SpriteFont, with the content builder and local tool pinned to 3.8.4.1. See README.md for resource ownership, asset provenance, and build and launch commands.
+`PawnShop.Game/Content/TitleScreen/title-screen-panorama-day-to-dusk-forest.png`
+is the active 1902x827 background, copied unchanged to build/publish output.
+The prior 2106x1494 source remains preserved; ImageGen's complete native revision
+adds a grassy urban forest on the left without manually stitching images.
+Application-owned TitleScreen uses Framework's PanoramicBackground to draw
+directly to the viewport with uniform cover scale and point sampling.
+PanoramaCamera frames the 1166x413 town band at (736,414), independently of the
+sky and left extensions. Position 0 is Main, +1 is Options, and -1 is character
+selection. New Game immediately starts a 1.1-second SmoothStep pan left, keeping
+Sprout's current pointing loop instead of playing Interact. His overlay follows
+the camera's eased progress to Characters' Male selection anchor. Both models appear on arrival through Characters' creation screen,
+composited over the panorama using the existing transparent 640x360 UI target.
+Back pans right to Main. Travel pauses on focus loss and captures its entire
+arrival frame; no session exists until a model is confirmed. Sprout keeps pointing
+beside the selected Male/Female/Back label. Music continues through selection
+and Back without restarting; gameplay stops it.
+
+On launch, Bootstrap's TitleIntro holds the camera in the daytime sky for a
+centered Torcalev Studios splash, with a one-second fade in, two-second hold
+and one-second fade out. ApplicationFlow advances the sequence once with
+presentation time, then starts the 3.2-second descent. Escape fades out the
+splash and reaches the ready menu within two seconds. The 0.8-second title fade
+begins 0.25 seconds before arrival and captures menu input through completion.
+Options travel shares the 1.1-second SmoothStep duration. Title and Options UI use
+contained 1920x1080 and 1280x720 targets, composited over the panorama after
+returning to the backbuffer. Options is visible during Sprout's outgoing float
+and accepts input on arrival. The return pan hides the menu until arrival.
+Escape can cancel the flight and reverse the pan. Pause-menu Options uses the
+room background. Room overlays use a 640x360 target. Fonts use MGCB/SpriteFont,
+with the content builder and local tool pinned to 3.8.4.1. See README.md for
+resource ownership, asset provenance, and build and launch commands.
 
 ### Common NPC ownership — approved destination
 
@@ -233,7 +263,7 @@ text-speed setting. AudioPlayback owns one Audio `LoopingMusic`/`SongMusicTrack`
 for the supplied Forgotten Treasures menu theme, balanced at 50% gain before
 Master/Music preferences. The existing MGCB pipeline compiles its preserved WAV
 source to an Ogg-backed Song. It plays during the startup intro, title and title-side
-Options, retaining position through their transitions. Character selection, gameplay
+Options and character selection, retaining position through their transitions. Gameplay
 and pause-side Options stop it; returning to title restarts it. Master/Music draft
 gain and focus mute apply live without restarting. The final 1.5 seconds fade down;
 after each repeat the first 1.5 seconds fade up, using a monotonic presentation
@@ -315,19 +345,19 @@ Interact pixels are padded into the shared 68x80 grid without resizing. No runti
 network connection is used.
 Framework's immutable SpriteSheetDefinition validates the grid/clips/pivot;
 SpriteAnimator selects frames from presentation time without a graphics device.
-ApplicationFlow advances the selector once and defers non-Options title commands until its
+ApplicationFlow advances the selector once and defers Continue/Exit title commands until its
 one-shot Interact clip finishes (0.8 seconds at 50 ms/frame; Idle uses 90 ms/frame). Repeated input is captured, Escape
 cancels, and focus loss holds pending activation. Disabled entries may animate but
 cannot execute. TitleScreen only reads the frame and draws through PixelRenderer
 using a source rectangle and stable pivot at the text's vertical center. The
 selector is application UI and does not create a gameplay companion entity.
 OptionsSproutFlight owns the main-menu/Options presentation: finish the current
-Idle cycle, then float upright to the first Display field over the 800 ms
+Idle cycle, then float upright to the first Display field over the 1.1-second
 panorama pan while continuing the same pointing loop. There are no takeoff,
 jet-flight or landing clips and no rotation. Arrival does not restart Idle.
 Options input unlocks after arrival; Escape cancels entry and focus loss freezes
 the sequence and camera. Closing main-menu Options captures Sprout's visible
-anchor before restoring draft settings, then floats him back over the same 800ms
+anchor before restoring draft settings, then floats him back over the same 1.1-second
 pan to the main menu's selected Options entry. The pointing loop and animation
 clock continue throughout without a restart. Return travel captures input through
 arrival; repeated Back does not skip it. The title menu renders behind the return
@@ -1085,6 +1115,12 @@ demo below; the legacy validator is not a production promotion gate.
 See docs/VERIFICATION_ASSET_CLEANUP.md.
 
 #### Implemented player selection and movement
+
+`Characters/Player/Create` owns new-game player creation presentation. Its
+`PlayerModel_SelectionScreen.cs` contains the selection screen and shared card/Back
+layout. Game supplies its menu and preview-drawing callback, retaining texture
+ownership and session creation at the application boundary. Characters does not
+reference Game.
 
 New Game opens a sessionless male/female selection screen. Confirmation creates
 one fresh session; X returns to title. `Characters/Player/PlayerState` owns the

@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using PawnShop.Characters.Player.Create;
 using PawnShop.Framework.Input;
 using PawnShop.Game.Bootstrap;
 

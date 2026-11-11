@@ -37,7 +37,9 @@ public sealed class ApplicationFlow : IDisposable
     public IReadOnlyDictionary<string, int> NpcFrames => session?.NpcFrames ?? System.Collections.Frozen.FrozenDictionary<string, int>.Empty;
     public DialoguePresenter? Dialogue { get; private set; }
     public PanoramaCamera TitleCamera { get; } = new();
-    public bool UsesTitleBackground => session is null && Screen is Screen.Title or Screen.Options;
+    public bool UsesTitleBackground => session is null && Screen is Screen.Title or Screen.Options or Screen.CharacterSelect;
+    public bool PlaysTitleMusic => UsesTitleBackground && !ExitRequested;
+    public bool CharacterSelectionFlying => Screen == Screen.CharacterSelect && TitleCamera.IsMoving;
     public bool TitleIntroPlaying => titleIntro.IsPlaying;
     public double TitleDescent => titleIntro.Descent;
     public float StudioLogoOpacity => titleIntro.StudioOpacity;
@@ -95,7 +97,7 @@ public sealed class ApplicationFlow : IDisposable
             {
                 optionsOrigin = Screen.Title;
                 Options.Open();
-                SetScreen(Screen.Options, preserveOptionsFlight: true);
+                SetScreen(Screen.Options, preserveTitleAnimation: true);
             }
             else if (before == OptionsSproutPhase.Flying) TitleCamera.Update(delta);
             return; // Capture input through arrival, including its completion frame.
@@ -114,16 +116,18 @@ public sealed class ApplicationFlow : IDisposable
                 return; // Completing feedback consumes input; never tick a newly created room.
             }
         }
-        if (UsesTitleBackground) TitleCamera.Update(delta);
         if (UsesTitleBackground && TitleCamera.IsMoving)
         {
+            if (!active) return;
+            TitleCamera.Update(delta);
+            if (Screen == Screen.CharacterSelect) TitleSelector.Update(delta);
             // Back may reverse an in-progress pan; hidden controls cannot activate.
-            if (active && input.Cancel && Screen == Screen.Options)
+            if (input.Cancel && Screen is Screen.Options or Screen.CharacterSelect)
             {
                 Options.Cancel();
                 SetScreen(Screen.Title);
             }
-            return;
+            return; // Arrival consumes this frame too; held confirmation cannot start a session.
         }
         if (Screen == Screen.Options)
         {
@@ -135,7 +139,7 @@ public sealed class ApplicationFlow : IDisposable
                 if (optionsOrigin == Screen.Title)
                 {
                     OptionsFlight.StartReturn(returnAnchor);
-                    SetScreen(Screen.Title, preserveOptionsFlight: true);
+                    SetScreen(Screen.Title, preserveTitleAnimation: true);
                     Menu!.Handle(new(SelectionIndex: 2)); // Land beside the main menu's Options entry.
                 }
                 else SetScreen(optionsOrigin);
@@ -165,6 +169,7 @@ public sealed class ApplicationFlow : IDisposable
             }
             return;
         }
+        if (Screen == Screen.CharacterSelect) TitleSelector.Update(delta);
         if (Screen == Screen.Room)
         {
             if (input.Cancel) { SetScreen(Screen.Pause); return; }
@@ -196,6 +201,11 @@ public sealed class ApplicationFlow : IDisposable
         var command = Menu?.Handle(input);
         if (Screen == Screen.Title && input.Confirm && input.Up == input.Down)
         {
+            if (command == MenuCommand.NewGame)
+            {
+                ExecuteMenuCommand(command);
+                return;
+            }
             if (command == MenuCommand.Settings)
             {
                 OptionsFlight.Start();
@@ -217,7 +227,7 @@ public sealed class ApplicationFlow : IDisposable
         {
             case MenuCommand.NewGame:
                 if (session is not null) throw new InvalidOperationException("A session is already active.");
-                SetScreen(Screen.CharacterSelect);
+                SetScreen(Screen.CharacterSelect, preserveTitleAnimation: true);
                 break;
             case MenuCommand.SelectMale:
             case MenuCommand.SelectFemale:
@@ -226,6 +236,9 @@ public sealed class ApplicationFlow : IDisposable
                     command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female, commonNpcs);
                 SessionsCreated++;
                 SetScreen(Screen.Room);
+                // The hidden title is ready at its original framing when returning from play.
+                TitleCamera.NavigateToMainMenu();
+                TitleCamera.Update(PanoramaCamera.TransitionDuration);
                 break;
             case MenuCommand.BackToTitle: SetScreen(Screen.Title); break;
             case MenuCommand.Resume: SetScreen(Screen.Room); break;
@@ -286,12 +299,13 @@ public sealed class ApplicationFlow : IDisposable
         SetScreen(target);
     }
 
-    private void SetScreen(Screen screen, bool preserveOptionsFlight = false)
+    private void SetScreen(Screen screen, bool preserveTitleAnimation = false)
     {
-        if (!preserveOptionsFlight) CancelTitleInteraction();
+        if (!preserveTitleAnimation) CancelTitleInteraction();
         if (session is null)
         {
             if (screen == Screen.Options) TitleCamera.NavigateToOptions();
+            else if (screen == Screen.CharacterSelect) TitleCamera.NavigateToCharacterSelection();
             else if (screen == Screen.Title) TitleCamera.NavigateToMainMenu();
         }
         Screen = screen;

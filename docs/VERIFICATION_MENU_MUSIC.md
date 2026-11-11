@@ -1,5 +1,13 @@
 # Menu theme music
 
+Selection follow-up (2026-11-11): the intro, title, title-side Options and character
+selection now share continuous playback. New Game's pan, time spent choosing a
+model, and Back preserve the same music instance and cursor. Gameplay still stops
+the track; returning from play restarts it. Headless playback counters verify no
+extra play/stop during travel or selection, including focus mute and return.
+Build/content passed with zero warnings/errors; the regression suite passed 95/95.
+No game launch or listening test was performed.
+
 Current ownership (2026-11-10): music source is
 `PawnShop.Audio/Content/Music/Forgotten_Treasures.wav`; playback types now use
 `PawnShop.Audio`, with `AudioAssets.MenuTheme` resolving to
@@ -37,8 +45,8 @@ has full configured gain; screen departures stop immediately. This is a fade thr
 silence at the repeat boundary, not overlapping playback. Musical seam quality and
 any silence authored into the recording remain subject to listening acceptance.
 
-Character selection, room/dialogue/pause and pause-side Options do not play the
-theme. Returning to title starts it from the beginning. The recording's base gain
+Character selection now retains the theme. Room/dialogue/pause and pause-side
+Options do not play it. Returning from gameplay starts it from the beginning. The recording's base gain
 is now 0.5, halving its playback level before applying Master/Music preferences
 and the fade envelope. At the default 80/80 settings, steady gain is 0.32 rather
 than 0.64. Saved preferences are unchanged. Master/Music preview gain multiplies
@@ -97,7 +105,8 @@ Pending with the user:
 3. Wait through 2:20; confirm the end fades down and the repeat fades back up at a
    comfortable rate, with no unwanted click, gap or abrupt musical transition.
 4. Preview Master/Music, then discard/apply; test focus mute both enabled and disabled.
-5. Enter character selection/gameplay, open pause-side Options and return to title;
-   confirm stop/restart behavior. Exit and confirm audio stops.
+5. Enter character selection and return; confirm uninterrupted music. Confirm a
+   model, open pause-side Options and return to title; check gameplay stop/title
+   restart behavior. Exit and confirm audio stops.
 
 No automated blocker remains. Audible loop quality is unverified.

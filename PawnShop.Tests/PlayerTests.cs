@@ -2,7 +2,9 @@ using System.Numerics;
 using Microsoft.Xna.Framework.Input;
 using PawnShop.Characters.Movement;
 using PawnShop.Characters.Player;
+using PawnShop.Characters.Player.Create;
 using PawnShop.Framework.Input;
+using PawnShop.Framework.Rendering;
 using PawnShop.Game.Bootstrap;
 using PawnShop.Game.Screens;
 using KeyboardInput = PawnShop.Framework.Input.KeyboardInput;
@@ -44,6 +46,106 @@ internal static partial class RegressionTests
         using var closing = new ApplicationFlow();
         Confirm(closing); closing.RequestExit();
         Check(closing.ExitRequested && closing.SessionsCreated == 0);
+    }
+
+    internal static void CharacterSelectionPan()
+    {
+        foreach (int uiScale in new[] { 100, 125, 150 })
+        {
+            using var app = new ApplicationFlow(new() { UiScale = uiScale });
+            var newGame = TitleMenuLayout.Row(0).Center;
+            app.Update(MenuPointerInput.HitTest(app, newGame.X, newGame.Y, 1920, 1080), TimeSpan.Zero);
+            FinishTitleInteraction(app);
+            Check(app.Screen == Screen.CharacterSelect && app.UsesTitleBackground && !app.TitleUiVisible);
+            Check(app.TitleCamera.IsMoving && app.TitleCamera.Position == 0 && app.LiveSessions == 0);
+            Check(!app.TitleInteractionPlaying && app.TitleSelector.AnimationName == "Idle");
+            var expected = new SpriteAnimator(app.TitleSelector.Definition, "Idle");
+            app.Update(new(SelectionIndex: 1, Confirm: true, MoveX: 1), PanoramaCamera.TransitionDuration / 4);
+            expected.Update(PanoramaCamera.TransitionDuration / 4);
+            Check(Math.Abs(app.TitleCamera.Position + .15625) < 1e-9 && app.Menu!.SelectedIndex == 0);
+            Check(app.CharacterSelectionFlying && app.TitleSelector.FrameIndex == expected.FrameIndex);
+            double frozen = app.TitleCamera.Position;
+            app.Update(new(Cancel: true), TimeSpan.FromSeconds(10), active: false);
+            Check(app.Screen == Screen.CharacterSelect && app.TitleCamera.Position == frozen
+                && app.TitleSelector.FrameIndex == expected.FrameIndex);
+            var female = CharacterSelectionLayout.Card(1).Center;
+            Check(MenuPointerInput.HitTest(app, female.X * 4, female.Y * 4, 2560, 1440) == default);
+            app.Update(new(SelectionIndex: 1, Confirm: true, MoveX: 1), PanoramaCamera.TransitionDuration * 3 / 4);
+            expected.Update(PanoramaCamera.TransitionDuration * 3 / 4);
+            Check(app.TitleCamera.Position == -1 && !app.TitleCamera.IsMoving && app.TitleUiVisible);
+            Check(!app.CharacterSelectionFlying && app.TitleSelector.AnimationName == "Idle"
+                && app.TitleSelector.FrameIndex == expected.FrameIndex, "Landing restarted the pointing animation.");
+            Check(app.LiveSessions == 0 && app.Menu!.SelectedIndex == 0, "Arrival input leaked into selection.");
+            app.Update(default, TimeSpan.FromMilliseconds(90));
+            expected.Update(TimeSpan.FromMilliseconds(90));
+            Check(app.TitleSelector.FrameIndex == expected.FrameIndex, "Selection must keep Sprout animated.");
+            app.Update(MenuPointerInput.HitTest(app, female.X * 4, female.Y * 4, 2560, 1440), TimeSpan.Zero);
+            Check(app.Screen == Screen.Room && app.Player is { Gender: PlayerGender.Female });
+            Check(app.Room!.Value.Elapsed == TimeSpan.Zero && app.SessionsCreated == 1);
+            ReturnPrompt(app); Discard(app);
+            Check(app.TitleCamera.Position == 0 && app.TitleUiVisible && app.SessionsDisposed == 1);
+        }
+
+        using var cancelled = new ApplicationFlow();
+        cancelled.Update(new(Confirm: true), TimeSpan.Zero);
+        FinishTitleInteraction(cancelled);
+        cancelled.Update(default, PanoramaCamera.TransitionDuration / 2);
+        Check(cancelled.TitleCamera.Position == -.5);
+        cancelled.Update(new(Cancel: true), TimeSpan.Zero);
+        Check(cancelled.Screen == Screen.Title && cancelled.TitleCamera.Position == -.5 && !cancelled.TitleUiVisible);
+        cancelled.Update(new(Confirm: true, SelectionIndex: 3), PanoramaCamera.TransitionDuration, active: false);
+        Check(cancelled.TitleCamera.Position == -.5 && !cancelled.ExitRequested);
+        cancelled.Update(new(Confirm: true, SelectionIndex: 3), PanoramaCamera.TransitionDuration);
+        Check(cancelled.TitleCamera.Position == 0 && cancelled.TitleUiVisible && !cancelled.TitleInteractionPlaying);
+        Check(cancelled.Menu!.SelectedIndex == 0 && cancelled.SessionsCreated == 0 && !cancelled.ExitRequested);
+        Confirm(cancelled);
+        var back = CharacterSelectionLayout.Back.Center;
+        cancelled.Update(MenuPointerInput.HitTest(cancelled, back.X, back.Y, 640, 360), TimeSpan.Zero);
+        Check(cancelled.Screen == Screen.Title && cancelled.TitleCamera.IsMoving && cancelled.LiveSessions == 0);
+        cancelled.Update(default, PanoramaCamera.TransitionDuration);
+        Confirm(cancelled);
+        cancelled.RequestExit();
+        Check(cancelled.ExitRequested && cancelled.SessionsCreated == 0);
+    }
+
+    internal static void CreationSelectorFlight()
+    {
+        Check(PanoramaCamera.TransitionDuration == TimeSpan.FromMilliseconds(1100));
+        foreach (int uiScale in new[] { 100, 125, 150 })
+        foreach (bool pointer in new[] { false, true })
+        {
+            using var app = new ApplicationFlow(new() { UiScale = uiScale });
+            app.Update(default, TimeSpan.FromMilliseconds(270));
+            int departureFrame = app.TitleSelector.FrameIndex;
+            Check(departureFrame == 3);
+            var row = TitleMenuLayout.Row(0).Center;
+            var input = pointer ? MenuPointerInput.HitTest(app, row.X, row.Y, 1920, 1080) : new PawnShop.Framework.Input.InputFrame(Confirm: true);
+            app.Update(input, TimeSpan.Zero);
+            Check(app.Screen == Screen.CharacterSelect && app.CharacterSelectionFlying && !app.TitleInteractionPlaying);
+            Check(app.TitleSelector.AnimationName == "Idle" && app.TitleSelector.FrameIndex == departureFrame,
+                "New Game must retain the current pointing phase instead of restarting or playing Interact.");
+            float textScale = uiScale / 100f;
+            var start = new Microsoft.Xna.Framework.Vector2(93, 208);
+            var male = CharacterSelectionLayout.SelectorAnchor(0, textScale);
+            var female = CharacterSelectionLayout.SelectorAnchor(1, textScale);
+            var back = CharacterSelectionLayout.SelectorAnchor(2, textScale);
+            Check(CharacterSelectionLayout.FlightAnchor(start, 0, textScale) == start);
+            Check(CharacterSelectionLayout.FlightAnchor(start, -.5, textScale) == Microsoft.Xna.Framework.Vector2.Lerp(start, male, .5f));
+            Check(CharacterSelectionLayout.FlightAnchor(start, -1, textScale) == male);
+            Check(male.X < CharacterSelectionLayout.Card(0).Center.X && female.X > male.X && back.Y > male.Y);
+            app.Update(new(Confirm: true, Right: true), PanoramaCamera.TransitionDuration);
+            Check(app.TitleCamera.Position == -1 && !app.CharacterSelectionFlying && app.Menu!.SelectedIndex == 0 && app.LiveSessions == 0);
+            Check(app.TitleSelector.AnimationName == "Idle");
+            app.Update(new(Right: true), TimeSpan.Zero);
+            Check(app.Menu!.SelectedIndex == 1 && app.LiveSessions == 0);
+            app.Update(new(Down: true), TimeSpan.Zero);
+            Check(app.Menu.SelectedIndex == 2 && app.LiveSessions == 0);
+            app.Update(new(Confirm: true), TimeSpan.Zero);
+            Check(app.Screen == Screen.Title && app.TitleCamera.IsMoving && !app.CharacterSelectionFlying);
+            app.Update(default, PanoramaCamera.TransitionDuration);
+            app.Update(input, TimeSpan.Zero);
+            Check(app.CharacterSelectionFlying && app.Menu!.SelectedIndex == 0);
+        }
     }
 
     internal static void PlayerInputMapping()
