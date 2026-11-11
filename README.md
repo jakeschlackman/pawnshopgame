@@ -55,6 +55,25 @@ This is a development-tool setting; it does not change game shutdown. Use the
 `--no-build` launch above after building to avoid another build on each launch.
 Visual Studio's own builds do not use this response file.
 
+## Application icon
+
+`PawnShop.Game/Content/Application/pickers-hollow.ico` is the single icon source
+for the Windows executable and application window. `ApplicationIcon` embeds it
+in Debug, Release and published executables. The same ICO is copied to build and
+publish content for the Windows-only `WindowsWindowIcon` bootstrap helper, which
+resolves DesktopGL's SDL window to an HWND and sets both native icon sizes during
+`Initialize`. The host restores SDL's icons and releases its handles on disposal.
+No WinForms, WPF or additional package is needed.
+
+`pickers-hollow-icon.png` in that folder preserves the supplied 1254x1254
+transparent source. It is neither loaded nor copied to runtime output. Both
+assets are preserved byte-for-byte. The ICO contains 16, 24, 32, 48, 64, 128 and
+256 pixel images. Other operating systems retain MonoGame's default window icon;
+macOS bundle/Linux desktop branding would require separate platform packaging.
+The window title is **Pickers Hollow**. Explorer, taskbar, Alt+Tab and caption
+appearance remain manual Windows checks; old shortcuts or Windows icon caches
+can retain a previous icon.
+
 ## Human asset authoring
 
 Approved modular human art now belongs to common NPC shoppers under

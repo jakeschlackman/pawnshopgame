@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
+    <ApplicationIcon>Content/Application/pickers-hollow.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Include="../PawnShop.Characters/Npcs/Common/Assets/**/*.png;../PawnShop.Characters/Npcs/Common/Assets/catalog.json"
@@ -17,6 +18,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.4.1" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="$(ApplicationIcon)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Update="Content/UI/*.png;Content/UI/*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Update="Content/TitleScreen/*.png" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Update="Content/Player/player-sprite.json;Content/Player/placeholder-sprite.json;Content/Player/Bases/male/base.png;Content/Player/Bases/female/base.png" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />

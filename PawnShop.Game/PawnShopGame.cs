@@ -24,6 +24,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
     private PixelRenderer? renderer;
     private GameScreens? screens;
     private FontLibrary? fonts;
+    private WindowsWindowIcon? windowIcon;
 
     public PawnShopGame()
     {
@@ -37,11 +38,20 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
             PreferredBackBufferHeight = Height * 2,
             SynchronizeWithVerticalRetrace = true
         };
-        Window.Title = "Picker's Hollow";
+        Window.Title = "Pickers Hollow";
         Window.AllowUserResizing = false;
         IsMouseVisible = true;
         IsFixedTimeStep = true;
         TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60);
+    }
+
+    protected override void Initialize()
+    {
+        // DesktopGL has created its final SDL window before Initialize is called.
+        if (OperatingSystem.IsWindows())
+            windowIcon = new WindowsWindowIcon(Window.Handle,
+                Path.Combine(AppContext.BaseDirectory, "Content", "Application", "pickers-hollow.ico"));
+        base.Initialize();
     }
 
     protected override void LoadContent()
@@ -177,6 +187,8 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
     {
         if (disposing)
         {
+            windowIcon?.Dispose();
+            windowIcon = null;
             flow.Dispose();
             audio?.Dispose();
             audio = null;
