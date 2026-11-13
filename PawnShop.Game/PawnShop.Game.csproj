@@ -5,6 +5,9 @@
     <ApplicationIcon>Content/Application/pickers-hollow.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="../PawnShop.Characters/Player/Create/Assets/*.png;../PawnShop.Characters/Player/Create/Assets/*.json"
+          Exclude="../PawnShop.Characters/Player/Create/Assets/packing.json"
+          Link="Content/CharacterSelection/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Include="../PawnShop.Characters/Npcs/Common/Assets/**/*.png;../PawnShop.Characters/Npcs/Common/Assets/catalog.json"
           Link="Content/CommonNpcs/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <ProjectReference Include="../PawnShop.Framework/PawnShop.Framework.csproj" />

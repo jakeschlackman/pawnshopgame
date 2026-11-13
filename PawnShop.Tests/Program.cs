@@ -6,6 +6,11 @@ if (args.Length > 0 && args[0] == "--assets") return PlayerAssets.Run(args[1..],
 // Dependency-free executable regression suite. A failure exits nonzero.
 var tests = new (string Name, Action Run)[]
 {
+    ("Selection actors move into the foreground, hold, overlap their return and rest on Back", CharacterSelectionTests.Motion),
+    ("Selection packing preserves native pixels and rejects overwrites, stale hashes and cropped feet", SelectionAssetTests.Run),
+    ("Rapid selection changes preserve positions and deterministic timing; confirmation latches one actor", CharacterSelectionTests.RapidSwitches),
+    ("Selection confirmation waits sessionless, freezes on focus loss and consumes arrival input once", CharacterSelectionTests.Flow),
+    ("Selection pointer hover shares moving actor bounds without stealing keyboard focus", CharacterSelectionTests.Pointer),
     ("Dropdown sound bags exhaust four samples and never repeat consecutive open/selection cues", RegressionTests.DropdownSoundBags),
     ("Dropdown opening and selection sound once through mouse and keyboard without a cooldown", RegressionTests.OptionsDropdownSounds),
     ("Dropdown WAV originals and four distinct compiled samples reach the audio pipeline unchanged", RegressionTests.DropdownClickContent),

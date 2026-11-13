@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "frameWidth": 192,
+  "frameHeight": 192,
+  "columns": 1,
+  "rows": 1,
+  "pivotX": 96,
+  "pivotY": 178,
+  "displayScale": 2,
+  "animations": {
+    "Idle": {
+      "firstFrame": 0,
+      "frameCount": 1,
+      "frameDurationMs": 1000,
+      "loop": true
+    }
+  }
+}

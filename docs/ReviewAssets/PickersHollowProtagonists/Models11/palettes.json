@@ -1,0 +1,2150 @@
+﻿{
+    "Male/south.png":  [
+                           {
+                               "hex":  "#281814",
+                               "pixels":  43
+                           },
+                           {
+                               "hex":  "#2a2223",
+                               "pixels":  29
+                           },
+                           {
+                               "hex":  "#2e1a15",
+                               "pixels":  68
+                           },
+                           {
+                               "hex":  "#312d30",
+                               "pixels":  34
+                           },
+                           {
+                               "hex":  "#331f1a",
+                               "pixels":  67
+                           },
+                           {
+                               "hex":  "#373d44",
+                               "pixels":  18
+                           },
+                           {
+                               "hex":  "#391d14",
+                               "pixels":  33
+                           },
+                           {
+                               "hex":  "#3b251e",
+                               "pixels":  46
+                           },
+                           {
+                               "hex":  "#404e5a",
+                               "pixels":  35
+                           },
+                           {
+                               "hex":  "#472419",
+                               "pixels":  42
+                           },
+                           {
+                               "hex":  "#4a5964",
+                               "pixels":  44
+                           },
+                           {
+                               "hex":  "#4e3227",
+                               "pixels":  48
+                           },
+                           {
+                               "hex":  "#586873",
+                               "pixels":  17
+                           },
+                           {
+                               "hex":  "#593221",
+                               "pixels":  37
+                           },
+                           {
+                               "hex":  "#637681",
+                               "pixels":  31
+                           },
+                           {
+                               "hex":  "#642718",
+                               "pixels":  14
+                           },
+                           {
+                               "hex":  "#687a85",
+                               "pixels":  40
+                           },
+                           {
+                               "hex":  "#693f29",
+                               "pixels":  31
+                           },
+                           {
+                               "hex":  "#73462d",
+                               "pixels":  30
+                           },
+                           {
+                               "hex":  "#785e4b",
+                               "pixels":  18
+                           },
+                           {
+                               "hex":  "#7c4a2d",
+                               "pixels":  58
+                           },
+                           {
+                               "hex":  "#7c8a92",
+                               "pixels":  16
+                           },
+                           {
+                               "hex":  "#885634",
+                               "pixels":  26
+                           },
+                           {
+                               "hex":  "#946136",
+                               "pixels":  57
+                           },
+                           {
+                               "hex":  "#99412b",
+                               "pixels":  15
+                           },
+                           {
+                               "hex":  "#a09488",
+                               "pixels":  2
+                           },
+                           {
+                               "hex":  "#b35538",
+                               "pixels":  9
+                           },
+                           {
+                               "hex":  "#c07e57",
+                               "pixels":  26
+                           },
+                           {
+                               "hex":  "#c1a07c",
+                               "pixels":  10
+                           },
+                           {
+                               "hex":  "#e2c69e",
+                               "pixels":  24
+                           },
+                           {
+                               "hex":  "#e39d6f",
+                               "pixels":  52
+                           },
+                           {
+                               "hex":  "#fceede",
+                               "pixels":  2
+                           }
+                       ],
+    "Male/east.png":  [
+                          {
+                              "hex":  "#281814",
+                              "pixels":  24
+                          },
+                          {
+                              "hex":  "#2a2223",
+                              "pixels":  35
+                          },
+                          {
+                              "hex":  "#2e1a15",
+                              "pixels":  46
+                          },
+                          {
+                              "hex":  "#312d30",
+                              "pixels":  9
+                          },
+                          {
+                              "hex":  "#331f1a",
+                              "pixels":  54
+                          },
+                          {
+                              "hex":  "#373d44",
+                              "pixels":  14
+                          },
+                          {
+                              "hex":  "#391d14",
+                              "pixels":  30
+                          },
+                          {
+                              "hex":  "#3b251e",
+                              "pixels":  46
+                          },
+                          {
+                              "hex":  "#404e5a",
+                              "pixels":  11
+                          },
+                          {
+                              "hex":  "#472419",
+                              "pixels":  27
+                          },
+                          {
+                              "hex":  "#4a5964",
+                              "pixels":  37
+                          },
+                          {
+                              "hex":  "#4e3227",
+                              "pixels":  55
+                          },
+                          {
+                              "hex":  "#586873",
+                              "pixels":  8
+                          },
+                          {
+                              "hex":  "#593221",
+                              "pixels":  27
+                          },
+                          {
+                              "hex":  "#637681",
+                              "pixels":  24
+                          },
+                          {
+                              "hex":  "#642718",
+                              "pixels":  9
+                          },
+                          {
+                              "hex":  "#687a85",
+                              "pixels":  18
+                          },
+                          {
+                              "hex":  "#693f29",
+                              "pixels":  35
+                          },
+                          {
+                              "hex":  "#73462d",
+                              "pixels":  13
+                          },
+                          {
+                              "hex":  "#785e4b",
+                              "pixels":  11
+                          },
+                          {
+                              "hex":  "#7c4a2d",
+                              "pixels":  28
+                          },
+                          {
+                              "hex":  "#7c8a92",
+                              "pixels":  11
+                          },
+                          {
+                              "hex":  "#885634",
+                              "pixels":  11
+                          },
+                          {
+                              "hex":  "#946136",
+                              "pixels":  22
+                          },
+                          {
+                              "hex":  "#99412b",
+                              "pixels":  4
+                          },
+                          {
+                              "hex":  "#a09488",
+                              "pixels":  2
+                          },
+                          {
+                              "hex":  "#b35538",
+                              "pixels":  8
+                          },
+                          {
+                              "hex":  "#c07e57",
+                              "pixels":  18
+                          },
+                          {
+                              "hex":  "#c1a07c",
+                              "pixels":  4
+                          },
+                          {
+                              "hex":  "#e2c69e",
+                              "pixels":  6
+                          },
+                          {
+                              "hex":  "#e39d6f",
+                              "pixels":  45
+                          },
+                          {
+                              "hex":  "#fceede",
+                              "pixels":  1
+                          }
+                      ],
+    "Male/north.png":  [
+                           {
+                               "hex":  "#281814",
+                               "pixels":  39
+                           },
+                           {
+                               "hex":  "#2a2223",
+                               "pixels":  31
+                           },
+                           {
+                               "hex":  "#2e1a15",
+                               "pixels":  66
+                           },
+                           {
+                               "hex":  "#312d30",
+                               "pixels":  10
+                           },
+                           {
+                               "hex":  "#331f1a",
+                               "pixels":  66
+                           },
+                           {
+                               "hex":  "#373d44",
+                               "pixels":  13
+                           },
+                           {
+                               "hex":  "#391d14",
+                               "pixels":  27
+                           },
+                           {
+                               "hex":  "#3b251e",
+                               "pixels":  77
+                           },
+                           {
+                               "hex":  "#404e5a",
+                               "pixels":  51
+                           },
+                           {
+                               "hex":  "#472419",
+                               "pixels":  15
+                           },
+                           {
+                               "hex":  "#4a5964",
+                               "pixels":  40
+                           },
+                           {
+                               "hex":  "#4e3227",
+                               "pixels":  95
+                           },
+                           {
+                               "hex":  "#586873",
+                               "pixels":  7
+                           },
+                           {
+                               "hex":  "#593221",
+                               "pixels":  13
+                           },
+                           {
+                               "hex":  "#637681",
+                               "pixels":  158
+                           },
+                           {
+                               "hex":  "#687a85",
+                               "pixels":  19
+                           },
+                           {
+                               "hex":  "#693f29",
+                               "pixels":  37
+                           },
+                           {
+                               "hex":  "#73462d",
+                               "pixels":  32
+                           },
+                           {
+                               "hex":  "#785e4b",
+                               "pixels":  14
+                           },
+                           {
+                               "hex":  "#7c4a2d",
+                               "pixels":  10
+                           },
+                           {
+                               "hex":  "#7c8a92",
+                               "pixels":  2
+                           },
+                           {
+                               "hex":  "#885634",
+                               "pixels":  42
+                           },
+                           {
+                               "hex":  "#946136",
+                               "pixels":  54
+                           },
+                           {
+                               "hex":  "#99412b",
+                               "pixels":  2
+                           },
+                           {
+                               "hex":  "#c07e57",
+                               "pixels":  11
+                           },
+                           {
+                               "hex":  "#e39d6f",
+                               "pixels":  12
+                           }
+                       ],
+    "Male/west.png":  [
+                          {
+                              "hex":  "#281814",
+                              "pixels":  31
+                          },
+                          {
+                              "hex":  "#2a2223",
+                              "pixels":  25
+                          },
+                          {
+                              "hex":  "#2e1a15",
+                              "pixels":  39
+                          },
+                          {
+                              "hex":  "#312d30",
+                              "pixels":  11
+                          },
+                          {
+                              "hex":  "#331f1a",
+                              "pixels":  50
+                          },
+                          {
+                              "hex":  "#373d44",
+                              "pixels":  16
+                          },
+                          {
+                              "hex":  "#391d14",
+                              "pixels":  36
+                          },
+                          {
+                              "hex":  "#3b251e",
+                              "pixels":  36
+                          },
+                          {
+                              "hex":  "#404e5a",
+                              "pixels":  19
+                          },
+                          {
+                              "hex":  "#472419",
+                              "pixels":  30
+                          },
+                          {
+                              "hex":  "#4a5964",
+                              "pixels":  24
+                          },
+                          {
+                              "hex":  "#4e3227",
+                              "pixels":  75
+                          },
+                          {
+                              "hex":  "#586873",
+                              "pixels":  7
+                          },
+                          {
+                              "hex":  "#593221",
+                              "pixels":  33
+                          },
+                          {
+                              "hex":  "#637681",
+                              "pixels":  24
+                          },
+                          {
+                              "hex":  "#642718",
+                              "pixels":  9
+                          },
+                          {
+                              "hex":  "#687a85",
+                              "pixels":  23
+                          },
+                          {
+                              "hex":  "#693f29",
+                              "pixels":  27
+                          },
+                          {
+                              "hex":  "#73462d",
+                              "pixels":  16
+                          },
+                          {
+                              "hex":  "#785e4b",
+                              "pixels":  11
+                          },
+                          {
+                              "hex":  "#7c4a2d",
+                              "pixels":  24
+                          },
+                          {
+                              "hex":  "#7c8a92",
+                              "pixels":  7
+                          },
+                          {
+                              "hex":  "#885634",
+                              "pixels":  16
+                          },
+                          {
+                              "hex":  "#946136",
+                              "pixels":  20
+                          },
+                          {
+                              "hex":  "#99412b",
+                              "pixels":  4
+                          },
+                          {
+                              "hex":  "#a09488",
+                              "pixels":  3
+                          },
+                          {
+                              "hex":  "#b35538",
+                              "pixels":  6
+                          },
+                          {
+                              "hex":  "#c07e57",
+                              "pixels":  20
+                          },
+                          {
+                              "hex":  "#c1a07c",
+                              "pixels":  2
+                          },
+                          {
+                              "hex":  "#e2c69e",
+                              "pixels":  6
+                          },
+                          {
+                              "hex":  "#e39d6f",
+                              "pixels":  43
+                          },
+                          {
+                              "hex":  "#fceede",
+                              "pixels":  1
+                          }
+                      ],
+    "Male/south-east.png":  [
+                                {
+                                    "hex":  "#281814",
+                                    "pixels":  31
+                                },
+                                {
+                                    "hex":  "#2a2223",
+                                    "pixels":  37
+                                },
+                                {
+                                    "hex":  "#2e1a15",
+                                    "pixels":  48
+                                },
+                                {
+                                    "hex":  "#312d30",
+                                    "pixels":  28
+                                },
+                                {
+                                    "hex":  "#331f1a",
+                                    "pixels":  59
+                                },
+                                {
+                                    "hex":  "#373d44",
+                                    "pixels":  19
+                                },
+                                {
+                                    "hex":  "#391d14",
+                                    "pixels":  37
+                                },
+                                {
+                                    "hex":  "#3b251e",
+                                    "pixels":  44
+                                },
+                                {
+                                    "hex":  "#404e5a",
+                                    "pixels":  36
+                                },
+                                {
+                                    "hex":  "#472419",
+                                    "pixels":  36
+                                },
+                                {
+                                    "hex":  "#4a5964",
+                                    "pixels":  29
+                                },
+                                {
+                                    "hex":  "#4e3227",
+                                    "pixels":  51
+                                },
+                                {
+                                    "hex":  "#586873",
+                                    "pixels":  12
+                                },
+                                {
+                                    "hex":  "#593221",
+                                    "pixels":  45
+                                },
+                                {
+                                    "hex":  "#637681",
+                                    "pixels":  52
+                                },
+                                {
+                                    "hex":  "#642718",
+                                    "pixels":  13
+                                },
+                                {
+                                    "hex":  "#687a85",
+                                    "pixels":  24
+                                },
+                                {
+                                    "hex":  "#693f29",
+                                    "pixels":  34
+                                },
+                                {
+                                    "hex":  "#73462d",
+                                    "pixels":  26
+                                },
+                                {
+                                    "hex":  "#785e4b",
+                                    "pixels":  12
+                                },
+                                {
+                                    "hex":  "#7c4a2d",
+                                    "pixels":  43
+                                },
+                                {
+                                    "hex":  "#7c8a92",
+                                    "pixels":  10
+                                },
+                                {
+                                    "hex":  "#885634",
+                                    "pixels":  26
+                                },
+                                {
+                                    "hex":  "#946136",
+                                    "pixels":  51
+                                },
+                                {
+                                    "hex":  "#99412b",
+                                    "pixels":  15
+                                },
+                                {
+                                    "hex":  "#a09488",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#b35538",
+                                    "pixels":  7
+                                },
+                                {
+                                    "hex":  "#c07e57",
+                                    "pixels":  28
+                                },
+                                {
+                                    "hex":  "#c1a07c",
+                                    "pixels":  13
+                                },
+                                {
+                                    "hex":  "#e2c69e",
+                                    "pixels":  14
+                                },
+                                {
+                                    "hex":  "#e39d6f",
+                                    "pixels":  45
+                                },
+                                {
+                                    "hex":  "#fceede",
+                                    "pixels":  2
+                                }
+                            ],
+    "Male/north-east.png":  [
+                                {
+                                    "hex":  "#281814",
+                                    "pixels":  33
+                                },
+                                {
+                                    "hex":  "#2a2223",
+                                    "pixels":  32
+                                },
+                                {
+                                    "hex":  "#2e1a15",
+                                    "pixels":  71
+                                },
+                                {
+                                    "hex":  "#312d30",
+                                    "pixels":  10
+                                },
+                                {
+                                    "hex":  "#331f1a",
+                                    "pixels":  49
+                                },
+                                {
+                                    "hex":  "#373d44",
+                                    "pixels":  19
+                                },
+                                {
+                                    "hex":  "#391d14",
+                                    "pixels":  45
+                                },
+                                {
+                                    "hex":  "#3b251e",
+                                    "pixels":  63
+                                },
+                                {
+                                    "hex":  "#404e5a",
+                                    "pixels":  39
+                                },
+                                {
+                                    "hex":  "#472419",
+                                    "pixels":  17
+                                },
+                                {
+                                    "hex":  "#4a5964",
+                                    "pixels":  33
+                                },
+                                {
+                                    "hex":  "#4e3227",
+                                    "pixels":  83
+                                },
+                                {
+                                    "hex":  "#586873",
+                                    "pixels":  13
+                                },
+                                {
+                                    "hex":  "#593221",
+                                    "pixels":  21
+                                },
+                                {
+                                    "hex":  "#637681",
+                                    "pixels":  72
+                                },
+                                {
+                                    "hex":  "#642718",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#687a85",
+                                    "pixels":  18
+                                },
+                                {
+                                    "hex":  "#693f29",
+                                    "pixels":  50
+                                },
+                                {
+                                    "hex":  "#73462d",
+                                    "pixels":  47
+                                },
+                                {
+                                    "hex":  "#785e4b",
+                                    "pixels":  10
+                                },
+                                {
+                                    "hex":  "#7c4a2d",
+                                    "pixels":  25
+                                },
+                                {
+                                    "hex":  "#7c8a92",
+                                    "pixels":  6
+                                },
+                                {
+                                    "hex":  "#885634",
+                                    "pixels":  15
+                                },
+                                {
+                                    "hex":  "#946136",
+                                    "pixels":  34
+                                },
+                                {
+                                    "hex":  "#99412b",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#b35538",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#c07e57",
+                                    "pixels":  12
+                                },
+                                {
+                                    "hex":  "#e39d6f",
+                                    "pixels":  16
+                                }
+                            ],
+    "Male/north-west.png":  [
+                                {
+                                    "hex":  "#281814",
+                                    "pixels":  43
+                                },
+                                {
+                                    "hex":  "#2a2223",
+                                    "pixels":  35
+                                },
+                                {
+                                    "hex":  "#2e1a15",
+                                    "pixels":  61
+                                },
+                                {
+                                    "hex":  "#312d30",
+                                    "pixels":  5
+                                },
+                                {
+                                    "hex":  "#331f1a",
+                                    "pixels":  53
+                                },
+                                {
+                                    "hex":  "#373d44",
+                                    "pixels":  24
+                                },
+                                {
+                                    "hex":  "#391d14",
+                                    "pixels":  42
+                                },
+                                {
+                                    "hex":  "#3b251e",
+                                    "pixels":  63
+                                },
+                                {
+                                    "hex":  "#404e5a",
+                                    "pixels":  39
+                                },
+                                {
+                                    "hex":  "#472419",
+                                    "pixels":  17
+                                },
+                                {
+                                    "hex":  "#4a5964",
+                                    "pixels":  40
+                                },
+                                {
+                                    "hex":  "#4e3227",
+                                    "pixels":  79
+                                },
+                                {
+                                    "hex":  "#586873",
+                                    "pixels":  7
+                                },
+                                {
+                                    "hex":  "#593221",
+                                    "pixels":  12
+                                },
+                                {
+                                    "hex":  "#637681",
+                                    "pixels":  61
+                                },
+                                {
+                                    "hex":  "#642718",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#687a85",
+                                    "pixels":  27
+                                },
+                                {
+                                    "hex":  "#693f29",
+                                    "pixels":  55
+                                },
+                                {
+                                    "hex":  "#73462d",
+                                    "pixels":  58
+                                },
+                                {
+                                    "hex":  "#785e4b",
+                                    "pixels":  8
+                                },
+                                {
+                                    "hex":  "#7c4a2d",
+                                    "pixels":  12
+                                },
+                                {
+                                    "hex":  "#7c8a92",
+                                    "pixels":  6
+                                },
+                                {
+                                    "hex":  "#885634",
+                                    "pixels":  14
+                                },
+                                {
+                                    "hex":  "#946136",
+                                    "pixels":  46
+                                },
+                                {
+                                    "hex":  "#99412b",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#a09488",
+                                    "pixels":  1
+                                },
+                                {
+                                    "hex":  "#b35538",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#c07e57",
+                                    "pixels":  7
+                                },
+                                {
+                                    "hex":  "#e39d6f",
+                                    "pixels":  17
+                                }
+                            ],
+    "Male/south-west.png":  [
+                                {
+                                    "hex":  "#281814",
+                                    "pixels":  32
+                                },
+                                {
+                                    "hex":  "#2a2223",
+                                    "pixels":  33
+                                },
+                                {
+                                    "hex":  "#2e1a15",
+                                    "pixels":  57
+                                },
+                                {
+                                    "hex":  "#312d30",
+                                    "pixels":  24
+                                },
+                                {
+                                    "hex":  "#331f1a",
+                                    "pixels":  51
+                                },
+                                {
+                                    "hex":  "#373d44",
+                                    "pixels":  19
+                                },
+                                {
+                                    "hex":  "#391d14",
+                                    "pixels":  41
+                                },
+                                {
+                                    "hex":  "#3b251e",
+                                    "pixels":  48
+                                },
+                                {
+                                    "hex":  "#404e5a",
+                                    "pixels":  35
+                                },
+                                {
+                                    "hex":  "#472419",
+                                    "pixels":  41
+                                },
+                                {
+                                    "hex":  "#4a5964",
+                                    "pixels":  26
+                                },
+                                {
+                                    "hex":  "#4e3227",
+                                    "pixels":  49
+                                },
+                                {
+                                    "hex":  "#586873",
+                                    "pixels":  10
+                                },
+                                {
+                                    "hex":  "#593221",
+                                    "pixels":  45
+                                },
+                                {
+                                    "hex":  "#637681",
+                                    "pixels":  56
+                                },
+                                {
+                                    "hex":  "#642718",
+                                    "pixels":  10
+                                },
+                                {
+                                    "hex":  "#687a85",
+                                    "pixels":  19
+                                },
+                                {
+                                    "hex":  "#693f29",
+                                    "pixels":  32
+                                },
+                                {
+                                    "hex":  "#73462d",
+                                    "pixels":  23
+                                },
+                                {
+                                    "hex":  "#785e4b",
+                                    "pixels":  10
+                                },
+                                {
+                                    "hex":  "#7c4a2d",
+                                    "pixels":  57
+                                },
+                                {
+                                    "hex":  "#7c8a92",
+                                    "pixels":  12
+                                },
+                                {
+                                    "hex":  "#885634",
+                                    "pixels":  28
+                                },
+                                {
+                                    "hex":  "#946136",
+                                    "pixels":  44
+                                },
+                                {
+                                    "hex":  "#99412b",
+                                    "pixels":  16
+                                },
+                                {
+                                    "hex":  "#a09488",
+                                    "pixels":  2
+                                },
+                                {
+                                    "hex":  "#b35538",
+                                    "pixels":  7
+                                },
+                                {
+                                    "hex":  "#c07e57",
+                                    "pixels":  26
+                                },
+                                {
+                                    "hex":  "#c1a07c",
+                                    "pixels":  16
+                                },
+                                {
+                                    "hex":  "#e2c69e",
+                                    "pixels":  12
+                                },
+                                {
+                                    "hex":  "#e39d6f",
+                                    "pixels":  46
+                                },
+                                {
+                                    "hex":  "#fceede",
+                                    "pixels":  2
+                                }
+                            ],
+    "Female/south.png":  [
+                             {
+                                 "hex":  "#2d1b15",
+                                 "pixels":  62
+                             },
+                             {
+                                 "hex":  "#392018",
+                                 "pixels":  91
+                             },
+                             {
+                                 "hex":  "#392c24",
+                                 "pixels":  40
+                             },
+                             {
+                                 "hex":  "#47251a",
+                                 "pixels":  51
+                             },
+                             {
+                                 "hex":  "#484233",
+                                 "pixels":  33
+                             },
+                             {
+                                 "hex":  "#512f21",
+                                 "pixels":  41
+                             },
+                             {
+                                 "hex":  "#54503c",
+                                 "pixels":  38
+                             },
+                             {
+                                 "hex":  "#554338",
+                                 "pixels":  19
+                             },
+                             {
+                                 "hex":  "#5f2d1d",
+                                 "pixels":  41
+                             },
+                             {
+                                 "hex":  "#613a29",
+                                 "pixels":  20
+                             },
+                             {
+                                 "hex":  "#635e44",
+                                 "pixels":  34
+                             },
+                             {
+                                 "hex":  "#6d694a",
+                                 "pixels":  47
+                             },
+                             {
+                                 "hex":  "#6f4532",
+                                 "pixels":  47
+                             },
+                             {
+                                 "hex":  "#753822",
+                                 "pixels":  60
+                             },
+                             {
+                                 "hex":  "#815139",
+                                 "pixels":  91
+                             },
+                             {
+                                 "hex":  "#8b3c23",
+                                 "pixels":  39
+                             },
+                             {
+                                 "hex":  "#8d835e",
+                                 "pixels":  9
+                             },
+                             {
+                                 "hex":  "#8e5025",
+                                 "pixels":  46
+                             },
+                             {
+                                 "hex":  "#a24c2c",
+                                 "pixels":  19
+                             },
+                             {
+                                 "hex":  "#ac6b35",
+                                 "pixels":  4
+                             },
+                             {
+                                 "hex":  "#b23521",
+                                 "pixels":  8
+                             },
+                             {
+                                 "hex":  "#c97047",
+                                 "pixels":  17
+                             },
+                             {
+                                 "hex":  "#cc3a24",
+                                 "pixels":  7
+                             },
+                             {
+                                 "hex":  "#dbb38b",
+                                 "pixels":  9
+                             },
+                             {
+                                 "hex":  "#ea9663",
+                                 "pixels":  32
+                             },
+                             {
+                                 "hex":  "#f1d5ae",
+                                 "pixels":  18
+                             },
+                             {
+                                 "hex":  "#f4aa76",
+                                 "pixels":  36
+                             },
+                             {
+                                 "hex":  "#faf9f9",
+                                 "pixels":  1
+                             }
+                         ],
+    "Female/east.png":  [
+                            {
+                                "hex":  "#2d1b15",
+                                "pixels":  120
+                            },
+                            {
+                                "hex":  "#392018",
+                                "pixels":  53
+                            },
+                            {
+                                "hex":  "#392c24",
+                                "pixels":  14
+                            },
+                            {
+                                "hex":  "#47251a",
+                                "pixels":  38
+                            },
+                            {
+                                "hex":  "#484233",
+                                "pixels":  23
+                            },
+                            {
+                                "hex":  "#512f21",
+                                "pixels":  14
+                            },
+                            {
+                                "hex":  "#54503c",
+                                "pixels":  16
+                            },
+                            {
+                                "hex":  "#554338",
+                                "pixels":  20
+                            },
+                            {
+                                "hex":  "#5f2d1d",
+                                "pixels":  43
+                            },
+                            {
+                                "hex":  "#613a29",
+                                "pixels":  22
+                            },
+                            {
+                                "hex":  "#635e44",
+                                "pixels":  15
+                            },
+                            {
+                                "hex":  "#64abdf",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#6d694a",
+                                "pixels":  38
+                            },
+                            {
+                                "hex":  "#6d6965",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#6f4532",
+                                "pixels":  16
+                            },
+                            {
+                                "hex":  "#753822",
+                                "pixels":  60
+                            },
+                            {
+                                "hex":  "#7a271a",
+                                "pixels":  2
+                            },
+                            {
+                                "hex":  "#7b7255",
+                                "pixels":  5
+                            },
+                            {
+                                "hex":  "#815139",
+                                "pixels":  45
+                            },
+                            {
+                                "hex":  "#8b3c23",
+                                "pixels":  54
+                            },
+                            {
+                                "hex":  "#8d835e",
+                                "pixels":  8
+                            },
+                            {
+                                "hex":  "#8e5025",
+                                "pixels":  20
+                            },
+                            {
+                                "hex":  "#9c341e",
+                                "pixels":  4
+                            },
+                            {
+                                "hex":  "#a24c2c",
+                                "pixels":  17
+                            },
+                            {
+                                "hex":  "#a3c9f1",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#ac6b35",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#b23521",
+                                "pixels":  6
+                            },
+                            {
+                                "hex":  "#c97047",
+                                "pixels":  5
+                            },
+                            {
+                                "hex":  "#cc3a24",
+                                "pixels":  18
+                            },
+                            {
+                                "hex":  "#d57c4e",
+                                "pixels":  3
+                            },
+                            {
+                                "hex":  "#dcdee4",
+                                "pixels":  2
+                            },
+                            {
+                                "hex":  "#e28857",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#e6c0ad",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#ea9663",
+                                "pixels":  14
+                            },
+                            {
+                                "hex":  "#f1d5ae",
+                                "pixels":  2
+                            },
+                            {
+                                "hex":  "#f4aa76",
+                                "pixels":  24
+                            },
+                            {
+                                "hex":  "#faebd6",
+                                "pixels":  1
+                            }
+                        ],
+    "Female/north.png":  [
+                             {
+                                 "hex":  "#2d1b15",
+                                 "pixels":  133
+                             },
+                             {
+                                 "hex":  "#392018",
+                                 "pixels":  79
+                             },
+                             {
+                                 "hex":  "#392c24",
+                                 "pixels":  28
+                             },
+                             {
+                                 "hex":  "#47251a",
+                                 "pixels":  29
+                             },
+                             {
+                                 "hex":  "#484233",
+                                 "pixels":  45
+                             },
+                             {
+                                 "hex":  "#512f21",
+                                 "pixels":  25
+                             },
+                             {
+                                 "hex":  "#54503c",
+                                 "pixels":  23
+                             },
+                             {
+                                 "hex":  "#554338",
+                                 "pixels":  32
+                             },
+                             {
+                                 "hex":  "#5f2d1d",
+                                 "pixels":  23
+                             },
+                             {
+                                 "hex":  "#613a29",
+                                 "pixels":  12
+                             },
+                             {
+                                 "hex":  "#635e44",
+                                 "pixels":  19
+                             },
+                             {
+                                 "hex":  "#6d694a",
+                                 "pixels":  107
+                             },
+                             {
+                                 "hex":  "#6f4532",
+                                 "pixels":  51
+                             },
+                             {
+                                 "hex":  "#753822",
+                                 "pixels":  52
+                             },
+                             {
+                                 "hex":  "#7a271a",
+                                 "pixels":  1
+                             },
+                             {
+                                 "hex":  "#815139",
+                                 "pixels":  114
+                             },
+                             {
+                                 "hex":  "#8b3c23",
+                                 "pixels":  82
+                             },
+                             {
+                                 "hex":  "#8d835e",
+                                 "pixels":  2
+                             },
+                             {
+                                 "hex":  "#8e5025",
+                                 "pixels":  11
+                             },
+                             {
+                                 "hex":  "#9c341e",
+                                 "pixels":  4
+                             },
+                             {
+                                 "hex":  "#a24c2c",
+                                 "pixels":  14
+                             },
+                             {
+                                 "hex":  "#ac6b35",
+                                 "pixels":  1
+                             },
+                             {
+                                 "hex":  "#b23521",
+                                 "pixels":  9
+                             },
+                             {
+                                 "hex":  "#c06238",
+                                 "pixels":  1
+                             },
+                             {
+                                 "hex":  "#c97047",
+                                 "pixels":  4
+                             },
+                             {
+                                 "hex":  "#cc3a24",
+                                 "pixels":  14
+                             },
+                             {
+                                 "hex":  "#d57c4e",
+                                 "pixels":  10
+                             },
+                             {
+                                 "hex":  "#e28857",
+                                 "pixels":  8
+                             },
+                             {
+                                 "hex":  "#ea9663",
+                                 "pixels":  4
+                             },
+                             {
+                                 "hex":  "#f1d5ae",
+                                 "pixels":  2
+                             },
+                             {
+                                 "hex":  "#f4aa76",
+                                 "pixels":  5
+                             }
+                         ],
+    "Female/west.png":  [
+                            {
+                                "hex":  "#2d1b15",
+                                "pixels":  106
+                            },
+                            {
+                                "hex":  "#392018",
+                                "pixels":  59
+                            },
+                            {
+                                "hex":  "#392c24",
+                                "pixels":  15
+                            },
+                            {
+                                "hex":  "#47251a",
+                                "pixels":  33
+                            },
+                            {
+                                "hex":  "#484233",
+                                "pixels":  27
+                            },
+                            {
+                                "hex":  "#512f21",
+                                "pixels":  14
+                            },
+                            {
+                                "hex":  "#54503c",
+                                "pixels":  16
+                            },
+                            {
+                                "hex":  "#554338",
+                                "pixels":  9
+                            },
+                            {
+                                "hex":  "#5f2d1d",
+                                "pixels":  43
+                            },
+                            {
+                                "hex":  "#613a29",
+                                "pixels":  18
+                            },
+                            {
+                                "hex":  "#635e44",
+                                "pixels":  20
+                            },
+                            {
+                                "hex":  "#6d694a",
+                                "pixels":  33
+                            },
+                            {
+                                "hex":  "#6f4532",
+                                "pixels":  12
+                            },
+                            {
+                                "hex":  "#753822",
+                                "pixels":  65
+                            },
+                            {
+                                "hex":  "#7a271a",
+                                "pixels":  3
+                            },
+                            {
+                                "hex":  "#7b7255",
+                                "pixels":  2
+                            },
+                            {
+                                "hex":  "#805e4e",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#815139",
+                                "pixels":  35
+                            },
+                            {
+                                "hex":  "#8b3c23",
+                                "pixels":  48
+                            },
+                            {
+                                "hex":  "#8d835e",
+                                "pixels":  8
+                            },
+                            {
+                                "hex":  "#8e5025",
+                                "pixels":  25
+                            },
+                            {
+                                "hex":  "#9c341e",
+                                "pixels":  3
+                            },
+                            {
+                                "hex":  "#a24c2c",
+                                "pixels":  17
+                            },
+                            {
+                                "hex":  "#a3c9f1",
+                                "pixels":  2
+                            },
+                            {
+                                "hex":  "#b23521",
+                                "pixels":  12
+                            },
+                            {
+                                "hex":  "#c06238",
+                                "pixels":  4
+                            },
+                            {
+                                "hex":  "#c97047",
+                                "pixels":  4
+                            },
+                            {
+                                "hex":  "#cc3a24",
+                                "pixels":  17
+                            },
+                            {
+                                "hex":  "#d57c4e",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#dd4a28",
+                                "pixels":  4
+                            },
+                            {
+                                "hex":  "#e28857",
+                                "pixels":  3
+                            },
+                            {
+                                "hex":  "#e6c0ad",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#e95a3a",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#ea9663",
+                                "pixels":  15
+                            },
+                            {
+                                "hex":  "#f1d5ae",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#f36341",
+                                "pixels":  1
+                            },
+                            {
+                                "hex":  "#f4aa76",
+                                "pixels":  22
+                            },
+                            {
+                                "hex":  "#faebd6",
+                                "pixels":  1
+                            }
+                        ],
+    "Female/south-east.png":  [
+                                  {
+                                      "hex":  "#2d1b15",
+                                      "pixels":  109
+                                  },
+                                  {
+                                      "hex":  "#392018",
+                                      "pixels":  87
+                                  },
+                                  {
+                                      "hex":  "#392c24",
+                                      "pixels":  22
+                                  },
+                                  {
+                                      "hex":  "#47251a",
+                                      "pixels":  33
+                                  },
+                                  {
+                                      "hex":  "#484233",
+                                      "pixels":  28
+                                  },
+                                  {
+                                      "hex":  "#512f21",
+                                      "pixels":  28
+                                  },
+                                  {
+                                      "hex":  "#54503c",
+                                      "pixels":  26
+                                  },
+                                  {
+                                      "hex":  "#554338",
+                                      "pixels":  23
+                                  },
+                                  {
+                                      "hex":  "#5992cd",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#5f2d1d",
+                                      "pixels":  41
+                                  },
+                                  {
+                                      "hex":  "#613a29",
+                                      "pixels":  33
+                                  },
+                                  {
+                                      "hex":  "#635e44",
+                                      "pixels":  33
+                                  },
+                                  {
+                                      "hex":  "#6d694a",
+                                      "pixels":  41
+                                  },
+                                  {
+                                      "hex":  "#6f4532",
+                                      "pixels":  32
+                                  },
+                                  {
+                                      "hex":  "#753822",
+                                      "pixels":  57
+                                  },
+                                  {
+                                      "hex":  "#7a271a",
+                                      "pixels":  4
+                                  },
+                                  {
+                                      "hex":  "#7b7255",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#805e4e",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#815139",
+                                      "pixels":  86
+                                  },
+                                  {
+                                      "hex":  "#8abae7",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#8b3c23",
+                                      "pixels":  40
+                                  },
+                                  {
+                                      "hex":  "#8d835e",
+                                      "pixels":  9
+                                  },
+                                  {
+                                      "hex":  "#8e5025",
+                                      "pixels":  35
+                                  },
+                                  {
+                                      "hex":  "#9c341e",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#a24c2c",
+                                      "pixels":  13
+                                  },
+                                  {
+                                      "hex":  "#ac6b35",
+                                      "pixels":  4
+                                  },
+                                  {
+                                      "hex":  "#b23521",
+                                      "pixels":  6
+                                  },
+                                  {
+                                      "hex":  "#c06238",
+                                      "pixels":  2
+                                  },
+                                  {
+                                      "hex":  "#c39c6b",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#c97047",
+                                      "pixels":  5
+                                  },
+                                  {
+                                      "hex":  "#cc3a24",
+                                      "pixels":  13
+                                  },
+                                  {
+                                      "hex":  "#cead7e",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#d57c4e",
+                                      "pixels":  9
+                                  },
+                                  {
+                                      "hex":  "#dbb38b",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#e28857",
+                                      "pixels":  6
+                                  },
+                                  {
+                                      "hex":  "#e95a3a",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#e9c599",
+                                      "pixels":  4
+                                  },
+                                  {
+                                      "hex":  "#ea9663",
+                                      "pixels":  30
+                                  },
+                                  {
+                                      "hex":  "#f1d5ae",
+                                      "pixels":  13
+                                  },
+                                  {
+                                      "hex":  "#f4aa76",
+                                      "pixels":  24
+                                  },
+                                  {
+                                      "hex":  "#faebd6",
+                                      "pixels":  1
+                                  }
+                              ],
+    "Female/north-east.png":  [
+                                  {
+                                      "hex":  "#2d1b15",
+                                      "pixels":  128
+                                  },
+                                  {
+                                      "hex":  "#392018",
+                                      "pixels":  59
+                                  },
+                                  {
+                                      "hex":  "#392c24",
+                                      "pixels":  12
+                                  },
+                                  {
+                                      "hex":  "#47251a",
+                                      "pixels":  38
+                                  },
+                                  {
+                                      "hex":  "#484233",
+                                      "pixels":  42
+                                  },
+                                  {
+                                      "hex":  "#512f21",
+                                      "pixels":  18
+                                  },
+                                  {
+                                      "hex":  "#54503c",
+                                      "pixels":  42
+                                  },
+                                  {
+                                      "hex":  "#554338",
+                                      "pixels":  35
+                                  },
+                                  {
+                                      "hex":  "#5992cd",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#5f2d1d",
+                                      "pixels":  43
+                                  },
+                                  {
+                                      "hex":  "#613a29",
+                                      "pixels":  73
+                                  },
+                                  {
+                                      "hex":  "#635e44",
+                                      "pixels":  6
+                                  },
+                                  {
+                                      "hex":  "#6d694a",
+                                      "pixels":  52
+                                  },
+                                  {
+                                      "hex":  "#6f4532",
+                                      "pixels":  46
+                                  },
+                                  {
+                                      "hex":  "#753822",
+                                      "pixels":  49
+                                  },
+                                  {
+                                      "hex":  "#7a271a",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#7b7255",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#805e4e",
+                                      "pixels":  2
+                                  },
+                                  {
+                                      "hex":  "#815139",
+                                      "pixels":  58
+                                  },
+                                  {
+                                      "hex":  "#8abae7",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#8b3c23",
+                                      "pixels":  64
+                                  },
+                                  {
+                                      "hex":  "#8d835e",
+                                      "pixels":  7
+                                  },
+                                  {
+                                      "hex":  "#8e5025",
+                                      "pixels":  16
+                                  },
+                                  {
+                                      "hex":  "#9c341e",
+                                      "pixels":  2
+                                  },
+                                  {
+                                      "hex":  "#a1bad5",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#a24c2c",
+                                      "pixels":  16
+                                  },
+                                  {
+                                      "hex":  "#b23521",
+                                      "pixels":  10
+                                  },
+                                  {
+                                      "hex":  "#b8c4d9",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#c06238",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#c97047",
+                                      "pixels":  5
+                                  },
+                                  {
+                                      "hex":  "#cc3a24",
+                                      "pixels":  23
+                                  },
+                                  {
+                                      "hex":  "#d57c4e",
+                                      "pixels":  8
+                                  },
+                                  {
+                                      "hex":  "#e28857",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#ea9663",
+                                      "pixels":  2
+                                  },
+                                  {
+                                      "hex":  "#f1d5ae",
+                                      "pixels":  2
+                                  },
+                                  {
+                                      "hex":  "#f4aa76",
+                                      "pixels":  7
+                                  }
+                              ],
+    "Female/north-west.png":  [
+                                  {
+                                      "hex":  "#2d1b15",
+                                      "pixels":  127
+                                  },
+                                  {
+                                      "hex":  "#392018",
+                                      "pixels":  55
+                                  },
+                                  {
+                                      "hex":  "#392c24",
+                                      "pixels":  14
+                                  },
+                                  {
+                                      "hex":  "#47251a",
+                                      "pixels":  24
+                                  },
+                                  {
+                                      "hex":  "#484233",
+                                      "pixels":  47
+                                  },
+                                  {
+                                      "hex":  "#512f21",
+                                      "pixels":  17
+                                  },
+                                  {
+                                      "hex":  "#54503c",
+                                      "pixels":  35
+                                  },
+                                  {
+                                      "hex":  "#554338",
+                                      "pixels":  42
+                                  },
+                                  {
+                                      "hex":  "#5992cd",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#5f2d1d",
+                                      "pixels":  25
+                                  },
+                                  {
+                                      "hex":  "#613a29",
+                                      "pixels":  69
+                                  },
+                                  {
+                                      "hex":  "#635e44",
+                                      "pixels":  8
+                                  },
+                                  {
+                                      "hex":  "#6d694a",
+                                      "pixels":  48
+                                  },
+                                  {
+                                      "hex":  "#6f4532",
+                                      "pixels":  42
+                                  },
+                                  {
+                                      "hex":  "#753822",
+                                      "pixels":  48
+                                  },
+                                  {
+                                      "hex":  "#79a4e4",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#7a271a",
+                                      "pixels":  5
+                                  },
+                                  {
+                                      "hex":  "#7b7255",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#815139",
+                                      "pixels":  65
+                                  },
+                                  {
+                                      "hex":  "#8b3c23",
+                                      "pixels":  63
+                                  },
+                                  {
+                                      "hex":  "#8d835e",
+                                      "pixels":  5
+                                  },
+                                  {
+                                      "hex":  "#8e5025",
+                                      "pixels":  15
+                                  },
+                                  {
+                                      "hex":  "#9c341e",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#a24c2c",
+                                      "pixels":  11
+                                  },
+                                  {
+                                      "hex":  "#a3c9f1",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#b23521",
+                                      "pixels":  4
+                                  },
+                                  {
+                                      "hex":  "#c06238",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#c97047",
+                                      "pixels":  2
+                                  },
+                                  {
+                                      "hex":  "#cc3a24",
+                                      "pixels":  11
+                                  },
+                                  {
+                                      "hex":  "#d57c4e",
+                                      "pixels":  8
+                                  },
+                                  {
+                                      "hex":  "#e28857",
+                                      "pixels":  4
+                                  },
+                                  {
+                                      "hex":  "#ea9663",
+                                      "pixels":  4
+                                  },
+                                  {
+                                      "hex":  "#ecba92",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#f4aa76",
+                                      "pixels":  6
+                                  }
+                              ],
+    "Female/south-west.png":  [
+                                  {
+                                      "hex":  "#2d1b15",
+                                      "pixels":  91
+                                  },
+                                  {
+                                      "hex":  "#392018",
+                                      "pixels":  99
+                                  },
+                                  {
+                                      "hex":  "#392c24",
+                                      "pixels":  26
+                                  },
+                                  {
+                                      "hex":  "#47251a",
+                                      "pixels":  45
+                                  },
+                                  {
+                                      "hex":  "#484233",
+                                      "pixels":  28
+                                  },
+                                  {
+                                      "hex":  "#512f21",
+                                      "pixels":  16
+                                  },
+                                  {
+                                      "hex":  "#54503c",
+                                      "pixels":  30
+                                  },
+                                  {
+                                      "hex":  "#554338",
+                                      "pixels":  18
+                                  },
+                                  {
+                                      "hex":  "#5992cd",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#5f2d1d",
+                                      "pixels":  59
+                                  },
+                                  {
+                                      "hex":  "#613a29",
+                                      "pixels":  27
+                                  },
+                                  {
+                                      "hex":  "#635e44",
+                                      "pixels":  29
+                                  },
+                                  {
+                                      "hex":  "#6d694a",
+                                      "pixels":  44
+                                  },
+                                  {
+                                      "hex":  "#6f4532",
+                                      "pixels":  29
+                                  },
+                                  {
+                                      "hex":  "#753822",
+                                      "pixels":  69
+                                  },
+                                  {
+                                      "hex":  "#7a271a",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#7b7255",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#815139",
+                                      "pixels":  82
+                                  },
+                                  {
+                                      "hex":  "#8b3c23",
+                                      "pixels":  48
+                                  },
+                                  {
+                                      "hex":  "#8d835e",
+                                      "pixels":  11
+                                  },
+                                  {
+                                      "hex":  "#8e5025",
+                                      "pixels":  33
+                                  },
+                                  {
+                                      "hex":  "#9c341e",
+                                      "pixels":  5
+                                  },
+                                  {
+                                      "hex":  "#a24c2c",
+                                      "pixels":  16
+                                  },
+                                  {
+                                      "hex":  "#a3c9f1",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#ac6b35",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#b23521",
+                                      "pixels":  11
+                                  },
+                                  {
+                                      "hex":  "#c06238",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#c39c6b",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#c97047",
+                                      "pixels":  6
+                                  },
+                                  {
+                                      "hex":  "#cc3a24",
+                                      "pixels":  25
+                                  },
+                                  {
+                                      "hex":  "#cead7e",
+                                      "pixels":  2
+                                  },
+                                  {
+                                      "hex":  "#d1c5b8",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#dd4a28",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#e28857",
+                                      "pixels":  11
+                                  },
+                                  {
+                                      "hex":  "#e9c599",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#ea9663",
+                                      "pixels":  26
+                                  },
+                                  {
+                                      "hex":  "#ecba92",
+                                      "pixels":  3
+                                  },
+                                  {
+                                      "hex":  "#f1d5ae",
+                                      "pixels":  15
+                                  },
+                                  {
+                                      "hex":  "#f4aa76",
+                                      "pixels":  30
+                                  },
+                                  {
+                                      "hex":  "#f84c3d",
+                                      "pixels":  1
+                                  },
+                                  {
+                                      "hex":  "#faebd6",
+                                      "pixels":  1
+                                  }
+                              ]
+}

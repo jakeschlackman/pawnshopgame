@@ -64,7 +64,7 @@ public sealed class PawnShopGame : Microsoft.Xna.Framework.Game
         fonts = new FontLibrary(Services, contentRoot, catalog);
         renderer = new PixelRenderer(GraphicsDevice, Width, Height, fonts: fonts);
         screens = new GameScreens(GraphicsDevice, flow.TitleCamera, () => flow.TitleDescent, fonts,
-            flow.TitleSelector.Definition, flow.PlayerSprites);
+            flow.TitleSelector.Definition, flow.PlayerSprites, flow.CharacterSelection.Catalog);
     }
 
     protected override void Update(GameTime gameTime)

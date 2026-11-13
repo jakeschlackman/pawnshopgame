@@ -1117,13 +1117,27 @@ See docs/VERIFICATION_ASSET_CLEANUP.md.
 #### Implemented player selection and movement
 
 `Characters/Player/Create` owns new-game player creation presentation. Its
-`PlayerModel_SelectionScreen.cs` contains the selection screen and shared card/Back
-layout. Game supplies its menu and preview-drawing callback, retaining texture
-ownership and session creation at the application boundary. Characters does not
-reference Game.
+`PlayerModel_SelectionScreen.cs` owns its application-lifetime selection textures
+and shared label/Back/actor geometry. Game supplies its menu and presentation
+state and retains session creation at the application boundary. Characters does
+not reference Game. The existing forest panorama remains the background; a
+separate transparent oak and both protagonists draw above it, following the
+existing camera arrival. No clearing background replaces the panorama.
 
-New Game opens a sessionless male/female selection screen. Confirmation creates
-one fresh session; X returns to title. `Characters/Player/PlayerState` owns the
+New Game opens a sessionless male/female selection screen. Both start leaning;
+the default Male highlight approaches after camera arrival. Selection presentation
+uses the existing `SpriteAnimator` independently from foot travel: push off,
+South walk, personality flourish and held foreground idle. Switching highlights
+turns the outgoing actor North, walks it back, turns it South and settles it into
+leaning idle, while the incoming actor can approach concurrently. Rapid changes
+retain current positions and finish short turns/gestures before redirecting.
+Back focus rests both; X returns to title. Pointer hover uses moving actor bounds
+and yields to keyboard navigation when stationary. Focus loss freezes the clocks.
+
+Confirmation latches one protagonist, captures selection input, and waits for
+its foreground idle and the other actor's completed return before creating one
+fresh session. Cancel can still return to title. Completion consumes the update
+without advancing room simulation. `Characters/Player/PlayerState` owns the
 player's ID, gender, ground position and facing, exposing an immutable `PlayerView`.
 `GameSession` advances movement and player/NPC animation once per room tick. Held movement
 is separate from pressed-once Z/X actions; focused menus and dialogue consume
@@ -1135,12 +1149,30 @@ rectangle is swept separately along X and Y against the room bounds, counter and
 NPC footprints, allowing sliding without tunneling. This is independent of the
 48-by-64 artwork. `ShopRoomLayout` shares floor/counter geometry with rendering.
 `PlayerSpriteCatalog` validates metadata and both PNG headers without a device.
-The application-owned `PlayerSpriteRenderer` retains both original base textures
-for selection. The room demonstrates four cardinal facings with temporary,
+The application-owned `PlayerSpriteRenderer` retains the legacy base textures;
+selection now uses its separate protagonist atlases. The room demonstrates four cardinal facings with temporary,
 code-authored body, jacket, helmet, backpack and wrench layers for both appearances.
 `PlayerPlaceholderSprites` creates those diagnostic textures once at load; it is
 not an asset generator or a production clothing-fit method. Existing PNGs remain
 unchanged, including their unused legacy directions. NPC textures remain location-owned.
+
+Selection art lives in `Characters/Player/Create/Assets`, linked into Game as
+`Content/CharacterSelection`. Both atlases use native 48x64 frames, pivot (24,60),
+and integer display scale 2; this does not change the legacy body pivot or room
+art. South/North walks use Skeleton v3 on the exact existing PixelLab protagonists;
+no new eight-direction set or character redesign was made. Raw source exports,
+prompts, IDs and hashes remain in `docs/ReviewAssets/CharacterSelectionTree/ProductionSources`.
+The approved correction is a standalone tree, replacing only the earlier clearing
+concept. Runtime composition/animation visual acceptance remains with the user.
+
+To repack a trusted source manifest, build the existing test executable and run
+`dotnet run --project PawnShop.Tests/PawnShop.Tests.csproj --no-build -- --assets selection-pack <source-directory> <new-directory>`.
+The source directory must contain `selection-sources.json`. This offline command
+verifies source hashes and binary alpha, applies one fixed whole-clip anchor,
+crops transparent padding without resizing or per-frame recentering, and refuses
+any opaque-pixel clipping or existing destination. `packing.json` records exact
+crops and source hashes; runtime packaging excludes it. The male turn-to-camera
+omits its generated leading South-facing rest frame so the return starts North.
 
 `PlayerState` chooses the dominant cardinal axis; a newly pressed/reversed axis wins
 equal diagonal input, otherwise the last axis persists (initially vertical).

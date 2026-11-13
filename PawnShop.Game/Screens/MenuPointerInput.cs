@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using PawnShop.Characters.Player;
 using PawnShop.Characters.Player.Create;
 using PawnShop.Framework.Input;
 using PawnShop.Game.Bootstrap;
@@ -23,11 +24,14 @@ public sealed class MenuPointerInput
     private int grab;
     private int? volumeDragRow;
     private int volumeGrabOffset;
+    private Point lastPointer = new(-1, -1);
 
     public InputFrame Read(ApplicationFlow flow, MouseState mouse, bool active, int clientWidth, int clientHeight,
         int backBufferWidth, int backBufferHeight)
     {
         bool down = mouse.LeftButton == ButtonState.Pressed;
+        bool moved = lastPointer.X != mouse.X || lastPointer.Y != mouse.Y;
+        lastPointer = new(mouse.X, mouse.Y);
         bool clicked = active && wasActive && down && !wasDown;
         int delta = active && wasActive ? mouse.ScrollWheelValue - wheel : 0;
         wheel = mouse.ScrollWheelValue;
@@ -121,6 +125,8 @@ public sealed class MenuPointerInput
             else { dragging = false; volumeDragRow = null; }
         }
         else { dragging = draggingDropdown = false; volumeDragRow = null; }
+        if (flow.Screen == Screen.CharacterSelect && moved && !down && hit.SelectionIndex is not null)
+            return hit with { Confirm = false };
         return clicked ? hit : default;
     }
 
@@ -212,8 +218,13 @@ public sealed class MenuPointerInput
         }
         else if (flow.Screen == Screen.CharacterSelect)
         {
+            if (flow.CharacterSelection.IsConfirming)
+                return CharacterSelectionLayout.Back.Contains(point) ? new(Cancel: true) : default;
             for (int i = 0; i < 2; i++)
-                if (CharacterSelectionLayout.Card(i).Contains(point)) return new(Confirm: true, SelectionIndex: i);
+                if (CharacterSelectionLayout.Card(i).Contains(point)
+                    || CharacterSelectionLayout.ActorHitBounds(flow.CharacterSelection.Actor(i == 0
+                        ? PlayerGender.Male : PlayerGender.Female)).Contains(point))
+                    return new(Confirm: true, SelectionIndex: i);
             if (CharacterSelectionLayout.Back.Contains(point)) return new(Cancel: true);
         }
         else if (flow.Menu is { } menu)

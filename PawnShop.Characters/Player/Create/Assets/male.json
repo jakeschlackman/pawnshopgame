@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "frameWidth": 48,
+  "frameHeight": 64,
+  "columns": 8,
+  "rows": 7,
+  "pivotX": 24,
+  "pivotY": 60,
+  "displayScale": 2,
+  "animations": {
+    "LeaningIdle": {
+      "firstFrame": 0,
+      "frameCount": 4,
+      "frameDurationMs": 350,
+      "loop": true
+    },
+    "PushOff": {
+      "firstFrame": 4,
+      "frameCount": 8,
+      "frameDurationMs": 55,
+      "loop": false
+    },
+    "WalkSouth": {
+      "firstFrame": 12,
+      "frameCount": 8,
+      "frameDurationMs": 95,
+      "loop": true
+    },
+    "WalkNorth": {
+      "firstFrame": 20,
+      "frameCount": 8,
+      "frameDurationMs": 95,
+      "loop": true
+    },
+    "TurnToTree": {
+      "firstFrame": 28,
+      "frameCount": 4,
+      "frameDurationMs": 75,
+      "loop": false
+    },
+    "TurnToCamera": {
+      "firstFrame": 32,
+      "frameCount": 3,
+      "frameDurationMs": 75,
+      "loop": false
+    },
+    "Flourish": {
+      "firstFrame": 35,
+      "frameCount": 6,
+      "frameDurationMs": 80,
+      "loop": false
+    },
+    "SelectedIdle": {
+      "firstFrame": 41,
+      "frameCount": 4,
+      "frameDurationMs": 300,
+      "loop": true
+    },
+    "Settle": {
+      "firstFrame": 45,
+      "frameCount": 8,
+      "frameDurationMs": 65,
+      "loop": false
+    }
+  }
+}

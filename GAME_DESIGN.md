@@ -414,7 +414,9 @@ female cuts of the same design. Their PixelLab object references and fitted
 wearable layers are distinct assets; body-specific art need not create separate
 economy items. The teal work shirt is visually approved for both south-facing
 standing poses. See [the standard process](docs/WEARABLE_ART_WORKFLOW.md).
-Male/female selection retains the original standing base art. Room movement now
+Male/female selection uses the distinct existing protagonists in a sessionless
+tree scene over the existing forest panorama. The highlighted protagonist steps
+forward and holds position; switching sends the other back to the tree. Room movement now
 demonstrates four cardinal facings, West mirrored from East, and a synchronized
 placeholder body/jacket/helmet/backpack/wrench walking loop. These are diagnostic
 shapes, not approved human art or fitted clothing. Other shirt directions, approved

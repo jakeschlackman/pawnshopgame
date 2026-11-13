@@ -1,0 +1,23 @@
+﻿{
+  "generation": 10,
+  "status": "Three-direction art exploration; awaiting user choice",
+  "reviewPage": "review.html",
+  "activeExploration": "Exploration10",
+  "fullRecord": "Exploration10/provenance.json",
+  "nativeCanvas": [
+    48,
+    64
+  ],
+  "initialConcepts": 6,
+  "targetedRefinements": 2,
+  "recommendation": "A — Storybook Warmth",
+  "selectedPaths": {
+    "Amale": "Exploration10/A/male-south.png",
+    "Bmale": "Exploration10/B/male-south.png",
+    "Cmale": "Exploration10/C/male-south.png",
+    "Afemale": "Exploration10/A/female-south.png",
+    "Bfemale": "Exploration10/B/female-south.png",
+    "Cfemale": "Exploration10/C/female-south.png"
+  },
+  "productionChanges": false
+}

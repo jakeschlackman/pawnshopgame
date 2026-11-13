@@ -26,6 +26,8 @@ internal static partial class RegressionTests
         app.Update(new(Right: true, Confirm: true), TimeSpan.Zero);
         Check(app.Screen == Screen.CharacterSelect && app.Menu!.SelectedIndex == 1 && app.LiveSessions == 0);
         app.Update(new(Confirm: true, Interact: true, MoveX: 1), TimeSpan.FromSeconds(1));
+        Check(app.LiveSessions == 0 && app.CharacterSelection.IsConfirming);
+        FinishCharacterConfirmation(app);
         Check(app.Player is { Gender: PlayerGender.Female } && app.Player.Value.Position == ShopRoomLayout.PlayerSpawn);
         Check(app.Room!.Value.Elapsed == TimeSpan.Zero && app.Dialogue is null);
         Guid player = app.Player!.Value.Id;
@@ -37,6 +39,7 @@ internal static partial class RegressionTests
         Confirm(app);
         var card = CharacterSelectionLayout.Card(0).Center;
         app.Update(MenuPointerInput.HitTest(app, card.X, card.Y, 640, 360), TimeSpan.Zero);
+        FinishCharacterConfirmation(app);
         Check(app.Player is { Gender: PlayerGender.Male } && app.Player.Value.Id != player);
         Check(app.LiveSessions == 1 && app.SessionsCreated == 2 && app.SessionsDisposed == 1);
         app.Update(new(MoveX: -1), TimeSpan.FromSeconds(.5));
@@ -80,6 +83,8 @@ internal static partial class RegressionTests
             expected.Update(TimeSpan.FromMilliseconds(90));
             Check(app.TitleSelector.FrameIndex == expected.FrameIndex, "Selection must keep Sprout animated.");
             app.Update(MenuPointerInput.HitTest(app, female.X * 4, female.Y * 4, 2560, 1440), TimeSpan.Zero);
+            Check(app.LiveSessions == 0 && app.CharacterSelection.IsConfirming);
+            FinishCharacterConfirmation(app);
             Check(app.Screen == Screen.Room && app.Player is { Gender: PlayerGender.Female });
             Check(app.Room!.Value.Elapsed == TimeSpan.Zero && app.SessionsCreated == 1);
             ReturnPrompt(app); Discard(app);

@@ -1,0 +1,276 @@
+{
+  "phase": 11,
+  "status": "Selected female model and approved frozen male model",
+  "recordedDate": "2026-11-12",
+  "reviewPage": "../review.html",
+  "nativeCanvas": [
+    48,
+    64
+  ],
+  "maleAppearanceFrozen": true,
+  "approval": "User approved the current male appearance and explicitly forbade further changes. Preserve this exact model and all locked static exports. No new art revisions, recolors, cleanup, pose changes or regeneration without a new explicit instruction.",
+  "female": {
+    "characterId": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+    "groupId": "bb7b678e-6f07-4208-b0aa-de55c18204d2",
+    "canonicalGallery": "gallery:92f6dfe6-08be-5b9e-a79a-0be2de7e12ce",
+    "canonicalSource": "Sources/female-approved-initial.png",
+    "canonicalSourceSha256": "9433DCE2EBC8FA882624E61A79D9FDE687864C49DC59B8A8FF5548302EC0D25F",
+    "tool": "PixelLab create_character",
+    "mode": "v3 reference",
+    "args": {
+      "name": "Pickers Hollow Female — C Initial",
+      "description": "Pickers Hollow female playable salvager, age28. Preserve the supplied exact SOUTH-facing sprite as drawn: warm stylized approximately three-head-tall adult proportions, messy auburn hair in a practical ponytail, small faded red bandana tied into the ponytail, olive vintage utility jacket over faded ochre/tan, brown work trousers/boots, fingerless gloves and small utility belt pouch. Preserve her face, hair silhouette, freckles, warm skin, palette and soft selective-outline pixel rendering. Generate consistent directional reference poses of this same person; neutral standing, low top-down RPG view. No tools, backpack, extra outfit elements or animation.",
+      "mode": "v3",
+      "n_directions": 8,
+      "body_type": "humanoid",
+      "view": "low top-down",
+      "reference_image_url": "https://api.pixellab.ai/mcp/images/1a4c5cb8-be35-45b3-a270-45344041d687/download"
+    },
+    "status": "completed",
+    "size": [
+      48,
+      64
+    ],
+    "directions": 8,
+    "animations": 0,
+    "southRGBAChangesFromChosenGallery": 0
+  },
+  "male": {
+    "characterId": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+    "groupId": "15a55169-bd10-478a-a6cd-b0a82674f38c",
+    "tool": "PixelLab create_character",
+    "mode": "pro",
+    "args": {
+      "name": "Pickers Hollow Male — Female C Style",
+      "description": "Pickers Hollow MALE playable protagonist, age28, a warm lovable slightly disorganized young-adult salvager in a faded Appalachian/Rustbelt town. MATCH THE FEMALE STYLE CHARACTER: same native pixel density, soft warm selective outlines, intentional clustered hair/shading, expressive simplified face, approximately three-head-tall adult proportions and warm light-medium skin. New male person, short messy DARK-BROWN hair with natural crown volume, two soft asymmetrical tufts and a broken casual fringe framing an open forehead. Friendly engaged eyes and relaxed fine brows in the same scale/rendering as the woman, subtle freckles or very light scruff, small gently amused smile. Slightly stockier frame and broader shoulders than the woman, average sturdy build with a clear waist and believable legs; no exaggerated belly or muscular hero anatomy. Worn DUSTY DENIM-BLUE utility overshirt open over a faded cream/tan shirt, warm-brown work trousers, brown boots, fingerless work gloves, one small belt pouch. Signature faded rust-RED bandana at his NECK, visible from front. Empty hands, no tools or backpack. Full-body neutral standing low top-down RPG view; keep the same face, hairstyle, proportions and clothing across all views. SOUTH faces the viewer straight on. Transparent background, complete silhouette, restrained vintage colors. Keep the figure comfortably narrower than48px and at most60px tall so its square working canvas can be cropped losslessly to48x64.",
+      "mode": "pro",
+      "body_type": "humanoid",
+      "style_character_id": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+      "size": 64,
+      "max_colors": 32,
+      "view": "low top-down"
+    },
+    "styleCharacterId": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+    "rejectedMalesUsedAsInputs": false,
+    "status": "completed",
+    "size": [
+      48,
+      64
+    ],
+    "directions": 8,
+    "animations": 0,
+    "appearanceFrozen": true,
+    "lockedFrames": {
+      "south": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          11,
+          4,
+          36,
+          59
+        ],
+        "visibleHeight": 56,
+        "bootBottomRow": 59,
+        "colors": 32,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "8EE363C29178796B02B57F112539461489D2272FAB8739BAD7CCD3C47524AFE9"
+      },
+      "east": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          15,
+          4,
+          33,
+          59
+        ],
+        "visibleHeight": 56,
+        "bootBottomRow": 59,
+        "colors": 32,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "C6A042D44E2EE1691F14061B9F7F1D2CED16C055E6FF63CC1D9373A25881E7CF"
+      },
+      "north": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          11,
+          4,
+          36,
+          58
+        ],
+        "visibleHeight": 55,
+        "bootBottomRow": 58,
+        "colors": 26,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "29F0CD237CA30EB5303EDEB8603C7C6F370AE225B651B9C287DA5D9F0F8A6259"
+      },
+      "west": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          14,
+          3,
+          32,
+          59
+        ],
+        "visibleHeight": 57,
+        "bootBottomRow": 59,
+        "colors": 32,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "0503078B6866ECDD3C9E5D6CF38FE5FBE8C2831BABC19EAF77380E8896648B9A"
+      },
+      "south-east": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          12,
+          4,
+          35,
+          59
+        ],
+        "visibleHeight": 56,
+        "bootBottomRow": 59,
+        "colors": 32,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "7F2EA80DE997854E9EBDDFC08050C9F07BD1A7C6B98755403B62804CD5152741"
+      },
+      "north-east": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          14,
+          4,
+          34,
+          59
+        ],
+        "visibleHeight": 56,
+        "bootBottomRow": 59,
+        "colors": 28,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "FAF6DC3B920C59EF2273B2CD40465BA4C8F5692E19AFB100C0A5A48C3FDCA57C"
+      },
+      "north-west": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          13,
+          4,
+          33,
+          58
+        ],
+        "visibleHeight": 55,
+        "bootBottomRow": 58,
+        "colors": 29,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "7E441E144B6BE5FA5D513E1A057DB2B4EA8AB8608F9711FF8E8EB5107CACB633"
+      },
+      "south-west": {
+        "canvas": [
+          48,
+          64
+        ],
+        "bounds": [
+          12,
+          4,
+          35,
+          59
+        ],
+        "visibleHeight": 56,
+        "bootBottomRow": 59,
+        "colors": 32,
+        "nativeCopyRGBAChanges": 0,
+        "sha256": "8322AC0199ECCF8E755217EAD9483A2735A4F7E349A5BB5D1146612300DFE692"
+      }
+    }
+  },
+  "canvasOperation": {
+    "tool": "PixelLab set_canvas_size",
+    "asset_id": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+    "from": [
+      64,
+      64
+    ],
+    "to": [
+      48,
+      64
+    ],
+    "operation": "Transparent side padding removed/recentered by native PixelLab canvas tool. No scaling or painting.",
+    "sourceDirectory": "Male/Native",
+    "outputDirectory": "Male",
+    "verifiedMapping": "output(x,y) = original(x+8,y), source columns0..7 and56..63 completely transparent across all8views.",
+    "performedBeforeMaleApproval": true,
+    "visiblePixelsChanged": 0
+  },
+  "sourcePreservation": {
+    "femaleEightViewNativeDirectory": "Female/Native",
+    "femaleExports": "Female",
+    "maleWorking64x64Directory": "Male/Native",
+    "maleFinal48x64Exports": "Male",
+    "localPainting": false,
+    "localPixelEditing": false,
+    "artworkGeneration": "PixelLab character creation only",
+    "previews": "Native PixelLab join and integer-scale. HTML crops/scales originals for head/native/3x previews."
+  },
+  "review": {
+    "front": "Review/comparison.png",
+    "front4x": "Review/comparison-4x.png",
+    "directions": "Review/directions.png",
+    "directions4x": "Review/directions-4x.png",
+    "layout": "Male top / female bottom; columns South, North, East",
+    "allAnglesOrder": [
+      "south",
+      "east",
+      "north",
+      "west",
+      "south-east",
+      "north-east",
+      "north-west",
+      "south-west"
+    ],
+    "toolReferences": {
+      "male-south-4x": "f53d4038-e72d-4a02-acbb-2f6bf55b6773",
+      "female-south-4x": "45ce3be7-b981-431e-a44f-1d9215befba7",
+      "male-sne": "6fba6011-928e-48fb-8f09-b2aebb2ad69e",
+      "male-sne-4x": "7668bec3-9df5-4666-b647-e056f6d46467",
+      "female-sne": "ed182537-4793-48a7-a47d-63aa8db68e2e",
+      "female-sne-4x": "1e908260-b2c8-482d-af7e-08771a1ff1d8",
+      "comparison": "006a45c0-d5f7-4bb3-baaa-991ec4521f7d",
+      "comparison-4x": "58717cba-d221-4c1d-8a83-6eaa90c9638d",
+      "directions": "a3043ea6-759d-466f-b65e-755a3fd874dd",
+      "directions-4x": "0a4b1592-508c-4b6e-8cb2-6cd31e460edf",
+      "male-all": "ea4f0634-9eba-49dc-bf61-01d94f250b17",
+      "male-all-4x": "f0b15917-e05b-48b6-b68a-d980c57db6b3",
+      "female-all": "01884d4e-9420-4456-bdd4-58ffbd42cbb9",
+      "female-all-4x": "e5369535-a632-45b2-bedd-1341acf59eaa"
+    }
+  },
+  "downloads": {
+    "male": "https://api.pixellab.ai/mcp/characters/6a4ced5a-df5a-4f6b-9887-5b407a420c07/download",
+    "female": "https://api.pixellab.ai/mcp/characters/4725d111-f5b3-4c22-b34e-f307ceea66db/download"
+  },
+  "scope": "Static native character models and isolated review only. Both character tools automatically supplied8angles; no animations generated. No game assets, code, configs, maps, NPCs, Sprout or mech changes. Eventual West should mirror East per project convention; no runtime integration performed.",
+  "limitations": [
+    "The selected female original isolated pixel is preserved rather than automatically corrected.",
+    "Generated standing views can differ slightly in boot baseline. Runtime origins, per-frame anchors and animation support are unimplemented and unapproved.",
+    "Model state is automatically named Idle by PixelLab; both completed characters explicitly report animations:none. This is not an idle animation."
+  ],
+  "validation": "validation.json",
+  "palettes": "palettes.json",
+  "pixelQC": "pixel-qc.json"
+}

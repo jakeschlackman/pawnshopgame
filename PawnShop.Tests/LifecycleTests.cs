@@ -17,9 +17,15 @@ internal static partial class RegressionTests
         if (app.UsesTitleBackground && app.TitleCamera.IsMoving && !app.OptionsFlight.IsBusy)
             app.Update(default, PawnShop.Framework.Rendering.PanoramaCamera.TransitionDuration);
         Step(app, new(Confirm: true));
+        FinishCharacterConfirmation(app);
         FinishTitleInteraction(app);
         if (app.Screen == Screen.CharacterSelect && app.TitleCamera.IsMoving)
             app.Update(default, PawnShop.Framework.Rendering.PanoramaCamera.TransitionDuration);
+    }
+    internal static void FinishCharacterConfirmation(ApplicationFlow app)
+    {
+        if (app.Screen == Screen.CharacterSelect && app.CharacterSelection.IsConfirming)
+            app.Update(default, TimeSpan.FromSeconds(10));
     }
     internal static void FinishTitleInteraction(ApplicationFlow app)
     {
@@ -84,6 +90,8 @@ internal static partial class RegressionTests
         Check(app.Screen == Screen.CharacterSelect && app.LiveSessions == 0 && app.Room is null);
         app.Update(default, PawnShop.Framework.Rendering.PanoramaCamera.TransitionDuration);
         Step(app, new(Confirm: true, Interact: true, MoveX: 1));
+        Check(app.Screen == Screen.CharacterSelect && app.CharacterSelection.IsConfirming && app.LiveSessions == 0);
+        FinishCharacterConfirmation(app);
         Check(app.Screen == Screen.Room && app.LiveSessions == 1 && app.SessionsCreated == 1);
         Check(app.Player!.Value.Position == ShopRoomLayout.PlayerSpawn);
         Check(app.Room!.Value.Elapsed == TimeSpan.Zero && app.Room.Value.BellRings == 0);

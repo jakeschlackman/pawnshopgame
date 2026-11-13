@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "approval": "User approved starting integration after the visual checkpoint, with the existing scene background and only an independent centered tree. Final runtime visual acceptance remains manual.",
+  "directions": "South and North walks; cardinal turns. No new diagonal direction sets or West art.",
+  "alignment": "One fixed cell center/clip ground anchor per clip, never per-frame recentering. Crop only transparent padding; reject clipped opaque pixels.",
+  "bodies": [
+    {
+      "sex": "male",
+      "characterId": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+      "clips": [
+        {
+          "name": "LeaningIdle",
+          "file": "male-LeaningIdle.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 350,
+          "sha256": "7c291292e7870a70009785a863a8eeca45dbc980820b8065eb092171e7919978"
+        },
+        {
+          "name": "PushOff",
+          "file": "male-PushOff.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 55,
+          "sha256": "eeeab7bcfd4917eee95d94476b67d7fa5b912b30c2b976d740c6ff98adb5e416"
+        },
+        {
+          "name": "WalkSouth",
+          "file": "male-WalkSouth.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 95,
+          "sha256": "2eae06b8ca7dbd19d5f75caefae0f9c67cff667655031f95590da71fe75e680e"
+        },
+        {
+          "name": "WalkNorth",
+          "file": "male-WalkNorth.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 95,
+          "sha256": "75b4b5b8c3463eccb65fd8d94cdceef60fc2e06f2bf4ab449df1cf30a7b423d4"
+        },
+        {
+          "name": "TurnToTree",
+          "file": "male-TurnToTree.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 75,
+          "sha256": "7659658add6d44d6beba93dab89a48ea84e75164758b5d3645f84248f70aa4c7"
+        },
+        {
+          "name": "TurnToCamera",
+          "file": "male-TurnToCamera.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 75,
+          "sha256": "e50a828cabd7329df09d17b7f79385859b945c97b2447fe2a1eb40dbe99ffa51",
+          "skipFirst": 1,
+          "reason": "Remove the generated South-facing rest frame preceding the actual North-to-East-to-South turn; retain raw export unchanged."
+        },
+        {
+          "name": "Flourish",
+          "file": "male-Flourish.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 6,
+          "frameDurationMs": 80,
+          "sha256": "d5eea380ede3d9ddb91ddeca564e0f0014748038d40ee3783ce4d8992a1f5163"
+        },
+        {
+          "name": "SelectedIdle",
+          "file": "male-SelectedIdle.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 300,
+          "sha256": "b8bff34b798e01ec63a578c57d60b83b765ef85412ea53ff0a32083b0ddf40e3"
+        },
+        {
+          "name": "Settle",
+          "file": "male-Settle.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 65,
+          "sha256": "a6ff6e32ee1279f7f056e6ea5f825ba3e17a5a6c748e811463befdddcfc5ea3a"
+        }
+      ]
+    },
+    {
+      "sex": "female",
+      "characterId": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+      "clips": [
+        {
+          "name": "LeaningIdle",
+          "file": "female-LeaningIdle.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 350,
+          "sha256": "18cf4b48d1d645ada2b73405ebaad581ded829687dcb08654f36a168d5e7bf13"
+        },
+        {
+          "name": "PushOff",
+          "file": "female-PushOff.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 55,
+          "sha256": "7d9e55a3b8186d3964511ad91df5981552c4bf2aa210168b63ea55926308c862"
+        },
+        {
+          "name": "WalkSouth",
+          "file": "female-WalkSouth.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 95,
+          "sha256": "f6093e5afd976a33e8c6fa760bfca4cea6fb7db0a008fa37f22b959033186eb1"
+        },
+        {
+          "name": "WalkNorth",
+          "file": "female-WalkNorth.png",
+          "cell": 80,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 95,
+          "sha256": "29b6182809146c887689eceb7a11e2a351382a17510478def9f790e45d09c03d"
+        },
+        {
+          "name": "TurnToTree",
+          "file": "female-TurnToTree.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 75,
+          "sha256": "345b19b312a9b05657fdd13ad039727e072da42c417fd1a1e5f60842856e2159"
+        },
+        {
+          "name": "TurnToCamera",
+          "file": "female-TurnToCamera.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 75,
+          "sha256": "0a65c959bd9768dabe5564ad5baf978c9d333ac1c5ffc24ce332941b7c6586de"
+        },
+        {
+          "name": "Flourish",
+          "file": "female-Flourish.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 6,
+          "frameDurationMs": 80,
+          "sha256": "46f75881db94819c3148f7dc55b7aa4174ce5e7310ce123f6a7ad6d2b25baf00"
+        },
+        {
+          "name": "SelectedIdle",
+          "file": "female-SelectedIdle.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 4,
+          "frameDurationMs": 300,
+          "sha256": "1f93508bd9a3abf30da4b873a924dbb89c472f9694b902ce92d39a0f44187b94"
+        },
+        {
+          "name": "Settle",
+          "file": "female-Settle.png",
+          "cell": 96,
+          "columns": 4,
+          "count": 8,
+          "frameDurationMs": 65,
+          "sha256": "46ffca570105b65fc0cca544f89818741976773ae6e4b0b011df2254ce55e0d9"
+        }
+      ]
+    }
+  ],
+  "tree": {
+    "file": "tree.png",
+    "sha256": "09b72894894fb6f41fa10c9684825ae30aa197343d6e45bbda6d8cefe2e3ceb3",
+    "jobId": "762e48f4-1eb8-4ef9-981e-d95f76b7c2b1"
+  }
+}

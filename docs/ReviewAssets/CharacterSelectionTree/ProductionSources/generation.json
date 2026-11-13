@@ -1,0 +1,1133 @@
+{
+  "approval": "User approved starting integration; requested existing scene background plus standalone centered tree.",
+  "tree": {
+    "args": {
+      "description": "A single standalone mature old oak tree sprite for Pickers Hollow cozy Appalachian pixel-art RPG character selection. Transparent background. ONLY THE TREE, no scenery, no sky, no landscape, no ground tile, no grass patch, no fence, no people, no UI. Sprawling broad organically uneven canopy of muted sage olive and warm forest-green clustered leaves, softly sunlit honey highlights, thick weathered brown trunk with textured bark, a few beautiful gnarled roots at the bottom. Low top-down three-quarter RPG view. Entire tree including canopy and roots fits comfortably within canvas without clipping. Large clear continuous lower trunk, nearly vertical trunk sides, wide enough for a human to rest a shoulder against either side; preserve readable tree silhouette. Trunk centered x96, lower trunk visible roughly y100 through y174, base at y180; canopy upper half broad, natural asymmetry, avoid decorative background frame. Native crisp small pixel clusters, warm selective outlines, restrained earthy palette. The tree should look beautiful, familiar and lived-in, natural cozy game prop.",
+      "width": 192,
+      "height": 192,
+      "no_background": true,
+      "view": "low top-down",
+      "outline": "selective outline",
+      "detail": "highly detailed",
+      "seed": 734213
+    },
+    "result": [
+      {
+        "type": "text",
+        "text": "status: completed\nid: 762e48f4-1eb8-4ef9-981e-d95f76b7c2b1\njob_id: 762e48f4-1eb8-4ef9-981e-d95f76b7c2b1\nframes: 1\ntransparent: yes\nasset_id: 40ba19f4-ca06-53f0-b2bc-b7f032f0e117\nasset_type: image\nasset_status: saved\ngallery: saved to your PixelLab gallery (pixellab.ai/create)\ncharged: 1 generation\ndownload: https://api.pixellab.ai/mcp/images/762e48f4-1eb8-4ef9-981e-d95f76b7c2b1/download"
+      }
+    ]
+  },
+  "animations": [
+    {
+      "sex": "male",
+      "key": "LeaningIdle",
+      "args": {
+        "character_id": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection LeaningIdle",
+        "action_description": "relaxed shoulder lean and quiet breathing",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "lean": [
+              -3,
+              -13
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              1
+            ]
+          },
+          {
+            "frame": 2,
+            "lean": [
+              -3,
+              -12
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              0
+            ]
+          },
+          {
+            "frame": 3,
+            "lean": [
+              -3,
+              -13
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              1
+            ]
+          },
+          {
+            "frame": 4,
+            "lean": [
+              -3,
+              -13
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              0
+            ]
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 6a4ced5a-df5a-4f6b-9887-5b407a420c07\nanimation: relaxed shoulder lean and quiet breathing\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job f39f8191-5493-4de2-be68-42c37644de09\ngroup: 90ac68f1-573c-48bd-963d-192623a722e6\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\", mode=\"skeleton-v3\", action_description=\"relaxed shoulder lean and quiet breathing\", animation_group_id=\"90ac68f1-573c-48bd-963d-192623a722e6\", directions=[...])\n\nhint: get_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "male",
+      "key": "TurnToTree",
+      "args": {
+        "character_id": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection TurnToTree",
+        "action_description": "turn calmly to face away",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "turn": 0
+          },
+          {
+            "frame": 2,
+            "turn": 50
+          },
+          {
+            "frame": 3,
+            "turn": 120
+          },
+          {
+            "frame": 4,
+            "turn": 180
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 6a4ced5a-df5a-4f6b-9887-5b407a420c07\nanimation: turn calmly to face away\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 7d7fb382-6667-4a15-8b56-40de7bab5acd\ngroup: dfb3fc9e-aa14-492b-94c9-82f5bd18b608\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\", mode=\"skeleton-v3\", action_description=\"turn calmly to face away\", animation_group_id=\"dfb3fc9e-aa14-492b-94c9-82f5bd18b608\", directions=[...])\n\nhint: get_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "male",
+      "key": "TurnToCamera",
+      "args": {
+        "character_id": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection TurnToCamera",
+        "action_description": "turn calmly to face forward",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "turn": 180
+          },
+          {
+            "frame": 2,
+            "turn": 120
+          },
+          {
+            "frame": 3,
+            "turn": 50
+          },
+          {
+            "frame": 4,
+            "turn": 0
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 6a4ced5a-df5a-4f6b-9887-5b407a420c07\nanimation: turn calmly to face forward\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 6f2d6473-d8ce-41a9-8e62-084d2fc20f55\ngroup: 271bb4b4-61a0-4429-84e4-f0f35f2c4cf3\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\", mode=\"skeleton-v3\", action_description=\"turn calmly to face forward\", animation_group_id=\"271bb4b4-61a0-4429-84e4-f0f35f2c4cf3\", directions=[...])\n\nhint: get_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "male",
+      "key": "Flourish",
+      "args": {
+        "character_id": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection Flourish",
+        "action_description": "briefly adjust neck bandana, relax",
+        "frame_count": 6,
+        "poses": [
+          {
+            "frame": 1
+          },
+          {
+            "frame": 2,
+            "right_hand": [
+              0.09,
+              0.07,
+              0.1
+            ],
+            "right_elbow": [
+              0.3,
+              0,
+              -1
+            ]
+          },
+          {
+            "frame": 3,
+            "right_hand": [
+              0.045,
+              0.09,
+              0.19
+            ],
+            "right_elbow": [
+              0.3,
+              0,
+              -1
+            ],
+            "head": [
+              0,
+              4
+            ]
+          },
+          {
+            "frame": 4,
+            "right_hand": [
+              0.045,
+              0.09,
+              0.19
+            ],
+            "right_elbow": [
+              0.3,
+              0,
+              -1
+            ],
+            "head": [
+              0,
+              3
+            ]
+          },
+          {
+            "frame": 5,
+            "right_hand": [
+              0.1,
+              0.04,
+              0.09
+            ],
+            "right_elbow": [
+              0.3,
+              0,
+              -1
+            ]
+          },
+          {
+            "frame": 6
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 6a4ced5a-df5a-4f6b-9887-5b407a420c07\nanimation: briefly adjust neck bandana, relax\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job db3b76a4-c65d-4a75-ac1e-04079592ddea\ngroup: d178b75f-5153-46f8-9ed7-500d5ca3e4a3\nframes: 6\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\", mode=\"skeleton-v3\", action_description=\"briefly adjust neck bandana, relax\", animation_group_id=\"d178b75f-5153-46f8-9ed7-500d5ca3e4a3\", directions=[...])\n\nhint: get_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "male",
+      "key": "SelectedIdle",
+      "args": {
+        "character_id": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection SelectedIdle",
+        "action_description": "relaxed standing and quiet breathing",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "pelvis": [
+              0,
+              0,
+              0
+            ],
+            "head": [
+              0,
+              0
+            ]
+          },
+          {
+            "frame": 2,
+            "pelvis": [
+              0,
+              0,
+              0.003
+            ],
+            "head": [
+              0,
+              0
+            ]
+          },
+          {
+            "frame": 3,
+            "pelvis": [
+              0,
+              0,
+              0
+            ],
+            "head": [
+              0,
+              1
+            ]
+          },
+          {
+            "frame": 4,
+            "pelvis": [
+              0,
+              0,
+              0
+            ],
+            "head": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 6a4ced5a-df5a-4f6b-9887-5b407a420c07\nanimation: relaxed standing and quiet breathing\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job f3ab64b1-119e-45af-8c62-5776f1605450\ngroup: 90ffc2ee-7867-40ad-b81a-55186df55b01\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\", mode=\"skeleton-v3\", action_description=\"relaxed standing and quiet breathing\", animation_group_id=\"90ffc2ee-7867-40ad-b81a-55186df55b01\", directions=[...])\n\nhint: get_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "male",
+      "key": "Settle",
+      "args": {
+        "character_id": "6a4ced5a-df5a-4f6b-9887-5b407a420c07",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection Settle",
+        "action_description": "settle shoulder gently into relaxed lean",
+        "frame_count": 8,
+        "poses": [
+          {
+            "frame": 1
+          },
+          {
+            "frame": 2,
+            "lean": [
+              0,
+              -2
+            ],
+            "pelvis": [
+              0,
+              0,
+              -0.004
+            ]
+          },
+          {
+            "frame": 3,
+            "lean": [
+              -1,
+              -5
+            ],
+            "pelvis": [
+              -0.005,
+              0,
+              -0.006
+            ]
+          },
+          {
+            "frame": 4,
+            "lean": [
+              -2,
+              -9
+            ],
+            "pelvis": [
+              -0.01,
+              0,
+              -0.009
+            ]
+          },
+          {
+            "frame": 5,
+            "lean": [
+              -3,
+              -12
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              1
+            ]
+          },
+          {
+            "frame": 6,
+            "lean": [
+              -3,
+              -13
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              0
+            ]
+          },
+          {
+            "frame": 7,
+            "lean": [
+              -3,
+              -13
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              1
+            ]
+          },
+          {
+            "frame": 8,
+            "lean": [
+              -3,
+              -13
+            ],
+            "pelvis": [
+              -0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              4,
+              0
+            ]
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 6a4ced5a-df5a-4f6b-9887-5b407a420c07\nanimation: settle shoulder gently into relaxed lean\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job cdc92a4c-c13d-4f00-90ef-632d7ff86d81\ngroup: 3d267b97-0002-4a33-8290-18d6aecf5746\nframes: 8\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\", mode=\"skeleton-v3\", action_description=\"settle shoulder gently into relaxed lean\", animation_group_id=\"3d267b97-0002-4a33-8290-18d6aecf5746\", directions=[...])\n\nhint: get_character(character_id=\"6a4ced5a-df5a-4f6b-9887-5b407a420c07\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "female",
+      "key": "LeaningIdle",
+      "args": {
+        "character_id": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection LeaningIdle",
+        "action_description": "relaxed shoulder lean and quiet breathing",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "lean": [
+              -3,
+              13
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              1
+            ]
+          },
+          {
+            "frame": 2,
+            "lean": [
+              -3,
+              12
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              0
+            ]
+          },
+          {
+            "frame": 3,
+            "lean": [
+              -3,
+              13
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              1
+            ]
+          },
+          {
+            "frame": 4,
+            "lean": [
+              -3,
+              13
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              0
+            ]
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 4725d111-f5b3-4c22-b34e-f307ceea66db\nanimation: relaxed shoulder lean and quiet breathing\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 0ac13c7f-2f5b-48e9-9281-972022a3eeff\ngroup: 2e741e5f-b1e9-454b-a84e-7668adda69ec\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\", mode=\"skeleton-v3\", action_description=\"relaxed shoulder lean and quiet breathing\", animation_group_id=\"2e741e5f-b1e9-454b-a84e-7668adda69ec\", directions=[...])\n\nhint: get_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "female",
+      "key": "TurnToTree",
+      "args": {
+        "character_id": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection TurnToTree",
+        "action_description": "turn calmly to face away",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "turn": 0
+          },
+          {
+            "frame": 2,
+            "turn": 50
+          },
+          {
+            "frame": 3,
+            "turn": 120
+          },
+          {
+            "frame": 4,
+            "turn": 180
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 4725d111-f5b3-4c22-b34e-f307ceea66db\nanimation: turn calmly to face away\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 63e06ce4-0924-4314-8376-5f8392087eb0\ngroup: 325a8a43-3730-42d6-ab25-0898e353a1e7\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\", mode=\"skeleton-v3\", action_description=\"turn calmly to face away\", animation_group_id=\"325a8a43-3730-42d6-ab25-0898e353a1e7\", directions=[...])\n\nhint: get_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "female",
+      "key": "TurnToCamera",
+      "args": {
+        "character_id": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection TurnToCamera",
+        "action_description": "turn calmly to face forward",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "turn": 180
+          },
+          {
+            "frame": 2,
+            "turn": 120
+          },
+          {
+            "frame": 3,
+            "turn": 50
+          },
+          {
+            "frame": 4,
+            "turn": 0
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 4725d111-f5b3-4c22-b34e-f307ceea66db\nanimation: turn calmly to face forward\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 5547932a-f238-4740-8feb-f16430d13e56\ngroup: 71a6faa9-6de2-4953-a227-c170ab2a10ab\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\", mode=\"skeleton-v3\", action_description=\"turn calmly to face forward\", animation_group_id=\"71a6faa9-6de2-4953-a227-c170ab2a10ab\", directions=[...])\n\nhint: get_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "female",
+      "key": "Flourish",
+      "args": {
+        "character_id": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection Flourish",
+        "action_description": "place one hand on hip",
+        "frame_count": 6,
+        "poses": [
+          {
+            "frame": 1
+          },
+          {
+            "frame": 2,
+            "left_hand": [
+              -0.16,
+              0.025,
+              0.02
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ]
+          },
+          {
+            "frame": 3,
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ],
+            "lean": [
+              0,
+              2
+            ]
+          },
+          {
+            "frame": 4,
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ],
+            "head": [
+              -4,
+              -2
+            ],
+            "lean": [
+              0,
+              3
+            ]
+          },
+          {
+            "frame": 5,
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ],
+            "lean": [
+              0,
+              2
+            ]
+          },
+          {
+            "frame": 6,
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ],
+            "lean": [
+              0,
+              2
+            ]
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 4725d111-f5b3-4c22-b34e-f307ceea66db\nanimation: place one hand on hip\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 7e4075e0-714e-4a77-99fb-4c1b59e41167\ngroup: 2832027a-a996-4297-99f0-fe57c072d046\nframes: 6\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\", mode=\"skeleton-v3\", action_description=\"place one hand on hip\", animation_group_id=\"2832027a-a996-4297-99f0-fe57c072d046\", directions=[...])\n\nhint: get_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "female",
+      "key": "SelectedIdle",
+      "args": {
+        "character_id": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection SelectedIdle",
+        "action_description": "relaxed hand on hip breathing",
+        "frame_count": 4,
+        "poses": [
+          {
+            "frame": 1,
+            "pelvis": [
+              0,
+              0,
+              0
+            ],
+            "head": [
+              0,
+              0
+            ],
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ]
+          },
+          {
+            "frame": 2,
+            "pelvis": [
+              0,
+              0,
+              0.003
+            ],
+            "head": [
+              0,
+              0
+            ],
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ]
+          },
+          {
+            "frame": 3,
+            "pelvis": [
+              0,
+              0,
+              0
+            ],
+            "head": [
+              0,
+              1
+            ],
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ]
+          },
+          {
+            "frame": 4,
+            "pelvis": [
+              0,
+              0,
+              0
+            ],
+            "head": [
+              0,
+              0
+            ],
+            "left_hand": [
+              -0.13,
+              0.04,
+              0.045
+            ],
+            "left_elbow": [
+              -1,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 4725d111-f5b3-4c22-b34e-f307ceea66db\nanimation: relaxed hand on hip breathing\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 6052b1ce-05eb-4bfe-9070-0185fc761fbf\ngroup: 918c5725-5337-4e00-9eee-23d1f49a66b5\nframes: 4\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\", mode=\"skeleton-v3\", action_description=\"relaxed hand on hip breathing\", animation_group_id=\"918c5725-5337-4e00-9eee-23d1f49a66b5\", directions=[...])\n\nhint: get_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\")"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "sex": "female",
+      "key": "Settle",
+      "args": {
+        "character_id": "4725d111-f5b3-4c22-b34e-f307ceea66db",
+        "mode": "skeleton-v3",
+        "directions": [
+          "south"
+        ],
+        "animation_name": "Selection Settle",
+        "action_description": "settle shoulder gently into relaxed lean",
+        "frame_count": 8,
+        "poses": [
+          {
+            "frame": 1
+          },
+          {
+            "frame": 2,
+            "lean": [
+              0,
+              2
+            ],
+            "pelvis": [
+              0,
+              0,
+              -0.004
+            ]
+          },
+          {
+            "frame": 3,
+            "lean": [
+              -1,
+              5
+            ],
+            "pelvis": [
+              0.005,
+              0,
+              -0.006
+            ]
+          },
+          {
+            "frame": 4,
+            "lean": [
+              -2,
+              9
+            ],
+            "pelvis": [
+              0.01,
+              0,
+              -0.009
+            ]
+          },
+          {
+            "frame": 5,
+            "lean": [
+              -3,
+              12
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              1
+            ]
+          },
+          {
+            "frame": 6,
+            "lean": [
+              -3,
+              13
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              0
+            ]
+          },
+          {
+            "frame": 7,
+            "lean": [
+              -3,
+              13
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              1
+            ]
+          },
+          {
+            "frame": 8,
+            "lean": [
+              -3,
+              13
+            ],
+            "pelvis": [
+              0.012,
+              0,
+              -0.008
+            ],
+            "head": [
+              -4,
+              0
+            ]
+          }
+        ]
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "character: 4725d111-f5b3-4c22-b34e-f307ceea66db\nanimation: settle shoulder gently into relaxed lean\nmode: skeleton-v3 (custom motion)\ndirections: south (1 jobs)\n  south: job 22c9f244-a7ef-420d-8702-d34b215edab9\ngroup: dd2a7cb5-ae02-45e9-9cc7-a646a6967727\nframes: 8\ncost: 3 generations per direction\neta: about 2-3 min per direction\nadd more directions to this group (same motion, no poses needed): animate_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\", mode=\"skeleton-v3\", action_description=\"settle shoulder gently into relaxed lean\", animation_group_id=\"dd2a7cb5-ae02-45e9-9cc7-a646a6967727\", directions=[...])\n\nhint: get_character(character_id=\"4725d111-f5b3-4c22-b34e-f307ceea66db\")"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "exports": [
+    {
+      "sex": "male",
+      "key": "LeaningIdle",
+      "group": "90ac68f1-573c-48bd-963d-192623a722e6",
+      "cell": 80,
+      "columns": 4,
+      "count": 4,
+      "file": "male-LeaningIdle.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/6dcdf020-82e3-4d38-b9a6-c24d9188e7d6/image.png"
+    },
+    {
+      "sex": "male",
+      "key": "TurnToTree",
+      "group": "dfb3fc9e-aa14-492b-94c9-82f5bd18b608",
+      "cell": 80,
+      "columns": 4,
+      "count": 4,
+      "file": "male-TurnToTree.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/9da52974-9ba9-4cfa-afa6-2f23aa2effd0/image.png"
+    },
+    {
+      "sex": "male",
+      "key": "TurnToCamera",
+      "group": "271bb4b4-61a0-4429-84e4-f0f35f2c4cf3",
+      "cell": 80,
+      "columns": 4,
+      "count": 4,
+      "file": "male-TurnToCamera.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/e1987ad6-a9df-461a-887e-419ea04ef607/image.png"
+    },
+    {
+      "sex": "male",
+      "key": "Flourish",
+      "group": "d178b75f-5153-46f8-9ed7-500d5ca3e4a3",
+      "cell": 80,
+      "columns": 4,
+      "count": 6,
+      "file": "male-Flourish.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/a69af544-7ee3-469a-8ab5-408ee365ce1d/image.png"
+    },
+    {
+      "sex": "male",
+      "key": "SelectedIdle",
+      "group": "90ffc2ee-7867-40ad-b81a-55186df55b01",
+      "cell": 80,
+      "columns": 4,
+      "count": 4,
+      "file": "male-SelectedIdle.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/fee95fc8-e3fd-444b-b430-5e4504c2baee/image.png"
+    },
+    {
+      "sex": "male",
+      "key": "Settle",
+      "group": "3d267b97-0002-4a33-8290-18d6aecf5746",
+      "cell": 80,
+      "columns": 4,
+      "count": 8,
+      "file": "male-Settle.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/18bb6ce1-52ed-4349-b503-8ed649ad2547/image.png"
+    },
+    {
+      "sex": "female",
+      "key": "LeaningIdle",
+      "group": "2e741e5f-b1e9-454b-a84e-7668adda69ec",
+      "cell": 96,
+      "columns": 4,
+      "count": 4,
+      "file": "female-LeaningIdle.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/f235d16b-e9dd-4a77-975a-fa36ca850f85/image.png"
+    },
+    {
+      "sex": "female",
+      "key": "TurnToTree",
+      "group": "325a8a43-3730-42d6-ab25-0898e353a1e7",
+      "cell": 96,
+      "columns": 4,
+      "count": 4,
+      "file": "female-TurnToTree.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/b9b7cb4a-2cef-4375-b9a0-595c83c9df51/image.png"
+    },
+    {
+      "sex": "female",
+      "key": "TurnToCamera",
+      "group": "71a6faa9-6de2-4953-a227-c170ab2a10ab",
+      "cell": 96,
+      "columns": 4,
+      "count": 4,
+      "file": "female-TurnToCamera.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/e5d146cd-aa91-4feb-9d04-6c1833be02f3/image.png"
+    },
+    {
+      "sex": "female",
+      "key": "Flourish",
+      "group": "2832027a-a996-4297-99f0-fe57c072d046",
+      "cell": 96,
+      "columns": 4,
+      "count": 6,
+      "file": "female-Flourish.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/1ea64295-2c59-45d8-92fd-07f8cf5e0c09/image.png"
+    },
+    {
+      "sex": "female",
+      "key": "SelectedIdle",
+      "group": "918c5725-5337-4e00-9eee-23d1f49a66b5",
+      "cell": 96,
+      "columns": 4,
+      "count": 4,
+      "file": "female-SelectedIdle.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/2248e3a5-9d6d-4d0b-9783-a76c7d46d0ca/image.png"
+    },
+    {
+      "sex": "female",
+      "key": "Settle",
+      "group": "dd2a7cb5-ae02-45e9-9cc7-a646a6967727",
+      "cell": 96,
+      "columns": 4,
+      "count": 8,
+      "file": "female-Settle.png",
+      "url": "https://api.pixellab.ai/mcp/pixel-tools/84f46e7b-e71e-4fde-b31c-96bff3359ae9/image.png"
+    }
+  ]
+}

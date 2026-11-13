@@ -5,6 +5,7 @@ using PawnShop.Framework.Rendering;
 using PawnShop.Game.Screens;
 using PawnShop.Narrative.Dialogue;
 using PawnShop.Characters.Player;
+using PawnShop.Characters.Player.Create;
 using PawnShop.Characters.Npcs.Common;
 
 namespace PawnShop.Game.Bootstrap;
@@ -34,6 +35,7 @@ public sealed class ApplicationFlow : IDisposable
     public PlayerView? Player => session?.Player;
     public int PlayerFrame => session?.PlayerFrame ?? 0;
     public PlayerSpriteCatalog PlayerSprites { get; }
+    public CharacterSelectionPresentation CharacterSelection { get; }
     public IReadOnlyDictionary<string, int> NpcFrames => session?.NpcFrames ?? System.Collections.Frozen.FrozenDictionary<string, int>.Empty;
     public DialoguePresenter? Dialogue { get; private set; }
     public PanoramaCamera TitleCamera { get; } = new();
@@ -53,6 +55,7 @@ public sealed class ApplicationFlow : IDisposable
             Path.Combine(AppContext.BaseDirectory, "Content", "TitleScreen", "title-sayings.json"), new Random())).Next();
         Options = new(settings ?? new(), saveSettings, TitleSaying);
         PlayerSprites = new(Path.Combine(AppContext.BaseDirectory, "Content", "Player"));
+        CharacterSelection = new(new CharacterSelectionCatalog(Path.Combine(AppContext.BaseDirectory, "Content", "CharacterSelection")));
         this.conversations = conversations ?? NpcContentCatalog.Load(Path.Combine(AppContext.BaseDirectory, "Content", "Npcs"), Path.Combine(AppContext.BaseDirectory, "Content", "World", "shop.npcs.json"));
         // Only the bundled room gets the example by default. Injected authored NPC
         // catalogs retain their own sprites unless explicitly paired with common art.
@@ -121,6 +124,7 @@ public sealed class ApplicationFlow : IDisposable
             if (!active) return;
             TitleCamera.Update(delta);
             if (Screen == Screen.CharacterSelect) TitleSelector.Update(delta);
+            if (Screen == Screen.CharacterSelect && !TitleCamera.IsMoving) CharacterSelection.Highlight(0);
             // Back may reverse an in-progress pan; hidden controls cannot activate.
             if (input.Cancel && Screen is Screen.Options or Screen.CharacterSelect)
             {
@@ -169,7 +173,22 @@ public sealed class ApplicationFlow : IDisposable
             }
             return;
         }
-        if (Screen == Screen.CharacterSelect) TitleSelector.Update(delta);
+        if (Screen == Screen.CharacterSelect)
+        {
+            TitleSelector.Update(delta);
+            if (input.Cancel) { SetScreen(Screen.Title); return; }
+            if (!CharacterSelection.IsConfirming)
+            {
+                if (input.Left != input.Right) input = input with { Up = input.Left, Down = input.Right };
+                var selectionCommand = Menu!.Handle(input);
+                CharacterSelection.Highlight(Menu.SelectedIndex);
+                ExecuteMenuCommand(selectionCommand);
+                if (Screen != Screen.CharacterSelect) return;
+            }
+            CharacterSelection.Update(delta);
+            if (CharacterSelection.ReadyToConfirm) StartSelectedPlayer(CharacterSelection.Confirmation!.Value);
+            return; // Includes transition completion; never tick a newly created room with menu input.
+        }
         if (Screen == Screen.Room)
         {
             if (input.Cancel) { SetScreen(Screen.Pause); return; }
@@ -191,13 +210,10 @@ public sealed class ApplicationFlow : IDisposable
                 case Screen.Pause: SetScreen(Screen.Room); break;
                 case Screen.ConfirmExit:
                 case Screen.ConfirmReturn: SetScreen(confirmationOrigin); break;
-                case Screen.CharacterSelect: SetScreen(Screen.Title); break;
                 // Escape on title is deliberately harmless; Exit is a separate menu action.
             }
             return;
         }
-        if (Screen == Screen.CharacterSelect && input.Left != input.Right)
-            input = input with { Up = input.Left, Down = input.Right };
         var command = Menu?.Handle(input);
         if (Screen == Screen.Title && input.Confirm && input.Up == input.Down)
         {
@@ -227,18 +243,13 @@ public sealed class ApplicationFlow : IDisposable
         {
             case MenuCommand.NewGame:
                 if (session is not null) throw new InvalidOperationException("A session is already active.");
+                CharacterSelection.Reset();
                 SetScreen(Screen.CharacterSelect, preserveTitleAnimation: true);
                 break;
             case MenuCommand.SelectMale:
             case MenuCommand.SelectFemale:
                 if (session is not null || Screen != Screen.CharacterSelect) throw new InvalidOperationException("Choose a character before starting a session.");
-                session = new GameSession(PlayerSprites.PlaceholderSheet, conversations.ShopNpcs,
-                    command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female, commonNpcs);
-                SessionsCreated++;
-                SetScreen(Screen.Room);
-                // The hidden title is ready at its original framing when returning from play.
-                TitleCamera.NavigateToMainMenu();
-                TitleCamera.Update(PanoramaCamera.TransitionDuration);
+                CharacterSelection.Confirm(command == MenuCommand.SelectMale ? PlayerGender.Male : PlayerGender.Female);
                 break;
             case MenuCommand.BackToTitle: SetScreen(Screen.Title); break;
             case MenuCommand.Resume: SetScreen(Screen.Room); break;
@@ -260,6 +271,16 @@ public sealed class ApplicationFlow : IDisposable
                 ExitRequested = exit;
                 break;
         }
+    }
+
+    private void StartSelectedPlayer(PlayerGender gender)
+    {
+        session = new GameSession(PlayerSprites.PlaceholderSheet, conversations.ShopNpcs, gender, commonNpcs);
+        SessionsCreated++;
+        SetScreen(Screen.Room);
+        // The hidden title is ready at its original framing when returning from play.
+        TitleCamera.NavigateToMainMenu();
+        TitleCamera.Update(PanoramaCamera.TransitionDuration);
     }
 
     public void RequestExit()

@@ -1,0 +1,13 @@
+{
+  "male": [
+    "✅ lint tmpuv37fnq0-subject0: 0 error(s), 0 warning(s), 3 info\n  info orphan_cluster [image f1] 249 cluster(s) of 1-2 px (noise unless deliberate glints) <- image/None (324px)\n  info pillow [image f1] image: darkest colour rings the part on all sides (pillow shading?) <- image/None (1022px)\n  info silhouette [image f1] silhouette bbox [11, 4, 36, 59] size [26, 56] margins L11 T4 R11 B4, 0 hole(s), 1 component(s)\nnext: lint character:6a4ced5a-df5a-4f6b-9887-5b407a420c07:south"
+  ],
+  "female": [
+    "⚠️  lint tmpgft3zdf1-subject0: 0 error(s), 1 warning(s), 4 info -> (returned with this reply)\n  warning orphan_pixel [image f1] 1 isolated pixel(s) <- image/None (1px)\n  info orphan_cluster [image f1] 343 cluster(s) of 1-2 px (noise unless deliberate glints) <- image/None (421px)\n  info banding [image f1] 10 px in equal-width stacked runs (possible banding) <- image/None (10px)\n  info pillow [image f1] image: darkest colour rings the part on all sides (pillow shading?) <- image/None (960px)\n  info silhouette [image f1] silhouette bbox [12, 4, 35, 60] size [24, 57] margins L12 T4 R12 B3, 1 hole(s), 2 component(s)\nnext in the engine: Remove or connect the isolated pixel(s) from node 'image' command draw[0].\nnext: lint character:4725d111-f5b3-4c22-b34e-f307ceea66db:south"
+  ],
+  "userDecision": "Male design approved and frozen; selected initial C female South preserved exactly.",
+  "visualInspection": "Actual native character previews and4x South/North/East and eight-angle static sheets inspected. No appearance changes after user approval.",
+  "changesAfterMaleApproval": "Only downloads, static preview composition/scaling, HTML/metadata and read-only verification. No artwork edits.",
+  "policy": "Do not fix lint information or the female source isolated pixel automatically. Do not regenerate, edit or alter the male without a new explicit instruction.",
+  "approvalLimits": "No animation, equipment, runtime anchor or rendering integration approval."
+}

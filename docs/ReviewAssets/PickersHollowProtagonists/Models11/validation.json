@@ -1,0 +1,300 @@
+﻿{
+    "exportChecksPassed":  true,
+    "nativeCanvas":  [
+                         48,
+                         64
+                     ],
+    "staticViewsPerModel":  8,
+    "frames":  {
+                   "Male":  {
+                                "south":  {
+                                              "canvas":  [
+                                                             48,
+                                                             64
+                                                         ],
+                                              "bounds":  [
+                                                             11,
+                                                             4,
+                                                             36,
+                                                             59
+                                                         ],
+                                              "visibleHeight":  56,
+                                              "bootBottomRow":  59,
+                                              "colors":  32,
+                                              "nativeCopyRGBAChanges":  0,
+                                              "sha256":  "8EE363C29178796B02B57F112539461489D2272FAB8739BAD7CCD3C47524AFE9"
+                                          },
+                                "east":  {
+                                             "canvas":  [
+                                                            48,
+                                                            64
+                                                        ],
+                                             "bounds":  [
+                                                            15,
+                                                            4,
+                                                            33,
+                                                            59
+                                                        ],
+                                             "visibleHeight":  56,
+                                             "bootBottomRow":  59,
+                                             "colors":  32,
+                                             "nativeCopyRGBAChanges":  0,
+                                             "sha256":  "C6A042D44E2EE1691F14061B9F7F1D2CED16C055E6FF63CC1D9373A25881E7CF"
+                                         },
+                                "north":  {
+                                              "canvas":  [
+                                                             48,
+                                                             64
+                                                         ],
+                                              "bounds":  [
+                                                             11,
+                                                             4,
+                                                             36,
+                                                             58
+                                                         ],
+                                              "visibleHeight":  55,
+                                              "bootBottomRow":  58,
+                                              "colors":  26,
+                                              "nativeCopyRGBAChanges":  0,
+                                              "sha256":  "29F0CD237CA30EB5303EDEB8603C7C6F370AE225B651B9C287DA5D9F0F8A6259"
+                                          },
+                                "west":  {
+                                             "canvas":  [
+                                                            48,
+                                                            64
+                                                        ],
+                                             "bounds":  [
+                                                            14,
+                                                            3,
+                                                            32,
+                                                            59
+                                                        ],
+                                             "visibleHeight":  57,
+                                             "bootBottomRow":  59,
+                                             "colors":  32,
+                                             "nativeCopyRGBAChanges":  0,
+                                             "sha256":  "0503078B6866ECDD3C9E5D6CF38FE5FBE8C2831BABC19EAF77380E8896648B9A"
+                                         },
+                                "south-east":  {
+                                                   "canvas":  [
+                                                                  48,
+                                                                  64
+                                                              ],
+                                                   "bounds":  [
+                                                                  12,
+                                                                  4,
+                                                                  35,
+                                                                  59
+                                                              ],
+                                                   "visibleHeight":  56,
+                                                   "bootBottomRow":  59,
+                                                   "colors":  32,
+                                                   "nativeCopyRGBAChanges":  0,
+                                                   "sha256":  "7F2EA80DE997854E9EBDDFC08050C9F07BD1A7C6B98755403B62804CD5152741"
+                                               },
+                                "north-east":  {
+                                                   "canvas":  [
+                                                                  48,
+                                                                  64
+                                                              ],
+                                                   "bounds":  [
+                                                                  14,
+                                                                  4,
+                                                                  34,
+                                                                  59
+                                                              ],
+                                                   "visibleHeight":  56,
+                                                   "bootBottomRow":  59,
+                                                   "colors":  28,
+                                                   "nativeCopyRGBAChanges":  0,
+                                                   "sha256":  "FAF6DC3B920C59EF2273B2CD40465BA4C8F5692E19AFB100C0A5A48C3FDCA57C"
+                                               },
+                                "north-west":  {
+                                                   "canvas":  [
+                                                                  48,
+                                                                  64
+                                                              ],
+                                                   "bounds":  [
+                                                                  13,
+                                                                  4,
+                                                                  33,
+                                                                  58
+                                                              ],
+                                                   "visibleHeight":  55,
+                                                   "bootBottomRow":  58,
+                                                   "colors":  29,
+                                                   "nativeCopyRGBAChanges":  0,
+                                                   "sha256":  "7E441E144B6BE5FA5D513E1A057DB2B4EA8AB8608F9711FF8E8EB5107CACB633"
+                                               },
+                                "south-west":  {
+                                                   "canvas":  [
+                                                                  48,
+                                                                  64
+                                                              ],
+                                                   "bounds":  [
+                                                                  12,
+                                                                  4,
+                                                                  35,
+                                                                  59
+                                                              ],
+                                                   "visibleHeight":  56,
+                                                   "bootBottomRow":  59,
+                                                   "colors":  32,
+                                                   "nativeCopyRGBAChanges":  0,
+                                                   "sha256":  "8322AC0199ECCF8E755217EAD9483A2735A4F7E349A5BB5D1146612300DFE692"
+                                               }
+                            },
+                   "Female":  {
+                                  "south":  {
+                                                "canvas":  [
+                                                               48,
+                                                               64
+                                                           ],
+                                                "bounds":  [
+                                                               12,
+                                                               4,
+                                                               35,
+                                                               60
+                                                           ],
+                                                "visibleHeight":  57,
+                                                "bootBottomRow":  60,
+                                                "colors":  28,
+                                                "nativeCopyRGBAChanges":  0,
+                                                "sha256":  "9433DCE2EBC8FA882624E61A79D9FDE687864C49DC59B8A8FF5548302EC0D25F"
+                                            },
+                                  "east":  {
+                                               "canvas":  [
+                                                              48,
+                                                              64
+                                                          ],
+                                               "bounds":  [
+                                                              8,
+                                                              4,
+                                                              34,
+                                                              60
+                                                          ],
+                                               "visibleHeight":  57,
+                                               "bootBottomRow":  60,
+                                               "colors":  37,
+                                               "nativeCopyRGBAChanges":  0,
+                                               "sha256":  "D6EB23D9AE46008583F1BB38F9CD824E7DF6719922997880CC76D64421F6F122"
+                                           },
+                                  "north":  {
+                                                "canvas":  [
+                                                               48,
+                                                               64
+                                                           ],
+                                                "bounds":  [
+                                                               10,
+                                                               4,
+                                                               34,
+                                                               59
+                                                           ],
+                                                "visibleHeight":  56,
+                                                "bootBottomRow":  59,
+                                                "colors":  31,
+                                                "nativeCopyRGBAChanges":  0,
+                                                "sha256":  "22C91739C88CD3DAC254AB7F9A8C3FBBBD89EEB2B84694A4A27E6622D27F3EBD"
+                                            },
+                                  "west":  {
+                                               "canvas":  [
+                                                              48,
+                                                              64
+                                                          ],
+                                               "bounds":  [
+                                                              12,
+                                                              4,
+                                                              38,
+                                                              60
+                                                          ],
+                                               "visibleHeight":  57,
+                                               "bootBottomRow":  60,
+                                               "colors":  38,
+                                               "nativeCopyRGBAChanges":  0,
+                                               "sha256":  "B5DCDC28555BCD3350AB9E80697D5B504C5E60CA50E252C0C73E6CAADA8DC48C"
+                                           },
+                                  "south-east":  {
+                                                     "canvas":  [
+                                                                    48,
+                                                                    64
+                                                                ],
+                                                     "bounds":  [
+                                                                    14,
+                                                                    4,
+                                                                    35,
+                                                                    61
+                                                                ],
+                                                     "visibleHeight":  58,
+                                                     "bootBottomRow":  61,
+                                                     "colors":  41,
+                                                     "nativeCopyRGBAChanges":  0,
+                                                     "sha256":  "C6332BB34FB246C20A479B5BB295D0720D81F881B1D46D485A5DAD54E79DEA92"
+                                                 },
+                                  "north-east":  {
+                                                     "canvas":  [
+                                                                    48,
+                                                                    64
+                                                                ],
+                                                     "bounds":  [
+                                                                    9,
+                                                                    4,
+                                                                    35,
+                                                                    59
+                                                                ],
+                                                     "visibleHeight":  56,
+                                                     "bootBottomRow":  59,
+                                                     "colors":  36,
+                                                     "nativeCopyRGBAChanges":  0,
+                                                     "sha256":  "30E85CC7876EEE593BE822C0D05E1E65CCE13E5CA546E755D5BBABF94B46FA6D"
+                                                 },
+                                  "north-west":  {
+                                                     "canvas":  [
+                                                                    48,
+                                                                    64
+                                                                ],
+                                                     "bounds":  [
+                                                                    12,
+                                                                    4,
+                                                                    33,
+                                                                    59
+                                                                ],
+                                                     "visibleHeight":  56,
+                                                     "bootBottomRow":  59,
+                                                     "colors":  34,
+                                                     "nativeCopyRGBAChanges":  0,
+                                                     "sha256":  "5C93803901DD168A271A393D612CFAA35965CD0E17D3632E5EE838E05CAC7520"
+                                                 },
+                                  "south-west":  {
+                                                     "canvas":  [
+                                                                    48,
+                                                                    64
+                                                                ],
+                                                     "bounds":  [
+                                                                    12,
+                                                                    4,
+                                                                    38,
+                                                                    61
+                                                                ],
+                                                     "visibleHeight":  58,
+                                                     "bootBottomRow":  61,
+                                                     "colors":  41,
+                                                     "nativeCopyRGBAChanges":  0,
+                                                     "sha256":  "7FF981EA63A0A63B39634BE9A9E30E2FAB382AAF81A801682D21FE2A78577E39"
+                                                 }
+                              }
+               },
+    "femaleCanonicalRGBAChanges":  0,
+    "maleCanvasOperation":  "PixelLab set_canvas_size:64x64 to48x64, transparent side margin only. Visible RGBA equals original source x+8 at every pixel.",
+    "nativeSourceSilhouettesPreserved":  true,
+    "binaryAlpha":  true,
+    "transparentMargins":  true,
+    "exactComparisonSheets":  true,
+    "exactNearestNeighbor4x":  true,
+    "maleDesignApproved":  true,
+    "maleAppearanceFrozen":  true,
+    "femaleSourceChosen":  "gallery:92f6dfe6-08be-5b9e-a79a-0be2de7e12ce",
+    "animationCount":  0,
+    "limitation":  "Model appearances are selected, but runtime origins, movement and equipment/animation have not been integrated or approved. Static boot baselines can differ by one or two source rows.",
+    "gameLaunched":  false,
+    "browserLaunched":  false
+}

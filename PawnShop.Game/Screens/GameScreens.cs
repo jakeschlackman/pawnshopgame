@@ -13,10 +13,11 @@ internal sealed class GameScreens : IDisposable
     private readonly TitleScreen title;
     private readonly OptionsScreen options;
     private readonly PlayerSpriteRenderer players;
+    private readonly PlayerModel_SelectionScreen selection;
     private RoomScreen? room;
 
     public GameScreens(GraphicsDevice device, PanoramaCamera camera, Func<double> titleDescent, FontLibrary fonts,
-        SpriteSheetDefinition titleSheet, PlayerSpriteCatalog playerCatalog)
+        SpriteSheetDefinition titleSheet, PlayerSpriteCatalog playerCatalog, CharacterSelectionCatalog selectionCatalog)
     {
         this.device = device;
         try
@@ -24,10 +25,12 @@ internal sealed class GameScreens : IDisposable
             title = new(device, camera, titleDescent, fonts, titleSheet);
             options = new(device, fonts);
             players = new(device, playerCatalog);
+            selection = new(device, selectionCatalog);
         }
         catch
         {
             players?.Dispose();
+            selection?.Dispose();
             options?.Dispose();
             title?.Dispose();
             throw;
@@ -59,8 +62,8 @@ internal sealed class GameScreens : IDisposable
             {
                 renderer.TextScale = flow.Options.Current.UiScale / 100f;
                 renderer.Begin(Color.Transparent);
-                if (!flow.CharacterSelectionFlying)
-                    PlayerModel_SelectionScreen.Draw(renderer, selectionMenu, players.Draw);
+                selection.Draw(renderer, selectionMenu, flow.CharacterSelection, flow.TitleCamera.Position,
+                    showUi: !flow.CharacterSelectionFlying);
                 renderer.Present(clearBackBuffer: false, drawBackground: title.DrawBackground);
                 var departure = title.SelectorAnchor(renderer, 0, "New Game", renderer.TextScale);
                 var anchor = flow.CharacterSelectionFlying
@@ -126,5 +129,6 @@ internal sealed class GameScreens : IDisposable
         title.Dispose();
         options.Dispose();
         players.Dispose();
+        selection.Dispose();
     }
 }
